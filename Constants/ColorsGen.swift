@@ -31,9 +31,9 @@ internal struct ColorName {
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#4ecd77"></span>
   /// Alpha: 100% <br/> (0x4ecd77ff)
   internal static let positive = ColorName(rgbaValue: 0x4ecd77ff)
-  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ba309f"></span>
-  /// Alpha: 100% <br/> (0xba309fff)
-  internal static let primary = ColorName(rgbaValue: 0xba309fff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#657fde"></span>
+  /// Alpha: 100% <br/> (0x657fdeff)
+  internal static let primary = ColorName(rgbaValue: 0x657fdeff)
 }
 // swiftlint:enable identifier_name line_length type_body_length
 

@@ -1,4 +1,4 @@
-Primary         : #BA309F
+Primary         : #657FDE
 Positive        : #4ECD77
 AlmostRed       : #FF5B5B
 

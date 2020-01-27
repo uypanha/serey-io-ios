@@ -52,6 +52,22 @@ extension RootViewController {
 //            }
 //        }
     }
+    
+    func switchToSelectLanguageBoardScreen() {
+        if let selectLanguageBoardViewController = R.storyboard.onBoard.selectLanguageViewController() {
+            selectLanguageBoardViewController.viewModel = SelectLanguageViewModel()
+            self.animateFadeTransition(to: selectLanguageBoardViewController)
+        }
+    }
+    
+    func switchToBoardingScreen() {
+        if let boardingViewController = R.storyboard.onBoard.boardingViewController() {
+//            boardingViewController.viewModel = BoardingViewModel()
+            self.animateFadeTransition(to: UINavigationController(rootViewController: boardingViewController).then {
+                $0.removeNavigationBarBorder()
+            })
+        }
+    }
 }
 
 // MARK: - Preparations & Tools

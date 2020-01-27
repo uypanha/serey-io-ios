@@ -64,6 +64,11 @@
 		DC6ED58F2326A7B000770B31 /* AppDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6ED58E2326A7B000770B31 /* AppDelegateHelper.swift */; };
 		DC6ED5912326A8F400770B31 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6ED5902326A8F400770B31 /* Appearance.swift */; };
 		DC7C09C22326AFF60006D0BF /* FireBaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C09C12326AFF60006D0BF /* FireBaseHandler.swift */; };
+		DC88A73323DF3D3900EB7F79 /* OnBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */; };
+		DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */; };
+		DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73823DF3F5200EB7F79 /* SelectLanguageViewController.swift */; };
+		DC88A73C23DF4A8900EB7F79 /* SelectLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73B23DF4A8900EB7F79 /* SelectLanguageViewModel.swift */; };
+		DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73D23DF4B7900EB7F79 /* BoardingViewController.swift */; };
 		DCD39859232E0F9600C812EB /* Slash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCD39858232E0F9600C812EB /* Slash.storyboard */; };
 		DCD3985C232E104400C812EB /* SlashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3985B232E104400C812EB /* SlashScreenViewController.swift */; };
 		DCD3985F232E106E00C812EB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3985E232E106E00C812EB /* BaseViewController.swift */; };
@@ -202,6 +207,11 @@
 		DC6ED58E2326A7B000770B31 /* AppDelegateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateHelper.swift; sourceTree = "<group>"; };
 		DC6ED5902326A8F400770B31 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		DC7C09C12326AFF60006D0BF /* FireBaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseHandler.swift; sourceTree = "<group>"; };
+		DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnBoard.storyboard; sourceTree = "<group>"; };
+		DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICenteredHorizantalButton.swift; sourceTree = "<group>"; };
+		DC88A73823DF3F5200EB7F79 /* SelectLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLanguageViewController.swift; sourceTree = "<group>"; };
+		DC88A73B23DF4A8900EB7F79 /* SelectLanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLanguageViewModel.swift; sourceTree = "<group>"; };
+		DC88A73D23DF4B7900EB7F79 /* BoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingViewController.swift; sourceTree = "<group>"; };
 		DCD39858232E0F9600C812EB /* Slash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Slash.storyboard; sourceTree = "<group>"; };
 		DCD3985B232E104400C812EB /* SlashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlashScreenViewController.swift; sourceTree = "<group>"; };
 		DCD3985E232E106E00C812EB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -372,7 +382,6 @@
 				DC6ED56B2326A19B00770B31 /* Constants.swift */,
 				DC6ED58B2326A5D300770B31 /* APNS */,
 				DC6ED55A2326822700770B31 /* App */,
-				DC6ED557232681DB00770B31 /* Controllers */,
 				DC6ED5702326A35800770B31 /* Deeplink */,
 				DC6ED56D2326A2E100770B31 /* Extensions */,
 				DC6ED5792326A42100770B31 /* Helpers */,
@@ -381,6 +390,7 @@
 				DC6ED5592326820300770B31 /* Resources */,
 				DCD39869232E1DE300C812EB /* Services */,
 				DC6A791623CB6EDF001D1009 /* Steem */,
+				DC6ED557232681DB00770B31 /* ViewControllers */,
 				DCD39863232E1CAB00C812EB /* ViewModel */,
 				DCD39877232E22E300C812EB /* Views */,
 			);
@@ -414,25 +424,27 @@
 			path = Configs;
 			sourceTree = "<group>";
 		};
-		DC6ED557232681DB00770B31 /* Controllers */ = {
+		DC6ED557232681DB00770B31 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
 				DCD39897232E2AD700C812EB /* CloseableNavigationController.swift */,
 				DC6ED56923269CA300770B31 /* RootViewController.swift */,
 				DCD3985D232E105A00C812EB /* Base */,
 				DC6A791323CB66E5001D1009 /* Main */,
+				DC88A73723DF3F3300EB7F79 /* OnBoard */,
 				DCD3985A232E102D00C812EB /* SlashScreen */,
 				DCD39892232E28B400C812EB /* WebView */,
 			);
-			path = Controllers;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		DC6ED558232681F100770B31 /* Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */,
+				DCD39858232E0F9600C812EB /* Slash.storyboard */,
 				DC6ED52923267EF000770B31 /* LaunchScreen.storyboard */,
 				DC6ED52423267EED00770B31 /* Main.storyboard */,
-				DCD39858232E0F9600C812EB /* Slash.storyboard */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -535,6 +547,31 @@
 			path = Handlers;
 			sourceTree = "<group>";
 		};
+		DC88A73423DF3EB600EB7F79 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		DC88A73723DF3F3300EB7F79 /* OnBoard */ = {
+			isa = PBXGroup;
+			children = (
+				DC88A73D23DF4B7900EB7F79 /* BoardingViewController.swift */,
+				DC88A73823DF3F5200EB7F79 /* SelectLanguageViewController.swift */,
+			);
+			path = OnBoard;
+			sourceTree = "<group>";
+		};
+		DC88A73A23DF4A7700EB7F79 /* OnBoard */ = {
+			isa = PBXGroup;
+			children = (
+				DC88A73B23DF4A8900EB7F79 /* SelectLanguageViewModel.swift */,
+			);
+			path = OnBoard;
+			sourceTree = "<group>";
+		};
 		DCD3985A232E102D00C812EB /* SlashScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -567,6 +604,7 @@
 			children = (
 				DCD39864232E1CB600C812EB /* Base */,
 				DC6A78F823CA20AB001D1009 /* Common */,
+				DC88A73A23DF4A7700EB7F79 /* OnBoard */,
 				DCD39874232E20BF00C812EB /* Slash */,
 			);
 			path = ViewModel;
@@ -620,6 +658,7 @@
 		DCD39877232E22E300C812EB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DC88A73423DF3EB600EB7F79 /* Common */,
 				DCD3987B232E234600C812EB /* Cells */,
 				DCD39878232E22F300C812EB /* NibViews */,
 			);
@@ -807,6 +846,7 @@
 				DCD39859232E0F9600C812EB /* Slash.storyboard in Resources */,
 				DC6ED52623267EED00770B31 /* Main.storyboard in Resources */,
 				DC6A790423CA242B001D1009 /* EmptyOrErrorView.xib in Resources */,
+				DC88A73323DF3D3900EB7F79 /* OnBoard.storyboard in Resources */,
 				DCD3986E232E1F2300C812EB /* Common.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -929,7 +969,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate --disable-input-output-files-validation \"$SRCROOT/R.generated.swift\"\n";
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
 		};
 		DC6ED55E2326973900770B31 /* SwiftGen Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -958,6 +998,7 @@
 			files = (
 				DC6A792823CB6F19001D1009 /* Tag.swift in Sources */,
 				DCD39873232E204000C812EB /* Rx+Extensions.swift in Sources */,
+				DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */,
 				DCD39887232E251C00C812EB /* StyleProtocol.swift in Sources */,
 				DC6A792723CB6F19001D1009 /* Accounts.swift in Sources */,
 				DC6ED5782326A40200770B31 /* AppCoordinator.swift in Sources */,
@@ -979,6 +1020,7 @@
 				DC6A791523CB676E001D1009 /* MainViewController.swift in Sources */,
 				DC6A790923CA2510001D1009 /* RealmManager.swift in Sources */,
 				DC6ED5762326A38B00770B31 /* FMDataParser.swift in Sources */,
+				DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */,
 				DC6ED57C2326A43700770B31 /* Store.swift in Sources */,
 				DC6A78F323CA1FEB001D1009 /* CollectionSingleSecitionProviderModel.swift in Sources */,
 				DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */,
@@ -986,6 +1028,7 @@
 				DCD3988B232E255E00C812EB /* UIImage+Extensions.swift in Sources */,
 				DC6A78FA23CA20B3001D1009 /* FieldViewModelProtocol.swift in Sources */,
 				DC6A792623CB6F19001D1009 /* Misc.swift in Sources */,
+				DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */,
 				DC6ED5842326A4BA00770B31 /* NotificationDispatcher.swift in Sources */,
 				DCD39870232E1F7E00C812EB /* LanguageManager.swift in Sources */,
 				DCD3987D232E235000C812EB /* BaseTableViewCell.swift in Sources */,
@@ -997,6 +1040,7 @@
 				DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */,
 				DC6ED58A2326A53B00770B31 /* KeyChainStore.swift in Sources */,
 				DC6ED5862326A4D000770B31 /* AppNotification.swift in Sources */,
+				DC88A73C23DF4A8900EB7F79 /* SelectLanguageViewModel.swift in Sources */,
 				DC6A790523CA242B001D1009 /* EmptyOrErrorView.swift in Sources */,
 				DCD3985C232E104400C812EB /* SlashScreenViewController.swift in Sources */,
 				DCD39894232E28C900C812EB /* WebViewViewController.swift in Sources */,

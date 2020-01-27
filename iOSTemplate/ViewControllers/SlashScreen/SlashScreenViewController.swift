@@ -33,11 +33,10 @@ fileprivate extension SlashScreenViewController {
         self.viewModel.shouldPresent
             .subscribe(onNext: { viewToPresent in
                 switch (viewToPresent) {
-                case .loginViewController:
-//                    AppDelegate.shared?.rootViewController?.switchToSignIn()
-                    break
                 case .homeViewController:
                     AppDelegate.shared?.rootViewController?.switchToMainScreen(fadeAnimation: true)
+                case .selectLanguageController:
+                    AppDelegate.shared?.rootViewController?.switchToSelectLanguageBoardScreen()
                 }
             }).disposed(by: self.disposeBag)
     }

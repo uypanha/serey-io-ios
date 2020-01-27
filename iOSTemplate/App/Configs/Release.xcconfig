@@ -15,7 +15,7 @@
 ROOT_URL = https:/$()/api.example.com
 
 // APP INFO
-app_name                = App Name
+app_name                = Serey.io
 app_bundle              = io.uyphanha.template
 app_version_name        = 1.0.0
 app_version_code        = 1

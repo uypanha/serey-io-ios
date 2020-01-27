@@ -13,8 +13,8 @@ import RxCocoa
 class SlashViewModel: BaseViewModel, ShouldPresent {
     
     enum ViewToPresent {
-        case loginViewController
         case homeViewController
+        case selectLanguageController
     }
     
     // output:
@@ -24,10 +24,10 @@ class SlashViewModel: BaseViewModel, ShouldPresent {
     internal lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
     
     func checkUserAuth() {
-//        if AuthData.shared.isUserLoggedIn {
+        if AuthData.shared.isUserLoggedIn {
             self.shouldPresentSubject.onNext(.homeViewController)
-//        } else {
-//            self.shouldPresentSubject.onNext(.loginViewController)
-//        }
+        } else {
+            self.shouldPresentSubject.onNext(.selectLanguageController)
+        }
     }
 }
