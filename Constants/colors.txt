@@ -1,0 +1,6 @@
+Primary         : #BA309F
+Positive        : #4ECD77
+AlmostRed       : #FF5B5B
+
+NavigationBg    : #FFFFFF
+NavigationTint  : #0c0c0c

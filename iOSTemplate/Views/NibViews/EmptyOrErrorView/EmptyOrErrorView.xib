@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmptyOrErrorView" customModule="iOSTemplate" customModuleProvider="target">
+            <connections>
+                <outlet property="actionButton" destination="lM7-1s-Xsw" id="jE8-8J-3f4"/>
+                <outlet property="descriptionLabel" destination="RZs-rk-N5P" id="UD8-jg-J8f"/>
+                <outlet property="errorImageWidthContraint" destination="XyL-XK-yNh" id="sgX-bX-XqM"/>
+                <outlet property="iconImageView" destination="OXD-53-7Ge" id="Ue0-wp-lL3"/>
+                <outlet property="titleLabel" destination="7vJ-PH-YI1" id="RDe-ah-rmg"/>
+                <outlet property="topConstraint" destination="kmn-qE-0rw" id="Lux-hH-WoH"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="448"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FTA-eF-SgJ">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="448"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="id5-Oy-M8N">
+                            <rect key="frame" x="24" y="30.5" width="366" height="387"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="errorSad" translatesAutoresizingMaskIntoConstraints="NO" id="OXD-53-7Ge">
+                                    <rect key="frame" x="36.5" y="0.0" width="293" height="234"/>
+                                    <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="OXD-53-7Ge" secondAttribute="height" multiplier="1:0.8" id="5QN-jy-Cnv"/>
+                                    </constraints>
+                                </imageView>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Rhy-lk-msN">
+                                    <rect key="frame" x="16" y="250" width="334" height="137"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iyG-FN-ZkN">
+                                            <rect key="frame" x="0.0" y="0.0" width="334" height="92"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7vJ-PH-YI1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="334" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZs-rk-N5P">
+                                                    <rect key="frame" x="0.0" y="25" width="334" height="67"/>
+                                                    <string key="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lM7-1s-Xsw">
+                                            <rect key="frame" x="125" y="108" width="84" height="29"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                            <state key="normal" title="Tab To Retry">
+                                                <color key="titleColor" red="0.0" green="0.62745098040000002" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="iyG-FN-ZkN" firstAttribute="leading" secondItem="Rhy-lk-msN" secondAttribute="leading" id="AdH-9M-T6F"/>
+                                        <constraint firstAttribute="trailing" secondItem="iyG-FN-ZkN" secondAttribute="trailing" id="Lfl-Op-HwU"/>
+                                    </constraints>
+                                </stackView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="OXD-53-7Ge" firstAttribute="top" secondItem="id5-Oy-M8N" secondAttribute="top" id="4Bw-W0-sP7"/>
+                                <constraint firstItem="Rhy-lk-msN" firstAttribute="leading" secondItem="id5-Oy-M8N" secondAttribute="leading" constant="16" id="BHg-mZ-z5S"/>
+                                <constraint firstItem="Rhy-lk-msN" firstAttribute="top" secondItem="OXD-53-7Ge" secondAttribute="bottom" constant="16" id="Ds4-ox-D48"/>
+                                <constraint firstAttribute="trailing" secondItem="Rhy-lk-msN" secondAttribute="trailing" constant="16" id="S89-Ye-HOr"/>
+                                <constraint firstItem="OXD-53-7Ge" firstAttribute="width" secondItem="id5-Oy-M8N" secondAttribute="width" multiplier="0.8" id="XyL-XK-yNh"/>
+                                <constraint firstItem="OXD-53-7Ge" firstAttribute="centerX" secondItem="id5-Oy-M8N" secondAttribute="centerX" id="sDS-IE-xbt"/>
+                                <constraint firstAttribute="bottom" secondItem="Rhy-lk-msN" secondAttribute="bottom" id="ttI-Qy-PvI"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="id5-Oy-M8N" secondAttribute="trailing" constant="24" id="H8w-yo-CVB"/>
+                        <constraint firstItem="id5-Oy-M8N" firstAttribute="centerY" secondItem="FTA-eF-SgJ" secondAttribute="centerY" id="IrM-pF-m3A"/>
+                        <constraint firstItem="id5-Oy-M8N" firstAttribute="leading" secondItem="FTA-eF-SgJ" secondAttribute="leading" constant="24" id="ojf-Cx-jFT"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="FTA-eF-SgJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="4eS-Ae-hD9"/>
+                <constraint firstAttribute="bottom" secondItem="FTA-eF-SgJ" secondAttribute="bottom" id="Lkj-sy-AGQ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="FTA-eF-SgJ" secondAttribute="trailing" id="jQq-Sq-80E"/>
+                <constraint firstItem="FTA-eF-SgJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="kmn-qE-0rw"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="152" y="179"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="errorSad" width="825" height="609"/>
+    </resources>
+</document>
