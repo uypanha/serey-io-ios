@@ -52,6 +52,8 @@ def frameworks_pods
   # Material Components
   pod 'MaterialComponents/Cards'
   pod 'MaterialComponents/Cards+ColorThemer'
+  pod 'MaterialComponents/Tabs'
+  pod 'MaterialComponents/BottomSheet'
   
 end
 

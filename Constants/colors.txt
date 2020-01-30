@@ -3,5 +3,7 @@ Secondary       : #1E358F
 Positive        : #4ECD77
 AlmostRed       : #FF5B5B
 
+Border          : #DBDBDB
+
 NavigationBg    : #FFFFFF
 NavigationTint  : #0c0c0c

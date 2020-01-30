@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import RxBinding
+import MaterialComponents
 
 class SelectLanguageViewController: BaseViewController {
     
@@ -19,6 +20,8 @@ class SelectLanguageViewController: BaseViewController {
     @IBOutlet weak var continueButton: UIButton!
     @IBOutlet weak var bottomLeftView: UIView!
     @IBOutlet weak var continueButtonHeightConstraint: NSLayoutConstraint!
+    
+    private var bottomSheet: MDCBottomSheetController?
     
     var viewModel: SelectLanguageViewModel!
     
@@ -103,7 +106,14 @@ fileprivate extension SelectLanguageViewController {
                         AppDelegate.shared?.rootViewController?.switchToBoardingScreen()
                     }
                 case .languagesBottomSheetController:
-                    break
+                    if let chooseLanguageSheetViewController = R.storyboard.onBoard.chooseLanguageSheetViewController() {
+                        chooseLanguageSheetViewController.viewModel = ChooseLanguageViewModel()
+                        self.bottomSheet = MDCBottomSheetController(contentViewController: chooseLanguageSheetViewController)
+                        self.bottomSheet?.isScrimAccessibilityElement = false
+                        self.bottomSheet?.automaticallyAdjustsScrollViewInsets = false
+                        self.bottomSheet?.trackingScrollView = chooseLanguageSheetViewController.tableView
+                        self.present(self.bottomSheet!, animated: true, completion: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

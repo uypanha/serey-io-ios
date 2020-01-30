@@ -19,6 +19,8 @@
 		DC40D5D623E32A6B00B0DD96 /* ImageTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5D523E32A6B00B0DD96 /* ImageTextModel.swift */; };
 		DC40D5D823E32AB800B0DD96 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5D723E32AB800B0DD96 /* Utilities.swift */; };
 		DC40D5D923E32F3800B0DD96 /* Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC40D5DB23E32F3800B0DD96 /* Common.strings */; };
+		DC40D5DF23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */; };
+		DC40D5E323E3360D00B0DD96 /* ChooseLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5E223E3360D00B0DD96 /* ChooseLanguageViewModel.swift */; };
 		DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78E923CA1F38001D1009 /* BaseCellViewModel.swift */; };
 		DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78EB23CA1F57001D1009 /* CellViewModel.swift */; };
 		DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78ED23CA1F72001D1009 /* NetworkViewModelProtocol.swift */; };
@@ -164,6 +166,8 @@
 		DC40D5D723E32AB800B0DD96 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		DC40D5DA23E32F3800B0DD96 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Common.strings; sourceTree = "<group>"; };
 		DC40D5DC23E32F5F00B0DD96 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Common.strings"; sourceTree = "<group>"; };
+		DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLanguageSheetViewController.swift; sourceTree = "<group>"; };
+		DC40D5E223E3360D00B0DD96 /* ChooseLanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLanguageViewModel.swift; sourceTree = "<group>"; };
 		DC6A78E923CA1F38001D1009 /* BaseCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78EB23CA1F57001D1009 /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78ED23CA1F72001D1009 /* NetworkViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -326,6 +330,30 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		DC40D5DD23E3316B00B0DD96 /* Dialog */ = {
+			isa = PBXGroup;
+			children = (
+				DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */,
+			);
+			path = Dialog;
+			sourceTree = "<group>";
+		};
+		DC40D5E023E335F200B0DD96 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DC40D5E123E335F900B0DD96 /* Language */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		DC40D5E123E335F900B0DD96 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				DC40D5E223E3360D00B0DD96 /* ChooseLanguageViewModel.swift */,
+			);
+			path = Language;
+			sourceTree = "<group>";
+		};
 		DC6A78EF23CA1FC6001D1009 /* CollectionProvider */ = {
 			isa = PBXGroup;
 			children = (
@@ -477,6 +505,7 @@
 				DCD39897232E2AD700C812EB /* CloseableNavigationController.swift */,
 				DC6ED56923269CA300770B31 /* RootViewController.swift */,
 				DCD3985D232E105A00C812EB /* Base */,
+				DC40D5DD23E3316B00B0DD96 /* Dialog */,
 				DC6A791323CB66E5001D1009 /* Main */,
 				DC88A73723DF3F3300EB7F79 /* OnBoard */,
 				DCD3985A232E102D00C812EB /* SlashScreen */,
@@ -655,6 +684,7 @@
 				DCD39864232E1CB600C812EB /* Base */,
 				DC6A78F823CA20AB001D1009 /* Common */,
 				DC88A73A23DF4A7700EB7F79 /* OnBoard */,
+				DC40D5E023E335F200B0DD96 /* Settings */,
 				DCD39874232E20BF00C812EB /* Slash */,
 			);
 			path = ViewModel;
@@ -1013,17 +1043,15 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$TEMP_DIR/rswift-lastrun",
 			);
 			name = "R.swift Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				$SRCROOT/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate --disable-input-output-files-validation \"$SRCROOT/R.generated.swift\"\n";
 		};
 		DC6ED55E2326973900770B31 /* SwiftGen Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1069,6 +1097,7 @@
 				DCD39881232E24A400C812EB /* NSLayoutConstraint+Multiplier.swift in Sources */,
 				DCD3989A232E2DE700C812EB /* UINavigationController.swift in Sources */,
 				DC6ED57E2326A44A00770B31 /* DefaultsStore.swift in Sources */,
+				DC40D5DF23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift in Sources */,
 				DCD3987A232E230B00C812EB /* NibView.swift in Sources */,
 				DCD39896232E28E100C812EB /* WebViewViewModel.swift in Sources */,
 				DC6ED56A23269CA300770B31 /* RootViewController.swift in Sources */,
@@ -1094,6 +1123,7 @@
 				DC6A790C23CA26BD001D1009 /* PaginationRequestModel.swift in Sources */,
 				DC40D5C723E31FDF00B0DD96 /* GradientView.swift in Sources */,
 				DC6ED58F2326A7B000770B31 /* AppDelegateHelper.swift in Sources */,
+				DC40D5E323E3360D00B0DD96 /* ChooseLanguageViewModel.swift in Sources */,
 				DC6A78F523CA1FFE001D1009 /* CollectionSectionedAnimatedProviderModel.swift in Sources */,
 				DC6ED5912326A8F400770B31 /* Appearance.swift in Sources */,
 				DC6ED56F2326A30000770B31 /* String+Extensions.swift in Sources */,
