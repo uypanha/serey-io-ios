@@ -10,7 +10,12 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-open class BaseViewController: UIViewController, LocalizeProtocol {
+protocol LocalizeProtocol {
+    
+    func setUpLocalizedTexts()
+}
+
+open class BaseViewController: UIViewController, LocalizeProtocol, NotificationObserver {
     
     lazy var disposeBag: DisposeBag = DisposeBag()
     
@@ -18,24 +23,31 @@ open class BaseViewController: UIViewController, LocalizeProtocol {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        registerForNotifs()
     }
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
         setUpLocalizedTexts()
     }
     
     open func setUpLocalizedTexts() {}
     
+    open func notificationReceived(_ notification: Notification) {
+        switch notification.appNotification {
+        case .languageChanged:
+            setUpLocalizedTexts()
+        default:
+            break
+        }
+    }
+    
     deinit {
+        unregisterFromNotifs()
         #if DEBUG
         print("\(type(of: self).className) ====> DeInit")
         #endif
     }
-}
-
-protocol LocalizeProtocol {
-    
-    func setUpLocalizedTexts()
 }

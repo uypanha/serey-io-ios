@@ -11,13 +11,14 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class SelectLanguageViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
+class SelectLanguageViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, CollectionSingleSecitionProviderModel {
     
     enum Action {
-        case languageSelected(Languages)
+        case itemSelected(IndexPath)
     }
     
     enum ViewToPresent {
+        case languagesBottomSheetController
         case boardingViewController
     }
     
@@ -27,19 +28,37 @@ class SelectLanguageViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent
     // output:
     internal lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
     
+    let cells: BehaviorRelay<[CellViewModel]>
+    
     override init() {
+        self.cells = BehaviorRelay(value: [])
         super.init()
         
         setUpRxObservers()
+        registerForNotifs()
+        self.cells.accept(self.prepareCells())
+    }
+    
+    deinit {
+        unregisterFromNotifs()
+    }
+}
+
+// MARK: - Preparations & Tools
+extension SelectLanguageViewModel {
+    
+    private func prepareCells() -> [CellViewModel] {
+        return [LanguageCellViewModel(language: LanguageManger.shared.currentLanguage, true)]
     }
 }
 
 // MARK: - Action Handlers
 fileprivate extension SelectLanguageViewModel {
     
-    func handleLanguageSelected(_ language: Languages) {
-        LanguageManger.shared.setLanguage(language: language)
-        self.shouldPresent(.boardingViewController)
+    func handleItemSelected(_ indexPath: IndexPath) {
+        if let _ = item(at: indexPath) as? LanguageCellViewModel {
+            self.shouldPresent(.languagesBottomSheetController)
+        }
     }
 }
 
@@ -54,9 +73,23 @@ fileprivate extension SelectLanguageViewModel {
         self.didActionSubject.asObservable()
             .subscribe(onNext: { [weak self] action in
                 switch action {
-                case .languageSelected(let language):
-                    self?.handleLanguageSelected(language)
+                case .itemSelected(let indexPath):
+                    self?.handleItemSelected(indexPath)
                 }
             }) ~ self.disposeBag
+    }
+}
+
+// MARK: - NotificationObserver
+extension SelectLanguageViewModel: NotificationObserver {
+
+    func notificationReceived(_ notification: Notification) {
+        guard let appNotif = notification.appNotification else { return }
+        switch appNotif {
+        case .languageChanged:
+            self.cells.accept(self.prepareCells())
+        default:
+            break
+        }
     }
 }

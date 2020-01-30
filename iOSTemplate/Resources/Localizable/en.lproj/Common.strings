@@ -18,27 +18,12 @@
 // MARK: - Normal Text
 "cancel"                            = "Cancel";
 "back"                              = "Back";
-"email"                             = "Email";
-"emailRequiredMessage"              = "The email field must be a valid email.";
-"name"                              = "Name";
-"fullName"                          = "Full name";
-"gender"                            = "Gender";
-"firstName"                         = "First Name";
-"firstNameRequiredMessage"          = "The first name is required.";
-"lastName"                          = "Last Name";
-"lastNameRequiredMessage"           = "The last name is required.";
 "confirm"                           = "Confirm";
-"book"                              = "Book";
-"edit"                              = "Edit";
-"save"                              = "Save";
 "yes"                               = "Yes";
 "No"                                = "No";
-"remove"                            = "Remove";
-"unknown"                           = "Unknown";
-"tryAgain"                          = "Try Again";
 "skip"                              = "Skip";
-"udpate"                            = "Update";
-"webViewDefaultTitle"               = "iOSTemplate";
+"continue"                          = "Continue";
+"webViewDefaultTitle"               = "Serey.io";
 
 // Media
 "takePhoto"                         = "Take Photo";

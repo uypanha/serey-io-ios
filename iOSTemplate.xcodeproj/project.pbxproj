@@ -9,6 +9,16 @@
 /* Begin PBXBuildFile section */
 		2ED1E50F4DEF1CBDE8D5ED3F /* Pods_iOSTemplateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28484C38ADD8C5896F46D108 /* Pods_iOSTemplateTests.framework */; };
 		6EE5B440CFEA9E85B2150C08 /* Pods_iOSTemplateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F57FBCCEFBA5499CB5A7652 /* Pods_iOSTemplateUITests.framework */; };
+		DC40D5C623E31FDF00B0DD96 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */; };
+		DC40D5C723E31FDF00B0DD96 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C523E31FDF00B0DD96 /* GradientView.swift */; };
+		DC40D5CC23E3298F00B0DD96 /* LanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C923E3298F00B0DD96 /* LanguageTableViewCell.swift */; };
+		DC40D5CD23E3298F00B0DD96 /* LanguageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC40D5CA23E3298F00B0DD96 /* LanguageTableViewCell.xib */; };
+		DC40D5CE23E3298F00B0DD96 /* LanguageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5CB23E3298F00B0DD96 /* LanguageCellViewModel.swift */; };
+		DC40D5D023E329E000B0DD96 /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5CF23E329E000B0DD96 /* LanguageModel.swift */; };
+		DC40D5D423E32A4400B0DD96 /* ImageTextCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5D323E32A4300B0DD96 /* ImageTextCellViewModel.swift */; };
+		DC40D5D623E32A6B00B0DD96 /* ImageTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5D523E32A6B00B0DD96 /* ImageTextModel.swift */; };
+		DC40D5D823E32AB800B0DD96 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5D723E32AB800B0DD96 /* Utilities.swift */; };
+		DC40D5D923E32F3800B0DD96 /* Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC40D5DB23E32F3800B0DD96 /* Common.strings */; };
 		DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78E923CA1F38001D1009 /* BaseCellViewModel.swift */; };
 		DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78EB23CA1F57001D1009 /* CellViewModel.swift */; };
 		DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78ED23CA1F72001D1009 /* NetworkViewModelProtocol.swift */; };
@@ -76,7 +86,6 @@
 		DCD39866232E1CC600C812EB /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39865232E1CC600C812EB /* BaseViewModel.swift */; };
 		DCD39868232E1D1B00C812EB /* ErrorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39867232E1D1B00C812EB /* ErrorHelper.swift */; };
 		DCD3986B232E1DF700C812EB /* AppService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3986A232E1DF700C812EB /* AppService.swift */; };
-		DCD3986E232E1F2300C812EB /* Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = DCD3986D232E1F2300C812EB /* Common.strings */; };
 		DCD39870232E1F7E00C812EB /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3986F232E1F7E00C812EB /* LanguageManager.swift */; };
 		DCD39873232E204000C812EB /* Rx+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39872232E204000C812EB /* Rx+Extensions.swift */; };
 		DCD39876232E20CF00C812EB /* SlashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39875232E20CF00C812EB /* SlashViewModel.swift */; };
@@ -144,6 +153,17 @@
 		C1BABD04EB0B02B02FA86822 /* Pods-iOSTemplate.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTemplate.release_production.xcconfig"; path = "Target Support Files/Pods-iOSTemplate/Pods-iOSTemplate.release_production.xcconfig"; sourceTree = "<group>"; };
 		CBA59D194129B953D45D43E3 /* Pods-iOSTemplateTests.debug_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTemplateTests.debug_development.xcconfig"; path = "Target Support Files/Pods-iOSTemplateTests/Pods-iOSTemplateTests.debug_development.xcconfig"; sourceTree = "<group>"; };
 		CFE837086F6E427F2B49C988 /* Pods-iOSTemplateUITests.release_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTemplateUITests.release_development.xcconfig"; path = "Target Support Files/Pods-iOSTemplateUITests/Pods-iOSTemplateUITests.release_development.xcconfig"; sourceTree = "<group>"; };
+		DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
+		DC40D5C523E31FDF00B0DD96 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		DC40D5C923E3298F00B0DD96 /* LanguageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTableViewCell.swift; sourceTree = "<group>"; };
+		DC40D5CA23E3298F00B0DD96 /* LanguageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LanguageTableViewCell.xib; sourceTree = "<group>"; };
+		DC40D5CB23E3298F00B0DD96 /* LanguageCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageCellViewModel.swift; sourceTree = "<group>"; };
+		DC40D5CF23E329E000B0DD96 /* LanguageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageModel.swift; sourceTree = "<group>"; };
+		DC40D5D323E32A4300B0DD96 /* ImageTextCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextCellViewModel.swift; sourceTree = "<group>"; };
+		DC40D5D523E32A6B00B0DD96 /* ImageTextModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextModel.swift; sourceTree = "<group>"; };
+		DC40D5D723E32AB800B0DD96 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		DC40D5DA23E32F3800B0DD96 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Common.strings; sourceTree = "<group>"; };
+		DC40D5DC23E32F5F00B0DD96 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Common.strings"; sourceTree = "<group>"; };
 		DC6A78E923CA1F38001D1009 /* BaseCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78EB23CA1F57001D1009 /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78ED23CA1F72001D1009 /* NetworkViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -219,7 +239,6 @@
 		DCD39865232E1CC600C812EB /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		DCD39867232E1D1B00C812EB /* ErrorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelper.swift; sourceTree = "<group>"; };
 		DCD3986A232E1DF700C812EB /* AppService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppService.swift; sourceTree = "<group>"; };
-		DCD3986D232E1F2300C812EB /* Common.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Common.strings; sourceTree = "<group>"; };
 		DCD3986F232E1F7E00C812EB /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		DCD39872232E204000C812EB /* Rx+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+Extensions.swift"; sourceTree = "<group>"; };
 		DCD39875232E20CF00C812EB /* SlashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlashViewModel.swift; sourceTree = "<group>"; };
@@ -281,6 +300,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DC40D5C823E3298F00B0DD96 /* LanguageTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC40D5CB23E3298F00B0DD96 /* LanguageCellViewModel.swift */,
+				DC40D5C923E3298F00B0DD96 /* LanguageTableViewCell.swift */,
+				DC40D5CA23E3298F00B0DD96 /* LanguageTableViewCell.xib */,
+			);
+			path = LanguageTableViewCell;
+			sourceTree = "<group>";
+		};
+		DC40D5D123E32A2800B0DD96 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DC40D5D323E32A4300B0DD96 /* ImageTextCellViewModel.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		DC40D5D223E32A3100B0DD96 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				DCD3987C232E235000C812EB /* BaseTableViewCell.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		DC6A78EF23CA1FC6001D1009 /* CollectionProvider */ = {
 			isa = PBXGroup;
 			children = (
@@ -313,6 +358,8 @@
 		DC6A790A23CA26B1001D1009 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DC40D5D523E32A6B00B0DD96 /* ImageTextModel.swift */,
+				DC40D5CF23E329E000B0DD96 /* LanguageModel.swift */,
 				DC6A790B23CA26BD001D1009 /* PaginationRequestModel.swift */,
 			);
 			path = Models;
@@ -510,6 +557,7 @@
 				DCD39867232E1D1B00C812EB /* ErrorHelper.swift */,
 				DCD3986F232E1F7E00C812EB /* LanguageManager.swift */,
 				DC6A790823CA2510001D1009 /* RealmManager.swift */,
+				DC40D5D723E32AB800B0DD96 /* Utilities.swift */,
 				DCD3988F232E264E00C812EB /* File */,
 				DC6ED57A2326A42D00770B31 /* Store */,
 			);
@@ -550,6 +598,8 @@
 		DC88A73423DF3EB600EB7F79 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */,
+				DC40D5C523E31FDF00B0DD96 /* GradientView.swift */,
 				DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */,
 			);
 			path = Common;
@@ -633,7 +683,7 @@
 		DCD3986C232E1F0C00C812EB /* Localizable */ = {
 			isa = PBXGroup;
 			children = (
-				DCD3986D232E1F2300C812EB /* Common.strings */,
+				DC40D5DB23E32F3800B0DD96 /* Common.strings */,
 			);
 			path = Localizable;
 			sourceTree = "<group>";
@@ -677,7 +727,9 @@
 		DCD3987B232E234600C812EB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				DCD3987C232E235000C812EB /* BaseTableViewCell.swift */,
+				DC40D5D223E32A3100B0DD96 /* Base */,
+				DC40D5D123E32A2800B0DD96 /* Common */,
+				DC40D5C823E3298F00B0DD96 /* LanguageTableViewCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -822,6 +874,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"km-KH",
 			);
 			mainGroup = DC6ED51423267EED00770B31;
 			productRefGroup = DC6ED51E23267EED00770B31 /* Products */;
@@ -845,9 +898,10 @@
 				DC6ED56523269B6600770B31 /* colors.txt in Resources */,
 				DCD39859232E0F9600C812EB /* Slash.storyboard in Resources */,
 				DC6ED52623267EED00770B31 /* Main.storyboard in Resources */,
+				DC40D5CD23E3298F00B0DD96 /* LanguageTableViewCell.xib in Resources */,
 				DC6A790423CA242B001D1009 /* EmptyOrErrorView.xib in Resources */,
 				DC88A73323DF3D3900EB7F79 /* OnBoard.storyboard in Resources */,
-				DCD3986E232E1F2300C812EB /* Common.strings in Resources */,
+				DC40D5D923E32F3800B0DD96 /* Common.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1000,8 +1054,11 @@
 				DCD39873232E204000C812EB /* Rx+Extensions.swift in Sources */,
 				DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */,
 				DCD39887232E251C00C812EB /* StyleProtocol.swift in Sources */,
+				DC40D5D023E329E000B0DD96 /* LanguageModel.swift in Sources */,
 				DC6A792723CB6F19001D1009 /* Accounts.swift in Sources */,
 				DC6ED5782326A40200770B31 /* AppCoordinator.swift in Sources */,
+				DC40D5CE23E3298F00B0DD96 /* LanguageCellViewModel.swift in Sources */,
+				DC40D5D823E32AB800B0DD96 /* Utilities.swift in Sources */,
 				DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */,
 				DC6A792323CB6F19001D1009 /* HttpClient.swift in Sources */,
 				DCD39862232E114300C812EB /* UIViewController+Properties.swift in Sources */,
@@ -1015,6 +1072,7 @@
 				DCD3987A232E230B00C812EB /* NibView.swift in Sources */,
 				DCD39896232E28E100C812EB /* WebViewViewModel.swift in Sources */,
 				DC6ED56A23269CA300770B31 /* RootViewController.swift in Sources */,
+				DC40D5D623E32A6B00B0DD96 /* ImageTextModel.swift in Sources */,
 				DCD39866232E1CC600C812EB /* BaseViewModel.swift in Sources */,
 				DCD3988D232E259700C812EB /* KeyboardController+Actions.swift in Sources */,
 				DC6A791523CB676E001D1009 /* MainViewController.swift in Sources */,
@@ -1029,10 +1087,12 @@
 				DC6A78FA23CA20B3001D1009 /* FieldViewModelProtocol.swift in Sources */,
 				DC6A792623CB6F19001D1009 /* Misc.swift in Sources */,
 				DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */,
+				DC40D5C623E31FDF00B0DD96 /* ContentSizedTableView.swift in Sources */,
 				DC6ED5842326A4BA00770B31 /* NotificationDispatcher.swift in Sources */,
 				DCD39870232E1F7E00C812EB /* LanguageManager.swift in Sources */,
 				DCD3987D232E235000C812EB /* BaseTableViewCell.swift in Sources */,
 				DC6A790C23CA26BD001D1009 /* PaginationRequestModel.swift in Sources */,
+				DC40D5C723E31FDF00B0DD96 /* GradientView.swift in Sources */,
 				DC6ED58F2326A7B000770B31 /* AppDelegateHelper.swift in Sources */,
 				DC6A78F523CA1FFE001D1009 /* CollectionSectionedAnimatedProviderModel.swift in Sources */,
 				DC6ED5912326A8F400770B31 /* Appearance.swift in Sources */,
@@ -1051,11 +1111,13 @@
 				DC6ED5882326A4F900770B31 /* APNSTokenStore.swift in Sources */,
 				DC6A792223CB6F19001D1009 /* Helper.swift in Sources */,
 				DCD39876232E20CF00C812EB /* SlashViewModel.swift in Sources */,
+				DC40D5D423E32A4400B0DD96 /* ImageTextCellViewModel.swift in Sources */,
 				DC6A792923CB6F19001D1009 /* Api.swift in Sources */,
 				DC6ED52123267EED00770B31 /* AppDelegate.swift in Sources */,
 				DC6ED5742326A37800770B31 /* DeeplinkParser.swift in Sources */,
 				DCD3986B232E1DF700C812EB /* AppService.swift in Sources */,
 				DC6ED56623269B6600770B31 /* ColorsGen.swift in Sources */,
+				DC40D5CC23E3298F00B0DD96 /* LanguageTableViewCell.swift in Sources */,
 				DC6A78F123CA1FD6001D1009 /* CollectionDataProviderModel.swift in Sources */,
 				DCD39898232E2AD700C812EB /* CloseableNavigationController.swift in Sources */,
 				DCD39891232E265F00C812EB /* MediaPickerHelper.swift in Sources */,
@@ -1105,6 +1167,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		DC40D5DB23E32F3800B0DD96 /* Common.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC40D5DA23E32F3800B0DD96 /* en */,
+				DC40D5DC23E32F5F00B0DD96 /* km-KH */,
+			);
+			name = Common.strings;
+			sourceTree = "<group>";
+		};
 		DC6ED52423267EED00770B31 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1129,6 +1200,7 @@
 			baseConfigurationReference = DC6ED55B2326825A00770B31 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1191,6 +1263,7 @@
 			baseConfigurationReference = DC6ED55B2326825A00770B31 /* Development.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1379,6 +1452,7 @@
 			baseConfigurationReference = DC6ED55C2326826500770B31 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1507,6 +1581,7 @@
 			baseConfigurationReference = DC6ED55C2326826500770B31 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

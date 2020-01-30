@@ -14,8 +14,11 @@ import RxBinding
 class SelectLanguageViewController: BaseViewController {
     
     @IBOutlet weak var selectLanguageLabel: UILabel!
-    @IBOutlet weak var englishButton: UICenteredHorizantalButton!
-    @IBOutlet weak var khmerButton: UICenteredHorizantalButton!
+    @IBOutlet weak var tableView: ContentSizedTableView!
+    
+    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var bottomLeftView: UIView!
+    @IBOutlet weak var continueButtonHeightConstraint: NSLayoutConstraint!
     
     var viewModel: SelectLanguageViewModel!
     
@@ -26,17 +29,36 @@ class SelectLanguageViewController: BaseViewController {
         setUpViews()
         setUpRxObservers()
     }
+    
+    override func setUpLocalizedTexts() {
+        super.setUpLocalizedTexts()
+        
+        self.continueButton.setTitle(R.string.common.continue.localized(), for: .normal)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.continueButton.roundCorners(corners: [.topLeft], radius: 24)
+        self.bottomLeftView.roundCorners(corners: [.topRight], radius: 24)
+    }
 }
 
 // MARK: - Preparations & Tools
 extension SelectLanguageViewController {
     
     func setUpViews() {
-        self.englishButton.makeMeCircular()
-        self.englishButton.setBorder(borderWith: 1, borderColor: ColorName.primary.color)
+        self.continueButton.backgroundColor = ColorName.primary.color
+        self.continueButtonHeightConstraint.constant = 56 + self.bottomSafeAreaHeight
+        self.continueButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: self.bottomSafeAreaHeight, right: 0)
         
-        self.khmerButton.makeMeCircular()
-        self.khmerButton.setBorder(borderWith: 1, borderColor: ColorName.primary.color)
+        prepareTableView()
+    }
+    
+    func prepareTableView() {
+        self.tableView.tableFooterView = UIView()
+        self.tableView.separatorStyle = .none
+        self.tableView.register(LanguageTableViewCell.self)
     }
 }
 
@@ -44,20 +66,30 @@ extension SelectLanguageViewController {
 fileprivate extension SelectLanguageViewController {
     
     func setUpRxObservers() {
+        setUpContentChangedObservers()
         setUpControlsObservers()
         setUpShouldPresentObservers()
     }
     
+    func setUpContentChangedObservers() {
+        self.viewModel.cells.asObservable()
+            .bind(to: self.tableView.rx.items){ tableView, index, item in
+                switch item {
+                case is LanguageCellViewModel:
+                    let cell: LanguageTableViewCell = tableView.dequeueReusableCell(forIndexPath: IndexPath(row: index, section: 0))
+                    cell.cellModel = item as? LanguageCellViewModel
+                    return cell
+                default:
+                    return UITableViewCell()
+                }
+            } ~ self.disposeBag
+    }
+    
     func setUpControlsObservers() {
-        self.englishButton.rx.tap
-            .map { Languages.en }
-            .map { SelectLanguageViewModel.Action.languageSelected($0) }
-            ~> self.viewModel.didActionSubject
-            ~ self.disposeBag
-        
-        self.khmerButton.rx.tap
-            .map { Languages.km }
-            .map { SelectLanguageViewModel.Action.languageSelected($0) }
+        self.tableView.rx.itemSelected
+            .`do`(onNext: { [weak self] (indexPath) in
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+            }).map { SelectLanguageViewModel.Action.itemSelected($0) }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
     }
@@ -70,6 +102,8 @@ fileprivate extension SelectLanguageViewController {
                     DispatchQueue.main.async {
                         AppDelegate.shared?.rootViewController?.switchToBoardingScreen()
                     }
+                case .languagesBottomSheetController:
+                    break
                 }
             }) ~ self.disposeBag
     }

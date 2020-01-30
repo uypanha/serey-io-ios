@@ -145,12 +145,30 @@ enum Languages: String, CaseIterable {
 //        }
 //    }
     
+    var image: UIImage? {
+        switch self {
+        case .en:
+            return R.image.enUs()
+        default:
+            return R.image.khKm()
+        }
+    }
+    
     var languageText: String? {
         switch self {
         case .en:
             return "English"
         case .km:
-            return "ខ្មែរ"
+            return "ខេមរៈភាសា"
+        }
+    }
+    
+    var languageCode: String {
+        switch self {
+        case .en:
+            return "en"
+        case .km:
+            return "km"
         }
     }
     
@@ -158,9 +176,9 @@ enum Languages: String, CaseIterable {
         return self == LanguageManger.shared.currentLanguage
     }
     
-//    var languageModel: LanguageModel {
-//        return LanguageModel(image: image, titleText: languageText, isSelected: isSelected)
-//    }
+    var languageModel: LanguageModel {
+        return LanguageModel(lanuage: self)
+    }
 }
 
 
