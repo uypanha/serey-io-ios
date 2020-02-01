@@ -28,4 +28,10 @@ class LanguageTableViewCell: BaseTableViewCell {
                 }).disposed(by: self.disposeBag)
         }
     }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        self.languageImageView.setRadius(all: 4)
+    }
 }

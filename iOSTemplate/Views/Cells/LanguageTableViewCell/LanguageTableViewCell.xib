@@ -23,14 +23,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="khKm" translatesAutoresizingMaskIntoConstraints="NO" id="bbf-Eo-xny">
-                        <rect key="frame" x="24" y="16" width="35.5" height="24"/>
+                        <rect key="frame" x="24" y="16" width="37" height="24"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="bbf-Eo-xny" secondAttribute="height" multiplier="40:27" id="ctc-Xg-PFo"/>
+                            <constraint firstAttribute="width" secondItem="bbf-Eo-xny" secondAttribute="height" multiplier="40:26" id="ctc-Xg-PFo"/>
                             <constraint firstAttribute="height" constant="24" id="fSf-Ba-GyY"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ខេមរៈភាសា" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaj-GI-Zl5">
-                        <rect key="frame" x="75.5" y="18.5" width="365.5" height="19"/>
+                        <rect key="frame" x="77" y="18.5" width="364" height="19"/>
                         <fontDescription key="fontDescription" name="CircularStd-Medium" family="Circular Std" pointSize="16"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>

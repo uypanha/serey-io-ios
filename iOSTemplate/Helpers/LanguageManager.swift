@@ -111,7 +111,12 @@ class LanguageManger {
         }
         
         var languages: [Languages] = []
-        availableLanguages.forEach { lang in
+        
+        // Make km-KH to the top of language list
+        if let langCode = availableLanguages.first(where: { $0 == "km-KH" }), let kmLanguage = Languages(rawValue: langCode) {
+            languages.append(kmLanguage)
+        }
+        availableLanguages.filter { $0 != "km-KH" }.forEach { lang in
             if let language = Languages(rawValue: lang) {
                 languages.append(language)
             }
@@ -133,17 +138,8 @@ enum Languages: String, CaseIterable {
     //    case zhHans = "zh-Hans"
     //    case zhHant = "zh-Hant"
     //    case zhHK = "zh-HK"
-    case en
     case km = "km-KH"
-    
-//    var image: UIImage? {
-//        switch self {
-//        case .en:
-//            return R.image.englishIcon()
-//        default:
-//            return R.image.khmerIcon()
-//        }
-//    }
+    case en
     
     var image: UIImage? {
         switch self {

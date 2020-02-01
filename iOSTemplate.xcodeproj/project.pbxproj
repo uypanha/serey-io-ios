@@ -21,6 +21,7 @@
 		DC40D5D923E32F3800B0DD96 /* Common.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC40D5DB23E32F3800B0DD96 /* Common.strings */; };
 		DC40D5DF23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */; };
 		DC40D5E323E3360D00B0DD96 /* ChooseLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5E223E3360D00B0DD96 /* ChooseLanguageViewModel.swift */; };
+		DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC40D5EA23E487A600B0DD96 /* OnBoard.strings */; };
 		DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78E923CA1F38001D1009 /* BaseCellViewModel.swift */; };
 		DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78EB23CA1F57001D1009 /* CellViewModel.swift */; };
 		DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78ED23CA1F72001D1009 /* NetworkViewModelProtocol.swift */; };
@@ -168,6 +169,8 @@
 		DC40D5DC23E32F5F00B0DD96 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Common.strings"; sourceTree = "<group>"; };
 		DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLanguageSheetViewController.swift; sourceTree = "<group>"; };
 		DC40D5E223E3360D00B0DD96 /* ChooseLanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLanguageViewModel.swift; sourceTree = "<group>"; };
+		DC40D5E923E487A600B0DD96 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OnBoard.strings; sourceTree = "<group>"; };
+		DC40D5EB23E487A800B0DD96 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/OnBoard.strings"; sourceTree = "<group>"; };
 		DC6A78E923CA1F38001D1009 /* BaseCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78EB23CA1F57001D1009 /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78ED23CA1F72001D1009 /* NetworkViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -714,6 +717,7 @@
 			isa = PBXGroup;
 			children = (
 				DC40D5DB23E32F3800B0DD96 /* Common.strings */,
+				DC40D5EA23E487A600B0DD96 /* OnBoard.strings */,
 			);
 			path = Localizable;
 			sourceTree = "<group>";
@@ -925,6 +929,7 @@
 			files = (
 				DC6ED52B23267EF000770B31 /* LaunchScreen.storyboard in Resources */,
 				DC6ED52823267EF000770B31 /* Assets.xcassets in Resources */,
+				DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */,
 				DC6ED56523269B6600770B31 /* colors.txt in Resources */,
 				DCD39859232E0F9600C812EB /* Slash.storyboard in Resources */,
 				DC6ED52623267EED00770B31 /* Main.storyboard in Resources */,
@@ -1204,6 +1209,15 @@
 				DC40D5DC23E32F5F00B0DD96 /* km-KH */,
 			);
 			name = Common.strings;
+			sourceTree = "<group>";
+		};
+		DC40D5EA23E487A600B0DD96 /* OnBoard.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC40D5E923E487A600B0DD96 /* en */,
+				DC40D5EB23E487A800B0DD96 /* km-KH */,
+			);
+			name = OnBoard.strings;
 			sourceTree = "<group>";
 		};
 		DC6ED52423267EED00770B31 /* Main.storyboard */ = {

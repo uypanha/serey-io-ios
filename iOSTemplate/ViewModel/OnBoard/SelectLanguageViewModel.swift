@@ -15,6 +15,7 @@ class SelectLanguageViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent
     
     enum Action {
         case itemSelected(IndexPath)
+        case continuePressed
     }
     
     enum ViewToPresent {
@@ -75,6 +76,8 @@ fileprivate extension SelectLanguageViewModel {
                 switch action {
                 case .itemSelected(let indexPath):
                     self?.handleItemSelected(indexPath)
+                case .continuePressed:
+                    self?.shouldPresent(.boardingViewController)
                 }
             }) ~ self.disposeBag
     }

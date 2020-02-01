@@ -36,6 +36,7 @@ class SelectLanguageViewController: BaseViewController {
     override func setUpLocalizedTexts() {
         super.setUpLocalizedTexts()
         
+        self.selectLanguageLabel.text = R.string.onBoard.selectLanguage.localized()
         self.continueButton.setTitle(R.string.common.continue.localized(), for: .normal)
     }
     
@@ -95,6 +96,11 @@ fileprivate extension SelectLanguageViewController {
             }).map { SelectLanguageViewModel.Action.itemSelected($0) }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
+        
+        self.continueButton.rx.tap.asObservable()
+            .map { SelectLanguageViewModel.Action.continuePressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpShouldPresentObservers() {
@@ -111,7 +117,8 @@ fileprivate extension SelectLanguageViewController {
                         self.bottomSheet = MDCBottomSheetController(contentViewController: chooseLanguageSheetViewController)
                         self.bottomSheet?.isScrimAccessibilityElement = false
                         self.bottomSheet?.automaticallyAdjustsScrollViewInsets = false
-                        self.bottomSheet?.trackingScrollView = chooseLanguageSheetViewController.tableView
+                        self.bottomSheet?.dismissOnDraggingDownSheet = false
+//                        self.bottomSheet?.trackingScrollView = chooseLanguageSheetViewController.tableView
                         self.present(self.bottomSheet!, animated: true, completion: nil)
                     }
                 }

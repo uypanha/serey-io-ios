@@ -14,6 +14,7 @@ import RxDataSources
 
 class ChooseLanguageSheetViewController: BaseViewController {
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var selectLanguageLabel: UILabel!
     @IBOutlet weak var tableView: ContentSizedTableView!
     
@@ -22,6 +23,19 @@ class ChooseLanguageSheetViewController: BaseViewController {
     }()
     
     var viewModel: ChooseLanguageViewModel!
+    
+    var backgroundGesture: UITapGestureRecognizer? {
+        didSet {
+            guard let guesture = self.backgroundGesture else { return }
+            
+            guesture.cancelsTouchesInView = false
+            view.addGestureRecognizer(guesture)
+            guesture.rx.event.asObservable()
+                .subscribe(onNext: { [weak self] _ in
+                    self?.dismiss(animated: true, completion: nil)
+                }).disposed(by: self.disposeBag)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +46,14 @@ class ChooseLanguageSheetViewController: BaseViewController {
     
     override func setUpLocalizedTexts() {
         super.setUpLocalizedTexts()
+        
+        self.selectLanguageLabel.text = R.string.onBoard.selectLanguage.localized()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        containerView.roundCorners(corners: [.topLeft, .topRight], radius: 8)
     }
 }
 
@@ -39,7 +61,7 @@ class ChooseLanguageSheetViewController: BaseViewController {
 fileprivate extension ChooseLanguageSheetViewController {
     
     func setUpViews() {
-        view.roundCorners(corners: [.topLeft, .topRight], radius: 8)
+        self.backgroundGesture = UITapGestureRecognizer()
         prepareTableView()
     }
     

@@ -1,41 +1,44 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-# Pods for Sharing to multiple targets
+# MARK: - Pods for Sharing to multiple targets
+install! 'cocoapods',
+:deterministic_uuids => false
+
 def frameworks_pods
   
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  # MARK: - Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   platform :ios, '10'
   use_frameworks!
   inhibit_all_warnings!
 
-	# Data Store
+	# MARK: - Data Store
   pod 'Locksmith'
 	pod 'RealmSwift'
 
-	# Extentions
+	# MARK: - Extentions
   pod 'Then'
 
-	# Tools + Builders
+	# MARK: - Tools + Builders
   pod 'R.swift'
   pod 'SwiftGen'
 
-	# Logger
+	# MARK: - Logger
   pod 'SwiftyBeaver'
 	
-	#Network Framework
+	# MARK: - Network Framework
   pod 'Kingfisher'
   pod 'Alamofire'
   pod 'AlamofireObjectMapper'
   pod 'ReachabilitySwift'
   pod 'Moya/RxSwift'
 
-	# UI + Controllers
+	# MARK: - UI + Controllers
 	pod 'SnapKit'
 	pod 'NVActivityIndicatorView'
 	pod 'NotificationBannerSwift'
 
-	# RX
+	# MARK: - RX
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxDataSources'
@@ -45,15 +48,16 @@ def frameworks_pods
   pod 'RxRealm'
   pod 'RxBinding'
   
-  # Google SDKs
+  # MARK: - Google SDKs
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   
-  # Material Components
+  # MARK: - Material Components
   pod 'MaterialComponents/Cards'
   pod 'MaterialComponents/Cards+ColorThemer'
   pod 'MaterialComponents/Tabs'
   pod 'MaterialComponents/BottomSheet'
+  pod 'MaterialComponents/PageControl'
   
 end
 
