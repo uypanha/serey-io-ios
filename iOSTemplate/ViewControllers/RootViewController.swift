@@ -40,17 +40,17 @@ class RootViewController: UIViewController {
 extension RootViewController {
     
     func switchToMainScreen(fadeAnimation: Bool = false) {
-//        let mainTabBarViewController = MainTabBarViewController()
+        let mainTabBarViewController = MainTabBarViewController()
 //        mainTabBarViewController.viewModel = MainTabBarViewModel()
-//        if fadeAnimation {
-//            self.animateFadeTransition(to: mainTabBarViewController) { [weak self] in
-//                self?.handleDeeplink()
-//            }
-//        } else {
-//            self.animateSlideToTopTransition(to: mainTabBarViewController) { [weak self] in
-//                self?.handleDeeplink()
-//            }
-//        }
+        if fadeAnimation {
+            self.animateFadeTransition(to: mainTabBarViewController) { [weak self] in
+                self?.handleDeeplink()
+            }
+        } else {
+            self.animateSlideToTopTransition(to: mainTabBarViewController) { [weak self] in
+                self?.handleDeeplink()
+            }
+        }
     }
     
     func switchToSelectLanguageBoardScreen() {
@@ -62,7 +62,7 @@ extension RootViewController {
     
     func switchToBoardingScreen() {
         if let boardingViewController = R.storyboard.onBoard.boardingViewController() {
-//            boardingViewController.viewModel = BoardingViewModel()
+            boardingViewController.viewModel = BoardingViewModel()
             self.animateFadeTransition(to: UINavigationController(rootViewController: boardingViewController).then {
                 $0.removeNavigationBarBorder()
             })

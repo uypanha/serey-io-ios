@@ -25,6 +25,9 @@
 "continue"                          = "Continue";
 "webViewDefaultTitle"               = "Serey.io";
 
+"next"                              = "Next";
+"letBegin"                          = "Let's begin";
+
 // Media
 "takePhoto"                         = "Take Photo";
 "choosePhoto"                       = "Choose Photo";

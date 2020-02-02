@@ -48,16 +48,15 @@ def frameworks_pods
   pod 'RxRealm'
   pod 'RxBinding'
   
+  
   # MARK: - Google SDKs
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   
   # MARK: - Material Components
-  pod 'MaterialComponents/Cards'
-  pod 'MaterialComponents/Cards+ColorThemer'
   pod 'MaterialComponents/Tabs'
-  pod 'MaterialComponents/BottomSheet'
   pod 'MaterialComponents/PageControl'
+  pod 'MaterialComponents/BottomSheet'
   
 end
 

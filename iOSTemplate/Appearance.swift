@@ -14,6 +14,7 @@ class Appearance {
     static func configure() {
         prepareTableView()
         prepareNavigationBar()
+        prepareTabBar()
     }
 }
 
@@ -23,6 +24,21 @@ fileprivate extension Appearance {
     static func prepareTableView() {
         UITableViewCell.appearance().selectedBackgroundView = UIView().then {
             $0.backgroundColor = ColorName.primary.color.withAlphaComponent(0.15)
+        }
+    }
+    
+    static func prepareTabBar() {
+        UITabBar.appearance().tintColor = ColorName.primary.color
+        if #available(iOS 10.0, *) {
+            UITabBar.appearance().unselectedItemTintColor = UIColor.darkGray
+        }
+        if #available(iOS 13.0, *) {
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithOpaqueBackground()
+            tabBarAppearance.backgroundColor = .white
+            UITabBar.appearance().standardAppearance = tabBarAppearance
+        } else {
+            UITabBar.appearance().backgroundColor = .white
         }
     }
     

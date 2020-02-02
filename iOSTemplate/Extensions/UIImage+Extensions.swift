@@ -24,4 +24,12 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return newImage
     }
+    
+    func image(with alpha: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(at: CGPoint.zero, blendMode: .normal, alpha: alpha)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
 }
