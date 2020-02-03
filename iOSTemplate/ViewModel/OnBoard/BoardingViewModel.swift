@@ -27,11 +27,22 @@ class BoardingViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
     
     // output:
     internal lazy var shouldPresentSubject = PublishSubject<BoardingViewModel.ViewToPresent>()
+    let slideCellModels: BehaviorRelay<[CellViewModel]>
 
     override init() {
+        self.slideCellModels = BehaviorRelay(value: [])
         super.init()
         
         setUpRxObservers()
+        self.slideCellModels.accept(prepareSlides())
+    }
+}
+
+// MARK: - Preparations & Tools
+extension BoardingViewModel {
+    
+    func prepareSlides() -> [CellViewModel] {
+        return (0...2).map { _ in BoardFeatureViewModel() }
     }
 }
 

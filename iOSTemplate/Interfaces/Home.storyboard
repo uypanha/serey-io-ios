@@ -8,20 +8,43 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="Roy-7A-s6h">
             <objects>
-                <viewController id="9XX-0x-nNP" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="9XX-0x-nNP" customClass="HomeViewController" customModule="iOSTemplate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WO3-W6-bhL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Urw-qo-YAF" customClass="MDCTabBar">
+                                <rect key="frame" x="0.0" y="44" width="414" height="48"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAr-6Z-A3K">
+                                <rect key="frame" x="0.0" y="97" width="414" height="799"/>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="xAr-6Z-A3K" firstAttribute="leading" secondItem="EAM-ao-e0i" secondAttribute="leading" id="3JE-6V-AZZ"/>
+                            <constraint firstItem="xAr-6Z-A3K" firstAttribute="width" secondItem="WO3-W6-bhL" secondAttribute="width" id="6tf-m7-sCZ"/>
+                            <constraint firstItem="Urw-qo-YAF" firstAttribute="top" secondItem="EAM-ao-e0i" secondAttribute="top" id="M9d-Oy-vq2"/>
+                            <constraint firstItem="EAM-ao-e0i" firstAttribute="trailing" secondItem="Urw-qo-YAF" secondAttribute="trailing" id="QYl-Ua-6Pc"/>
+                            <constraint firstItem="xAr-6Z-A3K" firstAttribute="top" secondItem="Urw-qo-YAF" secondAttribute="bottom" id="Sj8-Ng-4fG"/>
+                            <constraint firstAttribute="bottom" secondItem="xAr-6Z-A3K" secondAttribute="bottom" id="Utv-vD-yjJ"/>
+                            <constraint firstItem="EAM-ao-e0i" firstAttribute="trailing" secondItem="xAr-6Z-A3K" secondAttribute="trailing" id="iia-89-dia"/>
+                            <constraint firstItem="Urw-qo-YAF" firstAttribute="leading" secondItem="EAM-ao-e0i" secondAttribute="leading" id="v8p-PG-J8P"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="EAM-ao-e0i"/>
                     </view>
+                    <connections>
+                        <outlet property="scrollView" destination="xAr-6Z-A3K" id="7Go-8F-kvG"/>
+                        <outlet property="tabBar" destination="Urw-qo-YAF" id="wty-aR-Uae"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZRf-vn-GNx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="235" y="-170"/>
+            <point key="canvasLocation" x="234.78260869565219" y="-170.08928571428569"/>
         </scene>
     </scenes>
 </document>

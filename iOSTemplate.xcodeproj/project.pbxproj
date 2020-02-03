@@ -90,6 +90,14 @@
 		DC8EAB8323E7231A00E00A00 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */; };
 		DC8EAB8523E7232800E00A00 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8423E7232800E00A00 /* NotificationViewController.swift */; };
 		DC8EAB8723E7232F00E00A00 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8623E7232F00E00A00 /* SearchViewController.swift */; };
+		DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */; };
+		DCC49AC823E8632B00119BAA /* BoardFeatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC49AC623E8632B00119BAA /* BoardFeatureView.xib */; };
+		DCC49ACC23E864E500119BAA /* FeatureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49ACB23E864E500119BAA /* FeatureStore.swift */; };
+		DCC49ACE23E865B600119BAA /* BoardFeatureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49ACD23E865B600119BAA /* BoardFeatureViewModel.swift */; };
+		DCC49AD323E865D700119BAA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AD023E865D700119BAA /* ProfileView.swift */; };
+		DCC49AD423E865D700119BAA /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC49AD123E865D700119BAA /* ProfileView.xib */; };
+		DCC49AD523E865D700119BAA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AD223E865D700119BAA /* ProfileViewModel.swift */; };
+		DCC49AD723E8795600119BAA /* TabBarIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AD623E8795600119BAA /* TabBarIndicator.swift */; };
 		DCD39859232E0F9600C812EB /* Slash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCD39858232E0F9600C812EB /* Slash.storyboard */; };
 		DCD3985C232E104400C812EB /* SlashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3985B232E104400C812EB /* SlashScreenViewController.swift */; };
 		DCD3985F232E106E00C812EB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3985E232E106E00C812EB /* BaseViewController.swift */; };
@@ -256,6 +264,14 @@
 		DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		DC8EAB8423E7232800E00A00 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		DC8EAB8623E7232F00E00A00 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardFeatureView.swift; sourceTree = "<group>"; };
+		DCC49AC623E8632B00119BAA /* BoardFeatureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BoardFeatureView.xib; sourceTree = "<group>"; };
+		DCC49ACB23E864E500119BAA /* FeatureStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureStore.swift; sourceTree = "<group>"; };
+		DCC49ACD23E865B600119BAA /* BoardFeatureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardFeatureViewModel.swift; sourceTree = "<group>"; };
+		DCC49AD023E865D700119BAA /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		DCC49AD123E865D700119BAA /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
+		DCC49AD223E865D700119BAA /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		DCC49AD623E8795600119BAA /* TabBarIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarIndicator.swift; sourceTree = "<group>"; };
 		DCD39858232E0F9600C812EB /* Slash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Slash.storyboard; sourceTree = "<group>"; };
 		DCD3985B232E104400C812EB /* SlashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlashScreenViewController.swift; sourceTree = "<group>"; };
 		DCD3985E232E106E00C812EB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -623,12 +639,12 @@
 		DC6ED57A2326A42D00770B31 /* Store */ = {
 			isa = PBXGroup;
 			children = (
-				DC6ED5872326A4F900770B31 /* APNSTokenStore.swift */,
-				DC6ED5812326A47D00770B31 /* AuthData.swift */,
 				DC6ED57D2326A44A00770B31 /* DefaultsStore.swift */,
 				DC6ED5892326A53B00770B31 /* KeyChainStore.swift */,
 				DC6ED57F2326A46300770B31 /* SimpleStore.swift */,
 				DC6ED57B2326A43700770B31 /* Store.swift */,
+				DCC49AC923E864AA00119BAA /* Settings */,
+				DCC49ACA23E864BA00119BAA /* User */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -656,8 +672,9 @@
 			children = (
 				DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */,
 				DC40D5C523E31FDF00B0DD96 /* GradientView.swift */,
-				DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */,
 				DC8EAB7423E70ED600E00A00 /* MDCQuadPageControl.swift */,
+				DCC49AD623E8795600119BAA /* TabBarIndicator.swift */,
+				DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -710,6 +727,43 @@
 				DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */,
 			);
 			path = More;
+			sourceTree = "<group>";
+		};
+		DCC49AC423E8632B00119BAA /* BoardFeatureView */ = {
+			isa = PBXGroup;
+			children = (
+				DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */,
+				DCC49ACD23E865B600119BAA /* BoardFeatureViewModel.swift */,
+				DCC49AC623E8632B00119BAA /* BoardFeatureView.xib */,
+			);
+			path = BoardFeatureView;
+			sourceTree = "<group>";
+		};
+		DCC49AC923E864AA00119BAA /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				DCC49ACB23E864E500119BAA /* FeatureStore.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		DCC49ACA23E864BA00119BAA /* User */ = {
+			isa = PBXGroup;
+			children = (
+				DC6ED5872326A4F900770B31 /* APNSTokenStore.swift */,
+				DC6ED5812326A47D00770B31 /* AuthData.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		DCC49ACF23E865D700119BAA /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				DCC49AD023E865D700119BAA /* ProfileView.swift */,
+				DCC49AD223E865D700119BAA /* ProfileViewModel.swift */,
+				DCC49AD123E865D700119BAA /* ProfileView.xib */,
+			);
+			path = ProfileView;
 			sourceTree = "<group>";
 		};
 		DCD3985A232E102D00C812EB /* SlashScreen */ = {
@@ -812,7 +866,9 @@
 			isa = PBXGroup;
 			children = (
 				DCD39879232E230B00C812EB /* NibView.swift */,
+				DCC49AC423E8632B00119BAA /* BoardFeatureView */,
 				DC6A78FF23CA242B001D1009 /* EmptyOrErrorView */,
+				DCC49ACF23E865D700119BAA /* ProfileView */,
 			);
 			path = NibViews;
 			sourceTree = "<group>";
@@ -990,7 +1046,9 @@
 				DC8EAB7723E7218600E00A00 /* Home.storyboard in Resources */,
 				DC6ED52823267EF000770B31 /* Assets.xcassets in Resources */,
 				DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */,
+				DCC49AC823E8632B00119BAA /* BoardFeatureView.xib in Resources */,
 				DC6ED56523269B6600770B31 /* colors.txt in Resources */,
+				DCC49AD423E865D700119BAA /* ProfileView.xib in Resources */,
 				DCD39859232E0F9600C812EB /* Slash.storyboard in Resources */,
 				DC6ED52623267EED00770B31 /* Main.storyboard in Resources */,
 				DC40D5CD23E3298F00B0DD96 /* LanguageTableViewCell.xib in Resources */,
@@ -1176,6 +1234,8 @@
 				DC6A791523CB676E001D1009 /* MainViewController.swift in Sources */,
 				DC6A790923CA2510001D1009 /* RealmManager.swift in Sources */,
 				DC6ED5762326A38B00770B31 /* FMDataParser.swift in Sources */,
+				DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */,
+				DCC49AD523E865D700119BAA /* ProfileViewModel.swift in Sources */,
 				DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */,
 				DC6ED57C2326A43700770B31 /* Store.swift in Sources */,
 				DC6A78F323CA1FEB001D1009 /* CollectionSingleSecitionProviderModel.swift in Sources */,
@@ -1186,6 +1246,7 @@
 				DC6A792623CB6F19001D1009 /* Misc.swift in Sources */,
 				DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */,
 				DC40D5C623E31FDF00B0DD96 /* ContentSizedTableView.swift in Sources */,
+				DCC49ACE23E865B600119BAA /* BoardFeatureViewModel.swift in Sources */,
 				DC6ED5842326A4BA00770B31 /* NotificationDispatcher.swift in Sources */,
 				DCD39870232E1F7E00C812EB /* LanguageManager.swift in Sources */,
 				DC8EAB8323E7231A00E00A00 /* MoreViewController.swift in Sources */,
@@ -1202,6 +1263,7 @@
 				DC6ED5862326A4D000770B31 /* AppNotification.swift in Sources */,
 				DC88A73C23DF4A8900EB7F79 /* SelectLanguageViewModel.swift in Sources */,
 				DC6A790523CA242B001D1009 /* EmptyOrErrorView.swift in Sources */,
+				DCC49ACC23E864E500119BAA /* FeatureStore.swift in Sources */,
 				DCD3985C232E104400C812EB /* SlashScreenViewController.swift in Sources */,
 				DCD39894232E28C900C812EB /* WebViewViewController.swift in Sources */,
 				DCD39868232E1D1B00C812EB /* ErrorHelper.swift in Sources */,
@@ -1228,11 +1290,13 @@
 				DC8EAB8723E7232F00E00A00 /* SearchViewController.swift in Sources */,
 				DC6ED5802326A46300770B31 /* SimpleStore.swift in Sources */,
 				DC6A792523CB6F19001D1009 /* Broadcast.swift in Sources */,
+				DCC49AD323E865D700119BAA /* ProfileView.swift in Sources */,
 				DC6ED56823269B8400770B31 /* R.generated.swift in Sources */,
 				DCD3987F232E238800C812EB /* UIView+Appearance.swift in Sources */,
 				DC6A792A23CB6F19001D1009 /* Steem.swift in Sources */,
 				DC8EAB8523E7232800E00A00 /* NotificationViewController.swift in Sources */,
 				DC6A78F723CA202C001D1009 /* CollectionMultiSectionsProviderModel.swift in Sources */,
+				DCC49AD723E8795600119BAA /* TabBarIndicator.swift in Sources */,
 				DC6ED56C2326A19B00770B31 /* Constants.swift in Sources */,
 				DC6A78FC23CA2117001D1009 /* RxSwift+Operator.swift in Sources */,
 			);

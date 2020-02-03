@@ -46,12 +46,6 @@ class BoardingViewController: BaseViewController {
         self.nextButton.setTitle(R.string.common.next.localized(), for: .normal)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        self.slideViews = createSlides()
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -92,8 +86,8 @@ fileprivate extension BoardingViewController {
         }
     }
     
-    func createSlides() -> [UIView] {
-        return (0...2).map { _ in UIImageView() }
+    func createSlides(_ cells: [CellViewModel]) -> [UIView] {
+        return cells.map { _ in BoardFeatureView() }
     }
 }
 
@@ -105,7 +99,7 @@ extension BoardingViewController: UIScrollViewDelegate {
         let pageIndex = round(scrollView.contentOffset.x / self.scrollView.frame.width)
         if self.pageControl.currentPage != Int(pageIndex) {
             if Int(pageIndex) == (self.slideViews.count - 1) {
-                self.nextButton.setTitle(R.string.common.letBegin.localized(), for: .normal)
+                self.nextButton.setTitle(R.string.onBoard.getStarted.localized(), for: .normal)
                 self.navigationItem.rightBarButtonItem = nil
             } else {
                 self.nextButton.setTitle(R.string.common.next.localized(), for: .normal)
@@ -127,8 +121,16 @@ extension BoardingViewController: UIScrollViewDelegate {
 fileprivate extension BoardingViewController {
     
     func setUpRxObservers() {
+        setUpContentChangedObservers()
         setUpControlsObservers()
         setUpShouldPresentObservers()
+    }
+    
+    func setUpContentChangedObservers() {
+        self.viewModel.slideCellModels.asObservable()
+            .subscribe(onNext: { [unowned self] cells in
+                self.slideViews = self.createSlides(cells)
+            }) ~ self.disposeBag
     }
     
     func setUpControlsObservers() {

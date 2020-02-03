@@ -9,11 +9,27 @@
 import UIKit
 
 class MoreViewController: BaseViewController {
-
+    
+    private lazy var logoBarItem: UIBarButtonItem = {
+        let customView = UIImageView()
+        customView.image = R.image.logo()
+        return UIBarButtonItem(customView: customView)
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
+        setUpViews()
+    }
+}
+
+// MARK: - Preparations & Tools
+extension MoreViewController {
+    
+    func setUpViews() {
+        self.navigationController?.removeNavigationBarBorder()
+        self.navigationItem.leftBarButtonItem = logoBarItem
     }
 }
 

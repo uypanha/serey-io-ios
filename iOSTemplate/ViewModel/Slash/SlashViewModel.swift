@@ -24,7 +24,7 @@ class SlashViewModel: BaseViewModel, ShouldPresent {
     internal lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
     
     func checkUserAuth() {
-        if AuthData.shared.isUserLoggedIn {
+        if FeatureStore.shared.areFeaturesIntroduced {
             self.shouldPresentSubject.onNext(.homeViewController)
         } else {
             self.shouldPresentSubject.onNext(.selectLanguageController)

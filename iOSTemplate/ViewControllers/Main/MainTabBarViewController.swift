@@ -34,7 +34,7 @@ fileprivate extension MainTabBarViewController {
             
             switch self {
             case .home:
-                viewController = HomeViewController()
+                viewController = R.storyboard.home.homeViewController()
             case .search:
                 viewController = SearchViewController()
             case .notifications:
