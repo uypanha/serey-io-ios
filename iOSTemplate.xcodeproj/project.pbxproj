@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		2ED1E50F4DEF1CBDE8D5ED3F /* Pods_iOSTemplateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28484C38ADD8C5896F46D108 /* Pods_iOSTemplateTests.framework */; };
 		6EE5B440CFEA9E85B2150C08 /* Pods_iOSTemplateUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F57FBCCEFBA5499CB5A7652 /* Pods_iOSTemplateUITests.framework */; };
+		DC19DBE323EC581A00571CC8 /* ChooseCategorySheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */; };
+		DC19DBE523EC5D0700571CC8 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBE423EC5D0700571CC8 /* BaseTableViewController.swift */; };
+		DC19DBE723EC5E7500571CC8 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBE623EC5E7500571CC8 /* PostTableViewController.swift */; };
+		DC19DBEB23EC5F9E00571CC8 /* PostTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBEA23EC5F9E00571CC8 /* PostTableViewModel.swift */; };
+		DC19DBED23EC601900571CC8 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBEC23EC601900571CC8 /* HomeViewModel.swift */; };
+		DC19DBEF23EC60C900571CC8 /* PostCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBEE23EC60C900571CC8 /* PostCellViewModel.swift */; };
+		DC19DBF123EC6DEB00571CC8 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC19DBF023EC6DEB00571CC8 /* Search.storyboard */; };
+		DC19DBF323EC6E4600571CC8 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBF223EC6E4600571CC8 /* PaddingTextField.swift */; };
 		DC40D5C623E31FDF00B0DD96 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */; };
 		DC40D5C723E31FDF00B0DD96 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C523E31FDF00B0DD96 /* GradientView.swift */; };
 		DC40D5CC23E3298F00B0DD96 /* LanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C923E3298F00B0DD96 /* LanguageTableViewCell.swift */; };
@@ -22,6 +30,9 @@
 		DC40D5DF23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */; };
 		DC40D5E323E3360D00B0DD96 /* ChooseLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5E223E3360D00B0DD96 /* ChooseLanguageViewModel.swift */; };
 		DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC40D5EA23E487A600B0DD96 /* OnBoard.strings */; };
+		DC42AF0423E9CFB5008F8A0F /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC42AF0223E9CFB5008F8A0F /* PostTableViewCell.swift */; };
+		DC42AF0523E9CFB5008F8A0F /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC42AF0323E9CFB5008F8A0F /* PostTableViewCell.xib */; };
+		DC42AF0723E9D39B008F8A0F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC42AF0623E9D39B008F8A0F /* CardView.swift */; };
 		DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78E923CA1F38001D1009 /* BaseCellViewModel.swift */; };
 		DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78EB23CA1F57001D1009 /* CellViewModel.swift */; };
 		DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78ED23CA1F72001D1009 /* NetworkViewModelProtocol.swift */; };
@@ -173,6 +184,14 @@
 		C1BABD04EB0B02B02FA86822 /* Pods-iOSTemplate.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTemplate.release_production.xcconfig"; path = "Target Support Files/Pods-iOSTemplate/Pods-iOSTemplate.release_production.xcconfig"; sourceTree = "<group>"; };
 		CBA59D194129B953D45D43E3 /* Pods-iOSTemplateTests.debug_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTemplateTests.debug_development.xcconfig"; path = "Target Support Files/Pods-iOSTemplateTests/Pods-iOSTemplateTests.debug_development.xcconfig"; sourceTree = "<group>"; };
 		CFE837086F6E427F2B49C988 /* Pods-iOSTemplateUITests.release_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSTemplateUITests.release_development.xcconfig"; path = "Target Support Files/Pods-iOSTemplateUITests/Pods-iOSTemplateUITests.release_development.xcconfig"; sourceTree = "<group>"; };
+		DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCategorySheetViewController.swift; sourceTree = "<group>"; };
+		DC19DBE423EC5D0700571CC8 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		DC19DBE623EC5E7500571CC8 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
+		DC19DBEA23EC5F9E00571CC8 /* PostTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewModel.swift; sourceTree = "<group>"; };
+		DC19DBEC23EC601900571CC8 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		DC19DBEE23EC60C900571CC8 /* PostCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellViewModel.swift; sourceTree = "<group>"; };
+		DC19DBF023EC6DEB00571CC8 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
+		DC19DBF223EC6E4600571CC8 /* PaddingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
 		DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
 		DC40D5C523E31FDF00B0DD96 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		DC40D5C923E3298F00B0DD96 /* LanguageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTableViewCell.swift; sourceTree = "<group>"; };
@@ -188,6 +207,9 @@
 		DC40D5E223E3360D00B0DD96 /* ChooseLanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseLanguageViewModel.swift; sourceTree = "<group>"; };
 		DC40D5E923E487A600B0DD96 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OnBoard.strings; sourceTree = "<group>"; };
 		DC40D5EB23E487A800B0DD96 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/OnBoard.strings"; sourceTree = "<group>"; };
+		DC42AF0223E9CFB5008F8A0F /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		DC42AF0323E9CFB5008F8A0F /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
+		DC42AF0623E9D39B008F8A0F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		DC6A78E923CA1F38001D1009 /* BaseCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78EB23CA1F57001D1009 /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78ED23CA1F72001D1009 /* NetworkViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -341,6 +363,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DC19DBE823EC5F8400571CC8 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DC19DBE923EC5F9100571CC8 /* Home */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		DC19DBE923EC5F9100571CC8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				DC19DBEC23EC601900571CC8 /* HomeViewModel.swift */,
+				DC19DBEA23EC5F9E00571CC8 /* PostTableViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		DC40D5C823E3298F00B0DD96 /* LanguageTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,6 +428,16 @@
 				DC40D5E223E3360D00B0DD96 /* ChooseLanguageViewModel.swift */,
 			);
 			path = Language;
+			sourceTree = "<group>";
+		};
+		DC42AF0123E9CF93008F8A0F /* PostTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC19DBEE23EC60C900571CC8 /* PostCellViewModel.swift */,
+				DC42AF0223E9CFB5008F8A0F /* PostTableViewCell.swift */,
+				DC42AF0323E9CFB5008F8A0F /* PostTableViewCell.xib */,
+			);
+			path = PostTableViewCell;
 			sourceTree = "<group>";
 		};
 		DC6A78EF23CA1FC6001D1009 /* CollectionProvider */ = {
@@ -561,6 +610,7 @@
 			children = (
 				DC8EAB7623E7218600E00A00 /* Home.storyboard */,
 				DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */,
+				DC19DBF023EC6DEB00571CC8 /* Search.storyboard */,
 				DCD39858232E0F9600C812EB /* Slash.storyboard */,
 				DC6ED52923267EF000770B31 /* LaunchScreen.storyboard */,
 				DC6ED52423267EED00770B31 /* Main.storyboard */,
@@ -670,9 +720,11 @@
 		DC88A73423DF3EB600EB7F79 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DC42AF0623E9D39B008F8A0F /* CardView.swift */,
 				DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */,
 				DC40D5C523E31FDF00B0DD96 /* GradientView.swift */,
 				DC8EAB7423E70ED600E00A00 /* MDCQuadPageControl.swift */,
+				DC19DBF223EC6E4600571CC8 /* PaddingTextField.swift */,
 				DCC49AD623E8795600119BAA /* TabBarIndicator.swift */,
 				DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */,
 			);
@@ -700,7 +752,9 @@
 		DC8EAB7C23E722DF00E00A00 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */,
 				DC8EAB8023E7231200E00A00 /* HomeViewController.swift */,
+				DC19DBE623EC5E7500571CC8 /* PostTableViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -778,6 +832,7 @@
 			isa = PBXGroup;
 			children = (
 				DC8EAB7823E721EE00E00A00 /* BaseTabBarViewController.swift */,
+				DC19DBE423EC5D0700571CC8 /* BaseTableViewController.swift */,
 				DCD3985E232E106E00C812EB /* BaseViewController.swift */,
 			);
 			path = Base;
@@ -799,6 +854,7 @@
 			children = (
 				DCD39864232E1CB600C812EB /* Base */,
 				DC6A78F823CA20AB001D1009 /* Common */,
+				DC19DBE823EC5F8400571CC8 /* Main */,
 				DC88A73A23DF4A7700EB7F79 /* OnBoard */,
 				DC40D5E023E335F200B0DD96 /* Settings */,
 				DCD39874232E20BF00C812EB /* Slash */,
@@ -876,6 +932,7 @@
 		DCD3987B232E234600C812EB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				DC42AF0123E9CF93008F8A0F /* PostTableViewCell */,
 				DC40D5D223E32A3100B0DD96 /* Base */,
 				DC40D5D123E32A2800B0DD96 /* Common */,
 				DC40D5C823E3298F00B0DD96 /* LanguageTableViewCell */,
@@ -1046,6 +1103,7 @@
 				DC8EAB7723E7218600E00A00 /* Home.storyboard in Resources */,
 				DC6ED52823267EF000770B31 /* Assets.xcassets in Resources */,
 				DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */,
+				DC19DBF123EC6DEB00571CC8 /* Search.storyboard in Resources */,
 				DCC49AC823E8632B00119BAA /* BoardFeatureView.xib in Resources */,
 				DC6ED56523269B6600770B31 /* colors.txt in Resources */,
 				DCC49AD423E865D700119BAA /* ProfileView.xib in Resources */,
@@ -1053,6 +1111,7 @@
 				DC6ED52623267EED00770B31 /* Main.storyboard in Resources */,
 				DC40D5CD23E3298F00B0DD96 /* LanguageTableViewCell.xib in Resources */,
 				DC6A790423CA242B001D1009 /* EmptyOrErrorView.xib in Resources */,
+				DC42AF0523E9CFB5008F8A0F /* PostTableViewCell.xib in Resources */,
 				DC88A73323DF3D3900EB7F79 /* OnBoard.storyboard in Resources */,
 				DC40D5D923E32F3800B0DD96 /* Common.strings in Resources */,
 			);
@@ -1211,10 +1270,13 @@
 				DC6ED5782326A40200770B31 /* AppCoordinator.swift in Sources */,
 				DC40D5CE23E3298F00B0DD96 /* LanguageCellViewModel.swift in Sources */,
 				DC8EAB7523E70ED600E00A00 /* MDCQuadPageControl.swift in Sources */,
+				DC19DBE723EC5E7500571CC8 /* PostTableViewController.swift in Sources */,
 				DC40D5D823E32AB800B0DD96 /* Utilities.swift in Sources */,
+				DC19DBEF23EC60C900571CC8 /* PostCellViewModel.swift in Sources */,
 				DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */,
 				DC6A792323CB6F19001D1009 /* HttpClient.swift in Sources */,
 				DCD39862232E114300C812EB /* UIViewController+Properties.swift in Sources */,
+				DC42AF0723E9D39B008F8A0F /* CardView.swift in Sources */,
 				DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */,
 				DC7C09C22326AFF60006D0BF /* FireBaseHandler.swift in Sources */,
 				DC6A790323CA242B001D1009 /* EmptyOrErrorViewModel.swift in Sources */,
@@ -1245,6 +1307,7 @@
 				DC6A78FA23CA20B3001D1009 /* FieldViewModelProtocol.swift in Sources */,
 				DC6A792623CB6F19001D1009 /* Misc.swift in Sources */,
 				DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */,
+				DC42AF0423E9CFB5008F8A0F /* PostTableViewCell.swift in Sources */,
 				DC40D5C623E31FDF00B0DD96 /* ContentSizedTableView.swift in Sources */,
 				DCC49ACE23E865B600119BAA /* BoardFeatureViewModel.swift in Sources */,
 				DC6ED5842326A4BA00770B31 /* NotificationDispatcher.swift in Sources */,
@@ -1256,6 +1319,7 @@
 				DC6ED58F2326A7B000770B31 /* AppDelegateHelper.swift in Sources */,
 				DC40D5E323E3360D00B0DD96 /* ChooseLanguageViewModel.swift in Sources */,
 				DC6A78F523CA1FFE001D1009 /* CollectionSectionedAnimatedProviderModel.swift in Sources */,
+				DC19DBED23EC601900571CC8 /* HomeViewModel.swift in Sources */,
 				DC6ED5912326A8F400770B31 /* Appearance.swift in Sources */,
 				DC6ED56F2326A30000770B31 /* String+Extensions.swift in Sources */,
 				DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */,
@@ -1265,18 +1329,22 @@
 				DC6A790523CA242B001D1009 /* EmptyOrErrorView.swift in Sources */,
 				DCC49ACC23E864E500119BAA /* FeatureStore.swift in Sources */,
 				DCD3985C232E104400C812EB /* SlashScreenViewController.swift in Sources */,
+				DC19DBF323EC6E4600571CC8 /* PaddingTextField.swift in Sources */,
 				DCD39894232E28C900C812EB /* WebViewViewController.swift in Sources */,
 				DCD39868232E1D1B00C812EB /* ErrorHelper.swift in Sources */,
 				DC6A78FE23CA22B0001D1009 /* LoadingIndicatorController.swift in Sources */,
 				DC6ED5822326A47D00770B31 /* AuthData.swift in Sources */,
 				DC6ED5722326A36500770B31 /* DeeplinkType.swift in Sources */,
 				DC6ED5882326A4F900770B31 /* APNSTokenStore.swift in Sources */,
+				DC19DBE523EC5D0700571CC8 /* BaseTableViewController.swift in Sources */,
 				DC6A792223CB6F19001D1009 /* Helper.swift in Sources */,
 				DCD39876232E20CF00C812EB /* SlashViewModel.swift in Sources */,
 				DC40D5D423E32A4400B0DD96 /* ImageTextCellViewModel.swift in Sources */,
+				DC19DBEB23EC5F9E00571CC8 /* PostTableViewModel.swift in Sources */,
 				DC6A792923CB6F19001D1009 /* Api.swift in Sources */,
 				DC6ED52123267EED00770B31 /* AppDelegate.swift in Sources */,
 				DC6ED5742326A37800770B31 /* DeeplinkParser.swift in Sources */,
+				DC19DBE323EC581A00571CC8 /* ChooseCategorySheetViewController.swift in Sources */,
 				DCD3986B232E1DF700C812EB /* AppService.swift in Sources */,
 				DC6ED56623269B6600770B31 /* ColorsGen.swift in Sources */,
 				DC40D5CC23E3298F00B0DD96 /* LanguageTableViewCell.swift in Sources */,

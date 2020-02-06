@@ -3,6 +3,7 @@ Secondary       : #1E358F
 Positive        : #4ECD77
 AlmostRed       : #FF5B5B
 
+PostBackground  : #EFEFEF
 Border          : #DBDBDB
 
 NavigationBg    : #FFFFFF

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+import RxBinding
 import MaterialComponents
 
 class HomeViewController: BaseViewController {
@@ -23,12 +26,33 @@ class HomeViewController: BaseViewController {
     private lazy var filterButton: UIBarButtonItem = { [unowned self] in
         return UIBarButtonItem(image: R.image.filterIcon(), style: .plain, target: nil, action: nil)
     }()
+    
+    var tabItems: [UITabBarItem] = [] {
+        didSet {
+            tabBar.items = self.tabItems
+        }
+    }
+    
+    var slideViews: [UIViewController] = [] {
+        didSet {
+            addSlidesToScrollView()
+        }
+    }
+    
+    var viewModel: HomeViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         setUpViews()
+        setUpRxObservers()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        setupSlideScrollView(slides: self.slideViews.map { $0.view })
     }
 }
 
@@ -40,8 +64,10 @@ extension HomeViewController {
         self.navigationItem.leftBarButtonItem = logoBarItem
         self.navigationItem.rightBarButtonItem = filterButton
         
+        self.scrollView.delegate = self
+        self.scrollView.backgroundColor = ColorName.postBackground.color
+        
         prepareTabBar()
-        prepareStoryTabs()
     }
     
     func prepareTabBar() {
@@ -58,15 +84,42 @@ extension HomeViewController {
         tabBar.alignment = .justified
         tabBar.selectionIndicatorTemplate = TabBarIndicator()
         tabBar.bottomDividerColor = .lightGray
+        tabBar.delegate = self
     }
     
-    func prepareStoryTabs() {
-        tabBar.items = [
-            UITabBarItem(title: "TRENDING", image: nil, selectedImage: nil),
-            UITabBarItem(title: "HOT", image: nil, selectedImage: nil),
-            UITabBarItem(title: "NEW", image: nil, selectedImage: nil),
-        ]
-        tabBar.tintColor = ColorName.primary.color
+    func addSlidesToScrollView() {
+        self.scrollView.removeViews()
+        self.slideViews.forEach { viewController in
+            scrollView.addSubview(viewController.view)
+        }
+    }
+    
+    func setupSlideScrollView(slides : [UIView]) {
+        let contentWidth = self.scrollView.frame.width
+        let contentHeight = self.scrollView.frame.height
+        scrollView.contentSize = CGSize(width: contentWidth * CGFloat(slides.count), height: contentHeight)
+        scrollView.isPagingEnabled = true
+        
+        for i in 0 ..< slides.count {
+            slides[i].frame = CGRect(x: contentWidth * CGFloat(i), y: 0, width: contentWidth, height: contentHeight)
+            slides[i].layoutIfNeeded()
+        }
+    }
+    
+    fileprivate func prepareTabTitles(_ titles: [String]) {
+        var items: [UITabBarItem] = []
+        for i in (0...(titles.count - 1)) {
+            items.append(UITabBarItem(title: titles[i], image: nil, tag: i))
+        }
+        self.tabItems = items
+    }
+    
+    fileprivate func prepareSlidingViews(_ viewModels: [PostTableViewModel]) {
+        var slides: [UIViewController] = []
+        viewModels.forEach { postViewModel in
+            slides.append(PostTableViewController(style: .plain).then { $0.viewModel = postViewModel })
+        }
+        self.slideViews = slides
     }
 }
 
@@ -76,5 +129,41 @@ extension HomeViewController: TabBarControllerDelegate {
     func configureTabBar(_ tag: Int) {
         self.tabBarItem = UITabBarItem(title: "Home", image: R.image.tabHome(), selectedImage: R.image.tabHomeSelected())
         self.tabBarItem?.tag = tag
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension HomeViewController: UIScrollViewDelegate, MDCTabBarDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let pageIndex = round(scrollView.contentOffset.x / self.scrollView.frame.width)
+        if self.tabBar.selectedItem?.tag != Int(pageIndex) {
+            let index = Int(pageIndex)
+            self.tabBar.setSelectedItem(self.tabItems[index], animated: true)
+        }
+    }
+    
+    func tabBar(_ tabBar: MDCTabBar, willSelect item: UITabBarItem) {
+        self.scrollView.scrollRectToVisible(self.slideViews[item.tag].view.frame, animated: true)
+    }
+}
+
+// MARK: - SetUp Rx Observers
+fileprivate extension HomeViewController {
+    
+    func setUpRxObservers() {
+        setUpContentChangedObservers()
+    }
+    
+    func setUpContentChangedObservers() {
+        self.viewModel.postTabTitles.asObservable()
+            .subscribe(onNext: { [weak self] titles in
+                self?.prepareTabTitles(titles)
+            }) ~ self.disposeBag
+        
+        self.viewModel.postViewModels.asObservable()
+            .subscribe(onNext: { [weak self] viewModels in
+                self?.prepareSlidingViews(viewModels)
+            }) ~ self.disposeBag
     }
 }

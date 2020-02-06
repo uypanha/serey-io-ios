@@ -50,12 +50,12 @@ extension BoardingViewModel {
 fileprivate extension BoardingViewModel {
     
     func handleBeginButtonPressed() {
-//        FeatureStore.shared.areFeaturesIntroduced = true
+        FeatureStore.shared.areFeaturesIntroduced = true
         self.shouldPresent(.homeViewController)
     }
     
     func handleSkipButtonPressed() {
-//        FeatureStore.shared.areFeaturesIntroduced = true
+        FeatureStore.shared.areFeaturesIntroduced = true
         self.shouldPresent(.homeViewController)
     }
 }
