@@ -51,6 +51,7 @@ class PostTableViewController: BaseTableViewController {
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
+        self.tabBarItem = UITabBarItem(title: "Home", image: nil, selectedImage: nil)
     }
 }
 

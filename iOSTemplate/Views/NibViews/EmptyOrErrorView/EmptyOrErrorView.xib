@@ -27,29 +27,29 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="448"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="id5-Oy-M8N">
-                            <rect key="frame" x="24" y="30.5" width="366" height="387"/>
+                            <rect key="frame" x="24" y="58.5" width="366" height="331"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="errorSad" translatesAutoresizingMaskIntoConstraints="NO" id="OXD-53-7Ge">
-                                    <rect key="frame" x="36.5" y="0.0" width="293" height="234"/>
+                                    <rect key="frame" x="73" y="0.0" width="220" height="175.5"/>
                                     <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="OXD-53-7Ge" secondAttribute="height" multiplier="1:0.8" id="5QN-jy-Cnv"/>
                                     </constraints>
                                 </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Rhy-lk-msN">
-                                    <rect key="frame" x="16" y="250" width="334" height="137"/>
+                                    <rect key="frame" x="16" y="191.5" width="334" height="139.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iyG-FN-ZkN">
-                                            <rect key="frame" x="0.0" y="0.0" width="334" height="92"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="334" height="94.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7vJ-PH-YI1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="334" height="17"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="334" height="19.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RZs-rk-N5P">
-                                                    <rect key="frame" x="0.0" y="25" width="334" height="67"/>
+                                                    <rect key="frame" x="0.0" y="27.5" width="334" height="67"/>
                                                     <string key="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</string>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -58,7 +58,7 @@
                                             </subviews>
                                         </stackView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lM7-1s-Xsw">
-                                            <rect key="frame" x="125" y="108" width="84" height="29"/>
+                                            <rect key="frame" x="125" y="110.5" width="84" height="29"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                             <state key="normal" title="Tab To Retry">
                                                 <color key="titleColor" red="0.0" green="0.62745098040000002" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -76,7 +76,7 @@
                                 <constraint firstItem="Rhy-lk-msN" firstAttribute="leading" secondItem="id5-Oy-M8N" secondAttribute="leading" constant="16" id="BHg-mZ-z5S"/>
                                 <constraint firstItem="Rhy-lk-msN" firstAttribute="top" secondItem="OXD-53-7Ge" secondAttribute="bottom" constant="16" id="Ds4-ox-D48"/>
                                 <constraint firstAttribute="trailing" secondItem="Rhy-lk-msN" secondAttribute="trailing" constant="16" id="S89-Ye-HOr"/>
-                                <constraint firstItem="OXD-53-7Ge" firstAttribute="width" secondItem="id5-Oy-M8N" secondAttribute="width" multiplier="0.8" id="XyL-XK-yNh"/>
+                                <constraint firstItem="OXD-53-7Ge" firstAttribute="width" secondItem="id5-Oy-M8N" secondAttribute="width" multiplier="0.6" id="XyL-XK-yNh"/>
                                 <constraint firstItem="OXD-53-7Ge" firstAttribute="centerX" secondItem="id5-Oy-M8N" secondAttribute="centerX" id="sDS-IE-xbt"/>
                                 <constraint firstAttribute="bottom" secondItem="Rhy-lk-msN" secondAttribute="bottom" id="ttI-Qy-PvI"/>
                             </constraints>

@@ -20,6 +20,10 @@ struct Constants {
         return Bundle.main.bundleIdentifier ?? "io.uyphanha.app"
     }
     
+    static var appVersionName: String {
+        return Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String ?? ""
+    }
+    
     static let limitPerPage: Int = 20
     
     static func clearStoreData() {

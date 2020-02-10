@@ -99,6 +99,7 @@ extension HomeViewController {
         let contentHeight = self.scrollView.frame.height
         scrollView.contentSize = CGSize(width: contentWidth * CGFloat(slides.count), height: contentHeight)
         scrollView.isPagingEnabled = true
+        scrollView.isScrollEnabled = false
         
         for i in 0 ..< slides.count {
             slides[i].frame = CGRect(x: contentWidth * CGFloat(i), y: 0, width: contentWidth, height: contentHeight)
@@ -135,14 +136,14 @@ extension HomeViewController: TabBarControllerDelegate {
 // MARK: - UIScrollViewDelegate
 extension HomeViewController: UIScrollViewDelegate, MDCTabBarDelegate {
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let pageIndex = round(scrollView.contentOffset.x / self.scrollView.frame.width)
-        if self.tabBar.selectedItem?.tag != Int(pageIndex) {
-            let index = Int(pageIndex)
-            self.tabBar.setSelectedItem(self.tabItems[index], animated: true)
-        }
-    }
-    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let pageIndex = round(scrollView.contentOffset.x / self.scrollView.frame.width)
+//        if self.tabBar.selectedItem?.tag != Int(pageIndex) {
+//            let index = Int(pageIndex)
+//            self.tabBar.setSelectedItem(self.tabItems[index], animated: true)
+//        }
+//    }
+//
     func tabBar(_ tabBar: MDCTabBar, willSelect item: UITabBarItem) {
         self.scrollView.scrollRectToVisible(self.slideViews[item.tag].view.frame, animated: true)
     }

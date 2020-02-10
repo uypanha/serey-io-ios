@@ -48,7 +48,7 @@ class EmptyOrErrorModel {
     var actionTitle: String? = nil
     var iconImage: UIImage? = nil
     var topOffset: CGFloat = 0
-    var imageWidthOffset: CGFloat = 0.8
+    var imageWidthOffset: CGFloat = 0.6
     var completion: (() -> Void)? = nil
     
     init(withEmptyTitle title: String?, emptyDescription description: String, topOffset: CGFloat? = nil, imageWidthOffset: CGFloat? = nil, iconImage: UIImage? = UIImage(), actionTitle: String? = nil, actionCompletion: (() -> Void)? = nil) {
@@ -57,7 +57,7 @@ class EmptyOrErrorModel {
         self.description = description
         self.actionTitle = actionTitle
         self.topOffset = topOffset ?? 0
-        self.imageWidthOffset = imageWidthOffset ?? 0.8
+        self.imageWidthOffset = imageWidthOffset ?? 0.6
         self.iconImage = iconImage
         self.completion = actionCompletion
     }

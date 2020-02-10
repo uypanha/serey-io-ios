@@ -38,10 +38,12 @@ fileprivate extension MainTabBarViewController {
                 (viewController as? HomeViewController)?.viewModel = HomeViewModel()
             case .search:
                 viewController = R.storyboard.search.searchViewController()
+                (viewController as? SearchViewController)?.viewModel = SearchViewModel()
             case .notifications:
                 viewController = NotificationViewController()
             case .more:
                 viewController = MoreViewController()
+                (viewController as? MoreViewController)?.viewModel = MoreViewModel()
             }
             
             return viewController ?? UIViewController()
@@ -93,18 +95,5 @@ extension MainTabBarViewController: UITabBarControllerDelegate {
     }
     
     func setUpViewToPresentObservers() {
-//        self.viewModel.shouldPresent.asObservable()
-//            .subscribe(onNext: { [unowned self] viewToPresent in
-//                switch viewToPresent {
-//                case .createStoryController:
-//                    let createStoryController = SelectStoryViewController().then {
-//                        $0.viewModel = SelectStoryViewModel()
-//                    }
-//                    let closableViewController = CloseableNavigationController(rootViewController: createStoryController).then {
-//                        $0.modalPresentationStyle = .fullScreen
-//                    }
-//                    self.show(closableViewController, sender: nil)
-//                }
-//            }).disposed(by: self.disposeBag)
     }
 }
