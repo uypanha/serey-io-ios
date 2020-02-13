@@ -1,0 +1,21 @@
+//
+//  Release.xcconfig
+//  SereyIO
+//
+//  Created by Phanha Uy on 9/9/19.
+//  Copyright © 2019 Phanha Uy. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+#include "Pods/Target Support Files/Pods-SereyIO/Pods-SereyIO.release_production.xcconfig"
+#include "Pods/Target Support Files/Pods-SereyIO/Pods-SereyIO.debug_production.xcconfig"
+
+// Server URL
+ROOT_URL = https:/$()/api.example.com
+
+// APP INFO
+app_name                = Serey.io
+app_bundle              = io.uyphanha.serey
+app_version_name        = 1.0.0
+app_version_code        = 1

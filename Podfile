@@ -60,17 +60,17 @@ def frameworks_pods
   
 end
 
-target 'iOSTemplate' do
+target 'SereyIO' do
 
-  # Pods for iOSTemplate
+  # Pods for SereyIO
 	frameworks_pods
 
-  target 'iOSTemplateTests' do
+  target 'SereyIOTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'iOSTemplateUITests' do
+  target 'SereyIOUITests' do
     inherit! :search_paths
     # Pods for testing
   end
