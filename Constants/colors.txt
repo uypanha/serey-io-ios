@@ -8,3 +8,5 @@ Border          : #DBDBDB
 
 NavigationBg    : #FFFFFF
 NavigationTint  : #0c0c0c
+
+TabBarBg        : #FFFFFF

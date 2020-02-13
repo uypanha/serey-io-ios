@@ -35,19 +35,20 @@ fileprivate extension Appearance {
         if #available(iOS 13.0, *) {
             let tabBarAppearance = UITabBarAppearance()
             tabBarAppearance.configureWithOpaqueBackground()
-            tabBarAppearance.backgroundColor = .white
+            tabBarAppearance.backgroundColor = ColorName.tabBarBg.color
             UITabBar.appearance().standardAppearance = tabBarAppearance
         } else {
-            UITabBar.appearance().backgroundColor = .white
+            UITabBar.appearance().backgroundColor = ColorName.tabBarBg.color
         }
     }
     
     static func prepareNavigationBar() {
         //NavigationBar
         UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().barTintColor = ColorName.navigationTint.color
+        UINavigationBar.appearance().barTintColor = ColorName.navigationBg.color
         UINavigationBar.appearance().tintColor = ColorName.navigationTint.color
         
+        UINavigationBar.appearance().backgroundColor = ColorName.navigationBg.color
         UINavigationBar.appearance().titleTextAttributes = [
             .foregroundColor: ColorName.navigationTint.color
         ]
@@ -60,6 +61,7 @@ fileprivate extension Appearance {
                 .foregroundColor: ColorName.navigationTint.color,
                 .font: UIFont.systemFont(ofSize: 17, weight: .medium)
             ]
+            
             UINavigationBar.appearance().standardAppearance = navBarAppearance
             UINavigationBar.appearance().compactAppearance = navBarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance

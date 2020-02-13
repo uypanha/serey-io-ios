@@ -17,6 +17,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
     }
     
     enum ViewToPresent {
+        case accountViewController
         case languagesViewController
     }
     
@@ -73,9 +74,9 @@ extension MoreViewModel {
         var title: String? {
             switch self {
             case .general:
-                return "General"
+                return R.string.settings.general.localized()
             case .about:
-                return "About"
+                return R.string.settings.about.localized()
             default:
                 return nil
             }
@@ -85,6 +86,7 @@ extension MoreViewModel {
     fileprivate func prepareCellModels() -> [SectionType: [CellViewModel]] {
         var sectionItems: [SectionType: [CellViewModel]] = [:]
         
+        sectionItems[.profile] = [ProfileCellViewModel(), SettingCellViewModel(.myWallet, true)]
         sectionItems[.general] = [SettingCellViewModel(.lagnauge), SettingCellViewModel(.notificationSettings, true)]
         sectionItems[.about] = [SettingCellViewModel(.sereyApps), SettingCellViewModel(.version, true)]
         
@@ -125,6 +127,8 @@ fileprivate extension MoreViewModel {
             default:
                 break
             }
+        } else if let item = item(at: indexPath) as? ProfileCellViewModel {
+            self.shouldPresent(.accountViewController)
         }
     }
 }

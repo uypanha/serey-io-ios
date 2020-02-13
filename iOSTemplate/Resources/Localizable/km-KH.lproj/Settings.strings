@@ -6,6 +6,10 @@
   Copyright © 2020 Phanha Uy. All rights reserved.
 */
 
+"general"                   = "General";
+"about"                     = "About";
+
+"myWallet"                  = "My wallet";
 "language"                  = "Languages (%@)";
 "notificationSettings"      = "Notification Settings";
 "sereyApps"                 = "Serey Apps";

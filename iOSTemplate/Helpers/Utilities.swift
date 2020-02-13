@@ -33,7 +33,7 @@ class ViewUtiliesHelper {
     
     // MARK: - Create Indicator
     public static func prepareIndicatorAccessory() -> UIImageView {
-        return UIImageView(image: R.image.accessoryIcon()?.image(withTintColor: .lightGray))
+        return UIImageView(image: R.image.accessoryIcon()?.image(withTintColor: UIColor.lightGray.withAlphaComponent(0.5)))
     }
     
     // MAKR: - Default image placeholder

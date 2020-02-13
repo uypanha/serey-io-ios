@@ -18,6 +18,7 @@ open class BaseTableViewController: UITableViewController, LocalizeProtocol, Not
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        overrideBackItem()
         registerForNotifs()
     }
     

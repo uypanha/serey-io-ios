@@ -27,6 +27,15 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "DC6ED51C23267EED00770B31"
+            BuildableName = "iOSTemplate.app"
+            BlueprintName = "iOSTemplate"
+            ReferencedContainer = "container:iOSTemplate.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -49,17 +58,6 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DC6ED51C23267EED00770B31"
-            BuildableName = "iOSTemplate.app"
-            BlueprintName = "iOSTemplate"
-            ReferencedContainer = "container:iOSTemplate.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug_Development"
@@ -76,13 +74,20 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC6ED51C23267EED00770B31"
+            BuildableName = "SereyIO.app"
+            BlueprintName = "SereyIO"
+            ReferencedContainer = "container:SereyIO.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "DC6ED51C23267EED00770B31"
             BuildableName = "iOSTemplate.app"
             BlueprintName = "iOSTemplate"
             ReferencedContainer = "container:iOSTemplate.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release_Development"
@@ -95,9 +100,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "DC6ED51C23267EED00770B31"
-            BuildableName = "iOSTemplate.app"
-            BlueprintName = "iOSTemplate"
-            ReferencedContainer = "container:iOSTemplate.xcodeproj">
+            BuildableName = "SereyIO.app"
+            BlueprintName = "SereyIO"
+            ReferencedContainer = "container:SereyIO.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

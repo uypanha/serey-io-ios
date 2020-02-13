@@ -42,7 +42,7 @@ fileprivate extension MainTabBarViewController {
             case .notifications:
                 viewController = NotificationViewController()
             case .more:
-                viewController = MoreViewController()
+                viewController = R.storyboard.more.moreViewController()
                 (viewController as? MoreViewController)?.viewModel = MoreViewModel()
             }
             

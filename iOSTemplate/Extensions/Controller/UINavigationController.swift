@@ -19,18 +19,18 @@ extension UINavigationController {
         
         //  change to opaque all
         self.navigationBar.isTranslucent = false
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = ColorName.navigationBg.color
         if #available(iOS 13, *) {
             let standardAppearance = self.navigationBar.standardAppearance.copy()
-            standardAppearance.backgroundColor = .white
+            standardAppearance.backgroundColor = ColorName.navigationBg.color
             self.navigationBar.standardAppearance = standardAppearance
             
             let compactAppearance = self.navigationBar.compactAppearance?.copy()
-            compactAppearance?.backgroundColor = .white
+            compactAppearance?.backgroundColor = ColorName.navigationBg.color
             self.navigationBar.compactAppearance = compactAppearance
             
             let scrollEdgeAppearance = self.navigationBar.scrollEdgeAppearance?.copy()
-            scrollEdgeAppearance?.backgroundColor = .white
+            scrollEdgeAppearance?.backgroundColor = ColorName.navigationBg.color
             self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
         }
     }
@@ -51,6 +51,26 @@ extension UINavigationController {
             let scrollEdgeAppearance = self.navigationBar.scrollEdgeAppearance?.copy()
             scrollEdgeAppearance?.shadowColor = .clear
             scrollEdgeAppearance?.shadowImage = UIImage()
+            self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
+        }
+    }
+    
+    func showNavigationBarBorder() {
+        self.navigationBar.shadowImage = UIColor.lightGray.withAlphaComponent(0.5).toImage()
+        if #available(iOS 13.0, *) {
+            let standardAppearance = self.navigationBar.standardAppearance.copy()
+            standardAppearance.shadowColor = UIColor.lightGray.withAlphaComponent(0.5)
+            standardAppearance.shadowImage = UIColor.lightGray.withAlphaComponent(0.5).toImage()
+            self.navigationBar.standardAppearance = standardAppearance
+            
+            let compactAppearance = self.navigationBar.compactAppearance?.copy()
+            compactAppearance?.shadowColor = UIColor.lightGray.withAlphaComponent(0.5)
+            compactAppearance?.shadowImage = UIColor.lightGray.withAlphaComponent(0.5).toImage()
+            self.navigationBar.compactAppearance = compactAppearance
+            
+            let scrollEdgeAppearance = self.navigationBar.scrollEdgeAppearance?.copy()
+            scrollEdgeAppearance?.shadowColor = UIColor.lightGray.withAlphaComponent(0.5)
+            scrollEdgeAppearance?.shadowImage = UIColor.lightGray.withAlphaComponent(0.5).toImage()
             self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
         }
     }

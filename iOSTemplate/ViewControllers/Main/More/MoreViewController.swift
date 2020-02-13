@@ -12,7 +12,10 @@ import RxSwift
 import RxBinding
 import RxDataSources
 
-class MoreViewController: BaseTableViewController {
+class MoreViewController: BaseViewController {
+    
+    @IBOutlet weak var tableView: ContentSizedTableView!
+    @IBOutlet weak var termsContainerView: UIView!
     
     private lazy var logoBarItem: UIBarButtonItem = {
         let customView = UIImageView()
@@ -26,12 +29,10 @@ class MoreViewController: BaseTableViewController {
     
     var viewModel: MoreViewModel!
     
-    override init(style: UITableView.Style = .grouped) {
-        super.init(style: style)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.removeNavigationBarBorder()
     }
     
     override func viewDidLoad() {
@@ -47,8 +48,8 @@ class MoreViewController: BaseTableViewController {
 extension MoreViewController {
     
     func setUpViews() {
-        self.navigationController?.removeNavigationBarBorder()
         self.navigationItem.leftBarButtonItem = logoBarItem
+        self.termsContainerView.addBorders(edges: [.top], color: UIColor.lightGray.withAlphaComponent(0.2))
         
         prepareTableView()
     }
@@ -62,19 +63,21 @@ extension MoreViewController {
         self.tableView.tableFooterView = UIView()
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
         
+        self.tableView.register(ProfileTableViewCell.self)
         self.tableView.register(SettingTableViewCell.self)
     }
     
     func prepreDataSource() -> RxTableViewSectionedReloadDataSource<SectionItem> {
         let dataSource = RxTableViewSectionedReloadDataSource<SectionItem>(configureCell: { (datasource, tableView, indexPath, item) -> UITableViewCell in
             switch item {
+            case is ProfileCellViewModel:
+                let cell: ProfileTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+                cell.cellModel = item as? ProfileCellViewModel
+                return cell
             case is SettingCellViewModel:
                 let cell: SettingTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
                 cell.cellModel = item as? SettingCellViewModel
                 return cell
-//            case is LoadingCellViewModel:
-//                let cell: LoadingTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-//                return cell
             default:
                 return UITableViewCell()
             }
@@ -89,9 +92,9 @@ extension MoreViewController {
 }
 
 // MAKR: - TableView Delegate
-extension MoreViewController {
+extension MoreViewController: UITableViewDelegate {
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let title = self.viewModel.sectionTitle(in: section) else {
             return nil
         }
@@ -100,7 +103,7 @@ extension MoreViewController {
         return headerView
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         guard let _ = self.viewModel.sectionTitle(in: section) else {
             return CGFloat.leastNormalMagnitude
         }
@@ -142,11 +145,14 @@ fileprivate extension MoreViewController {
         self.viewModel.shouldPresent.asObservable()
             .subscribe(onNext: { [unowned self] viewToPresent in
                 switch viewToPresent {
+                case .accountViewController:
+                    if let accountViewController = R.storyboard.profile.accountVIewController() {
+                        self.show(accountViewController, sender: nil)
+                    }
                 case .languagesViewController:
-//                    let languagesViewController = LanguagesViewController()
-//                    languagesViewController.viewModel = LanguagesViewModel()
-//                    self.show(languagesViewController, sender: nil)
-                    break
+                    let languagesViewController = LanguagesViewController()
+                    languagesViewController.viewModel = ChooseLanguageViewModel()
+                    self.show(languagesViewController, sender: nil)
                 }
             }).disposed(by: self.disposeBag)
     }

@@ -16,6 +16,7 @@
 		DC05FDBC23F1B0500093B47B /* MoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05FDBB23F1B0500093B47B /* MoreViewModel.swift */; };
 		DC05FDC023F1B3410093B47B /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC05FDBE23F1B3410093B47B /* HeaderView.xib */; };
 		DC05FDC123F1B3410093B47B /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05FDBF23F1B3410093B47B /* HeaderView.swift */; };
+		DC05FDC323F1BDF10093B47B /* LanguagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05FDC223F1BDF10093B47B /* LanguagesViewController.swift */; };
 		DC19DBE323EC581A00571CC8 /* ChooseCategorySheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */; };
 		DC19DBE523EC5D0700571CC8 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBE423EC5D0700571CC8 /* BaseTableViewController.swift */; };
 		DC19DBE723EC5E7500571CC8 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBE623EC5E7500571CC8 /* PostTableViewController.swift */; };
@@ -25,6 +26,12 @@
 		DC19DBF123EC6DEB00571CC8 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC19DBF023EC6DEB00571CC8 /* Search.storyboard */; };
 		DC19DBF323EC6E4600571CC8 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBF223EC6E4600571CC8 /* PaddingTextField.swift */; };
 		DC19DBF623EC751700571CC8 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBF523EC751700571CC8 /* SearchViewModel.swift */; };
+		DC26812A23F2FCB30045776E /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26812823F2FCB30045776E /* ProfileTableViewCell.swift */; };
+		DC26812B23F2FCB30045776E /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC26812923F2FCB30045776E /* ProfileTableViewCell.xib */; };
+		DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26812C23F2FCD50045776E /* ProfileCellViewModel.swift */; };
+		DC26812F23F450BE0045776E /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC26812E23F450BE0045776E /* More.storyboard */; };
+		DC26813123F45A8C0045776E /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC26813023F45A8C0045776E /* Profile.storyboard */; };
+		DC26813423F45DEF0045776E /* AccountVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26813323F45DEF0045776E /* AccountVIewController.swift */; };
 		DC40D5C623E31FDF00B0DD96 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */; };
 		DC40D5C723E31FDF00B0DD96 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C523E31FDF00B0DD96 /* GradientView.swift */; };
 		DC40D5CC23E3298F00B0DD96 /* LanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C923E3298F00B0DD96 /* LanguageTableViewCell.swift */; };
@@ -200,6 +207,7 @@
 		DC05FDBB23F1B0500093B47B /* MoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewModel.swift; sourceTree = "<group>"; };
 		DC05FDBE23F1B3410093B47B /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		DC05FDBF23F1B3410093B47B /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		DC05FDC223F1BDF10093B47B /* LanguagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesViewController.swift; sourceTree = "<group>"; };
 		DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCategorySheetViewController.swift; sourceTree = "<group>"; };
 		DC19DBE423EC5D0700571CC8 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		DC19DBE623EC5E7500571CC8 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +217,12 @@
 		DC19DBF023EC6DEB00571CC8 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		DC19DBF223EC6E4600571CC8 /* PaddingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
 		DC19DBF523EC751700571CC8 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		DC26812823F2FCB30045776E /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		DC26812923F2FCB30045776E /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
+		DC26812C23F2FCD50045776E /* ProfileCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellViewModel.swift; sourceTree = "<group>"; };
+		DC26812E23F450BE0045776E /* More.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
+		DC26813023F45A8C0045776E /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		DC26813323F45DEF0045776E /* AccountVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVIewController.swift; sourceTree = "<group>"; };
 		DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
 		DC40D5C523E31FDF00B0DD96 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		DC40D5C923E3298F00B0DD96 /* LanguageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTableViewCell.swift; sourceTree = "<group>"; };
@@ -244,16 +258,16 @@
 		DC6A790B23CA26BD001D1009 /* PaginationRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationRequestModel.swift; sourceTree = "<group>"; };
 		DC6A790D23CA2B51001D1009 /* OAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuth2.framework; path = Carthage/Build/iOS/OAuth2.framework; sourceTree = "<group>"; };
 		DC6A791423CB676E001D1009 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		DC6ED51D23267EED00770B31 /* iOSTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC6ED51D23267EED00770B31 /* SereyIO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SereyIO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC6ED52023267EED00770B31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC6ED52523267EED00770B31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DC6ED52723267EF000770B31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC6ED52A23267EF000770B31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC6ED52C23267EF000770B31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DC6ED53123267EF000770B31 /* iOSTemplateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSTemplateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC6ED53123267EF000770B31 /* SereyIOTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SereyIOTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC6ED53523267EF000770B31 /* iOSTemplateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSTemplateTests.swift; sourceTree = "<group>"; };
 		DC6ED53723267EF000770B31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DC6ED53C23267EF000770B31 /* iOSTemplateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOSTemplateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC6ED53C23267EF000770B31 /* SereyIOUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SereyIOUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC6ED54023267EF000770B31 /* iOSTemplateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSTemplateUITests.swift; sourceTree = "<group>"; };
 		DC6ED54223267EF000770B31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC6ED55B2326825A00770B31 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
@@ -393,6 +407,7 @@
 		DC05FDA523F1AB1E0093B47B /* More */ = {
 			isa = PBXGroup;
 			children = (
+				DC26812723F2FC6C0045776E /* ProfileTableViewCell */,
 				DC05FDA723F1AB620093B47B /* SettingTableViewCell */,
 			);
 			path = More;
@@ -417,10 +432,19 @@
 			path = HeaderView;
 			sourceTree = "<group>";
 		};
+		DC05FDC423F1BE420093B47B /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				DC05FDC223F1BDF10093B47B /* LanguagesViewController.swift */,
+			);
+			path = Languages;
+			sourceTree = "<group>";
+		};
 		DC19DBE823EC5F8400571CC8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				DC19DBE923EC5F9100571CC8 /* Home */,
+				DC26813223F45DC70045776E /* Profile */,
 				DC19DBF423EC750000571CC8 /* Search */,
 				DC40D5E023E335F200B0DD96 /* Settings */,
 			);
@@ -442,6 +466,24 @@
 				DC19DBF523EC751700571CC8 /* SearchViewModel.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		DC26812723F2FC6C0045776E /* ProfileTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC26812C23F2FCD50045776E /* ProfileCellViewModel.swift */,
+				DC26812823F2FCB30045776E /* ProfileTableViewCell.swift */,
+				DC26812923F2FCB30045776E /* ProfileTableViewCell.xib */,
+			);
+			path = ProfileTableViewCell;
+			sourceTree = "<group>";
+		};
+		DC26813223F45DC70045776E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DC26813323F45DEF0045776E /* AccountVIewController.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		DC40D5C823E3298F00B0DD96 /* LanguageTableViewCell */ = {
@@ -572,9 +614,9 @@
 		DC6ED51E23267EED00770B31 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				DC6ED51D23267EED00770B31 /* iOSTemplate.app */,
-				DC6ED53123267EF000770B31 /* iOSTemplateTests.xctest */,
-				DC6ED53C23267EF000770B31 /* iOSTemplateUITests.xctest */,
+				DC6ED51D23267EED00770B31 /* SereyIO.app */,
+				DC6ED53123267EF000770B31 /* SereyIOTests.xctest */,
+				DC6ED53C23267EF000770B31 /* SereyIOUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -653,6 +695,8 @@
 				DCD39858232E0F9600C812EB /* Slash.storyboard */,
 				DC6ED52923267EF000770B31 /* LaunchScreen.storyboard */,
 				DC6ED52423267EED00770B31 /* Main.storyboard */,
+				DC26812E23F450BE0045776E /* More.storyboard */,
+				DC26813023F45A8C0045776E /* Profile.storyboard */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -868,6 +912,7 @@
 			isa = PBXGroup;
 			children = (
 				DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */,
+				DC05FDC423F1BE420093B47B /* Languages */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -1082,9 +1127,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		DC6ED51C23267EED00770B31 /* iOSTemplate */ = {
+		DC6ED51C23267EED00770B31 /* SereyIO */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DC6ED54523267EF000770B31 /* Build configuration list for PBXNativeTarget "iOSTemplate" */;
+			buildConfigurationList = DC6ED54523267EF000770B31 /* Build configuration list for PBXNativeTarget "SereyIO" */;
 			buildPhases = (
 				AD96C549B3A4A4EAE5F997AB /* [CP] Check Pods Manifest.lock */,
 				DC6ED55D232696E200770B31 /* R.swift Run Script */,
@@ -1099,14 +1144,14 @@
 			);
 			dependencies = (
 			);
-			name = iOSTemplate;
+			name = SereyIO;
 			productName = iOSTemplate;
-			productReference = DC6ED51D23267EED00770B31 /* iOSTemplate.app */;
+			productReference = DC6ED51D23267EED00770B31 /* SereyIO.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DC6ED53023267EF000770B31 /* iOSTemplateTests */ = {
+		DC6ED53023267EF000770B31 /* SereyIOTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DC6ED54823267EF000770B31 /* Build configuration list for PBXNativeTarget "iOSTemplateTests" */;
+			buildConfigurationList = DC6ED54823267EF000770B31 /* Build configuration list for PBXNativeTarget "SereyIOTests" */;
 			buildPhases = (
 				CC8E70AAA6C07379B6CB0475 /* [CP] Check Pods Manifest.lock */,
 				DC6ED52D23267EF000770B31 /* Sources */,
@@ -1118,14 +1163,14 @@
 			dependencies = (
 				DC6ED53323267EF000770B31 /* PBXTargetDependency */,
 			);
-			name = iOSTemplateTests;
+			name = SereyIOTests;
 			productName = iOSTemplateTests;
-			productReference = DC6ED53123267EF000770B31 /* iOSTemplateTests.xctest */;
+			productReference = DC6ED53123267EF000770B31 /* SereyIOTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		DC6ED53B23267EF000770B31 /* iOSTemplateUITests */ = {
+		DC6ED53B23267EF000770B31 /* SereyIOUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = DC6ED54B23267EF000770B31 /* Build configuration list for PBXNativeTarget "iOSTemplateUITests" */;
+			buildConfigurationList = DC6ED54B23267EF000770B31 /* Build configuration list for PBXNativeTarget "SereyIOUITests" */;
 			buildPhases = (
 				7DCB4B1D6CA6DBCFB7F11774 /* [CP] Check Pods Manifest.lock */,
 				DC6ED53823267EF000770B31 /* Sources */,
@@ -1137,9 +1182,9 @@
 			dependencies = (
 				DC6ED53E23267EF000770B31 /* PBXTargetDependency */,
 			);
-			name = iOSTemplateUITests;
+			name = SereyIOUITests;
 			productName = iOSTemplateUITests;
-			productReference = DC6ED53C23267EF000770B31 /* iOSTemplateUITests.xctest */;
+			productReference = DC6ED53C23267EF000770B31 /* SereyIOUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -1165,7 +1210,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DC6ED51823267EED00770B31 /* Build configuration list for PBXProject "iOSTemplate" */;
+			buildConfigurationList = DC6ED51823267EED00770B31 /* Build configuration list for PBXProject "SereyIO" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1179,9 +1224,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				DC6ED51C23267EED00770B31 /* iOSTemplate */,
-				DC6ED53023267EF000770B31 /* iOSTemplateTests */,
-				DC6ED53B23267EF000770B31 /* iOSTemplateUITests */,
+				DC6ED51C23267EED00770B31 /* SereyIO */,
+				DC6ED53023267EF000770B31 /* SereyIOTests */,
+				DC6ED53B23267EF000770B31 /* SereyIOUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1192,15 +1237,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC6ED52B23267EF000770B31 /* LaunchScreen.storyboard in Resources */,
+				DC26812F23F450BE0045776E /* More.storyboard in Resources */,
 				DC8EAB7723E7218600E00A00 /* Home.storyboard in Resources */,
 				DC6ED52823267EF000770B31 /* Assets.xcassets in Resources */,
 				DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */,
+				DC26812B23F2FCB30045776E /* ProfileTableViewCell.xib in Resources */,
 				DC05FDB023F1AC4F0093B47B /* Settings.strings in Resources */,
 				DC19DBF123EC6DEB00571CC8 /* Search.storyboard in Resources */,
 				DCC49AC823E8632B00119BAA /* BoardFeatureView.xib in Resources */,
 				DC6ED56523269B6600770B31 /* colors.txt in Resources */,
 				DCC49AD423E865D700119BAA /* ProfileView.xib in Resources */,
 				DCD39859232E0F9600C812EB /* Slash.storyboard in Resources */,
+				DC26813123F45A8C0045776E /* Profile.storyboard in Resources */,
 				DC6ED52623267EED00770B31 /* Main.storyboard in Resources */,
 				DC05FDAD23F1AB620093B47B /* SettingTableViewCell.xib in Resources */,
 				DC40D5CD23E3298F00B0DD96 /* LanguageTableViewCell.xib in Resources */,
@@ -1357,6 +1405,7 @@
 			files = (
 				DC8EAB8123E7231200E00A00 /* HomeViewController.swift in Sources */,
 				DCD39873232E204000C812EB /* Rx+Extensions.swift in Sources */,
+				DC26813423F45DEF0045776E /* AccountVIewController.swift in Sources */,
 				DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */,
 				DCD39887232E251C00C812EB /* StyleProtocol.swift in Sources */,
 				DC40D5D023E329E000B0DD96 /* LanguageModel.swift in Sources */,
@@ -1385,6 +1434,7 @@
 				DC6FCE7623F05D1700D72F6D /* Accounts.swift in Sources */,
 				DC8EAB7B23E722BC00E00A00 /* MainTabBarViewController.swift in Sources */,
 				DC05FDAB23F1AB620093B47B /* SettingCellViewModel.swift in Sources */,
+				DC05FDC323F1BDF10093B47B /* LanguagesViewController.swift in Sources */,
 				DC40D5D623E32A6B00B0DD96 /* ImageTextModel.swift in Sources */,
 				DCD39866232E1CC600C812EB /* BaseViewModel.swift in Sources */,
 				DCD3988D232E259700C812EB /* KeyboardController+Actions.swift in Sources */,
@@ -1399,11 +1449,13 @@
 				DC6ED57C2326A43700770B31 /* Store.swift in Sources */,
 				DC6A78F323CA1FEB001D1009 /* CollectionSingleSecitionProviderModel.swift in Sources */,
 				DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */,
+				DC26812A23F2FCB30045776E /* ProfileTableViewCell.swift in Sources */,
 				DCD39883232E24BF00C812EB /* Realm+Cnfigure.swift in Sources */,
 				DCD3988B232E255E00C812EB /* UIImage+Extensions.swift in Sources */,
 				DC6A78FA23CA20B3001D1009 /* FieldViewModelProtocol.swift in Sources */,
 				DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */,
 				DC42AF0423E9CFB5008F8A0F /* PostTableViewCell.swift in Sources */,
+				DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */,
 				DC40D5C623E31FDF00B0DD96 /* ContentSizedTableView.swift in Sources */,
 				DCC49ACE23E865B600119BAA /* BoardFeatureViewModel.swift in Sources */,
 				DC6ED5842326A4BA00770B31 /* NotificationDispatcher.swift in Sources */,
@@ -1491,12 +1543,12 @@
 /* Begin PBXTargetDependency section */
 		DC6ED53323267EF000770B31 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DC6ED51C23267EED00770B31 /* iOSTemplate */;
+			target = DC6ED51C23267EED00770B31 /* SereyIO */;
 			targetProxy = DC6ED53223267EF000770B31 /* PBXContainerItemProxy */;
 		};
 		DC6ED53E23267EF000770B31 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = DC6ED51C23267EED00770B31 /* iOSTemplate */;
+			target = DC6ED51C23267EED00770B31 /* SereyIO */;
 			targetProxy = DC6ED53D23267EF000770B31 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1732,7 +1784,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSTemplate.app/iOSTemplate";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SereyIO.app/SereyIO";
 			};
 			name = Debug_Development;
 		};
@@ -1754,7 +1806,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSTemplate.app/iOSTemplate";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SereyIO.app/SereyIO";
 			};
 			name = Release_Development;
 		};
@@ -1904,7 +1956,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSTemplate.app/iOSTemplate";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SereyIO.app/SereyIO";
 			};
 			name = Debug_Production;
 		};
@@ -2027,7 +2079,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iOSTemplate.app/iOSTemplate";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SereyIO.app/SereyIO";
 			};
 			name = Release_Production;
 		};
@@ -2055,7 +2107,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DC6ED51823267EED00770B31 /* Build configuration list for PBXProject "iOSTemplate" */ = {
+		DC6ED51823267EED00770B31 /* Build configuration list for PBXProject "SereyIO" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DC6ED54323267EF000770B31 /* Debug_Development */,
@@ -2066,7 +2118,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release_Production;
 		};
-		DC6ED54523267EF000770B31 /* Build configuration list for PBXNativeTarget "iOSTemplate" */ = {
+		DC6ED54523267EF000770B31 /* Build configuration list for PBXNativeTarget "SereyIO" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DC6ED54623267EF000770B31 /* Debug_Development */,
@@ -2077,7 +2129,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release_Production;
 		};
-		DC6ED54823267EF000770B31 /* Build configuration list for PBXNativeTarget "iOSTemplateTests" */ = {
+		DC6ED54823267EF000770B31 /* Build configuration list for PBXNativeTarget "SereyIOTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DC6ED54923267EF000770B31 /* Debug_Development */,
@@ -2088,7 +2140,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release_Production;
 		};
-		DC6ED54B23267EF000770B31 /* Build configuration list for PBXNativeTarget "iOSTemplateUITests" */ = {
+		DC6ED54B23267EF000770B31 /* Build configuration list for PBXNativeTarget "SereyIOUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DC6ED54C23267EF000770B31 /* Debug_Development */,

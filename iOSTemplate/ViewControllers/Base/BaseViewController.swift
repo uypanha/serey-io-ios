@@ -23,6 +23,7 @@ open class BaseViewController: UIViewController, LocalizeProtocol, NotificationO
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        overrideBackItem()
         registerForNotifs()
     }
     

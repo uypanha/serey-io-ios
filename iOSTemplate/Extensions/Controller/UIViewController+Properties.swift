@@ -38,10 +38,12 @@ extension UIViewController {
         }
     }
     
-    func overrideBackItem(_ title: String = R.string.common.back.localized()) {
+    func overrideBackItem(_ title: String = "") {
         self.navigationItem.backBarButtonItem = UIBarButtonItem().then {
             $0.title = title
         }
+        self.navigationController?.navigationBar.backIndicatorImage = R.image.accessoryIcon()
+        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage()
     }
     
     func showActionSheet(title: String? = nil, message: String? = nil, actionSheets: [ActionSheet], completion: @escaping ((_ index: Int, _ action: ActionSheet) -> Void)) {
