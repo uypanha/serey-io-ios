@@ -1,8 +1,8 @@
 //
-//  PostTableViewController.swift
+//  AccountVIewController.swift
 //  SereyIO
 //
-//  Created by Phanha Uy on 2/6/20.
+//  Created by Phanha Uy on 2/12/20.
 //  Copyright © 2020 Phanha Uy. All rights reserved.
 //
 
@@ -14,7 +14,13 @@ import RxDataSources
 import NVActivityIndicatorView
 import SnapKit
 
-class PostTableViewController: BaseTableViewController {
+class AccountViewController: BaseViewController {
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var tableView: ContentSizedTableView!
+    @IBOutlet weak var profileContainerView: UIView!
+    @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
     fileprivate weak var emptyView: EmptyOrErrorView? = nil {
         didSet {
@@ -24,24 +30,28 @@ class PostTableViewController: BaseTableViewController {
     
     lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
         return self.prepreDataSource()
-    }()
+        }()
     
-    var viewModel: PostTableViewModel!
-
+    var viewModel: AccountViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
-        self.tabBarItem = UITabBarItem(title: "Home", image: nil, selectedImage: nil)
     }
 }
 
 // MARK: - Preparations & Tools
-fileprivate extension PostTableViewController {
+extension AccountViewController {
     
     func setUpViews() {
+        self.tableViewHeightConstraint.constant = self.scrollView.frame.height - self.profileContainerView.frame.height
+        self.profileContainerView.addBorders(edges: [.bottom], color: UIColor.lightGray.withAlphaComponent(0.2))
+        self.followButton.setTitleColor(ColorName.primary.color, for: .normal)
+        self.followButton.customBorderStyle(with: ColorName.primary.color, border: 1.5, isCircular: false)
+        
         prepareTableView()
     }
     
@@ -49,6 +59,7 @@ fileprivate extension PostTableViewController {
         self.tableView.backgroundColor = ColorName.postBackground.color
         self.tableView.tableFooterView = UIView()
         self.tableView.separatorStyle = .none
+        
         self.tableView.register(PostTableViewCell.self)
     }
     
@@ -57,7 +68,7 @@ fileprivate extension PostTableViewController {
             switch item {
             case is PostCellViewModel:
                 let cell: PostTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-//                cell.cellModel = item as? PostCellViewModel
+                // cell.cellModel = item as? PostCellViewModel
                 return cell
             default:
                 return UITableViewCell()
@@ -79,7 +90,7 @@ fileprivate extension PostTableViewController {
 }
 
 // MARK: - SetUp Rx Observers
-fileprivate extension PostTableViewController {
+fileprivate extension AccountViewController {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
@@ -93,9 +104,8 @@ fileprivate extension PostTableViewController {
                     self?.emptyView?.removeFromSuperview()
                     self?.emptyView = nil
                 }
-            })
-            .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
-            .disposed(by: self.disposeBag)
+            }) ~> self.tableView.rx.items(dataSource: self.dataSource)
+            ~ self.disposeBag
         
         self.viewModel.emptyOrError.asObservable()
             .subscribe(onNext: { [weak self] emptyOrErrorViewModel in
@@ -103,11 +113,6 @@ fileprivate extension PostTableViewController {
                     self?.prepareToDisplayEmptyView(emptyOrErrorViewModel)
                 }
             }) ~ self.disposeBag
-        
-        // Item Selected
-//        self.tableView.rx.itemSelected.asObservable()
-//            .map { SearchViewModel.Action.itemSelected(at: $0) }
-//            .bind(to: self.viewModel.didActionSubject)
-//            .disposed(by: self.disposeBag)
     }
 }
+

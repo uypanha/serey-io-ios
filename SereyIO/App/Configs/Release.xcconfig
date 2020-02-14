@@ -12,7 +12,7 @@
 #include "Pods/Target Support Files/Pods-SereyIO/Pods-SereyIO.debug_production.xcconfig"
 
 // Server URL
-ROOT_URL = https:/$()/api.example.com
+API_URL = https:/$()/api.example.com
 
 // APP INFO
 app_name                = Serey.io

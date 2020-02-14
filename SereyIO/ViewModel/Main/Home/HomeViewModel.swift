@@ -35,11 +35,11 @@ enum PostTabType: CaseIterable {
     var title: String {
         switch self {
         case .trending:
-            return "TRENDING"
+            return "Trending"
         case .hot:
-            return "HOT"
+            return "Hot"
         case .new:
-            return "NEW"
+            return "New"
         }
     }
     

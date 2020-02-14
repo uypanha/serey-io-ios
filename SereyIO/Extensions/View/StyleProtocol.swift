@@ -44,9 +44,13 @@ extension UIButton: StyleProtocol {
         self.secondaryStyle(borderColor: ColorName.primary.color, borderWidth: 2)
     }
 
-    func secondaryStyle(borderColor: UIColor? = nil, borderWidth: CGFloat = 2) {
+    func secondaryStyle(borderColor: UIColor? = nil, borderWidth: CGFloat = 2, isCircular: Bool = true) {
         self.commonTextColorStyle()
-        self.makeMeCircular()
+        if isCircular {
+            self.makeMeCircular()
+        } else {
+            self.setRadius(all: 8)
+        }
         self.setBorder(borderWith: borderWidth, borderColor: borderColor ?? ColorName.primary.color)
         
         if let image = self.image(for: .normal) {
@@ -65,9 +69,13 @@ extension UIButton: StyleProtocol {
         self.commonTextColorStyle()
     }
     
-    func customBorderStyle(with borderColor: UIColor, border width: CGFloat = 1.5) {
+    func customBorderStyle(with borderColor: UIColor, border width: CGFloat = 1.5, isCircular: Bool = false) {
         self.commonTextColorStyle()
-        self.makeMeCircular()
+        if isCircular {
+            self.makeMeCircular()
+        } else {
+            self.setRadius(all: 8)
+        }
         self.setBorder(borderWith: width, borderColor: borderColor)
         
         if let image = self.image(for: .normal) {

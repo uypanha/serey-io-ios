@@ -31,7 +31,7 @@ class SearchViewController: BaseViewController {
         })
         
         return containerView
-    }()
+        }()
     
     fileprivate lazy var loadingIndicatorView: NVActivityIndicatorView = {
         return NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 48, height: 48), type: .ballBeat, color: UIColor.lightGray.withAlphaComponent(0.5), padding: 0)
@@ -45,13 +45,13 @@ class SearchViewController: BaseViewController {
     
     lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
         return self.prepreDataSource()
-    }()
-
+        }()
+    
     var viewModel: SearchViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
@@ -81,22 +81,22 @@ extension SearchViewController {
     }
     
     func prepreDataSource() -> RxTableViewSectionedReloadDataSource<SectionItem> {
-           let dataSource = RxTableViewSectionedReloadDataSource<SectionItem>(configureCell: { (datasource, tableView, indexPath, item) -> UITableViewCell in
-               return UITableViewCell()
-           })
-           
-           dataSource.titleForHeaderInSection = { dataSource, index in
-               return dataSource.sectionModels[index].model.header
-           }
-           
-           return dataSource
-       }
-       
-       private func prepareToDisplayEmptyView(_ model: EmptyOrErrorViewModel) {
-           let emptyView = EmptyOrErrorView()
-           emptyView.viewModel = model
-           self.emptyView = emptyView
-       }
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionItem>(configureCell: { (datasource, tableView, indexPath, item) -> UITableViewCell in
+            return UITableViewCell()
+        })
+        
+        dataSource.titleForHeaderInSection = { dataSource, index in
+            return dataSource.sectionModels[index].model.header
+        }
+        
+        return dataSource
+    }
+    
+    private func prepareToDisplayEmptyView(_ model: EmptyOrErrorViewModel) {
+        let emptyView = EmptyOrErrorView()
+        emptyView.viewModel = model
+        self.emptyView = emptyView
+    }
 }
 
 // MARK: - TabBarControllerDelegate
@@ -162,15 +162,15 @@ fileprivate extension SearchViewController {
     }
     
     func setUpShouldPresentErrorObsevers() {
-//        self.viewModel.shouldPresentError.asObservable()
-//            .subscribe(onNext: { [unowned self] errorInfo in
-//                if self.viewModel.cells.value.isEmpty {
-//                    self.prepareToDisplayEmptyView(self.viewModel.prepareEmptyViewModel(errorInfo))
-//                } else {
-//                    self.showDialogError(errorInfo, positiveButton: R.string.common.tryAgain.localized(), positiveCompletion: {
-//                        self.viewModel.downloadData()
-//                    }, negativeButton: R.string.common.cancel.localized())
-//                }
-//            }).disposed(by: self.disposeBag)
+        //        self.viewModel.shouldPresentError.asObservable()
+        //            .subscribe(onNext: { [unowned self] errorInfo in
+        //                if self.viewModel.cells.value.isEmpty {
+        //                    self.prepareToDisplayEmptyView(self.viewModel.prepareEmptyViewModel(errorInfo))
+        //                } else {
+        //                    self.showDialogError(errorInfo, positiveButton: R.string.common.tryAgain.localized(), positiveCompletion: {
+        //                        self.viewModel.downloadData()
+        //                    }, negativeButton: R.string.common.cancel.localized())
+        //                }
+        //            }).disposed(by: self.disposeBag)
     }
 }

@@ -32,7 +32,7 @@
 		DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26812C23F2FCD50045776E /* ProfileCellViewModel.swift */; };
 		DC26812F23F450BE0045776E /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC26812E23F450BE0045776E /* More.storyboard */; };
 		DC26813123F45A8C0045776E /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC26813023F45A8C0045776E /* Profile.storyboard */; };
-		DC26813423F45DEF0045776E /* AccountVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26813323F45DEF0045776E /* AccountVIewController.swift */; };
+		DC26813423F45DEF0045776E /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26813323F45DEF0045776E /* AccountViewController.swift */; };
 		DC40D5C623E31FDF00B0DD96 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */; };
 		DC40D5C723E31FDF00B0DD96 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C523E31FDF00B0DD96 /* GradientView.swift */; };
 		DC40D5CC23E3298F00B0DD96 /* LanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C923E3298F00B0DD96 /* LanguageTableViewCell.swift */; };
@@ -151,6 +151,8 @@
 		DCD39898232E2AD700C812EB /* CloseableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39897232E2AD700C812EB /* CloseableNavigationController.swift */; };
 		DCD3989A232E2DE700C812EB /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39899232E2DE700C812EB /* UINavigationController.swift */; };
 		DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */; };
+		DCF8738023F6F7CE007A8724 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8737F23F6F7CD007A8724 /* AccountViewModel.swift */; };
+		DCF8738223F6FA3B007A8724 /* BasePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8738123F6FA3B007A8724 /* BasePostViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,7 +222,7 @@
 		DC26812C23F2FCD50045776E /* ProfileCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellViewModel.swift; sourceTree = "<group>"; };
 		DC26812E23F450BE0045776E /* More.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
 		DC26813023F45A8C0045776E /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
-		DC26813323F45DEF0045776E /* AccountVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVIewController.swift; sourceTree = "<group>"; };
+		DC26813323F45DEF0045776E /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
 		DC40D5C523E31FDF00B0DD96 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		DC40D5C923E3298F00B0DD96 /* LanguageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTableViewCell.swift; sourceTree = "<group>"; };
@@ -358,6 +360,8 @@
 		DCD39897232E2AD700C812EB /* CloseableNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseableNavigationController.swift; sourceTree = "<group>"; };
 		DCD39899232E2DE700C812EB /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingViewModel.swift; sourceTree = "<group>"; };
+		DCF8737F23F6F7CD007A8724 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
+		DCF8738123F6FA3B007A8724 /* BasePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePostViewModel.swift; sourceTree = "<group>"; };
 		E48D784F3F419D4A8B0116EC /* Pods_SereyIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SereyIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4BA4EF9560F572B6DA8F7A4 /* Pods-SereyIOTests.debug_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.debug_production.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.debug_production.xcconfig"; sourceTree = "<group>"; };
 		F4BAB723C7E6C2FAF05380F9 /* Pods-SereyIOUITests.debug_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.debug_development.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.debug_development.xcconfig"; sourceTree = "<group>"; };
@@ -443,8 +447,9 @@
 		DC19DBE823EC5F8400571CC8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				DCF8738123F6FA3B007A8724 /* BasePostViewModel.swift */,
 				DC19DBE923EC5F9100571CC8 /* Home */,
-				DC26813223F45DC70045776E /* Profile */,
+				DCF8737E23F6F7B8007A8724 /* Profile */,
 				DC19DBF423EC750000571CC8 /* Search */,
 				DC40D5E023E335F200B0DD96 /* Settings */,
 			);
@@ -481,7 +486,7 @@
 		DC26813223F45DC70045776E /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				DC26813323F45DEF0045776E /* AccountVIewController.swift */,
+				DC26813323F45DEF0045776E /* AccountViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -594,6 +599,7 @@
 				DC8EAB7C23E722DF00E00A00 /* Home */,
 				DC8EAB7F23E722F100E00A00 /* More */,
 				DC8EAB7E23E722EA00E00A00 /* Notifications */,
+				DC26813223F45DC70045776E /* Profile */,
 				DC8EAB7D23E722E400E00A00 /* Search */,
 			);
 			path = Main;
@@ -1105,6 +1111,14 @@
 			path = WebView;
 			sourceTree = "<group>";
 		};
+		DCF8737E23F6F7B8007A8724 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DCF8737F23F6F7CD007A8724 /* AccountViewModel.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		EC758BF2CA0BBE85782B9603 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1405,7 +1419,7 @@
 			files = (
 				DC8EAB8123E7231200E00A00 /* HomeViewController.swift in Sources */,
 				DCD39873232E204000C812EB /* Rx+Extensions.swift in Sources */,
-				DC26813423F45DEF0045776E /* AccountVIewController.swift in Sources */,
+				DC26813423F45DEF0045776E /* AccountViewController.swift in Sources */,
 				DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */,
 				DCD39887232E251C00C812EB /* StyleProtocol.swift in Sources */,
 				DC40D5D023E329E000B0DD96 /* LanguageModel.swift in Sources */,
@@ -1452,6 +1466,7 @@
 				DC26812A23F2FCB30045776E /* ProfileTableViewCell.swift in Sources */,
 				DCD39883232E24BF00C812EB /* Realm+Cnfigure.swift in Sources */,
 				DCD3988B232E255E00C812EB /* UIImage+Extensions.swift in Sources */,
+				DCF8738223F6FA3B007A8724 /* BasePostViewModel.swift in Sources */,
 				DC6A78FA23CA20B3001D1009 /* FieldViewModelProtocol.swift in Sources */,
 				DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */,
 				DC42AF0423E9CFB5008F8A0F /* PostTableViewCell.swift in Sources */,
@@ -1479,6 +1494,7 @@
 				DC6ED5862326A4D000770B31 /* AppNotification.swift in Sources */,
 				DC88A73C23DF4A8900EB7F79 /* SelectLanguageViewModel.swift in Sources */,
 				DC6A790523CA242B001D1009 /* EmptyOrErrorView.swift in Sources */,
+				DCF8738023F6F7CE007A8724 /* AccountViewModel.swift in Sources */,
 				DCC49ACC23E864E500119BAA /* FeatureStore.swift in Sources */,
 				DCD3985C232E104400C812EB /* SlashScreenViewController.swift in Sources */,
 				DC19DBF323EC6E4600571CC8 /* PaddingTextField.swift in Sources */,

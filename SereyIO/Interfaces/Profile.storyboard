@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--AccountV Iew Controller-->
+        <!--Account View Controller-->
         <scene sceneID="Fm0-pQ-n3d">
             <objects>
-                <viewController storyboardIdentifier="AccountVIewController" id="Iwd-i8-Cb6" customClass="AccountVIewController" customModule="iOSTemplate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountViewController" id="Iwd-i8-Cb6" customClass="AccountViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lb5-sU-P85">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,18 +20,18 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lex-b5-u2g">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="858"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0QK-aE-mSY">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="227.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="233.5"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="c4y-F6-DwT">
-                                                        <rect key="frame" x="16" y="16" width="382" height="195.5"/>
+                                                        <rect key="frame" x="16" y="16" width="382" height="201.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3B5-ng-8du">
                                                                 <rect key="frame" x="151" y="0.0" width="80" height="80"/>
                                                                 <subviews>
-                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SG0-he-Qad" customClass="ProfileView" customModule="iOSTemplate" customModuleProvider="target">
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SG0-he-Qad" customClass="ProfileView" customModule="SereyIO" customModuleProvider="target">
                                                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                                                         <color key="backgroundColor" red="0.42352941179999998" green="0.38823529410000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                     </view>
@@ -59,7 +59,11 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DcN-Fm-KFc">
-                                                                <rect key="frame" x="76.5" y="165.5" width="229" height="30"/>
+                                                                <rect key="frame" x="76.5" y="165.5" width="229" height="36"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="36" id="geh-cp-rZY"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                                 <state key="normal" title="Follow"/>
                                                             </button>
                                                         </subviews>
@@ -76,9 +80,12 @@
                                                     <constraint firstAttribute="bottom" secondItem="c4y-F6-DwT" secondAttribute="bottom" constant="16" id="nYX-S6-EUF"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bYC-1g-O7P">
-                                                <rect key="frame" x="0.0" y="227.5" width="414" height="624.5"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bYC-1g-O7P" customClass="ContentSizedTableView" customModule="SereyIO" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="233.5" width="414" height="624.5"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="624.5" id="Sis-80-jVr"/>
+                                                </constraints>
                                             </tableView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -117,6 +124,7 @@
                         <outlet property="profileContainerView" destination="0QK-aE-mSY" id="Wz4-7c-g4w"/>
                         <outlet property="scrollView" destination="0tq-cy-4n0" id="hPe-Nn-C7X"/>
                         <outlet property="tableView" destination="bYC-1g-O7P" id="OAw-Nm-OtC"/>
+                        <outlet property="tableViewHeightConstraint" destination="Sis-80-jVr" id="dOS-Sf-0ob"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cI2-Gh-t36" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -13,4 +13,5 @@ import RxBinding
 
 class PostCellViewModel: CellViewModel {
     
+    
 }
