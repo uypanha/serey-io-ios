@@ -20,12 +20,18 @@ protocol DownloadStateNetworkProtocol: NetworkViewModelProtocol {
     var isDownloading: BehaviorRelay<Bool> { get }
 }
 
+protocol PaginationRequestProtocol {
+    
+    mutating func reset()
+}
+
 // MARK: Infinite Network Protocol
-protocol InfiniteNetworkProtocol: DownloadStateNetworkProtocol {
+protocol InfiniteNetworkProtocol: DownloadStateNetworkProtocol where P: PaginationRequestProtocol {
+    associatedtype P
     
     var canDownloadMorePages: BehaviorRelay<Bool> { get }
     var isRefresh: Bool { get set }
-    var pageModel: PaginationRequestModel { get set }
+    var pageModel: P { get set }
     var downloadDisposeBag: DisposeBag { get set }
     
     func canDownloadMore() -> Bool
@@ -41,7 +47,7 @@ extension InfiniteNetworkProtocol {
     
     mutating func reset() {
         self.canDownloadMorePages.accept(true)
-        self.pageModel.page = 1
+        self.pageModel.reset()
         self.isRefresh = true
         self.isDownloading.accept(false)
         self.downloadDisposeBag = DisposeBag()

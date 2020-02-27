@@ -145,9 +145,9 @@ fileprivate extension MoreViewController {
         self.viewModel.shouldPresent.asObservable()
             .subscribe(onNext: { [unowned self] viewToPresent in
                 switch viewToPresent {
-                case .accountViewController:
+                case .accountViewController(let accountViewModel):
                     if let accountViewController = R.storyboard.profile.accountViewController() {
-                        accountViewController.viewModel = AccountViewModel()
+                        accountViewController.viewModel = accountViewModel
                         self.show(accountViewController, sender: nil)
                     }
                 case .languagesViewController:

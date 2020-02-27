@@ -21,8 +21,8 @@ class AccountViewModel: BasePostViewModel, ShouldPresent {
     // output:
     lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
     
-    override init() {
-        super.init()
+    init(_ userId: String) {
+        super.init(.byUser, userId)
         
         setUpRxObservers()
     }
@@ -36,8 +36,6 @@ class AccountViewModel: BasePostViewModel, ShouldPresent {
 
 // MARK: - Preparations & Tools
 extension AccountViewModel {
-    
-    
 }
 
 // MARK: - SetUp RxObservers

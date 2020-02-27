@@ -34,9 +34,9 @@ internal struct ColorName {
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#4ecd77"></span>
   /// Alpha: 100% <br/> (0x4ecd77ff)
   internal static let positive = ColorName(rgbaValue: 0x4ecd77ff)
-  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#efefef"></span>
-  /// Alpha: 100% <br/> (0xefefefff)
-  internal static let postBackground = ColorName(rgbaValue: 0xefefefff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
+  /// Alpha: 100% <br/> (0xffffffff)
+  internal static let postBackground = ColorName(rgbaValue: 0xffffffff)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#3f5ac4"></span>
   /// Alpha: 100% <br/> (0x3f5ac4ff)
   internal static let primary = ColorName(rgbaValue: 0x3f5ac4ff)

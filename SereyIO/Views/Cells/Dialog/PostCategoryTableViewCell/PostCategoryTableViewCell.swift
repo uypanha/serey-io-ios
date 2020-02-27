@@ -41,8 +41,6 @@ extension PostCategoryTableViewCell {
             layout.scrollDirection = .horizontal
             layout.itemSize = CGSize(width: 1, height: 1)
             layout.estimatedItemSize = CGSize(width: 1, height: 1)
-            layout.minimumLineSpacing = 8
-            layout.minimumInteritemSpacing = 0
         }
         self.collectionView.register(SubPostCategoryCollectionViewCell.self)
     }
@@ -54,7 +52,6 @@ extension PostCategoryTableViewCell {
                 case is SubCategoryCellViewModel:
                     let cell: SubPostCategoryCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: IndexPath(row: index, section: 0))
                     cell.cellModel = item as? SubCategoryCellViewModel
-                    cell.layoutIfNeeded()
                     return cell
                 default:
                     return UICollectionViewCell()

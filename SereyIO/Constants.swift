@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Constants {
+public struct Constants {
     
     static var apiEndPoint: URL {
         return URL(string: ConfigSetting.urlProcol.value() + ConfigSetting.apiURL.value())!
@@ -28,7 +28,7 @@ struct Constants {
         return Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String ?? ""
     }
     
-    static let limitPerPage: Int = 20
+    public static let limitPerPage: Int = 10
     
     static func clearStoreData() {
     }

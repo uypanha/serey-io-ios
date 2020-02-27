@@ -17,7 +17,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
     }
     
     enum ViewToPresent {
-        case accountViewController
+        case accountViewController(AccountViewModel)
         case languagesViewController
     }
     
@@ -127,8 +127,9 @@ fileprivate extension MoreViewModel {
             default:
                 break
             }
-        } else if let item = item(at: indexPath) as? ProfileCellViewModel {
-            self.shouldPresent(.accountViewController)
+        } else if let _ = item(at: indexPath) as? ProfileCellViewModel {
+            let accountViewModel = AccountViewModel("")
+            self.shouldPresent(.accountViewController(accountViewModel))
         }
     }
 }

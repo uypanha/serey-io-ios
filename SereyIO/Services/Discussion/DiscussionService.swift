@@ -16,4 +16,9 @@ class DiscussionService: AppService<DiscussionApi> {
         return self.provider.rx.requestObject(.getCategories, type: [DiscussionCategoryModel].self)
             .asObservable()
     }
+    
+    func getDiscussionList(_ type: DiscussionType, _ query: QueryDiscussionsBy) -> Observable<[DiscussionModel]> {
+        return self.provider.rx.requestObject(.getDiscussions(type, query), type: [DiscussionModel].self)
+            .asObservable()
+    }
 }

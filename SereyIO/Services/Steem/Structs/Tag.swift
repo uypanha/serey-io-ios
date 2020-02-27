@@ -23,12 +23,12 @@ struct GetDiscussionsBy: Codable {
 }
 
 public struct QueryDiscussionsBy: Codable {
-    let tag: String?
-    let start_author: String?
-    let start_permlink: String?
-    let limit: Int?
+    var tag: String? = nil
+    var start_author: String? = nil
+    var start_permlink: String? = nil
+    var limit: Int = Constants.limitPerPage
     
-    public init(tag: String?, start_author: String?, start_permlink: String?, limit: Int?) {
+    public init(tag: String? = nil, start_author: String? = nil, start_permlink: String? = nil, limit: Int = Constants.limitPerPage) {
         self.tag = tag
         self.start_author = start_author
         self.start_permlink = start_permlink

@@ -9,14 +9,10 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import RxBinding
 import RxDataSources
 
 class PostTableViewModel: BasePostViewModel {
     
-    let postTabType: BehaviorRelay<PostTabType>
     
-    init(_ tabType: PostTabType) {
-        self.postTabType = BehaviorRelay(value: tabType)
-        super.init()
-    }
 }

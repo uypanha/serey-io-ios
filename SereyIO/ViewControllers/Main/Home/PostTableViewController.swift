@@ -34,7 +34,7 @@ class PostTableViewController: BaseTableViewController {
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
-        self.tabBarItem = UITabBarItem(title: "Home", image: nil, selectedImage: nil)
+        viewModel.downloadData()
     }
 }
 
@@ -109,5 +109,12 @@ fileprivate extension PostTableViewController {
 //            .map { SearchViewModel.Action.itemSelected(at: $0) }
 //            .bind(to: self.viewModel.didActionSubject)
 //            .disposed(by: self.disposeBag)
+        
+        self.tableView.rx.willDisplayCell.asObservable()
+            .subscribe(onNext: { [unowned self] (cell, indexPath) in
+                if self.viewModel.isLastItem(indexPath: indexPath) {
+                    self.viewModel.downloadData()
+                }
+            }) ~ self.disposeBag
     }
 }

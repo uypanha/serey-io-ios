@@ -12,18 +12,30 @@ import RxSwift
 import RxBinding
 import RxDataSources
 
-class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel {
+class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, InfiniteNetworkProtocol {
     
+    let postType: BehaviorRelay<DiscussionType>
+    let discussions: BehaviorRelay<[DiscussionModel]>
     let cells: BehaviorRelay<[SectionItem]>
     let emptyOrError: BehaviorSubject<EmptyOrErrorViewModel?>
     
-    override init() {
+    let discussionService: DiscussionService
+    let canDownloadMorePages: BehaviorRelay<Bool>
+    var isRefresh: Bool = true
+    lazy var pageModel: QueryDiscussionsBy = QueryDiscussionsBy()
+    lazy var downloadDisposeBag: DisposeBag = DisposeBag()
+    lazy var isDownloading: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    
+    init(_ type: DiscussionType, _ authorName: String? = nil) {
         self.cells = BehaviorRelay(value: [])
         self.emptyOrError = BehaviorSubject(value: nil)
+        self.discussions = BehaviorRelay(value: [])
+        self.postType = BehaviorRelay(value: type)
+        self.discussionService = DiscussionService()
+        self.canDownloadMorePages = BehaviorRelay(value: true)
         super.init()
         
         setUpRxObservers()
-        self.cells.accept(self.prepareCells())
     }
     
     open func prepareEmptyViewModel() -> EmptyOrErrorViewModel {
@@ -33,13 +45,55 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     }
 }
 
+// MARK: - Networks
+extension BasePostViewModel {
+    
+    func downloadData() {
+        if !self.isDownloading.value && self.canDownloadMore() {
+            self.isDownloading.accept(true)
+            fetchDiscussions()
+        }
+    }
+    
+    func fetchDiscussions() {
+        self.discussionService.getDiscussionList(self.postType.value, self.pageModel)
+            .subscribe(onNext: { [weak self] discussions in
+                self?.isDownloading.accept(false)
+                self?.updateData(discussions)
+            }, onError: { [weak self] error in
+                self?.isDownloading.accept(false)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+}
+
 // MARK: - Preparations & Tools
 extension BasePostViewModel {
     
-    fileprivate func prepareCells() -> [SectionItem] {
-//        let cells = (0...10).map { _ in PostCellViewModel() }
-//        return [SectionItem(items: cells)]
-        return []
+    fileprivate func updateData(_ data: [DiscussionModel]) {
+        var discussions = self.discussions.value
+        
+        if self.isRefresh {
+            discussions.removeAll()
+            self.isRefresh = false
+        }
+        
+        if data.count > 0 {
+            self.pageModel.start_author = data.last?.authorName
+            self.pageModel.start_permlink = data.last?.permlink
+        }
+        if pageModel.limit > data.count {
+            canDownloadMorePages.accept(false)
+        }
+        
+        discussions.append(contentsOf: data)
+        self.discussions.accept(discussions)
+    }
+    
+    fileprivate func prepareCells(_ discussions: [DiscussionModel]) -> [SectionItem] {
+        let cells = discussions.map { _ in PostCellViewModel() }
+        return [SectionItem(items: cells)]
     }
 }
 
@@ -51,6 +105,11 @@ fileprivate extension BasePostViewModel {
     }
     
     func setUpContentChangedObservers() {
+        self.discussions.asObservable()
+            .map { self.prepareCells($0) }
+            ~> self.cells
+            ~ self.disposeBag
+        
         self.cells.asObservable()
             .subscribe(onNext: { [unowned self] cells in
                 if cells.isEmpty {
@@ -60,3 +119,11 @@ fileprivate extension BasePostViewModel {
     }
 }
 
+// MARK: - QueryDiscussionsBy
+extension QueryDiscussionsBy: PaginationRequestProtocol {
+    
+    mutating func reset() {
+        self.start_permlink = nil
+        self.start_author = nil
+    }
+}

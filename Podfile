@@ -37,6 +37,7 @@ def frameworks_pods
 	pod 'SnapKit'
 	pod 'NVActivityIndicatorView'
 	pod 'NotificationBannerSwift'
+  pod 'Shimmer'
 
 	# MARK: - RX
   pod 'RxSwift'
@@ -47,7 +48,6 @@ def frameworks_pods
   pod 'RxAlamofire'
   pod 'RxRealm'
   pod 'RxBinding'
-  
   
   # MARK: - Google SDKs
   pod 'Firebase/Core'

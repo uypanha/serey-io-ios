@@ -43,8 +43,9 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
         super.init()
         
         setUpRxObservers()
-        self.postTabTitles.accept(PostTabType.allCases.map { $0.title })
-        self.postViewModels.accept(PostTabType.allCases.map { $0.viewModel })
+        let discussionTypes: [DiscussionType] = [.trending, .hot, .new]
+        self.postTabTitles.accept(discussionTypes.map { $0.title })
+        self.postViewModels.accept(discussionTypes.map { $0.viewModel })
     }
 }
 
@@ -99,10 +100,11 @@ extension HomeViewModel {
 }
 
 // MARK: - PostTabType
-enum PostTabType: CaseIterable {
+enum DiscussionType {
     case trending
     case hot
     case new
+    case byUser
     
     var title: String {
         switch self {
@@ -112,6 +114,8 @@ enum PostTabType: CaseIterable {
             return "Hot"
         case .new:
             return "New"
+        case .byUser:
+            return "User"
         }
     }
     

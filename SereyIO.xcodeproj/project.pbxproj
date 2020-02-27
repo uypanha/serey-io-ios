@@ -68,7 +68,6 @@
 		DC6A790423CA242B001D1009 /* EmptyOrErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC6A790123CA242B001D1009 /* EmptyOrErrorView.xib */; };
 		DC6A790523CA242B001D1009 /* EmptyOrErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A790223CA242B001D1009 /* EmptyOrErrorView.swift */; };
 		DC6A790923CA2510001D1009 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A790823CA2510001D1009 /* RealmManager.swift */; };
-		DC6A790C23CA26BD001D1009 /* PaginationRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A790B23CA26BD001D1009 /* PaginationRequestModel.swift */; };
 		DC6A791523CB676E001D1009 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A791423CB676E001D1009 /* MainViewController.swift */; };
 		DC6ED52123267EED00770B31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6ED52023267EED00770B31 /* AppDelegate.swift */; };
 		DC6ED52623267EED00770B31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC6ED52423267EED00770B31 /* Main.storyboard */; };
@@ -161,6 +160,7 @@
 		DCD39896232E28E100C812EB /* WebViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39895232E28E100C812EB /* WebViewViewModel.swift */; };
 		DCD39898232E2AD700C812EB /* CloseableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39897232E2AD700C812EB /* CloseableNavigationController.swift */; };
 		DCD3989A232E2DE700C812EB /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39899232E2DE700C812EB /* UINavigationController.swift */; };
+		DCE19A9F240822FD0054F752 /* DiscussionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE19A9E240822FD0054F752 /* DiscussionModel.swift */; };
 		DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */; };
 		DCF8738023F6F7CE007A8724 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8737F23F6F7CD007A8724 /* AccountViewModel.swift */; };
 		DCF8738223F6FA3B007A8724 /* BasePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8738123F6FA3B007A8724 /* BasePostViewModel.swift */; };
@@ -271,7 +271,6 @@
 		DC6A790123CA242B001D1009 /* EmptyOrErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyOrErrorView.xib; sourceTree = "<group>"; };
 		DC6A790223CA242B001D1009 /* EmptyOrErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyOrErrorView.swift; sourceTree = "<group>"; };
 		DC6A790823CA2510001D1009 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
-		DC6A790B23CA26BD001D1009 /* PaginationRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationRequestModel.swift; sourceTree = "<group>"; };
 		DC6A790D23CA2B51001D1009 /* OAuth2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OAuth2.framework; path = Carthage/Build/iOS/OAuth2.framework; sourceTree = "<group>"; };
 		DC6A791423CB676E001D1009 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		DC6ED51D23267EED00770B31 /* SereyIO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SereyIO.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -381,6 +380,7 @@
 		DCD39895232E28E100C812EB /* WebViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewModel.swift; sourceTree = "<group>"; };
 		DCD39897232E2AD700C812EB /* CloseableNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseableNavigationController.swift; sourceTree = "<group>"; };
 		DCD39899232E2DE700C812EB /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		DCE19A9E240822FD0054F752 /* DiscussionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionModel.swift; sourceTree = "<group>"; };
 		DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingViewModel.swift; sourceTree = "<group>"; };
 		DCF8737F23F6F7CD007A8724 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		DCF8738123F6FA3B007A8724 /* BasePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePostViewModel.swift; sourceTree = "<group>"; };
@@ -639,7 +639,6 @@
 			children = (
 				DC40D5D523E32A6B00B0DD96 /* ImageTextModel.swift */,
 				DC40D5CF23E329E000B0DD96 /* LanguageModel.swift */,
-				DC6A790B23CA26BD001D1009 /* PaginationRequestModel.swift */,
 				DC9AC6E42406C5A2008FAFA6 /* Discussion */,
 			);
 			path = Models;
@@ -989,6 +988,7 @@
 			isa = PBXGroup;
 			children = (
 				DC9AC6E52406C5BA008FAFA6 /* DiscussionCategoryModel.swift */,
+				DCE19A9E240822FD0054F752 /* DiscussionModel.swift */,
 			);
 			path = Discussion;
 			sourceTree = "<group>";
@@ -1497,6 +1497,7 @@
 				DC26813423F45DEF0045776E /* AccountViewController.swift in Sources */,
 				DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */,
 				DC1C6EC923FC3F6100BA701D /* BaseCollectionViewCell.swift in Sources */,
+				DCE19A9F240822FD0054F752 /* DiscussionModel.swift in Sources */,
 				DCD39887232E251C00C812EB /* StyleProtocol.swift in Sources */,
 				DC40D5D023E329E000B0DD96 /* LanguageModel.swift in Sources */,
 				DC6ED5782326A40200770B31 /* AppCoordinator.swift in Sources */,
@@ -1560,7 +1561,6 @@
 				DC6FCE7423F05D1700D72F6D /* Steem.swift in Sources */,
 				DC8EAB8323E7231A00E00A00 /* MoreViewController.swift in Sources */,
 				DCD3987D232E235000C812EB /* BaseTableViewCell.swift in Sources */,
-				DC6A790C23CA26BD001D1009 /* PaginationRequestModel.swift in Sources */,
 				DC6FCE7323F05D1700D72F6D /* HttpClient.swift in Sources */,
 				DC9AC6DF2406BF1C008FAFA6 /* DiscussionApi.swift in Sources */,
 				DC40D5C723E31FDF00B0DD96 /* GradientView.swift in Sources */,
