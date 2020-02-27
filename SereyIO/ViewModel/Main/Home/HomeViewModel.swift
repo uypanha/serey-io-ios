@@ -11,18 +11,90 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class HomeViewModel: BaseViewModel {
+class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, DownloadStateNetworkProtocol {
+    
+    enum Action {
+        case filterPressed
+    }
+    
+    enum ViewToPresent {
+        case choosePostCategoryController(ChooseCategorySheetViewModel)
+    }
+    
+    // input:
+    lazy var didActionSubject = PublishSubject<Action>()
+    
+    // output:
+    lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
     
     let postTabTitles: BehaviorRelay<[String]>
     let postViewModels: BehaviorRelay<[PostTableViewModel]>
     
+    let categories: BehaviorRelay<[DiscussionCategoryModel]>
+    
+    let discussionService: DiscussionService
+    lazy var isDownloading = BehaviorRelay<Bool>(value: false)
+    
     override init() {
         self.postTabTitles = BehaviorRelay(value: [])
         self.postViewModels = BehaviorRelay(value: [])
+        self.categories = BehaviorRelay(value: [])
+        self.discussionService = DiscussionService()
         super.init()
         
+        setUpRxObservers()
         self.postTabTitles.accept(PostTabType.allCases.map { $0.title })
         self.postViewModels.accept(PostTabType.allCases.map { $0.viewModel })
+    }
+}
+
+// MARK: - Networks
+extension HomeViewModel {
+    
+    func downloadData() {
+        if !self.isDownloading.value {
+            fetchCategories()
+        }
+    }
+    
+    private func fetchCategories() {
+        self.isDownloading.accept(true)
+        self.discussionService.getCategories()
+            .subscribe(onNext: { [weak self] categories in
+                self?.isDownloading.accept(false)
+                self?.categories.accept(categories)
+            }, onError: { [weak self] error in
+                self?.isDownloading.accept(false)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+}
+
+// MARK: - Action Handlers
+fileprivate extension HomeViewModel {
+    
+    func handleFilterPressed() {
+        let viewModel = ChooseCategorySheetViewModel(self.categories.value)
+        self.shouldPresent(.choosePostCategoryController(viewModel))
+    }
+}
+
+// MARK: - SetUp RxObservers
+extension HomeViewModel {
+    
+    func setUpRxObservers() {
+        setUpActionObservers()
+    }
+    
+    func setUpActionObservers() {
+        self.didActionSubject.asObservable()
+            .subscribe(onNext: { [weak self] action in
+                switch action {
+                case .filterPressed:
+                    self?.handleFilterPressed()
+                }
+            }) ~ self.disposeBag
     }
 }
 

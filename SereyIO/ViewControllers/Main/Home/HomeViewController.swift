@@ -47,6 +47,7 @@ class HomeViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
+        viewModel.downloadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -153,7 +154,16 @@ extension HomeViewController: UIScrollViewDelegate, MDCTabBarDelegate {
 fileprivate extension HomeViewController {
     
     func setUpRxObservers() {
+        setUpControlsObserver()
         setUpContentChangedObservers()
+        setUpShouldPresentObservers()
+    }
+    
+    func setUpControlsObserver() {
+        self.filterButton.rx.tap.asObservable()
+            .map { _ in HomeViewModel.Action.filterPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpContentChangedObservers() {
@@ -165,6 +175,23 @@ fileprivate extension HomeViewController {
         self.viewModel.postViewModels.asObservable()
             .subscribe(onNext: { [weak self] viewModels in
                 self?.prepareSlidingViews(viewModels)
+            }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentObservers() {
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { viewToPresent in
+                switch viewToPresent {
+                case .choosePostCategoryController(let chooseCategorySheetViewModel):
+                    if let choosePostCategoryViewController = R.storyboard.home.chooseCategorySheetViewController() {
+                        choosePostCategoryViewController.viewModel = chooseCategorySheetViewModel
+                        let bottomSheet = MDCBottomSheetController(contentViewController: choosePostCategoryViewController)
+                        bottomSheet.isScrimAccessibilityElement = false
+                        bottomSheet.automaticallyAdjustsScrollViewInsets = false
+                        bottomSheet.dismissOnDraggingDownSheet = false
+                        self.present(bottomSheet, animated: true, completion: nil)
+                    }
+                }
             }) ~ self.disposeBag
     }
 }

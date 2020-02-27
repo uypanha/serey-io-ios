@@ -27,6 +27,11 @@
 		DC19DBF123EC6DEB00571CC8 /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC19DBF023EC6DEB00571CC8 /* Search.storyboard */; };
 		DC19DBF323EC6E4600571CC8 /* PaddingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBF223EC6E4600571CC8 /* PaddingTextField.swift */; };
 		DC19DBF623EC751700571CC8 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBF523EC751700571CC8 /* SearchViewModel.swift */; };
+		DC1C6EC323FC3C6D00BA701D /* PostCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1C6EC123FC3C6D00BA701D /* PostCategoryTableViewCell.swift */; };
+		DC1C6EC423FC3C6D00BA701D /* PostCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1C6EC223FC3C6D00BA701D /* PostCategoryTableViewCell.xib */; };
+		DC1C6EC923FC3F6100BA701D /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1C6EC823FC3F6100BA701D /* BaseCollectionViewCell.swift */; };
+		DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1C6ECA23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift */; };
+		DC1C6ECD23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1C6ECB23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib */; };
 		DC26812A23F2FCB30045776E /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26812823F2FCB30045776E /* ProfileTableViewCell.swift */; };
 		DC26812B23F2FCB30045776E /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC26812923F2FCB30045776E /* ProfileTableViewCell.xib */; };
 		DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26812C23F2FCD50045776E /* ProfileCellViewModel.swift */; };
@@ -117,6 +122,12 @@
 		DC8EAB8323E7231A00E00A00 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */; };
 		DC8EAB8523E7232800E00A00 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8423E7232800E00A00 /* NotificationViewController.swift */; };
 		DC8EAB8723E7232F00E00A00 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8623E7232F00E00A00 /* SearchViewController.swift */; };
+		DC9AC6DF2406BF1C008FAFA6 /* DiscussionApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9AC6DE2406BF1C008FAFA6 /* DiscussionApi.swift */; };
+		DC9AC6E12406C1D1008FAFA6 /* DiscussionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9AC6E02406C1D1008FAFA6 /* DiscussionService.swift */; };
+		DC9AC6E32406C4F7008FAFA6 /* Moya+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9AC6E22406C4F7008FAFA6 /* Moya+Extensions.swift */; };
+		DC9AC6E62406C5BA008FAFA6 /* DiscussionCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9AC6E52406C5BA008FAFA6 /* DiscussionCategoryModel.swift */; };
+		DC9AC6E82406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9AC6E72406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift */; };
+		DC9AC6EA2406CD90008FAFA6 /* PostCategoryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9AC6E92406CD90008FAFA6 /* PostCategoryCellViewModel.swift */; };
 		DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */; };
 		DCC49AC823E8632B00119BAA /* BoardFeatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC49AC623E8632B00119BAA /* BoardFeatureView.xib */; };
 		DCC49ACC23E864E500119BAA /* FeatureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49ACB23E864E500119BAA /* FeatureStore.swift */; };
@@ -217,6 +228,11 @@
 		DC19DBF023EC6DEB00571CC8 /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		DC19DBF223EC6E4600571CC8 /* PaddingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddingTextField.swift; sourceTree = "<group>"; };
 		DC19DBF523EC751700571CC8 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		DC1C6EC123FC3C6D00BA701D /* PostCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategoryTableViewCell.swift; sourceTree = "<group>"; };
+		DC1C6EC223FC3C6D00BA701D /* PostCategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCategoryTableViewCell.xib; sourceTree = "<group>"; };
+		DC1C6EC823FC3F6100BA701D /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		DC1C6ECA23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubPostCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		DC1C6ECB23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubPostCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		DC26812823F2FCB30045776E /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		DC26812923F2FCB30045776E /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		DC26812C23F2FCD50045776E /* ProfileCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellViewModel.swift; sourceTree = "<group>"; };
@@ -326,6 +342,12 @@
 		DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		DC8EAB8423E7232800E00A00 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		DC8EAB8623E7232F00E00A00 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		DC9AC6DE2406BF1C008FAFA6 /* DiscussionApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionApi.swift; sourceTree = "<group>"; };
+		DC9AC6E02406C1D1008FAFA6 /* DiscussionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionService.swift; sourceTree = "<group>"; };
+		DC9AC6E22406C4F7008FAFA6 /* Moya+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Moya+Extensions.swift"; sourceTree = "<group>"; };
+		DC9AC6E52406C5BA008FAFA6 /* DiscussionCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionCategoryModel.swift; sourceTree = "<group>"; };
+		DC9AC6E72406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCategorySheetViewModel.swift; sourceTree = "<group>"; };
+		DC9AC6E92406CD90008FAFA6 /* PostCategoryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategoryCellViewModel.swift; sourceTree = "<group>"; };
 		DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardFeatureView.swift; sourceTree = "<group>"; };
 		DCC49AC623E8632B00119BAA /* BoardFeatureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BoardFeatureView.xib; sourceTree = "<group>"; };
 		DCC49ACB23E864E500119BAA /* FeatureStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureStore.swift; sourceTree = "<group>"; };
@@ -459,6 +481,7 @@
 		DC19DBE923EC5F9100571CC8 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				DC9AC6E72406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift */,
 				DC19DBEC23EC601900571CC8 /* HomeViewModel.swift */,
 				DC19DBEA23EC5F9E00571CC8 /* PostTableViewModel.swift */,
 			);
@@ -471,6 +494,34 @@
 				DC19DBF523EC751700571CC8 /* SearchViewModel.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		DC1C6EBF23FC3C3000BA701D /* Dialog */ = {
+			isa = PBXGroup;
+			children = (
+				DC1C6EC523FC3F2A00BA701D /* SubPostCategoryCollectionViewCell */,
+				DC1C6EC023FC3C3800BA701D /* PostCategoryTableViewCell */,
+			);
+			path = Dialog;
+			sourceTree = "<group>";
+		};
+		DC1C6EC023FC3C3800BA701D /* PostCategoryTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC9AC6E92406CD90008FAFA6 /* PostCategoryCellViewModel.swift */,
+				DC1C6EC123FC3C6D00BA701D /* PostCategoryTableViewCell.swift */,
+				DC1C6EC223FC3C6D00BA701D /* PostCategoryTableViewCell.xib */,
+			);
+			path = PostCategoryTableViewCell;
+			sourceTree = "<group>";
+		};
+		DC1C6EC523FC3F2A00BA701D /* SubPostCategoryCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC1C6ECA23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift */,
+				DC1C6ECB23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib */,
+			);
+			path = SubPostCategoryCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		DC26812723F2FC6C0045776E /* ProfileTableViewCell */ = {
@@ -513,6 +564,7 @@
 			isa = PBXGroup;
 			children = (
 				DCD3987C232E235000C812EB /* BaseTableViewCell.swift */,
+				DC1C6EC823FC3F6100BA701D /* BaseCollectionViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -520,6 +572,7 @@
 		DC40D5DD23E3316B00B0DD96 /* Dialog */ = {
 			isa = PBXGroup;
 			children = (
+				DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */,
 				DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */,
 			);
 			path = Dialog;
@@ -587,6 +640,7 @@
 				DC40D5D523E32A6B00B0DD96 /* ImageTextModel.swift */,
 				DC40D5CF23E329E000B0DD96 /* LanguageModel.swift */,
 				DC6A790B23CA26BD001D1009 /* PaginationRequestModel.swift */,
+				DC9AC6E42406C5A2008FAFA6 /* Discussion */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -891,7 +945,6 @@
 		DC8EAB7C23E722DF00E00A00 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */,
 				DC8EAB8023E7231200E00A00 /* HomeViewController.swift */,
 				DC19DBE623EC5E7500571CC8 /* PostTableViewController.swift */,
 			);
@@ -921,6 +974,23 @@
 				DC05FDC423F1BE420093B47B /* Languages */,
 			);
 			path = More;
+			sourceTree = "<group>";
+		};
+		DC9AC6DD2406BEFB008FAFA6 /* Discussion */ = {
+			isa = PBXGroup;
+			children = (
+				DC9AC6E02406C1D1008FAFA6 /* DiscussionService.swift */,
+				DC9AC6DE2406BF1C008FAFA6 /* DiscussionApi.swift */,
+			);
+			path = Discussion;
+			sourceTree = "<group>";
+		};
+		DC9AC6E42406C5A2008FAFA6 /* Discussion */ = {
+			isa = PBXGroup;
+			children = (
+				DC9AC6E52406C5BA008FAFA6 /* DiscussionCategoryModel.swift */,
+			);
+			path = Discussion;
 			sourceTree = "<group>";
 		};
 		DCC49AC423E8632B00119BAA /* BoardFeatureView */ = {
@@ -1017,6 +1087,7 @@
 			isa = PBXGroup;
 			children = (
 				DCD3986A232E1DF700C812EB /* AppService.swift */,
+				DC9AC6DD2406BEFB008FAFA6 /* Discussion */,
 				DC6FCE6523F05D1700D72F6D /* Steem */,
 			);
 			path = Services;
@@ -1035,6 +1106,7 @@
 		DCD39871232E203000C812EB /* Rx+Extension */ = {
 			isa = PBXGroup;
 			children = (
+				DC9AC6E22406C4F7008FAFA6 /* Moya+Extensions.swift */,
 				DCD39872232E204000C812EB /* Rx+Extensions.swift */,
 				DC6A78FB23CA2117001D1009 /* RxSwift+Operator.swift */,
 			);
@@ -1076,6 +1148,7 @@
 			children = (
 				DC40D5D223E32A3100B0DD96 /* Base */,
 				DC40D5D123E32A2800B0DD96 /* Common */,
+				DC1C6EBF23FC3C3000BA701D /* Dialog */,
 				DC40D5C823E3298F00B0DD96 /* LanguageTableViewCell */,
 				DC05FDA523F1AB1E0093B47B /* More */,
 				DC42AF0123E9CF93008F8A0F /* PostTableViewCell */,
@@ -1257,7 +1330,9 @@
 				DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */,
 				DC26812B23F2FCB30045776E /* ProfileTableViewCell.xib in Resources */,
 				DC05FDB023F1AC4F0093B47B /* Settings.strings in Resources */,
+				DC1C6EC423FC3C6D00BA701D /* PostCategoryTableViewCell.xib in Resources */,
 				DC19DBF123EC6DEB00571CC8 /* Search.storyboard in Resources */,
+				DC1C6ECD23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib in Resources */,
 				DCC49AC823E8632B00119BAA /* BoardFeatureView.xib in Resources */,
 				DC6ED56523269B6600770B31 /* colors.txt in Resources */,
 				DCC49AD423E865D700119BAA /* ProfileView.xib in Resources */,
@@ -1421,6 +1496,7 @@
 				DCD39873232E204000C812EB /* Rx+Extensions.swift in Sources */,
 				DC26813423F45DEF0045776E /* AccountViewController.swift in Sources */,
 				DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */,
+				DC1C6EC923FC3F6100BA701D /* BaseCollectionViewCell.swift in Sources */,
 				DCD39887232E251C00C812EB /* StyleProtocol.swift in Sources */,
 				DC40D5D023E329E000B0DD96 /* LanguageModel.swift in Sources */,
 				DC6ED5782326A40200770B31 /* AppCoordinator.swift in Sources */,
@@ -1430,9 +1506,11 @@
 				DC40D5D823E32AB800B0DD96 /* Utilities.swift in Sources */,
 				DC19DBEF23EC60C900571CC8 /* PostCellViewModel.swift in Sources */,
 				DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */,
+				DC1C6EC323FC3C6D00BA701D /* PostCategoryTableViewCell.swift in Sources */,
 				DCD39862232E114300C812EB /* UIViewController+Properties.swift in Sources */,
 				DC42AF0723E9D39B008F8A0F /* CardView.swift in Sources */,
 				DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */,
+				DC9AC6E12406C1D1008FAFA6 /* DiscussionService.swift in Sources */,
 				DC7C09C22326AFF60006D0BF /* FireBaseHandler.swift in Sources */,
 				DC6A790323CA242B001D1009 /* EmptyOrErrorViewModel.swift in Sources */,
 				DCD39889232E254100C812EB /* UIColor+Converter.swift in Sources */,
@@ -1449,6 +1527,7 @@
 				DC8EAB7B23E722BC00E00A00 /* MainTabBarViewController.swift in Sources */,
 				DC05FDAB23F1AB620093B47B /* SettingCellViewModel.swift in Sources */,
 				DC05FDC323F1BDF10093B47B /* LanguagesViewController.swift in Sources */,
+				DC9AC6E82406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift in Sources */,
 				DC40D5D623E32A6B00B0DD96 /* ImageTextModel.swift in Sources */,
 				DCD39866232E1CC600C812EB /* BaseViewModel.swift in Sources */,
 				DCD3988D232E259700C812EB /* KeyboardController+Actions.swift in Sources */,
@@ -1459,14 +1538,17 @@
 				DC6FCE7723F05D1700D72F6D /* Tag.swift in Sources */,
 				DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */,
 				DCC49AD523E865D700119BAA /* ProfileViewModel.swift in Sources */,
+				DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */,
 				DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */,
 				DC6ED57C2326A43700770B31 /* Store.swift in Sources */,
 				DC6A78F323CA1FEB001D1009 /* CollectionSingleSecitionProviderModel.swift in Sources */,
+				DC9AC6E32406C4F7008FAFA6 /* Moya+Extensions.swift in Sources */,
 				DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */,
 				DC26812A23F2FCB30045776E /* ProfileTableViewCell.swift in Sources */,
 				DCD39883232E24BF00C812EB /* Realm+Cnfigure.swift in Sources */,
 				DCD3988B232E255E00C812EB /* UIImage+Extensions.swift in Sources */,
 				DCF8738223F6FA3B007A8724 /* BasePostViewModel.swift in Sources */,
+				DC9AC6E62406C5BA008FAFA6 /* DiscussionCategoryModel.swift in Sources */,
 				DC6A78FA23CA20B3001D1009 /* FieldViewModelProtocol.swift in Sources */,
 				DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */,
 				DC42AF0423E9CFB5008F8A0F /* PostTableViewCell.swift in Sources */,
@@ -1480,6 +1562,7 @@
 				DCD3987D232E235000C812EB /* BaseTableViewCell.swift in Sources */,
 				DC6A790C23CA26BD001D1009 /* PaginationRequestModel.swift in Sources */,
 				DC6FCE7323F05D1700D72F6D /* HttpClient.swift in Sources */,
+				DC9AC6DF2406BF1C008FAFA6 /* DiscussionApi.swift in Sources */,
 				DC40D5C723E31FDF00B0DD96 /* GradientView.swift in Sources */,
 				DC6ED58F2326A7B000770B31 /* AppDelegateHelper.swift in Sources */,
 				DC40D5E323E3360D00B0DD96 /* ChooseLanguageViewModel.swift in Sources */,
@@ -1490,6 +1573,7 @@
 				DC6ED56F2326A30000770B31 /* String+Extensions.swift in Sources */,
 				DC05FDAC23F1AB620093B47B /* SettingTableViewCell.swift in Sources */,
 				DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */,
+				DC9AC6EA2406CD90008FAFA6 /* PostCategoryCellViewModel.swift in Sources */,
 				DC6ED58A2326A53B00770B31 /* KeyChainStore.swift in Sources */,
 				DC6ED5862326A4D000770B31 /* AppNotification.swift in Sources */,
 				DC88A73C23DF4A8900EB7F79 /* SelectLanguageViewModel.swift in Sources */,

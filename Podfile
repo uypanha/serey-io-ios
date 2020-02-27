@@ -57,6 +57,7 @@ def frameworks_pods
   pod 'MaterialComponents/Tabs'
   pod 'MaterialComponents/PageControl'
   pod 'MaterialComponents/BottomSheet'
+  pod 'MaterialComponents/Chips'
   
 end
 

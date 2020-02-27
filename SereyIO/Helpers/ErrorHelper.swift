@@ -109,9 +109,9 @@ class ErrorHelper {
     fileprivate static func prepareAppError(_ error: AppError) -> ErrorInfo {
         switch error {
         case .appApiError(let error):
-            switch AppApiErrorCode(rawValue: error.error) {
+            switch AppApiErrorCode(rawValue: error.0.error) {
             case .signinFailed?:
-                return PredefinedError.unauthenticatedError.prepareError(errorMessage: error.errorDescription)
+                return PredefinedError.unauthenticatedError.prepareError(errorMessage: error.0.errorDescription)
             default:
                 log.error(error)
                 return defaultError()

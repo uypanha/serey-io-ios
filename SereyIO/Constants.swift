@@ -11,7 +11,11 @@ import UIKit
 struct Constants {
     
     static var apiEndPoint: URL {
-        return URL(string: ConfigSetting.apiURL.value())!
+        return URL(string: ConfigSetting.urlProcol.value() + ConfigSetting.apiURL.value())!
+    }
+    
+    static var chainURL: URL {
+        return URL(string: ConfigSetting.urlProcol.value() + ConfigSetting.chainURL.value())!
     }
     
     static let shouldClearOutBadgeCountWhenFiredUp: Bool = true
@@ -54,11 +58,17 @@ struct Constants {
 fileprivate enum ConfigSetting {
     
     case apiURL
+    case chainURL
+    case urlProcol
     
     private var key: String {
         switch self {
         case .apiURL:
             return "API_URL"
+        case .chainURL:
+            return "CHAIN_URL"
+        case .urlProcol:
+            return "URL_PROTOCOL"
         }
     }
     
