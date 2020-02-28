@@ -215,6 +215,26 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <inset key="separatorInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+            <connections>
+                <outlet property="authorNameLabel" destination="awb-D6-bLG" id="hiq-vw-uD9"/>
+                <outlet property="commentContainerView" destination="PQs-vn-fg8" id="1J0-x8-W8c"/>
+                <outlet property="commentCountLabel" destination="Lrz-0j-iGV" id="fI9-bV-wew"/>
+                <outlet property="commentImageView" destination="5PJ-zO-X2Z" id="MPC-Hs-7T6"/>
+                <outlet property="downVoteContainerView" destination="fJk-3f-8mp" id="1M2-vP-I9E"/>
+                <outlet property="downVoteCountLabel" destination="vKS-vq-OAn" id="Beb-xa-fVF"/>
+                <outlet property="downVoteImageView" destination="Y4V-3w-kLX" id="xeL-up-jpy"/>
+                <outlet property="profileView" destination="b3R-JE-DPu" id="u6A-6R-rmV"/>
+                <outlet property="publishDateLabel" destination="oh8-mr-3FF" id="NkF-6D-SYs"/>
+                <outlet property="sereySymbolImageView" destination="Ylc-1A-jOP" id="yEN-IG-Ap9"/>
+                <outlet property="sereyValueContainerView" destination="RMt-vQ-kDu" id="2JH-tG-LaE"/>
+                <outlet property="sereyValueLabel" destination="Kos-6H-Sc5" id="cfS-mW-Ov5"/>
+                <outlet property="tagLabel" destination="4NY-gw-vpz" id="w4C-vP-iuy"/>
+                <outlet property="thumbnailImageView" destination="aaW-5B-3x6" id="s5m-Sm-ZtM"/>
+                <outlet property="titleLabel" destination="jL8-zB-Ee1" id="jip-rO-IU1"/>
+                <outlet property="upVoteContainerView" destination="PeF-OS-mFs" id="l1y-ix-eFt"/>
+                <outlet property="upVoteCountLabel" destination="hCi-7S-jrc" id="9xY-4X-cpS"/>
+                <outlet property="upVoteImageView" destination="jzL-lf-BtG" id="k3k-67-lXI"/>
+            </connections>
             <point key="canvasLocation" x="-15.942028985507248" y="167.74553571428569"/>
         </tableViewCell>
     </objects>

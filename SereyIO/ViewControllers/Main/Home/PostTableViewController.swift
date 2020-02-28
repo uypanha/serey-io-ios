@@ -48,7 +48,6 @@ fileprivate extension PostTableViewController {
     func prepareTableView() {
         self.tableView.backgroundColor = ColorName.postBackground.color
         self.tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = .none
         self.tableView.register(PostTableViewCell.self)
     }
     
@@ -57,7 +56,7 @@ fileprivate extension PostTableViewController {
             switch item {
             case is PostCellViewModel:
                 let cell: PostTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-//                cell.cellModel = item as? PostCellViewModel
+                cell.cellModel = item as? PostCellViewModel
                 return cell
             default:
                 return UITableViewCell()

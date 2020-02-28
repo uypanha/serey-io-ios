@@ -23,8 +23,9 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Dra-n3-f3R">
                                 <rect key="frame" x="16" y="4" width="75" height="22"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xlS-or-nXs">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkedIcon" translatesAutoresizingMaskIntoConstraints="NO" id="xlS-or-nXs">
                                         <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="22" id="BYy-SU-QBV"/>
                                             <constraint firstAttribute="width" secondItem="xlS-or-nXs" secondAttribute="height" multiplier="1:1" id="O3W-fx-tvX"/>
@@ -65,4 +66,7 @@
             <point key="canvasLocation" x="178.98550724637681" y="147.99107142857142"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="checkedIcon" width="27" height="27"/>
+    </resources>
 </document>

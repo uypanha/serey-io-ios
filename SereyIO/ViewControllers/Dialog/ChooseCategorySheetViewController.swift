@@ -16,17 +16,18 @@ class ChooseCategorySheetViewController: BaseViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var titleContainerView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var allButton: UIButton!
     
     var backgroundGesture: UITapGestureRecognizer? {
         didSet {
-            guard let guesture = self.backgroundGesture else { return }
-            
-            guesture.cancelsTouchesInView = false
-            view.addGestureRecognizer(guesture)
-            guesture.rx.event.asObservable()
-                .subscribe(onNext: { [weak self] _ in
-                    self?.dismiss(animated: true, completion: nil)
-                }).disposed(by: self.disposeBag)
+//            guard let guesture = self.backgroundGesture else { return }
+//
+//            guesture.cancelsTouchesInView = false
+//            view.addGestureRecognizer(guesture)
+//            guesture.rx.event.asObservable()
+//                .subscribe(onNext: { [weak self] _ in
+//                    self?.dismiss(animated: true, completion: nil)
+//                }).disposed(by: self.disposeBag)
         }
     }
     
@@ -70,6 +71,11 @@ extension ChooseCategorySheetViewController {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
+        
+        self.allButton.rx.tap.asObservable()
+            .map { ChooseCategorySheetViewModel.Action.allCategoryPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpContentChangedObservers() {

@@ -58,9 +58,9 @@ extension PostCategoryTableViewCell {
                 }
         } ~ self.disposeBag
         
-//        self.collectionView.rx.itemSelected.asObservable()
-//            .map { StoryCategoryCellViewModel.Action.itemSelected($0) }
-//            ~> cellModel.didActionSubject
-//            ~ self.disposeBag
+        self.collectionView.rx.itemSelected.asObservable()
+            .map { PostCategoryCellViewModel.Action.itemSelected($0) }
+            ~> cellModel.didActionSubject
+            ~ self.disposeBag
     }
 }

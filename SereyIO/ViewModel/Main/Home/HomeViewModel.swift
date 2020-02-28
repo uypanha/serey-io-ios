@@ -27,6 +27,7 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
     // output:
     lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
     
+    let selectedCategory: BehaviorRelay<DiscussionCategoryModel?>
     let postTabTitles: BehaviorRelay<[String]>
     let postViewModels: BehaviorRelay<[PostTableViewModel]>
     
@@ -36,6 +37,7 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
     lazy var isDownloading = BehaviorRelay<Bool>(value: false)
     
     override init() {
+        self.selectedCategory = BehaviorRelay(value: nil)
         self.postTabTitles = BehaviorRelay(value: [])
         self.postViewModels = BehaviorRelay(value: [])
         self.categories = BehaviorRelay(value: [])
@@ -76,7 +78,11 @@ extension HomeViewModel {
 fileprivate extension HomeViewModel {
     
     func handleFilterPressed() {
-        let viewModel = ChooseCategorySheetViewModel(self.categories.value)
+        let viewModel = ChooseCategorySheetViewModel(self.categories.value, self.selectedCategory.value)
+        viewModel.categoryDidSelected.asObservable()
+            .subscribe(onNext: { [weak self] selectedCategory in
+                self?.selectedCategory.accept(selectedCategory)
+            }) ~ viewModel.disposeBag
         self.shouldPresent(.choosePostCategoryController(viewModel))
     }
 }
@@ -85,7 +91,18 @@ fileprivate extension HomeViewModel {
 extension HomeViewModel {
     
     func setUpRxObservers() {
+        setUpContentChangedObservers()
         setUpActionObservers()
+    }
+    
+    func setUpContentChangedObservers() {
+        self.selectedCategory.asObservable()
+            .skip(1)
+            .subscribe(onNext: { [weak self] selectedCategory in
+                self?.postViewModels.value.forEach({ postTableViewModel in
+                    postTableViewModel.setCategory(selectedCategory)
+                })
+            }) ~ self.disposeBag
     }
     
     func setUpActionObservers() {

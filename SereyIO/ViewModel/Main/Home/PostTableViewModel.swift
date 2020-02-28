@@ -13,6 +13,4 @@ import RxBinding
 import RxDataSources
 
 class PostTableViewModel: BasePostViewModel {
-    
-    
 }

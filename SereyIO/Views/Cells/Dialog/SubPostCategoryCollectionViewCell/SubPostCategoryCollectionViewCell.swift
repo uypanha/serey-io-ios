@@ -30,6 +30,11 @@ class SubPostCategoryCollectionViewCell: BaseCollectionViewCell {
                 .map { !$0 }
                 ~> self.checkedView.rx.isHidden
                 ~ self.disposeBag
+            
+            cellModel.isSelected.asObservable()
+                .map { $0 ? UIColor.lightGray : UIColor.lightGray.withAlphaComponent(0.2) }
+                ~> self.chipView.rx.backgroundColor
+                ~ self.disposeBag
         }
     }
 

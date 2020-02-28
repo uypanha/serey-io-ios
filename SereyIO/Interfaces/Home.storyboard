@@ -16,11 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Urw-qo-YAF" customClass="MDCTabBar">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Urw-qo-YAF" customClass="MDCTabBar">
                                 <rect key="frame" x="0.0" y="44" width="414" height="48"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAr-6Z-A3K">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xAr-6Z-A3K">
                                 <rect key="frame" x="0.0" y="92" width="414" height="770"/>
                             </scrollView>
                         </subviews>
@@ -111,6 +111,7 @@
                         <viewLayoutGuide key="safeArea" id="eZI-i8-io8"/>
                     </view>
                     <connections>
+                        <outlet property="allButton" destination="jFc-fc-Q0M" id="jPx-8A-0Dl"/>
                         <outlet property="containerView" destination="1hU-zK-qfo" id="97b-Do-YWP"/>
                         <outlet property="tableView" destination="VPc-OT-upn" id="dW0-u5-1Hl"/>
                         <outlet property="titleContainerView" destination="1fP-Es-oH8" id="2lA-rM-01i"/>

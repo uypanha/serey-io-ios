@@ -16,6 +16,8 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     
     let postType: BehaviorRelay<DiscussionType>
     let discussions: BehaviorRelay<[DiscussionModel]>
+    let selectedCategory: BehaviorRelay<DiscussionCategoryModel?>
+    
     let cells: BehaviorRelay<[SectionItem]>
     let emptyOrError: BehaviorSubject<EmptyOrErrorViewModel?>
     
@@ -30,6 +32,7 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
         self.cells = BehaviorRelay(value: [])
         self.emptyOrError = BehaviorSubject(value: nil)
         self.discussions = BehaviorRelay(value: [])
+        self.selectedCategory = BehaviorRelay(value: nil)
         self.postType = BehaviorRelay(value: type)
         self.discussionService = DiscussionService()
         self.canDownloadMorePages = BehaviorRelay(value: true)
@@ -64,7 +67,7 @@ extension BasePostViewModel {
                 self?.isDownloading.accept(false)
                 let errorInfo = ErrorHelper.prepareError(error: error)
                 self?.shouldPresentError(errorInfo)
-            }) ~ self.disposeBag
+            }) ~ self.downloadDisposeBag
     }
 }
 
@@ -92,8 +95,12 @@ extension BasePostViewModel {
     }
     
     fileprivate func prepareCells(_ discussions: [DiscussionModel]) -> [SectionItem] {
-        let cells = discussions.map { _ in PostCellViewModel() }
+        let cells = discussions.map { PostCellViewModel($0) }
         return [SectionItem(items: cells)]
+    }
+    
+    func setCategory(_ category: DiscussionCategoryModel?) {
+        self.selectedCategory.accept(category)
     }
 }
 
@@ -115,6 +122,15 @@ fileprivate extension BasePostViewModel {
                 if cells.isEmpty {
                     self.emptyOrError.onNext(self.prepareEmptyViewModel())
                 }
+            }) ~ self.disposeBag
+        
+        self.selectedCategory.asObservable()
+            .skip(1)
+            .subscribe(onNext: { [weak self] selectedCategory in
+                self?.reset()
+                self?.pageModel.tag = selectedCategory?.name
+                self?.discussions.accept([])
+                self?.downloadData()
             }) ~ self.disposeBag
     }
 }

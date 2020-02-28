@@ -11,14 +11,27 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class ChooseCategorySheetViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel {
+class ChooseCategorySheetViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel, ShouldReactToAction {
+    
+    enum Action {
+        case allCategoryPressed
+    }
+    
+    // input:
+    lazy var didActionSubject = PublishSubject<Action>()
     
     let categories: BehaviorRelay<[DiscussionCategoryModel]>
-    let cells: BehaviorRelay<[CellViewModel]>
+    let selectedCategory: BehaviorRelay<DiscussionCategoryModel?>
     
-    init(_ categories: [DiscussionCategoryModel]) {
+    let cells: BehaviorRelay<[CellViewModel]>
+    let categoryDidSelected: PublishSubject<DiscussionCategoryModel?>
+    
+    init(_ categories: [DiscussionCategoryModel], _ selectedCategory: DiscussionCategoryModel?) {
         self.categories = BehaviorRelay(value: categories)
+        self.selectedCategory = BehaviorRelay(value: selectedCategory)
+        
         self.cells = BehaviorRelay(value: [])
+        self.categoryDidSelected = PublishSubject()
         super.init()
         
         setUpRxObservers()
@@ -29,7 +42,7 @@ class ChooseCategorySheetViewModel: BaseCellViewModel, CollectionSingleSecitionP
 extension ChooseCategorySheetViewModel {
     
     private func prepareCells(_ categories: [DiscussionCategoryModel]) -> [CellViewModel] {
-        return categories.map { PostCategoryCellViewModel($0, BehaviorRelay(value: nil)) }
+        return categories.map { PostCategoryCellViewModel($0, self.selectedCategory) }
     }
 }
 
@@ -38,6 +51,7 @@ extension ChooseCategorySheetViewModel {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
+        setUpActionObservers()
     }
     
     func setUpContentChangedObservers() {
@@ -45,5 +59,20 @@ extension ChooseCategorySheetViewModel {
             .map { self.prepareCells($0) }
             ~> self.cells
             ~ self.disposeBag
+        
+        self.selectedCategory.skip(1)
+            .subscribe(onNext: { [weak self] selectedCategory in
+                self?.categoryDidSelected.onNext(selectedCategory)
+            }) ~ self.disposeBag
+    }
+    
+    func setUpActionObservers() {
+        self.didActionSubject.asObservable()
+            .subscribe(onNext: { [weak self] action in
+                switch action {
+                case .allCategoryPressed:
+                    self?.selectedCategory.accept(nil)
+                }
+            }) ~ self.disposeBag
     }
 }

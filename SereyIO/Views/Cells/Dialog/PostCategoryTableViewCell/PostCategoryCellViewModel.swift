@@ -11,7 +11,14 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class PostCategoryCellViewModel: CellViewModel, CollectionSingleSecitionProviderModel {
+class PostCategoryCellViewModel: CellViewModel, CollectionSingleSecitionProviderModel, ShouldReactToAction {
+    
+    enum Action {
+        case itemSelected(IndexPath)
+    }
+    
+    // input:
+    lazy var didActionSubject = PublishSubject<Action>()
     
     let category: BehaviorRelay<DiscussionCategoryModel>
     let selectedCategory: BehaviorRelay<DiscussionCategoryModel?>
@@ -26,6 +33,7 @@ class PostCategoryCellViewModel: CellViewModel, CollectionSingleSecitionProvider
         self.cells = BehaviorRelay(value: [])
         super.init()
         
+        setUpRxObservers()
         self.notifyDataChanged(category)
     }
     
@@ -49,6 +57,35 @@ extension PostCategoryCellViewModel {
             SubCategoryCellViewModel($0, title: $0.name, isSelected: selectedCategory?.name == $0.name)
         })
         return cellModels
+    }
+}
+
+// MARK: - Action Handlers
+fileprivate extension PostCategoryCellViewModel {
+    
+    func handleItemSelected(_ indexPath: IndexPath) {
+        if let item = self.item(at: indexPath) as? SubCategoryCellViewModel {
+            self.selectedCategory.accept(item.category.value)
+        }
+    }
+}
+
+
+// MARK: - SetUp RxObservers
+extension PostCategoryCellViewModel {
+    
+    func setUpRxObservers() {
+        setUpActionObservers()
+    }
+    
+    func setUpActionObservers() {
+        self.didActionSubject.asObservable()
+            .subscribe(onNext: { [weak self] action in
+                switch action {
+                case .itemSelected(let indexPath):
+                    self?.handleItemSelected(indexPath)
+                }
+            }) ~ self.disposeBag
     }
 }
 
