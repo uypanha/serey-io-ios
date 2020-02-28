@@ -38,6 +38,6 @@ class ViewUtiliesHelper {
     
     // MAKR: - Default image placeholder
     public static func prepareDefualtPlaceholder() -> UIImage {
-        return UIColor.lightGray.withAlphaComponent(0.2).toImage() ?? UIImage()
+        return ColorName.shimmering.color.withAlphaComponent(0.5).toImage() ?? UIImage()
     }
 }

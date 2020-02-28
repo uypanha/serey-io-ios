@@ -81,7 +81,9 @@ fileprivate extension HomeViewModel {
         let viewModel = ChooseCategorySheetViewModel(self.categories.value, self.selectedCategory.value)
         viewModel.categoryDidSelected.asObservable()
             .subscribe(onNext: { [weak self] selectedCategory in
-                self?.selectedCategory.accept(selectedCategory)
+                if selectedCategory?.name != self?.selectedCategory.value?.name {
+                    self?.selectedCategory.accept(selectedCategory)
+                }
             }) ~ viewModel.disposeBag
         self.shouldPresent(.choosePostCategoryController(viewModel))
     }

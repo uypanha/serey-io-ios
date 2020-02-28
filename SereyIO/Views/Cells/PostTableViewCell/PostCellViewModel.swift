@@ -11,9 +11,11 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class PostCellViewModel: CellViewModel {
+class PostCellViewModel: CellViewModel, ShimmeringProtocol {
     
     let discussion: BehaviorRelay<DiscussionModel?>
+    let isShimmering: BehaviorRelay<Bool>
+    
     let authorName: BehaviorSubject<String?>
     let publishedAt: BehaviorSubject<String?>
     let thumbnailURL: BehaviorSubject<URL?>
@@ -35,13 +37,16 @@ class PostCellViewModel: CellViewModel {
         self.upVoteCount = BehaviorSubject(value: nil)
         self.downVoteCount = BehaviorSubject(value: nil)
         self.commentCount = BehaviorSubject(value: nil)
+        self.isShimmering = BehaviorRelay(value: false)
         super.init()
         
         setUpRxObservers()
     }
     
-    convenience init(isShimmer: Bool) {
+    required convenience init(_ isShimmering: Bool) {
         self.init(nil)
+        
+        self.isShimmering.accept(isShimmering)
     }
     
     private func notifyDataChanged(_ data: DiscussionModel?) {

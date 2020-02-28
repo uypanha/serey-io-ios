@@ -71,6 +71,7 @@ extension ChooseCategorySheetViewController {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
+        setUpShouldPresentObservers()
         
         self.allButton.rx.tap.asObservable()
             .map { ChooseCategorySheetViewModel.Action.allCategoryPressed }
@@ -90,5 +91,15 @@ extension ChooseCategorySheetViewController {
                     return UITableViewCell()
                 }
             } ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentObservers() {
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { [weak self] viewToPresent in
+                switch viewToPresent {
+                case .dismiss:
+                    self?.dismiss(animated: true, completion: nil)
+                }
+            }) ~ self.disposeBag
     }
 }

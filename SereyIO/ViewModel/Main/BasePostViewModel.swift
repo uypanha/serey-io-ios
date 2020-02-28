@@ -86,7 +86,7 @@ extension BasePostViewModel {
             self.pageModel.start_author = data.last?.authorName
             self.pageModel.start_permlink = data.last?.permlink
         }
-        if pageModel.limit > data.count {
+        if data.isEmpty || pageModel.limit > data.count {
             canDownloadMorePages.accept(false)
         }
         
@@ -95,7 +95,11 @@ extension BasePostViewModel {
     }
     
     fileprivate func prepareCells(_ discussions: [DiscussionModel]) -> [SectionItem] {
-        let cells = discussions.map { PostCellViewModel($0) }
+        var cells: [CellViewModel] = discussions.map { PostCellViewModel($0) }
+        if self.canDownloadMore() {
+            let loadingCells = cells.isEmpty ? (0...5) : (0...0)
+            cells.append(contentsOf: loadingCells.map { _ in PostCellViewModel(true) })
+        }
         return [SectionItem(items: cells)]
     }
     
@@ -117,9 +121,9 @@ fileprivate extension BasePostViewModel {
             ~> self.cells
             ~ self.disposeBag
         
-        self.cells.asObservable()
-            .subscribe(onNext: { [unowned self] cells in
-                if cells.isEmpty {
+        self.discussions.asObservable()
+            .subscribe(onNext: { [unowned self] discussions in
+                if discussions.isEmpty && !self.isDownloading.value && !self.canDownloadMore() {
                     self.emptyOrError.onNext(self.prepareEmptyViewModel())
                 }
             }) ~ self.disposeBag
@@ -127,10 +131,9 @@ fileprivate extension BasePostViewModel {
         self.selectedCategory.asObservable()
             .skip(1)
             .subscribe(onNext: { [weak self] selectedCategory in
-                self?.reset()
                 self?.pageModel.tag = selectedCategory?.name
+                self?.reset()
                 self?.discussions.accept([])
-                self?.downloadData()
             }) ~ self.disposeBag
     }
 }

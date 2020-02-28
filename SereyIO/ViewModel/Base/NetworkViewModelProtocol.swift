@@ -36,7 +36,7 @@ protocol InfiniteNetworkProtocol: DownloadStateNetworkProtocol where P: Paginati
     
     func canDownloadMore() -> Bool
     
-    mutating func reset()
+    mutating func reset(_ handler: @escaping () -> Void)
 }
 
 extension InfiniteNetworkProtocol {
@@ -45,12 +45,13 @@ extension InfiniteNetworkProtocol {
         return self.canDownloadMorePages.value
     }
     
-    mutating func reset() {
+    mutating func reset(_ handler: @escaping () -> Void = {}) {
         self.canDownloadMorePages.accept(true)
         self.pageModel.reset()
         self.isRefresh = true
         self.isDownloading.accept(false)
         self.downloadDisposeBag = DisposeBag()
+        handler()
         self.downloadData()
     }
 }

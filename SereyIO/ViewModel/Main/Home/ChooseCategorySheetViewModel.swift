@@ -11,14 +11,21 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class ChooseCategorySheetViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel, ShouldReactToAction {
+class ChooseCategorySheetViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel, ShouldReactToAction, ShouldPresent {
     
     enum Action {
         case allCategoryPressed
     }
     
+    enum ViewToPresent {
+        case dismiss
+    }
+    
     // input:
     lazy var didActionSubject = PublishSubject<Action>()
+    
+    // output:
+    lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
     
     let categories: BehaviorRelay<[DiscussionCategoryModel]>
     let selectedCategory: BehaviorRelay<DiscussionCategoryModel?>
@@ -63,6 +70,7 @@ extension ChooseCategorySheetViewModel {
         self.selectedCategory.skip(1)
             .subscribe(onNext: { [weak self] selectedCategory in
                 self?.categoryDidSelected.onNext(selectedCategory)
+                self?.shouldPresent(.dismiss)
             }) ~ self.disposeBag
     }
     

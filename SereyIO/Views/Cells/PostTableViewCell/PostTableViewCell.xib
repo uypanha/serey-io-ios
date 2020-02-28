@@ -17,6 +17,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="432" height="391"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oVx-EY-lCw" customClass="FBShimmeringView">
+                        <rect key="frame" x="0.0" y="0.0" width="432" height="391"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sWv-07-EAJ">
                         <rect key="frame" x="0.0" y="0.0" width="432" height="391"/>
                         <subviews>
@@ -31,17 +35,25 @@
                                             <constraint firstAttribute="width" constant="44" id="iyu-KY-pXQ"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MO8-0t-yC4">
-                                        <rect key="frame" x="56" y="6" width="344" height="34"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="MO8-0t-yC4">
+                                        <rect key="frame" x="56" y="3.5" width="344" height="39"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Cena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awb-D6-bLG">
-                                                <rect key="frame" x="0.0" y="0.0" width="344" height="19.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="7fy-wM-6Bi"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="XEN-CE-z6C"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 hours ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oh8-mr-3FF">
-                                                <rect key="frame" x="0.0" y="19.5" width="344" height="14.5"/>
+                                                <rect key="frame" x="0.0" y="24" width="70" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="15" id="3qm-Vy-WfU"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="JYZ-fR-q5Y"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -100,6 +112,9 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jL8-zB-Ee1">
                                 <rect key="frame" x="16" y="285.5" width="400" height="57.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Q7x-pI-8E8"/>
+                                </constraints>
                                 <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                 <nil key="textColor"/>
@@ -207,9 +222,13 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="sWv-07-EAJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="2NM-Ux-Fbr"/>
+                    <constraint firstItem="oVx-EY-lCw" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="KQG-7G-SyS"/>
+                    <constraint firstAttribute="bottom" secondItem="oVx-EY-lCw" secondAttribute="bottom" id="Xk0-c1-IP7"/>
+                    <constraint firstAttribute="trailing" secondItem="oVx-EY-lCw" secondAttribute="trailing" id="bUp-jS-Dj0"/>
                     <constraint firstItem="sWv-07-EAJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="eTc-I1-d64"/>
                     <constraint firstAttribute="trailing" secondItem="sWv-07-EAJ" secondAttribute="trailing" id="qt5-s3-Idf"/>
                     <constraint firstAttribute="bottom" secondItem="sWv-07-EAJ" secondAttribute="bottom" id="roC-d3-OTi"/>
+                    <constraint firstItem="oVx-EY-lCw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="vlF-KB-qVv"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -223,17 +242,20 @@
                 <outlet property="downVoteContainerView" destination="fJk-3f-8mp" id="1M2-vP-I9E"/>
                 <outlet property="downVoteCountLabel" destination="vKS-vq-OAn" id="Beb-xa-fVF"/>
                 <outlet property="downVoteImageView" destination="Y4V-3w-kLX" id="xeL-up-jpy"/>
+                <outlet property="mainView" destination="sWv-07-EAJ" id="lWS-be-8pu"/>
                 <outlet property="profileView" destination="b3R-JE-DPu" id="u6A-6R-rmV"/>
                 <outlet property="publishDateLabel" destination="oh8-mr-3FF" id="NkF-6D-SYs"/>
                 <outlet property="sereySymbolImageView" destination="Ylc-1A-jOP" id="yEN-IG-Ap9"/>
                 <outlet property="sereyValueContainerView" destination="RMt-vQ-kDu" id="2JH-tG-LaE"/>
                 <outlet property="sereyValueLabel" destination="Kos-6H-Sc5" id="cfS-mW-Ov5"/>
+                <outlet property="tagContainerView" destination="LIx-Ct-u76" id="N7x-Fj-bvJ"/>
                 <outlet property="tagLabel" destination="4NY-gw-vpz" id="w4C-vP-iuy"/>
                 <outlet property="thumbnailImageView" destination="aaW-5B-3x6" id="s5m-Sm-ZtM"/>
                 <outlet property="titleLabel" destination="jL8-zB-Ee1" id="jip-rO-IU1"/>
                 <outlet property="upVoteContainerView" destination="PeF-OS-mFs" id="l1y-ix-eFt"/>
                 <outlet property="upVoteCountLabel" destination="hCi-7S-jrc" id="9xY-4X-cpS"/>
                 <outlet property="upVoteImageView" destination="jzL-lf-BtG" id="k3k-67-lXI"/>
+                <outlet property="vwShimmer" destination="oVx-EY-lCw" id="h6D-W9-SkI"/>
             </connections>
             <point key="canvasLocation" x="-15.942028985507248" y="167.74553571428569"/>
         </tableViewCell>
