@@ -14,13 +14,15 @@ import RxDataSources
 class CellViewModel: BaseViewModel, IdentifiableType {
     
     let selectionType: BehaviorSubject<UITableViewCell.SelectionStyle>
+    let indicatorAccessory: BehaviorSubject<Bool>
     
     var identity: String {
         return self.identityData()
     }
     
-    init(_ selectType: UITableViewCell.SelectionStyle = .default) {
+    init(_ indicatorAccessory: Bool = false, _ selectType: UITableViewCell.SelectionStyle = .default) {
         self.selectionType = BehaviorSubject(value: selectType)
+        self.indicatorAccessory = BehaviorSubject(value: indicatorAccessory)
         super.init()
     }
     

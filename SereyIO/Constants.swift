@@ -50,19 +50,28 @@ public struct Constants {
     
     static var termAndConditionsUrl: URL? {
         get {
-            return URL(string: "https://www.example.com/Privacy")
+            return URL(string: "\(ConfigSetting.urlProcol.value() + ConfigSetting.baseDomain.value())/term-service")
+        }
+    }
+    
+    static var privacyAndPolicyUrl: URL? {
+        get {
+            return URL(string: "\(ConfigSetting.urlProcol.value() + ConfigSetting.baseDomain.value())/privacy-policy")
         }
     }
 }
 
 fileprivate enum ConfigSetting {
     
+    case baseDomain
     case apiURL
     case chainURL
     case urlProcol
     
     private var key: String {
         switch self {
+        case .baseDomain:
+            return "BASE_DOMAIN"
         case .apiURL:
             return "API_URL"
         case .chainURL:

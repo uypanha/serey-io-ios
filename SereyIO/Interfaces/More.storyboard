@@ -11,7 +11,7 @@
         <!--More View Controller-->
         <scene sceneID="oar-Bl-rVZ">
             <objects>
-                <viewController storyboardIdentifier="MoreViewController" id="DaF-bB-yG1" customClass="MoreViewController" customModule="iOSTemplate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MoreViewController" id="DaF-bB-yG1" customClass="MoreViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Byb-Ml-Zfp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -22,7 +22,7 @@
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WBb-za-1Gh">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="cZb-yV-CLp" customClass="ContentSizedTableView" customModule="iOSTemplate" customModuleProvider="target">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="cZb-yV-CLp" customClass="ContentSizedTableView" customModule="SereyIO" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             </tableView>
@@ -97,7 +97,9 @@
                         <viewLayoutGuide key="safeArea" id="V7r-Kq-uBK"/>
                     </view>
                     <connections>
+                        <outlet property="privacyPolicyButton" destination="chz-tR-W4U" id="eKP-QM-Zbf"/>
                         <outlet property="tableView" destination="cZb-yV-CLp" id="Ve5-wz-m8k"/>
+                        <outlet property="termServiceButton" destination="HWH-2C-Zgc" id="Cyv-Zt-ng3"/>
                         <outlet property="termsContainerView" destination="Q67-7P-mGD" id="u39-09-1kg"/>
                     </connections>
                 </viewController>

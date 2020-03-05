@@ -21,11 +21,12 @@ class ProfileView: NibView {
     
     var viewModel: ProfileViewModel? {
         didSet {
+            self.profileImageView.image = nil
             guard let viewModel = self.viewModel else { return }
             
             viewModel.imageURL.asObservable()
                 .map { $0 }
-                .bind(to: self.profileImageView.kf.rx.image(placeholder: ViewUtiliesHelper.prepareDefualtPlaceholder(), options: [.processor(ResizingImageProcessor(referenceSize: CGSize(width: 500, height: 500), mode: .aspectFill))]))
+                .bind(to: self.profileImageView.kf.rx.image(placeholder: ViewUtiliesHelper.prepareProfilePlaceholder(), options: [.processor(ResizingImageProcessor(referenceSize: CGSize(width: 500, height: 500), mode: .aspectFill))]))
                 .disposed(by: self.disposeBag)
         }
     }

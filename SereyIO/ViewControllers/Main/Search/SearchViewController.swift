@@ -11,7 +11,6 @@ import RxCocoa
 import RxSwift
 import RxBinding
 import RxDataSources
-import NVActivityIndicatorView
 import SnapKit
 
 class SearchViewController: BaseViewController {
@@ -19,23 +18,6 @@ class SearchViewController: BaseViewController {
     @IBOutlet weak var searchTextField: PaddingTextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    
-    fileprivate lazy var loadingContainerView: UIView = { [unowned self] in
-        let containerView = UIView().then {
-            $0.addSubview(self.loadingIndicatorView)
-        }
-        
-        self.loadingIndicatorView.snp.makeConstraints({ make in
-            make.width.height.equalTo(40)
-            make.center.equalTo(containerView)
-        })
-        
-        return containerView
-        }()
-    
-    fileprivate lazy var loadingIndicatorView: NVActivityIndicatorView = {
-        return NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 48, height: 48), type: .ballBeat, color: UIColor.lightGray.withAlphaComponent(0.5), padding: 0)
-    }()
     
     fileprivate weak var emptyView: EmptyOrErrorView? = nil {
         didSet {
@@ -45,7 +27,7 @@ class SearchViewController: BaseViewController {
     
     lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
         return self.prepreDataSource()
-        }()
+    }()
     
     var viewModel: SearchViewModel!
     
@@ -78,11 +60,20 @@ extension SearchViewController {
     
     func prepareTableView() {
         self.tableView.tableFooterView = UIView()
+        self.tableView.separatorColor = ColorName.border.color
+        self.tableView.register(PeopleTableViewCell.self)
     }
     
     func prepreDataSource() -> RxTableViewSectionedReloadDataSource<SectionItem> {
         let dataSource = RxTableViewSectionedReloadDataSource<SectionItem>(configureCell: { (datasource, tableView, indexPath, item) -> UITableViewCell in
-            return UITableViewCell()
+            switch item {
+            case is PeopleCellViewModel:
+                let cell: PeopleTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+                cell.cellModel = item as? PeopleCellViewModel
+                return cell
+            default:
+                return UITableViewCell()
+            }
         })
         
         dataSource.titleForHeaderInSection = { dataSource, index in
@@ -149,14 +140,6 @@ fileprivate extension SearchViewController {
                 switch viewToPresent {
                 case .emptyResult(let emptyViewModel):
                     self.prepareToDisplayEmptyView(emptyViewModel)
-                case .loadingIndicator(let loading):
-                    if loading {
-                        self.tableView.backgroundView = self.loadingContainerView
-                        self.loadingIndicatorView.startAnimating()
-                    } else {
-                        self.loadingIndicatorView.stopAnimating()
-                        self.tableView.backgroundView = nil
-                    }
                 }
             }).disposed(by: self.disposeBag)
     }

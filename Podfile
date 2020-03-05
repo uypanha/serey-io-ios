@@ -38,6 +38,7 @@ def frameworks_pods
 	pod 'NVActivityIndicatorView'
 	pod 'NotificationBannerSwift'
   pod 'Shimmer'
+  pod 'RichEditorView', :git => 'https://github.com/uyphanha/RichEditorView.git'
 
 	# MARK: - RX
   pod 'RxSwift'
@@ -58,6 +59,7 @@ def frameworks_pods
   pod 'MaterialComponents/PageControl'
   pod 'MaterialComponents/BottomSheet'
   pod 'MaterialComponents/Chips'
+  pod 'MaterialComponents/Buttons'
   
 end
 

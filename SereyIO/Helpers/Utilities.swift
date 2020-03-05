@@ -36,8 +36,13 @@ class ViewUtiliesHelper {
         return UIImageView(image: R.image.accessoryIcon()?.image(withTintColor: UIColor.lightGray.withAlphaComponent(0.5)))
     }
     
-    // MAKR: - Default image placeholder
+    // MARK: - Default image placeholder
     public static func prepareDefualtPlaceholder() -> UIImage {
         return ColorName.shimmering.color.withAlphaComponent(0.5).toImage() ?? UIImage()
+    }
+    
+    // MARK: - Default profile image placeholder
+    public static func prepareProfilePlaceholder() -> UIImage {
+        return R.image.userPlaceholder() ?? UIImage()
     }
 }

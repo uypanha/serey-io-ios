@@ -49,6 +49,7 @@ fileprivate extension PostTableViewController {
         self.tableView.backgroundColor = ColorName.postBackground.color
         self.tableView.tableFooterView = UIView()
         self.tableView.register(PostTableViewCell.self)
+        self.tableView.register(FilteredCategoryTableViewCell.self)
     }
     
     func prepreDataSource() -> RxTableViewSectionedReloadDataSource<SectionItem> {
@@ -57,6 +58,10 @@ fileprivate extension PostTableViewController {
             case is PostCellViewModel:
                 let cell: PostTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
                 cell.cellModel = item as? PostCellViewModel
+                return cell
+            case is FilteredCategoryCellViewModel:
+                let cell: FilteredCategoryTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+                cell.cellModel = item as? FilteredCategoryCellViewModel
                 return cell
             default:
                 return UITableViewCell()
@@ -82,6 +87,7 @@ fileprivate extension PostTableViewController {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
+        setUpShouldPresentErrorObservers()
     }
     
     func setUpContentChangedObservers() {
@@ -113,6 +119,17 @@ fileprivate extension PostTableViewController {
             .subscribe(onNext: { [unowned self] (cell, indexPath) in
                 if self.viewModel.isLastItem(indexPath: indexPath) {
                     self.viewModel.downloadData()
+                }
+            }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentErrorObservers() {
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [unowned self] errorInfo in
+                if self.viewModel.discussions.value.isEmpty {
+                    self.prepareToDisplayEmptyView(self.viewModel.prepareEmptyViewModel(errorInfo))
+                } else {
+                    
                 }
             }) ~ self.disposeBag
     }

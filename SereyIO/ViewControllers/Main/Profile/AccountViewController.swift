@@ -68,7 +68,7 @@ extension AccountViewController {
             switch item {
             case is PostCellViewModel:
                 let cell: PostTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-                // cell.cellModel = item as? PostCellViewModel
+                 cell.cellModel = item as? PostCellViewModel
                 return cell
             default:
                 return UITableViewCell()

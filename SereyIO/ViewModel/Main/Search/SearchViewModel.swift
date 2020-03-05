@@ -20,7 +20,6 @@ class SearchViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, 
     
     enum ViewToPresent {
         case emptyResult(EmptyOrErrorViewModel)
-        case loadingIndicator(Bool)
     }
     
     // input:
@@ -30,7 +29,7 @@ class SearchViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, 
     lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
     
     let cells: BehaviorRelay<[SectionItem]>
-//    let places: BehaviorRelay<[PlaceModel]>
+    let people: BehaviorRelay<[PeopleModel]>
     
     lazy var canDownloadMorePages = BehaviorRelay<Bool>(value: true)
     lazy var downloadDisposeBag: DisposeBag = DisposeBag()
@@ -39,21 +38,20 @@ class SearchViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, 
     let searchTextFieldViewModel: TextFieldViewModel
     fileprivate var editingDisposable: Disposable?
     
-//    let searchService: SearchService
+    let searchService: SearchService
     
     override init() {
         self.cells = BehaviorRelay(value: [])
-//        self.places = BehaviorRelay(value: [])
+        self.people = BehaviorRelay(value: [])
         self.searchTextFieldViewModel = TextFieldViewModel.textFieldWith(title: "Search")
-//        self.searchService = SearchService()
+        self.searchService = SearchService()
         super.init()
         
         setUpRxObservers()
     }
     
     func initialData() {
-        self.cells.accept([])
-//        self.places.accept([])
+        self.people.accept([])
     }
 }
 
@@ -61,35 +59,37 @@ class SearchViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, 
 extension SearchViewModel {
     
     func downloadData() {
-//        self.downloadDisposeBag = DisposeBag()
-//        self.places.accept([])
-//        if let searchText = self.searchTextFieldViewModel.value, !searchText.isEmpty {
-//            self.isDownloading.accept(true)
-//            self.searchService.searchGlobal(searchText)
-//                .subscribe(onNext: { [weak self] data in
-//                    self?.isDownloading.accept(false)
-//                    if let places = data?.places {
-//                        self?.places.accept(places)
-//                    }
-//                }, onError: { [weak self] error in
-//                    self?.isDownloading.accept(false)
-//                    let errorInfo = ErrorHelper.prepareError(error: error)
-//                    self?.shouldPresentError(errorInfo)
-//                }).disposed(by: self.downloadDisposeBag)
-//        }
+        self.downloadDisposeBag = DisposeBag()
+        if let searchText = self.searchTextFieldViewModel.value, !searchText.isEmpty {
+            self.isDownloading.accept(true)
+            self.people.accept([])
+            self.searchService.search(searchText)
+                .subscribe(onNext: { [weak self] data in
+                    self?.isDownloading.accept(false)
+                    self?.people.accept(data)
+                }, onError: { [weak self] error in
+                    self?.isDownloading.accept(false)
+                    let errorInfo = ErrorHelper.prepareError(error: error)
+                    self?.shouldPresentError(errorInfo)
+                }).disposed(by: self.downloadDisposeBag)
+        } else {
+            self.people.accept([])
+        }
     }
 }
 
 // MARK: - Preparations & Tools
 extension SearchViewModel {
     
-    fileprivate func prepareCells() -> [SectionItem] {
-//        var sections: [SectionItem] = []
-//        if !places.isEmpty {
-//            let cells: [CellViewModel] = places.map { PlaceCellViewModel($0) }
-//            sections.append(AnimatedSectionModel(model: Section(), items: cells))
-//        }
-        return []
+    fileprivate func prepareCells(_ people: [PeopleModel]) -> [SectionItem] {
+        var sections: [SectionItem] = []
+        if !people.isEmpty {
+            let cells: [CellViewModel] = people.map { PeopleCellViewModel($0) }
+            sections.append(SectionModel(model: Section(), items: cells))
+        } else if self.isDownloading.value {
+            sections.append(SectionModel(items: (0...11).map { _ in PeopleCellViewModel(true) }))
+        }
+        return sections
     }
     
     fileprivate func prepareEmptyViewModel() -> EmptyOrErrorViewModel {
@@ -141,23 +141,16 @@ fileprivate extension SearchViewModel {
     }
     
     func setUpContentChangedObservers() {
-//        self.places.asObservable()
-//            .map { self.prepareCells($0) }
-//            .bind(to: self.cells)
-//            .disposed(by: self.disposeBag)
-//
+        self.people.asObservable()
+            .map { self.prepareCells($0) }
+            .bind(to: self.cells)
+            .disposed(by: self.disposeBag)
+
         self.cells.asObservable()
             .subscribe(onNext: { [unowned self] cells in
                 if cells.isEmpty {
                     self.shouldPresent(.emptyResult(self.prepareEmptyViewModel()))
                 }
-            }).disposed(by: self.disposeBag)
-        
-        self.isDownloading
-            .asObservable()
-            .skip(1)
-            .subscribe(onNext: { [unowned self] downloading in
-                self.shouldPresent(.loadingIndicator(downloading ? self.cells.value.isEmpty : downloading))
             }).disposed(by: self.disposeBag)
     }
     

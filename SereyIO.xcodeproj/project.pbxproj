@@ -163,7 +163,19 @@
 		DCE19A9F240822FD0054F752 /* DiscussionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE19A9E240822FD0054F752 /* DiscussionModel.swift */; };
 		DCEC0CBC240907D0002F4B6F /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CBB240907D0002F4B6F /* Date+Formatter.swift */; };
 		DCEC0CBE240971AE002F4B6F /* ShimmeringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CBD240971AE002F4B6F /* ShimmeringProtocol.swift */; };
+		DCEC0CC3240A530B002F4B6F /* FilteredCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CC1240A530B002F4B6F /* FilteredCategoryTableViewCell.swift */; };
+		DCEC0CC4240A530B002F4B6F /* FilteredCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCEC0CC2240A530B002F4B6F /* FilteredCategoryTableViewCell.xib */; };
+		DCEC0CC6240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CC5240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift */; };
+		DCEC0CC8240A5E0E002F4B6F /* CicularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CC7240A5E0E002F4B6F /* CicularButton.swift */; };
 		DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */; };
+		DCF67FDD240FFC4A003061A7 /* SearchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FDC240FFC4A003061A7 /* SearchApi.swift */; };
+		DCF67FE1240FFD65003061A7 /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FDF240FFD65003061A7 /* PeopleTableViewCell.swift */; };
+		DCF67FE2240FFD65003061A7 /* PeopleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCF67FE0240FFD65003061A7 /* PeopleTableViewCell.xib */; };
+		DCF67FE5240FFFF9003061A7 /* PeopleCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FE4240FFFF9003061A7 /* PeopleCellViewModel.swift */; };
+		DCF67FE724100221003061A7 /* CircularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FE624100220003061A7 /* CircularView.swift */; };
+		DCF67FE924100B64003061A7 /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FE824100B64003061A7 /* SearchService.swift */; };
+		DCF67FEC24100C00003061A7 /* PeopleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FEB24100C00003061A7 /* PeopleModel.swift */; };
+		DCF67FEF24100C6F003061A7 /* ListDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FEE24100C6F003061A7 /* ListDataResponseModel.swift */; };
 		DCF8738023F6F7CE007A8724 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8737F23F6F7CD007A8724 /* AccountViewModel.swift */; };
 		DCF8738223F6FA3B007A8724 /* BasePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8738123F6FA3B007A8724 /* BasePostViewModel.swift */; };
 /* End PBXBuildFile section */
@@ -385,7 +397,19 @@
 		DCE19A9E240822FD0054F752 /* DiscussionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionModel.swift; sourceTree = "<group>"; };
 		DCEC0CBB240907D0002F4B6F /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
 		DCEC0CBD240971AE002F4B6F /* ShimmeringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmeringProtocol.swift; sourceTree = "<group>"; };
+		DCEC0CC1240A530B002F4B6F /* FilteredCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredCategoryTableViewCell.swift; sourceTree = "<group>"; };
+		DCEC0CC2240A530B002F4B6F /* FilteredCategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilteredCategoryTableViewCell.xib; sourceTree = "<group>"; };
+		DCEC0CC5240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredCategoryCellViewModel.swift; sourceTree = "<group>"; };
+		DCEC0CC7240A5E0E002F4B6F /* CicularButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CicularButton.swift; sourceTree = "<group>"; };
 		DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingViewModel.swift; sourceTree = "<group>"; };
+		DCF67FDC240FFC4A003061A7 /* SearchApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchApi.swift; sourceTree = "<group>"; };
+		DCF67FDF240FFD65003061A7 /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
+		DCF67FE0240FFD65003061A7 /* PeopleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PeopleTableViewCell.xib; sourceTree = "<group>"; };
+		DCF67FE4240FFFF9003061A7 /* PeopleCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleCellViewModel.swift; sourceTree = "<group>"; };
+		DCF67FE624100220003061A7 /* CircularView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularView.swift; sourceTree = "<group>"; };
+		DCF67FE824100B64003061A7 /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
+		DCF67FEB24100C00003061A7 /* PeopleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleModel.swift; sourceTree = "<group>"; };
+		DCF67FEE24100C6F003061A7 /* ListDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataResponseModel.swift; sourceTree = "<group>"; };
 		DCF8737F23F6F7CD007A8724 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		DCF8738123F6FA3B007A8724 /* BasePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePostViewModel.swift; sourceTree = "<group>"; };
 		E48D784F3F419D4A8B0116EC /* Pods_SereyIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SereyIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -643,7 +667,9 @@
 			children = (
 				DC40D5D523E32A6B00B0DD96 /* ImageTextModel.swift */,
 				DC40D5CF23E329E000B0DD96 /* LanguageModel.swift */,
+				DCF67FEE24100C6F003061A7 /* ListDataResponseModel.swift */,
 				DC9AC6E42406C5A2008FAFA6 /* Discussion */,
+				DCF67FEA24100BC7003061A7 /* User */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -918,6 +944,8 @@
 			isa = PBXGroup;
 			children = (
 				DC42AF0623E9D39B008F8A0F /* CardView.swift */,
+				DCEC0CC7240A5E0E002F4B6F /* CicularButton.swift */,
+				DCF67FE624100220003061A7 /* CircularView.swift */,
 				DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */,
 				DC40D5C523E31FDF00B0DD96 /* GradientView.swift */,
 				DC8EAB7423E70ED600E00A00 /* MDCQuadPageControl.swift */,
@@ -1094,6 +1122,7 @@
 			children = (
 				DCD3986A232E1DF700C812EB /* AppService.swift */,
 				DC9AC6DD2406BEFB008FAFA6 /* Discussion */,
+				DCF67FDB240FFC3B003061A7 /* Search */,
 				DC6FCE6523F05D1700D72F6D /* Steem */,
 			);
 			path = Services;
@@ -1155,9 +1184,10 @@
 				DC40D5D223E32A3100B0DD96 /* Base */,
 				DC40D5D123E32A2800B0DD96 /* Common */,
 				DC1C6EBF23FC3C3000BA701D /* Dialog */,
+				DCEC0CBF240A52CC002F4B6F /* Discussions */,
 				DC40D5C823E3298F00B0DD96 /* LanguageTableViewCell */,
 				DC05FDA523F1AB1E0093B47B /* More */,
-				DC42AF0123E9CF93008F8A0F /* PostTableViewCell */,
+				DCF67FDE240FFD21003061A7 /* Search */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1188,6 +1218,60 @@
 				DCD39895232E28E100C812EB /* WebViewViewModel.swift */,
 			);
 			path = WebView;
+			sourceTree = "<group>";
+		};
+		DCEC0CBF240A52CC002F4B6F /* Discussions */ = {
+			isa = PBXGroup;
+			children = (
+				DCEC0CC0240A52E3002F4B6F /* FilteredCategoryTableViewCell */,
+				DC42AF0123E9CF93008F8A0F /* PostTableViewCell */,
+			);
+			path = Discussions;
+			sourceTree = "<group>";
+		};
+		DCEC0CC0240A52E3002F4B6F /* FilteredCategoryTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DCEC0CC5240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift */,
+				DCEC0CC1240A530B002F4B6F /* FilteredCategoryTableViewCell.swift */,
+				DCEC0CC2240A530B002F4B6F /* FilteredCategoryTableViewCell.xib */,
+			);
+			path = FilteredCategoryTableViewCell;
+			sourceTree = "<group>";
+		};
+		DCF67FDB240FFC3B003061A7 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				DCF67FDC240FFC4A003061A7 /* SearchApi.swift */,
+				DCF67FE824100B64003061A7 /* SearchService.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		DCF67FDE240FFD21003061A7 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				DCF67FE3240FFD6B003061A7 /* PeopleTableViewCell */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		DCF67FE3240FFD6B003061A7 /* PeopleTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DCF67FE4240FFFF9003061A7 /* PeopleCellViewModel.swift */,
+				DCF67FDF240FFD65003061A7 /* PeopleTableViewCell.swift */,
+				DCF67FE0240FFD65003061A7 /* PeopleTableViewCell.xib */,
+			);
+			path = PeopleTableViewCell;
+			sourceTree = "<group>";
+		};
+		DCF67FEA24100BC7003061A7 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				DCF67FEB24100C00003061A7 /* PeopleModel.swift */,
+			);
+			path = User;
 			sourceTree = "<group>";
 		};
 		DCF8737E23F6F7B8007A8724 /* Profile */ = {
@@ -1343,6 +1427,7 @@
 				DC6ED56523269B6600770B31 /* colors.txt in Resources */,
 				DCC49AD423E865D700119BAA /* ProfileView.xib in Resources */,
 				DCD39859232E0F9600C812EB /* Slash.storyboard in Resources */,
+				DCEC0CC4240A530B002F4B6F /* FilteredCategoryTableViewCell.xib in Resources */,
 				DC26813123F45A8C0045776E /* Profile.storyboard in Resources */,
 				DC6ED52623267EED00770B31 /* Main.storyboard in Resources */,
 				DC05FDAD23F1AB620093B47B /* SettingTableViewCell.xib in Resources */,
@@ -1352,6 +1437,7 @@
 				DC05FDC023F1B3410093B47B /* HeaderView.xib in Resources */,
 				DC88A73323DF3D3900EB7F79 /* OnBoard.storyboard in Resources */,
 				DC40D5D923E32F3800B0DD96 /* Common.strings in Resources */,
+				DCF67FE2240FFD65003061A7 /* PeopleTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1512,12 +1598,14 @@
 				DC19DBE723EC5E7500571CC8 /* PostTableViewController.swift in Sources */,
 				DC40D5D823E32AB800B0DD96 /* Utilities.swift in Sources */,
 				DC19DBEF23EC60C900571CC8 /* PostCellViewModel.swift in Sources */,
+				DCEC0CC3240A530B002F4B6F /* FilteredCategoryTableViewCell.swift in Sources */,
 				DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */,
 				DC1C6EC323FC3C6D00BA701D /* PostCategoryTableViewCell.swift in Sources */,
 				DCD39862232E114300C812EB /* UIViewController+Properties.swift in Sources */,
 				DC42AF0723E9D39B008F8A0F /* CardView.swift in Sources */,
 				DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */,
 				DC9AC6E12406C1D1008FAFA6 /* DiscussionService.swift in Sources */,
+				DCF67FE724100221003061A7 /* CircularView.swift in Sources */,
 				DC7C09C22326AFF60006D0BF /* FireBaseHandler.swift in Sources */,
 				DC6A790323CA242B001D1009 /* EmptyOrErrorViewModel.swift in Sources */,
 				DCD39889232E254100C812EB /* UIColor+Converter.swift in Sources */,
@@ -1555,17 +1643,21 @@
 				DCD39883232E24BF00C812EB /* Realm+Cnfigure.swift in Sources */,
 				DCD3988B232E255E00C812EB /* UIImage+Extensions.swift in Sources */,
 				DCF8738223F6FA3B007A8724 /* BasePostViewModel.swift in Sources */,
+				DCEC0CC6240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift in Sources */,
 				DC9AC6E62406C5BA008FAFA6 /* DiscussionCategoryModel.swift in Sources */,
 				DC6A78FA23CA20B3001D1009 /* FieldViewModelProtocol.swift in Sources */,
 				DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */,
+				DCF67FEF24100C6F003061A7 /* ListDataResponseModel.swift in Sources */,
 				DC42AF0423E9CFB5008F8A0F /* PostTableViewCell.swift in Sources */,
 				DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */,
 				DC40D5C623E31FDF00B0DD96 /* ContentSizedTableView.swift in Sources */,
+				DCEC0CC8240A5E0E002F4B6F /* CicularButton.swift in Sources */,
 				DCC49ACE23E865B600119BAA /* BoardFeatureViewModel.swift in Sources */,
 				DC6ED5842326A4BA00770B31 /* NotificationDispatcher.swift in Sources */,
 				DCD39870232E1F7E00C812EB /* LanguageManager.swift in Sources */,
 				DC6FCE7423F05D1700D72F6D /* Steem.swift in Sources */,
 				DC8EAB8323E7231A00E00A00 /* MoreViewController.swift in Sources */,
+				DCF67FDD240FFC4A003061A7 /* SearchApi.swift in Sources */,
 				DCD3987D232E235000C812EB /* BaseTableViewCell.swift in Sources */,
 				DC6FCE7323F05D1700D72F6D /* HttpClient.swift in Sources */,
 				DC9AC6DF2406BF1C008FAFA6 /* DiscussionApi.swift in Sources */,
@@ -1575,6 +1667,8 @@
 				DC6A78F523CA1FFE001D1009 /* CollectionSectionedAnimatedProviderModel.swift in Sources */,
 				DC6FCE7223F05D1700D72F6D /* Broadcast.swift in Sources */,
 				DCEC0CBC240907D0002F4B6F /* Date+Formatter.swift in Sources */,
+				DCF67FEC24100C00003061A7 /* PeopleModel.swift in Sources */,
+				DCF67FE5240FFFF9003061A7 /* PeopleCellViewModel.swift in Sources */,
 				DC19DBED23EC601900571CC8 /* HomeViewModel.swift in Sources */,
 				DC6ED5912326A8F400770B31 /* Appearance.swift in Sources */,
 				DC6ED56F2326A30000770B31 /* String+Extensions.swift in Sources */,
@@ -1598,6 +1692,7 @@
 				DC6ED5882326A4F900770B31 /* APNSTokenStore.swift in Sources */,
 				DC19DBE523EC5D0700571CC8 /* BaseTableViewController.swift in Sources */,
 				DC19DBF623EC751700571CC8 /* SearchViewModel.swift in Sources */,
+				DCF67FE1240FFD65003061A7 /* PeopleTableViewCell.swift in Sources */,
 				DCD39876232E20CF00C812EB /* SlashViewModel.swift in Sources */,
 				DC40D5D423E32A4400B0DD96 /* ImageTextCellViewModel.swift in Sources */,
 				DC19DBEB23EC5F9E00571CC8 /* PostTableViewModel.swift in Sources */,
@@ -1606,6 +1701,7 @@
 				DC6ED5742326A37800770B31 /* DeeplinkParser.swift in Sources */,
 				DC19DBE323EC581A00571CC8 /* ChooseCategorySheetViewController.swift in Sources */,
 				DCD3986B232E1DF700C812EB /* AppService.swift in Sources */,
+				DCF67FE924100B64003061A7 /* SearchService.swift in Sources */,
 				DC6ED56623269B6600770B31 /* ColorsGen.swift in Sources */,
 				DC40D5CC23E3298F00B0DD96 /* LanguageTableViewCell.swift in Sources */,
 				DC6A78F123CA1FD6001D1009 /* CollectionDataProviderModel.swift in Sources */,

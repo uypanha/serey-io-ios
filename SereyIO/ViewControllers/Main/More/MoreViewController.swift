@@ -16,6 +16,8 @@ class MoreViewController: BaseViewController {
     
     @IBOutlet weak var tableView: ContentSizedTableView!
     @IBOutlet weak var termsContainerView: UIView!
+    @IBOutlet weak var privacyPolicyButton: UIButton!
+    @IBOutlet weak var termServiceButton: UIButton!
     
     private lazy var logoBarItem: UIBarButtonItem = {
         let customView = UIImageView()
@@ -124,9 +126,22 @@ extension MoreViewController: TabBarControllerDelegate {
 fileprivate extension MoreViewController {
     
     func setUpRxObservers() {
+        setUpControlsObservers()
         setUpTableViewObservers()
         setUpShouldPresentObservers()
         setUpShouldPresentErrorObsevers()
+    }
+    
+    func setUpControlsObservers() {
+        self.privacyPolicyButton.rx.tap.asObservable()
+            .map { MoreViewModel.Action.privacyPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+        
+        self.termServiceButton.rx.tap.asObservable()
+            .map { MoreViewModel.Action.termsPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpTableViewObservers() {
@@ -154,6 +169,10 @@ fileprivate extension MoreViewController {
                     let languagesViewController = LanguagesViewController()
                     languagesViewController.viewModel = ChooseLanguageViewModel()
                     self.show(languagesViewController, sender: nil)
+                case .webViewController(let webViewViewModel):
+                    let webViewController = WebViewViewController()
+                    webViewController.viewModel = webViewViewModel
+                    self.present(UINavigationController(rootViewController: webViewController), animated: true, completion: nil)
                 }
             }).disposed(by: self.disposeBag)
     }

@@ -2,11 +2,14 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "undraw_on_the_way_ldaq.pdf"
+      "filename" : "clear-24px.pdf"
     }
   ],
   "info" : {
     "version" : 1,
     "author" : "xcode"
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
   }
 }

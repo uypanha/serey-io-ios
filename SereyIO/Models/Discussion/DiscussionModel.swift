@@ -38,6 +38,12 @@ struct DiscussionModel: Codable {
         }
     }
     
+    var profileViewModel: ProfileViewModel {
+        get {
+            return ProfileViewModel(nil)
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case title

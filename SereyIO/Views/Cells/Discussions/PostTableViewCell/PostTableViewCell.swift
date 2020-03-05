@@ -24,7 +24,7 @@ class PostTableViewCell: BaseTableViewCell {
     @IBOutlet weak var publishDateLabel: UILabel!
     @IBOutlet weak var thumbnailImageView: UIImageView!
     
-    @IBOutlet weak var tagContainerView: CardView!
+    @IBOutlet weak var tagContainerView: CircularView!
     @IBOutlet weak var tagLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     
@@ -49,6 +49,7 @@ class PostTableViewCell: BaseTableViewCell {
             guard let cellModel = self.cellModel else { return }
             
             self.disposeBag ~ [
+                cellModel.profileViewModel ~> self.profileView.rx.profileViewModel,
                 cellModel.authorName ~> self.authorNameLabel.rx.text,
                 cellModel.publishedAt ~> self.publishDateLabel.rx.text,
                 cellModel.tagText ~> self.tagLabel.rx.text,
@@ -72,6 +73,7 @@ class PostTableViewCell: BaseTableViewCell {
         super.awakeFromNib()
         // Initialization code
         
+        self.vwShimmer.shimmeringSpeed = 400
         self.vwShimmer.contentView = self.mainView
     }
 }

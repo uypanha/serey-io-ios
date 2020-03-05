@@ -16,6 +16,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
     let discussion: BehaviorRelay<DiscussionModel?>
     let isShimmering: BehaviorRelay<Bool>
     
+    let profileViewModel: BehaviorSubject<ProfileViewModel?>
     let authorName: BehaviorSubject<String?>
     let publishedAt: BehaviorSubject<String?>
     let thumbnailURL: BehaviorSubject<URL?>
@@ -28,6 +29,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
     
     init(_ discussion: DiscussionModel?) {
         self.discussion = BehaviorRelay(value: discussion)
+        self.profileViewModel = BehaviorSubject(value: nil)
         self.authorName = BehaviorSubject(value: nil)
         self.publishedAt = BehaviorSubject(value: nil)
         self.thumbnailURL = BehaviorSubject(value: nil)
@@ -50,6 +52,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
     }
     
     private func notifyDataChanged(_ data: DiscussionModel?) {
+        self.profileViewModel.onNext(data?.profileViewModel)
         self.authorName.onNext(data?.authorName.capitalized)
         self.publishedAt.onNext(data?.publishedDateString)
         self.thumbnailURL.onNext(data?.firstThumnailURL)

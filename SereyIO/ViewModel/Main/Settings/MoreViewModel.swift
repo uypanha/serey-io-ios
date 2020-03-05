@@ -14,11 +14,14 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
     
     enum Action {
         case itemSelected(IndexPath)
+        case privacyPressed
+        case termsPressed
     }
     
     enum ViewToPresent {
         case accountViewController(AccountViewModel)
         case languagesViewController
+        case webViewController(WebViewViewModel)
     }
     
     // input:
@@ -132,6 +135,11 @@ fileprivate extension MoreViewModel {
             self.shouldPresent(.accountViewController(accountViewModel))
         }
     }
+    
+    func handleOpenWebView(_ title: String, url: URL?) {
+        let webViewViewModel = WebViewViewModel(withURLToLoad: url, title: title)
+        self.shouldPresent(.webViewController(webViewViewModel))
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -162,6 +170,10 @@ fileprivate extension MoreViewModel {
                 switch action {
                 case .itemSelected(let indexPath):
                     self?.handleItemSelected(indexPath)
+                case .privacyPressed:
+                    self?.handleOpenWebView("Privacy Policy", url: Constants.privacyAndPolicyUrl)
+                case .termsPressed:
+                    self?.handleOpenWebView("Terms of Service", url: Constants.termAndConditionsUrl)
                 }
             }).disposed(by: self.disposeBag)
     }

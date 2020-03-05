@@ -1,6 +1,6 @@
 //
 //  ContentSizedTableView.swift
-//  Togness
+//  SereyIO
 //
 //  Created by Phanha Uy on 12/19/19.
 //  Copyright © 2019 Phanha Uy. All rights reserved.
