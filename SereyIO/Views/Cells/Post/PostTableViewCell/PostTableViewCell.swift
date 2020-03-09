@@ -52,7 +52,7 @@ class PostTableViewCell: BaseTableViewCell {
                 cellModel.profileViewModel ~> self.profileView.rx.profileViewModel,
                 cellModel.authorName ~> self.authorNameLabel.rx.text,
                 cellModel.publishedAt ~> self.publishDateLabel.rx.text,
-                cellModel.tagText ~> self.tagLabel.rx.text,
+                cellModel.tags.map { $0.first?.capitalized } ~> self.tagLabel.rx.text,
                 cellModel.titleText ~> self.titleLabel.rx.text,
                 cellModel.sereyValue ~> self.sereyValueLabel.rx.text,
                 cellModel.upVoteCount ~> self.upVoteCountLabel.rx.text,

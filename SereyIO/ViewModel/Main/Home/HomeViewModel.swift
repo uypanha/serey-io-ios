@@ -19,6 +19,7 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
     
     enum ViewToPresent {
         case choosePostCategoryController(ChooseCategorySheetViewModel)
+        case postDetailViewController(PostDetailViewModel)
     }
     
     // input:
@@ -105,6 +106,13 @@ extension HomeViewModel {
                     postTableViewModel.setCategory(selectedCategory)
                 })
             }) ~ self.disposeBag
+        
+        self.postViewModels.asObservable()
+            .subscribe(onNext: { [unowned self] viewModels in
+                viewModels.forEach { viewModel in
+                    self.setUpPostTableViewModelObsevers(viewModel)
+                }
+            }) ~ self.disposeBag
     }
     
     func setUpActionObservers() {
@@ -115,6 +123,16 @@ extension HomeViewModel {
                     self?.handleFilterPressed()
                 }
             }) ~ self.disposeBag
+    }
+    
+    func setUpPostTableViewModelObsevers(_ viewModel: PostTableViewModel) {
+        viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { [weak self] viewToPresent in
+                switch viewToPresent {
+                case .postDetailViewController(let postDetailViewModel):
+                    self?.shouldPresent(.postDetailViewController(postDetailViewModel))
+                }
+            }) ~ viewModel.disposeBag
     }
 }
 

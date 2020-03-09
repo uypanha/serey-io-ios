@@ -25,7 +25,7 @@ class PeopleCellViewModel: CellViewModel, ShimmeringProtocol {
         super.init(true)
         
         self.nameText.onNext(name)
-        self.profileModel.onNext(ProfileViewModel(imageUrl))
+        self.profileModel.onNext(ProfileViewModel())
     }
     
     required convenience init(_ isShimmering: Bool) {

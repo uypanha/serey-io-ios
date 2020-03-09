@@ -15,7 +15,7 @@ import RxDataSources
 class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, InfiniteNetworkProtocol {
     
     let postType: BehaviorRelay<DiscussionType>
-    let discussions: BehaviorRelay<[DiscussionModel]>
+    let discussions: BehaviorRelay<[PostModel]>
     let selectedCategory: BehaviorRelay<DiscussionCategoryModel?>
     
     let cells: BehaviorRelay<[SectionItem]>
@@ -81,7 +81,7 @@ extension BasePostViewModel {
 // MARK: - Preparations & Tools
 extension BasePostViewModel {
     
-    fileprivate func updateData(_ data: [DiscussionModel]) {
+    fileprivate func updateData(_ data: [PostModel]) {
         var discussions = self.discussions.value
         
         if self.isRefresh {
@@ -101,7 +101,7 @@ extension BasePostViewModel {
         self.discussions.accept(discussions)
     }
     
-    fileprivate func prepareCells(_ discussions: [DiscussionModel], _ error: Bool) -> [SectionItem] {
+    fileprivate func prepareCells(_ discussions: [PostModel], _ error: Bool) -> [SectionItem] {
         var cells: [CellViewModel] = []
         if let selectedCategory = self.selectedCategory.value {
             cells.append(FilteredCategoryCellViewModel(selectedCategory).then { [weak self] in

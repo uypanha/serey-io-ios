@@ -1,0 +1,31 @@
+body {
+    font-size: (font-size-to-replace)pt !important;
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* unvisited link */
+a {
+    color: #00a0d2;
+    display: inline-block;
+}
+
+/* visited link */
+a:visited {
+    color: #00a0d2;
+}
+
+/* mouse over link */
+a:hover {
+    color: #00a0d2;
+}
+
+/* selected link */
+a:active {
+    color: #00a0d2;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1em;
+}

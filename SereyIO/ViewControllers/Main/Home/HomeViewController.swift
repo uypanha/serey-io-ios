@@ -191,6 +191,12 @@ fileprivate extension HomeViewController {
                         bottomSheet.dismissOnDraggingDownSheet = false
                         self.present(bottomSheet, animated: true, completion: nil)
                     }
+                case .postDetailViewController(let postDetailViewModel):
+                    if let postDetailViewController = R.storyboard.post.postDetailViewController() {
+                        postDetailViewController.viewModel = postDetailViewModel
+                        postDetailViewController.hidesBottomBarWhenPushed = true
+                        self.show(postDetailViewController, sender: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

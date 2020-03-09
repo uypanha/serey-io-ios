@@ -1,14 +1,14 @@
 //
-//  DiscussionModel.swift
+//  PostModel.swift
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/27/20.
 //  Copyright © 2020 Phanha Uy. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-struct DiscussionModel: Codable {
+struct PostModel: Codable {
     
     let id: Int
     let title: String
@@ -23,6 +23,7 @@ struct DiscussionModel: Codable {
     let upvote: Int
     let flag: Int
     let imageUrl: [String]
+    let replies: [PostModel]?
     
     var firstThumnailURL: URL? {
         get {
@@ -40,7 +41,9 @@ struct DiscussionModel: Codable {
     
     var profileViewModel: ProfileViewModel {
         get {
-            return ProfileViewModel(nil)
+            let firstLetter = authorName.first == nil ? "" : "\(authorName.first!)"
+            let uniqueColor = UIColor(hexString: PFColorHash().hex("\(authorName)"))
+            return ProfileViewModel(shortcut: firstLetter, imageUrl: nil, uniqueColor: uniqueColor)
         }
     }
     
@@ -58,5 +61,6 @@ struct DiscussionModel: Codable {
         case upvote
         case flag
         case imageUrl
+        case replies
     }
 }

@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import RichEditorView
 
 extension ObservableType where E == ErrorInfo {
     func asDriverWithDefaultError() -> Driver<ErrorInfo> {
@@ -24,6 +25,17 @@ extension Reactive where Base: UITextField {
     internal var placeholder: Binder<String?> {
         return Binder(self.base) { uiTextField, placeholder in
             uiTextField.placeholder = placeholder
+        }
+    }
+    
+}
+
+extension Reactive where Base : RichEditorView {
+    
+    /// Bindable sink for `html` property.
+    public var html: Binder<String?> {
+        return Binder(self.base) { richEditorView, html in
+            richEditorView.html = html ?? ""
         }
     }
     

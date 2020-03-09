@@ -10,7 +10,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileView" customModule="SereyIO" customModuleProvider="target">
             <connections>
+                <outlet property="bottomConstraint" destination="bwB-3o-2qt" id="Utn-lg-3OP"/>
+                <outlet property="containerView" destination="Xcx-yW-DMh" id="eIT-ji-TGM"/>
+                <outlet property="leftConstraint" destination="FJK-eW-Mkz" id="8pv-1k-OvC"/>
                 <outlet property="profileImageView" destination="Y4J-4O-Eqm" id="uM7-7o-Akn"/>
+                <outlet property="rightConstraint" destination="J9d-Wx-iHC" id="GJB-NX-JVd"/>
+                <outlet property="shortcutNameLabel" destination="tko-tn-tzQ" id="4Pr-gd-WXU"/>
+                <outlet property="topConstraint" destination="PEV-OS-Zjd" id="nOg-UB-2sR"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -21,6 +27,12 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xcx-yW-DMh">
                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                     <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CC" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="6" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tko-tn-tzQ">
+                            <rect key="frame" x="8" y="8" width="84" height="84"/>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="48"/>
+                            <color key="textColor" white="1" alpha="0.70020869009999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y4J-4O-Eqm">
                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -29,9 +41,13 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="Y4J-4O-Eqm" firstAttribute="top" secondItem="Xcx-yW-DMh" secondAttribute="top" id="86F-DX-jd0"/>
+                        <constraint firstItem="tko-tn-tzQ" firstAttribute="leading" secondItem="Xcx-yW-DMh" secondAttribute="leading" constant="8" id="FJK-eW-Mkz"/>
+                        <constraint firstAttribute="trailing" secondItem="tko-tn-tzQ" secondAttribute="trailing" constant="8" id="J9d-Wx-iHC"/>
                         <constraint firstAttribute="width" secondItem="Xcx-yW-DMh" secondAttribute="height" multiplier="1:1" id="NH5-CV-PY5"/>
+                        <constraint firstItem="tko-tn-tzQ" firstAttribute="top" secondItem="Xcx-yW-DMh" secondAttribute="top" constant="8" id="PEV-OS-Zjd"/>
                         <constraint firstAttribute="bottom" secondItem="Y4J-4O-Eqm" secondAttribute="bottom" id="TVo-rF-vkf"/>
                         <constraint firstAttribute="trailing" secondItem="Y4J-4O-Eqm" secondAttribute="trailing" id="Y9o-5i-oA1"/>
+                        <constraint firstAttribute="bottom" secondItem="tko-tn-tzQ" secondAttribute="bottom" constant="8" id="bwB-3o-2qt"/>
                         <constraint firstItem="Y4J-4O-Eqm" firstAttribute="leading" secondItem="Xcx-yW-DMh" secondAttribute="leading" id="siB-Yw-QSj"/>
                     </constraints>
                 </view>

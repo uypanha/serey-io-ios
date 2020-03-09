@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Post Detail View Controller-->
+        <scene sceneID="bKy-Np-mjS">
+            <objects>
+                <viewController storyboardIdentifier="PostDetailViewController" id="PF1-4e-mk9" customClass="PostDetailViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6la-aU-8bL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-Ab-I2i">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NwO-By-uuf">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="640"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="cQv-7F-ZFm">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="640"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZMt-1h-TMJ" customClass="PostDetailView" customModule="SereyIO" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MOL-Ab-ta7">
+                                                        <rect key="frame" x="0.0" y="512" width="414" height="128"/>
+                                                        <subviews>
+                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fGC-rn-idh" customClass="ContentSizedTableView" customModule="SereyIO" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="128" id="s8U-MU-6C0"/>
+                                                                </constraints>
+                                                            </tableView>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="cQv-7F-ZFm" secondAttribute="trailing" id="Mr1-jP-i7d"/>
+                                            <constraint firstAttribute="bottom" secondItem="cQv-7F-ZFm" secondAttribute="bottom" id="bbv-fA-Rc8"/>
+                                            <constraint firstItem="cQv-7F-ZFm" firstAttribute="leading" secondItem="NwO-By-uuf" secondAttribute="leading" id="gb4-wx-eXm"/>
+                                            <constraint firstItem="cQv-7F-ZFm" firstAttribute="top" secondItem="NwO-By-uuf" secondAttribute="top" id="yke-iO-Q3D"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="NwO-By-uuf" secondAttribute="trailing" id="2WA-6d-R9F"/>
+                                    <constraint firstAttribute="bottom" secondItem="NwO-By-uuf" secondAttribute="bottom" id="Cey-KE-Owf"/>
+                                    <constraint firstItem="NwO-By-uuf" firstAttribute="width" secondItem="BfV-Ab-I2i" secondAttribute="width" id="D7z-g7-gav"/>
+                                    <constraint firstItem="NwO-By-uuf" firstAttribute="leading" secondItem="BfV-Ab-I2i" secondAttribute="leading" id="Tbv-Rb-oHh"/>
+                                    <constraint firstItem="NwO-By-uuf" firstAttribute="top" secondItem="BfV-Ab-I2i" secondAttribute="top" id="YOB-hh-P7g"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="BfV-Ab-I2i" firstAttribute="leading" secondItem="b9G-bk-MDh" secondAttribute="leading" id="1ue-d4-NtE"/>
+                            <constraint firstAttribute="bottom" secondItem="BfV-Ab-I2i" secondAttribute="bottom" id="Aew-cW-WWh"/>
+                            <constraint firstItem="BfV-Ab-I2i" firstAttribute="top" secondItem="b9G-bk-MDh" secondAttribute="top" id="rHS-x4-DcM"/>
+                            <constraint firstItem="b9G-bk-MDh" firstAttribute="trailing" secondItem="BfV-Ab-I2i" secondAttribute="trailing" id="uG6-dt-HZo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="b9G-bk-MDh"/>
+                    </view>
+                    <connections>
+                        <outlet property="postDetailView" destination="ZMt-1h-TMJ" id="yVL-Pe-lbu"/>
+                        <outlet property="tableView" destination="fGC-rn-idh" id="lGu-26-KwX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gxW-qY-iSb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-42.028985507246382" y="114.50892857142857"/>
+        </scene>
+    </scenes>
+</document>
