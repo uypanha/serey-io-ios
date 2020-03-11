@@ -22,12 +22,12 @@ struct PostModel: Codable {
     let sereyValue: String
     let upvote: Int
     let flag: Int
-    let imageUrl: [String]
+    let imageUrl: [String]?
     let replies: [PostModel]?
     
     var firstThumnailURL: URL? {
         get {
-            return imageUrl.first == nil ? nil : URL(string: imageUrl.first!)
+            return imageUrl?.first == nil ? nil : URL(string: imageUrl!.first!)
         }
     }
     

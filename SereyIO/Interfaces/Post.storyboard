@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-Ab-I2i">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="749"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NwO-By-uuf">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="640"/>
@@ -32,12 +32,9 @@
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MOL-Ab-ta7">
                                                         <rect key="frame" x="0.0" y="512" width="414" height="128"/>
                                                         <subviews>
-                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fGC-rn-idh" customClass="ContentSizedTableView" customModule="SereyIO" customModuleProvider="target">
+                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fGC-rn-idh" customClass="ContentSizedTableView" customModule="SereyIO" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="128" id="s8U-MU-6C0"/>
-                                                                </constraints>
                                                             </tableView>
                                                         </subviews>
                                                     </stackView>
@@ -61,17 +58,47 @@
                                     <constraint firstItem="NwO-By-uuf" firstAttribute="top" secondItem="BfV-Ab-I2i" secondAttribute="top" id="YOB-hh-P7g"/>
                                 </constraints>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fqo-YY-n1f">
+                                <rect key="frame" x="0.0" y="793" width="414" height="103"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Nru-gX-dLv">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="69"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fm0-ru-5j0" customClass="PostCommentView" customModule="SereyIO" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="69"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="69" id="88L-Fv-CTW"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Nru-gX-dLv" secondAttribute="trailing" id="Hy8-L1-Y8k"/>
+                                    <constraint firstItem="Nru-gX-dLv" firstAttribute="leading" secondItem="Fqo-YY-n1f" secondAttribute="leading" id="Vjk-yB-LRj"/>
+                                    <constraint firstItem="Nru-gX-dLv" firstAttribute="top" secondItem="Fqo-YY-n1f" secondAttribute="top" id="jDc-Mz-c6q"/>
+                                    <constraint firstItem="pwG-vG-hip" firstAttribute="bottom" secondItem="Nru-gX-dLv" secondAttribute="bottom" id="s8G-dN-ZQc"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="pwG-vG-hip"/>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Fqo-YY-n1f" firstAttribute="top" secondItem="BfV-Ab-I2i" secondAttribute="bottom" id="17g-5B-xvE"/>
                             <constraint firstItem="BfV-Ab-I2i" firstAttribute="leading" secondItem="b9G-bk-MDh" secondAttribute="leading" id="1ue-d4-NtE"/>
-                            <constraint firstAttribute="bottom" secondItem="BfV-Ab-I2i" secondAttribute="bottom" id="Aew-cW-WWh"/>
+                            <constraint firstAttribute="bottom" secondItem="Fqo-YY-n1f" secondAttribute="bottom" id="6ry-Z8-fN0"/>
+                            <constraint firstItem="Fqo-YY-n1f" firstAttribute="leading" secondItem="b9G-bk-MDh" secondAttribute="leading" id="dMK-fw-9ED"/>
+                            <constraint firstItem="Fqo-YY-n1f" firstAttribute="trailing" secondItem="b9G-bk-MDh" secondAttribute="trailing" id="nIo-Zf-Otd"/>
                             <constraint firstItem="BfV-Ab-I2i" firstAttribute="top" secondItem="b9G-bk-MDh" secondAttribute="top" id="rHS-x4-DcM"/>
                             <constraint firstItem="b9G-bk-MDh" firstAttribute="trailing" secondItem="BfV-Ab-I2i" secondAttribute="trailing" id="uG6-dt-HZo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b9G-bk-MDh"/>
                     </view>
                     <connections>
+                        <outlet property="postCommentContainerView" destination="Fqo-YY-n1f" id="qrs-h9-DUv"/>
+                        <outlet property="postCommentView" destination="Fm0-ru-5j0" id="MUu-Cs-VYP"/>
                         <outlet property="postDetailView" destination="ZMt-1h-TMJ" id="yVL-Pe-lbu"/>
                         <outlet property="tableView" destination="fGC-rn-idh" id="lGu-26-KwX"/>
                     </connections>

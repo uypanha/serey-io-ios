@@ -11,11 +11,14 @@ import RxCocoa
 import RxSwift
 import RxBinding
 import RichEditorView
+import RxDataSources
 
 class PostDetailViewController: BaseViewController {
     
     @IBOutlet weak var postDetailView: PostDetailView!
     @IBOutlet weak var tableView: ContentSizedTableView!
+    @IBOutlet weak var postCommentContainerView: UIView!
+    @IBOutlet weak var postCommentView: PostCommentView!
     
     private var sereyValueButton: UIBarButtonItem? {
         didSet {
@@ -24,6 +27,10 @@ class PostDetailViewController: BaseViewController {
             self.navigationItem.rightBarButtonItem = sereyValueButton
         }
     }
+    
+    lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
+        return self.prepreDataSource()
+    }()
 
     var viewModel: PostDetailViewModel!
 
@@ -33,6 +40,7 @@ class PostDetailViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
+        viewModel.downloadData()
     }
 }
 
@@ -41,6 +49,7 @@ extension PostDetailViewController {
     
     func setUpViews() {
         self.postDetailView.addBorders(edges: [.bottom], color: ColorName.border.color, thickness: 1)
+        self.postCommentContainerView.addBorders(edges: [.top], color: ColorName.border.color, thickness: 1)
         prepareTableView()
     }
     
@@ -60,6 +69,25 @@ extension PostDetailViewController {
         }
         return UIBarButtonItem(customView: button)
     }
+    
+    func prepreDataSource() -> RxTableViewSectionedReloadDataSource<SectionItem> {
+        let dataSource = RxTableViewSectionedReloadDataSource<SectionItem>(configureCell: { (datasource, tableView, indexPath, item) -> UITableViewCell in
+            switch item {
+            case is CommentCellViewModel:
+                let cell: CommentTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+                cell.cellModel = item as? CommentCellViewModel
+                return cell
+            default:
+                return UITableViewCell()
+            }
+        })
+        
+        dataSource.titleForHeaderInSection = { dataSource, index in
+            return dataSource.sectionModels[index].model.header
+        }
+        
+        return dataSource
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -75,5 +103,9 @@ extension PostDetailViewController {
             .subscribe(onNext: { [unowned self] title in
                 self.sereyValueButton = self.prepareSereyValueButton(title)
             }) ~ self.disposeBag
+        
+        self.viewModel.cells.asObservable()
+            .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
+            .disposed(by: self.disposeBag)
     }
 }

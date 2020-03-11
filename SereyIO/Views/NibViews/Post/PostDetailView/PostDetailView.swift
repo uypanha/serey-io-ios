@@ -58,6 +58,10 @@ extension PostDetailView: RichEditorDelegate {
         let html = editor.html
         editor.html = html
     }
+    
+    func richEditor(_ editor: RichEditorView, shouldInteractWith url: URL) -> Bool {
+        return false
+    }
 }
 
 #if os(iOS) || os(tvOS)

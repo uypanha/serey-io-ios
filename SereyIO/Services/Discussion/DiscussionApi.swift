@@ -14,6 +14,8 @@ enum DiscussionApi {
     case getCategories
     
     case getDiscussions(DiscussionType, QueryDiscussionsBy)
+    
+    case getPostDetail(permlink: String, authorName: String)
 }
 
 extension DiscussionApi: AuthorizedApiTargetType {
@@ -22,6 +24,11 @@ extension DiscussionApi: AuthorizedApiTargetType {
         switch self {
         case .getDiscussions(let data):
             return data.1.prepareParameters(data.0 == .byUser ? "userId" : "authorName")
+        case .getPostDetail(let data):
+            return [
+                "permlink"      : data.permlink,
+                "authorName"    : data.authorName
+            ]
         default:
             return [:]
         }
@@ -33,6 +40,8 @@ extension DiscussionApi: AuthorizedApiTargetType {
             return "/api/v1/sereyweb/getAllWebCategories"
         case .getDiscussions(let data):
             return "/api/v1/sereyweb/\(data.0.path)"
+        case .getPostDetail:
+            return "/api/v1/sereyweb/findDetailBypermlink"
         }
     }
     
@@ -42,7 +51,7 @@ extension DiscussionApi: AuthorizedApiTargetType {
     
     var task: Task {
         switch self {
-        case .getDiscussions:
+        case .getDiscussions, .getPostDetail:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         default:
             return .requestPlain

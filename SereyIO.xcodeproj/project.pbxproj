@@ -38,6 +38,7 @@
 		DC26812F23F450BE0045776E /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC26812E23F450BE0045776E /* More.storyboard */; };
 		DC26813123F45A8C0045776E /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC26813023F45A8C0045776E /* Profile.storyboard */; };
 		DC26813423F45DEF0045776E /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26813323F45DEF0045776E /* AccountViewController.swift */; };
+		DC2EA012241934640025D0B0 /* PostDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2EA011241934640025D0B0 /* PostDetailResponse.swift */; };
 		DC40D5C623E31FDF00B0DD96 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */; };
 		DC40D5C723E31FDF00B0DD96 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C523E31FDF00B0DD96 /* GradientView.swift */; };
 		DC40D5CC23E3298F00B0DD96 /* LanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C923E3298F00B0DD96 /* LanguageTableViewCell.swift */; };
@@ -141,6 +142,8 @@
 		DC9E36F82416947900289693 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E36F62416947900289693 /* CommentTableViewCell.swift */; };
 		DC9E36F92416947900289693 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC9E36F72416947900289693 /* CommentTableViewCell.xib */; };
 		DC9E36FB2416997000289693 /* CommentCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E36FA2416997000289693 /* CommentCellViewModel.swift */; };
+		DCB629EC2417E83500C64BD6 /* PostCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB629EB2417E83500C64BD6 /* PostCommentView.swift */; };
+		DCB629EE2417E84F00C64BD6 /* PostCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB629ED2417E84F00C64BD6 /* PostCommentView.xib */; };
 		DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */; };
 		DCC49AC823E8632B00119BAA /* BoardFeatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC49AC623E8632B00119BAA /* BoardFeatureView.xib */; };
 		DCC49ACC23E864E500119BAA /* FeatureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49ACB23E864E500119BAA /* FeatureStore.swift */; };
@@ -267,6 +270,7 @@
 		DC26812E23F450BE0045776E /* More.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
 		DC26813023F45A8C0045776E /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		DC26813323F45DEF0045776E /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		DC2EA011241934640025D0B0 /* PostDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailResponse.swift; sourceTree = "<group>"; };
 		DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
 		DC40D5C523E31FDF00B0DD96 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		DC40D5C923E3298F00B0DD96 /* LanguageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTableViewCell.swift; sourceTree = "<group>"; };
@@ -389,6 +393,8 @@
 		DC9E36F62416947900289693 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		DC9E36F72416947900289693 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		DC9E36FA2416997000289693 /* CommentCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCellViewModel.swift; sourceTree = "<group>"; };
+		DCB629EB2417E83500C64BD6 /* PostCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentView.swift; sourceTree = "<group>"; };
+		DCB629ED2417E84F00C64BD6 /* PostCommentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCommentView.xib; sourceTree = "<group>"; };
 		DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardFeatureView.swift; sourceTree = "<group>"; };
 		DCC49AC623E8632B00119BAA /* BoardFeatureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BoardFeatureView.xib; sourceTree = "<group>"; };
 		DCC49ACB23E864E500119BAA /* FeatureStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureStore.swift; sourceTree = "<group>"; };
@@ -1055,6 +1061,7 @@
 			isa = PBXGroup;
 			children = (
 				DC9AC6E52406C5BA008FAFA6 /* DiscussionCategoryModel.swift */,
+				DC2EA011241934640025D0B0 /* PostDetailResponse.swift */,
 				DCE19A9E240822FD0054F752 /* PostModel.swift */,
 			);
 			path = Discussion;
@@ -1079,6 +1086,7 @@
 		DC9E36E024135A1700289693 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				DCB629EA2417E7F700C64BD6 /* PostCommentView */,
 				DC9E36E124135A1F00289693 /* PostDetailView */,
 			);
 			path = Post;
@@ -1111,6 +1119,15 @@
 				DC9E36F72416947900289693 /* CommentTableViewCell.xib */,
 			);
 			path = CommentTableViewCell;
+			sourceTree = "<group>";
+		};
+		DCB629EA2417E7F700C64BD6 /* PostCommentView */ = {
+			isa = PBXGroup;
+			children = (
+				DCB629EB2417E83500C64BD6 /* PostCommentView.swift */,
+				DCB629ED2417E84F00C64BD6 /* PostCommentView.xib */,
+			);
+			path = PostCommentView;
 			sourceTree = "<group>";
 		};
 		DCC49AC423E8632B00119BAA /* BoardFeatureView */ = {
@@ -1527,6 +1544,7 @@
 				DC9E36F2241628E000289693 /* custom_rich_editor.js in Resources */,
 				DC6ED52623267EED00770B31 /* Main.storyboard in Resources */,
 				DC05FDAD23F1AB620093B47B /* SettingTableViewCell.xib in Resources */,
+				DCB629EE2417E84F00C64BD6 /* PostCommentView.xib in Resources */,
 				DC40D5CD23E3298F00B0DD96 /* LanguageTableViewCell.xib in Resources */,
 				DC6A790423CA242B001D1009 /* EmptyOrErrorView.xib in Resources */,
 				DC42AF0523E9CFB5008F8A0F /* PostTableViewCell.xib in Resources */,
@@ -1689,6 +1707,7 @@
 				DCD39887232E251C00C812EB /* StyleProtocol.swift in Sources */,
 				DC40D5D023E329E000B0DD96 /* LanguageModel.swift in Sources */,
 				DC6ED5782326A40200770B31 /* AppCoordinator.swift in Sources */,
+				DC2EA012241934640025D0B0 /* PostDetailResponse.swift in Sources */,
 				DC40D5CE23E3298F00B0DD96 /* LanguageCellViewModel.swift in Sources */,
 				DC8EAB7523E70ED600E00A00 /* MDCQuadPageControl.swift in Sources */,
 				DC19DBE723EC5E7500571CC8 /* PostTableViewController.swift in Sources */,
@@ -1792,6 +1811,7 @@
 				DC6ED5822326A47D00770B31 /* AuthData.swift in Sources */,
 				DC6ED5722326A36500770B31 /* DeeplinkType.swift in Sources */,
 				DC6ED5882326A4F900770B31 /* APNSTokenStore.swift in Sources */,
+				DCB629EC2417E83500C64BD6 /* PostCommentView.swift in Sources */,
 				DC19DBE523EC5D0700571CC8 /* BaseTableViewController.swift in Sources */,
 				DC19DBF623EC751700571CC8 /* SearchViewModel.swift in Sources */,
 				DCF67FE1240FFD65003061A7 /* PeopleTableViewCell.swift in Sources */,

@@ -21,4 +21,9 @@ class DiscussionService: AppService<DiscussionApi> {
         return self.provider.rx.requestObject(.getDiscussions(type, query), type: [PostModel].self)
             .asObservable()
     }
+    
+    func getPostDetail(permlink: String, authorName: String) -> Observable<PostDetailResponse> {
+        return self.provider.rx.requestObject(.getPostDetail(permlink: permlink, authorName: authorName), type: PostDetailResponse.self)
+            .asObservable()
+    }
 }
