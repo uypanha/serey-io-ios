@@ -1,0 +1,5 @@
+img {
+    max-width: (imageMaxWidth) !important;
+    height: auto;
+    border-radius: 4px;
+}

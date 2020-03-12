@@ -60,6 +60,7 @@ extension PostDetailViewModel {
     }
     
     private func fetchPostDetial() {
+        self.replies.renotify()
         self.discussionService.getPostDetail(permlink: self.permlink.value, authorName: self.authorName.value)
             .subscribe(onNext: { [weak self] response in
                 self?.isDownloading.accept(false)
@@ -82,7 +83,12 @@ fileprivate extension PostDetailViewModel {
     }
     
     func prepareCells(_ replies: [PostModel]) -> [SectionItem] {
-        return [SectionItem(items: replies.map { CommentCellViewModel($0) })]
+        var cells: [CellViewModel] = []
+        cells.append(contentsOf: replies.map { CommentCellViewModel($0) })
+        if self.isDownloading.value && replies.isEmpty {
+            cells.append(contentsOf: (0...3).map { _ in CommentCellViewModel(true) })
+        }
+        return [SectionItem(items: cells)]
     }
 }
 

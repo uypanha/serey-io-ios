@@ -65,6 +65,7 @@ extension MoreViewController {
         self.tableView.tableFooterView = UIView()
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
         
+        self.tableView.register(SignInTableViewCell.self)
         self.tableView.register(ProfileTableViewCell.self)
         self.tableView.register(SettingTableViewCell.self)
     }
@@ -72,6 +73,10 @@ extension MoreViewController {
     func prepreDataSource() -> RxTableViewSectionedReloadDataSource<SectionItem> {
         let dataSource = RxTableViewSectionedReloadDataSource<SectionItem>(configureCell: { (datasource, tableView, indexPath, item) -> UITableViewCell in
             switch item {
+            case is SignInCellViewModel:
+                let cell: SignInTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+                cell.cellModel = item as? SignInCellViewModel
+                return cell
             case is ProfileCellViewModel:
                 let cell: ProfileTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
                 cell.cellModel = item as? ProfileCellViewModel

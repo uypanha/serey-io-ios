@@ -87,3 +87,40 @@ func <-> <T>(property: ControlProperty<T>, behaviorRelay: BehaviorRelay<T>) -> D
     
     return Disposables.create(bindToUIDisposable, bindToVariable)
 }
+
+extension BehaviorRelay where Element: RangeReplaceableCollection {
+    
+    func append(contentsOf elements: Element) {
+        var newValue = value
+        newValue.append(contentsOf: elements)
+        accept(newValue)
+    }
+    
+    func append(_ element: Element.Element) {
+        var newValue = value
+        newValue.append(element)
+        accept(newValue)
+    }
+    
+    func remove(at index: Element.Index) {
+        var newValue = value
+        newValue.remove(at: index)
+        accept(newValue)
+    }
+    
+    func removeAll() {
+        var values = value
+        values.removeAll()
+        accept(values)
+    }
+    
+    func insert(_ element: Element.Element, at index: Element.Index) {
+        var newValue = value
+        newValue.insert(element, at: index)
+        accept(newValue)
+    }
+    
+    func renotify() {
+        accept(value)
+    }
+}

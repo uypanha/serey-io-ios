@@ -46,7 +46,7 @@ class CommentTableViewCell: BaseTableViewCell {
                 cellModel.profileViewModel ~> self.profileView.rx.profileViewModel,
                 cellModel.authorName ~> self.authorNameLabel.rx.text,
                 cellModel.publishedAt ~> self.publishDateLabel.rx.text,
-                cellModel.contentDesc ~> self.descriptionLabel.rx.text,
+                cellModel.contentAttributedString ~> self.descriptionLabel.rx.attributedText,
                 cellModel.sereyValue ~> self.sereyValueLabel.rx.text,
                 cellModel.upVoteCount ~> self.upVoteCountLabel.rx.text,
                 cellModel.downVoteCount ~> self.downVoteCountLabel.rx.text,
@@ -82,6 +82,9 @@ extension CommentTableViewCell {
         self.authorNameLabel.setRadius(all: cornerRadius)
         self.publishDateLabel.backgroundColor = backgroundColor
         self.publishDateLabel.setRadius(all: cornerRadius)
+        
+        self.descriptionLabel.backgroundColor = backgroundColor
+        self.descriptionLabel.setRadius(all: cornerRadius)
         
         self.sereyValueContainerView.isHidden = isHidden
         self.upVoteContainerView.isHidden = isHidden

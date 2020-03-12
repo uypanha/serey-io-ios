@@ -89,7 +89,11 @@ extension MoreViewModel {
     fileprivate func prepareCellModels() -> [SectionType: [CellViewModel]] {
         var sectionItems: [SectionType: [CellViewModel]] = [:]
         
-        sectionItems[.profile] = [ProfileCellViewModel(), SettingCellViewModel(.myWallet, true)]
+        if AuthData.shared.isUserLoggedIn {
+            sectionItems[.profile] = [ProfileCellViewModel(), SettingCellViewModel(.myWallet, true)]
+        } else {
+            sectionItems[.profile] = [SignInCellViewModel()]
+        }
         sectionItems[.general] = [SettingCellViewModel(.lagnauge), SettingCellViewModel(.notificationSettings, true)]
         sectionItems[.about] = [SettingCellViewModel(.sereyApps), SettingCellViewModel(.version, true)]
         

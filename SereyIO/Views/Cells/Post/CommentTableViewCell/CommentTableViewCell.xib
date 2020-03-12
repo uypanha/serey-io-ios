@@ -25,13 +25,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="418" height="259"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="uuT-0e-Kzt">
-                                <rect key="frame" x="16" y="16" width="386" height="227"/>
+                                <rect key="frame" x="16" y="8" width="386" height="243"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="4dj-Zo-lWi">
-                                        <rect key="frame" x="0.0" y="0.0" width="386" height="46.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="386" height="62.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KPr-Tt-KgH" customClass="ProfileView" customModule="SereyIO" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1.5" width="44" height="44"/>
+                                                <rect key="frame" x="0.0" y="9.5" width="44" height="44"/>
                                                 <color key="backgroundColor" red="0.42352941179999998" green="0.38823529410000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="KPr-Tt-KgH" secondAttribute="height" multiplier="1:1" id="dEI-LC-VUS"/>
@@ -39,7 +39,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="2yX-al-aXF">
-                                                <rect key="frame" x="56" y="4" width="330" height="39"/>
+                                                <rect key="frame" x="56" y="12" width="330" height="39"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Cena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCo-Q6-kO6">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
@@ -66,7 +66,7 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gw-xn-dII">
-                                        <rect key="frame" x="0.0" y="62.5" width="386" height="95.5"/>
+                                        <rect key="frame" x="0.0" y="78.5" width="386" height="95.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="lTH-Dh-8sl"/>
                                         </constraints>
@@ -76,7 +76,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="T20-bo-Cpt">
-                                        <rect key="frame" x="0.0" y="174" width="386" height="53"/>
+                                        <rect key="frame" x="0.0" y="190" width="386" height="53"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="xu1-Jo-OZm">
                                                 <rect key="frame" x="0.0" y="0.0" width="263.5" height="16"/>
@@ -174,8 +174,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="uuT-0e-Kzt" firstAttribute="leading" secondItem="lUF-Cz-7bm" secondAttribute="leading" constant="16" id="52m-tQ-1sl"/>
-                            <constraint firstAttribute="bottom" secondItem="uuT-0e-Kzt" secondAttribute="bottom" constant="16" id="G1J-W2-ptQ"/>
-                            <constraint firstItem="uuT-0e-Kzt" firstAttribute="top" secondItem="lUF-Cz-7bm" secondAttribute="top" constant="16" id="oHL-aW-Ra8"/>
+                            <constraint firstAttribute="bottom" secondItem="uuT-0e-Kzt" secondAttribute="bottom" constant="8" id="G1J-W2-ptQ"/>
+                            <constraint firstItem="uuT-0e-Kzt" firstAttribute="top" secondItem="lUF-Cz-7bm" secondAttribute="top" constant="8" id="oHL-aW-Ra8"/>
                             <constraint firstAttribute="trailing" secondItem="uuT-0e-Kzt" secondAttribute="trailing" constant="16" id="vD2-L0-GY8"/>
                         </constraints>
                     </view>
