@@ -1,0 +1,11 @@
+/* 
+  File.strings
+  SereyIO
+
+  Created by Panha Uy on 3/15/20.
+  Copyright © 2020 Phanha Uy. All rights reserved.
+*/
+"userName"                              = "Username";
+"userNameRequiredMessage"               = "Username field is required.";
+"privateKeyOrPassword"                  = "Private Key or Password";
+"privateKeyOrPasswordRequireMessage"    = "Private key or password field is required.";

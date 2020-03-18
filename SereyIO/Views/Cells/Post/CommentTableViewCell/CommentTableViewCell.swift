@@ -50,6 +50,7 @@ class CommentTableViewCell: BaseTableViewCell {
                 cellModel.sereyValue ~> self.sereyValueLabel.rx.text,
                 cellModel.upVoteCount ~> self.upVoteCountLabel.rx.text,
                 cellModel.downVoteCount ~> self.downVoteCountLabel.rx.text,
+                cellModel.conversationText ~> self.viewConversationButton.rx.title(for: .normal),
                 cellModel.isReplyButtonHidden ~> self.viewConversationButton.rx.isHidden
             ]
             

@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+import RxBinding
 
 class SignInTableViewCell: BaseTableViewCell {
     
@@ -14,11 +17,7 @@ class SignInTableViewCell: BaseTableViewCell {
     @IBOutlet weak var orRegisterLabel: UILabel!
     @IBOutlet weak var goButton: UIButton!
     
-    var cellModel: SignInCellViewModel? {
-        didSet {
-            
-        }
-    }
+    var cellModel: SignInCellViewModel?
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -33,6 +32,7 @@ class SignInTableViewCell: BaseTableViewCell {
         // Initialization code
         setUpTexts()
         setUpRxObservers()
+        addBorder(edges: .bottom, color: UIColor.lightGray.withAlphaComponent(0.5), thickness: 1)
     }
     
     override func layoutSubviews() {
@@ -57,9 +57,9 @@ fileprivate extension SignInTableViewCell {
     }
     
     func setUpControlsObservers() {
-//        self.goButton.rx.tap.asObservable()
-//            .subscribe(onNext: { [weak self] _ in
-//                self?.cellModel?.didAction(with: .signInPressed)
-//            }).disposed(by: self.disposeBag)
+        self.goButton.rx.tap.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.cellModel?.didAction(with: .signInPressed)
+            }) ~ self.disposeBag
     }
 }

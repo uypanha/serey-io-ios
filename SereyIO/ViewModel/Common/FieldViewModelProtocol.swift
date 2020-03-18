@@ -10,6 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 import RxBinding
+import MaterialComponents
 
 // FieldViewModel
 protocol FieldViewModelProtocol {
@@ -118,6 +119,14 @@ class TextFieldViewModel: CellViewModel, FieldViewModelProtocol {
 // Marks: - TextFieldViewModel Common TextField
 extension TextFieldViewModel {
     
+    static func userNameTextFieldViewModel() -> TextFieldViewModel {
+        return textFieldWith(title: R.string.auth.userName.localized(), errorMessage: R.string.auth.userNameRequiredMessage.localized(), validation: .notEmpty)
+    }
+    
+    static func privateKeyOrPwdTextFieldViewModel(_ placeholder: String = R.string.auth.privateKeyOrPassword.localized(), _ errorMessage: String = R.string.auth.privateKeyOrPasswordRequireMessage.localized()) -> TextFieldViewModel {
+        return textFieldWith(title: placeholder, errorMessage: errorMessage, validation: .notEmpty)
+    }
+    
     static func textFieldWith(title: String, errorMessage: String? = nil, validation: TextFieldValidation = .none) -> TextFieldViewModel {
         let textFieldModel = TextFieldModel(titleText: title, placeholderText: title, textFieldText: BehaviorRelay(value: ""), errorText: errorMessage, textValidation: validation)
         
@@ -142,6 +151,14 @@ extension TextFieldViewModel {
                     self?.errorText.accept(nil)
                 }).disposed(by: self.disposeBag)
         }
+    }
+    
+    func bind(with textField: MDCTextField, controller: MDCTextInputControllerBase? = nil) {
+        bind(with: textField as UITextField)
+        errorText.asObservable()
+            .subscribe(onNext: { errorText in
+                controller?.setErrorText(errorText, errorAccessibilityValue: errorText)
+            }).disposed(by: self.disposeBag)
     }
 }
 

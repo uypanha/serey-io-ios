@@ -23,15 +23,15 @@ class WebViewViewModel: BaseViewModel {
     
     private var webViewTitle: String?
     var title: String {
-        return webViewTitle ?? R.string.common.webViewDefaultTitle.localized()
+        return webViewTitle ?? ""
     }
     
-    init(withStringToLoad stringToLoad: String?, title: String?) {
+    init(withStringToLoad stringToLoad: String?, title: String? = R.string.common.webViewDefaultTitle.localized()) {
         self.webViewTitle = title
         self.stringToLoad = stringToLoad
     }
     
-    init(withURLToLoad urlToLoad: URL?, title: String?) {
+    init(withURLToLoad urlToLoad: URL?, title: String? = R.string.common.webViewDefaultTitle.localized()) {
         self.webViewTitle = title
         self.urlToLoad = urlToLoad
     }

@@ -27,6 +27,12 @@
 		DC115F3B241A9A74006BE78C /* SignInTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC115F39241A9A74006BE78C /* SignInTableViewCell.swift */; };
 		DC115F3C241A9A74006BE78C /* SignInTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC115F3A241A9A74006BE78C /* SignInTableViewCell.xib */; };
 		DC115F3E241A9BA5006BE78C /* SignInCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC115F3D241A9BA5006BE78C /* SignInCellViewModel.swift */; };
+		DC12F20B242271B60099C479 /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC12F20A242271B60099C479 /* TokenModel.swift */; };
+		DC12F20D2422720E0099C479 /* DataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC12F20C2422720E0099C479 /* DataResponseModel.swift */; };
+		DC12F2102422782C0099C479 /* UserApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC12F20F2422782C0099C479 /* UserApi.swift */; };
+		DC12F212242278F90099C479 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC12F211242278F90099C479 /* UserModel.swift */; };
+		DC12F21424227A340099C479 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC12F21324227A340099C479 /* UserService.swift */; };
+		DC12F21624227AB40099C479 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC12F21524227AB40099C479 /* AccountModel.swift */; };
 		DC19DBE323EC581A00571CC8 /* ChooseCategorySheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */; };
 		DC19DBE523EC5D0700571CC8 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBE423EC5D0700571CC8 /* BaseTableViewController.swift */; };
 		DC19DBE723EC5E7500571CC8 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBE623EC5E7500571CC8 /* PostTableViewController.swift */; };
@@ -64,6 +70,10 @@
 		DC42AF0423E9CFB5008F8A0F /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC42AF0223E9CFB5008F8A0F /* PostTableViewCell.swift */; };
 		DC42AF0523E9CFB5008F8A0F /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC42AF0323E9CFB5008F8A0F /* PostTableViewCell.xib */; };
 		DC42AF0723E9D39B008F8A0F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC42AF0623E9D39B008F8A0F /* CardView.swift */; };
+		DC562433241E73D80076A78C /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC562432241E73D80076A78C /* SignInViewModel.swift */; };
+		DC562436241E75450076A78C /* Auth.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC562438241E75450076A78C /* Auth.strings */; };
+		DC56243C241E82B80076A78C /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC56243B241E82B80076A78C /* AuthService.swift */; };
+		DC56243E241E87000076A78C /* AuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC56243D241E87000076A78C /* AuthApi.swift */; };
 		DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78E923CA1F38001D1009 /* BaseCellViewModel.swift */; };
 		DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78EB23CA1F57001D1009 /* CellViewModel.swift */; };
 		DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78ED23CA1F72001D1009 /* NetworkViewModelProtocol.swift */; };
@@ -268,6 +278,12 @@
 		DC115F39241A9A74006BE78C /* SignInTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInTableViewCell.swift; sourceTree = "<group>"; };
 		DC115F3A241A9A74006BE78C /* SignInTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInTableViewCell.xib; sourceTree = "<group>"; };
 		DC115F3D241A9BA5006BE78C /* SignInCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInCellViewModel.swift; sourceTree = "<group>"; };
+		DC12F20A242271B60099C479 /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
+		DC12F20C2422720E0099C479 /* DataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataResponseModel.swift; sourceTree = "<group>"; };
+		DC12F20F2422782C0099C479 /* UserApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserApi.swift; sourceTree = "<group>"; };
+		DC12F211242278F90099C479 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		DC12F21324227A340099C479 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		DC12F21524227AB40099C479 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
 		DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCategorySheetViewController.swift; sourceTree = "<group>"; };
 		DC19DBE423EC5D0700571CC8 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		DC19DBE623EC5E7500571CC8 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
@@ -307,6 +323,11 @@
 		DC42AF0223E9CFB5008F8A0F /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		DC42AF0323E9CFB5008F8A0F /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		DC42AF0623E9D39B008F8A0F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		DC562432241E73D80076A78C /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		DC562437241E75450076A78C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Auth.strings; sourceTree = "<group>"; };
+		DC562439241E75470076A78C /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Auth.strings"; sourceTree = "<group>"; };
+		DC56243B241E82B80076A78C /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		DC56243D241E87000076A78C /* AuthApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthApi.swift; sourceTree = "<group>"; };
 		DC6A78E923CA1F38001D1009 /* BaseCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78EB23CA1F57001D1009 /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78ED23CA1F72001D1009 /* NetworkViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -565,6 +586,23 @@
 			path = SignInTableViewCell;
 			sourceTree = "<group>";
 		};
+		DC12F209242271A30099C479 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				DC12F20A242271B60099C479 /* TokenModel.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		DC12F20E2422781E0099C479 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				DC12F20F2422782C0099C479 /* UserApi.swift */,
+				DC12F21324227A340099C479 /* UserService.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		DC19DBE823EC5F8400571CC8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -705,6 +743,23 @@
 			path = PostTableViewCell;
 			sourceTree = "<group>";
 		};
+		DC562431241E73C30076A78C /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				DC562432241E73D80076A78C /* SignInViewModel.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		DC56243A241E82A90076A78C /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				DC56243D241E87000076A78C /* AuthApi.swift */,
+				DC56243B241E82B80076A78C /* AuthService.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		DC6A78EF23CA1FC6001D1009 /* CollectionProvider */ = {
 			isa = PBXGroup;
 			children = (
@@ -737,9 +792,11 @@
 		DC6A790A23CA26B1001D1009 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DC12F20C2422720E0099C479 /* DataResponseModel.swift */,
 				DC40D5D523E32A6B00B0DD96 /* ImageTextModel.swift */,
 				DC40D5CF23E329E000B0DD96 /* LanguageModel.swift */,
 				DCF67FEE24100C6F003061A7 /* ListDataResponseModel.swift */,
+				DC12F209242271A30099C479 /* Auth */,
 				DC9AC6E42406C5A2008FAFA6 /* Discussion */,
 				DCF67FEA24100BC7003061A7 /* User */,
 			);
@@ -1093,8 +1150,8 @@
 		DC9AC6DD2406BEFB008FAFA6 /* Discussion */ = {
 			isa = PBXGroup;
 			children = (
-				DC9AC6E02406C1D1008FAFA6 /* DiscussionService.swift */,
 				DC9AC6DE2406BF1C008FAFA6 /* DiscussionApi.swift */,
+				DC9AC6E02406C1D1008FAFA6 /* DiscussionService.swift */,
 			);
 			path = Discussion;
 			sourceTree = "<group>";
@@ -1243,6 +1300,7 @@
 		DCD39863232E1CAB00C812EB /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				DC562431241E73C30076A78C /* Auth */,
 				DCD39864232E1CB600C812EB /* Base */,
 				DC6A78F823CA20AB001D1009 /* Common */,
 				DC19DBE823EC5F8400571CC8 /* Main */,
@@ -1269,9 +1327,11 @@
 			isa = PBXGroup;
 			children = (
 				DCD3986A232E1DF700C812EB /* AppService.swift */,
+				DC56243A241E82A90076A78C /* Auth */,
 				DC9AC6DD2406BEFB008FAFA6 /* Discussion */,
 				DCF67FDB240FFC3B003061A7 /* Search */,
 				DC6FCE6523F05D1700D72F6D /* Steem */,
+				DC12F20E2422781E0099C479 /* User */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1282,6 +1342,7 @@
 				DC40D5DB23E32F3800B0DD96 /* Common.strings */,
 				DC40D5EA23E487A600B0DD96 /* OnBoard.strings */,
 				DC05FDB223F1AC4F0093B47B /* Settings.strings */,
+				DC562438241E75450076A78C /* Auth.strings */,
 			);
 			path = Localizable;
 			sourceTree = "<group>";
@@ -1420,6 +1481,8 @@
 			isa = PBXGroup;
 			children = (
 				DCF67FEB24100C00003061A7 /* PeopleModel.swift */,
+				DC12F21524227AB40099C479 /* AccountModel.swift */,
+				DC12F211242278F90099C479 /* UserModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -1571,6 +1634,7 @@
 				DC9E36D92412997800289693 /* Post.storyboard in Resources */,
 				DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */,
 				DC9E36E524135A3D00289693 /* PostDetailView.xib in Resources */,
+				DC562436241E75450076A78C /* Auth.strings in Resources */,
 				DC115F30241A8EA5006BE78C /* trix-editor.css in Resources */,
 				DC26812B23F2FCB30045776E /* ProfileTableViewCell.xib in Resources */,
 				DC05FDB023F1AC4F0093B47B /* Settings.strings in Resources */,
@@ -1760,6 +1824,7 @@
 				DC8EAB7523E70ED600E00A00 /* MDCQuadPageControl.swift in Sources */,
 				DC19DBE723EC5E7500571CC8 /* PostTableViewController.swift in Sources */,
 				DC40D5D823E32AB800B0DD96 /* Utilities.swift in Sources */,
+				DC12F212242278F90099C479 /* UserModel.swift in Sources */,
 				DC19DBEF23EC60C900571CC8 /* PostCellViewModel.swift in Sources */,
 				DCEC0CC3240A530B002F4B6F /* FilteredCategoryTableViewCell.swift in Sources */,
 				DC9E36F024154BC900289693 /* PFColorHash.swift in Sources */,
@@ -1769,6 +1834,7 @@
 				DC42AF0723E9D39B008F8A0F /* CardView.swift in Sources */,
 				DC9E36E324135A3400289693 /* PostDetailView.swift in Sources */,
 				DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */,
+				DC12F21424227A340099C479 /* UserService.swift in Sources */,
 				DC115F2C241A8D38006BE78C /* UtilsHelper.swift in Sources */,
 				DC9AC6E12406C1D1008FAFA6 /* DiscussionService.swift in Sources */,
 				DCF67FE724100221003061A7 /* CircularView.swift in Sources */,
@@ -1776,6 +1842,8 @@
 				DC6A790323CA242B001D1009 /* EmptyOrErrorViewModel.swift in Sources */,
 				DCD39889232E254100C812EB /* UIColor+Converter.swift in Sources */,
 				DCD39885232E24E500C812EB /* Reusable+Extensions.swift in Sources */,
+				DC12F20B242271B60099C479 /* TokenModel.swift in Sources */,
+				DC56243E241E87000076A78C /* AuthApi.swift in Sources */,
 				DCD39881232E24A400C812EB /* NSLayoutConstraint+Multiplier.swift in Sources */,
 				DC6FCE7923F05D1700D72F6D /* Helper.swift in Sources */,
 				DCD3989A232E2DE700C812EB /* UINavigationController.swift in Sources */,
@@ -1800,6 +1868,7 @@
 				DC6FCE7723F05D1700D72F6D /* Tag.swift in Sources */,
 				DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */,
 				DCC49AD523E865D700119BAA /* ProfileViewModel.swift in Sources */,
+				DC562433241E73D80076A78C /* SignInViewModel.swift in Sources */,
 				DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */,
 				DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */,
 				DC9E36E92413F4A100289693 /* RichEditor+Custom.swift in Sources */,
@@ -1826,6 +1895,7 @@
 				DCC49ACE23E865B600119BAA /* BoardFeatureViewModel.swift in Sources */,
 				DC6ED5842326A4BA00770B31 /* NotificationDispatcher.swift in Sources */,
 				DCD39870232E1F7E00C812EB /* LanguageManager.swift in Sources */,
+				DC12F21624227AB40099C479 /* AccountModel.swift in Sources */,
 				DC6FCE7423F05D1700D72F6D /* Steem.swift in Sources */,
 				DC8EAB8323E7231A00E00A00 /* MoreViewController.swift in Sources */,
 				DCF67FDD240FFC4A003061A7 /* SearchApi.swift in Sources */,
@@ -1854,6 +1924,7 @@
 				DCF8738023F6F7CE007A8724 /* AccountViewModel.swift in Sources */,
 				DCEC0CBE240971AE002F4B6F /* ShimmeringProtocol.swift in Sources */,
 				DCC49ACC23E864E500119BAA /* FeatureStore.swift in Sources */,
+				DC56243C241E82B80076A78C /* AuthService.swift in Sources */,
 				DCD3985C232E104400C812EB /* SlashScreenViewController.swift in Sources */,
 				DC19DBF323EC6E4600571CC8 /* PaddingTextField.swift in Sources */,
 				DCD39894232E28C900C812EB /* WebViewViewController.swift in Sources */,
@@ -1878,8 +1949,10 @@
 				DC6ED56623269B6600770B31 /* ColorsGen.swift in Sources */,
 				DC40D5CC23E3298F00B0DD96 /* LanguageTableViewCell.swift in Sources */,
 				DC6A78F123CA1FD6001D1009 /* CollectionDataProviderModel.swift in Sources */,
+				DC12F2102422782C0099C479 /* UserApi.swift in Sources */,
 				DC9E36FB2416997000289693 /* CommentCellViewModel.swift in Sources */,
 				DCD39898232E2AD700C812EB /* CloseableNavigationController.swift in Sources */,
+				DC12F20D2422720E0099C479 /* DataResponseModel.swift in Sources */,
 				DC8EAB7923E721EE00E00A00 /* BaseTabBarViewController.swift in Sources */,
 				DC9E36F82416947900289693 /* CommentTableViewCell.swift in Sources */,
 				DCD39891232E265F00C812EB /* MediaPickerHelper.swift in Sources */,
@@ -1959,6 +2032,15 @@
 				DC40D5EB23E487A800B0DD96 /* km-KH */,
 			);
 			name = OnBoard.strings;
+			sourceTree = "<group>";
+		};
+		DC562438241E75450076A78C /* Auth.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC562437241E75450076A78C /* en */,
+				DC562439241E75470076A78C /* km-KH */,
+			);
+			name = Auth.strings;
 			sourceTree = "<group>";
 		};
 		DC6ED52423267EED00770B31 /* Main.storyboard */ = {

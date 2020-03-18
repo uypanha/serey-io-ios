@@ -84,7 +84,7 @@ extension HomeViewController {
         tabBar.itemAppearance = .titles
         tabBar.alignment = .justified
         tabBar.selectionIndicatorTemplate = TabBarIndicator()
-        tabBar.bottomDividerColor = .lightGray
+        tabBar.bottomDividerColor = ColorName.border.color
         tabBar.delegate = self
     }
     

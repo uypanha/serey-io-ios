@@ -25,6 +25,12 @@ internal struct ColorName {
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#dbdbdb"></span>
   /// Alpha: 100% <br/> (0xdbdbdbff)
   internal static let border = ColorName(rgbaValue: 0xdbdbdbff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#7f98ed"></span>
+  /// Alpha: 100% <br/> (0x7f98edff)
+  internal static let buttonBg = ColorName(rgbaValue: 0x7f98edff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#cccccc"></span>
+  /// Alpha: 100% <br/> (0xccccccff)
+  internal static let disabled = ColorName(rgbaValue: 0xccccccff)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
   /// Alpha: 100% <br/> (0xffffffff)
   internal static let navigationBg = ColorName(rgbaValue: 0xffffffff)

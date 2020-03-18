@@ -8,13 +8,4 @@
 
 import Foundation
 
-struct ListDataResponseModel<T: Codable>: Codable {
-    
-    let message: String
-    let data: [T]
-    
-    enum CodingKeys: String, CodingKey {
-        case message
-        case data
-    }
-}
+class ListDataResponseModel<T: Codable>: DataResponseModel<[T]> {}

@@ -3,7 +3,9 @@ Secondary       : #1E358F
 Positive        : #4ECD77
 AlmostRed       : #FF5B5B
 Shimmering      : #E8E8E8
+Disabled        : #CCCCCC
 
+ButtonBg        : #7F98ED
 PostBackground  : #FFFFFF
 Border          : #DBDBDB
 

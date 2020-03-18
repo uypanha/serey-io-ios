@@ -62,6 +62,7 @@ fileprivate extension PostTableViewController {
             case is FilteredCategoryCellViewModel:
                 let cell: FilteredCategoryTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
                 cell.cellModel = item as? FilteredCategoryCellViewModel
+                cell.layoutIfNeeded()
                 return cell
             default:
                 return UITableViewCell()

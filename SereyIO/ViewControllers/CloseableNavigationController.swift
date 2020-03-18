@@ -34,13 +34,14 @@ class CloseableNavigationController: UINavigationController {
         }
         
         return UIBarButtonItem(image: self.closeIcon, style: .plain, target: self, action: #selector(self.backActionPressed))
-        }()
+    }()
     
-    init(rootViewController: UIViewController, closeIcon: UIImage? = R.image.leftArrowIcon(), closeTitle: StringResource? = R.string.common.back) {
+    init(rootViewController: UIViewController, closeIcon: UIImage? = R.image.clearIcon(), closeTitle: StringResource? = nil) {
         super.init(rootViewController: rootViewController)
         
         self.closeIcon = closeIcon
         self.closeTitle = closeTitle
+        self.modalPresentationStyle = .fullScreen
         rootViewController.navigationItem.leftBarButtonItem = self.backButton
     }
     

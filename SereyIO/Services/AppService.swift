@@ -35,7 +35,9 @@ class AppService<T: TargetType> {
         #if DEBUG
         plugins.append(NetworkLoggerPlugin(verbose: true))
         #endif
-        return MoyaProvider<T>(manager: DefaultAlamofireManager.sharedManager(self.timeOut), plugins: plugins)
+        var manager = DefaultAlamofireManager.sharedManager(self.timeOut)
+        
+        return MoyaProvider<T>(manager: manager, plugins: plugins)
     }()
     
     init() {}
@@ -92,6 +94,16 @@ class DefaultAlamofireManager: Alamofire.SessionManager {
         configuration.timeoutIntervalForRequest = 30 // as seconds, you can set your request timeout
         configuration.timeoutIntervalForResource = 30 // as seconds, you can set your resource timeout
         configuration.requestCachePolicy = .useProtocolCachePolicy
-        return DefaultAlamofireManager(configuration: configuration)
+        return DefaultAlamofireManager(configuration: configuration, serverTrustPolicyManager: CustomServerTrustPoliceManager())
+    }
+}
+
+class CustomServerTrustPoliceManager : ServerTrustPolicyManager {
+    override func serverTrustPolicy(forHost host: String) -> ServerTrustPolicy? {
+        return .disableEvaluation
+    }
+
+    public init() {
+        super.init(policies: [:])
     }
 }

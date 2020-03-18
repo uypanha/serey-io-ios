@@ -19,6 +19,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
     }
     
     enum ViewToPresent {
+        case signInController
         case accountViewController(AccountViewModel)
         case languagesViewController
         case webViewController(WebViewViewModel)
@@ -30,15 +31,19 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
     // output:
     lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
     
+    let userInfo: BehaviorRelay<UserModel?>
     let cells: BehaviorRelay<[SectionItem]>
     let cellModels: BehaviorRelay<[SectionType: [CellViewModel]]>
     
+    let userService: UserService
     lazy var downloadDisposeBag: DisposeBag = DisposeBag()
     lazy var isDownloading = BehaviorRelay<Bool>(value: false)
     
     override init() {
+        self.userInfo = BehaviorRelay(value: AuthData.shared.loggedUserModel)
         self.cells = BehaviorRelay(value: [])
         self.cellModels = BehaviorRelay(value: [:])
+        self.userService = UserService()
         super.init()
         
         setUpRxObservers()
@@ -54,14 +59,15 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
 // MARK: - Networks
 extension MoreViewModel {
     
-    func initialDownloadData() {
-        downloadData()
+    func downloadData() {
+        if AuthData.shared.isUserLoggedIn && !self.isDownloading.value {
+            self.isDownloading.accept(true)
+            self.fetchProfile()
+        }
     }
     
-    func downloadData() {
-        if !self.isDownloading.value {
-            self.isDownloading.accept(true)
-        }
+    fileprivate func fetchProfile() {
+        
     }
 }
 
@@ -92,7 +98,7 @@ extension MoreViewModel {
         if AuthData.shared.isUserLoggedIn {
             sectionItems[.profile] = [ProfileCellViewModel(), SettingCellViewModel(.myWallet, true)]
         } else {
-            sectionItems[.profile] = [SignInCellViewModel()]
+            sectionItems[.profile] = [SignInCellViewModel().then { [weak self] in self?.setUpSignInCellViewModelObservers($0) }]
         }
         sectionItems[.general] = [SettingCellViewModel(.lagnauge), SettingCellViewModel(.notificationSettings, true)]
         sectionItems[.about] = [SettingCellViewModel(.sereyApps), SettingCellViewModel(.version, true)]
@@ -181,6 +187,13 @@ fileprivate extension MoreViewModel {
                 }
             }).disposed(by: self.disposeBag)
     }
+    
+    func setUpSignInCellViewModelObservers(_ cellModel: SignInCellViewModel) {
+        cellModel.shouldSignIn.asObservable()
+            .map { ViewToPresent.signInController }
+            .bind(to: self.shouldPresentSubject)
+            .disposed(by: cellModel.disposeBag)
+    }
 }
 
 // MARK: - NotificationObserver
@@ -191,8 +204,9 @@ extension MoreViewModel: NotificationObserver {
         switch appNotif {
         case .languageChanged:
             self.cellModels.accept(self.prepareCellModels())
-        default:
-            break
+        case .userDidLogin, .userDidLogOut:
+            self.userInfo.accept(AuthData.shared.loggedUserModel)
+            self.cellModels.accept(self.prepareCellModels())
         }
     }
 }

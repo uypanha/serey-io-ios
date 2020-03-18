@@ -30,7 +30,13 @@ class FilteredCategoryTableViewCell: BaseTableViewCell {
         didSet {
             guard let cellModel = self.cellModel else { return }
             
-            cellModel.nameText ~> self.chipView.titleLabel.rx.text ~ self.disposeBag
+            cellModel.nameText.asObservable()
+                .subscribe(onNext: { [weak self] text in
+                    self?.chipView.titleLabel.text = text
+                    self?.chipView.layoutIfNeeded()
+                    self?.layoutIfNeeded()
+                }) ~ self.disposeBag
+            
             setUpClearButtonObservers(cellModel)
         }
     }

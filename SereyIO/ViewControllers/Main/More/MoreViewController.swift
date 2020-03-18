@@ -43,6 +43,7 @@ class MoreViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
+        viewModel.downloadData()
     }
 }
 
@@ -165,6 +166,11 @@ fileprivate extension MoreViewController {
         self.viewModel.shouldPresent.asObservable()
             .subscribe(onNext: { [unowned self] viewToPresent in
                 switch viewToPresent {
+                case .signInController:
+                    if let signInViewController = R.storyboard.auth.signInViewController() {
+                        signInViewController.viewModel = SignInViewModel()
+                        self.show(CloseableNavigationController(rootViewController: signInViewController), sender: nil)
+                    }
                 case .accountViewController(let accountViewModel):
                     if let accountViewController = R.storyboard.profile.accountViewController() {
                         accountViewController.viewModel = accountViewModel

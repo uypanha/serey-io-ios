@@ -18,14 +18,14 @@ class PeopleCellViewModel: CellViewModel, ShimmeringProtocol {
     let nameText: BehaviorSubject<String?>
     let profileModel: BehaviorSubject<ProfileViewModel?>
     
-    init(_ name: String?, imageUrl: URL? = nil) {
+    init(_ people: PeopleModel?) {
         self.nameText = BehaviorSubject(value: nil)
         self.profileModel = BehaviorSubject(value: nil)
         self.isShimmering = BehaviorRelay(value: false)
         super.init(true)
         
-        self.nameText.onNext(name)
-        self.profileModel.onNext(ProfileViewModel())
+        self.nameText.onNext(people)
+        self.profileModel.onNext(people?.profileViewModel)
     }
     
     required convenience init(_ isShimmering: Bool) {
