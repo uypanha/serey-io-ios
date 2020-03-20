@@ -140,6 +140,11 @@ fileprivate extension SearchViewController {
                 switch viewToPresent {
                 case .emptyResult(let emptyViewModel):
                     self.prepareToDisplayEmptyView(emptyViewModel)
+                case .accountViewController(let accountViewModel):
+                    if let accountViewController = R.storyboard.profile.accountViewController() {
+                        accountViewController.viewModel = accountViewModel
+                        self.show(accountViewController, sender: nil)
+                    }
                 }
             }).disposed(by: self.disposeBag)
     }

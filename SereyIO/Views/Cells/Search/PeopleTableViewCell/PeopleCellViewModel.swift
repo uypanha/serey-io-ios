@@ -15,10 +15,12 @@ class PeopleCellViewModel: CellViewModel, ShimmeringProtocol {
     
     let isShimmering: BehaviorRelay<Bool>
     
+    let people: BehaviorRelay<PeopleModel?>
     let nameText: BehaviorSubject<String?>
     let profileModel: BehaviorSubject<ProfileViewModel?>
     
     init(_ people: PeopleModel?) {
+        self.people = BehaviorRelay(value: people)
         self.nameText = BehaviorSubject(value: nil)
         self.profileModel = BehaviorSubject(value: nil)
         self.isShimmering = BehaviorRelay(value: false)

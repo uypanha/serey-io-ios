@@ -36,7 +36,7 @@ class SignInViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
     let shouldEnbleSigIn: BehaviorSubject<Bool>
     
     let authService: AuthService
-    let userService: UserService
+    var userService: UserService
     
     override init() {
         self.userNameTextFieldViewModel = TextFieldViewModel.userNameTextFieldViewModel()
@@ -56,8 +56,9 @@ extension SignInViewModel {
     fileprivate func signIn(_ userName: String, _ privateKeyOrPwd: String) {
         self.shouldPresent(.loading(true))
         self.authService.signIn(userName, privateKeyOrPwd)
-            .`do`(onNext: { response in
+            .`do`(onNext: { [weak self] response in
                 AuthData.shared.setAuthData(userToken: response.data.token, username: userName)
+                self?.userService = UserService()
             })
             .flatMap { _ in self.userService.fetchProfile(userName) }
             .subscribe(onNext: { [weak self] response in

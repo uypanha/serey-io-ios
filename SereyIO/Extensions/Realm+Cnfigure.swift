@@ -14,7 +14,7 @@ extension Realm {
     static func configureRealm(schemaVersion: UInt64) {
         
         let deleteRealmIfMigrationNeeded: Bool
-        #if DEVELOPMENT
+        #if DEBUG
         deleteRealmIfMigrationNeeded = true
         #else
         deleteRealmIfMigrationNeeded = false

@@ -16,6 +16,11 @@ import SnapKit
 
 class AccountViewController: BaseViewController {
     
+    @IBOutlet weak var profileView: ProfileView!
+    @IBOutlet weak var profileNameLabel: UILabel!
+    @IBOutlet weak var postCountLabel: UILabel!
+    @IBOutlet weak var followersCountLabel: UILabel!
+    @IBOutlet weak var followingCountLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView: ContentSizedTableView!
     @IBOutlet weak var profileContainerView: UIView!
@@ -30,7 +35,7 @@ class AccountViewController: BaseViewController {
     
     lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
         return self.prepreDataSource()
-        }()
+    }()
     
     var viewModel: AccountViewModel!
     
@@ -40,6 +45,13 @@ class AccountViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
+        viewModel.downloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.removeNavigationBarBorder()
     }
 }
 
@@ -58,7 +70,7 @@ extension AccountViewController {
     func prepareTableView() {
         self.tableView.backgroundColor = ColorName.postBackground.color
         self.tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = .none
+        self.tableView.separatorColor = ColorName.border.color
         
         self.tableView.register(PostTableViewCell.self)
     }
@@ -97,6 +109,15 @@ fileprivate extension AccountViewController {
     }
     
     func setUpContentChangedObservers() {
+        
+        self.disposeBag ~ [
+            self.viewModel.profileViewModel ~> self.profileView.rx.profileViewModel,
+            self.viewModel.accountName ~> self.profileNameLabel.rx.text,
+            self.viewModel.postCountText ~> self.postCountLabel.rx.text,
+            self.viewModel.followerCountText ~> self.followersCountLabel.rx.text,
+            self.viewModel.followingCountText ~> self.followingCountLabel.rx.text,
+            self.viewModel.isFollowHidden ~> self.followButton.rx.isHidden
+        ]
         
         self.viewModel.cells.asObservable()
             .`do`(onNext: { [weak self] cells in

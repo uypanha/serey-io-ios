@@ -9,3 +9,5 @@
 "userNameRequiredMessage"               = "Username field is required.";
 "privateKeyOrPassword"                  = "Private Key or Password";
 "privateKeyOrPasswordRequireMessage"    = "Private key or password field is required.";
+
+"signOut"                               = "Sign out";

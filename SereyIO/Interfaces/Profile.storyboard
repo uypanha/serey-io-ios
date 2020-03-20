@@ -52,12 +52,29 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 Posts      2K Folloers      1K Followings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zd9-FR-Xjk">
-                                                                <rect key="frame" x="64.5" y="132.5" width="253.5" height="17"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="EVs-KT-3hI">
+                                                                <rect key="frame" x="63" y="132.5" width="256.5" height="17"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 Posts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zd9-FR-Xjk">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="48.5" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2K Folloers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iqs-52-rjO">
+                                                                        <rect key="frame" x="72.5" y="0.0" width="72.5" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1K Followings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSk-CY-5rD">
+                                                                        <rect key="frame" x="169" y="0.0" width="87.5" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DcN-Fm-KFc">
                                                                 <rect key="frame" x="76.5" y="165.5" width="229" height="36"/>
                                                                 <constraints>
@@ -120,8 +137,13 @@
                         <viewLayoutGuide key="safeArea" id="5ih-Fr-xlL"/>
                     </view>
                     <connections>
-                        <outlet property="followButton" destination="DcN-Fm-KFc" id="4Og-8b-LaZ"/>
+                        <outlet property="followButton" destination="DcN-Fm-KFc" id="lfe-BN-hwk"/>
+                        <outlet property="followersCountLabel" destination="Iqs-52-rjO" id="yX1-xb-L1U"/>
+                        <outlet property="followingCountLabel" destination="fSk-CY-5rD" id="gop-Cx-4Dh"/>
+                        <outlet property="postCountLabel" destination="zd9-FR-Xjk" id="XEy-Jt-kSg"/>
                         <outlet property="profileContainerView" destination="0QK-aE-mSY" id="Wz4-7c-g4w"/>
+                        <outlet property="profileNameLabel" destination="6pV-Uq-lbh" id="pzY-ac-N0h"/>
+                        <outlet property="profileView" destination="SG0-he-Qad" id="ifc-lp-b0M"/>
                         <outlet property="scrollView" destination="0tq-cy-4n0" id="hPe-Nn-C7X"/>
                         <outlet property="tableView" destination="bYC-1g-O7P" id="OAw-Nm-OtC"/>
                         <outlet property="tableViewHeightConstraint" destination="Sis-80-jVr" id="dOS-Sf-0ob"/>

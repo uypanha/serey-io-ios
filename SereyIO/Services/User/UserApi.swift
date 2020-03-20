@@ -17,18 +17,13 @@ enum UserApi {
 extension UserApi: AuthorizedApiTargetType {
     
     var parameters: [String : Any] {
-        switch self {
-        case .profile(let data):
-            return [
-                "username"  : data
-            ]
-        }
+        return [:]
     }
     
     var path: String {
         switch self {
-        case .profile:
-            return "/api/v1/accounts/getUserProfile"
+        case .profile(let username):
+            return "/api/v1/accounts/\(username)"
         }
     }
     

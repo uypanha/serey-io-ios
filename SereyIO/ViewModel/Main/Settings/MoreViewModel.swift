@@ -9,6 +9,8 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import RxBinding
+import RxRealm
 
 class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, CollectionMultiSectionsProviderModel, ShouldReactToAction, ShouldPresent {
     
@@ -16,6 +18,8 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case itemSelected(IndexPath)
         case privacyPressed
         case termsPressed
+        case signOutPressed
+        case signOutConfirmed
     }
     
     enum ViewToPresent {
@@ -23,6 +27,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case accountViewController(AccountViewModel)
         case languagesViewController
         case webViewController(WebViewViewModel)
+        case signOutDialog
     }
     
     // input:
@@ -35,7 +40,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
     let cells: BehaviorRelay<[SectionItem]>
     let cellModels: BehaviorRelay<[SectionType: [CellViewModel]]>
     
-    let userService: UserService
+    var userService: UserService
     lazy var downloadDisposeBag: DisposeBag = DisposeBag()
     lazy var isDownloading = BehaviorRelay<Bool>(value: false)
     
@@ -60,25 +65,40 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
 extension MoreViewModel {
     
     func downloadData() {
+        guard let username = AuthData.shared.username else { return }
+        
         if AuthData.shared.isUserLoggedIn && !self.isDownloading.value {
             self.isDownloading.accept(true)
-            self.fetchProfile()
+            self.fetchProfile(username)
         }
     }
     
-    fileprivate func fetchProfile() {
-        
+    fileprivate func fetchProfile(_ username: String) {
+        self.userService.fetchProfile(username)
+            .subscribe(onNext: { [weak self] response in
+                response.data.result.save()
+                if self?.userInfo.value == nil {
+                    self?.userInfo.accept(response.data.result)
+                }
+            }, onError: { [weak self] error in
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    fileprivate func signOutRequest() {
     }
 }
 
 // MARK: - Preparations & Tools
 extension MoreViewModel {
     
-    enum SectionType {
+    enum SectionType: CaseIterable {
         case signIn
         case profile
         case general
         case about
+        case signOut
         
         var title: String? {
             switch self {
@@ -96,12 +116,23 @@ extension MoreViewModel {
         var sectionItems: [SectionType: [CellViewModel]] = [:]
         
         if AuthData.shared.isUserLoggedIn {
-            sectionItems[.profile] = [ProfileCellViewModel(), SettingCellViewModel(.myWallet, true)]
+            sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value), SettingCellViewModel(.myWallet, true)]
         } else {
-            sectionItems[.profile] = [SignInCellViewModel().then { [weak self] in self?.setUpSignInCellViewModelObservers($0) }]
+            sectionItems[.signIn] = [SignInCellViewModel().then { [weak self] in self?.setUpSignInCellViewModelObservers($0) }]
         }
         sectionItems[.general] = [SettingCellViewModel(.lagnauge), SettingCellViewModel(.notificationSettings, true)]
         sectionItems[.about] = [SettingCellViewModel(.sereyApps), SettingCellViewModel(.version, true)]
+        
+        if AuthData.shared.isUserLoggedIn {
+            let signOutButtonProperties = ButtonProperties(borderColor: .lightGray, isCircular: false)
+            let signOutButtonModel = ButtonCellViewModel(R.string.auth.signOut.localized(), signOutButtonProperties).then { [unowned self] in
+                $0.shouldFireButtonAction
+                    .map { Action.signOutPressed }
+                    .bind(to: self.didActionSubject)
+                    .disposed(by: $0.disposeBag)
+            }
+            sectionItems[.signOut] = [signOutButtonModel]
+        }
         
         return sectionItems
     }
@@ -109,20 +140,10 @@ extension MoreViewModel {
     fileprivate func prepareCells(_ cellModels: [SectionType: [CellViewModel]]) -> [SectionItem] {
         var sectionItems: [SectionItem] = []
         
-        if let signInCells = cellModels[.signIn] {
-            sectionItems.append(SectionItem(model: Section(header: SectionType.signIn.title), items: signInCells))
-        }
-        
-        if let profileCells = cellModels[.profile] {
-            sectionItems.append(SectionItem(model: Section(header: SectionType.profile.title), items: profileCells))
-        }
-        
-        if let generalCells = cellModels[.general] {
-            sectionItems.append(SectionItem(model: Section(header: SectionType.general.title), items: generalCells))
-        }
-        
-        if let aboutCells = cellModels[.about] {
-            sectionItems.append(SectionItem(model: Section(header: SectionType.about.title), items: aboutCells))
+        SectionType.allCases.forEach { type in
+            if let cells = cellModels[type] {
+                sectionItems.append(SectionItem(model: Section(header: type.title), items: cells))
+            }
         }
         
         return sectionItems
@@ -140,8 +161,8 @@ fileprivate extension MoreViewModel {
             default:
                 break
             }
-        } else if let _ = item(at: indexPath) as? ProfileCellViewModel {
-            let accountViewModel = AccountViewModel("")
+        } else if let item = item(at: indexPath) as? ProfileCellViewModel, let user = item.userInfo.value {
+            let accountViewModel = AccountViewModel(user)
             self.shouldPresent(.accountViewController(accountViewModel))
         }
     }
@@ -172,6 +193,15 @@ fileprivate extension MoreViewModel {
             .map { self.prepareCells($0) }
             .bind(to: self.cells)
             .disposed(by: self.disposeBag)
+        
+        self.userInfo.asObservable()
+            .`do`(onNext: { [weak self] userModel in
+                if let userModel = userModel {
+                    self?.setUpUserInfoObservers(userModel)
+                }
+            }).subscribe(onNext: { [unowned self] userModel in
+                self.cellModels.accept(self.prepareCellModels())
+            }).disposed(by: self.disposeBag)
     }
     
     func setUpActionObservers() {
@@ -184,6 +214,11 @@ fileprivate extension MoreViewModel {
                     self?.handleOpenWebView("Privacy Policy", url: Constants.privacyAndPolicyUrl)
                 case .termsPressed:
                     self?.handleOpenWebView("Terms of Service", url: Constants.termAndConditionsUrl)
+                case .signOutPressed:
+                    self?.shouldPresent(.signOutDialog)
+                case .signOutConfirmed:
+//                    self?.sign
+                    AuthData.shared.removeAuthData()
                 }
             }).disposed(by: self.disposeBag)
     }
@@ -193,6 +228,15 @@ fileprivate extension MoreViewModel {
             .map { ViewToPresent.signInController }
             .bind(to: self.shouldPresentSubject)
             .disposed(by: cellModel.disposeBag)
+    }
+    
+    private func setUpUserInfoObservers(_ userInfo: UserModel) {
+        
+        Observable.from(object: userInfo)
+            .asObservable()
+            .subscribe(onNext: { [unowned self] userModel in
+                self.cellModels.accept(self.prepareCellModels())
+            }).disposed(by: self.disposeBag)
     }
 }
 
@@ -205,8 +249,8 @@ extension MoreViewModel: NotificationObserver {
         case .languageChanged:
             self.cellModels.accept(self.prepareCellModels())
         case .userDidLogin, .userDidLogOut:
+            self.userService = UserService()
             self.userInfo.accept(AuthData.shared.loggedUserModel)
-            self.cellModels.accept(self.prepareCellModels())
         }
     }
 }

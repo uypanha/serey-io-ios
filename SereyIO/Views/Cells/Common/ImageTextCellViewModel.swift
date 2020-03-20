@@ -1,6 +1,6 @@
 //
 //  ImageTextCellViewModel.swift
-//  Emergency
+//  SereyIO
 //
 //  Created by Phanha Uy on 9/21/19.
 //  Copyright © 2019 Phanha Uy. All rights reserved.

@@ -27,13 +27,23 @@ class HomeViewController: BaseViewController {
         return UIBarButtonItem(image: R.image.filterIcon(), style: .plain, target: nil, action: nil)
     }()
     
-    var tabItems: [UITabBarItem] = [] {
+    private lazy var postButton: MDCFloatingButton = {
+        let button = MDCFloatingButton()
+        button.setImage(R.image.plusIcon(), for: .normal)
+        button.tintColor = .white
+        button.backgroundColor = ColorName.almostRed.color
+        button.setElevation(ShadowElevation(rawValue: 4), for: .normal)
+        button.setElevation(ShadowElevation(rawValue: 8), for: .highlighted)
+        return button
+    }()
+    
+    private var tabItems: [UITabBarItem] = [] {
         didSet {
             tabBar.items = self.tabItems
         }
     }
     
-    var slideViews: [UIViewController] = [] {
+    private var slideViews: [UIViewController] = [] {
         didSet {
             addSlidesToScrollView()
         }
@@ -68,7 +78,18 @@ extension HomeViewController {
         self.scrollView.delegate = self
         self.scrollView.backgroundColor = ColorName.postBackground.color
         
+        preparePostButton()
         prepareTabBar()
+    }
+    
+    func preparePostButton() {
+        self.view.addSubview(self.postButton)
+        self.view.bringSubviewToFront(self.postButton)
+        self.postButton.snp.makeConstraints { make in
+            make.height.width.equalTo(60)
+            make.rightMargin.equalTo(0)
+            make.bottomMargin.equalTo(-16)
+        }
     }
     
     func prepareTabBar() {

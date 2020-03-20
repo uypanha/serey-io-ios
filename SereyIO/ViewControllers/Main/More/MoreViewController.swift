@@ -69,6 +69,7 @@ extension MoreViewController {
         self.tableView.register(SignInTableViewCell.self)
         self.tableView.register(ProfileTableViewCell.self)
         self.tableView.register(SettingTableViewCell.self)
+        self.tableView.register(ButtonTableViewCell.self)
     }
     
     func prepreDataSource() -> RxTableViewSectionedReloadDataSource<SectionItem> {
@@ -85,6 +86,10 @@ extension MoreViewController {
             case is SettingCellViewModel:
                 let cell: SettingTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
                 cell.cellModel = item as? SettingCellViewModel
+                return cell
+            case is ButtonCellViewModel:
+                let cell: ButtonTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+                cell.cellModel = item as? ButtonCellViewModel
                 return cell
             default:
                 return UITableViewCell()
@@ -184,6 +189,8 @@ fileprivate extension MoreViewController {
                     let webViewController = WebViewViewController()
                     webViewController.viewModel = webViewViewModel
                     self.present(UINavigationController(rootViewController: webViewController), animated: true, completion: nil)
+                case .signOutDialog:
+                    break
                 }
             }).disposed(by: self.disposeBag)
     }

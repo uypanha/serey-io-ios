@@ -161,6 +161,9 @@
 		DC9E36F82416947900289693 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E36F62416947900289693 /* CommentTableViewCell.swift */; };
 		DC9E36F92416947900289693 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC9E36F72416947900289693 /* CommentTableViewCell.xib */; };
 		DC9E36FB2416997000289693 /* CommentCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E36FA2416997000289693 /* CommentCellViewModel.swift */; };
+		DCA525592425166B00284CD8 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCA525562425166B00284CD8 /* ButtonTableViewCell.xib */; };
+		DCA5255A2425166B00284CD8 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA525572425166B00284CD8 /* ButtonTableViewCell.swift */; };
+		DCA5255B2425166B00284CD8 /* ButtonCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA525582425166B00284CD8 /* ButtonCellViewModel.swift */; };
 		DCB629EC2417E83500C64BD6 /* PostCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB629EB2417E83500C64BD6 /* PostCommentView.swift */; };
 		DCB629EE2417E84F00C64BD6 /* PostCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB629ED2417E84F00C64BD6 /* PostCommentView.xib */; };
 		DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */; };
@@ -432,6 +435,9 @@
 		DC9E36F62416947900289693 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
 		DC9E36F72416947900289693 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		DC9E36FA2416997000289693 /* CommentCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCellViewModel.swift; sourceTree = "<group>"; };
+		DCA525562425166B00284CD8 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
+		DCA525572425166B00284CD8 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
+		DCA525582425166B00284CD8 /* ButtonCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCellViewModel.swift; sourceTree = "<group>"; };
 		DCB629EB2417E83500C64BD6 /* PostCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentView.swift; sourceTree = "<group>"; };
 		DCB629ED2417E84F00C64BD6 /* PostCommentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCommentView.xib; sourceTree = "<group>"; };
 		DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardFeatureView.swift; sourceTree = "<group>"; };
@@ -694,6 +700,7 @@
 			isa = PBXGroup;
 			children = (
 				DC40D5D323E32A4300B0DD96 /* ImageTextCellViewModel.swift */,
+				DCA525552425165C00284CD8 /* ButtonTableViewCell */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1221,6 +1228,16 @@
 			path = CommentTableViewCell;
 			sourceTree = "<group>";
 		};
+		DCA525552425165C00284CD8 /* ButtonTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DCA525582425166B00284CD8 /* ButtonCellViewModel.swift */,
+				DCA525572425166B00284CD8 /* ButtonTableViewCell.swift */,
+				DCA525562425166B00284CD8 /* ButtonTableViewCell.xib */,
+			);
+			path = ButtonTableViewCell;
+			sourceTree = "<group>";
+		};
 		DCB629EA2417E7F700C64BD6 /* PostCommentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1630,6 +1647,7 @@
 				DC26812F23F450BE0045776E /* More.storyboard in Resources */,
 				DC115F3C241A9A74006BE78C /* SignInTableViewCell.xib in Resources */,
 				DC8EAB7723E7218600E00A00 /* Home.storyboard in Resources */,
+				DCA525592425166B00284CD8 /* ButtonTableViewCell.xib in Resources */,
 				DC6ED52823267EF000770B31 /* Assets.xcassets in Resources */,
 				DC9E36D92412997800289693 /* Post.storyboard in Resources */,
 				DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */,
@@ -1820,6 +1838,7 @@
 				DC6ED5782326A40200770B31 /* AppCoordinator.swift in Sources */,
 				DC2EA012241934640025D0B0 /* PostDetailResponse.swift in Sources */,
 				DC115F3B241A9A74006BE78C /* SignInTableViewCell.swift in Sources */,
+				DCA5255A2425166B00284CD8 /* ButtonTableViewCell.swift in Sources */,
 				DC40D5CE23E3298F00B0DD96 /* LanguageCellViewModel.swift in Sources */,
 				DC8EAB7523E70ED600E00A00 /* MDCQuadPageControl.swift in Sources */,
 				DC19DBE723EC5E7500571CC8 /* PostTableViewController.swift in Sources */,
@@ -1871,6 +1890,7 @@
 				DC562433241E73D80076A78C /* SignInViewModel.swift in Sources */,
 				DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */,
 				DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */,
+				DCA5255B2425166B00284CD8 /* ButtonCellViewModel.swift in Sources */,
 				DC9E36E92413F4A100289693 /* RichEditor+Custom.swift in Sources */,
 				DC6ED57C2326A43700770B31 /* Store.swift in Sources */,
 				DC6A78F323CA1FEB001D1009 /* CollectionSingleSecitionProviderModel.swift in Sources */,

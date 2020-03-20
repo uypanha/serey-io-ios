@@ -38,6 +38,7 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
         self.canDownloadMorePages = BehaviorRelay(value: true)
         super.init()
         
+        pageModel.start_author = authorName
         setUpRxObservers()
     }
     

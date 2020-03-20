@@ -20,6 +20,7 @@ class SearchViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, 
     
     enum ViewToPresent {
         case emptyResult(EmptyOrErrorViewModel)
+        case accountViewController(AccountViewModel)
     }
     
     // input:
@@ -116,9 +117,10 @@ extension SearchViewModel {
 fileprivate extension SearchViewModel {
     
     func handleItemSelected(_ at: IndexPath) {
-//        if let placeItem = self.item(at: at) as? PlaceCellViewModel {
-//            self.shouldPresent(.placeDetailController(PlaceDetailViewModel(placeItem.place.value)))
-//        }
+        if let item = self.item(at: at) as? PeopleCellViewModel, let username = item.people.value {
+            let accountViewModel = AccountViewModel(username)
+            self.shouldPresent(.accountViewController(accountViewModel))
+        }
     }
     
     func handleEditingChanged() {

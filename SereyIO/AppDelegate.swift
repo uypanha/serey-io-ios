@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Realm
+import RealmSwift
 import SwiftyBeaver
 
 let log = SwiftyBeaver.self
@@ -122,7 +124,7 @@ fileprivate extension AppDelegate {
     
     func initRealm() {
         // Start to configure realm
-//        Realm.configureRealm(schemaVersion: 0)
+        Realm.configureRealm(schemaVersion: 0)
     }
     
     func initSwiftyBeaver() {
