@@ -12,7 +12,7 @@ import RxSwift
 import RxBinding
 import RxDataSources
 
-class MoreViewController: BaseViewController {
+class MoreViewController: BaseViewController, AlertDialogController {
     
     @IBOutlet weak var tableView: ContentSizedTableView!
     @IBOutlet weak var termsContainerView: UIView!
@@ -190,7 +190,9 @@ fileprivate extension MoreViewController {
                     webViewController.viewModel = webViewViewModel
                     self.present(UINavigationController(rootViewController: webViewController), animated: true, completion: nil)
                 case .signOutDialog:
-                    break
+                    self.showDialog(nil, title: "Sign Out?", message: "Are you sure you want to sign out?", dismissable: false, positiveButton: "Sign Out", positiveCompletion: {
+                        self.viewModel.didAction(with: .signOutConfirmed)
+                    }, negativeButton: "No")
                 }
             }).disposed(by: self.disposeBag)
     }

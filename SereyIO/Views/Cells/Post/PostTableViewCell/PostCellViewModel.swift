@@ -27,6 +27,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
     let upVoteCount: BehaviorSubject<String?>
     let downVoteCount: BehaviorSubject<String?>
     let commentCount: BehaviorSubject<String?>
+    let isMoreHidden: BehaviorSubject<Bool>
     
     init(_ discussion: PostModel?) {
         self.discussion = BehaviorRelay(value: discussion)
@@ -42,6 +43,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
         self.downVoteCount = BehaviorSubject(value: nil)
         self.commentCount = BehaviorSubject(value: nil)
         self.isShimmering = BehaviorRelay(value: false)
+        self.isMoreHidden = BehaviorSubject(value: true)
         super.init()
         
         setUpRxObservers()
@@ -65,6 +67,8 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
         self.upVoteCount.onNext("\(data?.upvote ?? 0)")
         self.downVoteCount.onNext("\(data?.flag ?? 0)")
         self.commentCount.onNext("\(data?.answerCount ?? 0)")
+        let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.authorName == AuthData.shared.username : false
+        self.isMoreHidden.onNext(!isMorePresent)
     }
 }
 

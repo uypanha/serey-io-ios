@@ -49,8 +49,9 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     }
     
     open func prepareEmptyViewModel(_ erroInfo: ErrorInfo) -> EmptyOrErrorViewModel {
-        return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withErrorInfo: erroInfo, actionTitle: "Try again", actionCompletion: { [weak self] in
-            self?.downloadData()
+        return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withErrorInfo: erroInfo, actionTitle: "Try again", actionCompletion: { [unowned self] in
+            self.downloadData()
+            self.discussions.renotify()
         }))
     }
 }

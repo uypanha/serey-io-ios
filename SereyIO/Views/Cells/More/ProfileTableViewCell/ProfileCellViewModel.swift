@@ -27,8 +27,15 @@ class ProfileCellViewModel: CellViewModel {
     }
     
     private func notifyDataChanged(_ data: UserModel?) {
-        self.profileViewModel.onNext(data?.profileModel)
-        self.authorName.onNext(data?.name)
+        let username = AuthData.shared.username ?? ""
+        self.profileViewModel.onNext(data?.profileModel ?? prepareProfileViewModel(from: username))
+        self.authorName.onNext(data?.name ?? username)
+    }
+    
+    private func prepareProfileViewModel(from username: String) -> ProfileViewModel {
+        let firstLetter = username.first == nil ? "" : "\(username.first!)"
+        let uniqueColor = UIColor(hexString: PFColorHash().hex(username))
+        return ProfileViewModel(shortcut: firstLetter, imageUrl: nil, uniqueColor: uniqueColor)
     }
 }
 

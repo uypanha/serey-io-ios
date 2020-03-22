@@ -86,9 +86,9 @@ extension HomeViewController {
         self.view.addSubview(self.postButton)
         self.view.bringSubviewToFront(self.postButton)
         self.postButton.snp.makeConstraints { make in
-            make.height.width.equalTo(60)
+            make.height.width.equalTo(48)
             make.rightMargin.equalTo(0)
-            make.bottomMargin.equalTo(-16)
+            make.bottomMargin.equalTo(-24)
         }
     }
     

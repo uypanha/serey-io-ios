@@ -19,6 +19,7 @@ class PostTableViewCell: BaseTableViewCell {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var vwShimmer: FBShimmeringView!
     
+    @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var profileView: ProfileView!
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var publishDateLabel: UILabel!
@@ -59,7 +60,8 @@ class PostTableViewCell: BaseTableViewCell {
                 cellModel.downVoteCount ~> self.downVoteCountLabel.rx.text,
                 cellModel.commentCount ~> self.commentCountLabel.rx.text,
                 cellModel.thumbnailURL.asObservable().map { $0 }
-                    .bind(to: self.thumbnailImageView.kf.rx.image(placeholder: ViewUtiliesHelper.prepareDefualtPlaceholder()))
+                    .bind(to: self.thumbnailImageView.kf.rx.image(placeholder: ViewUtiliesHelper.prepareDefualtPlaceholder())),
+                cellModel.isMoreHidden ~> self.moreButton.rx.isHidden
             ]
             
             cellModel.isShimmering.asObservable()

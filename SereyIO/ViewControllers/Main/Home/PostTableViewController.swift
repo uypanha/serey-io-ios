@@ -114,7 +114,7 @@ fileprivate extension PostTableViewController {
         self.tableView.rx.itemSelected.asObservable()
             .map { PostTableViewModel.Action.itemSelected($0) }
             .bind(to: self.viewModel.didActionSubject)
-            .disposed(by: self.disposeBag)
+            ~ self.disposeBag
         
         self.tableView.rx.willDisplayCell.asObservable()
             .subscribe(onNext: { [unowned self] (cell, indexPath) in

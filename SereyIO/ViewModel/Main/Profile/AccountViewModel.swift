@@ -12,11 +12,18 @@ import RxSwift
 import RxBinding
 import RxDataSources
 
-class AccountViewModel: BasePostViewModel, ShouldPresent {
+class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
+    
+    enum Action {
+        case itemSelected(IndexPath)
+    }
     
     enum ViewToPresent {
-        case postDetailViewController
+        case postDetailViewController(PostDetailViewModel)
     }
+    
+    // input:
+    lazy var didActionSubject = PublishSubject<AccountViewModel.Action>()
     
     // output:
     lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
@@ -93,17 +100,41 @@ extension AccountViewModel {
     }
 }
 
+// MARK: - Action Handlers
+fileprivate extension AccountViewModel {
+    
+    func handleItemPressed(_ indexPath: IndexPath) {
+        if let item = self.item(at: indexPath) as? PostCellViewModel {
+            if let discussion = item.discussion.value {
+                let viewModel = PostDetailViewModel(discussion)
+                self.shouldPresent(.postDetailViewController(viewModel))
+            }
+        }
+    }
+}
+
 // MARK: - SetUp RxObservers
 fileprivate extension AccountViewModel {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
+        setUpActionObservers()
     }
     
     func setUpContentChangedObservers() {
         self.userInfo.asObservable()
             .subscribe(onNext: { [weak self] user in
                 self?.notifyDataChanged(user)
+            }) ~ self.disposeBag
+    }
+    
+    func setUpActionObservers() {
+        self.didActionSubject.asObservable()
+            .subscribe(onNext: { [weak self] action in
+                switch action {
+                case .itemSelected(let indexPath):
+                    self?.handleItemPressed(indexPath)
+                }
             }) ~ self.disposeBag
     }
 }

@@ -35,7 +35,7 @@ class AccountViewController: BaseViewController {
     
     lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
         return self.prepreDataSource()
-    }()
+        }()
     
     var viewModel: AccountViewModel!
     
@@ -80,7 +80,7 @@ extension AccountViewController {
             switch item {
             case is PostCellViewModel:
                 let cell: PostTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-                 cell.cellModel = item as? PostCellViewModel
+                cell.cellModel = item as? PostCellViewModel
                 return cell
             default:
                 return UITableViewCell()
@@ -106,6 +106,8 @@ fileprivate extension AccountViewController {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
+        setUpTableViewObservers()
+        setUpShouldPresentObservers()
     }
     
     func setUpContentChangedObservers() {
@@ -132,6 +134,35 @@ fileprivate extension AccountViewController {
             .subscribe(onNext: { [weak self] emptyOrErrorViewModel in
                 if let emptyOrErrorViewModel = emptyOrErrorViewModel {
                     self?.prepareToDisplayEmptyView(emptyOrErrorViewModel)
+                }
+            }) ~ self.disposeBag
+    }
+    
+    func setUpTableViewObservers() {
+        // Item Selected
+        self.tableView.rx.itemSelected.asObservable()
+            .map { AccountViewModel.Action.itemSelected($0) }
+            .bind(to: self.viewModel.didActionSubject)
+            ~ self.disposeBag
+        
+        self.tableView.rx.willDisplayCell.asObservable()
+            .subscribe(onNext: { [unowned self] (cell, indexPath) in
+                if self.viewModel.isLastItem(indexPath: indexPath) {
+                    self.viewModel.downloadData()
+                }
+            }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentObservers() {
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { viewToPresent in
+                switch viewToPresent {
+                case .postDetailViewController(let postDetailViewModel):
+                    if let postDetailViewController = R.storyboard.post.postDetailViewController() {
+                        postDetailViewController.viewModel = postDetailViewModel
+                        postDetailViewController.hidesBottomBarWhenPushed = true
+                        self.show(postDetailViewController, sender: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

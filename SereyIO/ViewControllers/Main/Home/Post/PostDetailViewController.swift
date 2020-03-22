@@ -20,13 +20,8 @@ class PostDetailViewController: BaseViewController {
     @IBOutlet weak var postCommentContainerView: UIView!
     @IBOutlet weak var postCommentView: PostCommentView!
     
-    private var sereyValueButton: UIBarButtonItem? {
-        didSet {
-            guard let sereyValueButton = self.sereyValueButton else { return }
-            
-            self.navigationItem.rightBarButtonItem = sereyValueButton
-        }
-    }
+    private var sereyValueButton: UIBarButtonItem?
+    private var moreButton: UIBarButtonItem?
     
     lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
         return self.prepreDataSource()
@@ -88,6 +83,17 @@ extension PostDetailViewController {
         
         return dataSource
     }
+    
+    func prepareRightButtonItems() {
+        var buttonItems: [UIBarButtonItem] = []
+        if let moreButton = self.moreButton {
+            buttonItems.append(moreButton)
+        }
+        if let sereyValueButton = self.sereyValueButton {
+            buttonItems.append(sereyValueButton)
+        }
+        self.navigationItem.rightBarButtonItems = buttonItems
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -102,6 +108,13 @@ extension PostDetailViewController {
         self.viewModel.sereyValueText
             .subscribe(onNext: { [unowned self] title in
                 self.sereyValueButton = self.prepareSereyValueButton(title)
+                self.prepareRightButtonItems()
+            }) ~ self.disposeBag
+        
+        self.viewModel.isMoreHidden
+            .subscribe(onNext: { [unowned self] isHidden in
+                self.moreButton = isHidden ? nil : UIBarButtonItem(image: R.image.moreVertIcon(), style: .plain, target: nil, action: nil)
+                self.prepareRightButtonItems()
             }) ~ self.disposeBag
         
         self.viewModel.cells.asObservable()

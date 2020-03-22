@@ -56,14 +56,15 @@ extension SignInViewModel {
     fileprivate func signIn(_ userName: String, _ privateKeyOrPwd: String) {
         self.shouldPresent(.loading(true))
         self.authService.signIn(userName, privateKeyOrPwd)
-            .`do`(onNext: { [weak self] response in
-                AuthData.shared.setAuthData(userToken: response.data.token, username: userName)
-                self?.userService = UserService()
-            })
-            .flatMap { _ in self.userService.fetchProfile(userName) }
-            .subscribe(onNext: { [weak self] response in
+            .flatMap { response in
+                return self.userService.fetchProfile(userName)
+                .asObservable()
+                .map { (response, $0) }
+            }
+            .subscribe(onNext: { [weak self] data in
                 self?.shouldPresent(.loading(false))
-                response.data.result.save()
+                data.1.data.result.save()
+                AuthData.shared.setAuthData(userToken: data.0.data.token, username: userName)
                 self?.shouldPresent(.dismiss)
             }, onError: { [weak self] error in
                 self?.shouldPresent(.loading(false))

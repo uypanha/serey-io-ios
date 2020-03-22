@@ -22,6 +22,7 @@ class PostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProviderMod
     
     let postViewModel: BehaviorSubject<PostCellViewModel?>
     let sereyValueText: BehaviorSubject<String>
+    let isMoreHidden: BehaviorSubject<Bool>
     
     let discussionService: DiscussionService
     let isDownloading: BehaviorRelay<Bool>
@@ -34,6 +35,7 @@ class PostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProviderMod
         
         self.postViewModel = BehaviorSubject(value: nil)
         self.sereyValueText = BehaviorSubject(value: "")
+        self.isMoreHidden = BehaviorSubject(value: true)
         
         self.cells = BehaviorRelay(value: [])
         self.discussionService = DiscussionService()
@@ -80,6 +82,8 @@ fileprivate extension PostDetailViewModel {
         let postDetailViewModel = data == nil ? PostCellViewModel(true) : PostCellViewModel(data)
         self.postViewModel.onNext(postDetailViewModel)
         self.sereyValueText.onNext(data?.sereyValue ?? "")
+        let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.authorName == AuthData.shared.username : false
+        self.isMoreHidden.onNext(!isMorePresent)
     }
     
     func prepareCells(_ replies: [PostModel]) -> [SectionItem] {

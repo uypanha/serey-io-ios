@@ -164,6 +164,7 @@
 		DCA525592425166B00284CD8 /* ButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCA525562425166B00284CD8 /* ButtonTableViewCell.xib */; };
 		DCA5255A2425166B00284CD8 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA525572425166B00284CD8 /* ButtonTableViewCell.swift */; };
 		DCA5255B2425166B00284CD8 /* ButtonCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA525582425166B00284CD8 /* ButtonCellViewModel.swift */; };
+		DCA5255D2426636F00284CD8 /* AlertDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5255C2426636F00284CD8 /* AlertDialogController.swift */; };
 		DCB629EC2417E83500C64BD6 /* PostCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB629EB2417E83500C64BD6 /* PostCommentView.swift */; };
 		DCB629EE2417E84F00C64BD6 /* PostCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB629ED2417E84F00C64BD6 /* PostCommentView.xib */; };
 		DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */; };
@@ -438,6 +439,7 @@
 		DCA525562425166B00284CD8 /* ButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonTableViewCell.xib; sourceTree = "<group>"; };
 		DCA525572425166B00284CD8 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		DCA525582425166B00284CD8 /* ButtonCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCellViewModel.swift; sourceTree = "<group>"; };
+		DCA5255C2426636F00284CD8 /* AlertDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDialogController.swift; sourceTree = "<group>"; };
 		DCB629EB2417E83500C64BD6 /* PostCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentView.swift; sourceTree = "<group>"; };
 		DCB629ED2417E84F00C64BD6 /* PostCommentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCommentView.xib; sourceTree = "<group>"; };
 		DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardFeatureView.swift; sourceTree = "<group>"; };
@@ -719,6 +721,7 @@
 			children = (
 				DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */,
 				DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */,
+				DCA5255C2426636F00284CD8 /* AlertDialogController.swift */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1847,6 +1850,7 @@
 				DC19DBEF23EC60C900571CC8 /* PostCellViewModel.swift in Sources */,
 				DCEC0CC3240A530B002F4B6F /* FilteredCategoryTableViewCell.swift in Sources */,
 				DC9E36F024154BC900289693 /* PFColorHash.swift in Sources */,
+				DCA5255D2426636F00284CD8 /* AlertDialogController.swift in Sources */,
 				DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */,
 				DC1C6EC323FC3C6D00BA701D /* PostCategoryTableViewCell.swift in Sources */,
 				DCD39862232E114300C812EB /* UIViewController+Properties.swift in Sources */,
