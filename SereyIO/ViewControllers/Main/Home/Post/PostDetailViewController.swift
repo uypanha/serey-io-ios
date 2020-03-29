@@ -12,6 +12,7 @@ import RxSwift
 import RxBinding
 import RichEditorView
 import RxDataSources
+import MaterialComponents
 
 class PostDetailViewController: BaseViewController {
     
@@ -88,6 +89,7 @@ extension PostDetailViewController {
         var buttonItems: [UIBarButtonItem] = []
         if let moreButton = self.moreButton {
             buttonItems.append(moreButton)
+            setUpMoreButtonObservers(moreButton)
         }
         if let sereyValueButton = self.sereyValueButton {
             buttonItems.append(sereyValueButton)
@@ -101,6 +103,13 @@ extension PostDetailViewController {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
+        setUpShouldPresentObservers()
+    }
+    
+    func setUpMoreButtonObservers(_ button: UIBarButtonItem) {
+        button.rx.tap.map { PostDetailViewModel.Action.morePressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpContentChangedObservers() {
@@ -120,5 +129,22 @@ extension PostDetailViewController {
         self.viewModel.cells.asObservable()
             .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
             .disposed(by: self.disposeBag)
+    }
+    
+    func setUpShouldPresentObservers() {
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { viewToPresent in
+                switch viewToPresent {
+                case .moreDialogController(let bottomMenuViewModel):
+                    if let bottomMenuController = R.storyboard.dialog.bottomMenuViewController() {
+                        bottomMenuController.viewModel = bottomMenuViewModel
+                        let bottomSheet = MDCBottomSheetController(contentViewController: bottomMenuController)
+                        bottomSheet.isScrimAccessibilityElement = false
+                        bottomSheet.automaticallyAdjustsScrollViewInsets = false
+                        bottomSheet.dismissOnDraggingDownSheet = false
+                        self.present(bottomSheet, animated: true, completion: nil)
+                    }
+                }
+            }) ~ self.disposeBag
     }
 }

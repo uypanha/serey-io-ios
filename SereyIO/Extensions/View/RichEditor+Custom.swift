@@ -9,6 +9,108 @@
 import Foundation
 import RichEditorView
 
+/// RichEditorOptions is an enum of standard editor actions
+public enum CRichEditorOption: RichEditorOption {
+    
+    case bold
+    case italic
+    case strike
+    case underline
+    case header(Int)
+    case indent
+    case outdent
+    case orderedList
+    case unorderedList
+    case image
+    case link
+    
+    public static let all: [CRichEditorOption] = [
+        .bold, .italic,
+        .strike, .underline,
+        //.header(1),
+        .outdent, .indent, .orderedList,
+        .unorderedList, .link, .image
+    ]
+    
+    // MARK: RichEditorOption
+    
+    public var image: UIImage? {
+        let image: UIImage?
+        switch self {
+        case .bold: image = R.image.roundBold()
+        case .italic: image = R.image.roundItalic()
+        case .strike: image = R.image.roundStrikethrough()
+        case .underline: image = R.image.roundUnderlined()
+        case .header(let h): image = UIImage(named: "h\(h)")
+        case .indent: image = R.image.roundIndentIncrease()
+        case .outdent: image = R.image.roundIndentDecrease()
+        case .orderedList: image = R.image.roundListNumbered()
+        case .unorderedList: image = R.image.roundIstBulleted()
+        case .image: image = R.image.roundInsertPhoto()
+        case .link: image = R.image.roundInsertLink()
+        }
+        
+        return image
+    }
+    
+    public var title: String {
+        switch self {
+        case .bold: return NSLocalizedString("Bold", comment: "")
+        case .italic: return NSLocalizedString("Italic", comment: "")
+        case .strike: return NSLocalizedString("Strike", comment: "")
+        case .underline: return NSLocalizedString("Underline", comment: "")
+        case .header(let h): return NSLocalizedString("H\(h)", comment: "")
+        case .indent: return NSLocalizedString("Indent", comment: "")
+        case .outdent: return NSLocalizedString("Outdent", comment: "")
+        case .orderedList: return NSLocalizedString("Ordered List", comment: "")
+        case .unorderedList: return NSLocalizedString("Unordered List", comment: "")
+        case .image: return NSLocalizedString("Image", comment: "")
+        case .link: return NSLocalizedString("Link", comment: "")
+        }
+    }
+    
+    public var key: RichEditorOptionKey {
+        switch self {
+        case .bold: return .bold
+        case .italic: return .italic
+        case .strike: return .strike
+        case .underline: return .underline
+        case .header(_): return .header
+        case .indent: return .indent
+        case .outdent: return .outdent
+        case .orderedList: return .orderedList
+        case .unorderedList: return .unorderedList
+        case .image: return .image
+        case .link: return .link
+        }
+    }
+    
+    public var ignoreHighLight: Bool {
+        switch self {
+        case .image, .link:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    public func action(_ toolbar: RichEditorToolbar) {
+        switch self {
+        case .bold: toolbar.editor?.bold()
+        case .italic: toolbar.editor?.italic()
+        case .strike: toolbar.editor?.strikethrough()
+        case .underline: toolbar.editor?.underline()
+        case .header(let h): toolbar.editor?.header(h)
+        case .indent: toolbar.editor?.indent()
+        case .outdent: toolbar.editor?.outdent()
+        case .orderedList: toolbar.editor?.orderedList()
+        case .unorderedList: toolbar.editor?.unorderedList()
+        case .image: toolbar.delegate?.richEditorToolbarInsertImage?(toolbar)
+        case .link: toolbar.delegate?.richEditorToolbarInsertLink?(toolbar)
+        }
+    }
+}
+
 // Marks: - Custom Font for Rich Editor
 extension RichEditorView {
     

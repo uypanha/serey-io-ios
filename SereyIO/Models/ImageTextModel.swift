@@ -12,8 +12,9 @@ class ImageTextModel {
     
     var image: UIImage?
     var titleText: String?
+    var subTitle: String?
     
-    init(image: UIImage?, titleText: String?) {
+    init(image: UIImage?, titleText: String?, subTitle: String? = nil) {
         self.image = image
         self.titleText = titleText
     }

@@ -165,6 +165,8 @@
 		DCA5255A2425166B00284CD8 /* ButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA525572425166B00284CD8 /* ButtonTableViewCell.swift */; };
 		DCA5255B2425166B00284CD8 /* ButtonCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA525582425166B00284CD8 /* ButtonCellViewModel.swift */; };
 		DCA5255D2426636F00284CD8 /* AlertDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5255C2426636F00284CD8 /* AlertDialogController.swift */; };
+		DCA5255F242921EA00284CD8 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */; };
+		DCA52561242A4FDB00284CD8 /* BottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA52560242A4FDB00284CD8 /* BottomMenuViewController.swift */; };
 		DCB629EC2417E83500C64BD6 /* PostCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB629EB2417E83500C64BD6 /* PostCommentView.swift */; };
 		DCB629EE2417E84F00C64BD6 /* PostCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB629ED2417E84F00C64BD6 /* PostCommentView.xib */; };
 		DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */; };
@@ -175,6 +177,15 @@
 		DCC49AD423E865D700119BAA /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC49AD123E865D700119BAA /* ProfileView.xib */; };
 		DCC49AD523E865D700119BAA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AD223E865D700119BAA /* ProfileViewModel.swift */; };
 		DCC49AD723E8795600119BAA /* TabBarIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AD623E8795600119BAA /* TabBarIndicator.swift */; };
+		DCC6F1DC242BB041003B9E3A /* CenteredImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6F1DB242BB041003B9E3A /* CenteredImageButton.swift */; };
+		DCC6F1DE242BB45B003B9E3A /* CreatePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6F1DD242BB45B003B9E3A /* CreatePostViewModel.swift */; };
+		DCC6F1E2242BBDEA003B9E3A /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6F1E0242BBDEA003B9E3A /* TextTableViewCell.swift */; };
+		DCC6F1E3242BBDEB003B9E3A /* TextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC6F1E1242BBDEA003B9E3A /* TextTableViewCell.xib */; };
+		DCC6F1E5242BBF27003B9E3A /* TextCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6F1E4242BBF27003B9E3A /* TextCellViewModel.swift */; };
+		DCD12D65242CFB190084F66C /* Dialog.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCD12D64242CFB190084F66C /* Dialog.storyboard */; };
+		DCD12D68242D03850084F66C /* BottomMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD12D67242D03850084F66C /* BottomMenuViewModel.swift */; };
+		DCD12D6C242D06C20084F66C /* ImageTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD12D6A242D06C20084F66C /* ImageTextTableViewCell.swift */; };
+		DCD12D6D242D06C20084F66C /* ImageTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCD12D6B242D06C20084F66C /* ImageTextTableViewCell.xib */; };
 		DCD39859232E0F9600C812EB /* Slash.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCD39858232E0F9600C812EB /* Slash.storyboard */; };
 		DCD3985C232E104400C812EB /* SlashScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3985B232E104400C812EB /* SlashScreenViewController.swift */; };
 		DCD3985F232E106E00C812EB /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD3985E232E106E00C812EB /* BaseViewController.swift */; };
@@ -440,6 +451,8 @@
 		DCA525572425166B00284CD8 /* ButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableViewCell.swift; sourceTree = "<group>"; };
 		DCA525582425166B00284CD8 /* ButtonCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCellViewModel.swift; sourceTree = "<group>"; };
 		DCA5255C2426636F00284CD8 /* AlertDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDialogController.swift; sourceTree = "<group>"; };
+		DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
+		DCA52560242A4FDB00284CD8 /* BottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenuViewController.swift; sourceTree = "<group>"; };
 		DCB629EB2417E83500C64BD6 /* PostCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentView.swift; sourceTree = "<group>"; };
 		DCB629ED2417E84F00C64BD6 /* PostCommentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCommentView.xib; sourceTree = "<group>"; };
 		DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardFeatureView.swift; sourceTree = "<group>"; };
@@ -450,6 +463,15 @@
 		DCC49AD123E865D700119BAA /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		DCC49AD223E865D700119BAA /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DCC49AD623E8795600119BAA /* TabBarIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarIndicator.swift; sourceTree = "<group>"; };
+		DCC6F1DB242BB041003B9E3A /* CenteredImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenteredImageButton.swift; sourceTree = "<group>"; };
+		DCC6F1DD242BB45B003B9E3A /* CreatePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewModel.swift; sourceTree = "<group>"; };
+		DCC6F1E0242BBDEA003B9E3A /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
+		DCC6F1E1242BBDEA003B9E3A /* TextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextTableViewCell.xib; sourceTree = "<group>"; };
+		DCC6F1E4242BBF27003B9E3A /* TextCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCellViewModel.swift; sourceTree = "<group>"; };
+		DCD12D64242CFB190084F66C /* Dialog.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Dialog.storyboard; sourceTree = "<group>"; };
+		DCD12D67242D03850084F66C /* BottomMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenuViewModel.swift; sourceTree = "<group>"; };
+		DCD12D6A242D06C20084F66C /* ImageTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTextTableViewCell.swift; sourceTree = "<group>"; };
+		DCD12D6B242D06C20084F66C /* ImageTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageTextTableViewCell.xib; sourceTree = "<group>"; };
 		DCD39858232E0F9600C812EB /* Slash.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Slash.storyboard; sourceTree = "<group>"; };
 		DCD3985B232E104400C812EB /* SlashScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlashScreenViewController.swift; sourceTree = "<group>"; };
 		DCD3985E232E106E00C812EB /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -701,8 +723,9 @@
 		DC40D5D123E32A2800B0DD96 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				DC40D5D323E32A4300B0DD96 /* ImageTextCellViewModel.swift */,
+				DCD12D69242D06AB0084F66C /* ImageTextTableViewCell */,
 				DCA525552425165C00284CD8 /* ButtonTableViewCell */,
+				DCC6F1DF242BBDA7003B9E3A /* TextTableViewCell */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -719,9 +742,10 @@
 		DC40D5DD23E3316B00B0DD96 /* Dialog */ = {
 			isa = PBXGroup;
 			children = (
+				DCA5255C2426636F00284CD8 /* AlertDialogController.swift */,
+				DCA52560242A4FDB00284CD8 /* BottomMenuViewController.swift */,
 				DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */,
 				DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */,
-				DCA5255C2426636F00284CD8 /* AlertDialogController.swift */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -919,6 +943,7 @@
 			isa = PBXGroup;
 			children = (
 				DC115F31241A962A006BE78C /* Auth.storyboard */,
+				DCD12D64242CFB190084F66C /* Dialog.storyboard */,
 				DC8EAB7623E7218600E00A00 /* Home.storyboard */,
 				DC26812E23F450BE0045776E /* More.storyboard */,
 				DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */,
@@ -1100,6 +1125,7 @@
 				DC9E36F3241629F900289693 /* SRichEditorView.swift */,
 				DCC49AD623E8795600119BAA /* TabBarIndicator.swift */,
 				DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */,
+				DCC6F1DB242BB041003B9E3A /* CenteredImageButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1180,6 +1206,7 @@
 			isa = PBXGroup;
 			children = (
 				DC9E36DB24129ACA00289693 /* PostDetailViewController.swift */,
+				DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -1188,6 +1215,7 @@
 			isa = PBXGroup;
 			children = (
 				DC9E36DE2412A01000289693 /* PostDetailViewModel.swift */,
+				DCC6F1DD242BB45B003B9E3A /* CreatePostViewModel.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -1287,6 +1315,34 @@
 			path = ProfileView;
 			sourceTree = "<group>";
 		};
+		DCC6F1DF242BBDA7003B9E3A /* TextTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DCC6F1E4242BBF27003B9E3A /* TextCellViewModel.swift */,
+				DCC6F1E0242BBDEA003B9E3A /* TextTableViewCell.swift */,
+				DCC6F1E1242BBDEA003B9E3A /* TextTableViewCell.xib */,
+			);
+			path = TextTableViewCell;
+			sourceTree = "<group>";
+		};
+		DCD12D66242D036A0084F66C /* Dialog */ = {
+			isa = PBXGroup;
+			children = (
+				DCD12D67242D03850084F66C /* BottomMenuViewModel.swift */,
+			);
+			path = Dialog;
+			sourceTree = "<group>";
+		};
+		DCD12D69242D06AB0084F66C /* ImageTextTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC40D5D323E32A4300B0DD96 /* ImageTextCellViewModel.swift */,
+				DCD12D6A242D06C20084F66C /* ImageTextTableViewCell.swift */,
+				DCD12D6B242D06C20084F66C /* ImageTextTableViewCell.xib */,
+			);
+			path = ImageTextTableViewCell;
+			sourceTree = "<group>";
+		};
 		DCD3985A232E102D00C812EB /* SlashScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -1323,6 +1379,7 @@
 				DC562431241E73C30076A78C /* Auth */,
 				DCD39864232E1CB600C812EB /* Base */,
 				DC6A78F823CA20AB001D1009 /* Common */,
+				DCD12D66242D036A0084F66C /* Dialog */,
 				DC19DBE823EC5F8400571CC8 /* Main */,
 				DC88A73A23DF4A7700EB7F79 /* OnBoard */,
 				DCD39874232E20BF00C812EB /* Slash */,
@@ -1652,6 +1709,7 @@
 				DC8EAB7723E7218600E00A00 /* Home.storyboard in Resources */,
 				DCA525592425166B00284CD8 /* ButtonTableViewCell.xib in Resources */,
 				DC6ED52823267EF000770B31 /* Assets.xcassets in Resources */,
+				DCC6F1E3242BBDEB003B9E3A /* TextTableViewCell.xib in Resources */,
 				DC9E36D92412997800289693 /* Post.storyboard in Resources */,
 				DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */,
 				DC9E36E524135A3D00289693 /* PostDetailView.xib in Resources */,
@@ -1659,6 +1717,7 @@
 				DC115F30241A8EA5006BE78C /* trix-editor.css in Resources */,
 				DC26812B23F2FCB30045776E /* ProfileTableViewCell.xib in Resources */,
 				DC05FDB023F1AC4F0093B47B /* Settings.strings in Resources */,
+				DCD12D6D242D06C20084F66C /* ImageTextTableViewCell.xib in Resources */,
 				DC1C6EC423FC3C6D00BA701D /* PostCategoryTableViewCell.xib in Resources */,
 				DC19DBF123EC6DEB00571CC8 /* Search.storyboard in Resources */,
 				DC1C6ECD23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib in Resources */,
@@ -1676,6 +1735,7 @@
 				DC6ED52623267EED00770B31 /* Main.storyboard in Resources */,
 				DC05FDAD23F1AB620093B47B /* SettingTableViewCell.xib in Resources */,
 				DCB629EE2417E84F00C64BD6 /* PostCommentView.xib in Resources */,
+				DCD12D65242CFB190084F66C /* Dialog.storyboard in Resources */,
 				DC40D5CD23E3298F00B0DD96 /* LanguageTableViewCell.xib in Resources */,
 				DC6A790423CA242B001D1009 /* EmptyOrErrorView.xib in Resources */,
 				DC42AF0523E9CFB5008F8A0F /* PostTableViewCell.xib in Resources */,
@@ -1829,6 +1889,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCA52561242A4FDB00284CD8 /* BottomMenuViewController.swift in Sources */,
 				DC8EAB8123E7231200E00A00 /* HomeViewController.swift in Sources */,
 				DCD39873232E204000C812EB /* Rx+Extensions.swift in Sources */,
 				DC26813423F45DEF0045776E /* AccountViewController.swift in Sources */,
@@ -1871,6 +1932,7 @@
 				DC6FCE7923F05D1700D72F6D /* Helper.swift in Sources */,
 				DCD3989A232E2DE700C812EB /* UINavigationController.swift in Sources */,
 				DC6ED57E2326A44A00770B31 /* DefaultsStore.swift in Sources */,
+				DCD12D6C242D06C20084F66C /* ImageTextTableViewCell.swift in Sources */,
 				DC40D5DF23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift in Sources */,
 				DCD3987A232E230B00C812EB /* NibView.swift in Sources */,
 				DCD39896232E28E100C812EB /* WebViewViewModel.swift in Sources */,
@@ -1922,6 +1984,7 @@
 				DC12F21624227AB40099C479 /* AccountModel.swift in Sources */,
 				DC6FCE7423F05D1700D72F6D /* Steem.swift in Sources */,
 				DC8EAB8323E7231A00E00A00 /* MoreViewController.swift in Sources */,
+				DCC6F1E2242BBDEA003B9E3A /* TextTableViewCell.swift in Sources */,
 				DCF67FDD240FFC4A003061A7 /* SearchApi.swift in Sources */,
 				DCD3987D232E235000C812EB /* BaseTableViewCell.swift in Sources */,
 				DC6FCE7323F05D1700D72F6D /* HttpClient.swift in Sources */,
@@ -1935,14 +1998,17 @@
 				DCEC0CBC240907D0002F4B6F /* Date+Formatter.swift in Sources */,
 				DCF67FEC24100C00003061A7 /* PeopleModel.swift in Sources */,
 				DCF67FE5240FFFF9003061A7 /* PeopleCellViewModel.swift in Sources */,
+				DCA5255F242921EA00284CD8 /* CreatePostViewController.swift in Sources */,
 				DC19DBED23EC601900571CC8 /* HomeViewModel.swift in Sources */,
 				DC6ED5912326A8F400770B31 /* Appearance.swift in Sources */,
 				DC6ED56F2326A30000770B31 /* String+Extensions.swift in Sources */,
 				DC05FDAC23F1AB620093B47B /* SettingTableViewCell.swift in Sources */,
 				DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */,
+				DCD12D68242D03850084F66C /* BottomMenuViewModel.swift in Sources */,
 				DC9AC6EA2406CD90008FAFA6 /* PostCategoryCellViewModel.swift in Sources */,
 				DC6ED58A2326A53B00770B31 /* KeyChainStore.swift in Sources */,
 				DC6ED5862326A4D000770B31 /* AppNotification.swift in Sources */,
+				DCC6F1E5242BBF27003B9E3A /* TextCellViewModel.swift in Sources */,
 				DC88A73C23DF4A8900EB7F79 /* SelectLanguageViewModel.swift in Sources */,
 				DC6A790523CA242B001D1009 /* EmptyOrErrorView.swift in Sources */,
 				DCF8738023F6F7CE007A8724 /* AccountViewModel.swift in Sources */,
@@ -1994,8 +2060,10 @@
 				DC6A78F723CA202C001D1009 /* CollectionMultiSectionsProviderModel.swift in Sources */,
 				DCC49AD723E8795600119BAA /* TabBarIndicator.swift in Sources */,
 				DC6ED56C2326A19B00770B31 /* Constants.swift in Sources */,
+				DCC6F1DC242BB041003B9E3A /* CenteredImageButton.swift in Sources */,
 				DC6A78FC23CA2117001D1009 /* RxSwift+Operator.swift in Sources */,
 				DC05FDC123F1B3410093B47B /* HeaderView.swift in Sources */,
+				DCC6F1DE242BB45B003B9E3A /* CreatePostViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

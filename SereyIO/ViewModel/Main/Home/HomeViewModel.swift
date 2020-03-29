@@ -10,16 +10,22 @@ import Foundation
 import RxCocoa
 import RxSwift
 import RxBinding
+import RealmSwift
+import Realm
+import RxRealm
 
 class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, DownloadStateNetworkProtocol {
     
     enum Action {
         case filterPressed
+        case createPostPressed
     }
     
     enum ViewToPresent {
         case choosePostCategoryController(ChooseCategorySheetViewModel)
         case postDetailViewController(PostDetailViewModel)
+        case createPostViewController
+        case signInViewController
     }
     
     // input:
@@ -66,12 +72,20 @@ extension HomeViewModel {
         self.discussionService.getCategories()
             .subscribe(onNext: { [weak self] categories in
                 self?.isDownloading.accept(false)
-                self?.categories.accept(categories)
+                self?.updateData(categories)
             }, onError: { [weak self] error in
                 self?.isDownloading.accept(false)
                 let errorInfo = ErrorHelper.prepareError(error: error)
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
+    }
+}
+
+// MARK: - Preparations & Tools
+extension HomeViewModel {
+    
+    fileprivate func updateData(_ categories: [DiscussionCategoryModel]) {
+        self.categories.accept(categories)
     }
 }
 
@@ -87,6 +101,14 @@ fileprivate extension HomeViewModel {
                 }
             }) ~ viewModel.disposeBag
         self.shouldPresent(.choosePostCategoryController(viewModel))
+    }
+    
+    func handleCreatePost() {
+        if AuthData.shared.isUserLoggedIn {
+            self.shouldPresent(.createPostViewController)
+        } else {
+            self.shouldPresent(.signInViewController)
+        }
     }
 }
 
@@ -121,6 +143,8 @@ extension HomeViewModel {
                 switch action {
                 case .filterPressed:
                     self?.handleFilterPressed()
+                case .createPostPressed:
+                    self?.handleCreatePost()
                 }
             }) ~ self.disposeBag
     }

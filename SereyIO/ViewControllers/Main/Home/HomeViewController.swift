@@ -185,6 +185,11 @@ fileprivate extension HomeViewController {
             .map { _ in HomeViewModel.Action.filterPressed }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
+        
+        self.postButton.rx.tap.asObservable()
+            .map { _ in HomeViewModel.Action.createPostPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpContentChangedObservers() {
@@ -217,6 +222,17 @@ fileprivate extension HomeViewController {
                         postDetailViewController.viewModel = postDetailViewModel
                         postDetailViewController.hidesBottomBarWhenPushed = true
                         self.show(postDetailViewController, sender: nil)
+                    }
+                case .createPostViewController:
+                    if let createPostController = R.storyboard.post.createPostViewController() {
+                        createPostController.viewModel = CreatePostViewModel(.create)
+                        let createPostNavigationController = CloseableNavigationController(rootViewController: createPostController)
+                        self.present(createPostNavigationController, animated: true, completion: nil)
+                    }
+                case .signInViewController:
+                    if let signInViewController = R.storyboard.auth.signInViewController() {
+                        signInViewController.viewModel = SignInViewModel()
+                        self.show(CloseableNavigationController(rootViewController: signInViewController), sender: nil)
                     }
                 }
             }) ~ self.disposeBag

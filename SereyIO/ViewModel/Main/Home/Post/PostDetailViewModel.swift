@@ -11,7 +11,21 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class PostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, DownloadStateNetworkProtocol {
+class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent, CollectionMultiSectionsProviderModel, DownloadStateNetworkProtocol {
+    
+    enum Action {
+        case morePressed
+    }
+    
+    enum ViewToPresent {
+        case moreDialogController(BottomMenuViewModel)
+    }
+    
+    // input:
+    lazy var didActionSubject = PublishSubject<Action>()
+    
+    // output:
+    lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
     
     let cells: BehaviorRelay<[SectionItem]>
     
@@ -96,11 +110,40 @@ fileprivate extension PostDetailViewModel {
     }
 }
 
+// MARK: - Action Handlers
+fileprivate extension PostDetailViewModel {
+    
+    enum PostMenu {
+        case edit
+        case delete
+        
+        var cellModel: ImageTextCellViewModel {
+            return ImageTextCellViewModel(model: self.imageTextModel)
+        }
+        
+        var imageTextModel: ImageTextModel {
+            switch self {
+            case .edit:
+                return ImageTextModel(image: R.image.editIcon(), titleText: "Edit")
+            case .delete:
+                return ImageTextModel(image: R.image.trashIcon(), titleText: "Delete")
+            }
+        }
+    }
+    
+    func handleMorePressed() {
+        let items: [PostMenu] = [.edit, .delete]
+        let bottomMenuViewModel = BottomMenuViewModel(items.map { $0.cellModel })
+        self.shouldPresent(.moreDialogController(bottomMenuViewModel))
+    }
+}
+
 // MARK: - SetUp RxObservers
 extension PostDetailViewModel {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
+        setUpActionObservers()
     }
     
     func setUpContentChangedObservers() {
@@ -113,5 +156,15 @@ extension PostDetailViewModel {
             .map { self.prepareCells($0) }
             ~> self.cells
             ~ self.disposeBag
+    }
+    
+    func setUpActionObservers() {
+        self.didActionSubject.asObservable()
+            .subscribe(onNext: { [weak self] action in
+                switch action {
+                case .morePressed:
+                    self?.handleMorePressed()
+                }
+            }) ~ self.disposeBag
     }
 }

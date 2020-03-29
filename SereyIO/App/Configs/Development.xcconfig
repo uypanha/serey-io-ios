@@ -13,7 +13,7 @@
 
 // Server URL
 BASE_DOMAIN             = serey.io
-API_URL                 = 49.12.3.107
+API_URL                 = test-api.serey.io/
 WALLET_URL              = testkyc.serey.io
 CHAIN_URL               = api.serey.io
 URL_PROTOCOL            = https:/$()/

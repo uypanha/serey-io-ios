@@ -14,12 +14,10 @@ class SettingCellViewModel: ImageTextCellViewModel {
     
     let showSeperatorLine: BehaviorSubject<Bool>
     let type: BehaviorRelay<SettingType>
-    let subTitle: BehaviorSubject<String?>
     
     init(_ setting: SettingType, _ showSeperatorLine: Bool = false) {
         self.type = BehaviorRelay(value: setting)
         self.showSeperatorLine = BehaviorSubject(value: showSeperatorLine)
-        self.subTitle = BehaviorSubject(value: setting.subTitle)
         super.init(model: setting.imageModel, setting.indicatorAccessory, setting.selectionType)
     }
 }
@@ -38,7 +36,7 @@ enum SettingType {
                 return ImageTextModel(image: R.image.walletIcon(), titleText: R.string.settings.myWallet.localized())
             case .lagnauge:
                 let text = String(format: R.string.settings.language.localized(), LanguageManger.shared.currentLanguage.languageText ?? "")
-                return ImageTextModel(image: R.image.languageIcon(), titleText: text)
+                return ImageTextModel(image: R.image.languageIcon(), titleText: text, subTitle: self.subTitle)
             case .notificationSettings:
                 return ImageTextModel(image: R.image.tabNotification(), titleText: R.string.settings.notificationSettings.localized())
             case .sereyApps:
