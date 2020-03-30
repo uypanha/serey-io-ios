@@ -74,6 +74,10 @@
 		DC562436241E75450076A78C /* Auth.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC562438241E75450076A78C /* Auth.strings */; };
 		DC56243C241E82B80076A78C /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC56243B241E82B80076A78C /* AuthService.swift */; };
 		DC56243E241E87000076A78C /* AuthApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC56243D241E87000076A78C /* AuthApi.swift */; };
+		DC5D59D624323C200048C921 /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D59D524323C200048C921 /* ListTableViewController.swift */; };
+		DC5D59D824323CDA0048C921 /* BaseListTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D59D724323CDA0048C921 /* BaseListTableViewModel.swift */; };
+		DC5D59DD2432437A0048C921 /* SelectCategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D59DC2432437A0048C921 /* SelectCategoryViewModel.swift */; };
+		DC5D59DF243248570048C921 /* CategoryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5D59DE243248570048C921 /* CategoryCellViewModel.swift */; };
 		DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78E923CA1F38001D1009 /* BaseCellViewModel.swift */; };
 		DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78EB23CA1F57001D1009 /* CellViewModel.swift */; };
 		DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78ED23CA1F72001D1009 /* NetworkViewModelProtocol.swift */; };
@@ -343,6 +347,10 @@
 		DC562439241E75470076A78C /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Auth.strings"; sourceTree = "<group>"; };
 		DC56243B241E82B80076A78C /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		DC56243D241E87000076A78C /* AuthApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthApi.swift; sourceTree = "<group>"; };
+		DC5D59D524323C200048C921 /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
+		DC5D59D724323CDA0048C921 /* BaseListTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListTableViewModel.swift; sourceTree = "<group>"; };
+		DC5D59DC2432437A0048C921 /* SelectCategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCategoryViewModel.swift; sourceTree = "<group>"; };
+		DC5D59DE243248570048C921 /* CategoryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78E923CA1F38001D1009 /* BaseCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78EB23CA1F57001D1009 /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78ED23CA1F72001D1009 /* NetworkViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -638,6 +646,7 @@
 			children = (
 				DCF8738123F6FA3B007A8724 /* BasePostViewModel.swift */,
 				DC19DBE923EC5F9100571CC8 /* Home */,
+				DC9E36DD24129FFD00289693 /* Post */,
 				DCF8737E23F6F7B8007A8724 /* Profile */,
 				DC19DBF423EC750000571CC8 /* Search */,
 				DC40D5E023E335F200B0DD96 /* Settings */,
@@ -651,7 +660,6 @@
 				DC9AC6E72406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift */,
 				DC19DBEC23EC601900571CC8 /* HomeViewModel.swift */,
 				DC19DBEA23EC5F9E00571CC8 /* PostTableViewModel.swift */,
-				DC9E36DD24129FFD00289693 /* Post */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -794,6 +802,23 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		DC5D59D424323C080048C921 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DC5D59D524323C200048C921 /* ListTableViewController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		DC5D59DB243243660048C921 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				DC5D59DC2432437A0048C921 /* SelectCategoryViewModel.swift */,
+				DC5D59DE243248570048C921 /* CategoryCellViewModel.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		DC6A78EF23CA1FC6001D1009 /* CollectionProvider */ = {
 			isa = PBXGroup;
 			children = (
@@ -809,6 +834,7 @@
 			isa = PBXGroup;
 			children = (
 				DC6A78F923CA20B3001D1009 /* FieldViewModelProtocol.swift */,
+				DC5D59D724323CDA0048C921 /* BaseListTableViewModel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -845,6 +871,7 @@
 				DC8EAB7C23E722DF00E00A00 /* Home */,
 				DC8EAB7F23E722F100E00A00 /* More */,
 				DC8EAB7E23E722EA00E00A00 /* Notifications */,
+				DC9E36DA241299FF00289693 /* Post */,
 				DC26813223F45DC70045776E /* Profile */,
 				DC8EAB7D23E722E400E00A00 /* Search */,
 			);
@@ -930,6 +957,7 @@
 				DC6ED56923269CA300770B31 /* RootViewController.swift */,
 				DC115F35241A9956006BE78C /* Auth */,
 				DCD3985D232E105A00C812EB /* Base */,
+				DC5D59D424323C080048C921 /* Common */,
 				DC40D5DD23E3316B00B0DD96 /* Dialog */,
 				DC6A791323CB66E5001D1009 /* Main */,
 				DC88A73723DF3F3300EB7F79 /* OnBoard */,
@@ -1153,7 +1181,6 @@
 			children = (
 				DC8EAB8023E7231200E00A00 /* HomeViewController.swift */,
 				DC19DBE623EC5E7500571CC8 /* PostTableViewController.swift */,
-				DC9E36DA241299FF00289693 /* Post */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1205,8 +1232,8 @@
 		DC9E36DA241299FF00289693 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				DC9E36DB24129ACA00289693 /* PostDetailViewController.swift */,
 				DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */,
+				DC9E36DB24129ACA00289693 /* PostDetailViewController.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -1214,8 +1241,9 @@
 		DC9E36DD24129FFD00289693 /* Post */ = {
 			isa = PBXGroup;
 			children = (
-				DC9E36DE2412A01000289693 /* PostDetailViewModel.swift */,
 				DCC6F1DD242BB45B003B9E3A /* CreatePostViewModel.swift */,
+				DC9E36DE2412A01000289693 /* PostDetailViewModel.swift */,
+				DC5D59DB243243660048C921 /* Category */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -1893,6 +1921,7 @@
 				DC8EAB8123E7231200E00A00 /* HomeViewController.swift in Sources */,
 				DCD39873232E204000C812EB /* Rx+Extensions.swift in Sources */,
 				DC26813423F45DEF0045776E /* AccountViewController.swift in Sources */,
+				DC5D59DD2432437A0048C921 /* SelectCategoryViewModel.swift in Sources */,
 				DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */,
 				DC1C6EC923FC3F6100BA701D /* BaseCollectionViewCell.swift in Sources */,
 				DC115F34241A9744006BE78C /* MDCPasswordTextField.swift in Sources */,
@@ -1914,6 +1943,7 @@
 				DCA5255D2426636F00284CD8 /* AlertDialogController.swift in Sources */,
 				DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */,
 				DC1C6EC323FC3C6D00BA701D /* PostCategoryTableViewCell.swift in Sources */,
+				DC5D59D824323CDA0048C921 /* BaseListTableViewModel.swift in Sources */,
 				DCD39862232E114300C812EB /* UIViewController+Properties.swift in Sources */,
 				DC42AF0723E9D39B008F8A0F /* CardView.swift in Sources */,
 				DC9E36E324135A3400289693 /* PostDetailView.swift in Sources */,
@@ -1957,6 +1987,7 @@
 				DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */,
 				DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */,
 				DCA5255B2425166B00284CD8 /* ButtonCellViewModel.swift in Sources */,
+				DC5D59D624323C200048C921 /* ListTableViewController.swift in Sources */,
 				DC9E36E92413F4A100289693 /* RichEditor+Custom.swift in Sources */,
 				DC6ED57C2326A43700770B31 /* Store.swift in Sources */,
 				DC6A78F323CA1FEB001D1009 /* CollectionSingleSecitionProviderModel.swift in Sources */,
@@ -2017,6 +2048,7 @@
 				DC56243C241E82B80076A78C /* AuthService.swift in Sources */,
 				DCD3985C232E104400C812EB /* SlashScreenViewController.swift in Sources */,
 				DC19DBF323EC6E4600571CC8 /* PaddingTextField.swift in Sources */,
+				DC5D59DF243248570048C921 /* CategoryCellViewModel.swift in Sources */,
 				DCD39894232E28C900C812EB /* WebViewViewController.swift in Sources */,
 				DCD39868232E1D1B00C812EB /* ErrorHelper.swift in Sources */,
 				DC6A78FE23CA22B0001D1009 /* LoadingIndicatorController.swift in Sources */,

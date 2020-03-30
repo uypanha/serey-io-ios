@@ -43,6 +43,7 @@ class CreatePostViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
+        viewModel.downloadData()
     }
     
     override func setUpLocalizedTexts() {
@@ -127,6 +128,7 @@ extension CreatePostViewController {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
+        setUpShouldPresentObservers()
     }
     
     func setUpContentChangedObservers() {
@@ -150,5 +152,17 @@ extension CreatePostViewController {
             .map { CreatePostViewModel.Action.itemSelected($0) }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentObservers() {
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { [unowned self] viewToPresent in
+                switch viewToPresent {
+                case .selectCategoryController(let data):
+                    let listTableViewController = ListTableViewController(data.viewModel)
+                    listTableViewController.title = data.title
+                    self.show(listTableViewController, sender: nil)
+                }
+            }) ~ self.disposeBag
     }
 }

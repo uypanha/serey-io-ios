@@ -6,7 +6,7 @@
 //  Copyright © 2020 Phanha Uy. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxCocoa
 import RxSwift
 import RxBinding

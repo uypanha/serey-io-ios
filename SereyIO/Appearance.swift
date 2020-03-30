@@ -8,6 +8,7 @@
 
 import UIKit
 import Then
+import RichEditorView
 
 class Appearance {
     
@@ -15,6 +16,7 @@ class Appearance {
         prepareTableView()
         prepareNavigationBar()
         prepareTabBar()
+        prepareRichEditorAppearance()
     }
 }
 
@@ -71,5 +73,12 @@ fileprivate extension Appearance {
                 .font: UIFont.boldSystemFont(ofSize: 24)
             ]
         }
+    }
+    
+    static func prepareRichEditorAppearance() {
+        RichEditorToolbar.appearance.tintColor = UIColor.gray
+        RichEditorToolbar.appearance.selectedTintColor = UIColor.black
+        RichEditorToolbar.appearance.selectedBackgroundImage = R.image.toolbarBgSelected()
+        RichEditorToolbar.appearance.backgroundImage = R.image.transaprent()
     }
 }
