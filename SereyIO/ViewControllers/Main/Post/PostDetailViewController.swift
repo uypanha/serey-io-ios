@@ -13,13 +13,17 @@ import RxBinding
 import RichEditorView
 import RxDataSources
 import MaterialComponents
+import RxKeyboard
 
 class PostDetailViewController: BaseViewController {
+    
+    fileprivate lazy var keyboardDisposeBag = DisposeBag()
     
     @IBOutlet weak var postDetailView: PostDetailView!
     @IBOutlet weak var tableView: ContentSizedTableView!
     @IBOutlet weak var postCommentContainerView: UIView!
     @IBOutlet weak var postCommentView: PostCommentView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     private var sereyValueButton: UIBarButtonItem?
     private var moreButton: UIBarButtonItem?
@@ -37,6 +41,18 @@ class PostDetailViewController: BaseViewController {
         setUpViews()
         setUpRxObservers()
         viewModel.downloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.keyboardDisposeBag = DisposeBag()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setUpKeyboardObservers()
     }
 }
 
@@ -113,7 +129,11 @@ extension PostDetailViewController {
     }
     
     func setUpContentChangedObservers() {
-        self.viewModel.postViewModel ~> self.postDetailView.rx.viewModel ~ self.disposeBag
+        self.disposeBag ~ [
+            self.viewModel.postViewModel ~> self.postDetailView.rx.viewModel,
+            self.viewModel.commentPostViewModel ~> self.postCommentView.rx.viewModel
+        ]
+        
         self.viewModel.sereyValueText
             .subscribe(onNext: { [unowned self] title in
                 self.sereyValueButton = self.prepareSereyValueButton(title)
@@ -136,15 +156,27 @@ extension PostDetailViewController {
             .subscribe(onNext: { viewToPresent in
                 switch viewToPresent {
                 case .moreDialogController(let bottomMenuViewModel):
-                    if let bottomMenuController = R.storyboard.dialog.bottomMenuViewController() {
-                        bottomMenuController.viewModel = bottomMenuViewModel
-                        let bottomSheet = MDCBottomSheetController(contentViewController: bottomMenuController)
-                        bottomSheet.isScrimAccessibilityElement = false
-                        bottomSheet.automaticallyAdjustsScrollViewInsets = false
-                        bottomSheet.dismissOnDraggingDownSheet = false
-                        self.present(bottomSheet, animated: true, completion: nil)
+                    let bottomMenuController = BottomMenuViewController(bottomMenuViewModel)
+                    self.present(bottomMenuController, animated: true, completion: nil)
+                case .editPostController(let editPostViewModel):
+                    if let createPostController = R.storyboard.post.createPostViewController() {
+                        createPostController.viewModel = editPostViewModel
+                        let createPostNavigationController = CloseableNavigationController(rootViewController: createPostController)
+                        self.present(createPostNavigationController, animated: true, completion: nil)
                     }
                 }
             }) ~ self.disposeBag
+    }
+    
+    func setUpKeyboardObservers() {
+        RxKeyboard.instance.visibleHeight
+            .drive(onNext: { [weak self] keyboardHeight in
+                if let _self = self {
+                    _self.bottomConstraint.constant = keyboardHeight
+                    UIView.animate(withDuration: 0.3, animations: {
+                        _self.view.layoutIfNeeded()
+                    })
+                }
+            }).disposed(by: self.keyboardDisposeBag)
     }
 }

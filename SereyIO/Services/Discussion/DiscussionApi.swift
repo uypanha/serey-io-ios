@@ -16,6 +16,8 @@ enum DiscussionApi {
     case getDiscussions(DiscussionType, QueryDiscussionsBy)
     
     case getPostDetail(permlink: String, authorName: String)
+    
+    case submitPost(SubmitPostModel)
 }
 
 extension DiscussionApi: AuthorizedApiTargetType {
@@ -29,6 +31,8 @@ extension DiscussionApi: AuthorizedApiTargetType {
                 "permlink"      : data.permlink,
                 "authorName"    : data.authorName
             ]
+        case .submitPost(let data):
+            return data.parameters
         default:
             return [:]
         }
@@ -42,17 +46,26 @@ extension DiscussionApi: AuthorizedApiTargetType {
             return "/api/v1/sereyweb/\(data.0.path)"
         case .getPostDetail:
             return "/api/v1/sereyweb/findDetailBypermlink"
+        case .submitPost:
+            return "/api/v1/sereyweb/submitPost"
         }
     }
     
     var method: Moya.Method {
-        return .get
+        switch self {
+        case .submitPost:
+            return .post
+        default:
+            return .get
+        }
     }
     
     var task: Task {
         switch self {
         case .getDiscussions, .getPostDetail:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+        case .submitPost:
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         default:
             return .requestPlain
         }

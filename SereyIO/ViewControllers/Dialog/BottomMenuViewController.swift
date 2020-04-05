@@ -2,79 +2,29 @@
 //  BottomMenuViewController.swift
 //  SereyIO
 //
-//  Created by Panha Uy on 3/24/20.
+//  Created by Panha Uy on 4/3/20.
 //  Copyright © 2020 Phanha Uy. All rights reserved.
 //
 
 import UIKit
-import RxCocoa
-import RxSwift
-import RxBinding
-import RxDataSources
+import MaterialComponents
 
-class BottomMenuViewController: BaseViewController {
+class BottomMenuViewController: MDCBottomSheetController {
     
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var tableView: ContentSizedTableView!
-    
-    var viewModel: BottomMenuViewModel!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        setUpViews()
-        setUpRxObservers()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    init(_ viewModel: BottomListMenuViewModel) {
+        let listViewController = ListTableViewController(viewModel)
+        listViewController.sepereatorStyle = .none
+        listViewController.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 8, right: 0)
+        listViewController.view.roundCorners(corners: [.topLeft, .topRight], radius: 8)
+        super.init(contentViewController: listViewController)
         
-        containerView.roundCorners(corners: [.topLeft, .topRight], radius: 8)
-    }
-}
-
-// MARK: - Preparations & Tools
-extension BottomMenuViewController {
-    
-    func setUpViews() {
-        prepareTableView()
+        self.isScrimAccessibilityElement = false
+        self.automaticallyAdjustsScrollViewInsets = false
+        self.dismissOnDraggingDownSheet = true
+        self.trackingScrollView = listViewController.tableView
     }
     
-    func prepareTableView() {
-        self.tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = .none
-        self.tableView.register(ImageTextTableViewCell.self)
-    }
-}
-
-// MARK: - SetUp RxObservers
-extension BottomMenuViewController {
-    
-    func setUpRxObservers() {
-        setUpContentChangedObservers()
-    }
-    
-    func setUpContentChangedObservers() {
-        self.viewModel.cells.asObservable()
-            .bind(to: self.tableView.rx.items) { tableView, index, item in
-                switch item {
-                case is ImageTextCellViewModel:
-                    let cell: ImageTextTableViewCell = tableView.dequeueReusableCell(forIndexPath: IndexPath(row: index, section: 0))
-                    cell.cellModel = item as? ImageTextCellViewModel
-                    return cell
-                default:
-                    return UITableViewCell()
-                }
-            } ~ self.disposeBag
-        
-        // Item Selected
-        self.tableView.rx.itemSelected.asObservable()
-            .`do`(onNext: { [weak self] indexPath in
-                self?.tableView.deselectRow(at: indexPath, animated: true)
-            })
-            .map { BottomMenuViewModel.Action.itemSelected($0) }
-            ~> self.viewModel.didActionSubject
-            ~ self.disposeBag
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

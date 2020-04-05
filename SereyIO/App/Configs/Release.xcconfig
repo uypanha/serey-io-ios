@@ -20,6 +20,6 @@ URL_PROTOCOL            = https:/$()/
 
 // APP INFO
 app_name                = Serey.io
-app_bundle              = io.uyphanha.serey
+app_bundle              = io.serey.ios
 app_version_name        = 1.0.0
 app_version_code        = 1

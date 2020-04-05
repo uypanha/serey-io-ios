@@ -26,4 +26,10 @@ class DiscussionService: AppService<DiscussionApi> {
         return self.provider.rx.requestObject(.getPostDetail(permlink: permlink, authorName: authorName), type: PostDetailResponse.self)
             .asObservable()
     }
+    
+    func submitPost(_ submitModel: SubmitPostModel) -> Observable<BlockChainResponse> {
+        return self.provider.rx.requestObject(.submitPost(submitModel), type: DataResponseModel<BlockChainResponse>.self)
+            .asObservable()
+            .map { $0.data }
+    }
 }

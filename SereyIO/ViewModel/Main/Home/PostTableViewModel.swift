@@ -16,6 +16,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent 
     
     enum Action {
         case itemSelected(IndexPath)
+        case refresh
     }
     
     enum ViewToPresent {
@@ -61,6 +62,8 @@ fileprivate extension PostTableViewModel {
                 switch action {
                 case .itemSelected(let indexPath):
                     self?.handleItemPressed(indexPath)
+                case .refresh:
+                    self?.reset()
                 }
             }) ~ self.disposeBag
     }

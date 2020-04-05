@@ -43,13 +43,13 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     }
     
     open func prepareEmptyViewModel() -> EmptyOrErrorViewModel {
-        let title = "No Post Yet!"
-        let emptyMessage = "Your post will be shown here after you\nmade a post."
+        let title = R.string.post.noPostYet.localized()
+        let emptyMessage = R.string.post.noPostMessage.localized()
         return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withEmptyTitle: title, emptyDescription: emptyMessage, iconImage: R.image.emptyPost()))
     }
     
     open func prepareEmptyViewModel(_ erroInfo: ErrorInfo) -> EmptyOrErrorViewModel {
-        return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withErrorInfo: erroInfo, actionTitle: "Try again", actionCompletion: { [unowned self] in
+        return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withErrorInfo: erroInfo, actionTitle: R.string.common.tryAgain.localized(), actionCompletion: { [unowned self] in
             self.downloadData()
             self.discussions.renotify()
         }))

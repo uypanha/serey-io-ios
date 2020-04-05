@@ -24,9 +24,12 @@
 "skip"                              = "រំលង";
 "continue"                          = "បន្ត";
 "webViewDefaultTitle"               = "Serey.io";
+"tryAgain"                          = "Try again";
+"update"                            = "Update";
 
 "next"                              = "បន្ទាប់";
 "letBegin"                          = "ចាប់ផ្តើម";
+"ploralSuffix"                      = "";
 
 // Media
 "takePhoto"                         = "Take Photo";

@@ -34,6 +34,10 @@ public struct Constants {
     
     public static let limitPerPage: Int = 10
     
+    static var uploadImageUrl: String {
+        return "\(apiEndPoint.absoluteString)/api/v1/Image/UploadNoToken"
+    }
+    
     static func clearStoreData() {
     }
 

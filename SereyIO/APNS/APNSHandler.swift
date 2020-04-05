@@ -34,20 +34,20 @@ class APNSHandler: NSObject {
         self.application = application
         super.init()
         
-        self.configureFirebaseApp()
+        configureFirebaseApp()
     }
     
     fileprivate func configureFirebaseApp() {
-//        #if DEVELOPMENT
-//        let filePath = R.file.googleServiceInfoDevPlist()!.path
-//        #else
-//        let filePath = R.file.googleServiceInfoProPlist()!.path
-//        #endif
-//
-//        if let options = FirebaseOptions(contentsOfFile: filePath) {
-//            FirebaseApp.configure(options: options)
-//            Messaging.messaging().delegate = self
-//        }
+        #if DEVELOPMENT
+            let filePath = R.file.googleServiceInfoDevelopmentPlist()!.path
+        #else
+            let filePath = "" // R.file.googleServiceInfoProPlist()!.path
+        #endif
+        
+        if let options = FirebaseOptions(contentsOfFile: filePath) {
+            FirebaseApp.configure(options: options)
+            Messaging.messaging().delegate = self
+        }
     }
     
     // MARK: - Handlers Management

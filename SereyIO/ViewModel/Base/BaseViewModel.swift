@@ -62,4 +62,8 @@ class BaseViewModel: NSObject, ShouldPresentError {
     func shouldPresentError(_ error: ErrorInfo) {
         self.shouldPresentErrorSubject.onNext(error)
     }
+    
+    func dispose() {
+        self.disposeBag = DisposeBag()
+    }
 }

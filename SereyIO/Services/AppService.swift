@@ -11,6 +11,8 @@ import Moya
 import RxSwift
 import RxCocoa
 import Alamofire
+import ObjectMapper
+import AlamofireObjectMapper
 
 /// An `Error` emitted by `AppService Provider`.
 enum AppError: Error {
@@ -87,14 +89,15 @@ extension AuthorizedApiTargetType {
 
 class DefaultAlamofireManager: Alamofire.SessionManager {
     
-    static func sharedManager(_ timeout: TimeInterval = 30) -> DefaultAlamofireManager {
+    static func sharedManager(_ timeout: TimeInterval = 30, _ includeDefaultHeaders: Bool = true) -> DefaultAlamofireManager {
         let configuration = URLSessionConfiguration.default
-        let defaultHeaders = Alamofire.SessionManager.defaultHTTPHeaders
-        configuration.httpAdditionalHeaders = defaultHeaders
+        if includeDefaultHeaders {
+            let defaultHeaders = Alamofire.SessionManager.defaultHTTPHeaders
+            configuration.httpAdditionalHeaders = defaultHeaders
+        }
         configuration.timeoutIntervalForRequest = 30 // as seconds, you can set your request timeout
         configuration.timeoutIntervalForResource = 30 // as seconds, you can set your resource timeout
-        configuration.requestCachePolicy = .useProtocolCachePolicy
-        return DefaultAlamofireManager(configuration: configuration, serverTrustPolicyManager: CustomServerTrustPoliceManager())
+        return DefaultAlamofireManager(configuration: configuration) //, serverTrustPolicyManager: CustomServerTrustPoliceManager())
     }
 }
 

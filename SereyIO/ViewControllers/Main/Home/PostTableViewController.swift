@@ -46,6 +46,7 @@ fileprivate extension PostTableViewController {
     }
     
     func prepareTableView() {
+        self.refreshControl = UIRefreshControl()
         self.tableView.backgroundColor = ColorName.postBackground.color
         self.tableView.tableFooterView = UIView()
         self.tableView.register(PostTableViewCell.self)
@@ -87,8 +88,17 @@ fileprivate extension PostTableViewController {
 fileprivate extension PostTableViewController {
     
     func setUpRxObservers() {
+        setUpControlsObsservers()
         setUpContentChangedObservers()
         setUpShouldPresentErrorObservers()
+    }
+    
+    func setUpControlsObsservers() {
+        self.refreshControl?.rx.controlEvent(.valueChanged)
+            .filter { return self.refreshControl!.isRefreshing }
+            .map { PostTableViewModel.Action.refresh }
+            .bind(to: self.viewModel.didActionSubject)
+            .disposed(by: self.disposeBag)
     }
     
     func setUpContentChangedObservers() {
@@ -99,6 +109,7 @@ fileprivate extension PostTableViewController {
                     self?.emptyView?.removeFromSuperview()
                     self?.emptyView = nil
                 }
+                self?.refreshControl?.endRefreshing()
             })
             .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
             .disposed(by: self.disposeBag)

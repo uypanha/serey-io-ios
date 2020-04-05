@@ -251,6 +251,8 @@ extension MoreViewModel: NotificationObserver {
         case .userDidLogin, .userDidLogOut:
             self.userService = UserService()
             self.userInfo.accept(AuthData.shared.loggedUserModel)
+        default:
+            break
         }
     }
 }

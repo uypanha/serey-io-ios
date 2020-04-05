@@ -1,0 +1,26 @@
+/*
+  Post.strings
+  SereyIO
+
+  Created by Panha Uy on 4/5/20.
+  Copyright © 2020 Phanha Uy. All rights reserved.
+*/
+
+// MARK: Empty or Errors
+"noPostYet"         = "No Post Yet!";
+"noPostMessage"     = "Your post will be shown here after you\nmade a post.";
+
+"post"              = "Post";
+"postAnArticle"     = "Post an Article";
+"updateAnArticle"   = "Update an Article";
+"postAComment"      = "Post a comment...";
+
+"enterTitle"        = "Enter title";
+"articleBody"       = "Article body";
+"shortDescription"  = "Short description";
+
+"selectCategory"    = "Select category";
+"selectSubCategory" = "Select sub-category";
+
+"chooseThumbnail"   = "Choose Thumbnail with";
+"insertImageWith"   = "Insert Image with";

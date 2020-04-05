@@ -11,8 +11,14 @@ import RxCocoa
 import RxSwift
 import RxBinding
 import RichEditorView
+import MaterialComponents
+import RxKeyboard
+import Kingfisher
+import RxKingfisher
 
-class CreatePostViewController: BaseViewController {
+class CreatePostViewController: BaseViewController, KeyboardController, LoadingIndicatorController {
+    
+    fileprivate lazy var keyboardDisposeBag = DisposeBag()
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var titleTextField: PaddingTextField!
@@ -20,12 +26,19 @@ class CreatePostViewController: BaseViewController {
     @IBOutlet weak var shortDescTextField: PaddingTextField!
     @IBOutlet weak var tableView: ContentSizedTableView!
     @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var uploadThumbnailButton: CenteredImageButton!
+    @IBOutlet weak var thumbnailImageView: UIImageView!
     
     let minContentHeight: CGFloat = 200
     var isFirstInitial: Bool = false
     
+    private lazy var imagePickerHelper: MediaPickerHelper = { [unowned self] in
+        return MediaPickerHelper(withPresenting: self)
+    }()
+    
     lazy var postButton: UIBarButtonItem = { [unowned self] in
-        return UIBarButtonItem(title: "Post", style: .plain, target: nil, action: nil)
+        return UIBarButtonItem(title: self.viewModel.postTitle, style: .plain, target: nil, action: nil)
     }()
     
     lazy var toolbar: RichEditorToolbar = {
@@ -46,10 +59,22 @@ class CreatePostViewController: BaseViewController {
         viewModel.downloadData()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.keyboardDisposeBag = DisposeBag()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setUpKeyboardObservers()
+    }
+    
     override func setUpLocalizedTexts() {
         super.setUpLocalizedTexts()
         
-        self.title = "Post an Article"
+        self.title = self.viewModel.titleText
         self.richEditorView.placeholder = "Article body"
     }
 }
@@ -100,23 +125,27 @@ extension CreatePostViewController: RichEditorDelegate, RichEditorToolbarDelegat
     }
     
     func richEditor(_ editor: RichEditorView, heightDidChange height: Int) {
-        if CGFloat(height) != self.contentHeightConstraint.constant {
-            UIView.setAnimationsEnabled(false)
-            self.contentHeightConstraint.constant = (CGFloat(height) >= self.minContentHeight) ? CGFloat(height) : self.minContentHeight
-            if isFirstInitial {
-                let frame = self.richEditorView.frame
-                let rectToScroll = CGRect(x: 0, y: frame.height - 20, width: frame.width, height: frame.height)
-                self.scrollView.scrollRectToVisible(rectToScroll, animated: false)
-            }
-            UIView.setAnimationsEnabled(true)
+        UIView.setAnimationsEnabled(false)
+        self.contentHeightConstraint.constant = (CGFloat(height) >= self.minContentHeight) ? CGFloat(height) : self.minContentHeight
+        if isFirstInitial {
+            let frame = self.richEditorView.frame
+            let y = CGFloat(height) < self.minContentHeight ? CGFloat(height) : (frame.height - 100)
+            let rectToScroll = CGRect(x: 0, y: y, width: frame.width, height: 200)
+            self.scrollView.scrollRectToVisible(rectToScroll, animated: false)
         }
+        UIView.setAnimationsEnabled(true)
     }
     
     func richEditor(_ editor: RichEditorView, shouldInteractWith url: URL) -> Bool {
         return false
     }
     
+    func richEditor(_ editor: RichEditorView, contentDidChange content: String) {
+        self.viewModel.descriptionFieldViewModel.value = content
+    }
+    
     func richEditorToolbarInsertImage(_ toolbar: RichEditorToolbar) {
+        self.viewModel.didAction(with: .chooseImage(.insertImage))
     }
     
     func richEditorToolbarInsertLink(_ toolbar: RichEditorToolbar) {
@@ -127,8 +156,27 @@ extension CreatePostViewController: RichEditorDelegate, RichEditorToolbarDelegat
 extension CreatePostViewController {
     
     func setUpRxObservers() {
+        setUpControlsObservers()
         setUpContentChangedObservers()
         setUpShouldPresentObservers()
+        setUpTabSelfToDismissKeyboard()?.disposed(by: self.disposeBag)
+    }
+    
+    func setUpControlsObservers() {
+        self.uploadThumbnailButton.rx.tap.asObservable()
+            .map { CreatePostViewModel.Action.chooseImage(.thumbnail) }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+        
+        self.imagePickerHelper.selectedPhotoSubject.asObservable()
+            .map { CreatePostViewModel.Action.imageSelected($0) }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+        
+        self.postButton.rx.tap
+            .map { CreatePostViewModel.Action.postPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpContentChangedObservers() {
@@ -152,17 +200,72 @@ extension CreatePostViewController {
             .map { CreatePostViewModel.Action.itemSelected($0) }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
+        
+        self.viewModel.newThumbnailImage.asObservable()
+            .filter { $0 != nil }
+            .map { $0!.image }
+            ~> self.thumbnailImageView.rx.image
+            ~ self.disposeBag
+        
+        self.viewModel.shouldInsertImage.asObservable()
+            .subscribe(onNext: { [weak self] url in
+                self?.richEditorView.insertImage(url, alt: "")
+            }) ~ self.disposeBag
+        
+        self.viewModel.shouldEnablePost ~> self.postButton.rx.isEnabled ~ self.disposeBag
+        self.viewModel.titleTextFieldViewModel.bind(with: self.titleTextField)
+        self.viewModel.shortDescriptionFieldViewModel.bind(with: self.shortDescTextField)
+        self.viewModel.descriptionFieldViewModel.textFieldText.take(1)
+            .bind(to: self.richEditorView.rx.html)
+            ~ self.disposeBag
+        
+        self.viewModel.thumbnialUrl.asObservable()
+            .map { $0 }
+            .bind(to: self.thumbnailImageView.kf.rx.image())
+            ~ self.disposeBag
+        
+        self.viewModel.addThumbnailState.asObservable()
+            .subscribe(onNext: { [weak self] data in
+                self?.uploadThumbnailButton.setTitle(data.0, for: .normal)
+                self?.uploadThumbnailButton.setImage(data.1, for: .normal)
+            }) ~ self.disposeBag
     }
     
     func setUpShouldPresentObservers() {
         self.viewModel.shouldPresent.asObservable()
             .subscribe(onNext: { [unowned self] viewToPresent in
                 switch viewToPresent {
+                case .loading(let loading):
+                    loading ? self.showLoading() : self.dismissLoading()
                 case .selectCategoryController(let data):
                     let listTableViewController = ListTableViewController(data.viewModel)
                     listTableViewController.title = data.title
-                    self.show(listTableViewController, sender: nil)
+                    listTableViewController.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 8, right: 0)
+                    listTableViewController.view.roundCorners(corners: [.topLeft, .topRight], radius: 8)
+                    let bottomSheet = MDCBottomSheetController(contentViewController: listTableViewController)
+                    bottomSheet.isScrimAccessibilityElement = false
+                    bottomSheet.automaticallyAdjustsScrollViewInsets = false
+                    bottomSheet.dismissOnDraggingDownSheet = true
+                    bottomSheet.trackingScrollView = listTableViewController.tableView
+                    self.present(bottomSheet, animated: true, completion: nil)
+                case .chooseMediaController(let params):
+                    self.imagePickerHelper.allowEditting = params.editable
+                    self.imagePickerHelper.showImagePickerAlert(title: params.title)
+                case .dismiss:
+                    self.dismiss(animated: true, completion: nil)
                 }
             }) ~ self.disposeBag
+    }
+    
+    func setUpKeyboardObservers() {
+        RxKeyboard.instance.visibleHeight
+            .drive(onNext: { [weak self] keyboardHeight in
+                if let _self = self {
+                    _self.bottomConstraint.constant = keyboardHeight
+                    UIView.animate(withDuration: 0.3, animations: {
+                        _self.view.layoutIfNeeded()
+                    })
+                }
+            }).disposed(by: self.keyboardDisposeBag)
     }
 }

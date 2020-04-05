@@ -8,7 +8,7 @@
 
 import Foundation
 
-class DiscussionCategoryModel: Codable {
+struct DiscussionCategoryModel: Codable {
     
     var name: String
     var sub: [DiscussionCategoryModel]?

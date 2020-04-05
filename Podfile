@@ -51,6 +51,7 @@ def frameworks_pods
   pod 'RxBinding'
   
   # MARK: - Google SDKs
+  pod 'Firebase/Analytics'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   

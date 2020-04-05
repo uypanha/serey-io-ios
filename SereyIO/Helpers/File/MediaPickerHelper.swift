@@ -30,7 +30,7 @@ class MediaPickerHelper: NSObject {
         }
     }
     
-    private var allowEditting = true
+    public var allowEditting = true
     private var imagePickerControllerImage: UIImagePickerController.InfoKey {
         get {
             if (self.allowEditting) {
@@ -54,7 +54,7 @@ class MediaPickerHelper: NSObject {
         self.pickerController = picker
     }
     
-    func showImagePickerAlert(additional actionSheets: [UIViewController.ActionSheet]? = nil, completion: @escaping ((_ index: Int, _ action: UIViewController.ActionSheet) -> Void) = {_,_ in }) {
+    func showImagePickerAlert(title: String? = nil, additional actionSheets: [UIViewController.ActionSheet]? = nil, completion: @escaping ((_ index: Int, _ action: UIViewController.ActionSheet) -> Void) = {_,_ in }) {
         
         var photoActionSheets: [UIViewController.ActionSheet] = [
             UIViewController.ActionSheet(title: R.string.common.takePhoto.localized(), style: .default),
@@ -65,7 +65,7 @@ class MediaPickerHelper: NSObject {
             photoActionSheets.append(actionSheet)
         })
         
-        self.presentingViewController.showActionSheet(title: "Choose Image Source", actionSheets: photoActionSheets) { (index: Int, action: UIViewController.ActionSheet) in
+        self.presentingViewController.showActionSheet(title: title ?? "Choose Image Source", actionSheets: photoActionSheets) { (index: Int, action: UIViewController.ActionSheet) in
             
             switch(index) {
             case 0:

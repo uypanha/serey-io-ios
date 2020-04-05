@@ -60,8 +60,8 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
     }
     
     override func prepareEmptyViewModel() -> EmptyOrErrorViewModel {
-        let title = "No Post Yet!"
-        let emptyMessage = "Your post will be shown here after you\nmade a post."
+        let title = R.string.post.noPostYet.localized()
+        let emptyMessage = R.string.post.noPostMessage.localized()
         return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withEmptyTitle: title, emptyDescription: emptyMessage, iconImage: R.image.emptyPost()))
     }
 }
@@ -84,19 +84,19 @@ extension AccountViewModel {
     }
     
     private func prepareFollowingsCountText(_ count: Int) -> String {
-        return "\(count) Following\(preparePluralNumberSuffix(count))"
+        return String(format: R.string.account.followingCount.localized(), "\(count)", preparePluralNumberSuffix(count))
     }
     
     private func prepareFollowersCountText(_ count: Int) -> String {
-        return "\(count) Follower\(preparePluralNumberSuffix(count))"
+        return String(format: R.string.account.followerCount.localized(), "\(count)", preparePluralNumberSuffix(count))
     }
     
     private func preparePostCountText(_ count: Int) -> String {
-        return "\(count) Post\(preparePluralNumberSuffix(count))"
+        return String(format: R.string.account.postCount.localized(), "\(count)", preparePluralNumberSuffix(count))
     }
     
     private func preparePluralNumberSuffix(_ count: Int) -> String {
-        return count > 1 ? "s" : ""
+        return count > 1 ? R.string.common.ploralSuffix.localized() : ""
     }
 }
 

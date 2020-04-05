@@ -48,7 +48,6 @@ extension UIViewController {
     
     func showActionSheet(title: String? = nil, message: String? = nil, actionSheets: [ActionSheet], completion: @escaping ((_ index: Int, _ action: ActionSheet) -> Void)) {
         let actionSheetController = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
-        //        actionSheetController.view.tintColor = ColorName.main.color
         
         actionSheets.forEach { (action) in
             let alerActionButton = UIAlertAction(title: action.title, style: action.actionStyle) { alertAction -> Void in

@@ -13,4 +13,5 @@ enum AppNotification {
     case userDidLogin
     case userDidLogOut
     case languageChanged
+    case postSubmitted
 }

@@ -150,7 +150,7 @@ fileprivate extension SignInViewController {
         RxKeyboard.instance.visibleHeight
             .drive(onNext: { [weak self] keyboardHeight in
                 if let _self = self {
-                    _self.bottomConstraint.constant = -keyboardHeight
+                    _self.bottomConstraint.constant = keyboardHeight
                     UIView.animate(withDuration: 0.3, animations: {
                         _self.view.layoutIfNeeded()
                     })

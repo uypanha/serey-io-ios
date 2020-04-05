@@ -18,7 +18,8 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
     }
     
     enum ViewToPresent {
-        case moreDialogController(BottomMenuViewModel)
+        case moreDialogController(BottomListMenuViewModel)
+        case editPostController(CreatePostViewModel)
     }
     
     // input:
@@ -35,6 +36,7 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
     let replies: BehaviorRelay<[PostModel]>
     
     let postViewModel: BehaviorSubject<PostCellViewModel?>
+    let commentPostViewModel: BehaviorSubject<PostCommentViewModel?>
     let sereyValueText: BehaviorSubject<String>
     let isMoreHidden: BehaviorSubject<Bool>
     
@@ -48,6 +50,7 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
         self.replies = BehaviorRelay(value: [])
         
         self.postViewModel = BehaviorSubject(value: nil)
+        self.commentPostViewModel = BehaviorSubject(value: nil)
         self.sereyValueText = BehaviorSubject(value: "")
         self.isMoreHidden = BehaviorSubject(value: true)
         
@@ -90,35 +93,14 @@ extension PostDetailViewModel {
 }
 
 // MARK: - Preparations & Tools
-fileprivate extension PostDetailViewModel {
-    
-    func notifyDataChanged(_ data: PostModel?) {
-        let postDetailViewModel = data == nil ? PostCellViewModel(true) : PostCellViewModel(data)
-        self.postViewModel.onNext(postDetailViewModel)
-        self.sereyValueText.onNext(data?.sereyValue ?? "")
-        let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.authorName == AuthData.shared.username : false
-        self.isMoreHidden.onNext(!isMorePresent)
-    }
-    
-    func prepareCells(_ replies: [PostModel]) -> [SectionItem] {
-        var cells: [CellViewModel] = []
-        cells.append(contentsOf: replies.map { CommentCellViewModel($0) })
-        if self.isDownloading.value && replies.isEmpty {
-            cells.append(contentsOf: (0...3).map { _ in CommentCellViewModel(true) })
-        }
-        return [SectionItem(items: cells)]
-    }
-}
-
-// MARK: - Action Handlers
-fileprivate extension PostDetailViewModel {
+extension PostDetailViewModel {
     
     enum PostMenu {
         case edit
         case delete
         
-        var cellModel: ImageTextCellViewModel {
-            return ImageTextCellViewModel(model: self.imageTextModel)
+        var cellModel: PostMenuCellViewModel {
+            return PostMenuCellViewModel(self)
         }
         
         var imageTextModel: ImageTextModel {
@@ -131,10 +113,53 @@ fileprivate extension PostDetailViewModel {
         }
     }
     
+    fileprivate func notifyDataChanged(_ data: PostModel?) {
+        let postDetailViewModel = data == nil ? PostCellViewModel(true) : PostCellViewModel(data)
+        let commentPostViewModel = data == nil ? PostCommentViewModel(true) : PostCommentViewModel(data)
+        self.postViewModel.onNext(postDetailViewModel)
+        self.commentPostViewModel.onNext(commentPostViewModel)
+        self.sereyValueText.onNext(data?.sereyValue ?? "")
+        let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.authorName == AuthData.shared.username : false
+        self.isMoreHidden.onNext(!isMorePresent)
+    }
+    
+    fileprivate func prepareCells(_ replies: [PostModel]) -> [SectionItem] {
+        var cells: [CellViewModel] = []
+        cells.append(contentsOf: replies.map { CommentCellViewModel($0) })
+        if self.isDownloading.value && replies.isEmpty {
+            cells.append(contentsOf: (0...3).map { _ in CommentCellViewModel(true) })
+        }
+        return [SectionItem(items: cells)]
+    }
+}
+
+// MARK: - Action Handlers
+fileprivate extension PostDetailViewModel {
+    
     func handleMorePressed() {
         let items: [PostMenu] = [.edit, .delete]
-        let bottomMenuViewModel = BottomMenuViewModel(items.map { $0.cellModel })
+        let bottomMenuViewModel = BottomListMenuViewModel(items.map { $0.cellModel })
+        
+        bottomMenuViewModel.shouldSelectMenuItem.asObservable()
+            .subscribe(onNext: { [weak self] item in
+                if let itemType = (item as? PostMenuCellViewModel)?.type {
+                    self?.handleMenuPressed(itemType)
+                }
+            }) ~ bottomMenuViewModel.disposeBag
+        
         self.shouldPresent(.moreDialogController(bottomMenuViewModel))
+    }
+    
+    func handleMenuPressed(_ type: PostMenu) {
+        switch type {
+        case .edit:
+            if let post = self.discussion.value {
+                let createPostViewModel = CreatePostViewModel(.edit(post))
+                self.shouldPresent(.editPostController(createPostViewModel))
+            }
+        default:
+            break
+        }
     }
 }
 
@@ -166,5 +191,16 @@ extension PostDetailViewModel {
                     self?.handleMorePressed()
                 }
             }) ~ self.disposeBag
+    }
+}
+
+// MARK: - PostMenuCellViewModel
+class PostMenuCellViewModel: ImageTextCellViewModel {
+    
+    let type: PostDetailViewModel.PostMenu
+    
+    init(_ type: PostDetailViewModel.PostMenu) {
+        self.type = type
+        super.init(model: type.imageTextModel)
     }
 }

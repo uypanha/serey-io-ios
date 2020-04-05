@@ -16,6 +16,7 @@ class ListTableViewController<T>: BaseTableViewController where T : BaseListTabl
     
     let viewModel: T
     var sepereatorStyle: UITableViewCell.SeparatorStyle = .singleLine
+    var contentInset: UIEdgeInsets = UIEdgeInsets.zero
     
     lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
         return self.prepreDataSource()
@@ -42,6 +43,7 @@ class ListTableViewController<T>: BaseTableViewController where T : BaseListTabl
     open func setUpView() {
         self.tableView.tableFooterView = UIView()
         self.tableView.separatorStyle = self.sepereatorStyle
+        self.tableView.contentInset = self.contentInset
         self.viewModel.registerTableViewCell(self.tableView)
     }
     
