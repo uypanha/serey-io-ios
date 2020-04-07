@@ -18,11 +18,11 @@ class SubPostCategoryCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var checkedView: UIImageView!
     @IBOutlet weak var chipView: UIView!
     
-    var cellModel: SubCategoryCellViewModel? {
+    var cellModel: CategoryCellViewModel? {
         didSet {
             guard let cellModel = self.cellModel else { return }
             
-            cellModel.nameText.asObservable()
+            cellModel.titleLabelText.asObservable()
                 ~> self.nameLabel.rx.text
                 ~ self.disposeBag
             

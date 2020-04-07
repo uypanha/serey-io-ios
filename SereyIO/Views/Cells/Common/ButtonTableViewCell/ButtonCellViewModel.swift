@@ -24,7 +24,7 @@ class ButtonCellViewModel: CellViewModel {
     }
 }
 
-struct ButtonProperties {
+class ButtonProperties: NSObject {
     
     var font: UIFont? = nil
     var textColor: UIColor? = nil

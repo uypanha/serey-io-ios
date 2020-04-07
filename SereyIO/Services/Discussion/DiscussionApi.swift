@@ -18,6 +18,8 @@ enum DiscussionApi {
     case getPostDetail(permlink: String, authorName: String)
     
     case submitPost(SubmitPostModel)
+    
+    case submitComment(SubmitCommentModel)
 }
 
 extension DiscussionApi: AuthorizedApiTargetType {
@@ -25,13 +27,15 @@ extension DiscussionApi: AuthorizedApiTargetType {
     var parameters: [String : Any] {
         switch self {
         case .getDiscussions(let data):
-            return data.1.prepareParameters(data.0 == .byUser ? "userId" : "authorName")
+            return data.1.prepareParameters(data.0.authorParamName, authorName: data.0.authorName)
         case .getPostDetail(let data):
             return [
                 "permlink"      : data.permlink,
                 "authorName"    : data.authorName
             ]
         case .submitPost(let data):
+            return data.parameters
+        case .submitComment(let data):
             return data.parameters
         default:
             return [:]
@@ -48,12 +52,14 @@ extension DiscussionApi: AuthorizedApiTargetType {
             return "/api/v1/sereyweb/findDetailBypermlink"
         case .submitPost:
             return "/api/v1/sereyweb/submitPost"
+        case .submitComment:
+            return "/api/v1/sereyweb/submitReplies"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .submitPost:
+        case .submitPost, .submitComment:
             return .post
         default:
             return .get
@@ -64,7 +70,7 @@ extension DiscussionApi: AuthorizedApiTargetType {
         switch self {
         case .getDiscussions, .getPostDetail:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-        case .submitPost:
+        case .submitPost, .submitComment:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         default:
             return .requestPlain
@@ -96,12 +102,12 @@ fileprivate extension DiscussionType {
 // MARK: - QueryDiscussionsBy
 extension QueryDiscussionsBy {
     
-    func prepareParameters(_ authorFieldName: String = "authorName") -> [String: Any] {
+    func prepareParameters(_ authorFieldName: String = "authorName", authorName: String? = nil) -> [String: Any] {
         var parameters: [String: Any] = [:]
         if let permlink = start_permlink {
         parameters["permlink"] = permlink
         }
-        if let authorName = start_author {
+        if let authorName = authorName ?? start_author {
         parameters[authorFieldName] = authorName
         }
         if let categoryName = tag {

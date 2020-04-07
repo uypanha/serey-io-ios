@@ -109,10 +109,16 @@ fileprivate extension PostTableViewController {
                     self?.emptyView?.removeFromSuperview()
                     self?.emptyView = nil
                 }
-                self?.refreshControl?.endRefreshing()
             })
             .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
-            .disposed(by: self.disposeBag)
+            ~ self.disposeBag
+        
+        self.viewModel.endRefresh.asObservable()
+            .subscribe(onNext: { [weak self] endRefreshing in
+                if endRefreshing {
+                    self?.tableView.refreshControl?.endRefreshing()
+                }
+            }) ~ self.disposeBag
         
         self.viewModel.emptyOrError.asObservable()
             .subscribe(onNext: { [weak self] emptyOrErrorViewModel in

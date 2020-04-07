@@ -20,6 +20,7 @@ class PostDetailView: NibView {
     @IBOutlet weak var editorView: SRichEditorView!
     @IBOutlet weak var publishTimeLabel: UILabel!
     @IBOutlet weak var editorHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var collectionView: ContentSizedCollectionView!
     
     var viewModel: PostCellViewModel? {
         didSet {

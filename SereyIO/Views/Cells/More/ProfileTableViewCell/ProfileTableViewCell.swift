@@ -23,7 +23,14 @@ class ProfileTableViewCell: BaseTableViewCell {
             
             self.disposeBag ~ [
                 cellModel.profileViewModel ~> self.profileView.rx.profileViewModel,
-                cellModel.authorName ~> self.profileNameLabel.rx.text
+                cellModel.authorName ~> self.profileNameLabel.rx.text,
+                cellModel.showSeperatorLine.asObservable()
+                    .subscribe(onNext: { [weak self] showSeperatorLine in
+                        self?.removeAllBorders()
+                        if (showSeperatorLine) {
+                            self?.addBorder(edges: .bottom, color: UIColor.lightGray.withAlphaComponent(0.5), thickness: 1)
+                        }
+                    })
             ]
         }
     }

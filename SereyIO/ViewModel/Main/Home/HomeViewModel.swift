@@ -165,7 +165,7 @@ enum DiscussionType {
     case trending
     case hot
     case new
-    case byUser
+    case byUser(String)
     
     var title: String {
         switch self {
@@ -177,6 +177,24 @@ enum DiscussionType {
             return "New"
         case .byUser:
             return "User"
+        }
+    }
+    
+    var authorParamName: String {
+        switch self {
+        case .byUser:
+            return "userId"
+        default:
+            return "authorName"
+        }
+    }
+    
+    var authorName: String? {
+        switch self {
+        case .byUser(let username):
+            return username
+        default:
+            return nil
         }
     }
     

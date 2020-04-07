@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PostDetailView" customModule="SereyIO" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="45G-qy-lTQ" id="EYu-1Q-rIX"/>
                 <outlet property="editorHeightConstraint" destination="cfZ-LO-uoU" id="MSw-O5-7gH"/>
                 <outlet property="editorView" destination="dGP-JE-eDH" id="rr7-DO-u7v"/>
                 <outlet property="profileNameLabel" destination="q9u-u2-6Kg" id="qoI-xK-p6u"/>
@@ -27,13 +28,13 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="165"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="kn7-Zy-uQB">
-                            <rect key="frame" x="16" y="12" width="382" height="116"/>
+                            <rect key="frame" x="16" y="12" width="382" height="78.5"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KWQ-zp-Tan">
-                                    <rect key="frame" x="0.0" y="0.0" width="382" height="82.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="382" height="45"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MAK-YY-WwO" customClass="ProfileView" customModule="SereyIO" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="19" width="45" height="45"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
                                             <color key="backgroundColor" red="0.28627450980000002" green="0.4039215686" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="45" id="oCc-g2-kqZ"/>
@@ -41,7 +42,7 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="NvI-We-Bvd">
-                                            <rect key="frame" x="53" y="24.5" width="329" height="34"/>
+                                            <rect key="frame" x="53" y="5.5" width="329" height="34"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jhon Cena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q9u-u2-6Kg">
                                                     <rect key="frame" x="0.0" y="0.0" width="329" height="19.5"/>
@@ -60,7 +61,7 @@
                                     </subviews>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why pet can help you from depression?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDw-Cn-QpU">
-                                    <rect key="frame" x="0.0" y="94.5" width="382" height="21.5"/>
+                                    <rect key="frame" x="0.0" y="57" width="382" height="21.5"/>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -68,7 +69,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7VL-lD-WRi">
-                            <rect key="frame" x="0.0" y="144" width="414" height="21"/>
+                            <rect key="frame" x="0.0" y="106.5" width="414" height="58.5"/>
                             <subviews>
                                 <view alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G8r-8T-6vO">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
@@ -84,6 +85,21 @@
                                         <constraint firstAttribute="height" constant="20" id="cfZ-LO-uoU"/>
                                     </constraints>
                                 </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eoj-M4-kqf">
+                                    <rect key="frame" x="0.0" y="21" width="414" height="37.5"/>
+                                    <subviews>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="45G-qy-lTQ" customClass="ContentSizedCollectionView" customModule="SereyIO" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="37.5"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hPG-2G-TDc">
+                                                <size key="itemSize" width="50" height="50"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                        </collectionView>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                         </stackView>
                     </subviews>
@@ -108,7 +124,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-401" y="74"/>
+            <point key="canvasLocation" x="-401.44927536231887" y="73.995535714285708"/>
         </view>
     </objects>
 </document>

@@ -16,6 +16,7 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
     
     enum Action {
         case itemSelected(IndexPath)
+        case refresh
     }
     
     enum ViewToPresent {
@@ -48,7 +49,7 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
         self.followingCountText = BehaviorSubject(value: nil)
         self.isFollowHidden = BehaviorSubject(value: AuthData.shared.username == username)
         self.isFollowed = BehaviorSubject(value: false)
-        super.init(.byUser, username)
+        super.init(.byUser(username))
         
         setUpRxObservers()
     }
@@ -134,6 +135,9 @@ fileprivate extension AccountViewModel {
                 switch action {
                 case .itemSelected(let indexPath):
                     self?.handleItemPressed(indexPath)
+                case .refresh:
+                    self?.reset()
+                    self?.discussions.renotify()
                 }
             }) ~ self.disposeBag
     }

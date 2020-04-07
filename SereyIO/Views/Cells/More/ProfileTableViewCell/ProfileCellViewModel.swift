@@ -16,11 +16,13 @@ class ProfileCellViewModel: CellViewModel {
     let userInfo: BehaviorRelay<UserModel?>
     let profileViewModel: BehaviorSubject<ProfileViewModel?>
     let authorName: BehaviorSubject<String?>
+    let showSeperatorLine: BehaviorSubject<Bool>
     
-    init(_ user: UserModel?) {
+    init(_ user: UserModel?, _ border: Bool = false) {
         self.userInfo = BehaviorRelay(value: user)
         self.profileViewModel = BehaviorSubject(value: nil)
         self.authorName = BehaviorSubject(value: nil)
+        self.showSeperatorLine = BehaviorSubject(value: border)
         super.init()
         
         setUpRxObservers()

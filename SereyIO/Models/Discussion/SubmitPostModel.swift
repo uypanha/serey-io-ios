@@ -35,3 +35,4 @@ struct SubmitPostModel {
         return params
     }
 }
+

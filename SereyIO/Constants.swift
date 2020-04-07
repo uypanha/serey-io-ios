@@ -32,6 +32,10 @@ public struct Constants {
         return Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String ?? ""
     }
     
+    static var includeWallet: Bool {
+        return (ConfigSetting.includeWallet.value() as NSString).boolValue
+    }
+    
     public static let limitPerPage: Int = 10
     
     static var uploadImageUrl: String {
@@ -76,6 +80,7 @@ fileprivate enum ConfigSetting {
     case walletURL
     case chainURL
     case urlProcol
+    case includeWallet
     
     private var key: String {
         switch self {
@@ -89,6 +94,8 @@ fileprivate enum ConfigSetting {
             return "CHAIN_URL"
         case .urlProcol:
             return "URL_PROTOCOL"
+        case .includeWallet:
+            return "INCLUDE_WALLET"
         }
     }
     

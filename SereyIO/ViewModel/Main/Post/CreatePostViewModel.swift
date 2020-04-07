@@ -130,7 +130,7 @@ extension CreatePostViewModel {
 // MARK: - Preparations & Tools
 extension CreatePostViewModel {
     
-    class CategoryCellViewModel: TextCellViewModel {
+    class SelectCategoryCellViewModel: TextCellViewModel {
         
         let category: CreatePostViewModel.CategoryCellType
         
@@ -145,7 +145,7 @@ extension CreatePostViewModel {
         case subCategory(DiscussionCategoryModel?)
         
         var cellModel: TextCellViewModel {
-            return CategoryCellViewModel(self, indicatorAccessory: true)
+            return SelectCategoryCellViewModel(self, indicatorAccessory: true)
         }
         
         var selectTitle: String {
@@ -255,7 +255,7 @@ extension CreatePostViewModel {
 fileprivate extension CreatePostViewModel {
     
     func handleItemSelected(_ indexPath: IndexPath) {
-        if let item = self.item(at: indexPath) as? CategoryCellViewModel {
+        if let item = self.item(at: indexPath) as? SelectCategoryCellViewModel {
             switch item.category {
             case .category(let category):
                 self.prepareOpenSelectCategory(self.categories.value, selected: category)

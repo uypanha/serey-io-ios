@@ -192,6 +192,18 @@ extension PostDetailViewModel {
                 }
             }) ~ self.disposeBag
     }
+    
+    func setUpCommentViewModelObservers(_ viewModel: PostCommentViewModel) {
+        viewModel.shouldUpVote.asObservable()
+            .subscribe(onNext: { _ in
+                
+            }) ~ viewModel.disposeBag
+        
+        viewModel.shouldComment.asObservable()
+            .subscribe(onNext: { comment in
+                
+            }) ~ viewModel.disposeBag
+    }
 }
 
 // MARK: - PostMenuCellViewModel

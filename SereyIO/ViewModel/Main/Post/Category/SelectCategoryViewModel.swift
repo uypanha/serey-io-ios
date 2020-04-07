@@ -45,7 +45,7 @@ class SelectCategoryViewModel: BaseListTableViewModel {
 extension SelectCategoryViewModel {
     
     fileprivate func prepareCells(_ categories: [DiscussionCategoryModel]) -> [SectionItem] {
-        let items = categories.map { CategoryCellViewModel($0, indicatorAccessory: false) }
+        let items = categories.map { CategoryCellViewModel($0, title: $0.name, isSelected: false) }
         return [SectionItem(items: items)]
     }
 }
@@ -55,7 +55,7 @@ fileprivate extension SelectCategoryViewModel {
     
     func handleItemSelected(_ indexPath: IndexPath) {
         if let item = item(at: indexPath) as? CategoryCellViewModel {
-            self.shouldSelectCategory.onNext(item.category)
+            self.shouldSelectCategory.onNext(item.category.value)
             self.shouldDismiss.onNext(true)
         }
     }

@@ -13,6 +13,7 @@
                 <outlet property="commentTextField" destination="Ui3-5u-Rv0" id="UoV-sr-kbc"/>
                 <outlet property="downVoteButton" destination="fkQ-YQ-vVY" id="dXh-wg-Mfp"/>
                 <outlet property="profileView" destination="r1T-Oy-JNa" id="va3-YZ-cbb"/>
+                <outlet property="sendButton" destination="fbT-PC-zLK" id="vid-MJ-c8s"/>
                 <outlet property="upVoteButton" destination="kfg-2m-cAR" id="7NQ-c5-LEg"/>
             </connections>
         </placeholder>
@@ -24,14 +25,14 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y11-nQ-eXI">
                     <rect key="frame" x="16" y="16" width="429" height="81"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="trg-hd-cVp">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="trg-hd-cVp">
                             <rect key="frame" x="0.0" y="0.0" width="429" height="81"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Hjr-xs-pmT">
-                                    <rect key="frame" x="0.0" y="0.0" width="98" height="25"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="98" height="37"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfg-2m-cAR">
-                                            <rect key="frame" x="0.0" y="0.5" width="41" height="24"/>
+                                            <rect key="frame" x="0.0" y="6.5" width="41" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="zNT-0j-6ya"/>
                                             </constraints>
@@ -43,7 +44,7 @@
                                             </state>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fkQ-YQ-vVY">
-                                            <rect key="frame" x="57" y="0.5" width="41" height="24"/>
+                                            <rect key="frame" x="57" y="6.5" width="41" height="24"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                             <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="-4" maxY="0.0"/>
@@ -57,22 +58,31 @@
                                     </constraints>
                                 </stackView>
                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zjJ-Ov-cHe">
-                                    <rect key="frame" x="0.0" y="41" width="429" height="40"/>
+                                    <rect key="frame" x="0.0" y="45" width="429" height="36"/>
                                     <subviews>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r1T-Oy-JNa" customClass="ProfileView" customModule="SereyIO" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
                                             <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="PwJ-RF-i3W"/>
+                                                <constraint firstAttribute="height" constant="36" id="PwJ-RF-i3W"/>
                                                 <constraint firstAttribute="width" secondItem="r1T-Oy-JNa" secondAttribute="height" multiplier="1:1" id="X5w-G8-nPa"/>
                                             </constraints>
                                         </view>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write a comment..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ui3-5u-Rv0">
-                                            <rect key="frame" x="48" y="0.0" width="381" height="40"/>
+                                            <rect key="frame" x="44" y="0.0" width="341" height="36"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbT-PC-zLK">
+                                            <rect key="frame" x="393" y="0.0" width="36" height="36"/>
+                                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" image="sendIcon"/>
+                                        </button>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="fbT-PC-zLK" firstAttribute="width" secondItem="r1T-Oy-JNa" secondAttribute="width" id="4zV-hQ-ZXu"/>
+                                        <constraint firstItem="fbT-PC-zLK" firstAttribute="height" secondItem="r1T-Oy-JNa" secondAttribute="height" id="9uW-nX-TGb"/>
+                                    </constraints>
                                 </stackView>
                             </subviews>
                             <constraints>
@@ -103,6 +113,7 @@
     </objects>
     <resources>
         <image name="downVoteIcon" width="18" height="18"/>
+        <image name="sendIcon" width="41" height="41"/>
         <image name="upVoteIcon" width="18" height="18"/>
     </resources>
 </document>

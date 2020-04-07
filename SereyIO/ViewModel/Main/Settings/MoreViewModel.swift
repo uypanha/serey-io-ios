@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import RxBinding
 import RxRealm
+import Then
 
 class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, CollectionMultiSectionsProviderModel, ShouldReactToAction, ShouldPresent {
     
@@ -116,7 +117,11 @@ extension MoreViewModel {
         var sectionItems: [SectionType: [CellViewModel]] = [:]
         
         if AuthData.shared.isUserLoggedIn {
-            sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value), SettingCellViewModel(.myWallet, true)]
+            if Constants.includeWallet {
+                sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value), SettingCellViewModel(.myWallet, true)]
+            } else {
+                sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value, true)]
+            }
         } else {
             sectionItems[.signIn] = [SignInCellViewModel().then { [weak self] in self?.setUpSignInCellViewModelObservers($0) }]
         }
@@ -124,7 +129,12 @@ extension MoreViewModel {
         sectionItems[.about] = [SettingCellViewModel(.sereyApps), SettingCellViewModel(.version, true)]
         
         if AuthData.shared.isUserLoggedIn {
-            let signOutButtonProperties = ButtonProperties(borderColor: .lightGray, isCircular: false)
+            let signOutButtonProperties = ButtonProperties().then {
+                $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                $0.textColor = ColorName.primaryRed.color
+                $0.borderColor = ColorName.primaryRed.color
+                $0.isCircular = false
+            }
             let signOutButtonModel = ButtonCellViewModel(R.string.auth.signOut.localized(), signOutButtonProperties).then { [unowned self] in
                 $0.shouldFireButtonAction
                     .map { Action.signOutPressed }

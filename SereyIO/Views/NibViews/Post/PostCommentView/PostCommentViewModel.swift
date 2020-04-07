@@ -11,7 +11,16 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class PostCommentViewModel: BaseViewModel, ShimmeringProtocol {
+class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, ShouldReactToAction {
+    
+    enum Action {
+        case upVotePressed
+        case downVotePressed
+        case sendCommentPressed
+    }
+    
+    // input:
+    lazy var didActionSubject = PublishSubject<Action>()
     
     let post: BehaviorRelay<PostModel?>
     let isShimmering: BehaviorRelay<Bool>
@@ -19,6 +28,10 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol {
     let profileViewModel: BehaviorSubject<ProfileViewModel?>
     let upVoteCount: BehaviorSubject<String?>
     let downVoteCount: BehaviorSubject<String?>
+    
+    let shouldComment: PublishSubject<String>
+    let shouldUpVote: PublishSubject<Void>
+    let shouldDownVote: PublishSubject<Void>
     
     let commentTextFieldViewModel: TextFieldViewModel
     
@@ -28,6 +41,11 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol {
         self.profileViewModel = BehaviorSubject(value: nil)
         self.upVoteCount = BehaviorSubject(value: nil)
         self.downVoteCount = BehaviorSubject(value: nil)
+        
+        self.shouldComment = PublishSubject()
+        self.shouldUpVote = PublishSubject()
+        self.shouldDownVote = PublishSubject()
+        
         self.commentTextFieldViewModel = TextFieldViewModel.textFieldWith(title: R.string.post.postAComment.localized(), errorMessage: nil, validation: .notEmpty)
         super.init()
         
@@ -57,12 +75,28 @@ fileprivate extension PostCommentViewModel {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
+        setUpActionObservers()
     }
     
     func setUpContentChangedObservers() {
         self.post.asObservable()
             .subscribe(onNext: { [weak self] discussion in
                 self?.notifyDataChanged(discussion)
+            }) ~ self.disposeBag
+    }
+    
+    func setUpActionObservers() {
+        self.didActionSubject.asObservable()
+            .subscribe(onNext: { [weak self] action in
+                switch action {
+                case .upVotePressed:
+                    self?.shouldUpVote.onNext(())
+                case .downVotePressed:
+                    self?.shouldDownVote.onNext(())
+                case .sendCommentPressed:
+                    let comment = self?.commentTextFieldViewModel.value ?? ""
+                    self?.shouldComment.onNext(comment)
+                }
             }) ~ self.disposeBag
     }
 }

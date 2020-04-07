@@ -49,9 +49,9 @@ extension PostCategoryTableViewCell {
         cellModel.cells.asObservable()
             .bind(to: self.collectionView.rx.items) { collectionView, index, item in
                 switch item {
-                case is SubCategoryCellViewModel:
+                case is CategoryCellViewModel:
                     let cell: SubPostCategoryCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: IndexPath(row: index, section: 0))
-                    cell.cellModel = item as? SubCategoryCellViewModel
+                    cell.cellModel = item as? CategoryCellViewModel
                     return cell
                 default:
                     return UICollectionViewCell()

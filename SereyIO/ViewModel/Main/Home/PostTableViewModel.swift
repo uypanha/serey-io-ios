@@ -29,8 +29,8 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent 
     // output:
     lazy var shouldPresentSubject = PublishSubject<PostTableViewModel.ViewToPresent>()
     
-    override init(_ type: DiscussionType, _ authorName: String? = nil) {
-        super.init(type, authorName)
+    override init(_ type: DiscussionType) {
+        super.init(type)
         
         setUpRxObservers()
     }
@@ -64,6 +64,7 @@ fileprivate extension PostTableViewModel {
                     self?.handleItemPressed(indexPath)
                 case .refresh:
                     self?.reset()
+                    self?.discussions.renotify()
                 }
             }) ~ self.disposeBag
     }

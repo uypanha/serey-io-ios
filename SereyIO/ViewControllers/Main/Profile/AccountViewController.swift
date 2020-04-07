@@ -64,6 +64,7 @@ extension AccountViewController {
         self.followButton.setTitleColor(ColorName.primary.color, for: .normal)
         self.followButton.customBorderStyle(with: ColorName.primary.color, border: 1.5, isCircular: false)
         
+        self.scrollView.refreshControl = UIRefreshControl()
         prepareTableView()
     }
     
@@ -105,9 +106,18 @@ extension AccountViewController {
 fileprivate extension AccountViewController {
     
     func setUpRxObservers() {
+        setUpControlsObsservers()
         setUpContentChangedObservers()
         setUpTableViewObservers()
         setUpShouldPresentObservers()
+    }
+    
+    func setUpControlsObsservers() {
+        self.scrollView.refreshControl?.rx.controlEvent(.valueChanged)
+            .filter { return self.scrollView.refreshControl!.isRefreshing }
+            .map { AccountViewModel.Action.refresh }
+            .bind(to: self.viewModel.didActionSubject)
+            .disposed(by: self.disposeBag)
     }
     
     func setUpContentChangedObservers() {
@@ -129,6 +139,13 @@ fileprivate extension AccountViewController {
                 }
             }) ~> self.tableView.rx.items(dataSource: self.dataSource)
             ~ self.disposeBag
+        
+        self.viewModel.endRefresh.asObservable()
+            .subscribe(onNext: { [weak self] endRefreshing in
+                if endRefreshing {
+                    self?.scrollView?.refreshControl?.endRefreshing()
+                }
+            }) ~ self.disposeBag
         
         self.viewModel.emptyOrError.asObservable()
             .subscribe(onNext: { [weak self] emptyOrErrorViewModel in

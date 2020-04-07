@@ -51,10 +51,10 @@ extension PostCategoryCellViewModel {
         
         let category = self.category.value
         let selectedCategory = self.selectedCategory.value
-        cellModels.append(SubCategoryCellViewModel(category, title: "All", isSelected: selectedCategory?.name == category.name))
+        cellModels.append(CategoryCellViewModel(category, title: "All", isSelected: selectedCategory?.name == category.name))
         
         cellModels.append(contentsOf: (data.sub ?? []).map {
-            SubCategoryCellViewModel($0, title: $0.name, isSelected: selectedCategory?.name == $0.name)
+            CategoryCellViewModel($0, title: $0.name, isSelected: selectedCategory?.name == $0.name)
         })
         return cellModels
     }
@@ -64,7 +64,7 @@ extension PostCategoryCellViewModel {
 fileprivate extension PostCategoryCellViewModel {
     
     func handleItemSelected(_ indexPath: IndexPath) {
-        if let item = self.item(at: indexPath) as? SubCategoryCellViewModel {
+        if let item = self.item(at: indexPath) as? CategoryCellViewModel {
             self.selectedCategory.accept(item.category.value)
         }
     }
@@ -88,19 +88,3 @@ extension PostCategoryCellViewModel {
             }) ~ self.disposeBag
     }
 }
-
-// MARK: - Sub Category Cell
-class SubCategoryCellViewModel: CellViewModel {
-    
-    let category: BehaviorRelay<DiscussionCategoryModel>
-    let nameText: BehaviorSubject<String?>
-    let isSelected: BehaviorRelay<Bool>
-    
-    init(_ category: DiscussionCategoryModel, title: String, isSelected: Bool) {
-        self.category = BehaviorRelay(value: category)
-        self.isSelected = BehaviorRelay(value: isSelected)
-        self.nameText = BehaviorSubject(value: title)
-        super.init()
-    }
-}
-

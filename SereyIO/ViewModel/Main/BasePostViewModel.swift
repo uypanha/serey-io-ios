@@ -20,6 +20,7 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     
     let cells: BehaviorRelay<[SectionItem]>
     let emptyOrError: BehaviorSubject<EmptyOrErrorViewModel?>
+    let endRefresh: BehaviorSubject<Bool>
     
     let discussionService: DiscussionService
     let canDownloadMorePages: BehaviorRelay<Bool>
@@ -28,7 +29,7 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     lazy var downloadDisposeBag: DisposeBag = DisposeBag()
     lazy var isDownloading: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
-    init(_ type: DiscussionType, _ authorName: String? = nil) {
+    init(_ type: DiscussionType) {
         self.cells = BehaviorRelay(value: [])
         self.emptyOrError = BehaviorSubject(value: nil)
         self.discussions = BehaviorRelay(value: [])
@@ -36,9 +37,9 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
         self.postType = BehaviorRelay(value: type)
         self.discussionService = DiscussionService()
         self.canDownloadMorePages = BehaviorRelay(value: true)
+        self.endRefresh = BehaviorSubject(value: false)
         super.init()
         
-        pageModel.start_author = authorName
         setUpRxObservers()
     }
     
@@ -146,11 +147,11 @@ fileprivate extension BasePostViewModel {
                 }
             }) ~ self.disposeBag
         
-//        self.isDownloading.asObservable()
-//            .map { _ in self.discussions.value }
-//            .map { self.prepareCells($0) }
-//            ~> self.cells
-//            ~ self.disposeBag
+        self.isDownloading.asObservable()
+            .filter { !$0 }
+            .map { !$0 }
+            ~> self.endRefresh
+            ~ self.disposeBag
         
         self.selectedCategory.asObservable()
             .skip(1)
