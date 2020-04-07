@@ -73,7 +73,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
 }
 
 // MARK: - SetUp RxObservers
-fileprivate extension PostCellViewModel {
+private extension PostCellViewModel {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()

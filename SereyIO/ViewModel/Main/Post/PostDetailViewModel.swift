@@ -20,6 +20,7 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
     enum ViewToPresent {
         case moreDialogController(BottomListMenuViewModel)
         case editPostController(CreatePostViewModel)
+        case deletePostDialog(confirm: () -> Void)
     }
     
     // input:
@@ -35,7 +36,7 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
     let discussion: BehaviorRelay<PostModel?>
     let replies: BehaviorRelay<[PostModel]>
     
-    let postViewModel: BehaviorSubject<PostCellViewModel?>
+    let postViewModel: BehaviorSubject<PostDetailCellViewModel?>
     let commentPostViewModel: BehaviorSubject<PostCommentViewModel?>
     let sereyValueText: BehaviorSubject<String>
     let isMoreHidden: BehaviorSubject<Bool>
@@ -114,7 +115,7 @@ extension PostDetailViewModel {
     }
     
     fileprivate func notifyDataChanged(_ data: PostModel?) {
-        let postDetailViewModel = data == nil ? PostCellViewModel(true) : PostCellViewModel(data)
+        let postDetailViewModel = data == nil ? PostDetailCellViewModel(true) : PostDetailCellViewModel(data)
         let commentPostViewModel = data == nil ? PostCommentViewModel(true) : PostCommentViewModel(data)
         self.postViewModel.onNext(postDetailViewModel)
         self.commentPostViewModel.onNext(commentPostViewModel)
@@ -157,8 +158,10 @@ fileprivate extension PostDetailViewModel {
                 let createPostViewModel = CreatePostViewModel(.edit(post))
                 self.shouldPresent(.editPostController(createPostViewModel))
             }
-        default:
-            break
+        case .delete:
+            self.shouldPresent(.deletePostDialog(confirm: {
+                
+            }))
         }
     }
 }

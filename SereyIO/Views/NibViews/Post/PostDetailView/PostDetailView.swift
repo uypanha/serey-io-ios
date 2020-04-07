@@ -20,10 +20,11 @@ class PostDetailView: NibView {
     @IBOutlet weak var editorView: SRichEditorView!
     @IBOutlet weak var publishTimeLabel: UILabel!
     @IBOutlet weak var editorHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var collectionView: ContentSizedCollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
-    var viewModel: PostCellViewModel? {
+    var viewModel: PostDetailCellViewModel? {
         didSet {
+            self.disposeBag = DisposeBag()
             guard let cellModel = self.viewModel else { return }
             
             self.disposeBag ~ [
@@ -33,6 +34,8 @@ class PostDetailView: NibView {
                 cellModel.titleText ~> self.titleLabel.rx.text,
                 cellModel.contentDesc ~> self.editorView.rx.html
             ]
+            
+            self.setUpCollectionView(cellModel)
         }
     }
     
@@ -42,6 +45,36 @@ class PostDetailView: NibView {
         editorView.isScrollEnabled = false
         editorView.editingEnabled = false
         editorView.delegate = self
+        
+        setUpViews()
+    }
+    
+    private func setUpViews() {
+        if let layout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            layout.itemSize = CGSize(width: 1, height: 1)
+            layout.estimatedItemSize = CGSize(width: 1, height: 1)
+        }
+        self.collectionView.register(SubPostCategoryCollectionViewCell.self)
+    }
+}
+
+// MARK: - SetUp RxObservers
+extension PostDetailView {
+    
+    func setUpCollectionView(_ viewModel: PostDetailCellViewModel) {
+        
+        viewModel.cells.asObservable()
+            .bind(to: self.collectionView.rx.items) { collectionView, index, item in
+                switch item {
+                case is CategoryCellViewModel:
+                    let cell: SubPostCategoryCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: IndexPath(row: index, section: 0))
+                    cell.cellModel = item as? CategoryCellViewModel
+                    return cell
+                default:
+                    return UICollectionViewCell()
+                }
+            } ~ self.disposeBag
     }
 }
 
@@ -73,7 +106,7 @@ import UIKit
 extension Reactive where Base: PostDetailView {
     
     /// Bindable sink for `profileViewModel` property.
-    internal var viewModel: Binder<PostCellViewModel?> {
+    internal var viewModel: Binder<PostDetailCellViewModel?> {
         return Binder(self.base) { profileView, model in
             profileView.viewModel = model
         }

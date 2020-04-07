@@ -28,7 +28,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="165"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="kn7-Zy-uQB">
-                            <rect key="frame" x="16" y="12" width="382" height="78.5"/>
+                            <rect key="frame" x="16" y="12" width="382" height="70"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="KWQ-zp-Tan">
                                     <rect key="frame" x="0.0" y="0.0" width="382" height="45"/>
@@ -61,7 +61,7 @@
                                     </subviews>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Why pet can help you from depression?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDw-Cn-QpU">
-                                    <rect key="frame" x="0.0" y="57" width="382" height="21.5"/>
+                                    <rect key="frame" x="0.0" y="57" width="382" height="13"/>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -69,7 +69,7 @@
                             </subviews>
                         </stackView>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="7VL-lD-WRi">
-                            <rect key="frame" x="0.0" y="106.5" width="414" height="58.5"/>
+                            <rect key="frame" x="0.0" y="98" width="414" height="51"/>
                             <subviews>
                                 <view alpha="0.30000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G8r-8T-6vO">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
@@ -86,16 +86,19 @@
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eoj-M4-kqf">
-                                    <rect key="frame" x="0.0" y="21" width="414" height="37.5"/>
+                                    <rect key="frame" x="0.0" y="21" width="414" height="30"/>
                                     <subviews>
-                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="45G-qy-lTQ" customClass="ContentSizedCollectionView" customModule="SereyIO" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="37.5"/>
+                                        <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="45G-qy-lTQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hPG-2G-TDc">
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="lQb-nV-MDp"/>
+                                            </constraints>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hPG-2G-TDc">
                                                 <size key="itemSize" width="50" height="50"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                             </collectionViewFlowLayout>
                                         </collectionView>
                                     </subviews>
@@ -105,7 +108,7 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="7VL-lD-WRi" secondAttribute="bottom" id="05X-qc-Oas"/>
+                        <constraint firstAttribute="bottom" secondItem="7VL-lD-WRi" secondAttribute="bottom" constant="16" id="05X-qc-Oas"/>
                         <constraint firstItem="7VL-lD-WRi" firstAttribute="leading" secondItem="jFo-7D-uIm" secondAttribute="leading" id="9hj-1o-og8"/>
                         <constraint firstItem="kn7-Zy-uQB" firstAttribute="top" secondItem="jFo-7D-uIm" secondAttribute="top" constant="12" id="9oV-NU-R70"/>
                         <constraint firstItem="kn7-Zy-uQB" firstAttribute="leading" secondItem="jFo-7D-uIm" secondAttribute="leading" constant="16" id="bFV-ch-8m3"/>

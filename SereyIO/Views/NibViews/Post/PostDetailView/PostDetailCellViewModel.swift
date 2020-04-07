@@ -19,4 +19,25 @@ class PostDetailCellViewModel: PostCellViewModel, CollectionSingleSecitionProvid
         self.cells = BehaviorRelay(value: [])
         super.init(discussion)
     }
+    
+    required convenience init(_ isShimmering: Bool) {
+        self.init(nil)
+        
+        self.isShimmering.accept(isShimmering)
+    }
+    
+    override func notifyDataChanged(_ data: PostModel?) {
+        super.notifyDataChanged(data)
+        
+        self.cells.accept(self.prepareCells(data?.categoryItem ?? []))
+    }
+}
+
+// MARK: - Preparations & Tools
+extension PostDetailCellViewModel {
+    
+    private func prepareCells(_ tags: [String]) -> [CellViewModel] {
+        return tags.map { DiscussionCategoryModel(name: $0, sub: nil) }
+            .map { CategoryCellViewModel($0, title: $0.name, isSelected: false) }
+    }
 }

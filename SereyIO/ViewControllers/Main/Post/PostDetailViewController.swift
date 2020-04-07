@@ -15,7 +15,7 @@ import RxDataSources
 import MaterialComponents
 import RxKeyboard
 
-class PostDetailViewController: BaseViewController {
+class PostDetailViewController: BaseViewController, AlertDialogController {
     
     fileprivate lazy var keyboardDisposeBag = DisposeBag()
     
@@ -164,6 +164,10 @@ extension PostDetailViewController {
                         let createPostNavigationController = CloseableNavigationController(rootViewController: createPostController)
                         self.present(createPostNavigationController, animated: true, completion: nil)
                     }
+                case .deletePostDialog(let confirm):
+                    self.showDialog(nil, title: "Delete Article?", message: "Are you sure you want to delete this article?", dismissable: false, positiveButton: "Delete", positiveCompletion: {
+                        confirm()
+                    }, negativeButton: "No")
                 }
             }) ~ self.disposeBag
     }

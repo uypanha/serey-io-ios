@@ -164,14 +164,23 @@ extension CreatePostViewModel {
         self.shortDescriptionFieldViewModel.value = data.shortDesc
         self.thumbnialUrl.accept(data.firstThumnailURL)
         if data.categoryItem.count > 0 {
-            self.selectedCategory.accept(DiscussionCategoryModel(name: (data.categoryItem.first ?? "").capitalized, sub: nil))
+            var selectedCategory = DiscussionCategoryModel(name: (data.categoryItem.first ?? "").capitalized, sub: nil)
             if data.categoryItem.count > 1 {
-                self.selectedSubCategory.accept(DiscussionCategoryModel(name: data.categoryItem[1].capitalized, sub: nil))
+                let subCategory = DiscussionCategoryModel(name: data.categoryItem[1].capitalized, sub: nil)
+                selectedCategory.sub = [subCategory]
+                self.selectedSubCategory.accept(subCategory)
             }
+            self.selectedCategory.accept(selectedCategory)
         }
     }
     
     fileprivate func updateData(_ categories: [DiscussionCategoryModel]) {
+        if let selectedCategory = self.selectedCategory.value {
+            let first = categories.first { category -> Bool in
+                return selectedCategory.name == category.name
+            }
+            self.selectedCategory.accept(first)
+        }
         self.categories.accept(categories)
     }
     
@@ -309,11 +318,6 @@ extension CreatePostViewModel {
     }
     
     func setUpContentObservers() {
-        self.post.asObservable()
-            .filter { $0 != nil }
-            .subscribe(onNext: { [weak self] data in
-                self?.notifyDataToUpdate(data!)
-            }) ~ self.disposeBag
         
         self.selectedCategory.asObservable()
             .`do`(onNext: { [unowned self] _ in
@@ -349,6 +353,12 @@ extension CreatePostViewModel {
         self.thumbnialUrl
             .subscribe(onNext: { [weak self] _ in
                 self?.determineUploadThumbnailState()
+            }) ~ self.disposeBag
+        
+        self.post.asObservable()
+            .filter { $0 != nil }
+            .subscribe(onNext: { [weak self] data in
+                self?.notifyDataToUpdate(data!)
             }) ~ self.disposeBag
     }
     
