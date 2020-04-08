@@ -19,6 +19,7 @@ class PostDetailViewController: BaseViewController, AlertDialogController {
     
     fileprivate lazy var keyboardDisposeBag = DisposeBag()
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var postDetailView: PostDetailView!
     @IBOutlet weak var tableView: ContentSizedTableView!
     @IBOutlet weak var postCommentContainerView: UIView!
@@ -60,6 +61,7 @@ class PostDetailViewController: BaseViewController, AlertDialogController {
 extension PostDetailViewController {
     
     func setUpViews() {
+        self.scrollView.refreshControl = UIRefreshControl()
         self.postDetailView.addBorders(edges: [.bottom], color: ColorName.border.color, thickness: 1)
         self.postCommentContainerView.addBorders(edges: [.top], color: ColorName.border.color, thickness: 1)
         prepareTableView()
@@ -118,8 +120,17 @@ extension PostDetailViewController {
 extension PostDetailViewController {
     
     func setUpRxObservers() {
+        setUpControlsObsservers()
         setUpContentChangedObservers()
         setUpShouldPresentObservers()
+    }
+    
+    func setUpControlsObsservers() {
+        self.scrollView.refreshControl?.rx.controlEvent(.valueChanged)
+            .filter { return self.scrollView.refreshControl!.isRefreshing }
+            .map { PostDetailViewModel.Action.refresh }
+            .bind(to: self.viewModel.didActionSubject)
+            .disposed(by: self.disposeBag)
     }
     
     func setUpMoreButtonObservers(_ button: UIBarButtonItem) {
@@ -149,6 +160,13 @@ extension PostDetailViewController {
         self.viewModel.cells.asObservable()
             .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
             .disposed(by: self.disposeBag)
+        
+        self.viewModel.endRefresh.asObservable()
+            .subscribe(onNext: { [weak self] endRefreshing in
+                if endRefreshing {
+                    self?.scrollView.refreshControl?.endRefreshing()
+                }
+            }) ~ self.disposeBag
     }
     
     func setUpShouldPresentObservers() {

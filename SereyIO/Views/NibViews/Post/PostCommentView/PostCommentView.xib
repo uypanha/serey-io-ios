@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="commentTextField" destination="Ui3-5u-Rv0" id="UoV-sr-kbc"/>
                 <outlet property="downVoteButton" destination="fkQ-YQ-vVY" id="dXh-wg-Mfp"/>
+                <outlet property="loadingIndicator" destination="BNi-iD-0tf" id="YcG-NY-biy"/>
                 <outlet property="profileView" destination="r1T-Oy-JNa" id="va3-YZ-cbb"/>
                 <outlet property="sendButton" destination="fbT-PC-zLK" id="vid-MJ-c8s"/>
                 <outlet property="upVoteButton" destination="kfg-2m-cAR" id="7NQ-c5-LEg"/>
@@ -69,10 +70,13 @@
                                             </constraints>
                                         </view>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Write a comment..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ui3-5u-Rv0">
-                                            <rect key="frame" x="44" y="0.0" width="341" height="36"/>
+                                            <rect key="frame" x="44" y="0.0" width="297" height="36"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="BNi-iD-0tf">
+                                            <rect key="frame" x="349" y="0.0" width="36" height="36"/>
+                                        </activityIndicatorView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbT-PC-zLK">
                                             <rect key="frame" x="393" y="0.0" width="36" height="36"/>
                                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -80,6 +84,7 @@
                                         </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="BNi-iD-0tf" firstAttribute="width" secondItem="r1T-Oy-JNa" secondAttribute="width" id="2uP-hu-yS8"/>
                                         <constraint firstItem="fbT-PC-zLK" firstAttribute="width" secondItem="r1T-Oy-JNa" secondAttribute="width" id="4zV-hQ-ZXu"/>
                                         <constraint firstItem="fbT-PC-zLK" firstAttribute="height" secondItem="r1T-Oy-JNa" secondAttribute="height" id="9uW-nX-TGb"/>
                                     </constraints>

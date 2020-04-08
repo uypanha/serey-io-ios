@@ -189,6 +189,10 @@ fileprivate extension MoreViewController {
                     let webViewController = WebViewViewController()
                     webViewController.viewModel = webViewViewModel
                     self.present(UINavigationController(rootViewController: webViewController), animated: true, completion: nil)
+                case .moreAppsController(let moreAppsViewModel):
+                    let listTableViewController = ListTableViewController(moreAppsViewModel)
+                    listTableViewController.title = "Serey Apps"
+                    self.show(listTableViewController, sender: nil)
                 case .signOutDialog:
                     self.showDialog(nil, title: "Sign Out?", message: "Are you sure you want to sign out?", dismissable: false, positiveButton: "Sign Out", positiveCompletion: {
                         self.viewModel.didAction(with: .signOutConfirmed)

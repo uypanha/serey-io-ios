@@ -26,6 +26,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
     enum ViewToPresent {
         case signInController
         case accountViewController(AccountViewModel)
+        case moreAppsController(MoreAppsViewModel)
         case languagesViewController
         case webViewController(WebViewViewModel)
         case signOutDialog
@@ -168,6 +169,9 @@ fileprivate extension MoreViewModel {
             switch item.type.value {
             case .lagnauge:
                 self.shouldPresent(.languagesViewController)
+            case .sereyApps:
+                let moreAppsViewModel = MoreAppsViewModel()
+                self.shouldPresent(.moreAppsController(moreAppsViewModel))
             default:
                 break
             }

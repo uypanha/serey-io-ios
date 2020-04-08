@@ -18,6 +18,7 @@ class PostCommentView: NibView {
     @IBOutlet weak var profileView: ProfileView!
     @IBOutlet weak var commentTextField: UITextField!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     var viewModel: PostCommentViewModel? {
         didSet {
@@ -36,6 +37,14 @@ class PostCommentView: NibView {
                 .map { $0 != nil && !$0!.isEmpty }
                 ~> self.sendButton.rx.isEnabled
                 ~ self.disposeBag
+            viewModel.isUploading.asObservable()
+                .subscribe(onNext: { [weak self] isUploading in
+                    self?.commentTextField.isEnabled = !isUploading
+                    self?.loadingIndicator.isHidden = !isUploading
+                    if isUploading {
+                        self?.loadingIndicator.startAnimating()
+                    }
+                }) ~ self.disposeBag
             
             setUpRxObservers()
         }
@@ -84,6 +93,11 @@ fileprivate extension PostCommentView {
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel?.didAction(with: .sendCommentPressed)
             }) ~ self.disposeBag
+        
+        self.viewModel?.isUploading
+            .subscribe(onNext: { [weak self] isUploading in
+                self?.commentTextField.isEnabled = !isUploading
+            }).disposed(by: self.disposeBag)
     }
 }
 

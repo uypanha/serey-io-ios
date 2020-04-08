@@ -25,11 +25,13 @@ class BaseListTableViewModel: BaseCellViewModel, ShouldReactToAction,
     let isDownloading: BehaviorRelay<Bool>
     
     let shouldDismiss: PublishSubject<Bool>
+    let showBorder: Bool
     
-    init(_ items: [SectionItem]) {
+    init(_ items: [SectionItem], _ showBorder: Bool = false) {
         self.cells = BehaviorRelay(value: items)
         self.isDownloading = BehaviorRelay(value: false)
         self.shouldDismiss = PublishSubject()
+        self.showBorder = showBorder
         super.init()
     }
     

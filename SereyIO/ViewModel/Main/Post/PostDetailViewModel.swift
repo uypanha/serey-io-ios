@@ -15,6 +15,7 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
     
     enum Action {
         case morePressed
+        case refresh
     }
     
     enum ViewToPresent {
@@ -36,10 +37,11 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
     let discussion: BehaviorRelay<PostModel?>
     let replies: BehaviorRelay<[PostModel]>
     
-    let postViewModel: BehaviorSubject<PostDetailCellViewModel?>
-    let commentPostViewModel: BehaviorSubject<PostCommentViewModel?>
+    let postViewModel: BehaviorRelay<PostDetailCellViewModel?>
+    let commentPostViewModel: BehaviorRelay<PostCommentViewModel?>
     let sereyValueText: BehaviorSubject<String>
     let isMoreHidden: BehaviorSubject<Bool>
+    let endRefresh: BehaviorSubject<Bool>
     
     let discussionService: DiscussionService
     let isDownloading: BehaviorRelay<Bool>
@@ -50,10 +52,11 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
         self.discussion = BehaviorRelay(value: nil)
         self.replies = BehaviorRelay(value: [])
         
-        self.postViewModel = BehaviorSubject(value: nil)
-        self.commentPostViewModel = BehaviorSubject(value: nil)
+        self.postViewModel = BehaviorRelay(value: nil)
+        self.commentPostViewModel = BehaviorRelay(value: nil)
         self.sereyValueText = BehaviorSubject(value: "")
         self.isMoreHidden = BehaviorSubject(value: true)
+        self.endRefresh = BehaviorSubject(value: true)
         
         self.cells = BehaviorRelay(value: [])
         self.discussionService = DiscussionService()
@@ -91,6 +94,22 @@ extension PostDetailViewModel {
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
     }
+    
+    private func submitComment(_ comment: String) {
+        let submitCommentModel = self.prepareSubmitCommentModel(comment)
+        self.commentPostViewModel.value?.isUploading.onNext(true)
+        self.discussionService.submitComment(submitCommentModel)
+            .subscribe(onNext: { [weak self] _ in
+                self?.fetchPostDetial()
+                self?.commentPostViewModel.value?.commentTextFieldViewModel.value = ""
+                self?.commentPostViewModel.value?.isUploading.onNext(false)
+            }, onError: { [weak self] error in
+                self?.isDownloading.accept(false)
+                self?.commentPostViewModel.value?.isUploading.onNext(false)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
 }
 
 // MARK: - Preparations & Tools
@@ -107,18 +126,20 @@ extension PostDetailViewModel {
         var imageTextModel: ImageTextModel {
             switch self {
             case .edit:
-                return ImageTextModel(image: R.image.editIcon(), titleText: "Edit")
+                return ImageTextModel(image: R.image.editIcon(), titleText: R.string.common.edit.localized())
             case .delete:
-                return ImageTextModel(image: R.image.trashIcon(), titleText: "Delete")
+                return ImageTextModel(image: R.image.trashIcon(), titleText: R.string.common.edit.localized())
             }
         }
     }
     
     fileprivate func notifyDataChanged(_ data: PostModel?) {
         let postDetailViewModel = data == nil ? PostDetailCellViewModel(true) : PostDetailCellViewModel(data)
-        let commentPostViewModel = data == nil ? PostCommentViewModel(true) : PostCommentViewModel(data)
-        self.postViewModel.onNext(postDetailViewModel)
-        self.commentPostViewModel.onNext(commentPostViewModel)
+        let commentPostViewModel = data == nil ? PostCommentViewModel(true) : PostCommentViewModel(data).then {
+            self.setUpCommentViewModelObservers($0)
+        }
+        self.postViewModel.accept(postDetailViewModel)
+        self.commentPostViewModel.accept(commentPostViewModel)
         self.sereyValueText.onNext(data?.sereyValue ?? "")
         let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.authorName == AuthData.shared.username : false
         self.isMoreHidden.onNext(!isMorePresent)
@@ -131,6 +152,15 @@ extension PostDetailViewModel {
             cells.append(contentsOf: (0...3).map { _ in CommentCellViewModel(true) })
         }
         return [SectionItem(items: cells)]
+    }
+    
+    fileprivate func prepareSubmitCommentModel(_ comment: String) -> SubmitCommentModel {
+        let permlink = self.discussion.value?.permlink ?? ""
+        let author = self.discussion.value?.authorName ?? ""
+        let title = self.discussion.value?.title ?? ""
+        let category = self.discussion.value?.categoryItem.first ?? ""
+        
+        return SubmitCommentModel(parentAuthor: author, parentPermlink: permlink, title: title, body: comment, mainCategory: category)
     }
 }
 
@@ -184,6 +214,12 @@ extension PostDetailViewModel {
             .map { self.prepareCells($0) }
             ~> self.cells
             ~ self.disposeBag
+        
+        self.isDownloading.asObservable()
+            .filter { !$0 }
+            .map { !$0 }
+            ~> self.endRefresh
+            ~ self.disposeBag
     }
     
     func setUpActionObservers() {
@@ -192,6 +228,9 @@ extension PostDetailViewModel {
                 switch action {
                 case .morePressed:
                     self?.handleMorePressed()
+                case .refresh:
+                    self?.downloadData()
+                    self?.replies.renotify()
                 }
             }) ~ self.disposeBag
     }
@@ -203,8 +242,8 @@ extension PostDetailViewModel {
             }) ~ viewModel.disposeBag
         
         viewModel.shouldComment.asObservable()
-            .subscribe(onNext: { comment in
-                
+            .subscribe(onNext: { [weak self] comment in
+                self?.submitComment(comment)
             }) ~ viewModel.disposeBag
     }
 }

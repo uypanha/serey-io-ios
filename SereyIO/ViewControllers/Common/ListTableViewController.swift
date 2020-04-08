@@ -40,6 +40,16 @@ class ListTableViewController<T>: BaseTableViewController where T : BaseListTabl
         viewModel.downloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if self.viewModel.showBorder {
+            self.navigationController?.showNavigationBarBorder()
+        } else {
+            self.navigationController?.removeNavigationBarBorder()
+        }
+    }
+    
     open func setUpView() {
         self.tableView.tableFooterView = UIView()
         self.tableView.separatorStyle = self.sepereatorStyle

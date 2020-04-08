@@ -234,6 +234,7 @@
 		DCEC0CC8240A5E0E002F4B6F /* CicularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CC7240A5E0E002F4B6F /* CicularButton.swift */; };
 		DCEE3F7A2439DB57000A75C5 /* Post.strings in Resources */ = {isa = PBXBuildFile; fileRef = DCEE3F7C2439DB57000A75C5 /* Post.strings */; };
 		DCEE3F802439DCA8000A75C5 /* Account.strings in Resources */ = {isa = PBXBuildFile; fileRef = DCEE3F822439DCA8000A75C5 /* Account.strings */; };
+		DCEF9D37243E1680002B7E99 /* MoreAppsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEF9D36243E1680002B7E99 /* MoreAppsViewModel.swift */; };
 		DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */; };
 		DCF67FDD240FFC4A003061A7 /* SearchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FDC240FFC4A003061A7 /* SearchApi.swift */; };
 		DCF67FE1240FFD65003061A7 /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FDF240FFD65003061A7 /* PeopleTableViewCell.swift */; };
@@ -539,6 +540,7 @@
 		DCEE3F7D2439DB5A000A75C5 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Post.strings"; sourceTree = "<group>"; };
 		DCEE3F812439DCA8000A75C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Account.strings; sourceTree = "<group>"; };
 		DCEE3F832439DCA9000A75C5 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Account.strings"; sourceTree = "<group>"; };
+		DCEF9D36243E1680002B7E99 /* MoreAppsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreAppsViewModel.swift; sourceTree = "<group>"; };
 		DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingViewModel.swift; sourceTree = "<group>"; };
 		DCF67FDC240FFC4A003061A7 /* SearchApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchApi.swift; sourceTree = "<group>"; };
 		DCF67FDF240FFD65003061A7 /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
@@ -821,6 +823,7 @@
 		DC40D5E023E335F200B0DD96 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				DCEF9D36243E1680002B7E99 /* MoreAppsViewModel.swift */,
 				DC05FDBB23F1B0500093B47B /* MoreViewModel.swift */,
 				DC40D5E123E335F900B0DD96 /* Language */,
 			);
@@ -2048,6 +2051,7 @@
 				DC40D5DF23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift in Sources */,
 				DCD3987A232E230B00C812EB /* NibView.swift in Sources */,
 				DCD39896232E28E100C812EB /* WebViewViewModel.swift in Sources */,
+				DCEF9D37243E1680002B7E99 /* MoreAppsViewModel.swift in Sources */,
 				DC6ED56A23269CA300770B31 /* RootViewController.swift in Sources */,
 				DC6FCE7623F05D1700D72F6D /* Accounts.swift in Sources */,
 				DC8EAB7B23E722BC00E00A00 /* MainTabBarViewController.swift in Sources */,

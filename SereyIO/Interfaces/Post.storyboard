@@ -98,6 +98,7 @@
                         <outlet property="postCommentContainerView" destination="Fqo-YY-n1f" id="qrs-h9-DUv"/>
                         <outlet property="postCommentView" destination="Fm0-ru-5j0" id="MUu-Cs-VYP"/>
                         <outlet property="postDetailView" destination="ZMt-1h-TMJ" id="yVL-Pe-lbu"/>
+                        <outlet property="scrollView" destination="BfV-Ab-I2i" id="cuU-ZO-i0b"/>
                         <outlet property="tableView" destination="fGC-rn-idh" id="lGu-26-KwX"/>
                     </connections>
                 </viewController>

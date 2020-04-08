@@ -32,6 +32,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, ShouldReactToActi
     let shouldComment: PublishSubject<String>
     let shouldUpVote: PublishSubject<Void>
     let shouldDownVote: PublishSubject<Void>
+    let isUploading: BehaviorSubject<Bool>
     
     let commentTextFieldViewModel: TextFieldViewModel
     
@@ -45,6 +46,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, ShouldReactToActi
         self.shouldComment = PublishSubject()
         self.shouldUpVote = PublishSubject()
         self.shouldDownVote = PublishSubject()
+        self.isUploading = BehaviorSubject(value: false)
         
         self.commentTextFieldViewModel = TextFieldViewModel.textFieldWith(title: R.string.post.postAComment.localized(), errorMessage: nil, validation: .notEmpty)
         super.init()

@@ -32,4 +32,10 @@ class DiscussionService: AppService<DiscussionApi> {
             .asObservable()
             .map { $0.data }
     }
+    
+    func submitComment(_ submitModel: SubmitCommentModel) -> Observable<BlockChainResponse> {
+        return self.provider.rx.requestObject(.submitComment(submitModel), type: DataResponseModel<BlockChainResponse>.self)
+            .asObservable()
+            .map { $0.data }
+    }
 }

@@ -26,6 +26,8 @@
 "webViewDefaultTitle"               = "Serey.io";
 "tryAgain"                          = "Try again";
 "update"                            = "Update";
+"edit"                              = "Edit";
+"delete"                            = "Delete";
 
 "next"                              = "Next";
 "letBegin"                          = "Let's begin";
