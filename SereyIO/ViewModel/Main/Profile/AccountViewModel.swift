@@ -39,6 +39,8 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
     let isFollowHidden: BehaviorSubject<Bool>
     let isFollowed: BehaviorSubject<Bool>
     
+    let userService: UserService
+    
     init(_ username: String) {
         self.username = BehaviorRelay(value: username)
         self.userInfo = BehaviorRelay(value: nil)
@@ -49,6 +51,7 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
         self.followingCountText = BehaviorSubject(value: nil)
         self.isFollowHidden = BehaviorSubject(value: AuthData.shared.username == username)
         self.isFollowed = BehaviorSubject(value: false)
+        self.userService = UserService()
         super.init(.byUser(username))
         
         setUpRxObservers()
@@ -64,6 +67,14 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
         let title = R.string.post.noPostYet.localized()
         let emptyMessage = R.string.post.noPostMessage.localized()
         return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withEmptyTitle: title, emptyDescription: emptyMessage, iconImage: R.image.emptyPost()))
+    }
+}
+
+// MARK: - Networks
+extension AccountViewModel {
+    
+    func checkIsFollow() {
+        
     }
 }
 

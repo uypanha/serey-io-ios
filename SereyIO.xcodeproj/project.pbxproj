@@ -130,7 +130,6 @@
 		DC6ED58F2326A7B000770B31 /* AppDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6ED58E2326A7B000770B31 /* AppDelegateHelper.swift */; };
 		DC6ED5912326A8F400770B31 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6ED5902326A8F400770B31 /* Appearance.swift */; };
 		DC6FCE5623F05D0400D72F6D /* OAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6A790D23CA2B51001D1009 /* OAuth2.framework */; };
-		DC6FCE5723F05D0400D72F6D /* OAuth2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DC6A790D23CA2B51001D1009 /* OAuth2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DC6FCE7123F05D1700D72F6D /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE6623F05D1700D72F6D /* Auth.swift */; };
 		DC6FCE7223F05D1700D72F6D /* Broadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE6723F05D1700D72F6D /* Broadcast.swift */; };
 		DC6FCE7323F05D1700D72F6D /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE6823F05D1700D72F6D /* HttpClient.swift */; };
@@ -264,20 +263,6 @@
 			remoteInfo = iOSTemplate;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		DC6FCE5823F05D0400D72F6D /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				DC6FCE5723F05D0400D72F6D /* OAuth2.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		009C6AC26801959E18C0BEB7 /* Pods-SereyIOTests.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.release_production.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.release_production.xcconfig"; sourceTree = "<group>"; };
@@ -1715,8 +1700,8 @@
 				DC6ED51923267EED00770B31 /* Sources */,
 				DC6ED51A23267EED00770B31 /* Frameworks */,
 				DC6ED51B23267EED00770B31 /* Resources */,
-				DC6FCE5823F05D0400D72F6D /* Embed Frameworks */,
 				3014EFD087298EBD0273A55E /* [CP] Embed Pods Frameworks */,
+				DC6A258B243F822400725962 /* Carthage Run Script */,
 			);
 			buildRules = (
 			);
@@ -1958,6 +1943,26 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		DC6A258B243F822400725962 /* Carthage Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"$(SRCROOT)/input.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "Carthage Run Script";
+			outputFileListPaths = (
+				"$(SRCROOT)/output.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
 		};
 		DC6ED55D232696E200770B31 /* R.swift Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2441,7 +2446,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "${app_bundle}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug_Development;
 		};
@@ -2466,7 +2471,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "${app_bundle}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release_Development;
 		};
@@ -2639,7 +2644,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "${app_bundle}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug_Production;
 		};
@@ -2763,7 +2768,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "${app_bundle}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release_Production;
 		};
