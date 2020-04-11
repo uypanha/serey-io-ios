@@ -33,9 +33,13 @@ class DiscussionService: AppService<DiscussionApi> {
             .map { $0.data }
     }
     
-    func submitComment(_ submitModel: SubmitCommentModel) -> Observable<BlockChainResponse> {
-        return self.provider.rx.requestObject(.submitComment(submitModel), type: DataResponseModel<BlockChainResponse>.self)
+    func submitComment(_ submitModel: SubmitCommentModel) -> Observable<DataResponseModel<[PostModel]>> {
+        return self.provider.rx.requestObject(.submitComment(submitModel), type: DataResponseModel<[PostModel]>.self)
             .asObservable()
-            .map { $0.data }
+    }
+    
+    func deletePost(_ username: String, _ permlink: String) -> Observable<DataResponseModel<String>> {
+        return self.provider.rx.requestObject(.deletPost(username: username, permlink: permlink), type: DataResponseModel<String>.self)
+            .asObservable()
     }
 }

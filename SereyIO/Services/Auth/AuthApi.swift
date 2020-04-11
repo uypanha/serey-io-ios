@@ -21,7 +21,8 @@ extension AuthApi: AuthorizedApiTargetType {
         case .login(let data):
             return [
                 "username"  : data.userName,
-                "password"  : data.password
+                "password"  : data.password,
+                "rememberMe": true
             ]
         }
     }
@@ -29,7 +30,7 @@ extension AuthApi: AuthorizedApiTargetType {
     var path: String {
         switch self {
         case .login:
-            return "/api/v1/authentications/login"
+            return "/api/v1/authentications/loginKyc"
         }
     }
     

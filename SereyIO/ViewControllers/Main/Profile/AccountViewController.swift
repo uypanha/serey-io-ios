@@ -35,7 +35,7 @@ class AccountViewController: BaseViewController {
     
     lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
         return self.prepreDataSource()
-        }()
+    }()
     
     var viewModel: AccountViewModel!
     

@@ -20,6 +20,8 @@ enum DiscussionApi {
     case submitPost(SubmitPostModel)
     
     case submitComment(SubmitCommentModel)
+    
+    case deletPost(username: String, permlink: String)
 }
 
 extension DiscussionApi: AuthorizedApiTargetType {
@@ -37,6 +39,11 @@ extension DiscussionApi: AuthorizedApiTargetType {
             return data.parameters
         case .submitComment(let data):
             return data.parameters
+        case .deletPost(let data):
+            return [
+                "username"  : data.username,
+                "permlink"  : data.permlink
+            ]
         default:
             return [:]
         }
@@ -54,12 +61,14 @@ extension DiscussionApi: AuthorizedApiTargetType {
             return "/api/v1/sereyweb/submitPost"
         case .submitComment:
             return "/api/v1/sereyweb/submitReplies"
+        case .deletPost:
+            return "/api/v1/sereyweb/deletePost"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .submitPost, .submitComment:
+        case .submitPost, .submitComment, .deletPost:
             return .post
         default:
             return .get
@@ -70,7 +79,7 @@ extension DiscussionApi: AuthorizedApiTargetType {
         switch self {
         case .getDiscussions, .getPostDetail:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-        case .submitPost, .submitComment:
+        case .submitPost, .submitComment, .deletPost:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         default:
             return .requestPlain

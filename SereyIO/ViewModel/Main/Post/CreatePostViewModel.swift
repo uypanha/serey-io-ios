@@ -240,15 +240,18 @@ extension CreatePostViewModel {
         let body = self.descriptionFieldViewModel.value ?? ""
         let shortDesc = self.shortDescriptionFieldViewModel.value ?? ""
         let category = self.selectedCategory.value?.name ?? ""
-        let subCategory = self.selectedSubCategory.value?.name ?? ""
-        return SubmitPostModel(permlink: permlink, title: title, shortDesc: shortDesc, body: body, categories: category, subcategories: [subCategory], images: [thumbnailUrl])
+        var subCategories: [String] = []
+        if let subCategory = self.selectedSubCategory.value?.name {
+            subCategories.append(subCategory)
+        }
+        return SubmitPostModel(permlink: permlink, title: title, shortDesc: shortDesc, body: body, categories: category, subcategories: subCategories, images: [thumbnailUrl])
     }
     
     fileprivate func determineUploadThumbnailState() {
         let selectedImage = (self.thumbnialUrl.value != nil || self.newThumbnailImage.value != nil)
-        let title = selectedImage ? "Change Thumbnail" : "Upload Thubmnail"
+        let title = selectedImage ? R.string.post.changeThumbnail : R.string.post.uploadThumbnail
         let image = selectedImage ? R.image.bigEditIcon() : R.image.bigPlusIcon()
-        self.addThumbnailState.onNext((title, image))
+        self.addThumbnailState.onNext((title.localized(), image))
     }
     
     func validateForm() -> Bool {
@@ -421,7 +424,7 @@ enum MediaChooserType {
     var title: String {
         switch self {
         case .thumbnail:
-            return R.string.post.chooseThumbnail.localized()
+            return R.string.post.chooseThumbnailWith.localized()
         case .insertImage:
             return R.string.post.insertImageWith.localized()
         }

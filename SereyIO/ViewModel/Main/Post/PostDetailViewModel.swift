@@ -22,6 +22,7 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
         case moreDialogController(BottomListMenuViewModel)
         case editPostController(CreatePostViewModel)
         case deletePostDialog(confirm: () -> Void)
+        case loading(Bool)
     }
     
     // input:
@@ -110,6 +111,20 @@ extension PostDetailViewModel {
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
     }
+    
+    private func deletePost() {
+        if let post = self.discussion.value {
+            self.shouldPresent(.loading(true))
+            self.discussionService.deletePost(post.authorName, post.permlink)
+                .subscribe(onNext: { [weak self] _ in
+                    self?.shouldPresent(.loading(false))
+                }, onError: { [weak self] error in
+                    self?.shouldPresent(.loading(false))
+                    let errorInfo = ErrorHelper.prepareError(error: error)
+                    self?.shouldPresentError(errorInfo)
+                }) ~ self.disposeBag
+        }
+    }
 }
 
 // MARK: - Preparations & Tools
@@ -128,7 +143,7 @@ extension PostDetailViewModel {
             case .edit:
                 return ImageTextModel(image: R.image.editIcon(), titleText: R.string.common.edit.localized())
             case .delete:
-                return ImageTextModel(image: R.image.trashIcon(), titleText: R.string.common.edit.localized())
+                return ImageTextModel(image: R.image.trashIcon(), titleText: R.string.common.delete.localized())
             }
         }
     }
@@ -190,7 +205,7 @@ fileprivate extension PostDetailViewModel {
             }
         case .delete:
             self.shouldPresent(.deletePostDialog(confirm: {
-                
+                self.deletePost()
             }))
         }
     }
