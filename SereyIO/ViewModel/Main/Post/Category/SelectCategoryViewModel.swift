@@ -74,12 +74,9 @@ extension SelectCategoryViewModel {
             ~> self.cells
             ~ self.disposeBag
         
-        self.didActionSubject.asObservable()
-            .subscribe(onNext: { [weak self] action in
-                switch action {
-                case .itemSelected(let indedPath):
-                    self?.handleItemSelected(indedPath)
-                }
+        self.itemSelected.asObservable()
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.handleItemSelected(indexPath)
             }) ~ self.disposeBag
     }
 }

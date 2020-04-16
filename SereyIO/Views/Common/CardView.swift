@@ -86,6 +86,7 @@ class CardView: UIView {
             self.layer.shadowOpacity = shadowOpacity
             self.layer.shadowPath = shadowPath.cgPath
         } else {
+            self.layer.masksToBounds = true
             self.layer.shadowColor = UIColor.clear.cgColor
             self.layer.shadowOpacity = 0.0
         }

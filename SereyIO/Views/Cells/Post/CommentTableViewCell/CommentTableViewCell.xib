@@ -31,15 +31,15 @@
                                         <rect key="frame" x="0.0" y="0.0" width="386" height="62.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KPr-Tt-KgH" customClass="ProfileView" customModule="SereyIO" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="9.5" width="44" height="44"/>
+                                                <rect key="frame" x="0.0" y="11.5" width="40" height="40"/>
                                                 <color key="backgroundColor" red="0.42352941179999998" green="0.38823529410000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="KPr-Tt-KgH" secondAttribute="height" multiplier="1:1" id="dEI-LC-VUS"/>
-                                                    <constraint firstAttribute="width" constant="44" id="g83-3a-9vm"/>
+                                                    <constraint firstAttribute="width" constant="40" id="g83-3a-9vm"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="2yX-al-aXF">
-                                                <rect key="frame" x="56" y="12" width="330" height="39"/>
+                                                <rect key="frame" x="52" y="12" width="334" height="39"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Cena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCo-Q6-kO6">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="20"/>
@@ -193,12 +193,14 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="actionContainerView" destination="xu1-Jo-OZm" id="ERk-WU-4fc"/>
                 <outlet property="authorNameLabel" destination="RCo-Q6-kO6" id="1Nu-8J-KEU"/>
                 <outlet property="commentContainerView" destination="z5d-eI-6g3" id="Ebw-Pr-d1z"/>
                 <outlet property="descriptionLabel" destination="4gw-xn-dII" id="RuY-9U-AsE"/>
                 <outlet property="downVoteContainerView" destination="EAj-pK-eXY" id="uli-Jo-UIR"/>
                 <outlet property="downVoteCountLabel" destination="ZIb-0e-pT6" id="Nut-SM-v2v"/>
                 <outlet property="downVoteImageView" destination="FU0-2C-Brp" id="08O-Hb-12J"/>
+                <outlet property="leadingConstraint" destination="52m-tQ-1sl" id="SMI-Tu-wKO"/>
                 <outlet property="mainView" destination="lUF-Cz-7bm" id="jFm-kb-tgE"/>
                 <outlet property="profileView" destination="KPr-Tt-KgH" id="mJy-IF-c85"/>
                 <outlet property="publishDateLabel" destination="MPX-Ka-nb5" id="3JN-UF-t3N"/>

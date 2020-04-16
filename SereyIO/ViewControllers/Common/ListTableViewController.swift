@@ -76,8 +76,7 @@ fileprivate extension ListTableViewController {
         
         // Item Selected
         self.tableView.rx.itemSelected.asObservable()
-            .map { T.Action.itemSelected($0) }
-            .bind(to: self.viewModel.didActionSubject)
+            .bind(to: viewModel.itemSelected)
             ~ self.disposeBag
         
         self.viewModel.shouldDismiss.asObservable()

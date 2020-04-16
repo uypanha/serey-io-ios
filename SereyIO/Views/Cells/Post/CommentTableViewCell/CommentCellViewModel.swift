@@ -11,24 +11,48 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class CommentCellViewModel: PostCellViewModel {
+class CommentCellViewModel: PostCellViewModel, ShouldReactToAction {
+    
+    enum Action {
+        case upVotePressed
+        case downVotePressed
+        case replyCommentPressed
+    }
+    
+    lazy var didActionSubject = PublishSubject<CommentCellViewModel.Action>()
     
     let contentAttributedString: BehaviorSubject<NSAttributedString?>
     let conversationText: BehaviorSubject<String?>
     let replies: BehaviorRelay<[PostModel]>
-    let isReplyButtonHidden: BehaviorSubject<Bool>
+    let isViewConversationHidden: BehaviorSubject<Bool>
+    let isReplyHidden: BehaviorRelay<Bool>
+    let leadingConstraint: BehaviorRelay<CGFloat>
     
-    override init(_ discussion: PostModel?) {
+    let shouldReplyComment: PublishSubject<CommentCellViewModel>
+    let shouldUpVoteComment: PublishSubject<PostModel>
+    let shouldDownVoteComment: PublishSubject<CommentCellViewModel>
+    
+    init(_ discussion: PostModel?, canReply: Bool = true, leading: CGFloat = 16) {
         self.contentAttributedString = BehaviorSubject(value: nil)
         self.conversationText = BehaviorSubject(value: nil)
         self.replies = BehaviorRelay(value: discussion?.replies ?? [])
-        self.isReplyButtonHidden = BehaviorSubject(value: true)
+        let isConversationHidden = (discussion?.replies?.isEmpty ?? true) || !canReply
+        self.isViewConversationHidden = BehaviorSubject(value: isConversationHidden )
+        self.isReplyHidden = BehaviorRelay(value: !canReply)
+        self.leadingConstraint = BehaviorRelay(value: leading)
+        
+        self.shouldReplyComment = PublishSubject()
+        self.shouldUpVoteComment = PublishSubject()
+        self.shouldDownVoteComment = PublishSubject()
         super.init(discussion)
         
-        self.replies.asObservable()
-            .map { $0.isEmpty }
-            ~> self.isReplyButtonHidden
-            ~ self.disposeBag
+        setUpRxObservers()
+    }
+    
+    required convenience init(_ isShimmering: Bool) {
+        self.init(nil)
+        
+        self.isShimmering.accept(isShimmering)
     }
     
     override func notifyDataChanged(_ data: PostModel?) {
@@ -36,5 +60,29 @@ class CommentCellViewModel: PostCellViewModel {
         
         self.contentAttributedString.onNext(data?.description?.htmlAttributed(size: 12))
         self.conversationText.onNext("View Conversation (\(data?.answerCount ?? 0))")
+    }
+}
+
+// MARK: - SetUp RxObservers
+fileprivate extension CommentCellViewModel {
+    
+    func setUpRxObservers() {
+        setUpActionObservers()
+    }
+    
+    func setUpActionObservers() {
+        self.didActionSubject.asObservable()
+            .subscribe(onNext: { [unowned self] action in
+                switch action {
+                case .downVotePressed:
+                    self.shouldDownVoteComment.onNext(self)
+                case .upVotePressed:
+                    if let postModel = self.discussion.value {
+                        self.shouldUpVoteComment.onNext(postModel)
+                    }
+                case .replyCommentPressed:
+                    self.shouldReplyComment.onNext(self)
+                }
+            }) ~ self.disposeBag
     }
 }

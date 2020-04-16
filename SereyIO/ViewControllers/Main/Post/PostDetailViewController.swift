@@ -15,7 +15,7 @@ import RxDataSources
 import MaterialComponents
 import RxKeyboard
 
-class PostDetailViewController: BaseViewController, AlertDialogController, LoadingIndicatorController {
+class PostDetailViewController: BaseViewController, AlertDialogController, LoadingIndicatorController, VoteDialogProtocol {
     
     fileprivate lazy var keyboardDisposeBag = DisposeBag()
     
@@ -188,6 +188,18 @@ extension PostDetailViewController {
                     }, negativeButton: "No")
                 case .loading(let loading):
                     loading ? self.showLoading() : self.dismissLoading()
+                case .signInViewController:
+                    if let signInViewController = R.storyboard.auth.signInViewController() {
+                        signInViewController.viewModel = SignInViewModel()
+                        self.show(CloseableNavigationController(rootViewController: signInViewController), sender: nil)
+                    }
+                case .replyComment(let replyCommentViewModel):
+                    if let replyCommentViewController = R.storyboard.post.replyCommentViewController() {
+                        replyCommentViewController.viewModel = replyCommentViewModel
+                        self.show(CloseableNavigationController(rootViewController: replyCommentViewController), sender: nil)
+                    }
+                case .voteDialogController(let voteDialogViewModel):
+                    self.showVoteDialog(voteDialogViewModel)
                 }
             }) ~ self.disposeBag
     }

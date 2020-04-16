@@ -23,6 +23,7 @@ class CommentTableViewCell: BaseTableViewCell {
     
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    @IBOutlet weak var actionContainerView: UIStackView!
     @IBOutlet weak var sereyValueContainerView: UIStackView!
     @IBOutlet weak var sereySymbolImageView: UIImageView!
     @IBOutlet weak var sereyValueLabel: UILabel!
@@ -37,6 +38,34 @@ class CommentTableViewCell: BaseTableViewCell {
     
     @IBOutlet weak var commentContainerView: UIStackView!
     @IBOutlet weak var viewConversationButton: UIButton!
+    @IBOutlet weak var leadingConstraint: NSLayoutConstraint!
+    
+    private var upVoteGesture: UITapGestureRecognizer? {
+        didSet {
+            guard let gesture = self.upVoteGesture else { return }
+            
+            self.upVoteContainerView.isUserInteractionEnabled = true
+            self.upVoteContainerView.addGestureRecognizer(gesture)
+        }
+    }
+    
+    private var downVoteGesture: UITapGestureRecognizer? {
+        didSet {
+            guard let gesture = self.downVoteGesture else { return }
+            
+            self.downVoteContainerView.isUserInteractionEnabled = true
+            self.downVoteContainerView.addGestureRecognizer(gesture)
+        }
+    }
+    
+    private var replyCommentGesture: UITapGestureRecognizer? {
+        didSet {
+            guard let gesture = self.replyCommentGesture else { return }
+            
+            self.commentContainerView.isUserInteractionEnabled = true
+            self.commentContainerView.addGestureRecognizer(gesture)
+        }
+    }
     
     var cellModel: CommentCellViewModel? {
         didSet {
@@ -51,13 +80,17 @@ class CommentTableViewCell: BaseTableViewCell {
                 cellModel.upVoteCount ~> self.upVoteCountLabel.rx.text,
                 cellModel.downVoteCount ~> self.downVoteCountLabel.rx.text,
                 cellModel.conversationText ~> self.viewConversationButton.rx.title(for: .normal),
-                cellModel.isReplyButtonHidden ~> self.viewConversationButton.rx.isHidden
+                cellModel.isViewConversationHidden ~> self.viewConversationButton.rx.isHidden,
+                cellModel.isReplyHidden ~> self.commentContainerView.rx.isHidden,
+                cellModel.leadingConstraint ~> self.leadingConstraint.rx.constant
             ]
             
             cellModel.isShimmering.asObservable()
                 .subscribe(onNext: { [weak self] isShimmering in
                     self?.prepareShimmering(isShimmering)
                 }) ~ self.disposeBag
+            
+            setUpRxObservers(cellModel)
         }
     }
     
@@ -67,6 +100,9 @@ class CommentTableViewCell: BaseTableViewCell {
         
         self.vwShimmer.shimmeringSpeed = 400
         self.vwShimmer.contentView = self.mainView
+        self.upVoteGesture = UITapGestureRecognizer()
+        self.downVoteGesture = UITapGestureRecognizer()
+        self.replyCommentGesture = UITapGestureRecognizer()
     }
 }
 
@@ -88,9 +124,7 @@ extension CommentTableViewCell {
         self.descriptionLabel.setRadius(all: cornerRadius)
         
         self.sereyValueContainerView.isHidden = isHidden
-        self.upVoteContainerView.isHidden = isHidden
-        self.downVoteContainerView.isHidden = isHidden
-        self.commentContainerView.isHidden = isHidden
+        self.actionContainerView.isHidden = isHidden
         
         DispatchQueue.main.async {
             self.vwShimmer.isShimmering = isShimmering
@@ -98,3 +132,28 @@ extension CommentTableViewCell {
     }
 }
 
+// MARK: - SetUp RxObservers
+extension CommentTableViewCell {
+    
+    func setUpRxObservers(_ cellModel: CommentCellViewModel) {
+        self.upVoteGesture?.rx.event.asObservable()
+            .map { _ in CommentCellViewModel.Action.upVotePressed }
+            .bind(to: cellModel.didActionSubject)
+            .disposed(by: self.disposeBag)
+        
+        self.downVoteGesture?.rx.event.asObservable()
+            .map { _ in CommentCellViewModel.Action.downVotePressed }
+            .bind(to: cellModel.didActionSubject)
+            .disposed(by: self.disposeBag)
+        
+        self.replyCommentGesture?.rx.event.asObservable()
+            .map { _ in CommentCellViewModel.Action.replyCommentPressed }
+            .bind(to: cellModel.didActionSubject)
+            .disposed(by: self.disposeBag)
+        
+        self.viewConversationButton.rx.tap.asObservable()
+            .map { _ in CommentCellViewModel.Action.replyCommentPressed }
+            .bind(to: cellModel.didActionSubject)
+            .disposed(by: self.disposeBag)
+    }
+}

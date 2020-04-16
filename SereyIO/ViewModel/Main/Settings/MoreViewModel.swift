@@ -231,7 +231,6 @@ fileprivate extension MoreViewModel {
                 case .signOutPressed:
                     self?.shouldPresent(.signOutDialog)
                 case .signOutConfirmed:
-//                    self?.sign
                     AuthData.shared.removeAuthData()
                 }
             }).disposed(by: self.disposeBag)

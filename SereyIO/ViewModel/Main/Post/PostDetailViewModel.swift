@@ -15,13 +15,18 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
     
     enum Action {
         case morePressed
+        case upVotePressed(PostModel)
         case refresh
+        case replyCommentPressed(CommentCellViewModel)
     }
     
     enum ViewToPresent {
         case moreDialogController(BottomListMenuViewModel)
         case editPostController(CreatePostViewModel)
         case deletePostDialog(confirm: () -> Void)
+        case replyComment(ReplyCommentTableViewModel)
+        case voteDialogController(VoteDialogViewModel)
+        case signInViewController
         case loading(Bool)
     }
     
@@ -162,7 +167,7 @@ extension PostDetailViewModel {
     
     fileprivate func prepareCells(_ replies: [PostModel]) -> [SectionItem] {
         var cells: [CellViewModel] = []
-        cells.append(contentsOf: replies.map { CommentCellViewModel($0) })
+        cells.append(contentsOf: replies.map { CommentCellViewModel($0).then { self.setUpCommentCellObservers($0) } })
         if self.isDownloading.value && replies.isEmpty {
             cells.append(contentsOf: (0...3).map { _ in CommentCellViewModel(true) })
         }
@@ -209,6 +214,26 @@ fileprivate extension PostDetailViewModel {
             }))
         }
     }
+    
+    func handleReplyCommentPressed(_ cellViewModel: CommentCellViewModel) {
+        if let commentData = cellViewModel.discussion.value {
+            if AuthData.shared.isUserLoggedIn {
+                let replyCommentViewModel = ReplyCommentTableViewModel(commentData, title: self.discussion.value?.title ?? "")
+                self.shouldPresent(.replyComment(replyCommentViewModel))
+            } else {
+                self.shouldPresent(.signInViewController)
+            }
+        }
+    }
+    
+    func handleUpVotePressed(_ postModel: PostModel) {
+        if AuthData.shared.isUserLoggedIn {
+            let voteDialogViewModel = VoteDialogViewModel()
+            self.shouldPresent(.voteDialogController(voteDialogViewModel))
+        } else {
+            self.shouldPresent(.signInViewController)
+        }
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -246,6 +271,10 @@ extension PostDetailViewModel {
                 case .refresh:
                     self?.downloadData()
                     self?.replies.renotify()
+                case .replyCommentPressed(let commentCell):
+                    self?.handleReplyCommentPressed(commentCell)
+                case .upVotePressed(let postModel):
+                    self?.handleUpVotePressed(postModel)
                 }
             }) ~ self.disposeBag
     }
@@ -260,6 +289,18 @@ extension PostDetailViewModel {
             .subscribe(onNext: { [weak self] comment in
                 self?.submitComment(comment)
             }) ~ viewModel.disposeBag
+    }
+    
+    func setUpCommentCellObservers(_ cellModel: CommentCellViewModel) {
+        cellModel.shouldReplyComment
+            .map { Action.replyCommentPressed($0) }
+            ~> self.didActionSubject
+            ~ self.disposeBag
+        
+        cellModel.shouldUpVoteComment
+            .map { Action.upVotePressed($0) }
+            ~> self.didActionSubject
+            ~ self.disposeBag
     }
 }
 

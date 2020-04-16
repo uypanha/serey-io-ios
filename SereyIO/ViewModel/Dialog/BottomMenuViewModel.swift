@@ -47,14 +47,11 @@ fileprivate extension BottomListMenuViewModel {
     }
     
     func setUpActionObservers() {
-        self.didActionSubject.asObservable()
-            .subscribe(onNext: { [weak self] action in
-                switch action {
-                case .itemSelected(let indexPath):
-                    self?.shouldDismiss.onNext(true)
-                    if let item = self?.item(at: indexPath) as? ImageTextCellViewModel {
-                        self?.shouldSelectMenuItem.onNext(item)
-                    }
+        self.itemSelected.asObservable()
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.shouldDismiss.onNext(true)
+                if let item = self?.item(at: indexPath) as? ImageTextCellViewModel {
+                    self?.shouldSelectMenuItem.onNext(item)
                 }
             }) ~ self.disposeBag
     }

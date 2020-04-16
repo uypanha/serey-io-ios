@@ -28,18 +28,18 @@
                                 <rect key="frame" x="16" y="16" width="400" height="45.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="a5V-Xk-ImY">
-                                        <rect key="frame" x="0.0" y="0.0" width="361" height="44"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b3R-JE-DPu" customClass="ProfileView" customModule="SereyIO" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                 <color key="backgroundColor" red="0.42352941179999998" green="0.38823529410000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="b3R-JE-DPu" secondAttribute="height" multiplier="1:1" id="VjG-vY-KiN"/>
-                                                    <constraint firstAttribute="width" constant="44" id="iyu-KY-pXQ"/>
+                                                    <constraint firstAttribute="width" constant="40" id="iyu-KY-pXQ"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="MO8-0t-yC4">
-                                                <rect key="frame" x="56" y="5.5" width="305" height="38.5"/>
+                                                <rect key="frame" x="52" y="1.5" width="309" height="38.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Cena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awb-D6-bLG">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="19.5"/>
@@ -79,11 +79,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LIx-Ct-u76" customClass="CircularView" customModule="SereyIO" customModuleProvider="target">
-                                        <rect key="frame" x="322" y="12" width="66" height="35.5"/>
+                                        <rect key="frame" x="326" y="12" width="62" height="33"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4NY-gw-vpz">
-                                                <rect key="frame" x="16" y="8" width="34" height="19.5"/>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                <rect key="frame" x="16" y="8" width="30" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>

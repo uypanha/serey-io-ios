@@ -11,20 +11,13 @@ import RxCocoa
 import RxSwift
 import RxDataSources
 
-class BaseListTableViewModel: BaseCellViewModel, ShouldReactToAction,
-    CollectionMultiSectionsProviderModel, DownloadStateNetworkProtocol {
-    
-    enum Action {
-        case itemSelected(IndexPath)
-    }
-    
-    // input:
-    lazy var didActionSubject = PublishSubject<Action>()
+class BaseListTableViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, DownloadStateNetworkProtocol {
     
     let cells: BehaviorRelay<[SectionItem]>
     let isDownloading: BehaviorRelay<Bool>
     
     let shouldDismiss: PublishSubject<Bool>
+    let itemSelected: PublishSubject<IndexPath>
     let showBorder: Bool
     
     init(_ items: [SectionItem], _ showBorder: Bool = false) {
@@ -32,6 +25,7 @@ class BaseListTableViewModel: BaseCellViewModel, ShouldReactToAction,
         self.isDownloading = BehaviorRelay(value: false)
         self.shouldDismiss = PublishSubject()
         self.showBorder = showBorder
+        self.itemSelected = PublishSubject()
         super.init()
     }
     

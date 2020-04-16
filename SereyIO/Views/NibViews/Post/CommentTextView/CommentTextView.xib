@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommentTextView" customModule="SereyIO" customModuleProvider="target">
+            <connections>
+                <outlet property="sendButton" destination="mF4-S6-lGD" id="36Z-Wg-2Gd"/>
+                <outlet property="textView" destination="zjF-Yd-wN3" id="JdE-b6-20O"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zjF-Yd-wN3" customClass="UIPlaceHolderTextView" customModule="SereyIO" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+                    <color key="backgroundColor" white="0.90181756563926929" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="30"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="paddingTop">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="paddingBottom">
+                            <real key="value" value="18"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="paddingLeft">
+                            <real key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="paddingRight">
+                            <real key="value" value="48"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="string" keyPath="placeholderText" value="Post a comment..."/>
+                    </userDefinedRuntimeAttributes>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mF4-S6-lGD">
+                    <rect key="frame" x="366" y="12" width="36" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="36" id="X6V-ma-7sW"/>
+                        <constraint firstAttribute="width" secondItem="mF4-S6-lGD" secondAttribute="height" multiplier="1:1" id="n5r-fr-Grn"/>
+                    </constraints>
+                    <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" image="sendIcon"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="zjF-Yd-wN3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="3mq-mL-dWx"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="mF4-S6-lGD" secondAttribute="bottom" constant="12" id="N4K-rq-eDT"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="mF4-S6-lGD" secondAttribute="trailing" constant="12" id="Pag-m4-MZ9"/>
+                <constraint firstItem="zjF-Yd-wN3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YW4-NU-uI0"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zjF-Yd-wN3" secondAttribute="trailing" id="a4n-5x-IoE"/>
+                <constraint firstItem="mF4-S6-lGD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="b8p-89-urB"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="zjF-Yd-wN3" secondAttribute="bottom" id="emI-nu-d4m"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="134.78260869565219" y="411.16071428571428"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="sendIcon" width="41" height="41"/>
+    </resources>
+</document>

@@ -249,6 +249,57 @@
             </objects>
             <point key="canvasLocation" x="824.63768115942037" y="114.50892857142857"/>
         </scene>
+        <!--Reply Comment View Controller-->
+        <scene sceneID="jm3-iJ-DLY">
+            <objects>
+                <viewController storyboardIdentifier="ReplyCommentViewController" id="0jE-I1-2SM" customClass="ReplyCommentViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sN2-O1-pfG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j1n-Xp-aoJ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lDM-Zs-seM">
+                                <rect key="frame" x="0.0" y="820" width="414" height="56"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Dc-9h-ZVW" customClass="CommentTextView" customModule="SereyIO" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="8" width="398" height="40"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="5Dc-9h-ZVW" firstAttribute="top" secondItem="lDM-Zs-seM" secondAttribute="top" constant="8" id="0dY-IT-R9P"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Dc-9h-ZVW" secondAttribute="trailing" constant="8" id="6X1-eQ-SF5"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Dc-9h-ZVW" secondAttribute="bottom" constant="8" id="V5e-VR-yLA"/>
+                                    <constraint firstItem="5Dc-9h-ZVW" firstAttribute="leading" secondItem="lDM-Zs-seM" secondAttribute="leading" constant="8" id="ulJ-YC-GUi"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="lDM-Zs-seM" firstAttribute="trailing" secondItem="FUR-uK-Y6I" secondAttribute="trailing" id="Lai-2l-tYo"/>
+                            <constraint firstItem="lDM-Zs-seM" firstAttribute="top" secondItem="j1n-Xp-aoJ" secondAttribute="bottom" constant="8" symbolic="YES" id="Txu-Oc-HS7"/>
+                            <constraint firstItem="j1n-Xp-aoJ" firstAttribute="top" secondItem="FUR-uK-Y6I" secondAttribute="top" id="ZEM-8e-3I7"/>
+                            <constraint firstAttribute="bottom" secondItem="lDM-Zs-seM" secondAttribute="bottom" constant="20" symbolic="YES" id="n5a-hh-DOK"/>
+                            <constraint firstItem="j1n-Xp-aoJ" firstAttribute="leading" secondItem="FUR-uK-Y6I" secondAttribute="leading" id="sse-HM-wFT"/>
+                            <constraint firstItem="FUR-uK-Y6I" firstAttribute="trailing" secondItem="j1n-Xp-aoJ" secondAttribute="trailing" id="t7G-8o-Ujh"/>
+                            <constraint firstItem="lDM-Zs-seM" firstAttribute="leading" secondItem="FUR-uK-Y6I" secondAttribute="leading" id="xh0-tt-VG5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="FUR-uK-Y6I"/>
+                    </view>
+                    <connections>
+                        <outlet property="commentContainerView" destination="lDM-Zs-seM" id="frC-Ii-sAw"/>
+                        <outlet property="commentTextView" destination="5Dc-9h-ZVW" id="GAH-g2-bhy"/>
+                        <outlet property="tableView" destination="j1n-Xp-aoJ" id="JGX-OO-86K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OsQ-B1-F1X" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1776.8115942028987" y="114.50892857142857"/>
+        </scene>
     </scenes>
     <resources>
         <image name="plusIcon" width="27" height="27"/>

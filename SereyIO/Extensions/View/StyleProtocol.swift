@@ -77,7 +77,7 @@ extension UIButton: StyleProtocol {
     }
     
     func secondaryStyle() {
-        self.secondaryStyle(borderColor: ColorName.primary.color, borderWidth: 2)
+        self.secondaryStyle(borderColor: ColorName.primary.color, borderWidth: 2, isCircular: false)
     }
 
     func secondaryStyle(borderColor: UIColor? = nil, borderWidth: CGFloat = 2, isCircular: Bool = true) {

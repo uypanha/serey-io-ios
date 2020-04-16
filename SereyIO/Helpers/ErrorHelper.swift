@@ -109,9 +109,14 @@ class ErrorHelper {
     fileprivate static func prepareAppError(_ error: AppError) -> ErrorInfo {
         switch error {
         case .appApiError(let error):
-            switch AppApiErrorCode(rawValue: error.0.error) {
+            switch AppApiErrorCode(rawValue: error.0.statusCode ?? 0) {
             case .signinFailed?:
-                return PredefinedError.unauthenticatedError.prepareError(errorMessage: error.0.errorDescription)
+                return PredefinedError.unauthenticatedError.prepareError(errorMessage: error.0.message)
+            case .unauthorized?, .accessDenied?, .unauthenticateError?:
+                if AuthData.shared.isUserLoggedIn {
+                    AuthData.shared.removeAuthData(notify: true)
+                }
+                return PredefinedError.unauthenticatedError.prepareError()
             default:
                 log.error(error)
                 return defaultError()
@@ -149,6 +154,9 @@ class ErrorHelper {
     }
 }
 
-fileprivate enum AppApiErrorCode: String {
-    case signinFailed = "signin_failed"
+fileprivate enum AppApiErrorCode: Int {
+    case signinFailed = 0
+    case unauthorized = 3
+    case unauthenticateError = 4
+    case accessDenied = 10
 }

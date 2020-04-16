@@ -224,6 +224,15 @@
 		DCD39896232E28E100C812EB /* WebViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39895232E28E100C812EB /* WebViewViewModel.swift */; };
 		DCD39898232E2AD700C812EB /* CloseableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39897232E2AD700C812EB /* CloseableNavigationController.swift */; };
 		DCD3989A232E2DE700C812EB /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39899232E2DE700C812EB /* UINavigationController.swift */; };
+		DCDE00672446016800D09717 /* ReplyCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE00662446016800D09717 /* ReplyCommentViewController.swift */; };
+		DCDE006A244601A600D09717 /* ReplyCommentTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE0069244601A600D09717 /* ReplyCommentTableViewModel.swift */; };
+		DCDE006E2446161500D09717 /* UIPlaceHolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE006D2446161500D09717 /* UIPlaceHolderTextView.swift */; };
+		DCDE007124475DFA00D09717 /* CommentTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE007024475DFA00D09717 /* CommentTextView.swift */; };
+		DCDE007324475E1100D09717 /* CommentTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCDE007224475E1100D09717 /* CommentTextView.xib */; };
+		DCDE00752448A70B00D09717 /* CommentTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE00742448A70B00D09717 /* CommentTextViewModel.swift */; };
+		DCDE00782448B0B800D09717 /* VoteDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE00772448B0B700D09717 /* VoteDialogViewController.swift */; };
+		DCDE007A2448B0DC00D09717 /* VoteDialogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCDE00792448B0DC00D09717 /* VoteDialogViewController.xib */; };
+		DCDE007C2448B3DB00D09717 /* VoteDialogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE007B2448B3DA00D09717 /* VoteDialogViewModel.swift */; };
 		DCE19A9F240822FD0054F752 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE19A9E240822FD0054F752 /* PostModel.swift */; };
 		DCEC0CBC240907D0002F4B6F /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CBB240907D0002F4B6F /* Date+Formatter.swift */; };
 		DCEC0CBE240971AE002F4B6F /* ShimmeringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CBD240971AE002F4B6F /* ShimmeringProtocol.swift */; };
@@ -245,6 +254,7 @@
 		DCF67FEF24100C6F003061A7 /* ListDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FEE24100C6F003061A7 /* ListDataResponseModel.swift */; };
 		DCF8738023F6F7CE007A8724 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8737F23F6F7CD007A8724 /* AccountViewModel.swift */; };
 		DCF8738223F6FA3B007A8724 /* BasePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8738123F6FA3B007A8724 /* BasePostViewModel.swift */; };
+		DCFF69612448B5BB00416218 /* VoteDialogProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -514,6 +524,15 @@
 		DCD39895232E28E100C812EB /* WebViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewModel.swift; sourceTree = "<group>"; };
 		DCD39897232E2AD700C812EB /* CloseableNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseableNavigationController.swift; sourceTree = "<group>"; };
 		DCD39899232E2DE700C812EB /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		DCDE00662446016800D09717 /* ReplyCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyCommentViewController.swift; sourceTree = "<group>"; };
+		DCDE0069244601A600D09717 /* ReplyCommentTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyCommentTableViewModel.swift; sourceTree = "<group>"; };
+		DCDE006D2446161500D09717 /* UIPlaceHolderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPlaceHolderTextView.swift; sourceTree = "<group>"; };
+		DCDE007024475DFA00D09717 /* CommentTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextView.swift; sourceTree = "<group>"; };
+		DCDE007224475E1100D09717 /* CommentTextView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTextView.xib; sourceTree = "<group>"; };
+		DCDE00742448A70B00D09717 /* CommentTextViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTextViewModel.swift; sourceTree = "<group>"; };
+		DCDE00772448B0B700D09717 /* VoteDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDialogViewController.swift; sourceTree = "<group>"; };
+		DCDE00792448B0DC00D09717 /* VoteDialogViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteDialogViewController.xib; sourceTree = "<group>"; };
+		DCDE007B2448B3DA00D09717 /* VoteDialogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDialogViewModel.swift; sourceTree = "<group>"; };
 		DCE19A9E240822FD0054F752 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		DCEC0CBB240907D0002F4B6F /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
 		DCEC0CBD240971AE002F4B6F /* ShimmeringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmeringProtocol.swift; sourceTree = "<group>"; };
@@ -537,6 +556,7 @@
 		DCF67FEE24100C6F003061A7 /* ListDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataResponseModel.swift; sourceTree = "<group>"; };
 		DCF8737F23F6F7CD007A8724 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		DCF8738123F6FA3B007A8724 /* BasePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePostViewModel.swift; sourceTree = "<group>"; };
+		DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDialogProtocol.swift; sourceTree = "<group>"; };
 		E48D784F3F419D4A8B0116EC /* Pods_SereyIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SereyIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4BA4EF9560F572B6DA8F7A4 /* Pods-SereyIOTests.debug_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.debug_production.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.debug_production.xcconfig"; sourceTree = "<group>"; };
 		F4BAB723C7E6C2FAF05380F9 /* Pods-SereyIOUITests.debug_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.debug_development.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.debug_development.xcconfig"; sourceTree = "<group>"; };
@@ -798,9 +818,10 @@
 			isa = PBXGroup;
 			children = (
 				DCA5255C2426636F00284CD8 /* AlertDialogController.swift */,
+				DCCD40CD24379BD100093A18 /* BottomMenuViewController.swift */,
 				DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */,
 				DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */,
-				DCCD40CD24379BD100093A18 /* BottomMenuViewController.swift */,
+				DCDE00762448B08600D09717 /* VoteDialogController */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1206,6 +1227,7 @@
 				DC9E36F3241629F900289693 /* SRichEditorView.swift */,
 				DCC49AD623E8795600119BAA /* TabBarIndicator.swift */,
 				DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */,
+				DCDE006D2446161500D09717 /* UIPlaceHolderTextView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1288,6 +1310,7 @@
 			children = (
 				DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */,
 				DC9E36DB24129ACA00289693 /* PostDetailViewController.swift */,
+				DCDE00652446013D00D09717 /* Comment */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -1298,6 +1321,7 @@
 				DCC6F1DD242BB45B003B9E3A /* CreatePostViewModel.swift */,
 				DC9E36DE2412A01000289693 /* PostDetailViewModel.swift */,
 				DC5D59DB243243660048C921 /* Category */,
+				DCDE00682446019900D09717 /* Comment */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -1305,6 +1329,7 @@
 		DC9E36E024135A1700289693 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				DCDE006F24475DD800D09717 /* CommentTextView */,
 				DCB629EA2417E7F700C64BD6 /* PostCommentView */,
 				DC9E36E124135A1F00289693 /* PostDetailView */,
 			);
@@ -1421,6 +1446,7 @@
 			isa = PBXGroup;
 			children = (
 				DCD12D67242D03850084F66C /* BottomMenuViewModel.swift */,
+				DCDE007B2448B3DA00D09717 /* VoteDialogViewModel.swift */,
 			);
 			path = Dialog;
 			sourceTree = "<group>";
@@ -1601,6 +1627,42 @@
 				DCD39895232E28E100C812EB /* WebViewViewModel.swift */,
 			);
 			path = WebView;
+			sourceTree = "<group>";
+		};
+		DCDE00652446013D00D09717 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				DCDE00662446016800D09717 /* ReplyCommentViewController.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		DCDE00682446019900D09717 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				DCDE0069244601A600D09717 /* ReplyCommentTableViewModel.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		DCDE006F24475DD800D09717 /* CommentTextView */ = {
+			isa = PBXGroup;
+			children = (
+				DCDE007024475DFA00D09717 /* CommentTextView.swift */,
+				DCDE00742448A70B00D09717 /* CommentTextViewModel.swift */,
+				DCDE007224475E1100D09717 /* CommentTextView.xib */,
+			);
+			path = CommentTextView;
+			sourceTree = "<group>";
+		};
+		DCDE00762448B08600D09717 /* VoteDialogController */ = {
+			isa = PBXGroup;
+			children = (
+				DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */,
+				DCDE00772448B0B700D09717 /* VoteDialogViewController.swift */,
+				DCDE00792448B0DC00D09717 /* VoteDialogViewController.xib */,
+			);
+			path = VoteDialogController;
 			sourceTree = "<group>";
 		};
 		DCEC0CBF240A52CC002F4B6F /* Post */ = {
@@ -1812,6 +1874,7 @@
 				DC562436241E75450076A78C /* Auth.strings in Resources */,
 				DC115F30241A8EA5006BE78C /* trix-editor.css in Resources */,
 				DC26812B23F2FCB30045776E /* ProfileTableViewCell.xib in Resources */,
+				DCDE007324475E1100D09717 /* CommentTextView.xib in Resources */,
 				DC05FDB023F1AC4F0093B47B /* Settings.strings in Resources */,
 				DCD12D6D242D06C20084F66C /* ImageTextTableViewCell.xib in Resources */,
 				DC1C6EC423FC3C6D00BA701D /* PostCategoryTableViewCell.xib in Resources */,
@@ -1840,6 +1903,7 @@
 				DC05FDC023F1B3410093B47B /* HeaderView.xib in Resources */,
 				DC88A73323DF3D3900EB7F79 /* OnBoard.storyboard in Resources */,
 				DC40D5D923E32F3800B0DD96 /* Common.strings in Resources */,
+				DCDE007A2448B0DC00D09717 /* VoteDialogViewController.xib in Resources */,
 				DCF67FE2240FFD65003061A7 /* PeopleTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2050,6 +2114,7 @@
 				DC56243E241E87000076A78C /* AuthApi.swift in Sources */,
 				DCD39881232E24A400C812EB /* NSLayoutConstraint+Multiplier.swift in Sources */,
 				DC6FCE7923F05D1700D72F6D /* Helper.swift in Sources */,
+				DCDE006E2446161500D09717 /* UIPlaceHolderTextView.swift in Sources */,
 				DCD3989A232E2DE700C812EB /* UINavigationController.swift in Sources */,
 				DC6ED57E2326A44A00770B31 /* DefaultsStore.swift in Sources */,
 				DCD12D6C242D06C20084F66C /* ImageTextTableViewCell.swift in Sources */,
@@ -2064,6 +2129,7 @@
 				DC05FDAB23F1AB620093B47B /* SettingCellViewModel.swift in Sources */,
 				DC05FDC323F1BDF10093B47B /* LanguagesViewController.swift in Sources */,
 				DC9AC6E82406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift in Sources */,
+				DCDE00672446016800D09717 /* ReplyCommentViewController.swift in Sources */,
 				DC6CDC342439B077008A52D9 /* PostCommentViewModel.swift in Sources */,
 				DC40D5D623E32A6B00B0DD96 /* ImageTextModel.swift in Sources */,
 				DCD39866232E1CC600C812EB /* BaseViewModel.swift in Sources */,
@@ -2073,6 +2139,7 @@
 				DC6A790923CA2510001D1009 /* RealmManager.swift in Sources */,
 				DC6ED5762326A38B00770B31 /* FMDataParser.swift in Sources */,
 				DC6FCE7723F05D1700D72F6D /* Tag.swift in Sources */,
+				DCDE007C2448B3DB00D09717 /* VoteDialogViewModel.swift in Sources */,
 				DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */,
 				DCC49AD523E865D700119BAA /* ProfileViewModel.swift in Sources */,
 				DC562433241E73D80076A78C /* SignInViewModel.swift in Sources */,
@@ -2107,6 +2174,7 @@
 				DCD39870232E1F7E00C812EB /* LanguageManager.swift in Sources */,
 				DC0044092433A98200244607 /* FileUploadModel.swift in Sources */,
 				DC12F21624227AB40099C479 /* AccountModel.swift in Sources */,
+				DCDE00782448B0B800D09717 /* VoteDialogViewController.swift in Sources */,
 				DC6FCE7423F05D1700D72F6D /* Steem.swift in Sources */,
 				DCCD40C924363EF700093A18 /* SubmitPostModel.swift in Sources */,
 				DC8EAB8323E7231A00E00A00 /* MoreViewController.swift in Sources */,
@@ -2118,6 +2186,7 @@
 				DC9AC6DF2406BF1C008FAFA6 /* DiscussionApi.swift in Sources */,
 				DC40D5C723E31FDF00B0DD96 /* GradientView.swift in Sources */,
 				DC6ED58F2326A7B000770B31 /* AppDelegateHelper.swift in Sources */,
+				DCFF69612448B5BB00416218 /* VoteDialogProtocol.swift in Sources */,
 				DC9E36F4241629F900289693 /* SRichEditorView.swift in Sources */,
 				DC40D5E323E3360D00B0DD96 /* ChooseLanguageViewModel.swift in Sources */,
 				DC6A78F523CA1FFE001D1009 /* CollectionSectionedAnimatedProviderModel.swift in Sources */,
@@ -2144,6 +2213,7 @@
 				DCC49ACC23E864E500119BAA /* FeatureStore.swift in Sources */,
 				DC56243C241E82B80076A78C /* AuthService.swift in Sources */,
 				DC010D3B2434F6C6002BE182 /* MimeType.swift in Sources */,
+				DCDE007124475DFA00D09717 /* CommentTextView.swift in Sources */,
 				DCD3985C232E104400C812EB /* SlashScreenViewController.swift in Sources */,
 				DC19DBF323EC6E4600571CC8 /* PaddingTextField.swift in Sources */,
 				DCD39894232E28C900C812EB /* WebViewViewController.swift in Sources */,
@@ -2155,6 +2225,7 @@
 				DC6ED5882326A4F900770B31 /* APNSTokenStore.swift in Sources */,
 				DCB629EC2417E83500C64BD6 /* PostCommentView.swift in Sources */,
 				DC19DBE523EC5D0700571CC8 /* BaseTableViewController.swift in Sources */,
+				DCDE00752448A70B00D09717 /* CommentTextViewModel.swift in Sources */,
 				DC19DBF623EC751700571CC8 /* SearchViewModel.swift in Sources */,
 				DCF67FE1240FFD65003061A7 /* PeopleTableViewCell.swift in Sources */,
 				DCD39876232E20CF00C812EB /* SlashViewModel.swift in Sources */,
@@ -2162,6 +2233,7 @@
 				DC19DBEB23EC5F9E00571CC8 /* PostTableViewModel.swift in Sources */,
 				DC6FCE7523F05D1700D72F6D /* Misc.swift in Sources */,
 				DC6ED52123267EED00770B31 /* AppDelegate.swift in Sources */,
+				DCDE006A244601A600D09717 /* ReplyCommentTableViewModel.swift in Sources */,
 				DC6ED5742326A37800770B31 /* DeeplinkParser.swift in Sources */,
 				DCCD40CB2436422C00093A18 /* BlockChainResponse.swift in Sources */,
 				DC19DBE323EC581A00571CC8 /* ChooseCategorySheetViewController.swift in Sources */,
