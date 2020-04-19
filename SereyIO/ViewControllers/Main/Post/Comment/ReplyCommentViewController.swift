@@ -11,12 +11,16 @@ import RxCocoa
 import RxSwift
 import RxBinding
 import RxDataSources
+import RxKeyboard
 
-class ReplyCommentViewController: BaseViewController {
+class ReplyCommentViewController: BaseViewController, KeyboardController {
+    
+    fileprivate lazy var keyboardDisposeBag = DisposeBag()
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var commentTextView: CommentTextView!
     @IBOutlet weak var commentContainerView: UIView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     var viewModel: ReplyCommentTableViewModel!
     
@@ -36,6 +40,18 @@ class ReplyCommentViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         self.navigationController?.showNavigationBarBorder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.keyboardDisposeBag = DisposeBag()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setUpKeyboardObservers()
     }
     
     func prepreDataSource() -> RxTableViewSectionedReloadDataSource<SectionItem> {
@@ -81,10 +97,18 @@ fileprivate extension ReplyCommentViewController {
     func setUpRxObservers() {
         setUpContentChangedObsesrvers()
         setUpTableViewObservers()
+        setUpTabSelfToDismissKeyboard(true, cancelsTouchesInView: true)?.disposed(by: self.disposeBag)
     }
     
     func setUpContentChangedObsesrvers() {
         self.commentTextView.viewModel = self.viewModel.commentViewModel
+        
+        self.viewModel.endRefresh.asObservable()
+            .subscribe(onNext: { [weak self] endRefreshing in
+                if endRefreshing {
+                    self?.tableView.refreshControl?.endRefreshing()
+                }
+            }) ~ self.disposeBag
     }
     
     func setUpTableViewObservers() {
@@ -96,5 +120,23 @@ fileprivate extension ReplyCommentViewController {
 //        self.tableView.rx.itemSelected.asObservable()
 //            .bind(to: viewModel.itemSelected)
 //            ~ self.disposeBag
+        
+        self.tableView.refreshControl?.rx.controlEvent(.valueChanged)
+            .filter { return self.tableView.refreshControl!.isRefreshing }
+            .map { ReplyCommentTableViewModel.Action.refresh }
+            .bind(to: self.viewModel.didActionSubject)
+            .disposed(by: self.disposeBag)
+    }
+    
+    func setUpKeyboardObservers() {
+        RxKeyboard.instance.visibleHeight
+            .drive(onNext: { [weak self] keyboardHeight in
+                if let _self = self {
+                    _self.bottomConstraint.constant = keyboardHeight
+                    UIView.animate(withDuration: 0.3, animations: {
+                        _self.view.layoutIfNeeded()
+                    })
+                }
+            }).disposed(by: self.keyboardDisposeBag)
     }
 }

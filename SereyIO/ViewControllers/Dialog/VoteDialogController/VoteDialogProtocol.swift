@@ -19,7 +19,8 @@ protocol VoteDialogProtocol {
 extension VoteDialogProtocol where Self: UIViewController {
     
     func showVoteDialog(_ viewModel: VoteDialogViewModel) {
-        let voteDialogViewController = VoteDialogViewController()
+        let voteDialogViewController = VoteDialogViewController(self)
+        voteDialogViewController.viewModel = viewModel
         
         // dismiss old dialog befire display new one
         self.dismissDialogViewController(.zoomInOut)

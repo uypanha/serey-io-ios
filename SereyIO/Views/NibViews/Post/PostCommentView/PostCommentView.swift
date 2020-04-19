@@ -13,12 +13,10 @@ import RxBinding
 
 class PostCommentView: NibView {
 
+    @IBOutlet weak var voteContainerView: UIStackView!
     @IBOutlet weak var upVoteButton: UIButton!
     @IBOutlet weak var downVoteButton: UIButton!
-    @IBOutlet weak var profileView: ProfileView!
-    @IBOutlet weak var commentTextField: UITextField!
-    @IBOutlet weak var sendButton: UIButton!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var commentTextView: CommentTextView!
     
     var viewModel: PostCommentViewModel? {
         didSet {
@@ -26,26 +24,12 @@ class PostCommentView: NibView {
             
             self.disposeBag = DisposeBag()
             self.disposeBag ~ [
-                viewModel.profileViewModel ~> self.profileView.rx.profileViewModel,
                 viewModel.upVoteCount ~> self.upVoteButton.rx.title(for: .normal),
-                viewModel.downVoteCount ~> self.downVoteButton.rx.title(for: .normal)
+                viewModel.downVoteCount ~> self.downVoteButton.rx.title(for: .normal),
+                viewModel.isVoteAllowed.map { !$0 } ~> self.voteContainerView.rx.isHidden
             ]
             
-            viewModel.commentTextFieldViewModel.dispose()
-            viewModel.commentTextFieldViewModel.bind(with: self.commentTextField)
-            viewModel.commentTextFieldViewModel.textFieldText.asObservable()
-                .map { $0 != nil && !$0!.isEmpty }
-                ~> self.sendButton.rx.isEnabled
-                ~ self.disposeBag
-            viewModel.isUploading.asObservable()
-                .subscribe(onNext: { [weak self] isUploading in
-                    self?.commentTextField.isEnabled = !isUploading
-                    self?.loadingIndicator.isHidden = !isUploading
-                    if isUploading {
-                        self?.loadingIndicator.startAnimating()
-                    }
-                }) ~ self.disposeBag
-            
+            commentTextView.viewModel = viewModel.commentTextViewModel
             setUpRxObservers()
         }
     }
@@ -53,10 +37,6 @@ class PostCommentView: NibView {
     override func xibSetup() {
         super.xibSetup()
         
-        self.sendButton.isHidden = true
-        self.sendButton.isEnabled = false
-        self.sendButton.setImage(R.image.sendIcon()?.image(withTintColor: .lightGray), for: .disabled)
-        self.sendButton.setImage(R.image.sendIcon()?.image(withTintColor: ColorName.primary.color), for: .normal)
         setUpRxObservers()
     }
 }
@@ -69,15 +49,6 @@ fileprivate extension PostCommentView {
     }
     
     func setUpControlObsservers() {
-        self.commentTextField.rx.controlEvent(.editingDidBegin)
-            .map { _ in false }
-            ~> self.sendButton.rx.isHidden
-            ~ self.disposeBag
-        
-        self.commentTextField.rx.controlEvent(.editingDidEnd)
-            .map { _ in true }
-            ~> self.sendButton.rx.isHidden
-            ~ self.disposeBag
         
         self.upVoteButton.rx.tap.asObservable()
             .subscribe(onNext: { [weak self] _ in
@@ -88,16 +59,6 @@ fileprivate extension PostCommentView {
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel?.didAction(with: .downVotePressed)
             }) ~ self.disposeBag
-        
-        self.sendButton.rx.tap.asObservable()
-            .subscribe(onNext: { [weak self] _ in
-                self?.viewModel?.didAction(with: .sendCommentPressed)
-            }) ~ self.disposeBag
-        
-        self.viewModel?.isUploading
-            .subscribe(onNext: { [weak self] isUploading in
-                self?.commentTextField.isEnabled = !isUploading
-            }).disposed(by: self.disposeBag)
     }
 }
 

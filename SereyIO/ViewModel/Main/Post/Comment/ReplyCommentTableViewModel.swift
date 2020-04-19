@@ -11,12 +11,20 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class ReplyCommentTableViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, DownloadStateNetworkProtocol {
+class ReplyCommentTableViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, DownloadStateNetworkProtocol, ShouldReactToAction {
+    
+    enum Action {
+        case refresh
+    }
+    
+    // input:
+    lazy var didActionSubject = PublishSubject<ReplyCommentTableViewModel.Action>()
     
     let cells: BehaviorRelay<[SectionItem]>
     let title: BehaviorRelay<String>
     let comment: BehaviorRelay<PostModel>
     let replies: BehaviorRelay<[PostModel]>
+    let endRefresh: BehaviorSubject<Bool>
     
     let commentViewModel: CommentTextViewModel
     
@@ -30,6 +38,8 @@ class ReplyCommentTableViewModel: BaseCellViewModel, CollectionMultiSectionsProv
         self.cells = BehaviorRelay(value: [])
         self.comment = BehaviorRelay(value: comment)
         self.replies = BehaviorRelay(value: comment.replies ?? [])
+        self.endRefresh = BehaviorSubject(value: true)
+        
         self.discussionService = DiscussionService()
         
         self.commentViewModel = CommentTextViewModel()
@@ -47,15 +57,15 @@ extension ReplyCommentTableViewModel {
     
     private func submitComment(_ comment: String) {
         let submitCommentModel = self.prepareSubmitCommentModel(comment)
-//        self.commentPostViewModel.value?.isUploading.onNext(true)
+        self.commentViewModel.isUploading.onNext(true)
         self.discussionService.submitComment(submitCommentModel)
             .subscribe(onNext: { [weak self] data in
                 self?.updateReplies(data.data)
-//                self?.commentPostViewModel.value?.commentTextFieldViewModel.value = ""
-//                self?.commentPostViewModel.value?.isUploading.onNext(false)
+                self?.commentViewModel.clearInput()
+                self?.commentViewModel.isUploading.onNext(false)
             }, onError: { [weak self] error in
                 self?.isDownloading.accept(false)
-//                self?.commentPostViewModel.value?.isUploading.onNext(false)
+                self?.commentViewModel.isUploading.onNext(false)
                 let errorInfo = ErrorHelper.prepareError(error: error)
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
@@ -94,6 +104,7 @@ extension ReplyCommentTableViewModel {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
+        setUpActionObservers()
         setUpCommentTextViewObservers()
     }
     
@@ -114,6 +125,16 @@ extension ReplyCommentTableViewModel {
 //            .map { !$0 }
 //            ~> self.endRefresh
 //            ~ self.disposeBag
+    }
+    
+    func setUpActionObservers() {
+        self.didActionSubject.asObservable()
+            .subscribe(onNext: { [weak self] action in
+                switch action {
+                case .refresh:
+                    self?.endRefresh.onNext(true)
+                }
+            }) ~ self.disposeBag
     }
     
     func setUpCommentTextViewObservers() {

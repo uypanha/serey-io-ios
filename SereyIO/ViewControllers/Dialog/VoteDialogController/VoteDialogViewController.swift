@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+import RxBinding
 
 class VoteDialogViewController: BaseViewController {
     
@@ -17,10 +20,13 @@ class VoteDialogViewController: BaseViewController {
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
+    var presentingController: UIViewController?
+    
     var viewModel: VoteDialogViewModel!
     
-    init() {
+    init(_ presentingViewController: UIViewController?) {
         super.init(nibName: R.nib.voteDialogViewController.name, bundle: R.nib.voteDialogViewController.bundle)
+        self.presentingController = presentingViewController
     }
     
     required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
@@ -30,6 +36,7 @@ class VoteDialogViewController: BaseViewController {
 
         // Do any additional setup after loading the view.
         setUpViews()
+        setUpRxObservers()
     }
 }
 
@@ -40,5 +47,37 @@ extension VoteDialogViewController {
         self.titleContainerView.addBorders(edges: [.bottom], color: ColorName.border.color)
         self.confirmButton.primaryStyle()
         self.cancelButton.secondaryStyle()
+        
+        if let parentController = self.presentingController {
+            self.cancelButton.addTarget(parentController, action: #selector(UIViewController.tapLSDialogBackgroundView(_:)), for: .touchUpInside)
+            self.confirmButton.addTarget(parentController, action:#selector(UIViewController.tapLSDialogBackgroundView(_:)), for: .touchUpInside)
+        }
+    }
+}
+
+// MARK: - SetUp RxObservers
+extension VoteDialogViewController {
+    
+    func setUpRxObservers() {
+        setUpContentChangedObservers()
+        setUpControlsObservers()
+    }
+    
+    func setUpContentChangedObservers() {
+        self.viewModel.pregressText ~> self.progressValueLabel.rx.text ~ self.disposeBag
+        self.viewModel.titleText ~> self.voteTitleLabel.rx.text ~ self.disposeBag
+    }
+    
+    func setUpControlsObservers() {
+        (self.progressSlider.rx.value <-> self.viewModel.voteCount) ~ self.disposeBag
+        
+        self.confirmButton.rx.tap.map { VoteDialogViewModel.Action.confirmPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+            
+        self.cancelButton.rx.tap.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.dismissDialogViewController(.zoomInOut)
+            }) ~ self.disposeBag
     }
 }

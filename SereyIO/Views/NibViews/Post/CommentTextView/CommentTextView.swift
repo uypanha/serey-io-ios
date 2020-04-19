@@ -15,6 +15,7 @@ class CommentTextView: NibView {
     
     @IBOutlet weak var textView: UIPlaceHolderTextView!
     @IBOutlet weak var sendButton: UIButton!
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     var viewModel: CommentTextViewModel? {
         didSet {
@@ -32,6 +33,16 @@ class CommentTextView: NibView {
                 .map { CommentTextViewModel.Action.sendCommentPressed }
                 ~> viewModel.didActionSubject
                 ~ self.disposeBag
+            
+            viewModel.isUploading.asObservable()
+                .subscribe(onNext: { [weak self] isUploading in
+                    self?.textView.isEditable = !isUploading
+                    self?.loadingIndicator.isHidden = !isUploading
+                    self?.sendButton.isHidden = isUploading
+                    if isUploading {
+                        self?.loadingIndicator.startAnimating()
+                    }
+                }) ~ self.disposeBag
         }
     }
     
@@ -40,7 +51,10 @@ class CommentTextView: NibView {
         
         self.backgroundColor = .clear
         self.textView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
+        
         self.sendButton.tintColor = ColorName.primary.color
+        self.sendButton.setImage(R.image.sendIcon()?.image(withTintColor: .lightGray), for: .disabled)
+        self.sendButton.setImage(R.image.sendIcon()?.image(withTintColor: ColorName.primary.color), for: .normal)
     }
 }
 

@@ -82,7 +82,9 @@ class CommentTableViewCell: BaseTableViewCell {
                 cellModel.conversationText ~> self.viewConversationButton.rx.title(for: .normal),
                 cellModel.isViewConversationHidden ~> self.viewConversationButton.rx.isHidden,
                 cellModel.isReplyHidden ~> self.commentContainerView.rx.isHidden,
-                cellModel.leadingConstraint ~> self.leadingConstraint.rx.constant
+                cellModel.leadingConstraint ~> self.leadingConstraint.rx.constant,
+                cellModel.isVoteAllowed.map { !$0 } ~> self.upVoteContainerView.rx.isHidden,
+                cellModel.isVoteAllowed.map { !$0 } ~> self.downVoteContainerView.rx.isHidden,
             ]
             
             cellModel.isShimmering.asObservable()

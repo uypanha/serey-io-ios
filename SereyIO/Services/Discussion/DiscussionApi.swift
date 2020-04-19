@@ -22,6 +22,12 @@ enum DiscussionApi {
     case submitComment(SubmitCommentModel)
     
     case deletPost(username: String, permlink: String)
+    
+    case upVote(permlink: String, author: String, weight: String)
+    
+    case flag(permlink: String, author: String, weight: String)
+    
+    case downVote(permlink: String, author: String)
 }
 
 extension DiscussionApi: AuthorizedApiTargetType {
@@ -44,6 +50,17 @@ extension DiscussionApi: AuthorizedApiTargetType {
                 "username"  : data.username,
                 "permlink"  : data.permlink
             ]
+        case .upVote(let data), .flag(let data):
+            return [
+                "author"    : data.author,
+                "permlink"  : data.permlink,
+                "weight"    : data.weight
+            ]
+        case .downVote(let data):
+            return [
+                "author"    : data.author,
+                "permlink"  : data.permlink
+            ]
         default:
             return [:]
         }
@@ -63,12 +80,18 @@ extension DiscussionApi: AuthorizedApiTargetType {
             return "/api/v1/sereyweb/submitReplies"
         case .deletPost:
             return "/api/v1/sereyweb/deletePost"
+        case .upVote:
+            return "/api/v1/vote/upvote"
+        case .downVote:
+            return "/api/v1/vote/downvote"
+        case .flag:
+            return "/api/v1/vote/flag"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .submitPost, .submitComment, .deletPost:
+        case .submitPost, .submitComment, .deletPost, .upVote, .downVote, .flag:
             return .post
         default:
             return .get

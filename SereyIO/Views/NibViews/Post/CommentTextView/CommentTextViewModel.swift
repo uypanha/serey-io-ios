@@ -33,6 +33,10 @@ class CommentTextViewModel: BaseViewModel, ShouldReactToAction {
         
         setUpRxObservers()
     }
+    
+    func clearInput() {
+        self.commentTextFieldViewModel.value = ""
+    }
 }
 
 // MARK: - SetUp RxObservers

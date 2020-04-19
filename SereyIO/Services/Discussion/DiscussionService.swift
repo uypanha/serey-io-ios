@@ -42,4 +42,13 @@ class DiscussionService: AppService<DiscussionApi> {
         return self.provider.rx.requestObject(.deletPost(username: username, permlink: permlink), type: DataResponseModel<String>.self)
             .asObservable()
     }
+    
+    func upVote() {
+    }
+    
+    func flag() {
+    }
+    
+    func downVote() {
+    }
 }

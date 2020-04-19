@@ -16,7 +16,6 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, ShouldReactToActi
     enum Action {
         case upVotePressed
         case downVotePressed
-        case sendCommentPressed
     }
     
     // input:
@@ -25,30 +24,30 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, ShouldReactToActi
     let post: BehaviorRelay<PostModel?>
     let isShimmering: BehaviorRelay<Bool>
     
-    let profileViewModel: BehaviorSubject<ProfileViewModel?>
     let upVoteCount: BehaviorSubject<String?>
     let downVoteCount: BehaviorSubject<String?>
+    let isVoteAllowed: BehaviorSubject<Bool>
     
     let shouldComment: PublishSubject<String>
-    let shouldUpVote: PublishSubject<Void>
-    let shouldDownVote: PublishSubject<Void>
+    let shouldUpVote: PublishSubject<PostModel>
+    let shouldDownVote: PublishSubject<PostModel>
     let isUploading: BehaviorSubject<Bool>
     
-    let commentTextFieldViewModel: TextFieldViewModel
+    let commentTextViewModel: CommentTextViewModel
     
     init(_ postModel: PostModel?) {
         self.post = BehaviorRelay(value: postModel)
         self.isShimmering = BehaviorRelay(value: false)
-        self.profileViewModel = BehaviorSubject(value: nil)
         self.upVoteCount = BehaviorSubject(value: nil)
         self.downVoteCount = BehaviorSubject(value: nil)
+        self.isVoteAllowed = BehaviorSubject(value: true)
         
         self.shouldComment = PublishSubject()
         self.shouldUpVote = PublishSubject()
         self.shouldDownVote = PublishSubject()
         self.isUploading = BehaviorSubject(value: false)
         
-        self.commentTextFieldViewModel = TextFieldViewModel.textFieldWith(title: R.string.post.postAComment.localized(), errorMessage: nil, validation: .notEmpty)
+        self.commentTextViewModel = CommentTextViewModel()
         super.init()
         
         setUpRxObservers()
@@ -65,10 +64,14 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, ShouldReactToActi
         self.isShimmering.accept(false)
     }
     
+    func clearInput() {
+        self.commentTextViewModel.clearInput()
+    }
+    
     internal func notifyDataChanged(_ data: PostModel?) {
-        self.profileViewModel.onNext(AuthData.shared.loggedUserModel?.profileModel)
         self.upVoteCount.onNext("\(data?.upvote ?? 0)")
         self.downVoteCount.onNext("\(data?.flag ?? 0)")
+        self.isVoteAllowed.onNext(AuthData.shared.username != data?.authorName)
     }
 }
 
@@ -77,6 +80,7 @@ fileprivate extension PostCommentViewModel {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
+        setUpCommentTextViewModel()
         setUpActionObservers()
     }
     
@@ -87,17 +91,28 @@ fileprivate extension PostCommentViewModel {
             }) ~ self.disposeBag
     }
     
+    func setUpCommentTextViewModel() {
+        self.commentTextViewModel.shouldSendComment
+            ~> self.shouldComment
+            ~ self.disposeBag
+        
+        self.isUploading.asObservable()
+            ~> self.commentTextViewModel.isUploading
+            ~ self.disposeBag
+    }
+    
     func setUpActionObservers() {
         self.didActionSubject.asObservable()
             .subscribe(onNext: { [weak self] action in
                 switch action {
                 case .upVotePressed:
-                    self?.shouldUpVote.onNext(())
+                    if let postModel = self?.post.value {
+                        self?.shouldUpVote.onNext(postModel)
+                    }
                 case .downVotePressed:
-                    self?.shouldDownVote.onNext(())
-                case .sendCommentPressed:
-                    let comment = self?.commentTextFieldViewModel.value ?? ""
-                    self?.shouldComment.onNext(comment)
+                    if let postModel = self?.post.value {
+                        self?.shouldDownVote.onNext(postModel)
+                    }
                 }
             }) ~ self.disposeBag
     }

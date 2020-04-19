@@ -15,7 +15,8 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
     
     enum Action {
         case morePressed
-        case upVotePressed(PostModel)
+        case upVotePressed(VotePostType, PostModel)
+        case downVotePressed(VotePostType, PostModel)
         case refresh
         case replyCommentPressed(CommentCellViewModel)
     }
@@ -107,7 +108,7 @@ extension PostDetailViewModel {
         self.discussionService.submitComment(submitCommentModel)
             .subscribe(onNext: { [weak self] _ in
                 self?.fetchPostDetial()
-                self?.commentPostViewModel.value?.commentTextFieldViewModel.value = ""
+                self?.commentPostViewModel.value?.clearInput()
                 self?.commentPostViewModel.value?.isUploading.onNext(false)
             }, onError: { [weak self] error in
                 self?.isDownloading.accept(false)
@@ -151,6 +152,11 @@ extension PostDetailViewModel {
                 return ImageTextModel(image: R.image.trashIcon(), titleText: R.string.common.delete.localized())
             }
         }
+    }
+    
+    enum VotePostType {
+        case comment
+        case article
     }
     
     fileprivate func notifyDataChanged(_ data: PostModel?) {
@@ -226,9 +232,18 @@ fileprivate extension PostDetailViewModel {
         }
     }
     
-    func handleUpVotePressed(_ postModel: PostModel) {
+    func handleUpVotePressed(_ voteType: VotePostType, _ postModel: PostModel) {
         if AuthData.shared.isUserLoggedIn {
-            let voteDialogViewModel = VoteDialogViewModel()
+            let voteDialogViewModel = VoteDialogViewModel(1, type: voteType == .comment ? .upVoteComment : .upvotePost)
+            self.shouldPresent(.voteDialogController(voteDialogViewModel))
+        } else {
+            self.shouldPresent(.signInViewController)
+        }
+    }
+    
+    func handleDownVotePressed(_ voteType: VotePostType, _ postModel: PostModel) {
+        if AuthData.shared.isUserLoggedIn {
+            let voteDialogViewModel = VoteDialogViewModel(0, type: voteType == .comment ? .downVoteComment : .downVotePost)
             self.shouldPresent(.voteDialogController(voteDialogViewModel))
         } else {
             self.shouldPresent(.signInViewController)
@@ -273,17 +288,24 @@ extension PostDetailViewModel {
                     self?.replies.renotify()
                 case .replyCommentPressed(let commentCell):
                     self?.handleReplyCommentPressed(commentCell)
-                case .upVotePressed(let postModel):
-                    self?.handleUpVotePressed(postModel)
+                case .upVotePressed(let data):
+                    self?.handleUpVotePressed(data.0, data.1)
+                case .downVotePressed(let data):
+                    self?.handleDownVotePressed(data.0, data.1)
                 }
             }) ~ self.disposeBag
     }
     
     func setUpCommentViewModelObservers(_ viewModel: PostCommentViewModel) {
         viewModel.shouldUpVote.asObservable()
-            .subscribe(onNext: { _ in
-                
-            }) ~ viewModel.disposeBag
+            .map { Action.upVotePressed(.comment, $0) }
+            ~> self.didActionSubject
+            ~ viewModel.disposeBag
+        
+        viewModel.shouldDownVote.asObservable()
+            .map { Action.downVotePressed(.comment, $0) }
+            ~> self.didActionSubject
+            ~ viewModel.disposeBag
         
         viewModel.shouldComment.asObservable()
             .subscribe(onNext: { [weak self] comment in
@@ -298,7 +320,12 @@ extension PostDetailViewModel {
             ~ self.disposeBag
         
         cellModel.shouldUpVoteComment
-            .map { Action.upVotePressed($0) }
+            .map { Action.upVotePressed(.article, $0) }
+            ~> self.didActionSubject
+            ~ self.disposeBag
+        
+        cellModel.shouldDownVoteComment
+            .map { Action.downVotePressed(.article, $0) }
             ~> self.didActionSubject
             ~ self.disposeBag
     }

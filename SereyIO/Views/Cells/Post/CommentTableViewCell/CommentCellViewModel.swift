@@ -27,10 +27,11 @@ class CommentCellViewModel: PostCellViewModel, ShouldReactToAction {
     let isViewConversationHidden: BehaviorSubject<Bool>
     let isReplyHidden: BehaviorRelay<Bool>
     let leadingConstraint: BehaviorRelay<CGFloat>
+    let isVoteAllowed: BehaviorSubject<Bool>
     
     let shouldReplyComment: PublishSubject<CommentCellViewModel>
     let shouldUpVoteComment: PublishSubject<PostModel>
-    let shouldDownVoteComment: PublishSubject<CommentCellViewModel>
+    let shouldDownVoteComment: PublishSubject<PostModel>
     
     init(_ discussion: PostModel?, canReply: Bool = true, leading: CGFloat = 16) {
         self.contentAttributedString = BehaviorSubject(value: nil)
@@ -40,6 +41,7 @@ class CommentCellViewModel: PostCellViewModel, ShouldReactToAction {
         self.isViewConversationHidden = BehaviorSubject(value: isConversationHidden )
         self.isReplyHidden = BehaviorRelay(value: !canReply)
         self.leadingConstraint = BehaviorRelay(value: leading)
+        self.isVoteAllowed = BehaviorSubject(value: false)
         
         self.shouldReplyComment = PublishSubject()
         self.shouldUpVoteComment = PublishSubject()
@@ -60,6 +62,7 @@ class CommentCellViewModel: PostCellViewModel, ShouldReactToAction {
         
         self.contentAttributedString.onNext(data?.description?.htmlAttributed(size: 12))
         self.conversationText.onNext("View Conversation (\(data?.answerCount ?? 0))")
+        self.isVoteAllowed.onNext(data?.authorName != AuthData.shared.username)
     }
 }
 
@@ -75,7 +78,9 @@ fileprivate extension CommentCellViewModel {
             .subscribe(onNext: { [unowned self] action in
                 switch action {
                 case .downVotePressed:
-                    self.shouldDownVoteComment.onNext(self)
+                    if let postModel = self.discussion.value {
+                        self.shouldDownVoteComment.onNext(postModel)
+                    }
                 case .upVotePressed:
                     if let postModel = self.discussion.value {
                         self.shouldUpVoteComment.onNext(postModel)
