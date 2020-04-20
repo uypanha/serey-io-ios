@@ -16,7 +16,7 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
     enum Action {
         case morePressed
         case upVotePressed(VotePostType, PostModel)
-        case downVotePressed(VotePostType, PostModel)
+        case flagPressed(VotePostType, PostModel)
         case refresh
         case replyCommentPressed(CommentCellViewModel)
     }
@@ -113,6 +113,26 @@ extension PostDetailViewModel {
             }, onError: { [weak self] error in
                 self?.isDownloading.accept(false)
                 self?.commentPostViewModel.value?.isUploading.onNext(false)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    private func upVote(_ post: PostModel, _ weight: Int) {
+        self.discussionService.upVote(post.permlink, author: post.authorName, weight: weight)
+            .subscribe(onNext: { [weak self] _ in
+                self?.fetchPostDetial()
+            }, onError: { [weak self] error in
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    private func flag(_ post: PostModel, _ weight: Int) {
+        self.discussionService.flag(post.permlink, author: post.authorName, weight: weight)
+            .subscribe(onNext: { [weak self] _ in
+                self?.fetchPostDetial()
+            }, onError: { [weak self] error in
                 let errorInfo = ErrorHelper.prepareError(error: error)
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
@@ -234,16 +254,24 @@ fileprivate extension PostDetailViewModel {
     
     func handleUpVotePressed(_ voteType: VotePostType, _ postModel: PostModel) {
         if AuthData.shared.isUserLoggedIn {
-            let voteDialogViewModel = VoteDialogViewModel(1, type: voteType == .comment ? .upVoteComment : .upvotePost)
+            let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .upVoteComment : .upvotePost)
+            voteDialogViewModel.shouldConfirm
+                .subscribe(onNext: { [weak self] weight in
+                    self?.upVote(postModel, weight)
+                }) ~ voteDialogViewModel.disposeBag
             self.shouldPresent(.voteDialogController(voteDialogViewModel))
         } else {
             self.shouldPresent(.signInViewController)
         }
     }
     
-    func handleDownVotePressed(_ voteType: VotePostType, _ postModel: PostModel) {
+    func handleFlagPressed(_ voteType: VotePostType, _ postModel: PostModel) {
         if AuthData.shared.isUserLoggedIn {
-            let voteDialogViewModel = VoteDialogViewModel(0, type: voteType == .comment ? .downVoteComment : .downVotePost)
+            let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .downVoteComment : .downVotePost)
+            voteDialogViewModel.shouldConfirm
+                .subscribe(onNext: { [weak self] weight in
+                    self?.flag(postModel, -weight)
+                }) ~ voteDialogViewModel.disposeBag
             self.shouldPresent(.voteDialogController(voteDialogViewModel))
         } else {
             self.shouldPresent(.signInViewController)
@@ -290,22 +318,25 @@ extension PostDetailViewModel {
                     self?.handleReplyCommentPressed(commentCell)
                 case .upVotePressed(let data):
                     self?.handleUpVotePressed(data.0, data.1)
-                case .downVotePressed(let data):
-                    self?.handleDownVotePressed(data.0, data.1)
+                case .flagPressed(let data):
+                    self?.handleFlagPressed(data.0, data.1)
                 }
             }) ~ self.disposeBag
     }
     
     func setUpCommentViewModelObservers(_ viewModel: PostCommentViewModel) {
         viewModel.shouldUpVote.asObservable()
-            .map { Action.upVotePressed(.comment, $0) }
+            .map { Action.upVotePressed(.article, $0) }
             ~> self.didActionSubject
             ~ viewModel.disposeBag
         
-        viewModel.shouldDownVote.asObservable()
-            .map { Action.downVotePressed(.comment, $0) }
+        viewModel.shouldFlag.asObservable()
+            .map { Action.flagPressed(.article, $0) }
             ~> self.didActionSubject
             ~ viewModel.disposeBag
+        
+//        viewModel.shouldDownvote.asObservable()
+//            .map {}
         
         viewModel.shouldComment.asObservable()
             .subscribe(onNext: { [weak self] comment in
@@ -320,12 +351,12 @@ extension PostDetailViewModel {
             ~ self.disposeBag
         
         cellModel.shouldUpVoteComment
-            .map { Action.upVotePressed(.article, $0) }
+            .map { Action.upVotePressed(.comment, $0) }
             ~> self.didActionSubject
             ~ self.disposeBag
         
-        cellModel.shouldDownVoteComment
-            .map { Action.downVotePressed(.article, $0) }
+        cellModel.shouldFlagComment
+            .map { Action.flagPressed(.comment, $0) }
             ~> self.didActionSubject
             ~ self.disposeBag
     }

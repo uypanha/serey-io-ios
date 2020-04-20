@@ -21,7 +21,9 @@ struct PostModel: Codable {
     let publishDate: String
     let sereyValue: String
     let upvote: Int
+    let voter: [String]
     let flag: Int
+    let flagger: [String]
     let imageUrl: [String]?
     let replies: [PostModel]?
     
@@ -47,6 +49,20 @@ struct PostModel: Codable {
         }
     }
     
+    var votedType: VotedType? {
+        get {
+            if let loggerUserName = AuthData.shared.username {
+                if self.voter.contains(where: { $0 == loggerUserName }) {
+                    return .upvote
+                } else if self.flagger.contains(where: { $0 == loggerUserName }) {
+                    return .flag
+                }
+            }
+            
+            return nil
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case title
@@ -59,7 +75,9 @@ struct PostModel: Codable {
         case publishDate
         case sereyValue
         case upvote
+        case voter
         case flag
+        case flagger
         case imageUrl
         case replies
     }

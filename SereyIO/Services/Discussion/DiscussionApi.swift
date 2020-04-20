@@ -23,9 +23,9 @@ enum DiscussionApi {
     
     case deletPost(username: String, permlink: String)
     
-    case upVote(permlink: String, author: String, weight: String)
+    case upVote(permlink: String, author: String, weight: Int)
     
-    case flag(permlink: String, author: String, weight: String)
+    case flag(permlink: String, author: String, weight: Int)
     
     case downVote(permlink: String, author: String)
 }
@@ -50,7 +50,13 @@ extension DiscussionApi: AuthorizedApiTargetType {
                 "username"  : data.username,
                 "permlink"  : data.permlink
             ]
-        case .upVote(let data), .flag(let data):
+        case .upVote(let data):
+            return [
+                "author"    : data.author,
+                "permlink"  : data.permlink,
+                "weight"    : data.weight
+            ]
+        case .flag(let data):
             return [
                 "author"    : data.author,
                 "permlink"  : data.permlink,
@@ -102,7 +108,7 @@ extension DiscussionApi: AuthorizedApiTargetType {
         switch self {
         case .getDiscussions, .getPostDetail:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-        case .submitPost, .submitComment, .deletPost:
+        case .submitPost, .submitComment, .deletPost, .upVote, .flag, .downVote:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         default:
             return .requestPlain

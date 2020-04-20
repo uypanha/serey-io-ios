@@ -31,7 +31,7 @@ class CommentCellViewModel: PostCellViewModel, ShouldReactToAction {
     
     let shouldReplyComment: PublishSubject<CommentCellViewModel>
     let shouldUpVoteComment: PublishSubject<PostModel>
-    let shouldDownVoteComment: PublishSubject<PostModel>
+    let shouldFlagComment: PublishSubject<PostModel>
     
     init(_ discussion: PostModel?, canReply: Bool = true, leading: CGFloat = 16) {
         self.contentAttributedString = BehaviorSubject(value: nil)
@@ -45,7 +45,7 @@ class CommentCellViewModel: PostCellViewModel, ShouldReactToAction {
         
         self.shouldReplyComment = PublishSubject()
         self.shouldUpVoteComment = PublishSubject()
-        self.shouldDownVoteComment = PublishSubject()
+        self.shouldFlagComment = PublishSubject()
         super.init(discussion)
         
         setUpRxObservers()
@@ -79,7 +79,7 @@ fileprivate extension CommentCellViewModel {
                 switch action {
                 case .downVotePressed:
                     if let postModel = self.discussion.value {
-                        self.shouldDownVoteComment.onNext(postModel)
+                        self.shouldFlagComment.onNext(postModel)
                     }
                 case .upVotePressed:
                     if let postModel = self.discussion.value {

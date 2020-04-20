@@ -139,6 +139,7 @@
 		DC6FCE7723F05D1700D72F6D /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE6E23F05D1700D72F6D /* Tag.swift */; };
 		DC6FCE7823F05D1700D72F6D /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE6F23F05D1700D72F6D /* Api.swift */; };
 		DC6FCE7923F05D1700D72F6D /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE7023F05D1700D72F6D /* Helper.swift */; };
+		DC75DAB7244DF0C100D80CB2 /* PostCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */; };
 		DC7C09C22326AFF60006D0BF /* FireBaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C09C12326AFF60006D0BF /* FireBaseHandler.swift */; };
 		DC88A73323DF3D3900EB7F79 /* OnBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */; };
 		DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */; };
@@ -439,6 +440,7 @@
 		DC6FCE6E23F05D1700D72F6D /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		DC6FCE6F23F05D1700D72F6D /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		DC6FCE7023F05D1700D72F6D /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellProtocol.swift; sourceTree = "<group>"; };
 		DC7C09C12326AFF60006D0BF /* FireBaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseHandler.swift; sourceTree = "<group>"; };
 		DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnBoard.storyboard; sourceTree = "<group>"; };
 		DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICenteredHorizantalButton.swift; sourceTree = "<group>"; };
@@ -1329,6 +1331,7 @@
 		DC9E36E024135A1700289693 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */,
 				DCDE006F24475DD800D09717 /* CommentTextView */,
 				DCB629EA2417E7F700C64BD6 /* PostCommentView */,
 				DC9E36E124135A1F00289693 /* PostDetailView */,
@@ -2099,6 +2102,7 @@
 				DC1C6EC323FC3C6D00BA701D /* PostCategoryTableViewCell.swift in Sources */,
 				DC5D59D824323CDA0048C921 /* BaseListTableViewModel.swift in Sources */,
 				DCD39862232E114300C812EB /* UIViewController+Properties.swift in Sources */,
+				DC75DAB7244DF0C100D80CB2 /* PostCellProtocol.swift in Sources */,
 				DC42AF0723E9D39B008F8A0F /* CardView.swift in Sources */,
 				DC9E36E324135A3400289693 /* PostDetailView.swift in Sources */,
 				DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */,

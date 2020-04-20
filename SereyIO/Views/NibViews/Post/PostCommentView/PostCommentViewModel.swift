@@ -11,11 +11,11 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, ShouldReactToAction {
+class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol, ShouldReactToAction {
     
     enum Action {
         case upVotePressed
-        case downVotePressed
+        case flagPressed
     }
     
     // input:
@@ -30,7 +30,10 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, ShouldReactToActi
     
     let shouldComment: PublishSubject<String>
     let shouldUpVote: PublishSubject<PostModel>
-    let shouldDownVote: PublishSubject<PostModel>
+    let shouldFlag: PublishSubject<PostModel>
+    let shouldDownvote: PublishSubject<PostModel>
+    let votedType: BehaviorRelay<VotedType?>
+    
     let isUploading: BehaviorSubject<Bool>
     
     let commentTextViewModel: CommentTextViewModel
@@ -41,10 +44,13 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, ShouldReactToActi
         self.upVoteCount = BehaviorSubject(value: nil)
         self.downVoteCount = BehaviorSubject(value: nil)
         self.isVoteAllowed = BehaviorSubject(value: true)
+        self.votedType = BehaviorRelay(value: nil)
         
         self.shouldComment = PublishSubject()
         self.shouldUpVote = PublishSubject()
-        self.shouldDownVote = PublishSubject()
+        self.shouldFlag = PublishSubject()
+        self.shouldDownvote = PublishSubject()
+        
         self.isUploading = BehaviorSubject(value: false)
         
         self.commentTextViewModel = CommentTextViewModel()
@@ -72,6 +78,32 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, ShouldReactToActi
         self.upVoteCount.onNext("\(data?.upvote ?? 0)")
         self.downVoteCount.onNext("\(data?.flag ?? 0)")
         self.isVoteAllowed.onNext(AuthData.shared.username != data?.authorName)
+        self.votedType.accept(data?.votedType)
+        
+    }
+}
+
+// MARK: - Action Handlers
+fileprivate extension PostCommentViewModel {
+    
+    func handleUpVotePressed() {
+        if let postModel = self.post.value {
+            if let _ = self.votedType.value {
+                self.shouldDownvote.onNext(postModel)
+            } else {
+                self.shouldUpVote.onNext(postModel)
+            }
+        }
+    }
+    
+    func handleFlagPressed() {
+        if let postModel = self.post.value {
+            if let _ = self.votedType.value {
+                self.shouldDownvote.onNext(postModel)
+            } else {
+                self.shouldFlag.onNext(postModel)
+            }
+        }
     }
 }
 
@@ -106,13 +138,9 @@ fileprivate extension PostCommentViewModel {
             .subscribe(onNext: { [weak self] action in
                 switch action {
                 case .upVotePressed:
-                    if let postModel = self?.post.value {
-                        self?.shouldUpVote.onNext(postModel)
-                    }
-                case .downVotePressed:
-                    if let postModel = self?.post.value {
-                        self?.shouldDownVote.onNext(postModel)
-                    }
+                    self?.handleUpVotePressed()
+                case .flagPressed:
+                    self?.handleFlagPressed()
                 }
             }) ~ self.disposeBag
     }

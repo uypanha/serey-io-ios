@@ -43,12 +43,22 @@ class DiscussionService: AppService<DiscussionApi> {
             .asObservable()
     }
     
-    func upVote() {
+    func upVote(_ permlink: String, author: String, weight: Int) -> Observable<BlockChainResponse> {
+        return self.provider.rx.requestObject(.upVote(permlink: permlink, author: author, weight: weight), type: DataResponseModel<BlockChainResponse>.self)
+            .asObservable()
+            .map { $0.data }
     }
     
-    func flag() {
+    func flag(_ permlink: String, author: String, weight: Int) -> Observable<BlockChainResponse> {
+        return self.provider.rx.requestObject(.flag(permlink: permlink, author: author, weight: weight), type: DataResponseModel<BlockChainResponse>.self)
+            .asObservable()
+            .map { $0.data }
     }
     
-    func downVote() {
+    func downVote(_ permlink: String, author: String) -> Observable<BlockChainResponse> {
+        return self.provider.rx.requestObject(.downVote(permlink: permlink, author: author), type: DataResponseModel<BlockChainResponse>.self)
+            .asObservable()
+            .map { $0.data }
     }
+    
 }

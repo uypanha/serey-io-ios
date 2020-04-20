@@ -26,7 +26,12 @@ class PostCommentView: NibView {
             self.disposeBag ~ [
                 viewModel.upVoteCount ~> self.upVoteButton.rx.title(for: .normal),
                 viewModel.downVoteCount ~> self.downVoteButton.rx.title(for: .normal),
-                viewModel.isVoteAllowed.map { !$0 } ~> self.voteContainerView.rx.isHidden
+                viewModel.isVoteAllowed.map { !$0 } ~> self.voteContainerView.rx.isHidden,
+                viewModel.votedType
+                    .subscribe(onNext: { [weak self] voteType in
+                        self?.downVoteButton.isHidden = voteType == .upvote
+                        self?.upVoteButton.isHidden = voteType == .flag
+                    })
             ]
             
             commentTextView.viewModel = viewModel.commentTextViewModel
@@ -57,7 +62,7 @@ fileprivate extension PostCommentView {
         
         self.downVoteButton.rx.tap.asObservable()
             .subscribe(onNext: { [weak self] _ in
-                self?.viewModel?.didAction(with: .downVotePressed)
+                self?.viewModel?.didAction(with: .flagPressed)
             }) ~ self.disposeBag
     }
 }
