@@ -16,4 +16,14 @@ class UserService: AppService<UserApi> {
         return self.provider.rx.requestObject(.profile(userName: username), type: DataResponseModel<AccountModel>.self)
             .asObservable()
     }
+    
+    func getFollowerList(_ username: String) -> Observable<FollowerListResponse> {
+        return self.provider.rx.requestObject(.getFollowerList(author: username), type: FollowerListResponse.self)
+            .asObservable()
+    }
+    
+    func followAction(_ username: String, action: FollowActionType) -> Observable<FollowActionModel> {
+        return self.provider.rx.requestObject(.followAction(author: username, actionType: action), type: FollowActionModel.self)
+            .asObservable()
+    }
 }

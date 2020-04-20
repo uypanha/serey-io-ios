@@ -45,7 +45,7 @@ class AccountViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
-        viewModel.downloadData()
+        viewModel.initialDownloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,6 +118,11 @@ fileprivate extension AccountViewController {
             .map { AccountViewModel.Action.refresh }
             .bind(to: self.viewModel.didActionSubject)
             .disposed(by: self.disposeBag)
+        
+        self.followButton.rx.tap.asObservable()
+            .map { AccountViewModel.Action.followPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpContentChangedObservers() {
@@ -130,6 +135,19 @@ fileprivate extension AccountViewController {
             self.viewModel.followingCountText ~> self.followingCountLabel.rx.text,
             self.viewModel.isFollowHidden ~> self.followButton.rx.isHidden
         ]
+        
+        self.viewModel.isFollowed.asObservable()
+            .subscribe(onNext: { [weak self] isFollowed in
+                let titleColor = isFollowed ? UIColor.white : ColorName.primary.color
+                self?.followButton.setTitleColor(titleColor, for: .normal)
+                if isFollowed {
+                    self?.followButton.setTitle("Unfollow", for: .normal)
+                    self?.followButton.primaryStyle()
+                } else {
+                    self?.followButton.setTitle("Follow", for: .normal)
+                    self?.followButton.customBorderStyle(with: ColorName.primary.color, border: 1.5, isCircular: false)
+                }
+            }) ~ self.disposeBag
         
         self.viewModel.cells.asObservable()
             .`do`(onNext: { [weak self] cells in

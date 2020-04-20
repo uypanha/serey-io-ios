@@ -55,17 +55,17 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
             self.discussions.renotify()
         }))
     }
-}
-
-// MARK: - Networks
-extension BasePostViewModel {
     
-    func downloadData() {
+    open func downloadData() {
         if !self.isDownloading.value && self.canDownloadMore() {
             self.isDownloading.accept(true)
             fetchDiscussions()
         }
     }
+}
+
+// MARK: - Networks
+extension BasePostViewModel {
     
     func fetchDiscussions() {
         self.discussionService.getDiscussionList(self.postType.value, self.pageModel)

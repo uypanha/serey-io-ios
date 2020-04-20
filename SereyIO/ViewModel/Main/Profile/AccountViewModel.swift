@@ -16,6 +16,7 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
     
     enum Action {
         case itemSelected(IndexPath)
+        case followPressed
         case refresh
     }
     
@@ -31,6 +32,8 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
     
     let username: BehaviorRelay<String>
     let userInfo: BehaviorRelay<UserModel?>
+    let followers: BehaviorRelay<[String]>
+    
     let profileViewModel: BehaviorSubject<ProfileViewModel?>
     let accountName: BehaviorSubject<String?>
     let postCountText: BehaviorSubject<String?>
@@ -44,6 +47,8 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
     init(_ username: String) {
         self.username = BehaviorRelay(value: username)
         self.userInfo = BehaviorRelay(value: nil)
+        self.followers = BehaviorRelay(value: [])
+        
         self.profileViewModel = BehaviorSubject(value: nil)
         self.accountName = BehaviorSubject(value: nil)
         self.postCountText = BehaviorSubject(value: nil)
@@ -73,8 +78,35 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
 // MARK: - Networks
 extension AccountViewModel {
     
-    func checkIsFollow() {
-        
+    func initialDownloadData() {
+        downloadData()
+        getFollowerList()
+    }
+    
+    func getFollowerList() {
+        self.userService.getFollowerList(self.username.value)
+            .subscribe(onNext: { [weak self] response in
+                self?.followers.accept(response.followerList)
+            }, onError: { [weak self] error in
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    func followAction(_ action: FollowActionType) {
+        self.userService.followAction(username.value, action: action)
+            .subscribe(onNext: { response in
+                if response.action == "follow" {
+                    self.followers.append(AuthData.shared.username!)
+                } else {
+                    if let indexToRemove = self.followers.value.index(where: { $0 == AuthData.shared.username }) {
+                        self.followers.remove(at: indexToRemove)
+                    }
+                }
+            }, onError: { [weak self] error in
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
     }
 }
 
@@ -123,6 +155,16 @@ fileprivate extension AccountViewModel {
             }
         }
     }
+    
+    func handleFollowPressed() {
+        if let loggedUsername = AuthData.shared.username {
+            if followers.value.contains(where: { $0 == loggedUsername }) {
+                self.followAction(.unfollow)
+            } else {
+                self.followAction(.follow)
+            }
+        }
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -138,6 +180,12 @@ fileprivate extension AccountViewModel {
             .subscribe(onNext: { [weak self] user in
                 self?.notifyDataChanged(user)
             }) ~ self.disposeBag
+        
+        self.followers.asObservable()
+            .filter { _ in AuthData.shared.username != self.username.value }
+            .map { $0.contains { $0 == AuthData.shared.username } }
+            ~> self.isFollowed
+            ~ self.disposeBag
     }
     
     func setUpActionObservers() {
@@ -149,6 +197,8 @@ fileprivate extension AccountViewModel {
                 case .refresh:
                     self?.reset()
                     self?.discussions.renotify()
+                case .followPressed:
+                    self?.handleFollowPressed()
                 }
             }) ~ self.disposeBag
     }
