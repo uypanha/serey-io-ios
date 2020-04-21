@@ -18,7 +18,7 @@ class SlashScreenViewController: BaseViewController {
         super.viewDidAppear(animated)
         
         self.setUpRxObservers()
-        self.viewModel.checkUserAuth()
+        self.viewModel.determineInitialScreen()
     }
 }
 

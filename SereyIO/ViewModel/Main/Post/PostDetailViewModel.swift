@@ -15,8 +15,8 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
     
     enum Action {
         case morePressed
-        case upVotePressed(VotePostType, PostModel)
-        case flagPressed(VotePostType, PostModel)
+        case upVotePressed(VotePostType, PostModel, BehaviorSubject<VotedType?>)
+        case flagPressed(VotePostType, PostModel, BehaviorSubject<VotedType?>)
         case refresh
         case replyCommentPressed(CommentCellViewModel)
     }
@@ -94,6 +94,7 @@ extension PostDetailViewModel {
         self.discussionService.getPostDetail(permlink: self.permlink.value, authorName: self.authorName.value)
             .subscribe(onNext: { [weak self] response in
                 self?.isDownloading.accept(false)
+                self?.discussion.accept(response.content)
                 self?.replies.accept(response.replies)
             }, onError: { [weak self] error in
                 self?.isDownloading.accept(false)
@@ -118,20 +119,24 @@ extension PostDetailViewModel {
             }) ~ self.disposeBag
     }
     
-    private func upVote(_ post: PostModel, _ weight: Int) {
+    private func upVote(_ post: PostModel, _ weight: Int, _ isVoting: BehaviorSubject<VotedType?>) {
+        isVoting.onNext(.upvote)
         self.discussionService.upVote(post.permlink, author: post.authorName, weight: weight)
             .subscribe(onNext: { [weak self] _ in
                 self?.fetchPostDetial()
+                isVoting.onNext(nil)
             }, onError: { [weak self] error in
                 let errorInfo = ErrorHelper.prepareError(error: error)
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
     }
     
-    private func flag(_ post: PostModel, _ weight: Int) {
+    private func flag(_ post: PostModel, _ weight: Int, _ isVoting: BehaviorSubject<VotedType?>) {
+        isVoting.onNext(.flag)
         self.discussionService.flag(post.permlink, author: post.authorName, weight: weight)
             .subscribe(onNext: { [weak self] _ in
                 self?.fetchPostDetial()
+                isVoting.onNext(nil)
             }, onError: { [weak self] error in
                 let errorInfo = ErrorHelper.prepareError(error: error)
                 self?.shouldPresentError(errorInfo)
@@ -242,7 +247,7 @@ fileprivate extension PostDetailViewModel {
     }
     
     func handleReplyCommentPressed(_ cellViewModel: CommentCellViewModel) {
-        if let commentData = cellViewModel.discussion.value {
+        if let commentData = cellViewModel.post.value {
             if AuthData.shared.isUserLoggedIn {
                 let replyCommentViewModel = ReplyCommentTableViewModel(commentData, title: self.discussion.value?.title ?? "")
                 self.shouldPresent(.replyComment(replyCommentViewModel))
@@ -252,12 +257,12 @@ fileprivate extension PostDetailViewModel {
         }
     }
     
-    func handleUpVotePressed(_ voteType: VotePostType, _ postModel: PostModel) {
+    func handleUpVotePressed(_ voteType: VotePostType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
         if AuthData.shared.isUserLoggedIn {
             let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .upVoteComment : .upvotePost)
             voteDialogViewModel.shouldConfirm
                 .subscribe(onNext: { [weak self] weight in
-                    self?.upVote(postModel, weight)
+                    self?.upVote(postModel, weight, isVoting)
                 }) ~ voteDialogViewModel.disposeBag
             self.shouldPresent(.voteDialogController(voteDialogViewModel))
         } else {
@@ -265,12 +270,12 @@ fileprivate extension PostDetailViewModel {
         }
     }
     
-    func handleFlagPressed(_ voteType: VotePostType, _ postModel: PostModel) {
+    func handleFlagPressed(_ voteType: VotePostType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
         if AuthData.shared.isUserLoggedIn {
             let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .downVoteComment : .downVotePost)
             voteDialogViewModel.shouldConfirm
                 .subscribe(onNext: { [weak self] weight in
-                    self?.flag(postModel, -weight)
+                    self?.flag(postModel, -weight, isVoting)
                 }) ~ voteDialogViewModel.disposeBag
             self.shouldPresent(.voteDialogController(voteDialogViewModel))
         } else {
@@ -317,21 +322,21 @@ extension PostDetailViewModel {
                 case .replyCommentPressed(let commentCell):
                     self?.handleReplyCommentPressed(commentCell)
                 case .upVotePressed(let data):
-                    self?.handleUpVotePressed(data.0, data.1)
+                    self?.handleUpVotePressed(data.0, data.1, data.2)
                 case .flagPressed(let data):
-                    self?.handleFlagPressed(data.0, data.1)
+                    self?.handleFlagPressed(data.0, data.1, data.2)
                 }
             }) ~ self.disposeBag
     }
     
     func setUpCommentViewModelObservers(_ viewModel: PostCommentViewModel) {
         viewModel.shouldUpVote.asObservable()
-            .map { Action.upVotePressed(.article, $0) }
+            .map { Action.upVotePressed(.article, $0, viewModel.isVoting) }
             ~> self.didActionSubject
             ~ viewModel.disposeBag
         
         viewModel.shouldFlag.asObservable()
-            .map { Action.flagPressed(.article, $0) }
+            .map { Action.flagPressed(.article, $0, viewModel.isVoting) }
             ~> self.didActionSubject
             ~ viewModel.disposeBag
         
@@ -348,17 +353,17 @@ extension PostDetailViewModel {
         cellModel.shouldReplyComment
             .map { Action.replyCommentPressed($0) }
             ~> self.didActionSubject
-            ~ self.disposeBag
+            ~ cellModel.disposeBag
         
-        cellModel.shouldUpVoteComment
-            .map { Action.upVotePressed(.comment, $0) }
+        cellModel.shouldUpVote
+            .map { Action.upVotePressed(.comment, $0, cellModel.isVoting) }
             ~> self.didActionSubject
-            ~ self.disposeBag
+            ~ cellModel.disposeBag
         
-        cellModel.shouldFlagComment
-            .map { Action.flagPressed(.comment, $0) }
+        cellModel.shouldFlag
+            .map { Action.flagPressed(.comment, $0, cellModel.isVoting) }
             ~> self.didActionSubject
-            ~ self.disposeBag
+            ~ cellModel.disposeBag
     }
 }
 

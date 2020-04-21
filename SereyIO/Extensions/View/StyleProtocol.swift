@@ -106,8 +106,7 @@ extension UIButton: StyleProtocol {
     }
     
     func customBorderStyle(with borderColor: UIColor, border width: CGFloat = 1.5, isCircular: Bool = false) {
-        self.setBackgroundColor(.clear, for: .normal)
-        self.commonTextColorStyle()
+        self.customStyle(with: .clear)
         if isCircular {
             self.makeMeCircular()
         } else {

@@ -18,6 +18,7 @@ import RxKeyboard
 class PostDetailViewController: BaseViewController, AlertDialogController, LoadingIndicatorController, VoteDialogProtocol {
     
     fileprivate lazy var keyboardDisposeBag = DisposeBag()
+    fileprivate lazy var moreButtonDisposeBag = DisposeBag()
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var postDetailView: PostDetailView!
@@ -107,6 +108,7 @@ extension PostDetailViewController {
         var buttonItems: [UIBarButtonItem] = []
         if let moreButton = self.moreButton {
             buttonItems.append(moreButton)
+            self.moreButtonDisposeBag = DisposeBag()
             setUpMoreButtonObservers(moreButton)
         }
         if let sereyValueButton = self.sereyValueButton {
@@ -136,7 +138,7 @@ extension PostDetailViewController {
     func setUpMoreButtonObservers(_ button: UIBarButtonItem) {
         button.rx.tap.map { PostDetailViewModel.Action.morePressed }
             ~> self.viewModel.didActionSubject
-            ~ self.disposeBag
+            ~ self.moreButtonDisposeBag
     }
     
     func setUpContentChangedObservers() {

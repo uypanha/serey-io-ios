@@ -85,6 +85,12 @@ class CommentTableViewCell: BaseTableViewCell {
                 cellModel.leadingConstraint ~> self.leadingConstraint.rx.constant,
                 cellModel.isVoteAllowed.map { !$0 } ~> self.upVoteContainerView.rx.isHidden,
                 cellModel.isVoteAllowed.map { !$0 } ~> self.downVoteContainerView.rx.isHidden,
+                cellModel.votedType.asObservable()
+                    .subscribe(onNext: { [weak self] voteType in
+                        self?.preparepVoteTypeStyle(voteType)
+                    }),
+                cellModel.upVoteEnabled ~> self.upVoteContainerView.rx.isUserInteractionEnabled,
+                cellModel.flagEnabled ~> self.downVoteContainerView.rx.isUserInteractionEnabled
             ]
             
             cellModel.isShimmering.asObservable()
@@ -131,6 +137,20 @@ extension CommentTableViewCell {
         DispatchQueue.main.async {
             self.vwShimmer.isShimmering = isShimmering
         }
+    }
+    
+    func preparepVoteTypeStyle(_ voteType: VotedType?) {
+        let downVoteTintColor: UIColor = voteType == .flag ? ColorName.primary.color : .lightGray
+        let downVoteIcon: UIImage? = voteType == .flag ? R.image.downVoteFilledIcon() : R.image.downVoteIcon()
+        self.downVoteImageView.tintColor = downVoteTintColor
+        self.downVoteCountLabel.textColor = downVoteTintColor
+        self.downVoteImageView.image = downVoteIcon
+        
+        let upVoteTintColor: UIColor = voteType == .upvote ? ColorName.primary.color : .lightGray
+        let upVoteIcon: UIImage? = voteType == .upvote ? R.image.upVoteFilledIcon() : R.image.upVoteIcon()
+        self.upVoteImageView.tintColor = upVoteTintColor
+        self.upVoteCountLabel.textColor = upVoteTintColor
+        self.upVoteImageView.image = upVoteIcon
     }
 }
 

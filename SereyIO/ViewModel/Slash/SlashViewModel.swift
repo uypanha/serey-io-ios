@@ -23,7 +23,14 @@ class SlashViewModel: BaseViewModel, ShouldPresent {
     }()
     internal lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
     
-    func checkUserAuth() {
+    func determineInitialScreen() {
+        if AuthData.shared.isUserLoggedIn, let expiry = AuthData.shared.expiration {
+            let now = Date().timeIntervalSince1970
+            if expiry <= now {
+                AuthData.shared.removeAuthData()
+            }
+        }
+        
         if FeatureStore.shared.areFeaturesIntroduced {
             self.shouldPresentSubject.onNext(.homeViewController)
         } else {

@@ -33,6 +33,9 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
     let shouldFlag: PublishSubject<PostModel>
     let shouldDownvote: PublishSubject<PostModel>
     let votedType: BehaviorRelay<VotedType?>
+    let upVoteEnabled: BehaviorSubject<Bool>
+    let flagEnabled: BehaviorSubject<Bool>
+    let isVoting: BehaviorSubject<VotedType?>
     
     let isUploading: BehaviorSubject<Bool>
     
@@ -45,6 +48,9 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
         self.downVoteCount = BehaviorSubject(value: nil)
         self.isVoteAllowed = BehaviorSubject(value: true)
         self.votedType = BehaviorRelay(value: nil)
+        self.upVoteEnabled = BehaviorSubject(value: true)
+        self.flagEnabled = BehaviorSubject(value: true)
+        self.isVoting = BehaviorSubject(value: nil)
         
         self.shouldComment = PublishSubject()
         self.shouldUpVote = PublishSubject()
@@ -79,7 +85,8 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
         self.downVoteCount.onNext("\(data?.flag ?? 0)")
         self.isVoteAllowed.onNext(AuthData.shared.username != data?.authorName)
         self.votedType.accept(data?.votedType)
-        
+        self.upVoteEnabled.onNext(data?.votedType != .flag)
+        self.flagEnabled.onNext(data?.votedType != .upvote)
     }
 }
 

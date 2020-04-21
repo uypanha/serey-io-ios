@@ -25,11 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Override point for customization after application launch.
-        self.prepareApplication()
-        self.configureRootView()
+        prepareApplication()
+        configureRootView()
         
-        self.initAPNSHandler(withApplication: application)
-        self.turnOnPushNotification()
+        initAPNSHandler(withApplication: application)
+        turnOnPushNotification()
         
         if Constants.shouldClearOutBadgeCountWhenFiredUp {
             application.applicationIconBadgeNumber = 0
@@ -94,7 +94,6 @@ extension AppDelegate {
     func clearData() {
         turnOffPushNotification()
         Constants.clearStoreData()
-//        RealmManager.deleteAllObjects()
     }
     
     func turnOnPushNotification() {

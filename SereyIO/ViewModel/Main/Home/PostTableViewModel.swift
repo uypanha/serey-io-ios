@@ -41,7 +41,7 @@ fileprivate extension PostTableViewModel {
     
     func handleItemPressed(_ indexPath: IndexPath) {
         if let item = self.item(at: indexPath) as? PostCellViewModel {
-            if let discussion = item.discussion.value {
+            if let discussion = item.post.value {
                 let viewModel = PostDetailViewModel(discussion)
                 self.shouldPresent(.postDetailViewController(viewModel))
             }

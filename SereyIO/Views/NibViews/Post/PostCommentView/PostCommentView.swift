@@ -10,9 +10,11 @@ import UIKit
 import RxCocoa
 import RxSwift
 import RxBinding
+import Rswift
 
 class PostCommentView: NibView {
 
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var voteContainerView: UIStackView!
     @IBOutlet weak var upVoteButton: UIButton!
     @IBOutlet weak var downVoteButton: UIButton!
@@ -29,8 +31,16 @@ class PostCommentView: NibView {
                 viewModel.isVoteAllowed.map { !$0 } ~> self.voteContainerView.rx.isHidden,
                 viewModel.votedType
                     .subscribe(onNext: { [weak self] voteType in
-                        self?.downVoteButton.isHidden = voteType == .upvote
-                        self?.upVoteButton.isHidden = voteType == .flag
+                        self?.preparepVoteTypeStyle(voteType)
+                    }),
+                viewModel.isVoting.asObservable()
+                    .subscribe(onNext: { [unowned self] voteType in
+                        self.upVoteButton.isHidden = voteType == .upvote ? true : self.upVoteButton.isHidden
+                        self.downVoteButton.isHidden = voteType == .flag ? true : self.downVoteButton.isHidden
+                        self.loadingIndicator.isHidden = voteType == nil
+                        if voteType != nil {
+                            self.loadingIndicator.startAnimating()
+                        }
                     })
             ]
             
@@ -43,6 +53,27 @@ class PostCommentView: NibView {
         super.xibSetup()
         
         setUpRxObservers()
+    }
+}
+
+// MARK: - Preparations
+fileprivate extension PostCommentView {
+    
+    func preparepVoteTypeStyle(_ voteType: VotedType?) {
+        self.downVoteButton.isHidden = voteType == .upvote
+        self.upVoteButton.isHidden = voteType == .flag
+        
+        let downVoteTintColor: UIColor = voteType == .flag ? ColorName.primary.color : .gray
+        let downVoteIcon: UIImage? = voteType == .flag ? R.image.downVoteFilledIcon() : R.image.downVoteIcon()
+        self.downVoteButton.tintColor = downVoteTintColor
+        self.downVoteButton.setTitleColor(downVoteTintColor, for: .normal)
+        self.downVoteButton.setImage(downVoteIcon, for: .normal)
+        
+        let upVoteTintColor: UIColor = voteType == .upvote ? ColorName.primary.color : .gray
+        let upVoteIcon: UIImage? = voteType == .upvote ? R.image.upVoteFilledIcon() : R.image.upVoteIcon()
+        self.upVoteButton.tintColor = upVoteTintColor
+        self.upVoteButton.setTitleColor(upVoteTintColor, for: .normal)
+        self.upVoteButton.setImage(upVoteIcon, for: .normal)
     }
 }
 

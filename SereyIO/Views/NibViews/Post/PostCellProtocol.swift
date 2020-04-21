@@ -19,7 +19,9 @@ protocol PostCellProtocol {
     var shouldDownvote: PublishSubject<PostModel> { get }
     
     var votedType: BehaviorRelay<VotedType?> { get }
-    
+    var upVoteEnabled: BehaviorSubject<Bool> { get }
+    var flagEnabled: BehaviorSubject<Bool> { get }
+    var isVoting: BehaviorSubject<VotedType?> { get }
 }
 
 enum VotedType {

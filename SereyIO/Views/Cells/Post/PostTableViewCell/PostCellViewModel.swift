@@ -13,7 +13,7 @@ import RxBinding
 
 class PostCellViewModel: CellViewModel, ShimmeringProtocol {
     
-    let discussion: BehaviorRelay<PostModel?>
+    let post: BehaviorRelay<PostModel?>
     let isShimmering: BehaviorRelay<Bool>
     
     let profileViewModel: BehaviorSubject<ProfileViewModel?>
@@ -29,8 +29,8 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
     let commentCount: BehaviorSubject<String?>
     let isMoreHidden: BehaviorSubject<Bool>
     
-    init(_ discussion: PostModel?) {
-        self.discussion = BehaviorRelay(value: discussion)
+    init(_ post: PostModel?) {
+        self.post = BehaviorRelay(value: post)
         self.profileViewModel = BehaviorSubject(value: nil)
         self.authorName = BehaviorSubject(value: nil)
         self.publishedAt = BehaviorSubject(value: nil)
@@ -80,7 +80,7 @@ private extension PostCellViewModel {
     }
     
     func setUpContentChangedObservers() {
-        self.discussion.asObservable()
+        self.post.asObservable()
             .subscribe(onNext: { [weak self] discussion in
                 self?.notifyDataChanged(discussion)
             }) ~ self.disposeBag
