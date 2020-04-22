@@ -13,7 +13,7 @@ import RxBinding
 import RxDataSources
 import RxKeyboard
 
-class ReplyCommentViewController: BaseViewController, KeyboardController {
+class ReplyCommentViewController: BaseViewController, KeyboardController, LoadingIndicatorController, VoteDialogProtocol {
     
     fileprivate lazy var keyboardDisposeBag = DisposeBag()
     
@@ -97,6 +97,7 @@ fileprivate extension ReplyCommentViewController {
     func setUpRxObservers() {
         setUpContentChangedObsesrvers()
         setUpTableViewObservers()
+        setUpShouldPresentObservers()
         setUpTabSelfToDismissKeyboard(true, cancelsTouchesInView: true)?.disposed(by: self.disposeBag)
     }
     
@@ -126,6 +127,25 @@ fileprivate extension ReplyCommentViewController {
             .map { ReplyCommentTableViewModel.Action.refresh }
             .bind(to: self.viewModel.didActionSubject)
             .disposed(by: self.disposeBag)
+    }
+    
+    func setUpShouldPresentObservers() {
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { viewToPresent in
+                switch viewToPresent {
+                case .loading(let loading):
+                    loading ? self.showLoading() : self.dismissLoading()
+                case .signInViewController:
+                    if let signInViewController = R.storyboard.auth.signInViewController() {
+                        signInViewController.viewModel = SignInViewModel()
+                        self.show(CloseableNavigationController(rootViewController: signInViewController), sender: nil)
+                    }
+                case .voteDialogController(let voteDialogViewModel):
+                    self.showVoteDialog(voteDialogViewModel)
+                case .downVoteDialogController(let downvoteDialogViewModel):
+                    self.showDownvoteDialog(downvoteDialogViewModel)
+                }
+            }) ~ self.disposeBag
     }
     
     func setUpKeyboardObservers() {

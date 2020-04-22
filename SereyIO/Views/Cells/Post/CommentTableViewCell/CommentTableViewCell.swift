@@ -28,9 +28,12 @@ class CommentTableViewCell: BaseTableViewCell {
     @IBOutlet weak var sereySymbolImageView: UIImageView!
     @IBOutlet weak var sereyValueLabel: UILabel!
     
+    @IBOutlet weak var voteContainerView: UIStackView!
     @IBOutlet weak var upVoteContainerView: UIStackView!
     @IBOutlet weak var upVoteImageView: UIImageView!
     @IBOutlet weak var upVoteCountLabel: UILabel!
+    
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var downVoteContainerView: UIStackView!
     @IBOutlet weak var downVoteImageView: UIImageView!
@@ -83,14 +86,22 @@ class CommentTableViewCell: BaseTableViewCell {
                 cellModel.isViewConversationHidden ~> self.viewConversationButton.rx.isHidden,
                 cellModel.isReplyHidden ~> self.commentContainerView.rx.isHidden,
                 cellModel.leadingConstraint ~> self.leadingConstraint.rx.constant,
-                cellModel.isVoteAllowed.map { !$0 } ~> self.upVoteContainerView.rx.isHidden,
-                cellModel.isVoteAllowed.map { !$0 } ~> self.downVoteContainerView.rx.isHidden,
+                cellModel.isVoteAllowed.map { !$0 } ~> self.voteContainerView.rx.isHidden,
                 cellModel.votedType.asObservable()
                     .subscribe(onNext: { [weak self] voteType in
                         self?.preparepVoteTypeStyle(voteType)
                     }),
                 cellModel.upVoteEnabled ~> self.upVoteContainerView.rx.isUserInteractionEnabled,
-                cellModel.flagEnabled ~> self.downVoteContainerView.rx.isUserInteractionEnabled
+                cellModel.flagEnabled ~> self.downVoteContainerView.rx.isUserInteractionEnabled,
+                cellModel.isVoting.asObservable()
+                    .subscribe(onNext: { [unowned self] voteType in
+                        self.upVoteContainerView.isHidden = voteType == .upvote
+                        self.downVoteContainerView.isHidden = voteType == .flag
+                        self.loadingIndicator.isHidden = voteType == nil
+                        if voteType != nil {
+                            self.loadingIndicator.startAnimating()
+                        }
+                    })
             ]
             
             cellModel.isShimmering.asObservable()

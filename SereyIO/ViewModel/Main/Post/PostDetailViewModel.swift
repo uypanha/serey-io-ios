@@ -11,12 +11,13 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent, CollectionMultiSectionsProviderModel, DownloadStateNetworkProtocol {
+class PostDetailViewModel: BasePostDetailViewModel, ShouldReactToAction, ShouldPresent{
     
     enum Action {
         case morePressed
         case upVotePressed(VotePostType, PostModel, BehaviorSubject<VotedType?>)
         case flagPressed(VotePostType, PostModel, BehaviorSubject<VotedType?>)
+        case downVotePressed(DownvoteDialogViewModel.DownVoteType, PostModel, BehaviorSubject<VotedType?>)
         case refresh
         case replyCommentPressed(CommentCellViewModel)
     }
@@ -27,6 +28,7 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
         case deletePostDialog(confirm: () -> Void)
         case replyComment(ReplyCommentTableViewModel)
         case voteDialogController(VoteDialogViewModel)
+        case downVoteDialogController(DownvoteDialogViewModel)
         case signInViewController
         case loading(Bool)
     }
@@ -37,114 +39,74 @@ class PostDetailViewModel: BaseCellViewModel, ShouldReactToAction, ShouldPresent
     // output:
     lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
     
-    let cells: BehaviorRelay<[SectionItem]>
-    
-    let permlink: BehaviorRelay<String>
-    let authorName: BehaviorRelay<String>
-    let discussion: BehaviorRelay<PostModel?>
-    let replies: BehaviorRelay<[PostModel]>
-    
     let postViewModel: BehaviorRelay<PostDetailCellViewModel?>
     let commentPostViewModel: BehaviorRelay<PostCommentViewModel?>
     let sereyValueText: BehaviorSubject<String>
-    let isMoreHidden: BehaviorSubject<Bool>
-    let endRefresh: BehaviorSubject<Bool>
     
-    let discussionService: DiscussionService
-    let isDownloading: BehaviorRelay<Bool>
-    
-    init(_ permlink: String, _ authorName: String) {
-        self.permlink = BehaviorRelay(value: permlink)
-        self.authorName = BehaviorRelay(value: authorName)
-        self.discussion = BehaviorRelay(value: nil)
-        self.replies = BehaviorRelay(value: [])
-        
+    override init(_ permlink: String, _ authorName: String) {
         self.postViewModel = BehaviorRelay(value: nil)
         self.commentPostViewModel = BehaviorRelay(value: nil)
         self.sereyValueText = BehaviorSubject(value: "")
-        self.isMoreHidden = BehaviorSubject(value: true)
-        self.endRefresh = BehaviorSubject(value: true)
-        
-        self.cells = BehaviorRelay(value: [])
-        self.discussionService = DiscussionService()
-        self.isDownloading = BehaviorRelay(value: false)
-        super.init()
-        
-        setUpRxObservers()
+        super.init(permlink, authorName)
     }
     
-    convenience init(_ discussion: PostModel) {
-        self.init(discussion.permlink, discussion.authorName)
-        self.discussion.accept(discussion)
+    convenience init(_ post: PostModel) {
+        self.init(post.permlink, post.authorName)
+        self.post.accept(post)
+    }
+    
+    override func setUpRxObservers() {
+        super.setUpRxObservers()
+        
+        setUpActionObservers()
+    }
+    
+    override func clearCommentInput() {
+        super.clearCommentInput()
+        
+        self.commentPostViewModel.value?.clearInput()
+    }
+    
+    override func notifyDataChanged(_ data: PostModel?) {
+        super.notifyDataChanged(data)
+        
+        let postDetailViewModel = data == nil ? PostDetailCellViewModel(true) : PostDetailCellViewModel(data)
+        let commentPostViewModel = data == nil ? PostCommentViewModel(true) : PostCommentViewModel(data).then {
+            self.setUpCommentViewModelObservers($0)
+        }
+        self.postViewModel.accept(postDetailViewModel)
+        self.commentPostViewModel.accept(commentPostViewModel)
+        self.sereyValueText.onNext(data?.sereyValue ?? "")
+    }
+    
+    override func setUpCommentCellObservers(_ cellModel: CommentCellViewModel) {
+        cellModel.shouldReplyComment
+            .map { Action.replyCommentPressed($0) }
+            ~> self.didActionSubject
+            ~ cellModel.disposeBag
+        
+        cellModel.shouldUpVote
+            .map { Action.upVotePressed(.comment, $0, cellModel.isVoting) }
+            ~> self.didActionSubject
+            ~ cellModel.disposeBag
+        
+        cellModel.shouldFlag
+            .map { Action.flagPressed(.comment, $0, cellModel.isVoting) }
+            ~> self.didActionSubject
+            ~ cellModel.disposeBag
+        
+        cellModel.shouldDownvote.asObservable()
+            .map { Action.downVotePressed($0.0 == .flag ? .flagComment : .upVoteComment, $0.1, cellModel.isVoting) }
+            ~> self.didActionSubject
+            ~ cellModel.disposeBag
     }
 }
 
 // MARK: - Networks
 extension PostDetailViewModel {
     
-    func downloadData() {
-        if !self.isDownloading.value {
-            self.isDownloading.accept(true)
-            self.fetchPostDetial()
-        }
-    }
-    
-    private func fetchPostDetial() {
-        self.replies.renotify()
-        self.discussionService.getPostDetail(permlink: self.permlink.value, authorName: self.authorName.value)
-            .subscribe(onNext: { [weak self] response in
-                self?.isDownloading.accept(false)
-                self?.discussion.accept(response.content)
-                self?.replies.accept(response.replies)
-            }, onError: { [weak self] error in
-                self?.isDownloading.accept(false)
-                let errorInfo = ErrorHelper.prepareError(error: error)
-                self?.shouldPresentError(errorInfo)
-            }) ~ self.disposeBag
-    }
-    
-    private func submitComment(_ comment: String) {
-        let submitCommentModel = self.prepareSubmitCommentModel(comment)
-        self.commentPostViewModel.value?.isUploading.onNext(true)
-        self.discussionService.submitComment(submitCommentModel)
-            .subscribe(onNext: { [weak self] _ in
-                self?.fetchPostDetial()
-                self?.commentPostViewModel.value?.clearInput()
-                self?.commentPostViewModel.value?.isUploading.onNext(false)
-            }, onError: { [weak self] error in
-                self?.isDownloading.accept(false)
-                self?.commentPostViewModel.value?.isUploading.onNext(false)
-                let errorInfo = ErrorHelper.prepareError(error: error)
-                self?.shouldPresentError(errorInfo)
-            }) ~ self.disposeBag
-    }
-    
-    private func upVote(_ post: PostModel, _ weight: Int, _ isVoting: BehaviorSubject<VotedType?>) {
-        isVoting.onNext(.upvote)
-        self.discussionService.upVote(post.permlink, author: post.authorName, weight: weight)
-            .subscribe(onNext: { [weak self] _ in
-                self?.fetchPostDetial()
-                isVoting.onNext(nil)
-            }, onError: { [weak self] error in
-                let errorInfo = ErrorHelper.prepareError(error: error)
-                self?.shouldPresentError(errorInfo)
-            }) ~ self.disposeBag
-    }
-    
-    private func flag(_ post: PostModel, _ weight: Int, _ isVoting: BehaviorSubject<VotedType?>) {
-        isVoting.onNext(.flag)
-        self.discussionService.flag(post.permlink, author: post.authorName, weight: weight)
-            .subscribe(onNext: { [weak self] _ in
-                self?.fetchPostDetial()
-                isVoting.onNext(nil)
-            }, onError: { [weak self] error in
-                let errorInfo = ErrorHelper.prepareError(error: error)
-                self?.shouldPresentError(errorInfo)
-            }) ~ self.disposeBag
-    }
-    
     private func deletePost() {
-        if let post = self.discussion.value {
+        if let post = self.post.value {
             self.shouldPresent(.loading(true))
             self.discussionService.deletePost(post.authorName, post.permlink)
                 .subscribe(onNext: { [weak self] _ in
@@ -178,41 +140,6 @@ extension PostDetailViewModel {
             }
         }
     }
-    
-    enum VotePostType {
-        case comment
-        case article
-    }
-    
-    fileprivate func notifyDataChanged(_ data: PostModel?) {
-        let postDetailViewModel = data == nil ? PostDetailCellViewModel(true) : PostDetailCellViewModel(data)
-        let commentPostViewModel = data == nil ? PostCommentViewModel(true) : PostCommentViewModel(data).then {
-            self.setUpCommentViewModelObservers($0)
-        }
-        self.postViewModel.accept(postDetailViewModel)
-        self.commentPostViewModel.accept(commentPostViewModel)
-        self.sereyValueText.onNext(data?.sereyValue ?? "")
-        let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.authorName == AuthData.shared.username : false
-        self.isMoreHidden.onNext(!isMorePresent)
-    }
-    
-    fileprivate func prepareCells(_ replies: [PostModel]) -> [SectionItem] {
-        var cells: [CellViewModel] = []
-        cells.append(contentsOf: replies.map { CommentCellViewModel($0).then { self.setUpCommentCellObservers($0) } })
-        if self.isDownloading.value && replies.isEmpty {
-            cells.append(contentsOf: (0...3).map { _ in CommentCellViewModel(true) })
-        }
-        return [SectionItem(items: cells)]
-    }
-    
-    fileprivate func prepareSubmitCommentModel(_ comment: String) -> SubmitCommentModel {
-        let permlink = self.discussion.value?.permlink ?? ""
-        let author = self.discussion.value?.authorName ?? ""
-        let title = self.discussion.value?.title ?? ""
-        let category = self.discussion.value?.categoryItem.first ?? ""
-        
-        return SubmitCommentModel(parentAuthor: author, parentPermlink: permlink, title: title, body: comment, mainCategory: category)
-    }
 }
 
 // MARK: - Action Handlers
@@ -235,7 +162,7 @@ fileprivate extension PostDetailViewModel {
     func handleMenuPressed(_ type: PostMenu) {
         switch type {
         case .edit:
-            if let post = self.discussion.value {
+            if let post = self.post.value {
                 let createPostViewModel = CreatePostViewModel(.edit(post))
                 self.shouldPresent(.editPostController(createPostViewModel))
             }
@@ -249,7 +176,7 @@ fileprivate extension PostDetailViewModel {
     func handleReplyCommentPressed(_ cellViewModel: CommentCellViewModel) {
         if let commentData = cellViewModel.post.value {
             if AuthData.shared.isUserLoggedIn {
-                let replyCommentViewModel = ReplyCommentTableViewModel(commentData, title: self.discussion.value?.title ?? "")
+                let replyCommentViewModel = ReplyCommentTableViewModel(commentData, title: self.post.value?.title ?? "")
                 self.shouldPresent(.replyComment(replyCommentViewModel))
             } else {
                 self.shouldPresent(.signInViewController)
@@ -272,7 +199,7 @@ fileprivate extension PostDetailViewModel {
     
     func handleFlagPressed(_ voteType: VotePostType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
         if AuthData.shared.isUserLoggedIn {
-            let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .downVoteComment : .downVotePost)
+            let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .flagComment : .flagPost)
             voteDialogViewModel.shouldConfirm
                 .subscribe(onNext: { [weak self] weight in
                     self?.flag(postModel, -weight, isVoting)
@@ -282,33 +209,24 @@ fileprivate extension PostDetailViewModel {
             self.shouldPresent(.signInViewController)
         }
     }
+    
+    func handlDownvotePressed(_ downvoteType: DownvoteDialogViewModel.DownVoteType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
+        if AuthData.shared.isUserLoggedIn {
+            let downvoteViewModel = DownvoteDialogViewModel(downvoteType)
+            downvoteViewModel.shouldConfirm
+                .subscribe(onNext: { [weak self] _ in
+                    let votedType : VotedType = (downvoteType == .upVoteComment || downvoteType == .upvotePost) ? .upvote : .flag
+                    self?.downVote(postModel, votedType, isVoting)
+                }) ~ downvoteViewModel.disposeBag
+            self.shouldPresent(.downVoteDialogController(downvoteViewModel))
+        } else {
+            self.shouldPresent(.signInViewController)
+        }
+    }
 }
 
 // MARK: - SetUp RxObservers
 extension PostDetailViewModel {
-    
-    func setUpRxObservers() {
-        setUpContentChangedObservers()
-        setUpActionObservers()
-    }
-    
-    func setUpContentChangedObservers() {
-        self.discussion.asObservable()
-            .subscribe(onNext: { [weak self] discussion in
-                self?.notifyDataChanged(discussion)
-            }) ~ self.disposeBag
-        
-        self.replies.asObservable()
-            .map { self.prepareCells($0) }
-            ~> self.cells
-            ~ self.disposeBag
-        
-        self.isDownloading.asObservable()
-            .filter { !$0 }
-            .map { !$0 }
-            ~> self.endRefresh
-            ~ self.disposeBag
-    }
     
     func setUpActionObservers() {
         self.didActionSubject.asObservable()
@@ -325,6 +243,8 @@ extension PostDetailViewModel {
                     self?.handleUpVotePressed(data.0, data.1, data.2)
                 case .flagPressed(let data):
                     self?.handleFlagPressed(data.0, data.1, data.2)
+                case .downVotePressed(let data):
+                    self?.handlDownvotePressed(data.0, data.1, data.2)
                 }
             }) ~ self.disposeBag
     }
@@ -340,30 +260,15 @@ extension PostDetailViewModel {
             ~> self.didActionSubject
             ~ viewModel.disposeBag
         
-//        viewModel.shouldDownvote.asObservable()
-//            .map {}
+        viewModel.shouldDownvote.asObservable()
+            .map { Action.downVotePressed($0.0 == .flag ? .flagPost : .upvotePost, $0.1, viewModel.isVoting) }
+            ~> self.didActionSubject
+            ~ viewModel.disposeBag
         
         viewModel.shouldComment.asObservable()
             .subscribe(onNext: { [weak self] comment in
-                self?.submitComment(comment)
+                self?.submitComment(comment, viewModel.isUploading)
             }) ~ viewModel.disposeBag
-    }
-    
-    func setUpCommentCellObservers(_ cellModel: CommentCellViewModel) {
-        cellModel.shouldReplyComment
-            .map { Action.replyCommentPressed($0) }
-            ~> self.didActionSubject
-            ~ cellModel.disposeBag
-        
-        cellModel.shouldUpVote
-            .map { Action.upVotePressed(.comment, $0, cellModel.isVoting) }
-            ~> self.didActionSubject
-            ~ cellModel.disposeBag
-        
-        cellModel.shouldFlag
-            .map { Action.flagPressed(.comment, $0, cellModel.isVoting) }
-            ~> self.didActionSubject
-            ~ cellModel.disposeBag
     }
 }
 

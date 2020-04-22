@@ -23,6 +23,10 @@
 		DC05FDC023F1B3410093B47B /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC05FDBE23F1B3410093B47B /* HeaderView.xib */; };
 		DC05FDC123F1B3410093B47B /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05FDBF23F1B3410093B47B /* HeaderView.swift */; };
 		DC05FDC323F1BDF10093B47B /* LanguagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05FDC223F1BDF10093B47B /* LanguagesViewController.swift */; };
+		DC0F36AD245093A800916886 /* DownvoteDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0F36AC245093A800916886 /* DownvoteDialogViewController.swift */; };
+		DC0F36AF245093B800916886 /* DownvoteDialogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC0F36AE245093B800916886 /* DownvoteDialogViewController.xib */; };
+		DC0F36B12450944700916886 /* DownvoteDialogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0F36B02450944700916886 /* DownvoteDialogViewModel.swift */; };
+		DC0F36B32450A27700916886 /* BasePostDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0F36B22450A27700916886 /* BasePostDetailViewModel.swift */; };
 		DC115F2C241A8D38006BE78C /* UtilsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC115F2B241A8D38006BE78C /* UtilsHelper.swift */; };
 		DC115F2E241A8E18006BE78C /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC115F2D241A8E18006BE78C /* NSAttributedString+Extensions.swift */; };
 		DC115F30241A8EA5006BE78C /* trix-editor.css in Resources */ = {isa = PBXBuildFile; fileRef = DC115F2F241A8EA5006BE78C /* trix-editor.css */; };
@@ -304,6 +308,10 @@
 		DC05FDBE23F1B3410093B47B /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		DC05FDBF23F1B3410093B47B /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		DC05FDC223F1BDF10093B47B /* LanguagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesViewController.swift; sourceTree = "<group>"; };
+		DC0F36AC245093A800916886 /* DownvoteDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownvoteDialogViewController.swift; sourceTree = "<group>"; };
+		DC0F36AE245093B800916886 /* DownvoteDialogViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DownvoteDialogViewController.xib; sourceTree = "<group>"; };
+		DC0F36B02450944700916886 /* DownvoteDialogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownvoteDialogViewModel.swift; sourceTree = "<group>"; };
+		DC0F36B22450A27700916886 /* BasePostDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePostDetailViewModel.swift; sourceTree = "<group>"; };
 		DC115F2B241A8D38006BE78C /* UtilsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsHelper.swift; sourceTree = "<group>"; };
 		DC115F2D241A8E18006BE78C /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
 		DC115F2F241A8EA5006BE78C /* trix-editor.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = "trix-editor.css"; sourceTree = "<group>"; };
@@ -678,6 +686,15 @@
 			path = Languages;
 			sourceTree = "<group>";
 		};
+		DC0F36AB2450937700916886 /* DialogViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DC0F36AC245093A800916886 /* DownvoteDialogViewController.swift */,
+				DC0F36AE245093B800916886 /* DownvoteDialogViewController.xib */,
+			);
+			path = DialogViewController;
+			sourceTree = "<group>";
+		};
 		DC115F35241A9956006BE78C /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -827,6 +844,8 @@
 				DCCD40CD24379BD100093A18 /* BottomMenuViewController.swift */,
 				DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */,
 				DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */,
+				DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */,
+				DC0F36AB2450937700916886 /* DialogViewController */,
 				DCDE00762448B08600D09717 /* VoteDialogController */,
 			);
 			path = Dialog;
@@ -1324,6 +1343,7 @@
 		DC9E36DD24129FFD00289693 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				DC0F36B22450A27700916886 /* BasePostDetailViewModel.swift */,
 				DCC6F1DD242BB45B003B9E3A /* CreatePostViewModel.swift */,
 				DC9E36DE2412A01000289693 /* PostDetailViewModel.swift */,
 				DC5D59DB243243660048C921 /* Category */,
@@ -1453,6 +1473,7 @@
 			isa = PBXGroup;
 			children = (
 				DCD12D67242D03850084F66C /* BottomMenuViewModel.swift */,
+				DC0F36B02450944700916886 /* DownvoteDialogViewModel.swift */,
 				DCDE007B2448B3DA00D09717 /* VoteDialogViewModel.swift */,
 			);
 			path = Dialog;
@@ -1665,7 +1686,6 @@
 		DCDE00762448B08600D09717 /* VoteDialogController */ = {
 			isa = PBXGroup;
 			children = (
-				DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */,
 				DCDE00772448B0B700D09717 /* VoteDialogViewController.swift */,
 				DCDE00792448B0DC00D09717 /* VoteDialogViewController.xib */,
 			);
@@ -1879,6 +1899,7 @@
 				DCC6F1E3242BBDEB003B9E3A /* TextTableViewCell.xib in Resources */,
 				DC9E36D92412997800289693 /* Post.storyboard in Resources */,
 				DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */,
+				DC0F36AF245093B800916886 /* DownvoteDialogViewController.xib in Resources */,
 				DC9E36E524135A3D00289693 /* PostDetailView.xib in Resources */,
 				DC562436241E75450076A78C /* Auth.strings in Resources */,
 				DC115F30241A8EA5006BE78C /* trix-editor.css in Resources */,
@@ -2192,8 +2213,10 @@
 				DCC6F1E2242BBDEA003B9E3A /* TextTableViewCell.swift in Sources */,
 				DCF67FDD240FFC4A003061A7 /* SearchApi.swift in Sources */,
 				DC357A50243CC88E00B2D3B7 /* PostDetailCellViewModel.swift in Sources */,
+				DC0F36B32450A27700916886 /* BasePostDetailViewModel.swift in Sources */,
 				DCD3987D232E235000C812EB /* BaseTableViewCell.swift in Sources */,
 				DC6FCE7323F05D1700D72F6D /* HttpClient.swift in Sources */,
+				DC0F36AD245093A800916886 /* DownvoteDialogViewController.swift in Sources */,
 				DC9AC6DF2406BF1C008FAFA6 /* DiscussionApi.swift in Sources */,
 				DC40D5C723E31FDF00B0DD96 /* GradientView.swift in Sources */,
 				DC6ED58F2326A7B000770B31 /* AppDelegateHelper.swift in Sources */,
@@ -2250,6 +2273,7 @@
 				DC19DBE323EC581A00571CC8 /* ChooseCategorySheetViewController.swift in Sources */,
 				DCD3986B232E1DF700C812EB /* AppService.swift in Sources */,
 				DC6CA7B7243CD08D00F1EEC8 /* CategoryCellViewModel.swift in Sources */,
+				DC0F36B12450944700916886 /* DownvoteDialogViewModel.swift in Sources */,
 				DCF67FE924100B64003061A7 /* SearchService.swift in Sources */,
 				DC6ED56623269B6600770B31 /* ColorsGen.swift in Sources */,
 				DC40D5CC23E3298F00B0DD96 /* LanguageTableViewCell.swift in Sources */,

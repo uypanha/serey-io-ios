@@ -11,64 +11,89 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class ReplyCommentTableViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, DownloadStateNetworkProtocol, ShouldReactToAction {
+class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, ShouldPresent{
     
     enum Action {
+        case upVotePressed(VotePostType, PostModel, BehaviorSubject<VotedType?>)
+        case flagPressed(VotePostType, PostModel, BehaviorSubject<VotedType?>)
+        case downVotePressed(DownvoteDialogViewModel.DownVoteType, PostModel, BehaviorSubject<VotedType?>)
         case refresh
     }
     
+    enum ViewToPresent {
+        case voteDialogController(VoteDialogViewModel)
+        case downVoteDialogController(DownvoteDialogViewModel)
+        case signInViewController
+        case loading(Bool)
+    }
+    
     // input:
-    lazy var didActionSubject = PublishSubject<ReplyCommentTableViewModel.Action>()
+    lazy var didActionSubject = PublishSubject<Action>()
     
-    let cells: BehaviorRelay<[SectionItem]>
+    // output:
+    lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
+    
     let title: BehaviorRelay<String>
-    let comment: BehaviorRelay<PostModel>
-    let replies: BehaviorRelay<[PostModel]>
-    let endRefresh: BehaviorSubject<Bool>
-    
     let commentViewModel: CommentTextViewModel
-    
-    let isDownloading: BehaviorRelay<Bool>
-    let discussionService: DiscussionService
     
     init(_ comment: PostModel, title: String) {
         self.title = BehaviorRelay(value: title)
-        
-        self.isDownloading = BehaviorRelay(value: false)
-        self.cells = BehaviorRelay(value: [])
-        self.comment = BehaviorRelay(value: comment)
-        self.replies = BehaviorRelay(value: comment.replies ?? [])
-        self.endRefresh = BehaviorSubject(value: true)
-        
-        self.discussionService = DiscussionService()
-        
         self.commentViewModel = CommentTextViewModel()
-        super.init()
+        super.init(comment.permlink, comment.authorName)
         
-        setUpRxObservers()
-    }
-}
-
-// MARK: - Networks
-extension ReplyCommentTableViewModel {
-    
-    func downloadData() {
+        self.post.accept(comment)
     }
     
-    private func submitComment(_ comment: String) {
-        let submitCommentModel = self.prepareSubmitCommentModel(comment)
-        self.commentViewModel.isUploading.onNext(true)
-        self.discussionService.submitComment(submitCommentModel)
-            .subscribe(onNext: { [weak self] data in
-                self?.updateReplies(data.data)
-                self?.commentViewModel.clearInput()
-                self?.commentViewModel.isUploading.onNext(false)
-            }, onError: { [weak self] error in
-                self?.isDownloading.accept(false)
-                self?.commentViewModel.isUploading.onNext(false)
-                let errorInfo = ErrorHelper.prepareError(error: error)
-                self?.shouldPresentError(errorInfo)
-            }) ~ self.disposeBag
+    override func setUpRxObservers() {
+        super.setUpRxObservers()
+        
+        setUpActionObservers()
+        setUpCommentTextViewObservers()
+    }
+    
+    override func clearCommentInput() {
+        super.clearCommentInput()
+        
+        self.commentViewModel.clearInput()
+    }
+    
+    override func prepareCells(_ replies: [PostModel]) -> [SectionItem] {
+        var cells: [CellViewModel] = []
+        cells.append(CommentCellViewModel(self.post.value, canReply: false).then { self.setUpCommentCellObservers($0) })
+        cells.append(contentsOf: replies.map { CommentCellViewModel($0, canReply: false, leading: 42).then { self.setUpCommentCellObservers($0) } })
+        if self.isDownloading.value && replies.isEmpty {
+            cells.append(contentsOf: (0...3).map { _ in CommentCellViewModel(true) })
+        }
+        return [SectionItem(items: cells)]
+    }
+    
+    override func notifyDataChanged(_ data: PostModel?) {
+        super.notifyDataChanged(data)
+        
+        self.replies.accept(data?.replies ?? [])
+    }
+    
+    override func setUpCommentCellObservers(_ cellModel: CommentCellViewModel) {
+        cellModel.shouldUpVote
+            .map { Action.upVotePressed(.comment, $0, cellModel.isVoting) }
+            ~> self.didActionSubject
+            ~ cellModel.disposeBag
+        
+        cellModel.shouldFlag
+            .map { Action.flagPressed(.comment, $0, cellModel.isVoting) }
+            ~> self.didActionSubject
+            ~ cellModel.disposeBag
+        
+        cellModel.shouldDownvote.asObservable()
+            .map { Action.downVotePressed($0.0 == .flag ? .flagComment : .upVoteComment, $0.1, cellModel.isVoting) }
+            ~> self.didActionSubject
+            ~ cellModel.disposeBag
+    }
+    
+    override func updateData(_ data: PostDetailResponse) {
+        var post = data.content
+        post.replies = data.replies
+        self.post.accept(post)
     }
 }
 
@@ -78,72 +103,76 @@ extension ReplyCommentTableViewModel {
     fileprivate func updateReplies(_ replies: [PostModel]) {
         self.replies.append(contentsOf: replies)
     }
+}
+
+// MARK: - Action Handlers
+fileprivate extension ReplyCommentTableViewModel {
     
-    fileprivate func prepareCells(_ replies: [PostModel]) -> [SectionItem] {
-        var cells: [CellViewModel] = []
-        cells.append(CommentCellViewModel(self.comment.value, canReply: false))
-        cells.append(contentsOf: replies.map { CommentCellViewModel($0, canReply: false, leading: 42).then { self.setUpCommentCellObservers($0) } })
-        if self.isDownloading.value && replies.isEmpty {
-            cells.append(contentsOf: (0...3).map { _ in CommentCellViewModel(true) })
+    func handleUpVotePressed(_ voteType: VotePostType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
+        if AuthData.shared.isUserLoggedIn {
+            let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .upVoteComment : .upvotePost)
+            voteDialogViewModel.shouldConfirm
+                .subscribe(onNext: { [weak self] weight in
+                    self?.upVote(postModel, weight, isVoting)
+                }) ~ voteDialogViewModel.disposeBag
+            self.shouldPresent(.voteDialogController(voteDialogViewModel))
+        } else {
+            self.shouldPresent(.signInViewController)
         }
-        return [SectionItem(items: cells)]
     }
     
-    fileprivate func prepareSubmitCommentModel(_ comment: String) -> SubmitCommentModel {
-        let permlink = self.comment.value.permlink
-        let author = self.comment.value.authorName
-        let title = self.title.value
-        let category = self.comment.value.categoryItem.first ?? ""
-        
-        return SubmitCommentModel(parentAuthor: author, parentPermlink: permlink, title: title, body: comment, mainCategory: category)
+    func handleFlagPressed(_ voteType: VotePostType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
+        if AuthData.shared.isUserLoggedIn {
+            let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .flagComment : .flagPost)
+            voteDialogViewModel.shouldConfirm
+                .subscribe(onNext: { [weak self] weight in
+                    self?.flag(postModel, -weight, isVoting)
+                }) ~ voteDialogViewModel.disposeBag
+            self.shouldPresent(.voteDialogController(voteDialogViewModel))
+        } else {
+            self.shouldPresent(.signInViewController)
+        }
+    }
+    
+    func handlDownvotePressed(_ downvoteType: DownvoteDialogViewModel.DownVoteType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
+        if AuthData.shared.isUserLoggedIn {
+            let downvoteViewModel = DownvoteDialogViewModel(downvoteType)
+            downvoteViewModel.shouldConfirm
+                .subscribe(onNext: { [weak self] _ in
+                    let votedType : VotedType = (downvoteType == .upVoteComment || downvoteType == .upvotePost) ? .upvote : .flag
+                    self?.downVote(postModel, votedType, isVoting)
+                }) ~ downvoteViewModel.disposeBag
+            self.shouldPresent(.downVoteDialogController(downvoteViewModel))
+        } else {
+            self.shouldPresent(.signInViewController)
+        }
     }
 }
 
 // MARK: - SetUp RxObservers
 extension ReplyCommentTableViewModel {
     
-    func setUpRxObservers() {
-        setUpContentChangedObservers()
-        setUpActionObservers()
-        setUpCommentTextViewObservers()
-    }
-    
-    func setUpContentChangedObservers() {
-        self.comment.asObservable()
-            .map { _ in self.replies.value }
-            .map { self.prepareCells($0) }
-            ~> self.cells
-            ~ self.disposeBag
-        
-        self.replies.asObservable()
-            .map { self.prepareCells($0) }
-            ~> self.cells
-            ~ self.disposeBag
-        
-//        self.isDownloading.asObservable()
-//            .filter { !$0 }
-//            .map { !$0 }
-//            ~> self.endRefresh
-//            ~ self.disposeBag
-    }
-    
     func setUpActionObservers() {
         self.didActionSubject.asObservable()
             .subscribe(onNext: { [weak self] action in
                 switch action {
                 case .refresh:
-                    self?.endRefresh.onNext(true)
+                    self?.downloadData()
+                    self?.replies.renotify()
+                case .upVotePressed(let data):
+                    self?.handleUpVotePressed(data.0, data.1, data.2)
+                case .flagPressed(let data):
+                    self?.handleFlagPressed(data.0, data.1, data.2)
+                case .downVotePressed(let data):
+                    self?.handlDownvotePressed(data.0, data.1, data.2)
                 }
             }) ~ self.disposeBag
     }
     
     func setUpCommentTextViewObservers() {
         self.commentViewModel.shouldSendComment.asObservable()
-            .subscribe(onNext: { [weak self] comment in
-                self?.submitComment(comment)
+            .subscribe(onNext: { [unowned self] comment in
+                self.submitComment(comment, self.commentViewModel.isUploading)
             }) ~ self.disposeBag
-    }
-    
-    func setUpCommentCellObservers(_ cellModel: CommentCellViewModel) {
     }
 }

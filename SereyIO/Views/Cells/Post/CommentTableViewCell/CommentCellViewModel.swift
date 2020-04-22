@@ -35,7 +35,7 @@ class CommentCellViewModel: PostCellViewModel, ShouldReactToAction, PostCellProt
     let shouldReplyComment: PublishSubject<CommentCellViewModel>
     let shouldUpVote: PublishSubject<PostModel>
     let shouldFlag: PublishSubject<PostModel>
-    let shouldDownvote: PublishSubject<PostModel>
+    let shouldDownvote: PublishSubject<(VotedType, PostModel)>
     let votedType: BehaviorRelay<VotedType?>
     
     init(_ discussion: PostModel?, canReply: Bool = true, leading: CGFloat = 16) {
@@ -84,8 +84,8 @@ fileprivate extension CommentCellViewModel {
     
     func handleUpVotePressed() {
         if let postModel = self.post.value {
-            if let _ = self.votedType.value {
-                self.shouldDownvote.onNext(postModel)
+            if let votedType = self.votedType.value {
+                self.shouldDownvote.onNext((votedType, postModel))
             } else {
                 self.shouldUpVote.onNext(postModel)
             }
@@ -94,8 +94,8 @@ fileprivate extension CommentCellViewModel {
     
     func handleFlagPressed() {
         if let postModel = self.post.value {
-            if let _ = self.votedType.value {
-                self.shouldDownvote.onNext(postModel)
+            if let votedType = self.votedType.value {
+                self.shouldDownvote.onNext((votedType, postModel))
             } else {
                 self.shouldFlag.onNext(postModel)
             }

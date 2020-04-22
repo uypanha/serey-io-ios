@@ -31,7 +31,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
     let shouldComment: PublishSubject<String>
     let shouldUpVote: PublishSubject<PostModel>
     let shouldFlag: PublishSubject<PostModel>
-    let shouldDownvote: PublishSubject<PostModel>
+    let shouldDownvote: PublishSubject<(VotedType, PostModel)>
     let votedType: BehaviorRelay<VotedType?>
     let upVoteEnabled: BehaviorSubject<Bool>
     let flagEnabled: BehaviorSubject<Bool>
@@ -95,8 +95,8 @@ fileprivate extension PostCommentViewModel {
     
     func handleUpVotePressed() {
         if let postModel = self.post.value {
-            if let _ = self.votedType.value {
-                self.shouldDownvote.onNext(postModel)
+            if let votedType = self.votedType.value {
+                self.shouldDownvote.onNext((votedType, postModel))
             } else {
                 self.shouldUpVote.onNext(postModel)
             }
@@ -105,8 +105,8 @@ fileprivate extension PostCommentViewModel {
     
     func handleFlagPressed() {
         if let postModel = self.post.value {
-            if let _ = self.votedType.value {
-                self.shouldDownvote.onNext(postModel)
+            if let votedType = self.votedType.value {
+                self.shouldDownvote.onNext((votedType, postModel))
             } else {
                 self.shouldFlag.onNext(postModel)
             }

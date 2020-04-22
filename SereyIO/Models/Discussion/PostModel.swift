@@ -25,7 +25,7 @@ struct PostModel: Codable {
     let flag: Int
     let flagger: [String]
     let imageUrl: [String]?
-    let replies: [PostModel]?
+    var replies: [PostModel]?
     
     var firstThumnailURL: URL? {
         get {

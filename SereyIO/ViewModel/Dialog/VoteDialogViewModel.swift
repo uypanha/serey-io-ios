@@ -15,13 +15,13 @@ class VoteDialogViewModel: BaseViewModel, ShouldReactToAction {
     
     enum VoteType {
         case upVoteComment
-        case downVoteComment
+        case flagComment
         case upvotePost
-        case downVotePost
+        case flagPost
         
         var minusText: String {
             switch self {
-            case .downVoteComment, .downVotePost:
+            case .flagComment, .flagPost:
                 return "-"
             default:
                 return ""
@@ -34,10 +34,10 @@ class VoteDialogViewModel: BaseViewModel, ShouldReactToAction {
                 return "Upvote Post"
             case .upVoteComment:
                 return "Upvote Comment"
-            case .downVoteComment:
+            case .flagComment:
                 return "Flag Comment"
             default:
-                return "Downvote Post"
+                return "Flag Post"
             }
         }
     }

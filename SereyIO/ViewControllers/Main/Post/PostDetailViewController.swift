@@ -202,6 +202,8 @@ extension PostDetailViewController {
                     }
                 case .voteDialogController(let voteDialogViewModel):
                     self.showVoteDialog(voteDialogViewModel)
+                case .downVoteDialogController(let downvoteDialogViewModel):
+                    self.showDownvoteDialog(downvoteDialogViewModel)
                 }
             }) ~ self.disposeBag
     }
