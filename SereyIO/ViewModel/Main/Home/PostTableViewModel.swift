@@ -12,7 +12,7 @@ import RxSwift
 import RxBinding
 import RxDataSources
 
-class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent {
+class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent, ShouldRefreshProtocol {
     
     enum Action {
         case itemSelected(IndexPath)
@@ -33,6 +33,10 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent 
         super.init(type)
         
         setUpRxObservers()
+    }
+    
+    func shouldRefreshData() {
+        self.didAction(with: .refresh)
     }
 }
 

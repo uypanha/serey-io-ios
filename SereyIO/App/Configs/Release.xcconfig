@@ -14,7 +14,7 @@
 // Server URL
 BASE_DOMAIN             = serey.io
 API_URL                 = global-api.serey.io
-WALLET_URL              = kyc.serey.io
+KYC_URL                 = kyc.serey.io
 CHAIN_URL               = api.serey.io
 URL_PROTOCOL            = https:/$()/
 

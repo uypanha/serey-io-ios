@@ -45,7 +45,7 @@ class SelectCategoryViewModel: BaseListTableViewModel {
 extension SelectCategoryViewModel {
     
     fileprivate func prepareCells(_ categories: [DiscussionCategoryModel]) -> [SectionItem] {
-        let items = categories.map { CategoryCellViewModel($0, title: $0.name, isSelected: false) }
+        let items = categories.map { CategoryCellViewModel($0, title: $0.name, isSelected: false, indicatorAccessory: false) }
         return [SectionItem(items: items)]
     }
 }

@@ -38,6 +38,6 @@ extension PostDetailCellViewModel {
     
     private func prepareCells(_ tags: [String]) -> [CellViewModel] {
         return tags.map { DiscussionCategoryModel(name: $0, sub: nil) }
-            .map { CategoryCellViewModel($0, title: $0.name, isSelected: false) }
+            .map { CategoryCellViewModel($0, title: $0.name, isSelected: false, indicatorAccessory: true) }
     }
 }

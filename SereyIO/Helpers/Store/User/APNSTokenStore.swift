@@ -26,14 +26,14 @@ class APNSTokenStore {
                 firebaseToken = fcmToken
             }
             
-            guard firebaseToken != nil else { return }
+            guard let token = firebaseToken else { return }
             
-//            PushService().subscribeToNotification(token: firebaseToken!, true)
-//                .subscribe(onNext: { _ in
-//                    log.debug("APNS token sent to server")
-//                }, onError: { error in
-//                    log.error("Error while sending APNS token to server: \(error)")
-//                }).disposed(by: self.disposeBag)
+            PushService().register(AuthData.shared.username ?? "", token)
+                .subscribe(onNext: { _ in
+                    log.debug("APNS token sent to server")
+                }, onError: { error in
+                    log.error("Error while sending APNS token to server: \(error)")
+                }).disposed(by: self.disposeBag)
         }
     }
     

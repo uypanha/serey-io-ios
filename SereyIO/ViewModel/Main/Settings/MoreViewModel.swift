@@ -25,7 +25,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
     
     enum ViewToPresent {
         case signInController
-        case accountViewController(AccountViewModel)
+        case accountViewController(UserAccountViewModel)
         case moreAppsController(MoreAppsViewModel)
         case languagesViewController
         case webViewController(WebViewViewModel)
@@ -176,7 +176,7 @@ fileprivate extension MoreViewModel {
                 break
             }
         } else if let item = item(at: indexPath) as? ProfileCellViewModel, let user = item.userInfo.value {
-            let accountViewModel = AccountViewModel(user)
+            let accountViewModel = UserAccountViewModel(user)
             self.shouldPresent(.accountViewController(accountViewModel))
         }
     }

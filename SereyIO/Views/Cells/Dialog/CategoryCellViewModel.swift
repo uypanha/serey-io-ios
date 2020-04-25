@@ -15,9 +15,9 @@ class CategoryCellViewModel: TextCellViewModel {
     let category: BehaviorRelay<DiscussionCategoryModel>
     let isSelected: BehaviorRelay<Bool>
     
-    init(_ category: DiscussionCategoryModel, title: String, isSelected: Bool) {
+    init(_ category: DiscussionCategoryModel, title: String, isSelected: Bool, indicatorAccessory: Bool = true) {
         self.category = BehaviorRelay(value: category)
         self.isSelected = BehaviorRelay(value: isSelected)
-        super.init(with: title, properties: .defaultProperties(), indicatorAccessory: true, isSelectionEnabled: false)
+        super.init(with: title, properties: .defaultProperties(), indicatorAccessory: indicatorAccessory, isSelectionEnabled: false)
     }
 }

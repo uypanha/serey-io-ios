@@ -45,7 +45,7 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     
     open func prepareEmptyViewModel() -> EmptyOrErrorViewModel {
         let title = R.string.post.noPostYet.localized()
-        let emptyMessage = R.string.post.noPostMessage.localized()
+        let emptyMessage = self.postType.value.emptyMessage
         return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withEmptyTitle: title, emptyDescription: emptyMessage, iconImage: R.image.emptyPost()))
     }
     

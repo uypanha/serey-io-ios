@@ -170,11 +170,11 @@ enum DiscussionType {
     var title: String {
         switch self {
         case .trending:
-            return "Trending"
+            return R.string.post.trending.localized()
         case .hot:
-            return "Hot"
+            return R.string.post.hot.localized()
         case .new:
-            return "New"
+            return R.string.post.new.localized()
         case .byUser:
             return "User"
         }
@@ -200,6 +200,19 @@ enum DiscussionType {
     
     var viewModel: PostTableViewModel {
         return PostTableViewModel(self)
+    }
+    
+    var emptyMessage: String {
+        switch self {
+        case .trending:
+            return R.string.post.noTrendingPostMessage.localized()
+        case .hot:
+            return R.string.post.noHotPostMessage.localized()
+        case .new:
+            return R.string.post.noNewPostMessage.localized()
+        case .byUser(let username):
+            return username == AuthData.shared.username ? R.string.post.noPostMessage.localized() : String(format: R.string.post.noPostUserMessage.localized(), username, username)
+        }
     }
 }
 

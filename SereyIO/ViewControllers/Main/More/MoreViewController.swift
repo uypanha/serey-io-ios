@@ -177,7 +177,7 @@ fileprivate extension MoreViewController {
                         self.show(CloseableNavigationController(rootViewController: signInViewController), sender: nil)
                     }
                 case .accountViewController(let accountViewModel):
-                    if let accountViewController = R.storyboard.profile.accountViewController() {
+                    if let accountViewController = R.storyboard.profile.userAccountViewController() {
                         accountViewController.viewModel = accountViewModel
                         self.show(accountViewController, sender: nil)
                     }

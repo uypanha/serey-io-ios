@@ -27,6 +27,11 @@ class DiscussionService: AppService<DiscussionApi> {
             .asObservable()
     }
     
+    func getCommentsReply(of username: String, type: GetCommentType) -> Observable<ListDataResponseModel<CommentReplyModel>> {
+        return self.provider.rx.requestObject(.getCommentReply(username: username, type: type), type: ListDataResponseModel<CommentReplyModel>.self)
+            .asObservable()
+    }
+    
     func submitPost(_ submitModel: SubmitPostModel) -> Observable<BlockChainResponse> {
         return self.provider.rx.requestObject(.submitPost(submitModel), type: DataResponseModel<BlockChainResponse>.self)
             .asObservable()

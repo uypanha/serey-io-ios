@@ -22,6 +22,9 @@ def frameworks_pods
 	# MARK: - Tools + Builders
   pod 'R.swift'
   pod 'SwiftGen'
+  
+  # MARK: - Coder Tools
+  pod 'AnyCodable-FlightSchool', '~> 0.2.3'
 
 	# MARK: - Logger
   pod 'SwiftyBeaver'

@@ -82,5 +82,6 @@ class EmptyOrErrorView: NibView {
         
         self.topConstraint.constant = self.topConstraintConstant
         self.errorImageWidthContraint = self.errorImageWidthContraint.changeMultiplier(multiplier: self.imageWidthContraint)
+        self.actionButton.secondaryStyle()
     }
 }

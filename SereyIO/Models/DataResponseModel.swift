@@ -10,7 +10,7 @@ import Foundation
 
 class DataResponseModel<T: Codable>: Codable {
     
-    let message: String
+    let message: String?
     let data: T
     
     enum CodingKeys: String, CodingKey {

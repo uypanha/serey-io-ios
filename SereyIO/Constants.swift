@@ -14,8 +14,8 @@ public struct Constants {
         return URL(string: ConfigSetting.urlProcol.value() + ConfigSetting.apiURL.value())!
     }
     
-    static var walletUrl: URL {
-        return URL(string: ConfigSetting.urlProcol.value() + ConfigSetting.walletURL.value())!
+    static var kycURL: URL {
+        return URL(string: ConfigSetting.urlProcol.value() + ConfigSetting.kycURL.value())!
     }
     
     static var chainURL: URL {
@@ -77,7 +77,7 @@ fileprivate enum ConfigSetting {
     
     case baseDomain
     case apiURL
-    case walletURL
+    case kycURL
     case chainURL
     case urlProcol
     case includeWallet
@@ -88,8 +88,8 @@ fileprivate enum ConfigSetting {
             return "BASE_DOMAIN"
         case .apiURL:
             return "API_URL"
-        case .walletURL:
-            return "WALLET_URL"
+        case .kycURL:
+            return "KYC_URL"
         case .chainURL:
             return "CHAIN_URL"
         case .urlProcol:

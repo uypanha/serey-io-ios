@@ -13,7 +13,7 @@ import RxBinding
 import RxDataSources
 import SnapKit
 
-class SearchViewController: BaseViewController {
+class SearchViewController: BaseViewController, KeyboardController {
     
     @IBOutlet weak var searchTextField: PaddingTextField!
     @IBOutlet weak var tableView: UITableView!
@@ -106,6 +106,7 @@ fileprivate extension SearchViewController {
         setUpContentChangedObservers()
         setUpShouldPresentObservers()
         setUpShouldPresentErrorObsevers()
+        setUpTabSelfToDismissKeyboard()?.disposed(by: self.disposeBag)
     }
     
     func setUpContentChangedObservers() {
@@ -141,7 +142,7 @@ fileprivate extension SearchViewController {
                 case .emptyResult(let emptyViewModel):
                     self.prepareToDisplayEmptyView(emptyViewModel)
                 case .accountViewController(let accountViewModel):
-                    if let accountViewController = R.storyboard.profile.accountViewController() {
+                    if let accountViewController = R.storyboard.profile.userAccountViewController() {
                         accountViewController.viewModel = accountViewModel
                         self.show(accountViewController, sender: nil)
                     }

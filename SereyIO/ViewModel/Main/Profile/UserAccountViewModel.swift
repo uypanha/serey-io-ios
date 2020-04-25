@@ -1,8 +1,8 @@
 //
-//  AccountViewModel.swift
+//  UserAccountViewModel.swift
 //  SereyIO
 //
-//  Created by Phanha Uy on 2/14/20.
+//  Created by Panha Uy on 4/25/20.
 //  Copyright © 2020 Phanha Uy. All rights reserved.
 //
 
@@ -10,14 +10,17 @@ import Foundation
 import RxCocoa
 import RxSwift
 import RxBinding
-import RxDataSources
 
-class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
+protocol ShouldRefreshProtocol {
+    
+    func shouldRefreshData()
+}
+
+class UserAccountViewModel: BaseViewModel, DownloadStateNetworkProtocol, ShouldPresent, ShouldReactToAction {
     
     enum Action {
-        case itemSelected(IndexPath)
-        case followPressed
         case refresh
+        case followPressed
     }
     
     enum ViewToPresent {
@@ -25,7 +28,7 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
     }
     
     // input:
-    lazy var didActionSubject = PublishSubject<AccountViewModel.Action>()
+    lazy var didActionSubject = PublishSubject<Action>()
     
     // output:
     lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
@@ -33,6 +36,8 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
     let username: BehaviorRelay<String>
     let userInfo: BehaviorRelay<UserModel?>
     let followers: BehaviorRelay<[String]>
+    let tabTitles: BehaviorRelay<[String]>
+    let tabViewModels: BehaviorRelay<[BaseViewModel]>
     
     let profileViewModel: BehaviorSubject<ProfileViewModel?>
     let accountName: BehaviorSubject<String?>
@@ -41,13 +46,17 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
     let followingCountText: BehaviorSubject<String?>
     let isFollowHidden: BehaviorSubject<Bool>
     let isFollowed: BehaviorSubject<Bool>
+    let endRefresh: BehaviorSubject<Bool>
     
     let userService: UserService
+    let isDownloading: BehaviorRelay<Bool>
     
     init(_ username: String) {
         self.username = BehaviorRelay(value: username)
         self.userInfo = BehaviorRelay(value: nil)
         self.followers = BehaviorRelay(value: [])
+        self.tabTitles = BehaviorRelay(value: [])
+        self.tabViewModels = BehaviorRelay(value: [])
         
         self.profileViewModel = BehaviorSubject(value: nil)
         self.accountName = BehaviorSubject(value: nil)
@@ -56,10 +65,13 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
         self.followingCountText = BehaviorSubject(value: nil)
         self.isFollowHidden = BehaviorSubject(value: AuthData.shared.username == username)
         self.isFollowed = BehaviorSubject(value: false)
+        self.endRefresh = BehaviorSubject(value: false)
         self.userService = UserService()
-        super.init(.byUser(username))
+        self.isDownloading = BehaviorRelay(value: false)
+        super.init()
         
         setUpRxObservers()
+        prepareTabViewModels()
     }
     
     convenience init(_ user: UserModel) {
@@ -67,27 +79,25 @@ class AccountViewModel: BasePostViewModel, ShouldPresent, ShouldReactToAction {
         
         self.userInfo.accept(user)
     }
-    
-    override func prepareEmptyViewModel() -> EmptyOrErrorViewModel {
-        let title = R.string.post.noPostYet.localized()
-        let emptyMessage = R.string.post.noPostMessage.localized()
-        return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withEmptyTitle: title, emptyDescription: emptyMessage, iconImage: R.image.emptyPost()))
-    }
 }
 
 // MARK: - Networks
-extension AccountViewModel {
+extension UserAccountViewModel {
     
-    func initialDownloadData() {
-        downloadData()
-        getFollowerList()
+    func downloadData() {
+        if !self.isDownloading.value {
+            getFollowerList()
+        }
     }
     
     func getFollowerList() {
+        self.isDownloading.accept(true)
         self.userService.getFollowerList(self.username.value)
             .subscribe(onNext: { [weak self] response in
+                self?.isDownloading.accept(false)
                 self?.followers.accept(response.followerList)
             }, onError: { [weak self] error in
+                self?.isDownloading.accept(false)
                 let errorInfo = ErrorHelper.prepareError(error: error)
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
@@ -111,7 +121,40 @@ extension AccountViewModel {
 }
 
 // MARK: - Preparations & Tools
-extension AccountViewModel {
+extension UserAccountViewModel {
+    
+    enum TabItem: CaseIterable {
+        case post
+        case comment
+        case replies
+        
+        var title: String {
+            switch self {
+            case .post:
+                return "Post"
+            case .comment:
+                return "Comments"
+            case .replies:
+                return "Replies"
+            }
+        }
+        
+        func prepareViewModel(_ username: String) -> BaseViewModel {
+            switch self {
+            case .post:
+                return PostTableViewModel(.byUser(username))
+            case .comment:
+                return CommentsListViewModel(username, with: .comments)
+            case .replies:
+                return CommentsListViewModel(username, with: .replies)
+            }
+        }
+    }
+    
+    func prepareTabViewModels() {
+        self.tabViewModels.accept(TabItem.allCases.map { $0.prepareViewModel(self.username.value) })
+        self.tabTitles.accept(TabItem.allCases.map { $0.title })
+    }
     
     private func notifyDataChanged(_ data: UserModel?) {
         self.profileViewModel.onNext(data?.profileModel ?? prepareProfileViewModel(from: self.username.value))
@@ -145,15 +188,13 @@ extension AccountViewModel {
 }
 
 // MARK: - Action Handlers
-fileprivate extension AccountViewModel {
+fileprivate extension UserAccountViewModel {
     
-    func handleItemPressed(_ indexPath: IndexPath) {
-        if let item = self.item(at: indexPath) as? PostCellViewModel {
-            if let discussion = item.post.value {
-                let viewModel = PostDetailViewModel(discussion)
-                self.shouldPresent(.postDetailViewController(viewModel))
-            }
+    func handleRefress() {
+        self.tabViewModels.value.forEach { viewModel in
+            (viewModel as? ShouldRefreshProtocol)?.shouldRefreshData()
         }
+        self.downloadData()
     }
     
     func handleFollowPressed() {
@@ -168,7 +209,7 @@ fileprivate extension AccountViewModel {
 }
 
 // MARK: - SetUp RxObservers
-fileprivate extension AccountViewModel {
+fileprivate extension UserAccountViewModel {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
@@ -186,17 +227,46 @@ fileprivate extension AccountViewModel {
             .map { $0.contains { $0 == AuthData.shared.username } }
             ~> self.isFollowed
             ~ self.disposeBag
+        
+        self.isDownloading.asObservable()
+            .filter { !$0 }
+            .map { !$0 }
+            ~> self.endRefresh
+            ~ self.disposeBag
+        
+        self.tabViewModels.asObservable()
+            .subscribe(onNext: { [unowned self] viewModels in
+                viewModels.forEach { viewModel in
+                    self.setUpTabViewModelObsevers(viewModel)
+                }
+            }) ~ self.disposeBag
+    }
+    
+    func setUpTabViewModelObsevers(_ viewModel: BaseViewModel) {
+        switch viewModel {
+        case is PostTableViewModel:
+            self.setUpPostTableViewModelObsevers(viewModel as! PostTableViewModel)
+        default:
+            break
+        }
+    }
+    
+    func setUpPostTableViewModelObsevers(_ viewModel: PostTableViewModel) {
+        viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { [weak self] viewToPresent in
+                switch viewToPresent {
+                case .postDetailViewController(let postDetailViewModel):
+                    self?.shouldPresent(.postDetailViewController(postDetailViewModel))
+                }
+            }) ~ viewModel.disposeBag
     }
     
     func setUpActionObservers() {
         self.didActionSubject.asObservable()
             .subscribe(onNext: { [weak self] action in
                 switch action {
-                case .itemSelected(let indexPath):
-                    self?.handleItemPressed(indexPath)
                 case .refresh:
-                    self?.reset()
-                    self?.discussions.renotify()
+                    self?.handleRefress()
                 case .followPressed:
                     self?.handleFollowPressed()
                 }

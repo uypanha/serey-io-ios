@@ -112,7 +112,7 @@ fileprivate extension SignInViewController {
                     loading ? self?.showLoading() : self?.dismissLoading()
                 case .signUpViewController:
                     let webViewController = WebViewViewController()
-                    webViewController.viewModel = WebViewViewModel(withURLToLoad: Constants.walletUrl, title: nil)
+                    webViewController.viewModel = WebViewViewModel(withURLToLoad: Constants.kycURL, title: nil)
                     let navigationViewController = UINavigationController(rootViewController: webViewController)
                         .then { $0.modalPresentationStyle = .fullScreen }
                     self?.show(navigationViewController, sender: nil)

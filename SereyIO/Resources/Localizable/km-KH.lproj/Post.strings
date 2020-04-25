@@ -7,23 +7,31 @@
 */
 
 // MARK: Empty or Errors
-"noPostYet"         = "No Post Yet!";
-"noPostMessage"     = "Your post will be shown here after you\nmade a post.";
+"noPostYet"                 = "No Post Yet!";
+"noPostMessage"             = "Your post will be shown here after you\nmade a post.";
+"noPostUserMessage"         = "%@'s post will be shown here after %@\nmade a post.";
 
-"post"              = "Post";
-"postAnArticle"     = "Post an Article";
-"updateAnArticle"   = "Update an Article";
-"postAComment"      = "Post a comment...";
+"trending"                  = "Trending";
+"noTrendingPostMessage"     = "Trending post will be shown here afer someone\nmade a post.";
+"hot"                       = "Hot";
+"noHotPostMessage"          = "Hot post will be shown here afer someone\nmade a post.";
+"new"                       = "New";
+"noNewPostMessage"          = "New post will be shown here afer someone\nmade a post.";
 
-"enterTitle"        = "Enter title";
-"articleBody"       = "Article body";
-"shortDescription"  = "Short description";
+"post"                      = "Post";
+"postAnArticle"             = "Post an Article";
+"updateAnArticle"           = "Update an Article";
+"postAComment"              = "Post a comment...";
 
-"selectCategory"    = "Select category";
-"selectSubCategory" = "Select sub-category";
+"enterTitle"                = "Enter title";
+"articleBody"               = "Article body";
+"shortDescription"          = "Short description";
 
-"chooseThumbnailWith"   = "Choose Thumbnail with";
-"insertImageWith"       = "Insert Image with";
+"selectCategory"            = "Select category";
+"selectSubCategory"         = "Select sub-category";
 
-"changeThumbnail"       = "Change Thumbnail";
-"uploadThumbnail"       = "Upload Thumbnail";
+"chooseThumbnailWith"       = "Choose Thumbnail with";
+"insertImageWith"           = "Insert Image with";
+
+"changeThumbnail"           = "Change Thumbnail";
+"uploadThumbnail"           = "Upload Thumbnail";

@@ -17,6 +17,8 @@ enum DiscussionApi {
     
     case getPostDetail(permlink: String, authorName: String)
     
+    case getCommentReply(username: String, type: GetCommentType)
+    
     case submitPost(SubmitPostModel)
     
     case submitComment(SubmitCommentModel)
@@ -40,6 +42,11 @@ extension DiscussionApi: AuthorizedApiTargetType {
             return [
                 "permlink"      : data.permlink,
                 "authorName"    : data.authorName
+            ]
+        case .getCommentReply(let username, let type):
+            return [
+                "UserId"    : username,
+                "typeId"    : type.typeId
             ]
         case .submitPost(let data):
             return data.parameters
@@ -80,6 +87,8 @@ extension DiscussionApi: AuthorizedApiTargetType {
             return "/api/v1/sereyweb/\(data.0.path)"
         case .getPostDetail:
             return "/api/v1/sereyweb/findDetailBypermlink"
+        case .getCommentReply:
+            return "/api/v1/sereyweb/findRepliesOrCommentsByUserId"
         case .submitPost:
             return "/api/v1/sereyweb/submitPost"
         case .submitComment:
@@ -106,7 +115,7 @@ extension DiscussionApi: AuthorizedApiTargetType {
     
     var task: Task {
         switch self {
-        case .getDiscussions, .getPostDetail:
+        case .getDiscussions, .getPostDetail, .getCommentReply:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         case .submitPost, .submitComment, .deletPost, .upVote, .flag, .downVote:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
@@ -133,6 +142,20 @@ fileprivate extension DiscussionType {
             return "findByNew"
         case .byUser:
             return "findByUserId"
+        }
+    }
+}
+
+enum GetCommentType {
+    case comments
+    case replies
+    
+    var typeId: String {
+        switch self {
+        case .comments:
+            return "comments"
+        case .replies:
+            return "recent-replies"
         }
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import OAuth2
+//import OAuth2
 
 public typealias JSONString = [String : Any]
 
@@ -16,9 +16,9 @@ public class Auth {
     
     public init() {}
     
-    var oauth2 : OAuth2CodeGrantNoTokenType?
+//    var oauth2 : OAuth2CodeGrantNoTokenType?
     var config : NSDictionary = [:]
-    var loader : OAuth2DataLoader!
+//    var loader : OAuth2DataLoader!
     
     var basePath = "https://v2.steemconnect.com/api"
     
@@ -33,23 +33,23 @@ public class Auth {
             self.basePath = basePath  as! String
         }
         
-        oauth2 = OAuth2CodeGrantNoTokenType(settings: [
-            "client_id": conf["client_id"] as! String,
-            "client_secret": conf["client_secret"] as! String,
-            "authorize_uri": conf["authorize_uri"] as! String,
-            "token_uri": conf["token_uri"] as! String,
-            "redirect_uris": conf["redirect_uris"] as! [String],
-            "scope": conf["scope"] as! String,
-            "keychain": true,
-            "secret_in_body": true,
-            "verbose": conf["should_Debug"] as! Bool,
-        ] as OAuth2JSON)
-        
-        if (conf["should_Debug"] as! Bool) {
-            oauth2?.logger = OAuth2DebugLogger(.debug)
-        }
-        
-        loader = OAuth2DataLoader(oauth2: oauth2!)
+//        oauth2 = OAuth2CodeGrantNoTokenType(settings: [
+//            "client_id": conf["client_id"] as! String,
+//            "client_secret": conf["client_secret"] as! String,
+//            "authorize_uri": conf["authorize_uri"] as! String,
+//            "token_uri": conf["token_uri"] as! String,
+//            "redirect_uris": conf["redirect_uris"] as! [String],
+//            "scope": conf["scope"] as! String,
+//            "keychain": true,
+//            "secret_in_body": true,
+//            "verbose": conf["should_Debug"] as! Bool,
+//        ] as OAuth2JSON)
+//
+//        if (conf["should_Debug"] as! Bool) {
+//            oauth2?.logger = OAuth2DebugLogger(.debug)
+//        }
+//
+//        loader = OAuth2DataLoader(oauth2: oauth2!)
     }
     
     
@@ -65,21 +65,21 @@ public class Auth {
     ///
     /// - Returns: True or False
     public func isAuthorized() -> Bool {
-        if oauth2!.accessToken == nil && oauth2!.refreshToken == nil {
-            return false
-        }
-        
-        if oauth2!.accessToken != nil && oauth2!.refreshToken != nil && oauth2!.accessToken!.count == 0 && oauth2!.refreshToken!.count == 0 {
-            return false
-        }
-        
-        if oauth2!.accessToken != nil && oauth2!.refreshToken == nil && oauth2!.accessToken!.count == 0 {
-            return false
-        }
-        
-        if oauth2!.accessToken == nil && oauth2!.refreshToken != nil && oauth2!.refreshToken!.count == 0 {
-            return false
-        }
+//        if oauth2!.accessToken == nil && oauth2!.refreshToken == nil {
+//            return false
+//        }
+//
+//        if oauth2!.accessToken != nil && oauth2!.refreshToken != nil && oauth2!.accessToken!.count == 0 && oauth2!.refreshToken!.count == 0 {
+//            return false
+//        }
+//
+//        if oauth2!.accessToken != nil && oauth2!.refreshToken == nil && oauth2!.accessToken!.count == 0 {
+//            return false
+//        }
+//
+//        if oauth2!.accessToken == nil && oauth2!.refreshToken != nil && oauth2!.refreshToken!.count == 0 {
+//            return false
+//        }
         
         return true
     }
@@ -111,35 +111,35 @@ public class Auth {
             headers["Content-Type"] = "application/json"
             req.allHTTPHeaderFields = headers
 
-            loader.perform(request: req) { (response) in
-                do {
-                    let json = try response.responseJSON()
-                    
-                    if (response.response.statusCode != 200) {
-                        var err_desc : String = ""
-                        
-                        if let desc = json["error_description"] {
-                            err_desc = desc as! String
-                        }
-                        
-                        callback([
-                            "error": response.response.statusString,
-                            "error_code": response.response.statusCode,
-                            "error_desc": err_desc
-                            ])
-                        return
-                    }
-                    
-                    callback(json)
-                }
-                catch let error {
-                    print(error)
-                    
-                    callback([
-                        "error": error
-                    ])
-                }
-            }
+//            loader.perform(request: req) { (response) in
+//                do {
+//                    let json = try response.responseJSON()
+//
+//                    if (response.response.statusCode != 200) {
+//                        var err_desc : String = ""
+//
+//                        if let desc = json["error_description"] {
+//                            err_desc = desc as! String
+//                        }
+//
+//                        callback([
+//                            "error": response.response.statusString,
+//                            "error_code": response.response.statusCode,
+//                            "error_desc": err_desc
+//                            ])
+//                        return
+//                    }
+//
+//                    callback(json)
+//                }
+//                catch let error {
+//                    print(error)
+//
+//                    callback([
+//                        "error": error
+//                    ])
+//                }
+//            }
         } catch let error {
             print("Error parsing JSON Data: \(data)");
             callback([
@@ -153,21 +153,21 @@ public class Auth {
     ///
     /// - Parameter callback: Success True or False
     public func revoke(callback: @escaping ((Bool) -> Swift.Void)) {
-        var req = oauth2!.request(forURL: URL(string: "\(getBasePath())/oauth2/token/revoke")!)
-        req.httpMethod = "POST"
-
-        oauth2!.perform(request: req) { (response) in
-            do {
-                _ = try response.responseJSON()
-                
-                self.oauth2!.forgetTokens()
-                
-                callback(true)
-            } catch let error {
-                print(error)
-                callback(false)
-            }
-        }
+//        var req = oauth2!.request(forURL: URL(string: "\(getBasePath())/oauth2/token/revoke")!)
+//        req.httpMethod = "POST"
+//
+//        oauth2!.perform(request: req) { (response) in
+//            do {
+//                _ = try response.responseJSON()
+//
+//                self.oauth2!.forgetTokens()
+//
+//                callback(true)
+//            } catch let error {
+//                print(error)
+//                callback(false)
+//            }
+//        }
     }
     
     
@@ -175,7 +175,7 @@ public class Auth {
     ///
     /// - Parameter url: Redirect URL
     public func handleRedirectURL(url: URL) {
-        oauth2!.handleRedirectURL(url)
+//        oauth2!.handleRedirectURL(url)
     }
     
     
@@ -183,15 +183,15 @@ public class Auth {
     ///
     /// - Parameter callback: JSON Data containing error or response data
     public func me(callback: @escaping ((JSONString) -> Swift.Void)) {
-        loader.perform(request: URLRequest(url: URL(string: "\(getBasePath())/me")!)) { (response) in
-            do {
-                let json = try response.responseJSON()
-                callback(json)
-            }
-            catch let error {
-                print(error)
-            }
-        }
+//        loader.perform(request: URLRequest(url: URL(string: "\(getBasePath())/me")!)) { (response) in
+//            do {
+//                let json = try response.responseJSON()
+//                callback(json)
+//            }
+//            catch let error {
+//                print(error)
+//            }
+//        }
     }
     
     
@@ -212,20 +212,20 @@ public class Auth {
             headers["Content-Type"] = "application/json"
             req.allHTTPHeaderFields = headers
             
-            loader.perform(request: req) { (response) in
-                do {
-                    let json = try response.responseJSON()
-                    
-                    callback(json)
-                }
-                catch let error {
-                    print(error)
-                    
-                    callback([
-                        "error": error
-                    ])
-                }
-            }
+//            loader.perform(request: req) { (response) in
+//                do {
+//                    let json = try response.responseJSON()
+//
+//                    callback(json)
+//                }
+//                catch let error {
+//                    print(error)
+//
+//                    callback([
+//                        "error": error
+//                    ])
+//                }
+//            }
         } catch let error {
             print("Error parsing JSON Data: \(userMetadata)");
             callback([
@@ -239,14 +239,14 @@ public class Auth {
     ///
     /// - Parameter callback: JSON Data containing error or response data
     public func authorize(callback: @escaping ((JSONString) -> Swift.Void)) {
-        loader.perform(request: URLRequest(url: URL(string: "\(getBasePath())/me")!)) { (response) in
-            do {
-                let json = try response.responseJSON()
-                callback(json)
-            }
-            catch let error {
-                print(error)
-            }
-        }
+//        loader.perform(request: URLRequest(url: URL(string: "\(getBasePath())/me")!)) { (response) in
+//            do {
+//                let json = try response.responseJSON()
+//                callback(json)
+//            }
+//            catch let error {
+//                print(error)
+//            }
+//        }
     }
 }
