@@ -12,7 +12,7 @@ import RxSwift
 import RxBinding
 import MaterialComponents
 
-class UserAccountViewController: BaseViewController {
+class UserAccountViewController: BaseViewController, AlertDialogController, LoadingIndicatorController {
     
     @IBOutlet weak var profileView: ProfileView!
     @IBOutlet weak var profileNameLabel: UILabel!
@@ -45,6 +45,7 @@ class UserAccountViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
+        viewModel.downloadData()
     }
     
     override func viewDidLayoutSubviews() {
@@ -58,6 +59,7 @@ class UserAccountViewController: BaseViewController {
 extension UserAccountViewController {
     
     func setUpViews() {
+        self.navigationController?.removeNavigationBarBorder()
         self.parentScrollView.refreshControl = UIRefreshControl()
         prepareTabBar()
     }
@@ -205,6 +207,14 @@ extension UserAccountViewController {
                         postDetailViewController.hidesBottomBarWhenPushed = true
                         self.show(postDetailViewController, sender: nil)
                     }
+                case .editPostController(let editPostViewModel):
+                    if let createPostController = R.storyboard.post.createPostViewController() {
+                        createPostController.viewModel = editPostViewModel
+                        let createPostNavigationController = CloseableNavigationController(rootViewController: createPostController)
+                        self.present(createPostNavigationController, animated: true, completion: nil)
+                    }
+                case .loading(let loading):
+                    loading ? self.showLoading() : self.dismissLoading()
                 }
             }) ~ self.disposeBag
     }

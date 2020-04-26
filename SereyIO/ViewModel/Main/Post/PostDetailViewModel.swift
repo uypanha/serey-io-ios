@@ -120,28 +120,6 @@ extension PostDetailViewModel {
     }
 }
 
-// MARK: - Preparations & Tools
-extension PostDetailViewModel {
-    
-    enum PostMenu {
-        case edit
-        case delete
-        
-        var cellModel: PostMenuCellViewModel {
-            return PostMenuCellViewModel(self)
-        }
-        
-        var imageTextModel: ImageTextModel {
-            switch self {
-            case .edit:
-                return ImageTextModel(image: R.image.editIcon(), titleText: R.string.common.edit.localized())
-            case .delete:
-                return ImageTextModel(image: R.image.trashIcon(), titleText: R.string.common.delete.localized())
-            }
-        }
-    }
-}
-
 // MARK: - Action Handlers
 fileprivate extension PostDetailViewModel {
     
@@ -239,12 +217,12 @@ extension PostDetailViewModel {
                     self?.replies.renotify()
                 case .replyCommentPressed(let commentCell):
                     self?.handleReplyCommentPressed(commentCell)
-                case .upVotePressed(let data):
-                    self?.handleUpVotePressed(data.0, data.1, data.2)
-                case .flagPressed(let data):
-                    self?.handleFlagPressed(data.0, data.1, data.2)
-                case .downVotePressed(let data):
-                    self?.handlDownvotePressed(data.0, data.1, data.2)
+                case .upVotePressed(let type, let post, let votedType):
+                    self?.handleUpVotePressed(type, post, votedType)
+                case .flagPressed(let type, let post, let votedType):
+                    self?.handleFlagPressed(type, post, votedType)
+                case .downVotePressed(let type, let post, let votedType):
+                    self?.handlDownvotePressed(type, post, votedType)
                 }
             }) ~ self.disposeBag
     }
@@ -275,10 +253,29 @@ extension PostDetailViewModel {
 // MARK: - PostMenuCellViewModel
 class PostMenuCellViewModel: ImageTextCellViewModel {
     
-    let type: PostDetailViewModel.PostMenu
+    let type: PostMenu
     
-    init(_ type: PostDetailViewModel.PostMenu) {
+    init(_ type: PostMenu) {
         self.type = type
         super.init(model: type.imageTextModel)
+    }
+}
+
+// MARK: - Post Menu
+enum PostMenu {
+    case edit
+    case delete
+    
+    var cellModel: PostMenuCellViewModel {
+        return PostMenuCellViewModel(self)
+    }
+    
+    var imageTextModel: ImageTextModel {
+        switch self {
+        case .edit:
+            return ImageTextModel(image: R.image.editIcon(), titleText: R.string.common.edit.localized())
+        case .delete:
+            return ImageTextModel(image: R.image.trashIcon(), titleText: R.string.common.delete.localized())
+        }
     }
 }

@@ -20,7 +20,11 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
     }
     
     enum ViewToPresent {
+        case loading(Bool)
         case postDetailViewController(PostDetailViewModel)
+        case moreDialogController(BottomListMenuViewModel)
+        case editPostController(CreatePostViewModel)
+        case deletePostDialog(confirm: () -> Void)
     }
     
     // input:
@@ -38,6 +42,36 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
     func shouldRefreshData() {
         self.didAction(with: .refresh)
     }
+    
+    override func onMorePressed(of postModel: PostModel) {
+        let items: [PostMenu] = [.edit, .delete]
+        let bottomMenuViewModel = BottomListMenuViewModel(items.map { $0.cellModel })
+        
+        bottomMenuViewModel.shouldSelectMenuItem.asObservable()
+            .subscribe(onNext: { [weak self] item in
+                if let itemType = (item as? PostMenuCellViewModel)?.type {
+                    self?.handleMenuPressed(itemType, postModel)
+                }
+            }) ~ bottomMenuViewModel.disposeBag
+        
+        self.shouldPresent(.moreDialogController(bottomMenuViewModel))
+    }
+}
+
+// MARK: - Networks
+extension PostTableViewModel {
+    
+    private func deletePost(_ post: PostModel) {
+        self.shouldPresent(.loading(true))
+        self.discussionService.deletePost(post.authorName, post.permlink)
+            .subscribe(onNext: { [weak self] _ in
+                self?.shouldPresent(.loading(false))
+            }, onError: { [weak self] error in
+                self?.shouldPresent(.loading(false))
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
 }
 
 // MARK: - Action Handlers
@@ -49,6 +83,19 @@ fileprivate extension PostTableViewModel {
                 let viewModel = PostDetailViewModel(discussion)
                 self.shouldPresent(.postDetailViewController(viewModel))
             }
+        }
+    }
+    
+    func handleMenuPressed(_ type: PostMenu, _ post: PostModel) {
+        switch type {
+        case .edit:
+            let createPostViewModel = CreatePostViewModel(.edit(post))
+            self.shouldPresent(.editPostController(createPostViewModel))
+        case .delete:
+            self.shouldPresent(.deletePostDialog(confirm: {
+                self.deletePost(post)
+            }))
+            break
         }
     }
 }

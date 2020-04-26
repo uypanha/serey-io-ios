@@ -62,6 +62,10 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
             fetchDiscussions()
         }
     }
+    
+    internal func onMorePressed(of postModel: PostModel) {
+        
+    }
 }
 
 // MARK: - Networks
@@ -112,7 +116,12 @@ extension BasePostViewModel {
             })
         }
         
-        cells.append(contentsOf: discussions.map { PostCellViewModel($0) })
+        cells.append(contentsOf: discussions.map {
+            PostCellViewModel($0).then {
+                setUpPostCellViewModel($0)
+            }
+        })
+        
         if self.canDownloadMore() {
             let loadingCells = error ? nil : !discussions.isEmpty ? (0...0) : (0...3)
             if let loadingCells = loadingCells {
@@ -167,6 +176,13 @@ fileprivate extension BasePostViewModel {
             .map { _ in return nil }
             ~> self.selectedCategory
             ~ cellModel.disposeBag
+    }
+    
+    func setUpPostCellViewModel(_ cellModel: PostCellViewModel) {
+        cellModel.shouldShowMoreOption.asObservable()
+            .subscribe(onNext: { [weak self] postModel in
+                self?.onMorePressed(of: postModel)
+            }) ~ cellModel.disposeBag
     }
 }
 

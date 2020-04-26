@@ -36,13 +36,13 @@ enum SettingType {
                 return ImageTextModel(image: R.image.walletIcon(), titleText: R.string.settings.myWallet.localized())
             case .lagnauge:
                 let text = String(format: R.string.settings.language.localized(), LanguageManger.shared.currentLanguage.languageText ?? "")
-                return ImageTextModel(image: R.image.languageIcon(), titleText: text, subTitle: self.subTitle)
+                return ImageTextModel(image: R.image.languageIcon(), titleText: text)
             case .notificationSettings:
                 return ImageTextModel(image: R.image.tabNotification(), titleText: R.string.settings.notificationSettings.localized())
             case .sereyApps:
                 return ImageTextModel(image: R.image.sereyAppsIcon(), titleText: R.string.settings.sereyApps.localized())
             case .version:
-                return ImageTextModel(image: R.image.aboutIcon(), titleText: R.string.settings.version.localized())
+                return ImageTextModel(image: R.image.aboutIcon(), titleText: R.string.settings.version.localized(), subTitle: self.subTitle)
             }
         }
     }

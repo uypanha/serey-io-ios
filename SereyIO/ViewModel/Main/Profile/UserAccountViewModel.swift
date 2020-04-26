@@ -25,6 +25,8 @@ class UserAccountViewModel: BaseViewModel, DownloadStateNetworkProtocol, ShouldP
     
     enum ViewToPresent {
         case postDetailViewController(PostDetailViewModel)
+        case editPostController(CreatePostViewModel)
+        case loading(Bool)
     }
     
     // input:
@@ -86,16 +88,20 @@ extension UserAccountViewModel {
     
     func downloadData() {
         if !self.isDownloading.value {
-            getFollowerList()
+            getProfile()
         }
     }
     
-    func getFollowerList() {
+    func getProfile() {
         self.isDownloading.accept(true)
-        self.userService.getFollowerList(self.username.value)
-            .subscribe(onNext: { [weak self] response in
+        self.userService.fetchProfile(self.username.value)
+            .flatMap { [unowned self] data -> Observable<FollowerListResponse> in
+                self.userInfo.accept(data.data.result)
+                return self.userService.getFollowerList(self.username.value)
+            }
+            .subscribe(onNext: { [weak self] data in
                 self?.isDownloading.accept(false)
-                self?.followers.accept(response.followerList)
+                self?.followers.accept(data.followerList)
             }, onError: { [weak self] error in
                 self?.isDownloading.accept(false)
                 let errorInfo = ErrorHelper.prepareError(error: error)
@@ -158,7 +164,7 @@ extension UserAccountViewModel {
     
     private func notifyDataChanged(_ data: UserModel?) {
         self.profileViewModel.onNext(data?.profileModel ?? prepareProfileViewModel(from: self.username.value))
-        self.accountName.onNext(data?.name ?? self.username.value)
+        self.accountName.onNext((data?.name ?? self.username.value)?.capitalized)
         self.postCountText.onNext(preparePostCountText(data?.postCount ?? 0))
         self.followerCountText.onNext(prepareFollowersCountText(data?.followersCount ?? 0))
         self.followingCountText.onNext(prepareFollowingsCountText(data?.followingCount ?? 0))
@@ -257,6 +263,12 @@ fileprivate extension UserAccountViewModel {
                 switch viewToPresent {
                 case .postDetailViewController(let postDetailViewModel):
                     self?.shouldPresent(.postDetailViewController(postDetailViewModel))
+                case .editPostController(let createPostViewModel):
+                    self?.shouldPresent(.editPostController(createPostViewModel))
+                case .loading(let loading):
+                    self?.shouldPresent(.loading(loading))
+                default:
+                    break
                 }
             }) ~ viewModel.disposeBag
     }

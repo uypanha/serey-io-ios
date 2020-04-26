@@ -12,7 +12,7 @@ import RxSwift
 import RxBinding
 import MaterialComponents
 
-class HomeViewController: BaseViewController {
+class HomeViewController: BaseViewController, AlertDialogController, LoadingIndicatorController {
     
     @IBOutlet weak var tabBar: MDCTabBar!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -234,6 +234,14 @@ fileprivate extension HomeViewController {
                         signInViewController.viewModel = SignInViewModel()
                         self.show(CloseableNavigationController(rootViewController: signInViewController), sender: nil)
                     }
+                case .editPostController(let editPostViewModel):
+                    if let createPostController = R.storyboard.post.createPostViewController() {
+                        createPostController.viewModel = editPostViewModel
+                        let createPostNavigationController = CloseableNavigationController(rootViewController: createPostController)
+                        self.present(createPostNavigationController, animated: true, completion: nil)
+                    }
+                case .loading(let loading):
+                    loading ? self.showLoading() : self.dismissLoading()
                 }
             }) ~ self.disposeBag
     }

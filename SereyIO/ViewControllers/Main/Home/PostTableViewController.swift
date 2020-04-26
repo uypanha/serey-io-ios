@@ -14,7 +14,7 @@ import RxDataSources
 import NVActivityIndicatorView
 import SnapKit
 
-class PostTableViewController: BaseTableViewController {
+class PostTableViewController: BaseTableViewController, AlertDialogController {
     
     fileprivate weak var emptyView: EmptyOrErrorView? = nil {
         didSet {
@@ -90,6 +90,7 @@ fileprivate extension PostTableViewController {
     func setUpRxObservers() {
         setUpControlsObsservers()
         setUpContentChangedObservers()
+        shouldPresentObservers()
         setUpShouldPresentErrorObservers()
     }
     
@@ -137,6 +138,23 @@ fileprivate extension PostTableViewController {
             .subscribe(onNext: { [unowned self] (cell, indexPath) in
                 if self.viewModel.isLastItem(indexPath: indexPath) {
                     self.viewModel.downloadData()
+                }
+            }) ~ self.disposeBag
+    }
+    
+    func shouldPresentObservers() {
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { viewToPresent in
+                switch viewToPresent {
+                case .moreDialogController(let bottomViewModel):
+                    let bottomMenuController = BottomMenuViewController(bottomViewModel)
+                    self.present(bottomMenuController, animated: true, completion: nil)
+                case .deletePostDialog(let confirm):
+                    self.showDialog(nil, title: "Delete Article?", message: "Are you sure you want to delete this article?", dismissable: false, positiveButton: "Delete", positiveCompletion: {
+                        confirm()
+                    }, negativeButton: "No")
+                default:
+                    break
                 }
             }) ~ self.disposeBag
     }

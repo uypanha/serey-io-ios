@@ -25,6 +25,8 @@ class UserCommentReplyCellViewModel: CellViewModel, ShimmeringProtocol {
     let upVoteCount: BehaviorSubject<String?>
     let downVoteCount: BehaviorSubject<String?>
     
+    let isDownvoteHidden: BehaviorSubject<Bool>
+    
     init(_ data: CommentReplyModel?) {
         self.data = BehaviorRelay(value: data)
         self.isShimmering = BehaviorRelay(value: false)
@@ -37,6 +39,7 @@ class UserCommentReplyCellViewModel: CellViewModel, ShimmeringProtocol {
         self.sereyValue = BehaviorSubject(value: nil)
         self.upVoteCount = BehaviorSubject(value: nil)
         self.downVoteCount = BehaviorSubject(value: nil)
+        self.isDownvoteHidden = BehaviorSubject(value: true)
         super.init()
         
         setUpRxObservers()
@@ -54,12 +57,13 @@ extension UserCommentReplyCellViewModel {
     
     func notifyDataChanged(_ data: CommentReplyModel?) {
         self.profileViewModel.onNext(data?.profileViewModel)
-        self.authorName.onNext(data?.author)
+        self.authorName.onNext(data?.author.capitalized)
         self.publishedAt.onNext(data?.publishedDateString)
         self.titleText.onNext(data?.title)
         self.contentAttributedString.onNext(data?.body.htmlAttributed(size: 10))
         self.sereyValue.onNext(data?.sereyValue)
         self.upVoteCount.onNext("\(data?.votes ?? 0)")
+        self.isDownvoteHidden.onNext(true)
     }
 }
 

@@ -23,9 +23,11 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
     
     enum ViewToPresent {
         case choosePostCategoryController(ChooseCategorySheetViewModel)
+        case editPostController(CreatePostViewModel)
         case postDetailViewController(PostDetailViewModel)
         case createPostViewController
         case signInViewController
+        case loading(Bool)
     }
     
     // input:
@@ -155,6 +157,12 @@ extension HomeViewModel {
                 switch viewToPresent {
                 case .postDetailViewController(let postDetailViewModel):
                     self?.shouldPresent(.postDetailViewController(postDetailViewModel))
+                case .editPostController(let createPostViewModel):
+                    self?.shouldPresent(.editPostController(createPostViewModel))
+                case .loading(let loading):
+                    self?.shouldPresent(.loading(loading))
+                default:
+                    break
                 }
             }) ~ viewModel.disposeBag
     }

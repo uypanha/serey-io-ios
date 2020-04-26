@@ -50,7 +50,8 @@ class UserCommentReplyTableViewCell: BaseTableViewCell {
                 cellModel.contentAttributedString ~> self.commentDescriptionLabel.rx.attributedText,
                 cellModel.sereyValue ~> self.sereyValueLabel.rx.text,
                 cellModel.upVoteCount ~> self.upVoteCountLabel.rx.text,
-                cellModel.downVoteCount ~> self.downVoteCountLabel.rx.text
+                cellModel.downVoteCount ~> self.downVoteCountLabel.rx.text,
+                cellModel.isDownvoteHidden ~> self.downVoteContainerView.rx.isHidden
             ]
             
             cellModel.isShimmering.asObservable()

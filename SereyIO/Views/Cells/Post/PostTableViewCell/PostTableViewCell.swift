@@ -68,6 +68,8 @@ class PostTableViewCell: BaseTableViewCell {
                 .subscribe(onNext: { [weak self] isShimmering in
                     self?.prepareShimmering(isShimmering)
                 }) ~ self.disposeBag
+            
+            setUpControlsObservers()
         }
     }
 
@@ -105,5 +107,16 @@ extension PostTableViewCell {
         DispatchQueue.main.async {
             self.vwShimmer.isShimmering = isShimmering
         }
+    }
+}
+
+// MARK: - SetUp RxObservers
+extension PostTableViewCell {
+    
+    func setUpControlsObservers() {
+        self.moreButton.rx.tap.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.cellModel?.onMoreButtonPressed()
+            }) ~ self.disposeBag
     }
 }

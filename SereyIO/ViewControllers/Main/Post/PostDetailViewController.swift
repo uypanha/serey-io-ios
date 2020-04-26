@@ -45,8 +45,8 @@ class PostDetailViewController: BaseViewController, AlertDialogController, Loadi
         viewModel.downloadData()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
         self.keyboardDisposeBag = DisposeBag()
     }
