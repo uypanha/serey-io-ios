@@ -42,6 +42,11 @@
 		DC12F212242278F90099C479 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC12F211242278F90099C479 /* UserModel.swift */; };
 		DC12F21424227A340099C479 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC12F21324227A340099C479 /* UserService.swift */; };
 		DC12F21624227AB40099C479 /* AccountModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC12F21524227AB40099C479 /* AccountModel.swift */; };
+		DC13409024573A1F00CC9856 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC13408F24573A1E00CC9856 /* Notifications.storyboard */; };
+		DC13409324573AE700CC9856 /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13409224573AE700CC9856 /* NotificationSettingsViewController.swift */; };
+		DC13409824573F0C00CC9856 /* ToggleTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC13409524573F0C00CC9856 /* ToggleTextTableViewCell.xib */; };
+		DC13409924573F0C00CC9856 /* ToggleTextCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13409624573F0C00CC9856 /* ToggleTextCellModel.swift */; };
+		DC13409A24573F0C00CC9856 /* ToggleTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC13409724573F0C00CC9856 /* ToggleTextTableViewCell.swift */; };
 		DC19DBE323EC581A00571CC8 /* ChooseCategorySheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */; };
 		DC19DBE523EC5D0700571CC8 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBE423EC5D0700571CC8 /* BaseTableViewController.swift */; };
 		DC19DBE723EC5E7500571CC8 /* PostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC19DBE623EC5E7500571CC8 /* PostTableViewController.swift */; };
@@ -152,6 +157,9 @@
 		DC6FCE7723F05D1700D72F6D /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE6E23F05D1700D72F6D /* Tag.swift */; };
 		DC6FCE7823F05D1700D72F6D /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE6F23F05D1700D72F6D /* Api.swift */; };
 		DC6FCE7923F05D1700D72F6D /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE7023F05D1700D72F6D /* Helper.swift */; };
+		DC7558AE24587B3D00AD40FA /* FeatureBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7558AD24587B3D00AD40FA /* FeatureBoarding.swift */; };
+		DC7558B124588CE700AD40FA /* NotificationSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7558B024588CE700AD40FA /* NotificationSettingsViewModel.swift */; };
+		DC7558B32458932700AD40FA /* PreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7558B22458932700AD40FA /* PreferenceStore.swift */; };
 		DC75DAB7244DF0C100D80CB2 /* PostCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */; };
 		DC75DAB9244E055000D80CB2 /* FollowActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */; };
 		DC75DABB244E07EE00D80CB2 /* FollowerListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */; };
@@ -335,6 +343,11 @@
 		DC12F211242278F90099C479 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		DC12F21324227A340099C479 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		DC12F21524227AB40099C479 /* AccountModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountModel.swift; sourceTree = "<group>"; };
+		DC13408F24573A1E00CC9856 /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
+		DC13409224573AE700CC9856 /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
+		DC13409524573F0C00CC9856 /* ToggleTextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToggleTextTableViewCell.xib; sourceTree = "<group>"; };
+		DC13409624573F0C00CC9856 /* ToggleTextCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleTextCellModel.swift; sourceTree = "<group>"; };
+		DC13409724573F0C00CC9856 /* ToggleTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToggleTextTableViewCell.swift; sourceTree = "<group>"; };
 		DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCategorySheetViewController.swift; sourceTree = "<group>"; };
 		DC19DBE423EC5D0700571CC8 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		DC19DBE623EC5E7500571CC8 /* PostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewController.swift; sourceTree = "<group>"; };
@@ -467,6 +480,9 @@
 		DC6FCE6E23F05D1700D72F6D /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		DC6FCE6F23F05D1700D72F6D /* Api.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
 		DC6FCE7023F05D1700D72F6D /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		DC7558AD24587B3D00AD40FA /* FeatureBoarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureBoarding.swift; sourceTree = "<group>"; };
+		DC7558B024588CE700AD40FA /* NotificationSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewModel.swift; sourceTree = "<group>"; };
+		DC7558B22458932700AD40FA /* PreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceStore.swift; sourceTree = "<group>"; };
 		DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellProtocol.swift; sourceTree = "<group>"; };
 		DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowActionModel.swift; sourceTree = "<group>"; };
 		DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListResponse.swift; sourceTree = "<group>"; };
@@ -746,6 +762,24 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		DC13409124573AC100CC9856 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				DC13409224573AE700CC9856 /* NotificationSettingsViewController.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		DC13409424573F0C00CC9856 /* ToggleTextTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC13409624573F0C00CC9856 /* ToggleTextCellModel.swift */,
+				DC13409724573F0C00CC9856 /* ToggleTextTableViewCell.swift */,
+				DC13409524573F0C00CC9856 /* ToggleTextTableViewCell.xib */,
+			);
+			path = ToggleTextTableViewCell;
+			sourceTree = "<group>";
+		};
 		DC19DBE823EC5F8400571CC8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -838,6 +872,7 @@
 		DC40D5D123E32A2800B0DD96 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DC13409424573F0C00CC9856 /* ToggleTextTableViewCell */,
 				DCD12D69242D06AB0084F66C /* ImageTextTableViewCell */,
 				DCA525552425165C00284CD8 /* ButtonTableViewCell */,
 				DCC6F1DF242BBDA7003B9E3A /* TextTableViewCell */,
@@ -874,6 +909,7 @@
 				DCEF9D36243E1680002B7E99 /* MoreAppsViewModel.swift */,
 				DC05FDBB23F1B0500093B47B /* MoreViewModel.swift */,
 				DC40D5E123E335F900B0DD96 /* Language */,
+				DC7558AF24588C1600AD40FA /* Notification */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1105,6 +1141,7 @@
 				DC115F31241A962A006BE78C /* Auth.storyboard */,
 				DC8EAB7623E7218600E00A00 /* Home.storyboard */,
 				DC26812E23F450BE0045776E /* More.storyboard */,
+				DC13408F24573A1E00CC9856 /* Notifications.storyboard */,
 				DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */,
 				DC9E36D82412997800289693 /* Post.storyboard */,
 				DC26813023F45A8C0045776E /* Profile.storyboard */,
@@ -1264,6 +1301,14 @@
 			path = Structs;
 			sourceTree = "<group>";
 		};
+		DC7558AF24588C1600AD40FA /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				DC7558B024588CE700AD40FA /* NotificationSettingsViewModel.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		DC7C09C02326AFEA0006D0BF /* Handlers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1305,8 +1350,9 @@
 		DC88A73A23DF4A7700EB7F79 /* OnBoard */ = {
 			isa = PBXGroup;
 			children = (
-				DC88A73B23DF4A8900EB7F79 /* SelectLanguageViewModel.swift */,
 				DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */,
+				DC7558AD24587B3D00AD40FA /* FeatureBoarding.swift */,
+				DC88A73B23DF4A8900EB7F79 /* SelectLanguageViewModel.swift */,
 			);
 			path = OnBoard;
 			sourceTree = "<group>";
@@ -1341,6 +1387,7 @@
 			children = (
 				DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */,
 				DC05FDC423F1BE420093B47B /* Languages */,
+				DC13409124573AC100CC9856 /* Notifications */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -1465,6 +1512,7 @@
 			isa = PBXGroup;
 			children = (
 				DCC49ACB23E864E500119BAA /* FeatureStore.swift */,
+				DC7558B22458932700AD40FA /* PreferenceStore.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1965,8 +2013,10 @@
 				DC115F32241A962A006BE78C /* Auth.storyboard in Resources */,
 				DC9E36F2241628E000289693 /* custom_rich_editor.js in Resources */,
 				DC0079102438D4150063C3FF /* GoogleService-Info-Development.plist in Resources */,
+				DC13409024573A1F00CC9856 /* Notifications.storyboard in Resources */,
 				DC6ED52623267EED00770B31 /* Main.storyboard in Resources */,
 				DC05FDAD23F1AB620093B47B /* SettingTableViewCell.xib in Resources */,
+				DC13409824573F0C00CC9856 /* ToggleTextTableViewCell.xib in Resources */,
 				DCB629EE2417E84F00C64BD6 /* PostCommentView.xib in Resources */,
 				DC40D5CD23E3298F00B0DD96 /* LanguageTableViewCell.xib in Resources */,
 				DC6A790423CA242B001D1009 /* EmptyOrErrorView.xib in Resources */,
@@ -2202,8 +2252,10 @@
 				DC6ED56A23269CA300770B31 /* RootViewController.swift in Sources */,
 				DC6FCE7623F05D1700D72F6D /* Accounts.swift in Sources */,
 				DC8EAB7B23E722BC00E00A00 /* MainTabBarViewController.swift in Sources */,
+				DC7558B124588CE700AD40FA /* NotificationSettingsViewModel.swift in Sources */,
 				DC115F37241A9975006BE78C /* SignInViewController.swift in Sources */,
 				DC05FDAB23F1AB620093B47B /* SettingCellViewModel.swift in Sources */,
+				DC13409324573AE700CC9856 /* NotificationSettingsViewController.swift in Sources */,
 				DC05FDC323F1BDF10093B47B /* LanguagesViewController.swift in Sources */,
 				DC9AC6E82406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift in Sources */,
 				DCDE00672446016800D09717 /* ReplyCommentViewController.swift in Sources */,
@@ -2231,6 +2283,7 @@
 				DC9AC6E32406C4F7008FAFA6 /* Moya+Extensions.swift in Sources */,
 				DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */,
 				DC26812A23F2FCB30045776E /* ProfileTableViewCell.swift in Sources */,
+				DC7558AE24587B3D00AD40FA /* FeatureBoarding.swift in Sources */,
 				DCD39883232E24BF00C812EB /* Realm+Cnfigure.swift in Sources */,
 				DC9E36DC24129ACA00289693 /* PostDetailViewController.swift in Sources */,
 				DCD3988B232E255E00C812EB /* UIImage+Extensions.swift in Sources */,
@@ -2245,6 +2298,7 @@
 				DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */,
 				DC115F2E241A8E18006BE78C /* NSAttributedString+Extensions.swift in Sources */,
 				DC40D5C623E31FDF00B0DD96 /* ContentSizedTableView.swift in Sources */,
+				DC7558B32458932700AD40FA /* PreferenceStore.swift in Sources */,
 				DC357A4E243CC72C00B2D3B7 /* ContentSizedCollectionView.swift in Sources */,
 				DCEC0CC8240A5E0E002F4B6F /* CicularButton.swift in Sources */,
 				DCC49ACE23E865B600119BAA /* BoardFeatureViewModel.swift in Sources */,
@@ -2289,6 +2343,7 @@
 				DCCD40CE24379BD100093A18 /* BottomMenuViewController.swift in Sources */,
 				DCC6F1E5242BBF27003B9E3A /* TextCellViewModel.swift in Sources */,
 				DC88A73C23DF4A8900EB7F79 /* SelectLanguageViewModel.swift in Sources */,
+				DC13409A24573F0C00CC9856 /* ToggleTextTableViewCell.swift in Sources */,
 				DC6A790523CA242B001D1009 /* EmptyOrErrorView.swift in Sources */,
 				DCEC0CBE240971AE002F4B6F /* ShimmeringProtocol.swift in Sources */,
 				DCC49ACC23E864E500119BAA /* FeatureStore.swift in Sources */,
@@ -2340,6 +2395,7 @@
 				DC6ED5802326A46300770B31 /* SimpleStore.swift in Sources */,
 				DCC49AD323E865D700119BAA /* ProfileView.swift in Sources */,
 				DC05FDBC23F1B0500093B47B /* MoreViewModel.swift in Sources */,
+				DC13409924573F0C00CC9856 /* ToggleTextCellModel.swift in Sources */,
 				DC6ED56823269B8400770B31 /* R.generated.swift in Sources */,
 				DC115F3E241A9BA5006BE78C /* SignInCellViewModel.swift in Sources */,
 				DCD3987F232E238800C812EB /* UIView+Appearance.swift in Sources */,

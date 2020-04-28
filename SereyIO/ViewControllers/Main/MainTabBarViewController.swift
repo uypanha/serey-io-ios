@@ -11,8 +11,6 @@ import UIKit
 class MainTabBarViewController: BaseTabBarViewController {
     
     private var previousController: UIViewController? = nil
-    
-//    var viewModel: MainTabBarViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,14 +50,11 @@ fileprivate extension MainTabBarViewController {
     
     func setUpViews() {
         configureTabBarController()
-//        for tabBarItem in tabBar.items! {
-//            tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
-//        }
         self.delegate = self
     }
     
     func configureTabBarController() {
-        let controllers: [UIViewController] = ControllerType.allCases.map { $0.prepareViewController() }
+        let controllers: [UIViewController] = [ControllerType.home, .search, .more].map { $0.prepareViewController() }
         
         for i in 0..<controllers.count {
             (controllers[i] as? TabBarControllerDelegate)?.configureTabBar(i)

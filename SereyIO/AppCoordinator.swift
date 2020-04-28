@@ -24,11 +24,11 @@ class AppCoordinator {
     }
     
     fileprivate func checkInitialStatus() {
-        if Store.standard.value(forKey: Constants.UserDefaultsKeys.appHasRunBefore.rawValue) as? Bool ?? false {
+        if PreferenceStore.shared.isAppRunBefore {
             return
         }
         
-        Store.standard.setValue(true, forKey: Constants.UserDefaultsKeys.appHasRunBefore.rawValue)
+        PreferenceStore.shared.isAppRunBefore = true
         // Removing data from keychain
         // TODO: (PŁ) remove all data ??
         AuthData.shared.removeAuthData(notify: false)

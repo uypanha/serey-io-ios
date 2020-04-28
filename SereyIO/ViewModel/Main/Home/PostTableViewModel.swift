@@ -95,7 +95,6 @@ fileprivate extension PostTableViewModel {
             self.shouldPresent(.deletePostDialog(confirm: {
                 self.deletePost(post)
             }))
-            break
         }
     }
 }

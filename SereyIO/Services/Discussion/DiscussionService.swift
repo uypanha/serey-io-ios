@@ -9,6 +9,7 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import AnyCodable
 
 class DiscussionService: AppService<DiscussionApi> {
     
@@ -43,8 +44,8 @@ class DiscussionService: AppService<DiscussionApi> {
             .asObservable()
     }
     
-    func deletePost(_ username: String, _ permlink: String) -> Observable<DataResponseModel<String>> {
-        return self.provider.rx.requestObject(.deletPost(username: username, permlink: permlink), type: DataResponseModel<String>.self)
+    func deletePost(_ username: String, _ permlink: String) -> Observable<AnyCodable> {
+        return self.provider.rx.requestObject(.deletPost(username: username, permlink: permlink), type: AnyCodable.self)
             .asObservable()
     }
     

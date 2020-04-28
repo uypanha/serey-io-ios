@@ -42,7 +42,7 @@ class BoardingViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
 extension BoardingViewModel {
     
     func prepareSlides() -> [CellViewModel] {
-        return (0...2).map { _ in BoardFeatureViewModel() }
+        return (FeatureBoarding.allCases).map { BoardFeatureViewModel($0) }
     }
 }
 

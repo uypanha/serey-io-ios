@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BoardFeatureView" customModule="iOSTemplate" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BoardFeatureView" customModule="SereyIO" customModuleProvider="target">
             <connections>
                 <outlet property="featureImageView" destination="1Xb-UA-Ubl" id="B3V-Fr-x76"/>
                 <outlet property="headlineLabel" destination="qww-ye-h69" id="XMt-qp-VSm"/>
@@ -20,14 +20,14 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="547"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odb-zT-pVP" customClass="CardView" customModule="iOSTemplate" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odb-zT-pVP" customClass="CardView" customModule="SereyIO" customModuleProvider="target">
                     <rect key="frame" x="30" y="20" width="354" height="354"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Xb-UA-Ubl">
                             <rect key="frame" x="0.0" y="0.0" width="354" height="354"/>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" red="0.89411764705882346" green="0.95686274509803915" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="1Xb-UA-Ubl" firstAttribute="leading" secondItem="odb-zT-pVP" secondAttribute="leading" id="30b-LK-SkQ"/>
                         <constraint firstAttribute="trailing" secondItem="1Xb-UA-Ubl" secondAttribute="trailing" id="Eih-ol-Z09"/>

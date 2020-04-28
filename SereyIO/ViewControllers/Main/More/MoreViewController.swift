@@ -197,6 +197,11 @@ fileprivate extension MoreViewController {
                     self.showDialog(nil, title: "Sign Out?", message: "Are you sure you want to sign out?", dismissable: false, positiveButton: "Sign Out", positiveCompletion: {
                         self.viewModel.didAction(with: .signOutConfirmed)
                     }, negativeButton: "No")
+                case .notificationSettingsController:
+                    if let notificationSettingsViewController = R.storyboard.notifications.notificationSettingsViewController() {
+                        notificationSettingsViewController.viewModel = NotificationSettingsViewModel()
+                        self.show(notificationSettingsViewController, sender: nil)
+                    }
                 }
             }).disposed(by: self.disposeBag)
     }

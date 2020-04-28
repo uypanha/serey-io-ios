@@ -64,6 +64,7 @@ fileprivate extension BoardingViewController {
         self.pageControl.hidesForSinglePage = true
         
         self.nextButton.primaryStyle()
+        self.nextButton.makeMeCircular()
         self.scrollView.delegate = self
     }
     
@@ -87,7 +88,15 @@ fileprivate extension BoardingViewController {
     }
     
     func createSlides(_ cells: [CellViewModel]) -> [UIView] {
-        return cells.map { _ in BoardFeatureView() }
+        var featureViews: [UIView] = []
+        cells.forEach { cell in
+            if let cell = cell as? BoardFeatureViewModel {
+                featureViews.append(BoardFeatureView().then {
+                    $0.viewModel = cell
+                })
+            }
+        }
+        return featureViews
     }
 }
 

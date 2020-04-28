@@ -28,6 +28,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case accountViewController(UserAccountViewModel)
         case moreAppsController(MoreAppsViewModel)
         case languagesViewController
+        case notificationSettingsController
         case webViewController(WebViewViewModel)
         case signOutDialog
     }
@@ -172,6 +173,8 @@ fileprivate extension MoreViewModel {
             case .sereyApps:
                 let moreAppsViewModel = MoreAppsViewModel()
                 self.shouldPresent(.moreAppsController(moreAppsViewModel))
+            case .notificationSettings:
+                self.shouldPresent(.notificationSettingsController)
             default:
                 break
             }

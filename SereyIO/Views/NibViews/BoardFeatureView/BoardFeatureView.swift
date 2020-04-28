@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxBinding
 import Kingfisher
 import RxKingfisher
 
@@ -20,7 +21,13 @@ class BoardFeatureView: NibView {
     
     var viewModel: BoardFeatureViewModel? {
         didSet {
+            guard let viewModel = self.viewModel else { return }
             
+            self.disposeBag ~ [
+                viewModel.image ~> self.featureImageView.rx.image,
+                viewModel.title ~> self.headlineLabel.rx.text,
+                viewModel.message ~> self.messageLabel.rx.text
+            ]
         }
     }
 }
