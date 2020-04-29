@@ -21,6 +21,7 @@
 "confirm"                           = "Confirm";
 "yes"                               = "Yes";
 "No"                                = "No";
+"delete"                            = "Delete";
 "skip"                              = "Skip";
 "continue"                          = "Continue";
 "webViewDefaultTitle"               = "Serey.io";
@@ -28,6 +29,7 @@
 "update"                            = "Update";
 "edit"                              = "Edit";
 "delete"                            = "Delete";
+"all"                               = "All";
 
 "next"                              = "Next";
 "letBegin"                          = "Let's begin";

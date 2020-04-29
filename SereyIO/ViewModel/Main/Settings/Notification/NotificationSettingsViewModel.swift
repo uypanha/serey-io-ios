@@ -40,7 +40,7 @@ extension NotificationSettingsViewModel {
         var imageViewModel: ImageTextModel {
             switch self  {
             case .generalNotification:
-                return ImageTextModel(image: R.image.tabNotification(), titleText: "Push Notification")
+                return ImageTextModel(image: R.image.tabNotification(), titleText: R.string.notifications.pushNotification.localized())
             }
         }
         

@@ -71,7 +71,7 @@ class CommentCellViewModel: PostCellViewModel, ShouldReactToAction, PostCellProt
         super.notifyDataChanged(data)
         
         self.contentAttributedString.onNext(data?.description?.htmlAttributed(size: 12))
-        self.conversationText.onNext("View Conversation (\(data?.answerCount ?? 0))")
+        self.conversationText.onNext(String(format: R.string.post.viewConversation.localized(), "(\(data?.answerCount ?? 0))"))
         self.isVoteAllowed.onNext(data?.authorName != AuthData.shared.username)
         self.votedType.accept(data?.votedType)
         self.upVoteEnabled.onNext(data?.votedType != .flag)

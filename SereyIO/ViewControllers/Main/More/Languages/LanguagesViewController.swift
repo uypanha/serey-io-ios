@@ -55,7 +55,7 @@ fileprivate extension LanguagesViewController {
     }
     
     func prepareStringResources() {
-        self.title = "Languages"
+        self.title = R.string.settings.languages.localized()
     }
     
     func prepareTableView() {

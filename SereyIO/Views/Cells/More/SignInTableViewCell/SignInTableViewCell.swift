@@ -43,9 +43,9 @@ class SignInTableViewCell: BaseTableViewCell {
     }
     
     private func setUpTexts() {
-//        self.signInLabel.text = R.string.auth.signIn.localized()
-//        self.orRegisterLabel.text = R.string.auth.orRegister.localized()
-//        self.goButton.setTitle(R.string.settings.go.localized(), for: .normal)
+        self.signInLabel.text = R.string.auth.signIn.localized()
+        self.orRegisterLabel.text = R.string.auth.orSignUp.localized()
+        self.goButton.setTitle(R.string.auth.go.localized(), for: .normal)
     }
 }
 

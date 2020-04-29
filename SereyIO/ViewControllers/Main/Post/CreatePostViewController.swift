@@ -16,7 +16,7 @@ import RxKeyboard
 import Kingfisher
 import RxKingfisher
 
-class CreatePostViewController: BaseViewController, KeyboardController, LoadingIndicatorController {
+class CreatePostViewController: BaseViewController, KeyboardController, LoadingIndicatorController, AlertDialogController {
     
     fileprivate lazy var keyboardDisposeBag = DisposeBag()
 
@@ -75,7 +75,7 @@ class CreatePostViewController: BaseViewController, KeyboardController, LoadingI
         super.setUpLocalizedTexts()
         
         self.title = self.viewModel.titleText
-        self.richEditorView.placeholder = "Article body"
+        self.richEditorView.placeholder = R.string.post.articleBody.localized()
     }
 }
 
@@ -159,6 +159,7 @@ extension CreatePostViewController {
         setUpControlsObservers()
         setUpContentChangedObservers()
         setUpShouldPresentObservers()
+        setUpShouldPresentErrorObsevers()
         setUpTabSelfToDismissKeyboard()?.disposed(by: self.disposeBag)
     }
     
@@ -237,9 +238,9 @@ extension CreatePostViewController {
                 switch viewToPresent {
                 case .loading(let loading):
                     loading ? self.showLoading() : self.dismissLoading()
-                case .selectCategoryController(let data):
-                    let listTableViewController = ListTableViewController(data.viewModel)
-                    listTableViewController.title = data.title
+                case .selectCategoryController(let title, let viewModel):
+                    let listTableViewController = ListTableViewController(viewModel)
+                    listTableViewController.title = title
                     listTableViewController.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 8, right: 0)
                     listTableViewController.view.roundCorners(corners: [.topLeft, .topRight], radius: 8)
                     let bottomSheet = MDCBottomSheetController(contentViewController: listTableViewController)
@@ -248,13 +249,20 @@ extension CreatePostViewController {
                     bottomSheet.dismissOnDraggingDownSheet = true
                     bottomSheet.trackingScrollView = listTableViewController.tableView
                     self.present(bottomSheet, animated: true, completion: nil)
-                case .chooseMediaController(let params):
-                    self.imagePickerHelper.allowEditting = params.editable
-                    self.imagePickerHelper.showImagePickerAlert(title: params.title)
+                case .chooseMediaController(let title, let editable):
+                    self.imagePickerHelper.allowEditting = editable
+                    self.imagePickerHelper.showImagePickerAlert(title: title)
                 case .dismiss:
                     self.dismiss(animated: true, completion: nil)
                 }
             }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentErrorObsevers() {
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [unowned self] errorInfo in
+                self.showDialogError(errorInfo, positiveButton: R.string.common.confirm.localized(), positiveCompletion: nil)
+            }).disposed(by: self.disposeBag)
     }
     
     func setUpKeyboardObservers() {

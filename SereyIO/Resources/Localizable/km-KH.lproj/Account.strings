@@ -8,3 +8,6 @@
 "followerCount"         = "%@ Follower%@";
 "FollowingCount"        = "%@ Following%@";
 "postCount"             = "%@ Post%@";
+
+"follow"                = "Follow";
+"unfollow"              = "Unfollow";

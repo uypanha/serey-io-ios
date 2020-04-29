@@ -28,22 +28,22 @@ enum FeatureBoarding: CaseIterable {
     var title: String {
         switch self  {
         case .shareAndEarn:
-            return "Share & Earn"
+            return R.string.onBoard.shareAndEarn.localized()
         case .transparency:
-            return "Transparency"
+            return R.string.onBoard.transparency.localized()
         case .walletAndMarketPlace:
-            return "Wallet & Marketplace"
+            return R.string.onBoard.walletMarketplace.localized()
         }
     }
     
     var message: String {
         switch self {
         case .shareAndEarn:
-            return "Earn Serey coins by posting and sharing content."
+            return R.string.onBoard.shareAndEarnMessage.localized()
         case .transparency:
-            return "All posts on Serey will be permanently stored on the Serey decentralized blockchain."
+            return R.string.onBoard.transparencyMessage.localized()
         case .walletAndMarketPlace:
-            return "Download the Serey Wallet to send and receive coins or go to the Serey marketplace to buy and sell products."
+            return R.string.onBoard.walletMarketplaceMessage.localized()
         }
     }
 }

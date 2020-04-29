@@ -51,7 +51,7 @@ extension PostCategoryCellViewModel {
         
         let category = self.category.value
         let selectedCategory = self.selectedCategory.value
-        cellModels.append(CategoryCellViewModel(category, title: "All", isSelected: selectedCategory?.name == category.name))
+        cellModels.append(CategoryCellViewModel(category, title: R.string.common.all.localized(), isSelected: selectedCategory?.name == category.name))
         
         cellModels.append(contentsOf: (data.sub ?? []).map {
             CategoryCellViewModel($0, title: $0.name, isSelected: selectedCategory?.name == $0.name)

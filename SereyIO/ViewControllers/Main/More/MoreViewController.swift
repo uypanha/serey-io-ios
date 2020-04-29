@@ -128,7 +128,7 @@ extension MoreViewController: UITableViewDelegate {
 extension MoreViewController: TabBarControllerDelegate {
     
     func configureTabBar(_ tag: Int) {
-        self.tabBarItem = UITabBarItem(title: "More", image: R.image.tabMore(), selectedImage: R.image.tabMoreSelected())
+        self.tabBarItem = UITabBarItem(title: R.string.more.more.localized(), image: R.image.tabMore(), selectedImage: R.image.tabMoreSelected())
         self.tabBarItem?.tag = tag
     }
 }
@@ -194,9 +194,9 @@ fileprivate extension MoreViewController {
                     listTableViewController.title = "Serey Apps"
                     self.show(listTableViewController, sender: nil)
                 case .signOutDialog:
-                    self.showDialog(nil, title: "Sign Out?", message: "Are you sure you want to sign out?", dismissable: false, positiveButton: "Sign Out", positiveCompletion: {
+                    self.showDialog(nil, title: R.string.settings.signOutQ.localized(), message: R.string.settings.signOutMessage.localized(), dismissable: false, positiveButton: R.string.settings.signOut.localized(), positiveCompletion: {
                         self.viewModel.didAction(with: .signOutConfirmed)
-                    }, negativeButton: "No")
+                    }, negativeButton: R.string.common.no.localized())
                 case .notificationSettingsController:
                     if let notificationSettingsViewController = R.storyboard.notifications.notificationSettingsViewController() {
                         notificationSettingsViewController.viewModel = NotificationSettingsViewModel()

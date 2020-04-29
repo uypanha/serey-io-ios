@@ -22,18 +22,18 @@ class DownvoteDialogViewModel: BaseViewModel, ShouldReactToAction {
         var title: String {
             switch self {
             case .upvotePost, .upVoteComment:
-                return "Confirm Remove Vote"
+                return R.string.post.confirmRemoveVote.localized()
             case .flagComment, .flagPost:
-                return "Confirm Remove Flag"
+                return R.string.post.confirmRemoveFlage.localized()
             }
         }
         
         var message: String {
             switch self {
             case .upvotePost, .flagPost:
-                return "Removing your vote will reset your curation rewards for this post."
+                return R.string.post.removeVotePostMessage.localized()
             case .upVoteComment, .flagComment:
-                return "Removing your vote will reset your curation rewards for this comment."
+                return R.string.post.removeVoteCommentMessage.localized()
             }
         }
     }

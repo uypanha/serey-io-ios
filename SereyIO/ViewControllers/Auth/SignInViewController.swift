@@ -14,7 +14,7 @@ import MaterialComponents
 import Then
 import RxKeyboard
 
-class SignInViewController: BaseViewController, LoadingIndicatorController, KeyboardController {
+class SignInViewController: BaseViewController, LoadingIndicatorController, KeyboardController, AlertDialogController {
     
     fileprivate lazy var keyboardDisposeBag = DisposeBag()
     
@@ -27,6 +27,7 @@ class SignInViewController: BaseViewController, LoadingIndicatorController, Keyb
     @IBOutlet weak var signInButton: UIButton!
     
     @IBOutlet weak var dontHaveAccountLabel: UILabel!
+    
     @IBOutlet weak var signUpButton: UIButton!
     
     var userNameController: MDCTextInputControllerOutlined?
@@ -57,10 +58,10 @@ class SignInViewController: BaseViewController, LoadingIndicatorController, Keyb
     override func setUpLocalizedTexts() {
         super.setUpLocalizedTexts()
         
-//        self.signInLabel.text = R.string.auth.signIn.localized()
-//        self.signInButton.setTitle(R.string.auth.signIn.localized(), for: .normal)
-//        self.dontHaveAccountLabel.text = R.string.auth.donHaveAccountQuestion.localized()
-//        self.signUpButton.setTitle(R.string.auth.signUp.localized(), for: .normal)
+        self.signInLabel.text = R.string.auth.signIn.localized()
+        self.signInButton.setTitle(R.string.auth.signIn.localized(), for: .normal)
+        self.dontHaveAccountLabel.text = R.string.auth.donHaveAccountQuestion.localized()
+        self.signUpButton.setTitle(R.string.auth.signUp.localized(), for: .normal)
     }
 }
 
@@ -123,17 +124,10 @@ fileprivate extension SignInViewController {
     }
     
     func setUpShouldPresentErrorObservers() {
-//        self.viewModel.shouldPresentError.asObservable()
-//            .subscribe(onNext: { [weak self] errorInfo in
-//                switch errorInfo.prefinedErrorType {
-//                case .emailNotRegistered:
-//                    self?.showDialogError(errorInfo, positiveButton: R.string.auth.signUp.localized(), positiveCompletion: {
-//                        self?.viewModel.didAction(with: .signUpPressed)
-//                    })
-//                default:
-//                    self?.showDialogError(errorInfo, positiveButton: R.string.common.confirm.localized())
-//                }
-//            }).disposed(by: self.disposeBag)
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [weak self] errorInfo in
+                self?.showDialogError(errorInfo, positiveButton: R.string.common.confirm.localized(), positiveCompletion: nil)
+            }).disposed(by: self.disposeBag)
     }
     
     func setUpRxKeyboardObservers() {

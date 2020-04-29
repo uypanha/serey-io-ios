@@ -150,7 +150,7 @@ extension HomeViewController {
 extension HomeViewController: TabBarControllerDelegate {
     
     func configureTabBar(_ tag: Int) {
-        self.tabBarItem = UITabBarItem(title: "Home", image: R.image.tabHome(), selectedImage: R.image.tabHomeSelected())
+        self.tabBarItem = UITabBarItem(title: R.string.home.home.localized(), image: R.image.tabHome(), selectedImage: R.image.tabHomeSelected())
         self.tabBarItem?.tag = tag
     }
 }

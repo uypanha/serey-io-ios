@@ -38,6 +38,13 @@ class VoteDialogViewController: BaseViewController {
         setUpViews()
         setUpRxObservers()
     }
+    
+    override func setUpLocalizedTexts() {
+        super.setUpLocalizedTexts()
+        
+        self.confirmButton.setTitle(R.string.common.confirm.localized(), for: .normal)
+        self.cancelButton.setTitle(R.string.common.cancel.localized(), for: .normal)
+    }
 }
 
 // MARK: - Preparations & Tools

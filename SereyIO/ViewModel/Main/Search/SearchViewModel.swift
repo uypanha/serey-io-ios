@@ -44,7 +44,7 @@ class SearchViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, 
     override init() {
         self.cells = BehaviorRelay(value: [])
         self.people = BehaviorRelay(value: [])
-        self.searchTextFieldViewModel = TextFieldViewModel.textFieldWith(title: "Search")
+        self.searchTextFieldViewModel = TextFieldViewModel.textFieldWith(title: R.string.search.search.localized())
         self.searchService = SearchService()
         super.init()
         
@@ -97,20 +97,20 @@ extension SearchViewModel {
         let title: String
         let emptyMessage: String
         if let searchText = self.searchTextFieldViewModel.value, !searchText.isEmpty {
-            title = "People not found"
-            emptyMessage = "No people found for \(searchText) at this moment"//String(format: R.string.cooperator.placeNotFoundMessage.localized(), searchText)
+            title = R.string.search.peopleNotFound.localized()
+            emptyMessage = String(format: R.string.search.peopleNotFoundMessage.localized(), searchText)
         } else {
-            title = "Searh People"
-            emptyMessage = "Enter a name of people you want to search for"
+            title = R.string.search.searchPeople.localized()
+            emptyMessage = R.string.search.searchPeopleMessage.localized()
         }
         return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withEmptyTitle: title, emptyDescription: emptyMessage, iconImage: R.image.searchPeople()))
     }
     
-//    func prepareEmptyViewModel(_ erroInfo: ErrorInfo) -> EmptyOrErrorViewModel {
-//        return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withErrorInfo: erroInfo, actionTitle: R.string.common.tryAgain.localized(), actionCompletion: {
-//            self.downloadData()
-//        }))
-//    }
+    open func prepareEmptyViewModel(_ erroInfo: ErrorInfo) -> EmptyOrErrorViewModel {
+        return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withErrorInfo: erroInfo, actionTitle: R.string.common.tryAgain.localized(), actionCompletion: { [unowned self] in
+            self.downloadData()
+        }))
+    }
 }
 
 // MARK: - Action Handlers

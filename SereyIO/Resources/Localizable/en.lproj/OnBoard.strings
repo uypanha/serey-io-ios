@@ -8,3 +8,10 @@
 
 "selectLanguage"    = "Select Language";
 "getStarted"        = "Get Started";
+
+"shareAndEarn"              = "Share & Earn";
+"shareAndEarnMessage"       = "Earn Serey coins by posting and sharing content.";
+"transparency"              = "Transparency";
+"transparencyMessage"       = "All posts on Serey will be permanently stored on the Serey decentralized blockchain.";
+"walletMarketplace"         = "Wallet & Marketplace";
+"walletMarketplaceMessage"  = "Download the Serey Wallet to send and receive coins or go to the Serey marketplace to buy and sell products.";

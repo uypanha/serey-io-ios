@@ -185,9 +185,9 @@ extension PostDetailViewController {
                         self.present(createPostNavigationController, animated: true, completion: nil)
                     }
                 case .deletePostDialog(let confirm):
-                    self.showDialog(nil, title: "Delete Article?", message: "Are you sure you want to delete this article?", dismissable: false, positiveButton: "Delete", positiveCompletion: {
+                    self.showDialog(nil, title: R.string.post.deleteArticleQ.localized(), message: R.string.post.deleteArticleMessage.localized(), dismissable: false, positiveButton: R.string.common.delete.localized(), positiveCompletion: {
                         confirm()
-                    }, negativeButton: "No")
+                    }, negativeButton: R.string.common.no.localized())
                 case .loading(let loading):
                     loading ? self.showLoading() : self.dismissLoading()
                 case .signInViewController:

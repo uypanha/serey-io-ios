@@ -181,10 +181,10 @@ extension UserAccountViewController {
                 let titleColor = isFollowed ? UIColor.white : ColorName.primary.color
                 self?.followButton.setTitleColor(titleColor, for: .normal)
                 if isFollowed {
-                    self?.followButton.setTitle("Unfollow", for: .normal)
+                    self?.followButton.setTitle(R.string.account.unfollow.localized(), for: .normal)
                     self?.followButton.primaryStyle()
                 } else {
-                    self?.followButton.setTitle("Follow", for: .normal)
+                    self?.followButton.setTitle(R.string.account.follow.localized(), for: .normal)
                     self?.followButton.customBorderStyle(with: ColorName.primary.color, border: 1.5, isCircular: false)
                 }
             }) ~ self.disposeBag

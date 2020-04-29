@@ -11,3 +11,8 @@
 "privateKeyOrPasswordRequireMessage"    = "Private key or password field is required.";
 
 "signOut"                               = "Sign out";
+"signIn"                                = "Sign in";
+"signUp"                                = "Sign up";
+"orSignUp"                              = "or Sign up";
+"go"                                    = "Go";
+"donHaveAccountQuestion"                = "Don’t have an account?\n\nSign up now and get free Serey coins!";

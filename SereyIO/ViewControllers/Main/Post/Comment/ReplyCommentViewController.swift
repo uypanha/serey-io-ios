@@ -78,7 +78,7 @@ class ReplyCommentViewController: BaseViewController, KeyboardController, Loadin
 extension ReplyCommentViewController {
     
     func setUpViews() {
-        self.title = "Replies"
+        self.title = R.string.post.replies.localized()
         self.tableView.refreshControl = UIRefreshControl()
         self.commentContainerView.addBorders(edges: [.top], color: ColorName.border.color, thickness: 1)
         prepareTableView()

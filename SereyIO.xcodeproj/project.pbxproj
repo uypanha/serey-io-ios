@@ -160,6 +160,13 @@
 		DC7558AE24587B3D00AD40FA /* FeatureBoarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7558AD24587B3D00AD40FA /* FeatureBoarding.swift */; };
 		DC7558B124588CE700AD40FA /* NotificationSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7558B024588CE700AD40FA /* NotificationSettingsViewModel.swift */; };
 		DC7558B32458932700AD40FA /* PreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7558B22458932700AD40FA /* PreferenceStore.swift */; };
+		DC7558B7245898EC00AD40FA /* SereyAppTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7558B5245898EC00AD40FA /* SereyAppTableViewCell.swift */; };
+		DC7558B8245898EC00AD40FA /* SereyAppTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC7558B6245898EC00AD40FA /* SereyAppTableViewCell.xib */; };
+		DC7558BA24589A4C00AD40FA /* SereyAppCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7558B924589A4C00AD40FA /* SereyAppCellViewModel.swift */; };
+		DC7558BD2459C91E00AD40FA /* More.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC7558BF2459C91E00AD40FA /* More.strings */; };
+		DC7558C32459D1DD00AD40FA /* Notifications.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC7558C52459D1DD00AD40FA /* Notifications.strings */; };
+		DC7558C92459DB0400AD40FA /* Search.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC7558CB2459DB0400AD40FA /* Search.strings */; };
+		DC7558CF2459DFD800AD40FA /* Home.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC7558D12459DFD800AD40FA /* Home.strings */; };
 		DC75DAB7244DF0C100D80CB2 /* PostCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */; };
 		DC75DAB9244E055000D80CB2 /* FollowActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */; };
 		DC75DABB244E07EE00D80CB2 /* FollowerListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */; };
@@ -483,6 +490,17 @@
 		DC7558AD24587B3D00AD40FA /* FeatureBoarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureBoarding.swift; sourceTree = "<group>"; };
 		DC7558B024588CE700AD40FA /* NotificationSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewModel.swift; sourceTree = "<group>"; };
 		DC7558B22458932700AD40FA /* PreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceStore.swift; sourceTree = "<group>"; };
+		DC7558B5245898EC00AD40FA /* SereyAppTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SereyAppTableViewCell.swift; sourceTree = "<group>"; };
+		DC7558B6245898EC00AD40FA /* SereyAppTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SereyAppTableViewCell.xib; sourceTree = "<group>"; };
+		DC7558B924589A4C00AD40FA /* SereyAppCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SereyAppCellViewModel.swift; sourceTree = "<group>"; };
+		DC7558BE2459C91E00AD40FA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/More.strings; sourceTree = "<group>"; };
+		DC7558C02459C92300AD40FA /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/More.strings"; sourceTree = "<group>"; };
+		DC7558C42459D1DD00AD40FA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Notifications.strings; sourceTree = "<group>"; };
+		DC7558C62459D1E400AD40FA /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Notifications.strings"; sourceTree = "<group>"; };
+		DC7558CA2459DB0400AD40FA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Search.strings; sourceTree = "<group>"; };
+		DC7558CC2459DB0700AD40FA /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Search.strings"; sourceTree = "<group>"; };
+		DC7558D02459DFD800AD40FA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Home.strings; sourceTree = "<group>"; };
+		DC7558D22459DFDB00AD40FA /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Home.strings"; sourceTree = "<group>"; };
 		DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellProtocol.swift; sourceTree = "<group>"; };
 		DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowActionModel.swift; sourceTree = "<group>"; };
 		DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListResponse.swift; sourceTree = "<group>"; };
@@ -684,9 +702,10 @@
 		DC05FDA523F1AB1E0093B47B /* More */ = {
 			isa = PBXGroup;
 			children = (
-				DC115F38241A9A56006BE78C /* SignInTableViewCell */,
 				DC26812723F2FC6C0045776E /* ProfileTableViewCell */,
+				DC7558B42458986300AD40FA /* SereyAppTableViewCell */,
 				DC05FDA723F1AB620093B47B /* SettingTableViewCell */,
+				DC115F38241A9A56006BE78C /* SignInTableViewCell */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -1309,6 +1328,16 @@
 			path = Notification;
 			sourceTree = "<group>";
 		};
+		DC7558B42458986300AD40FA /* SereyAppTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC7558B924589A4C00AD40FA /* SereyAppCellViewModel.swift */,
+				DC7558B5245898EC00AD40FA /* SereyAppTableViewCell.swift */,
+				DC7558B6245898EC00AD40FA /* SereyAppTableViewCell.xib */,
+			);
+			path = SereyAppTableViewCell;
+			sourceTree = "<group>";
+		};
 		DC7C09C02326AFEA0006D0BF /* Handlers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1649,12 +1678,16 @@
 		DCD3986C232E1F0C00C812EB /* Localizable */ = {
 			isa = PBXGroup;
 			children = (
-				DC40D5DB23E32F3800B0DD96 /* Common.strings */,
-				DC40D5EA23E487A600B0DD96 /* OnBoard.strings */,
-				DC05FDB223F1AC4F0093B47B /* Settings.strings */,
-				DC562438241E75450076A78C /* Auth.strings */,
-				DCEE3F7C2439DB57000A75C5 /* Post.strings */,
+				DC7558D12459DFD800AD40FA /* Home.strings */,
 				DCEE3F822439DCA8000A75C5 /* Account.strings */,
+				DC562438241E75450076A78C /* Auth.strings */,
+				DC40D5DB23E32F3800B0DD96 /* Common.strings */,
+				DC7558BF2459C91E00AD40FA /* More.strings */,
+				DC7558C52459D1DD00AD40FA /* Notifications.strings */,
+				DC40D5EA23E487A600B0DD96 /* OnBoard.strings */,
+				DCEE3F7C2439DB57000A75C5 /* Post.strings */,
+				DC7558CB2459DB0400AD40FA /* Search.strings */,
+				DC05FDB223F1AC4F0093B47B /* Settings.strings */,
 			);
 			path = Localizable;
 			sourceTree = "<group>";
@@ -1985,11 +2018,13 @@
 				DC8EAB7723E7218600E00A00 /* Home.storyboard in Resources */,
 				DCA525592425166B00284CD8 /* ButtonTableViewCell.xib in Resources */,
 				DC6ED52823267EF000770B31 /* Assets.xcassets in Resources */,
+				DC7558BD2459C91E00AD40FA /* More.strings in Resources */,
 				DCC6F1E3242BBDEB003B9E3A /* TextTableViewCell.xib in Resources */,
 				DC9E36D92412997800289693 /* Post.storyboard in Resources */,
 				DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */,
 				DC0F36AF245093B800916886 /* DownvoteDialogViewController.xib in Resources */,
 				DC9E36E524135A3D00289693 /* PostDetailView.xib in Resources */,
+				DC7558CF2459DFD800AD40FA /* Home.strings in Resources */,
 				DC562436241E75450076A78C /* Auth.strings in Resources */,
 				DC115F30241A8EA5006BE78C /* trix-editor.css in Resources */,
 				DC26812B23F2FCB30045776E /* ProfileTableViewCell.xib in Resources */,
@@ -2002,12 +2037,14 @@
 				DCEE3F7A2439DB57000A75C5 /* Post.strings in Resources */,
 				DCC49AC823E8632B00119BAA /* BoardFeatureView.xib in Resources */,
 				DCEE3F802439DCA8000A75C5 /* Account.strings in Resources */,
+				DC7558B8245898EC00AD40FA /* SereyAppTableViewCell.xib in Resources */,
 				DC6ED56523269B6600770B31 /* colors.txt in Resources */,
 				DC9E36F92416947900289693 /* CommentTableViewCell.xib in Resources */,
 				DC9E36EE2413F57800289693 /* common_css.css in Resources */,
 				DC9E36EC2413F52C00289693 /* custom_rich_editor_style.css in Resources */,
 				DCC49AD423E865D700119BAA /* ProfileView.xib in Resources */,
 				DCD39859232E0F9600C812EB /* Slash.storyboard in Resources */,
+				DC7558C92459DB0400AD40FA /* Search.strings in Resources */,
 				DCEC0CC4240A530B002F4B6F /* FilteredCategoryTableViewCell.xib in Resources */,
 				DC26813123F45A8C0045776E /* Profile.storyboard in Resources */,
 				DC115F32241A962A006BE78C /* Auth.storyboard in Resources */,
@@ -2016,6 +2053,7 @@
 				DC13409024573A1F00CC9856 /* Notifications.storyboard in Resources */,
 				DC6ED52623267EED00770B31 /* Main.storyboard in Resources */,
 				DC05FDAD23F1AB620093B47B /* SettingTableViewCell.xib in Resources */,
+				DC7558C32459D1DD00AD40FA /* Notifications.strings in Resources */,
 				DC13409824573F0C00CC9856 /* ToggleTextTableViewCell.xib in Resources */,
 				DCB629EE2417E84F00C64BD6 /* PostCommentView.xib in Resources */,
 				DC40D5CD23E3298F00B0DD96 /* LanguageTableViewCell.xib in Resources */,
@@ -2246,6 +2284,7 @@
 				DC6ED57E2326A44A00770B31 /* DefaultsStore.swift in Sources */,
 				DCD12D6C242D06C20084F66C /* ImageTextTableViewCell.swift in Sources */,
 				DC40D5DF23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift in Sources */,
+				DC7558BA24589A4C00AD40FA /* SereyAppCellViewModel.swift in Sources */,
 				DCD3987A232E230B00C812EB /* NibView.swift in Sources */,
 				DCD39896232E28E100C812EB /* WebViewViewModel.swift in Sources */,
 				DCEF9D37243E1680002B7E99 /* MoreAppsViewModel.swift in Sources */,
@@ -2316,6 +2355,7 @@
 				DC357A50243CC88E00B2D3B7 /* PostDetailCellViewModel.swift in Sources */,
 				DC0F36B32450A27700916886 /* BasePostDetailViewModel.swift in Sources */,
 				DCD3987D232E235000C812EB /* BaseTableViewCell.swift in Sources */,
+				DC7558B7245898EC00AD40FA /* SereyAppTableViewCell.swift in Sources */,
 				DC6FCE7323F05D1700D72F6D /* HttpClient.swift in Sources */,
 				DC0F36AD245093A800916886 /* DownvoteDialogViewController.swift in Sources */,
 				DC9AC6DF2406BF1C008FAFA6 /* DiscussionApi.swift in Sources */,
@@ -2494,6 +2534,42 @@
 				DC6ED52A23267EF000770B31 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		DC7558BF2459C91E00AD40FA /* More.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC7558BE2459C91E00AD40FA /* en */,
+				DC7558C02459C92300AD40FA /* km-KH */,
+			);
+			name = More.strings;
+			sourceTree = "<group>";
+		};
+		DC7558C52459D1DD00AD40FA /* Notifications.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC7558C42459D1DD00AD40FA /* en */,
+				DC7558C62459D1E400AD40FA /* km-KH */,
+			);
+			name = Notifications.strings;
+			sourceTree = "<group>";
+		};
+		DC7558CB2459DB0400AD40FA /* Search.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC7558CA2459DB0400AD40FA /* en */,
+				DC7558CC2459DB0700AD40FA /* km-KH */,
+			);
+			name = Search.strings;
+			sourceTree = "<group>";
+		};
+		DC7558D12459DFD800AD40FA /* Home.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC7558D02459DFD800AD40FA /* en */,
+				DC7558D22459DFDB00AD40FA /* km-KH */,
+			);
+			name = Home.strings;
 			sourceTree = "<group>";
 		};
 		DCEE3F7C2439DB57000A75C5 /* Post.strings */ = {

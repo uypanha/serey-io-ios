@@ -13,7 +13,7 @@ import RxBinding
 import RxDataSources
 import SnapKit
 
-class SearchViewController: BaseViewController, KeyboardController {
+class SearchViewController: BaseViewController, KeyboardController, AlertDialogController {
     
     @IBOutlet weak var searchTextField: PaddingTextField!
     @IBOutlet weak var tableView: UITableView!
@@ -151,15 +151,15 @@ fileprivate extension SearchViewController {
     }
     
     func setUpShouldPresentErrorObsevers() {
-        //        self.viewModel.shouldPresentError.asObservable()
-        //            .subscribe(onNext: { [unowned self] errorInfo in
-        //                if self.viewModel.cells.value.isEmpty {
-        //                    self.prepareToDisplayEmptyView(self.viewModel.prepareEmptyViewModel(errorInfo))
-        //                } else {
-        //                    self.showDialogError(errorInfo, positiveButton: R.string.common.tryAgain.localized(), positiveCompletion: {
-        //                        self.viewModel.downloadData()
-        //                    }, negativeButton: R.string.common.cancel.localized())
-        //                }
-        //            }).disposed(by: self.disposeBag)
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [unowned self] errorInfo in
+                if self.viewModel.cells.value.isEmpty {
+                    self.prepareToDisplayEmptyView(self.viewModel.prepareEmptyViewModel(errorInfo))
+                } else {
+                    self.showDialogError(errorInfo, positiveButton: R.string.common.tryAgain.localized(), positiveCompletion: {
+                        self.viewModel.downloadData()
+                    }, negativeButton: R.string.common.cancel.localized())
+                }
+            }).disposed(by: self.disposeBag)
     }
 }

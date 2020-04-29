@@ -33,6 +33,7 @@ class ErrorHelper {
         case unknownError = 9000
         case unknownServerError = 9001
         case unauthenticatedError = 9002
+        case userNotFound = 9004
         case networkOffline = 9999
         
         var errorTitle: String? {
@@ -67,6 +68,8 @@ class ErrorHelper {
                 errorDescription = errorMessage ?? R.string.common.notAuthenticated.localized()
             case .networkOffline:
                 errorDescription = R.string.common.networkOfflineMessage.localized()
+            case .userNotFound:
+                errorDescription = "User not found."
             }
             
             return ErrorInfo(error: NSError(domain: ErrorHelper.errorDomain, code: self.rawValue, userInfo: [NSLocalizedDescriptionKey: errorDescription]), type: self, errorTitle: self.errorTitle, errorIcon: self.errorIcon)
@@ -117,9 +120,11 @@ class ErrorHelper {
                     AuthData.shared.removeAuthData(notify: true)
                 }
                 return PredefinedError.unauthenticatedError.prepareError()
+            case .userNotFound:
+                return PredefinedError.userNotFound.prepareError()
             default:
                 log.error(error)
-                return defaultError()
+                return defaultError(message: error.0.message)
             }
         }
     }
@@ -159,4 +164,5 @@ fileprivate enum AppApiErrorCode: Int {
     case unauthorized = 3
     case unauthenticateError = 4
     case accessDenied = 10
+    case userNotFound = 12
 }

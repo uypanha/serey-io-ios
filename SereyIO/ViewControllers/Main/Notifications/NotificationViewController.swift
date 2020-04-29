@@ -21,7 +21,7 @@ class NotificationViewController: BaseViewController {
 extension NotificationViewController: TabBarControllerDelegate {
     
     func configureTabBar(_ tag: Int) {
-        self.tabBarItem = UITabBarItem(title: "Notifications", image: R.image.tabNotification(), selectedImage: R.image.tabNotificationSelected())
+        self.tabBarItem = UITabBarItem(title: R.string.notifications.notifications.localized(), image: R.image.tabNotification(), selectedImage: R.image.tabNotificationSelected())
         self.tabBarItem?.tag = tag
     }
 }

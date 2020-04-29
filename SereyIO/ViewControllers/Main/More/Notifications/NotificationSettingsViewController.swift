@@ -29,6 +29,12 @@ class NotificationSettingsViewController: BaseViewController {
         setUpViews()
         setUpRxObservers()
     }
+    
+    override func setUpLocalizedTexts() {
+        super.setUpLocalizedTexts()
+        
+        self.titleLabel.text = R.string.notifications.manageYourNotification.localized()
+    }
 }
 
 // MARK: - Preparations & Tools

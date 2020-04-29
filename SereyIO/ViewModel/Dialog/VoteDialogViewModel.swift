@@ -31,13 +31,13 @@ class VoteDialogViewModel: BaseViewModel, ShouldReactToAction {
         var title: String {
             switch self {
             case .upvotePost:
-                return "Upvote Post"
+                return R.string.post.upVotePost.localized()
             case .upVoteComment:
-                return "Upvote Comment"
+                return R.string.post.upVoteComment.localized()
             case .flagComment:
-                return "Flag Comment"
+                return R.string.post.flagComment.localized()
             default:
-                return "Flag Post"
+                return R.string.post.flagPost.localized()
             }
         }
     }

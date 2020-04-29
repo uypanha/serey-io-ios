@@ -150,9 +150,9 @@ fileprivate extension PostTableViewController {
                     let bottomMenuController = BottomMenuViewController(bottomViewModel)
                     self.present(bottomMenuController, animated: true, completion: nil)
                 case .deletePostDialog(let confirm):
-                    self.showDialog(nil, title: "Delete Article?", message: "Are you sure you want to delete this article?", dismissable: false, positiveButton: "Delete", positiveCompletion: {
+                    self.showDialog(nil, title: R.string.post.deleteArticleQ.localized(), message: R.string.post.deleteArticleMessage.localized(), dismissable: false, positiveButton: R.string.common.delete.localized(), positiveCompletion: {
                         confirm()
-                    }, negativeButton: "No")
+                    }, negativeButton: R.string.common.no.localized())
                 default:
                     break
                 }
@@ -165,7 +165,9 @@ fileprivate extension PostTableViewController {
                 if self.viewModel.discussions.value.isEmpty {
                     self.prepareToDisplayEmptyView(self.viewModel.prepareEmptyViewModel(errorInfo))
                 } else {
-                    
+                    self.showDialogError(errorInfo, positiveButton: R.string.common.tryAgain.localized(), positiveCompletion: {
+                        self.viewModel.downloadData()
+                    }, negativeButton: R.string.common.cancel.localized())
                 }
             }) ~ self.disposeBag
     }

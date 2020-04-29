@@ -10,7 +10,12 @@
 "about"                     = "About";
 
 "myWallet"                  = "My wallet";
+"languages"                 = "Languages";
 "language"                  = "Languages (%@)";
 "notificationSettings"      = "Notification Settings";
 "sereyApps"                 = "Serey Apps";
 "version"                   = "Version";
+
+"signOutQ"                  = "Sign Out?";
+"signOut"                   = "Sign Out?";
+"signOutMessage"            = "Are you sure you want to sign out?";

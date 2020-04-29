@@ -137,11 +137,11 @@ extension UserAccountViewModel {
         var title: String {
             switch self {
             case .post:
-                return "Post"
+                return R.string.post.post.localized()
             case .comment:
-                return "Comments"
+                return R.string.post.comments.localized()
             case .replies:
-                return "Replies"
+                return R.string.post.replies.localized()
             }
         }
         

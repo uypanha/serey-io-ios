@@ -14,7 +14,5 @@ class CommentReplyTableViewController: ListTableViewController<CommentsListViewM
         self.sepereatorStyle = .none
         self.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 }
