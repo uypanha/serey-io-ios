@@ -32,5 +32,10 @@ class PreferenceStore {
     
     func setNotification(_ enabled: Bool) {
         self.userDisabledNotifs = !enabled
+        if enabled {
+            AppDelegate.shared?.turnOnPushNotification()
+        } else {
+            AppDelegate.shared?.turnOffPushNotification()
+        }
     }
 }

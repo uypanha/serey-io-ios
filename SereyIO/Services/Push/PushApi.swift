@@ -14,6 +14,10 @@ enum PushApi {
     case register(username: String, token: String)
 
     case remove(username: String)
+    
+    case updateToken(username: String, token: String)
+    
+    case login
 }
 
 extension PushApi: AuthorizedApiTargetType {
@@ -24,15 +28,26 @@ extension PushApi: AuthorizedApiTargetType {
 
     var parameters: [String : Any] {
         switch self {
-        case .register(let data):
+        case .register(let username, let token):
             return [
-                "username"      : data.username,
-                "token"         : data.token,
+                "username"      : username,
+                "token"         : token,
                 "deviceType"    : "IOS"
             ]
         case .remove(let username):
             return [
                 "username"      : username
+            ]
+        case .updateToken(let username, let token):
+            return [
+                "username"      : username,
+                "newToken"      : token
+            ]
+        case .login:
+            return [
+                "username"      : "mobile",
+                "password"      : "kgx?tMjn@RhBqQ4<",
+                "rememberMe"    : true
             ]
         }
     }
@@ -43,6 +58,10 @@ extension PushApi: AuthorizedApiTargetType {
             return "/api/notification/user/register"
         case .remove:
             return "/api/notification/user/remove"
+        case .login:
+            return "/api/notification/user/login"
+        case .updateToken:
+            return "/api/notification/user/update"
         }
     }
     

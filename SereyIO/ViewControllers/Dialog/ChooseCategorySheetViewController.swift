@@ -17,6 +17,7 @@ class ChooseCategorySheetViewController: BaseViewController {
     @IBOutlet weak var titleContainerView: UIView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var allButton: UIButton!
+    @IBOutlet weak var hieghtConstraint: NSLayoutConstraint!
     
     var backgroundGesture: UITapGestureRecognizer? {
         didSet {
@@ -54,6 +55,7 @@ extension ChooseCategorySheetViewController {
     func setUpViews() {
         self.backgroundGesture = UITapGestureRecognizer()
         self.titleContainerView.addBorders(edges: [.bottom], color: ColorName.border.color)
+        self.hieghtConstraint.constant = UIScreen.main.bounds.height * 0.4
         
         prepareTableView()
     }

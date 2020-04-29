@@ -74,7 +74,7 @@ class AuthData {
     }
     
     func removeAuthData(notify: Bool = true) {
-        apnsTokenStore.removeCurrentToken(accessToken: self.userToken)
+        apnsTokenStore.removeCurrentToken(username: self.username)
         
         self.userToken = nil
         self.username = nil

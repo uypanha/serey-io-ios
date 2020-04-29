@@ -167,6 +167,7 @@
 		DC7558C32459D1DD00AD40FA /* Notifications.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC7558C52459D1DD00AD40FA /* Notifications.strings */; };
 		DC7558C92459DB0400AD40FA /* Search.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC7558CB2459DB0400AD40FA /* Search.strings */; };
 		DC7558CF2459DFD800AD40FA /* Home.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC7558D12459DFD800AD40FA /* Home.strings */; };
+		DC7558D42459F1EF00AD40FA /* GoogleService-Info-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC7558D32459F1EE00AD40FA /* GoogleService-Info-Release.plist */; };
 		DC75DAB7244DF0C100D80CB2 /* PostCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */; };
 		DC75DAB9244E055000D80CB2 /* FollowActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */; };
 		DC75DABB244E07EE00D80CB2 /* FollowerListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */; };
@@ -501,6 +502,7 @@
 		DC7558CC2459DB0700AD40FA /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Search.strings"; sourceTree = "<group>"; };
 		DC7558D02459DFD800AD40FA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Home.strings; sourceTree = "<group>"; };
 		DC7558D22459DFDB00AD40FA /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Home.strings"; sourceTree = "<group>"; };
+		DC7558D32459F1EE00AD40FA /* GoogleService-Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Release.plist"; sourceTree = "<group>"; };
 		DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellProtocol.swift; sourceTree = "<group>"; };
 		DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowActionModel.swift; sourceTree = "<group>"; };
 		DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListResponse.swift; sourceTree = "<group>"; };
@@ -687,6 +689,7 @@
 		DC0079072438D3620063C3FF /* Release */ = {
 			isa = PBXGroup;
 			children = (
+				DC7558D32459F1EE00AD40FA /* GoogleService-Info-Release.plist */,
 			);
 			path = Release;
 			sourceTree = "<group>";
@@ -2022,6 +2025,7 @@
 				DCC6F1E3242BBDEB003B9E3A /* TextTableViewCell.xib in Resources */,
 				DC9E36D92412997800289693 /* Post.storyboard in Resources */,
 				DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */,
+				DC7558D42459F1EF00AD40FA /* GoogleService-Info-Release.plist in Resources */,
 				DC0F36AF245093B800916886 /* DownvoteDialogViewController.xib in Resources */,
 				DC9E36E524135A3D00289693 /* PostDetailView.xib in Resources */,
 				DC7558CF2459DFD800AD40FA /* Home.strings in Resources */,

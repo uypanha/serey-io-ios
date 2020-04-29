@@ -41,7 +41,7 @@ class APNSHandler: NSObject {
         #if DEVELOPMENT
             let filePath = R.file.googleServiceInfoDevelopmentPlist()!.path
         #else
-            let filePath = "" // R.file.googleServiceInfoProPlist()!.path
+            let filePath = R.file.googleServiceInfoReleasePlist()!.path
         #endif
         
         if let options = FirebaseOptions(contentsOfFile: filePath) {

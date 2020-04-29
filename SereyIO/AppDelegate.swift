@@ -29,7 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         configureRootView()
         
         initAPNSHandler(withApplication: application)
-        turnOnPushNotification()
+        if !PreferenceStore.shared.userDisabledNotifs {
+            turnOnPushNotification()
+        }
         
         if Constants.shouldClearOutBadgeCountWhenFiredUp {
             application.applicationIconBadgeNumber = 0
@@ -92,7 +94,6 @@ extension AppDelegate {
     }
     
     func clearData() {
-        turnOffPushNotification()
         Constants.clearStoreData()
     }
     

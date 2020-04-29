@@ -27,6 +27,7 @@ class UserAccountViewModel: BaseViewModel, DownloadStateNetworkProtocol, ShouldP
         case postDetailViewController(PostDetailViewModel)
         case editPostController(CreatePostViewModel)
         case loading(Bool)
+        case followLoading(Bool)
     }
     
     // input:
@@ -110,8 +111,12 @@ extension UserAccountViewModel {
     }
     
     func followAction(_ action: FollowActionType) {
+        self.shouldPresent(.followLoading(true))
+        self.isFollowHidden.onNext(true)
         self.userService.followAction(username.value, action: action)
-            .subscribe(onNext: { response in
+            .subscribe(onNext: { [unowned self] response in
+                self.shouldPresent(.followLoading(false))
+                self.isFollowHidden.onNext(false)
                 if response.action == "follow" {
                     self.followers.append(AuthData.shared.username!)
                 } else {
@@ -120,6 +125,8 @@ extension UserAccountViewModel {
                     }
                 }
             }, onError: { [weak self] error in
+                self?.isFollowHidden.onNext(false)
+                self?.shouldPresent(.followLoading(false))
                 let errorInfo = ErrorHelper.prepareError(error: error)
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag

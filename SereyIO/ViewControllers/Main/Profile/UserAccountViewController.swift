@@ -23,6 +23,7 @@ class UserAccountViewController: BaseViewController, AlertDialogController, Load
     @IBOutlet weak var contentScrollView: UIScrollView!
     @IBOutlet weak var profileContainerView: UIView!
     @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var followLoadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tabBar: MDCTabBar!
     
     private var tabItems: [UITabBarItem] = [] {
@@ -61,6 +62,7 @@ extension UserAccountViewController {
     func setUpViews() {
         self.navigationController?.removeNavigationBarBorder()
         self.parentScrollView.refreshControl = UIRefreshControl()
+        self.followLoadingIndicator.isHidden = true
         prepareTabBar()
     }
     
@@ -215,6 +217,11 @@ extension UserAccountViewController {
                     }
                 case .loading(let loading):
                     loading ? self.showLoading() : self.dismissLoading()
+                case .followLoading(let loading):
+                    self.followLoadingIndicator.isHidden = !loading
+                    if loading {
+                        self.followLoadingIndicator.startAnimating()
+                    }
                 }
             }) ~ self.disposeBag
     }

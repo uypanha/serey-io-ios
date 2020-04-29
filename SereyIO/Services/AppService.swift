@@ -97,7 +97,11 @@ class DefaultAlamofireManager: Alamofire.SessionManager {
         }
         configuration.timeoutIntervalForRequest = 30 // as seconds, you can set your request timeout
         configuration.timeoutIntervalForResource = 30 // as seconds, you can set your resource timeout
-        return DefaultAlamofireManager(configuration: configuration) //, serverTrustPolicyManager: CustomServerTrustPoliceManager())
+        #if DEVELOPMENT
+        return DefaultAlamofireManager(configuration: configuration, serverTrustPolicyManager: CustomServerTrustPoliceManager())
+        #else
+        return DefaultAlamofireManager(configuration: configuration)
+        #endif
     }
 }
 
