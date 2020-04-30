@@ -13,11 +13,14 @@ import RxBinding
 
 enum SereyApp: CaseIterable {
     case sereySquare
+    case sereyWallet
     case sereyLottery
     case sereySour
     
     var imageTextModel: ImageTextModel {
         switch self {
+        case .sereyWallet:
+            return ImageTextModel(image: R.image.walletApp(), titleText: "Serey Wallet", subTitle: "Download it at serey.io")
         case .sereySquare:
             return ImageTextModel(image: R.image.marketplaceApp(), titleText: "Serey Marketplace")
         case .sereyLottery:
@@ -33,6 +36,15 @@ enum SereyApp: CaseIterable {
             return true
         default:
             return false
+        }
+    }
+    
+    var url: URL? {
+        switch self {
+        case .sereySquare:
+            return URL(string: "https://square.serey.io")
+        default:
+            return nil
         }
     }
 }

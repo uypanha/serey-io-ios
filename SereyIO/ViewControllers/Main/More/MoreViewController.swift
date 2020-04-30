@@ -190,7 +190,7 @@ fileprivate extension MoreViewController {
                     webViewController.viewModel = webViewViewModel
                     self.present(UINavigationController(rootViewController: webViewController), animated: true, completion: nil)
                 case .moreAppsController(let moreAppsViewModel):
-                    let listTableViewController = ListTableViewController(moreAppsViewModel)
+                    let listTableViewController = MoreAppsViewController(moreAppsViewModel)
                     listTableViewController.title = "Serey Apps"
                     self.show(listTableViewController, sender: nil)
                 case .signOutDialog:

@@ -94,6 +94,9 @@ fileprivate extension ListTableViewController {
         
         // Item Selected
         self.tableView.rx.itemSelected.asObservable()
+            .`do`(onNext: { [weak self] indexPath in
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+            })
             .bind(to: viewModel.itemSelected)
             ~ self.disposeBag
         

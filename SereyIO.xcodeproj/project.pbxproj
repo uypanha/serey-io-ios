@@ -172,6 +172,7 @@
 		DC75DAB9244E055000D80CB2 /* FollowActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */; };
 		DC75DABB244E07EE00D80CB2 /* FollowerListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */; };
 		DC7C09C22326AFF60006D0BF /* FireBaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C09C12326AFF60006D0BF /* FireBaseHandler.swift */; };
+		DC8654C5245B26540066DAB8 /* MoreAppsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8654C4245B26540066DAB8 /* MoreAppsViewController.swift */; };
 		DC88A73323DF3D3900EB7F79 /* OnBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */; };
 		DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */; };
 		DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73823DF3F5200EB7F79 /* SelectLanguageViewController.swift */; };
@@ -507,6 +508,7 @@
 		DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowActionModel.swift; sourceTree = "<group>"; };
 		DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListResponse.swift; sourceTree = "<group>"; };
 		DC7C09C12326AFF60006D0BF /* FireBaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseHandler.swift; sourceTree = "<group>"; };
+		DC8654C4245B26540066DAB8 /* MoreAppsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreAppsViewController.swift; sourceTree = "<group>"; };
 		DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnBoard.storyboard; sourceTree = "<group>"; };
 		DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICenteredHorizantalButton.swift; sourceTree = "<group>"; };
 		DC88A73823DF3F5200EB7F79 /* SelectLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLanguageViewController.swift; sourceTree = "<group>"; };
@@ -1417,6 +1419,7 @@
 		DC8EAB7F23E722F100E00A00 /* More */ = {
 			isa = PBXGroup;
 			children = (
+				DC8654C4245B26540066DAB8 /* MoreAppsViewController.swift */,
 				DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */,
 				DC05FDC423F1BE420093B47B /* Languages */,
 				DC13409124573AC100CC9856 /* Notifications */,
@@ -2275,6 +2278,7 @@
 				DC9AC6E12406C1D1008FAFA6 /* DiscussionService.swift in Sources */,
 				DCF67FE724100221003061A7 /* CircularView.swift in Sources */,
 				DC7C09C22326AFF60006D0BF /* FireBaseHandler.swift in Sources */,
+				DC8654C5245B26540066DAB8 /* MoreAppsViewController.swift in Sources */,
 				DC6A790323CA242B001D1009 /* EmptyOrErrorViewModel.swift in Sources */,
 				DCD39889232E254100C812EB /* UIColor+Converter.swift in Sources */,
 				DCD39885232E24E500C812EB /* Reusable+Extensions.swift in Sources */,
