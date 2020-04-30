@@ -15,6 +15,7 @@ class BaseListTableViewModel: BaseCellViewModel, CollectionMultiSectionsProvider
     
     let cells: BehaviorRelay<[SectionItem]>
     let isDownloading: BehaviorRelay<Bool>
+    let emptyOrError: BehaviorSubject<EmptyOrErrorViewModel?>
     
     let shouldDismiss: PublishSubject<Bool>
     let itemSelected: PublishSubject<IndexPath>
@@ -25,6 +26,7 @@ class BaseListTableViewModel: BaseCellViewModel, CollectionMultiSectionsProvider
         self.isDownloading = BehaviorRelay(value: false)
         self.shouldDismiss = PublishSubject()
         self.showBorder = showBorder
+        self.emptyOrError = BehaviorSubject(value: nil)
         self.itemSelected = PublishSubject()
         super.init()
     }

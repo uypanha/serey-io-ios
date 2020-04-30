@@ -23,7 +23,7 @@ enum PushApi {
 extension PushApi: AuthorizedApiTargetType {
     
     var baseURL: URL {
-        return Constants.kycURL
+        return Constants.notificationCenterUrl
     }
 
     var parameters: [String : Any] {

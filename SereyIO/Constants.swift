@@ -22,6 +22,10 @@ public struct Constants {
         return URL(string: ConfigSetting.urlProcol.value() + ConfigSetting.chainURL.value())!
     }
     
+    static var notificationCenterUrl: URL {
+        return URL(string: ConfigSetting.notificationCenterUrl.value())!
+    }
+    
     static let shouldClearOutBadgeCountWhenFiredUp: Bool = true
     
     static var appBundleIndentifire: String {
@@ -81,6 +85,7 @@ fileprivate enum ConfigSetting {
     case chainURL
     case urlProcol
     case includeWallet
+    case notificationCenterUrl
     
     private var key: String {
         switch self {
@@ -96,6 +101,8 @@ fileprivate enum ConfigSetting {
             return "URL_PROTOCOL"
         case .includeWallet:
             return "INCLUDE_WALLET"
+        case .notificationCenterUrl:
+            return "Notificaton Center URL"
         }
     }
     

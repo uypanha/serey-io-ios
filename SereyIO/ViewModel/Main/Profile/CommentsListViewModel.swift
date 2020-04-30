@@ -68,6 +68,7 @@ extension CommentsListViewModel {
                 self?.comments.accept(data.data)
             }, onError: { [weak self] error in
                 self?.isDownloading.accept(false)
+                self?.comments.renotify()
                 let errorInfo = ErrorHelper.prepareError(error: error)
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
@@ -84,6 +85,17 @@ extension CommentsListViewModel {
         }
         return [SectionItem(items: cells)]
     }
+    
+    func prepareEmptyViewModel() -> EmptyOrErrorViewModel {
+        let title = "No activities found"
+        return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withEmptyTitle: title, emptyDescription: "", iconImage: R.image.emptyActivities()))
+    }
+    
+    open func prepareEmptyViewModel(_ erroInfo: ErrorInfo) -> EmptyOrErrorViewModel {
+        return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withErrorInfo: erroInfo, actionTitle: R.string.common.tryAgain.localized(), actionCompletion: { [unowned self] in
+            self.downloadData()
+        }))
+    }
 }
 
 // MARK: - SetUp Rx Observers
@@ -98,5 +110,12 @@ extension CommentsListViewModel {
             .map { self.prepareCells($0) }
             ~> self.cells
             ~ self.disposeBag
+        
+        self.comments.asObservable()
+            .subscribe(onNext: { [unowned self] comments in
+                if comments.isEmpty && !self.isDownloading.value {
+                    self.emptyOrError.onNext(self.prepareEmptyViewModel())
+                }
+            }) ~ self.disposeBag
     }
 }

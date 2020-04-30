@@ -83,7 +83,7 @@ extension SearchViewController {
         return dataSource
     }
     
-    private func prepareToDisplayEmptyView(_ model: EmptyOrErrorViewModel) {
+    func prepareToDisplayEmptyView(_ model: EmptyOrErrorViewModel) {
         let emptyView = EmptyOrErrorView()
         emptyView.viewModel = model
         self.emptyView = emptyView

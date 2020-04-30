@@ -12,11 +12,17 @@ import RxSwift
 import RxBinding
 import RxDataSources
 
-class ListTableViewController<T>: BaseTableViewController where T : BaseListTableViewModel {
+class ListTableViewController<T>: BaseTableViewController, AlertDialogController where T : BaseListTableViewModel {
     
     let viewModel: T
     var sepereatorStyle: UITableViewCell.SeparatorStyle = .singleLine
     var contentInset: UIEdgeInsets = UIEdgeInsets.zero
+    
+    fileprivate weak var emptyView: EmptyOrErrorView? = nil {
+        didSet {
+            self.tableView?.backgroundView = emptyView
+        }
+    }
     
     lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
         return self.prepreDataSource()
@@ -60,6 +66,12 @@ class ListTableViewController<T>: BaseTableViewController where T : BaseListTabl
     open func prepreDataSource() -> RxTableViewSectionedReloadDataSource<SectionItem> {
         return self.viewModel.prepareDatasource()
     }
+    
+    open func prepareToDisplayEmptyView(_ model: EmptyOrErrorViewModel) {
+        let emptyView = EmptyOrErrorView()
+        emptyView.viewModel = model
+        self.emptyView = emptyView
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -71,6 +83,12 @@ fileprivate extension ListTableViewController {
     
     func setUpTableViewObservers() {
         self.viewModel.cells.asObservable()
+            .`do`(onNext: { [weak self] cells in
+                if !cells.isEmpty {
+                    self?.emptyView?.removeFromSuperview()
+                    self?.emptyView = nil
+                }
+            })
             ~> self.tableView.rx.items(dataSource: self.dataSource)
             ~ self.disposeBag
         
@@ -87,6 +105,13 @@ fileprivate extension ListTableViewController {
                     } else {
                         self?.dismiss(animated: true, completion: nil)
                     }
+                }
+            }) ~ self.disposeBag
+        
+        self.viewModel.emptyOrError.asObservable()
+            .subscribe(onNext: { [weak self] emptyOrErrorViewModel in
+                if let emptyOrErrorViewModel = emptyOrErrorViewModel {
+                    self?.prepareToDisplayEmptyView(emptyOrErrorViewModel)
                 }
             }) ~ self.disposeBag
     }
