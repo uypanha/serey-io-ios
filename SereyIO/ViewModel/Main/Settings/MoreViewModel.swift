@@ -128,7 +128,10 @@ extension MoreViewModel {
             sectionItems[.signIn] = [SignInCellViewModel().then { [weak self] in self?.setUpSignInCellViewModelObservers($0) }]
         }
         sectionItems[.general] = [SettingCellViewModel(.lagnauge), SettingCellViewModel(.notificationSettings, true)]
-        sectionItems[.about] = [SettingCellViewModel(.sereyApps), SettingCellViewModel(.version, true)]
+        sectionItems[.about] = [
+//            SettingCellViewModel(.sereyApps),
+            SettingCellViewModel(.version, true)
+        ]
         
         if AuthData.shared.isUserLoggedIn {
             let signOutButtonProperties = ButtonProperties().then {

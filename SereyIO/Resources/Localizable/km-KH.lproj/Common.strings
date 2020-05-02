@@ -21,15 +21,14 @@
 "confirm"                           = "យល់ព្រម";
 "yes"                               = "បាទ/ចា៎";
 "No"                                = "ទេ";
-"delete"                            = "Delete";
+"delete"                            = "លុប";
 "skip"                              = "រំលង";
 "continue"                          = "បន្ត";
 "webViewDefaultTitle"               = "Serey.io";
 "tryAgain"                          = "Try again";
 "update"                            = "Update";
 "edit"                              = "កែប្រែ";
-"delete"                            = "លុប";
-"all"                               = "All";
+"all"                               = "ទាំងអស់";
 
 "next"                              = "បន្ទាប់";
 "letBegin"                          = "ចាប់ផ្តើម";

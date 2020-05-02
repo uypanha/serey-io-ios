@@ -8,15 +8,15 @@
 
 // MARK: Empty or Errors
 "noPostYet"                 = "No Post Yet!";
-"noPostMessage"             = "Your post will be shown here after you\nmade a post.";
-"noPostUserMessage"         = "%@'s post will be shown here after %@\nmade a post.";
+"noPostMessage"             = "Your post will be shown here after you made a post.";
+"noPostUserMessage"         = "%@'s post will be shown here after %@ made a post.";
 
 "trending"                  = "Trending";
-"noTrendingPostMessage"     = "Trending post will be shown here afer someone\nmade a post.";
+"noTrendingPostMessage"     = "Trending post will be shown here afer someone made a post.";
 "hot"                       = "Hot";
-"noHotPostMessage"          = "Hot post will be shown here afer someone\nmade a post.";
+"noHotPostMessage"          = "Hot post will be shown here afer someone made a post.";
 "new"                       = "New";
-"noNewPostMessage"          = "New post will be shown here afer someone\nmade a post.";
+"noNewPostMessage"          = "New post will be shown here afer someone made a post.";
 
 "post"                      = "Post";
 "postAnArticle"             = "Post an Article";
