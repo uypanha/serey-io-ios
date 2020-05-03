@@ -12,7 +12,6 @@ import RxSwift
 import RxCocoa
 import Alamofire
 import ObjectMapper
-import AlamofireObjectMapper
 
 /// An `Error` emitted by `AppService Provider`.
 enum AppError: Error {
@@ -32,14 +31,13 @@ class AppService<T: TargetType> {
         var plugins: [PluginType] = []
         if let token = AuthData.shared.userToken {
             let tokenAuth = token
-            plugins.append(AccessTokenPlugin { tokenAuth })
+            plugins.append(AccessTokenPlugin { _ in tokenAuth })
         }
         #if DEBUG
-        plugins.append(NetworkLoggerPlugin(verbose: true))
+        plugins.append(NetworkLoggerPlugin())
         #endif
         var manager = DefaultAlamofireManager.sharedManager(self.timeOut)
-        
-        return MoyaProvider<T>(manager: manager, plugins: plugins)
+        return MoyaProvider<T>(session: manager, plugins: plugins)
     }()
     
     init() {}
@@ -82,35 +80,36 @@ protocol AuthorizedApiTargetType: ApiTargetType, AccessTokenAuthorizable {}
 
 extension AuthorizedApiTargetType {
     
-    public var authorizationType: AuthorizationType {
+    public var authorizationType: AuthorizationType? {
         return .bearer
     }
 }
 
-class DefaultAlamofireManager: Alamofire.SessionManager {
+class DefaultAlamofireManager: Alamofire.Session {
     
     static func sharedManager(_ timeout: TimeInterval = 30, _ includeDefaultHeaders: Bool = true) -> DefaultAlamofireManager {
         let configuration = URLSessionConfiguration.default
-        if includeDefaultHeaders {
-            let defaultHeaders = Alamofire.SessionManager.defaultHTTPHeaders
-            configuration.httpAdditionalHeaders = defaultHeaders
-        }
+//        if includeDefaultHeaders {
+//            let defaultHeaders = Alamofire.Session.default
+//            configuration.httpAdditionalHeaders = defaultHeaders
+//        }
         configuration.timeoutIntervalForRequest = 30 // as seconds, you can set your request timeout
         configuration.timeoutIntervalForResource = 30 // as seconds, you can set your resource timeout
         #if DEVELOPMENT
-        return DefaultAlamofireManager(configuration: configuration, serverTrustPolicyManager: CustomServerTrustPoliceManager())
+        return DefaultAlamofireManager(configuration: configuration, serverTrustManager: CustomServerTrustPoliceManager())
         #else
-        return DefaultAlamofireManager(configuration: configuration)
+        return DefaultAlamofireManager(configuration: configuration, serverTrustManager: CustomServerTrustPoliceManager())
         #endif
     }
 }
 
-class CustomServerTrustPoliceManager : ServerTrustPolicyManager {
-    override func serverTrustPolicy(forHost host: String) -> ServerTrustPolicy? {
-        return .disableEvaluation
-    }
-
+class CustomServerTrustPoliceManager : ServerTrustManager {
+    
     public init() {
-        super.init(policies: [:])
+        super.init(evaluators: [:])
+    }
+    
+    override func serverTrustEvaluator(forHost host: String) throws -> ServerTrustEvaluating? {
+        return nil
     }
 }

@@ -18,13 +18,13 @@ class PushService: AppService<PushApi> {
         var plugins: [PluginType] = []
         if let token = accessToken {
             let tokenAuth = token
-            plugins.append(AccessTokenPlugin { tokenAuth })
+            plugins.append(AccessTokenPlugin { _ in tokenAuth })
         }
         #if DEBUG
-        plugins.append(NetworkLoggerPlugin(verbose: true))
+        plugins.append(NetworkLoggerPlugin())
         #endif
         let manager = DefaultAlamofireManager.sharedManager(self.timeOut)
-        return MoyaProvider<PushApi>(manager: manager, plugins: plugins)
+        return MoyaProvider<PushApi>(session: manager, plugins: plugins)
     }
     
     func register(_ username: String, _ token: String) -> Observable<NotificationResponse> {

@@ -11,10 +11,20 @@ def frameworks_pods
   platform :ios, '10'
   use_frameworks!
   inhibit_all_warnings!
+  
+  # MARK: - RX
+  pod 'RxSwift', '~> 5'
+  pod 'RxCocoa', '~> 5'
+  pod 'RxDataSources', '~> 4.0'
+  pod 'RxKeyboard', '1.0.0'
+  pod 'RxKingfisher', '1.0.0'
+  pod 'RxAlamofire', '5.2.0'
+  pod 'RxRealm', '2.0.0'
+  pod 'RxBinding', '0.3.1'
 
 	# MARK: - Data Store
   pod 'Locksmith'
-	pod 'RealmSwift'
+	pod 'RealmSwift', '4.0'
 
 	# MARK: - Extentions
   pod 'Then'
@@ -32,7 +42,7 @@ def frameworks_pods
 	# MARK: - Network Framework
   pod 'Kingfisher'
   pod 'Alamofire'
-  pod 'AlamofireObjectMapper'
+  pod 'AlamofireObjectMapper', :git => 'https://github.com/uypanha/AlamofireObjectMapper.git'
   pod 'ReachabilitySwift'
   pod 'Moya/RxSwift'
 
@@ -43,16 +53,6 @@ def frameworks_pods
   pod 'Shimmer'
   pod 'RichEditorView', :git => 'https://github.com/uyphanha/RichEditorView.git'
   pod 'LSDialogViewController', :git => 'https://github.com/uyphanha/LSDialogViewController.git'
-
-	# MARK: - RX
-  pod 'RxSwift'
-  pod 'RxCocoa'
-  pod 'RxDataSources'
-  pod 'RxKeyboard'
-  pod 'RxKingfisher'
-  pod 'RxAlamofire'
-  pod 'RxRealm'
-  pod 'RxBinding'
   
   # MARK: - Google SDKs
   pod 'Firebase/Analytics'

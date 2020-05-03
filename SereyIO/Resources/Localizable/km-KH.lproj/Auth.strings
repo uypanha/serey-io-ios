@@ -6,14 +6,14 @@
   Copyright © 2020 Phanha Uy. All rights reserved.
 */
 
-"userName"                              = "Username";
+"userName"                              = "ឈ្មោះ​អ្នកប្រើប្រាស់";
 "userNameRequiredMessage"               = "Username field is required.";
-"privateKeyOrPassword"                  = "Private Key or Password";
+"privateKeyOrPassword"                  = "សោឯកជន ឬពាក្យសម្ងាត់";
 "privateKeyOrPasswordRequireMessage"    = "Private key or password field is required.";
 
-"signOut"                               = "Sign out";
-"signIn"                                = "Sign in";
-"signUp"                                = "Sign up";
-"orSignUp"                              = "or Sign up";
-"go"                                    = "Go";
-"donHaveAccountQuestion"                = "Don’t have an account?\n\nSign up now and get free Serey coins!";
+"signOut"                               = "ចាកចេញ";
+"signIn"                                = "ចូល";
+"signUp"                                = "ចុះ​ឈ្មោះ";
+"orSignUp"                              = "ឬចុះ​ឈ្មោះ";
+"go"                                    = "ចូល";
+"donHaveAccountQuestion"                = "មិនមានគណនី?\n\nចុះ​ឈ្មោះឥឡូវនេះ និងទទួលបានកាក់សេរីឥតគិតថ្លៃ!";

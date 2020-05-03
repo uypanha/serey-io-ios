@@ -24,15 +24,15 @@ extension UserApi: AuthorizedApiTargetType {
     
     var parameters: [String : Any] {
         switch self {
-        case .getFollowAction(let data):
+        case .getFollowAction(let username, let author):
             return [
-                "username"      : data.username,
-                "authorName"    : data.author
+                "username"      : username,
+                "authorName"    : author
             ]
-        case .followAction(let data):
+        case .followAction(let author, let actionType):
             return [
-                "author"        : data.author,
-                "actionType"    : data.actionType.typeText
+                "author"        : author,
+                "actionType"    : actionType.typeText
             ]
         case .getFollowerList(let data):
             return [

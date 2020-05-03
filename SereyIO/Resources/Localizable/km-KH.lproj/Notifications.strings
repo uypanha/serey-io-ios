@@ -6,7 +6,7 @@
   Copyright © 2020 Phanha Uy. All rights reserved.
 */
 
-"notifications"             = "Notifications";
+"notifications"             = "ការជូនដំណឹង";
 
-"manageYourNotification"    = "Manage Your Notifications";
-"pushNotification"          = "Push Notification";
+"manageYourNotification"    = "គ្រប់គ្រងការជូនដំណឹងរបស់អ្នក";
+"pushNotification"          = "ការជំរុញការជូនដំណឹង";

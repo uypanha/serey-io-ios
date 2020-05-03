@@ -18,10 +18,10 @@ extension AuthApi: AuthorizedApiTargetType {
     
     var parameters: [String : Any] {
         switch self {
-        case .login(let data):
+        case .login(let userName, let password):
             return [
-                "username"  : data.userName,
-                "password"  : data.password,
+                "username"  : userName,
+                "password"  : password,
                 "rememberMe": true
             ]
         }

@@ -44,13 +44,13 @@ class FileUploadService {
         return uploadSubject
     }
     
-    fileprivate func createHeaders() -> [String: String] {
+    fileprivate func createHeaders() -> HTTPHeaders {
         guard let userToken = AuthData.shared.userToken else { return [:] }
         
-        let headers: [String: String] = [
-            "Authorization": "Bearer \(userToken)",
-            "Content-Type": "application/json"
-        ]
+        let headers: HTTPHeaders = HTTPHeaders([
+                   "Authorization": "Bearer \(userToken)",
+                   "Content-Type": "application/json"
+               ])
         
         return headers
     }
@@ -62,77 +62,102 @@ extension FileUploadService {
     fileprivate func uploadImageFile(_ fixedPhoto: UIImage, parameters: [String: Any], uploadURL: String) -> Observable<(Bool, FileUploadModel)> {
         let uploadSubject = PublishSubject<(Bool, FileUploadModel)>()
         
-        Alamofire.upload(multipartFormData: { multipartFormData in
+        Alamofire.Session.default.upload(multipartFormData: { multipartFormData in
             for (key, value) in parameters {
                 let valueData = (value as AnyObject).data(using: String.Encoding.utf8.rawValue)
                 multipartFormData.append(valueData!, withName: key)
             }
-            multipartFormData.append(fixedPhoto.jpegData(compressionQuality: 0.8)!, withName: "upfile", fileName: "\(Date().timeIntervalSince1970).jpg", mimeType: "image/jpeg")
-        }, to: uploadURL, headers: self.createHeaders(), encodingCompletion: { result in
             
-            switch result {
-            case .success(let request, _, _):
-                #if DEBUG
-                request.responseString(completionHandler: { (uploadResponse: DataResponse<String>) in
-                    print(uploadResponse.result)
-                })
-                #endif
-                request.responseObject(completionHandler: { (uploadResponse: DataResponse<FileUploadModel>) in
-                    switch uploadResponse.result {
-                    case .success(let imageModel):
-                        uploadSubject.onNext((true, imageModel))
-                        break
-                    case .failure(let error) :
-                        if (uploadResponse.response?.statusCode == 413) { // Entity Too Large
-                            uploadSubject.onNext((false, FileUploadModel()))
-                        } else {
-                            uploadSubject.onError(error)
-                        }
-                        break
+            let imageData = fixedPhoto.jpegData(compressionQuality: 0.8)!
+            let withName = "upfile"
+            let filename = "\(Date().timeIntervalSince1970).jpg"
+            let mimetype = "image/jpeg"
+            multipartFormData.append(imageData, withName: withName, fileName: filename, mimeType: mimetype)
+        }, to: uploadURL, headers: self.createHeaders())
+            .responseObject { (response: DataResponse<FileUploadModel, AFError>) in
+                switch response.result {
+                case .success(let imageModel):
+                    uploadSubject.onNext((true, imageModel))
+                case .failure(let error):
+                    if (response.response?.statusCode == 413) { // Entity Too Large
+                        uploadSubject.onNext((false, FileUploadModel()))
+                    } else {
+                        uploadSubject.onError(error)
                     }
-                })
-            case .failure(let error):
-                uploadSubject.onError(error)
-            }
-            
-        })
+                }
+        }
+        
+//        Alamofire.Session.default.upload(multipartFormData: { multipartFormData in
+//            for (key, value) in parameters {
+//                let valueData = (value as AnyObject).data(using: String.Encoding.utf8.rawValue)
+//                multipartFormData.append(valueData!, withName: key)
+//            }
+//            multipartFormData.append(fixedPhoto.jpegData(compressionQuality: 0.8)!, withName: "upfile", fileName: "\(Date().timeIntervalSince1970).jpg", mimeType: "image/jpeg")
+//        }, to: uploadURL, headers: self.createHeaders(), encodingCompletion: { result in
+//
+//            switch result {
+//            case .success(let request, _, _):
+//                #if DEBUG
+//                request.responseString(completionHandler: { (uploadResponse: DataResponse<String>) in
+//                    print(uploadResponse.result)
+//                })
+//                #endif
+//                request.responseObject(completionHandler: { (uploadResponse: DataResponse<FileUploadModel>) in
+//                    switch uploadResponse.result {
+//                    case .success(let imageModel):
+//                        uploadSubject.onNext((true, imageModel))
+//                        break
+//                    case .failure(let error) :
+//                        if (uploadResponse.response?.statusCode == 413) { // Entity Too Large
+//                            uploadSubject.onNext((false, FileUploadModel()))
+//                        } else {
+//                            uploadSubject.onError(error)
+//                        }
+//                        break
+//                    }
+//                })
+//            case .failure(let error):
+//                uploadSubject.onError(error)
+//            }
+//
+//        })
         
         return uploadSubject
     }
     
-    fileprivate func uploadFile(_ url: URL, parameters: [String: Any], uploadURL: String) -> Observable<(Bool, FileUploadModel)> {
-        let uploadSubject = PublishSubject<(Bool, FileUploadModel)>()
-        
-        DefaultAlamofireManager.sharedManager(30, false).upload(multipartFormData: { multipartFormData in
-            multipartFormData.append(url, withName: "upfile", fileName: url.lastPathComponent, mimeType: url.mimeType)
-        }, to: uploadURL, headers: self.createHeaders()) { result in
-            switch result {
-            case .success(let request, _, _):
-                #if DEBUG
-                request.responseString(completionHandler: { (uploadResponse: DataResponse<String>) in
-                    print(uploadResponse.result)
-                })
-                #endif
-                request.responseObject(completionHandler: { (uploadResponse: DataResponse<FileUploadModel>) in
-                    switch uploadResponse.result {
-                    case .success(let imageModel):
-                        uploadSubject.onNext((true, imageModel))
-                        break
-                    case .failure(let error) :
-                        if (uploadResponse.response?.statusCode == 413) { // Entity Too Large
-                            uploadSubject.onNext((false, FileUploadModel()))
-                        } else {
-                            uploadSubject.onError(error)
-                        }
-                        break
-                    }
-                })
-            case .failure(let error):
-                uploadSubject.onError(error)
-            }
-        }
-        
-        return uploadSubject
-    }
+//    fileprivate func uploadFile(_ url: URL, parameters: [String: Any], uploadURL: String) -> Observable<(Bool, FileUploadModel)> {
+//        let uploadSubject = PublishSubject<(Bool, FileUploadModel)>()
+//
+//        DefaultAlamofireManager.sharedManager(30, false).upload(multipartFormData: { multipartFormData in
+//            multipartFormData.append(url, withName: "upfile", fileName: url.lastPathComponent, mimeType: url.mimeType)
+//        }, to: uploadURL, headers: self.createHeaders()) { result in
+//            switch result {
+//            case .success(let request, _, _):
+//                #if DEBUG
+//                request.responseString(completionHandler: { (uploadResponse: DataResponse<String>) in
+//                    print(uploadResponse.result)
+//                })
+//                #endif
+//                request.responseObject(completionHandler: { (uploadResponse: DataResponse<FileUploadModel>) in
+//                    switch uploadResponse.result {
+//                    case .success(let imageModel):
+//                        uploadSubject.onNext((true, imageModel))
+//                        break
+//                    case .failure(let error) :
+//                        if (uploadResponse.response?.statusCode == 413) { // Entity Too Large
+//                            uploadSubject.onNext((false, FileUploadModel()))
+//                        } else {
+//                            uploadSubject.onError(error)
+//                        }
+//                        break
+//                    }
+//                })
+//            case .failure(let error):
+//                uploadSubject.onError(error)
+//            }
+//        }
+//
+//        return uploadSubject
+//    }
 }
 

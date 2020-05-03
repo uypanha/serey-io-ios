@@ -5,9 +5,9 @@
   Created by Panha Uy on 4/5/20.
   Copyright © 2020 Phanha Uy. All rights reserved.
 */
-"followerCount"         = "%@ Follower%@";
-"FollowingCount"        = "%@ Following%@";
-"postCount"             = "%@ Post%@";
+"followerCount"         = "តាមអ្នក %@ នាក់%@";
+"FollowingCount"        = "តាម %@ នាក់%@";
+"postCount"             = "%@ អត្ថបទ%@";
 
-"follow"                = "Follow";
-"unfollow"              = "Unfollow";
+"follow"                = "តាម";
+"unfollow"              = "មិនតាម";
