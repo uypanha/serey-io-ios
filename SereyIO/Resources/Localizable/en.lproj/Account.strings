@@ -11,3 +11,5 @@
 
 "follow"                = "Follow";
 "unfollow"              = "Unfollow";
+"followUnfollow"        = "Follow | Unfollow";
+"noActivitiesFound"     = "No activities found";

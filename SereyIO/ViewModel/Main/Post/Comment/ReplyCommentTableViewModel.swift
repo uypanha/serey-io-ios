@@ -34,14 +34,18 @@ class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, 
     lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
     
     let title: BehaviorRelay<String>
+    let commentHidden: BehaviorSubject<Bool>
     let commentViewModel: CommentTextViewModel
     
     init(_ comment: PostModel, title: String) {
         self.title = BehaviorRelay(value: title)
+        self.commentHidden = BehaviorSubject(value: false)
+        
         self.commentViewModel = CommentTextViewModel()
         super.init(comment.permlink, comment.authorName)
         
         self.post.accept(comment)
+        registerForNotifs()
     }
     
     override func setUpRxObservers() {
@@ -71,6 +75,7 @@ class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, 
         super.notifyDataChanged(data)
         
         self.replies.accept(data?.replies ?? [])
+        self.commentHidden.onNext(!AuthData.shared.isUserLoggedIn)
     }
     
     override func setUpCommentCellObservers(_ cellModel: CommentCellViewModel) {
@@ -94,6 +99,10 @@ class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, 
         var post = data.content
         post.replies = data.replies
         self.post.accept(post)
+    }
+    
+    deinit {
+        unregisterFromNotifs()
     }
 }
 
@@ -159,12 +168,12 @@ extension ReplyCommentTableViewModel {
                 case .refresh:
                     self?.downloadData()
                     self?.replies.renotify()
-                case .upVotePressed(let data):
-                    self?.handleUpVotePressed(data.0, data.1, data.2)
-                case .flagPressed(let data):
-                    self?.handleFlagPressed(data.0, data.1, data.2)
-                case .downVotePressed(let data):
-                    self?.handlDownvotePressed(data.0, data.1, data.2)
+                case .upVotePressed(let voteType, let postModel, let isVoting):
+                    self?.handleUpVotePressed(voteType, postModel, isVoting)
+                case .flagPressed(let voteType, let postModel, let isVoting):
+                    self?.handleFlagPressed(voteType, postModel, isVoting)
+                case .downVotePressed(let voteType, let postModel, let isVoting):
+                    self?.handlDownvotePressed(voteType, postModel, isVoting)
                 }
             }) ~ self.disposeBag
     }
@@ -174,5 +183,19 @@ extension ReplyCommentTableViewModel {
             .subscribe(onNext: { [unowned self] comment in
                 self.submitComment(comment, self.commentViewModel.isUploading)
             }) ~ self.disposeBag
+    }
+}
+
+// MARK: - NotificationObserver
+extension ReplyCommentTableViewModel: NotificationObserver {
+    
+    func notificationReceived(_ notification: Notification) {
+        guard let appNotif = notification.appNotification else { return }
+        switch appNotif {
+        case .userDidLogin, .userDidLogOut:
+            self.commentHidden.onNext(!AuthData.shared.isUserLoggedIn)
+        default:
+            break
+        }
     }
 }

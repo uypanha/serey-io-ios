@@ -153,12 +153,8 @@ fileprivate extension PostDetailViewModel {
     
     func handleReplyCommentPressed(_ cellViewModel: CommentCellViewModel) {
         if let commentData = cellViewModel.post.value {
-            if AuthData.shared.isUserLoggedIn {
-                let replyCommentViewModel = ReplyCommentTableViewModel(commentData, title: self.post.value?.title ?? "")
-                self.shouldPresent(.replyComment(replyCommentViewModel))
-            } else {
-                self.shouldPresent(.signInViewController)
-            }
+            let replyCommentViewModel = ReplyCommentTableViewModel(commentData, title: self.post.value?.title ?? "")
+            self.shouldPresent(.replyComment(replyCommentViewModel))
         }
     }
     

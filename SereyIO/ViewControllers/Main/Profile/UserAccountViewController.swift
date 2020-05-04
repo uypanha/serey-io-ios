@@ -180,14 +180,20 @@ extension UserAccountViewController {
         
         self.viewModel.isFollowed.asObservable()
             .subscribe(onNext: { [weak self] isFollowed in
-                let titleColor = isFollowed ? UIColor.white : ColorName.primary.color
-                self?.followButton.setTitleColor(titleColor, for: .normal)
-                if isFollowed {
-                    self?.followButton.setTitle(R.string.account.unfollow.localized(), for: .normal)
-                    self?.followButton.primaryStyle()
+                if let isFollowed = isFollowed {
+                    let titleColor = isFollowed ? UIColor.white : ColorName.primary.color
+                    self?.followButton.setTitleColor(titleColor, for: .normal)
+                    if isFollowed {
+                        self?.followButton.setTitle(R.string.account.unfollow.localized(), for: .normal)
+                        self?.followButton.primaryStyle()
+                    } else {
+                        self?.followButton.setTitle(R.string.account.follow.localized(), for: .normal)
+                        self?.followButton.customBorderStyle(with: ColorName.primary.color, border: 1.5, isCircular: false)
+                    }
                 } else {
-                    self?.followButton.setTitle(R.string.account.follow.localized(), for: .normal)
-                    self?.followButton.customBorderStyle(with: ColorName.primary.color, border: 1.5, isCircular: false)
+                    self?.followButton.setTitleColor(ColorName.primary.color, for: .normal)
+                    self?.followButton.customBorderStyle(with: .lightGray, border: 1, isCircular: false)
+                    self?.followButton.setTitle(R.string.account.followUnfollow.localized(), for: .normal)
                 }
             }) ~ self.disposeBag
         
@@ -221,6 +227,11 @@ extension UserAccountViewController {
                     self.followLoadingIndicator.isHidden = !loading
                     if loading {
                         self.followLoadingIndicator.startAnimating()
+                    }
+                case .signInController:
+                    if let signInViewController = R.storyboard.auth.signInViewController() {
+                        signInViewController.viewModel = SignInViewModel()
+                        self.show(CloseableNavigationController(rootViewController: signInViewController), sender: nil)
                     }
                 }
             }) ~ self.disposeBag

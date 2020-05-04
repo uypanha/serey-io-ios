@@ -28,6 +28,7 @@ class UserAccountViewModel: BaseViewModel, DownloadStateNetworkProtocol, ShouldP
         case editPostController(CreatePostViewModel)
         case loading(Bool)
         case followLoading(Bool)
+        case signInController
     }
     
     // input:
@@ -48,7 +49,7 @@ class UserAccountViewModel: BaseViewModel, DownloadStateNetworkProtocol, ShouldP
     let followerCountText: BehaviorSubject<String?>
     let followingCountText: BehaviorSubject<String?>
     let isFollowHidden: BehaviorSubject<Bool>
-    let isFollowed: BehaviorSubject<Bool>
+    let isFollowed: BehaviorSubject<Bool?>
     let endRefresh: BehaviorSubject<Bool>
     
     let userService: UserService
@@ -67,7 +68,7 @@ class UserAccountViewModel: BaseViewModel, DownloadStateNetworkProtocol, ShouldP
         self.followerCountText = BehaviorSubject(value: nil)
         self.followingCountText = BehaviorSubject(value: nil)
         self.isFollowHidden = BehaviorSubject(value: AuthData.shared.username == username)
-        self.isFollowed = BehaviorSubject(value: false)
+        self.isFollowed = BehaviorSubject(value: nil)
         self.endRefresh = BehaviorSubject(value: false)
         self.userService = UserService()
         self.isDownloading = BehaviorRelay(value: false)
@@ -75,12 +76,17 @@ class UserAccountViewModel: BaseViewModel, DownloadStateNetworkProtocol, ShouldP
         
         setUpRxObservers()
         prepareTabViewModels()
+        registerForNotifs()
     }
     
     convenience init(_ user: UserModel) {
         self.init(user.name)
         
         self.userInfo.accept(user)
+    }
+    
+    deinit {
+        unregisterFromNotifs()
     }
 }
 
@@ -217,6 +223,8 @@ fileprivate extension UserAccountViewModel {
             } else {
                 self.followAction(.follow)
             }
+        } else {
+            self.shouldPresent(.signInController)
         }
     }
 }
@@ -237,7 +245,7 @@ fileprivate extension UserAccountViewModel {
         
         self.followers.asObservable()
             .filter { _ in AuthData.shared.username != self.username.value }
-            .map { $0.contains { $0 == AuthData.shared.username } }
+            .map { AuthData.shared.isUserLoggedIn ? $0.contains { $0 == AuthData.shared.username } : nil }
             ~> self.isFollowed
             ~ self.disposeBag
         
@@ -290,5 +298,19 @@ fileprivate extension UserAccountViewModel {
                     self?.handleFollowPressed()
                 }
             }) ~ self.disposeBag
+    }
+}
+
+// MARK: - NotificationObserver
+extension UserAccountViewModel: NotificationObserver {
+    
+    func notificationReceived(_ notification: Notification) {
+        guard let appNotif = notification.appNotification else { return }
+        switch appNotif {
+        case .userDidLogin, .userDidLogOut:
+            self.followers.renotify()
+        default:
+            break
+        }
     }
 }

@@ -29,6 +29,7 @@ class PostCommentView: NibView {
                 viewModel.upVoteCount ~> self.upVoteButton.rx.title(for: .normal),
                 viewModel.downVoteCount ~> self.downVoteButton.rx.title(for: .normal),
                 viewModel.isVoteAllowed.map { !$0 } ~> self.voteContainerView.rx.isHidden,
+                viewModel.commentHidden ~> self.commentTextView.rx.isHidden,
                 viewModel.votedType
                     .subscribe(onNext: { [weak self] voteType in
                         self?.preparepVoteTypeStyle(voteType)

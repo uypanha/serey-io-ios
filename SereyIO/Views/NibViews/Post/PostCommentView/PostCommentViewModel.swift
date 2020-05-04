@@ -36,6 +36,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
     let upVoteEnabled: BehaviorSubject<Bool>
     let flagEnabled: BehaviorSubject<Bool>
     let isVoting: BehaviorSubject<VotedType?>
+    let commentHidden: BehaviorSubject<Bool>
     
     let isUploading: BehaviorSubject<Bool>
     
@@ -51,6 +52,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
         self.upVoteEnabled = BehaviorSubject(value: true)
         self.flagEnabled = BehaviorSubject(value: true)
         self.isVoting = BehaviorSubject(value: nil)
+        self.commentHidden = BehaviorSubject(value: false)
         
         self.shouldComment = PublishSubject()
         self.shouldUpVote = PublishSubject()
@@ -63,6 +65,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
         super.init()
         
         setUpRxObservers()
+        registerForNotifs()
     }
     
     required convenience init(_ isShimmering: Bool) {
@@ -87,6 +90,11 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
         self.votedType.accept(data?.votedType)
         self.upVoteEnabled.onNext(data?.votedType != .flag)
         self.flagEnabled.onNext(data?.votedType != .upvote)
+        self.commentHidden.onNext(!AuthData.shared.isUserLoggedIn)
+    }
+    
+    deinit {
+        self.unregisterFromNotifs()
     }
 }
 
@@ -152,3 +160,18 @@ fileprivate extension PostCommentViewModel {
             }) ~ self.disposeBag
     }
 }
+
+// MARK: - NotificationObserver
+extension PostCommentViewModel: NotificationObserver {
+    
+    func notificationReceived(_ notification: Notification) {
+        guard let appNotif = notification.appNotification else { return }
+        switch appNotif {
+        case .userDidLogin, .userDidLogOut:
+            self.commentHidden.onNext(!AuthData.shared.isUserLoggedIn)
+        default:
+            break
+        }
+    }
+}
+

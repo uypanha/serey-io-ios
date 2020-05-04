@@ -11,3 +11,5 @@
 
 "follow"                = "តាម";
 "unfollow"              = "មិនតាម";
+"followUnfollow"        = "តាម | មិនតាម";
+"noActivitiesFound"     = "No activities found";

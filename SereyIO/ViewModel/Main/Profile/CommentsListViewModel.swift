@@ -87,14 +87,16 @@ extension CommentsListViewModel {
     }
     
     func prepareEmptyViewModel() -> EmptyOrErrorViewModel {
-        let title = "No activities found"
+        let title = R.string.account.noActivitiesFound.localized()
         return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withEmptyTitle: title, emptyDescription: "", iconImage: R.image.emptyActivities()))
     }
     
     open func prepareEmptyViewModel(_ erroInfo: ErrorInfo) -> EmptyOrErrorViewModel {
-        return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withErrorInfo: erroInfo, actionTitle: R.string.common.tryAgain.localized(), actionCompletion: { [unowned self] in
+        let emptyModel = EmptyOrErrorModel(withErrorInfo: erroInfo, actionTitle: R.string.common.tryAgain.localized(), actionCompletion: { [unowned self] in
             self.downloadData()
-        }))
+        })
+        emptyModel.imageWidthOffset = 0.5
+        return EmptyOrErrorViewModel(withErrorEmptyModel: emptyModel)
     }
 }
 
