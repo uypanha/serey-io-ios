@@ -10,40 +10,40 @@ import UIKit
 
 enum FeatureBoarding: CaseIterable {
     
-    case shareAndEarn
+//    case shareAndEarn
     case transparency
-    case walletAndMarketPlace
+//    case walletAndMarketPlace
     
     var image: UIImage? {
         switch self {
-        case .shareAndEarn:
-            return R.image.shareaAndEarn()
+//        case .shareAndEarn:
+//            return R.image.shareaAndEarn()
         case .transparency:
             return R.image.transparency()
-        case .walletAndMarketPlace:
-            return R.image.walletMarketplace()
+//        case .walletAndMarketPlace:
+//            return R.image.walletMarketplace()
         }
     }
     
     var title: String {
         switch self  {
-        case .shareAndEarn:
-            return R.string.onBoard.shareAndEarn.localized()
+//        case .shareAndEarn:
+//            return R.string.onBoard.shareAndEarn.localized()
         case .transparency:
             return R.string.onBoard.transparency.localized()
-        case .walletAndMarketPlace:
-            return R.string.onBoard.walletMarketplace.localized()
+//        case .walletAndMarketPlace:
+//            return R.string.onBoard.walletMarketplace.localized()
         }
     }
     
     var message: String {
         switch self {
-        case .shareAndEarn:
-            return R.string.onBoard.shareAndEarnMessage.localized()
+//        case .shareAndEarn:
+//            return R.string.onBoard.shareAndEarnMessage.localized()
         case .transparency:
             return R.string.onBoard.transparencyMessage.localized()
-        case .walletAndMarketPlace:
-            return R.string.onBoard.walletMarketplaceMessage.localized()
+//        case .walletAndMarketPlace:
+//            return R.string.onBoard.walletMarketplaceMessage.localized()
         }
     }
 }

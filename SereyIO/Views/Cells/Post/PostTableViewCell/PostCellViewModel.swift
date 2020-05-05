@@ -72,7 +72,8 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
         self.downVoteCount.onNext("\(data?.flag ?? 0)")
         self.commentCount.onNext("\(data?.answerCount ?? 0)")
         let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.authorName == AuthData.shared.username : false
-        self.isMoreHidden.onNext(!isMorePresent)
+        let isOverAWeek = data?.isOverAWeek ?? false
+        self.isMoreHidden.onNext(isOverAWeek || !isMorePresent)
     }
     
     func onMoreButtonPressed() {

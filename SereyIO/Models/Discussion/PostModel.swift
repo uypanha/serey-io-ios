@@ -41,6 +41,14 @@ struct PostModel: Codable {
         }
     }
     
+    var isOverAWeek: Bool {
+        get {
+            guard let date = Date.date(from: self.publishDate, format: "yyyy-MM-dd HH:mm") else { return false }
+            
+            return date.daysCount(to: Date()) > 7
+        }
+    }
+    
     var profileViewModel: ProfileViewModel {
         get {
             let firstLetter = authorName.first == nil ? "" : "\(authorName.first!)"
