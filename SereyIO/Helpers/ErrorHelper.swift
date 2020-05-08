@@ -34,6 +34,7 @@ class ErrorHelper {
         case unknownServerError = 9001
         case unauthenticatedError = 9002
         case userNotFound = 9004
+        case commentIn20s = 9006
         case networkOffline = 9999
         
         var errorTitle: String? {
@@ -70,6 +71,8 @@ class ErrorHelper {
                 errorDescription = R.string.common.networkOfflineMessage.localized()
             case .userNotFound:
                 errorDescription = "User not found."
+            case .commentIn20s:
+                errorDescription = "You may only comment once every 20 seconds."
             }
             
             return ErrorInfo(error: NSError(domain: ErrorHelper.errorDomain, code: self.rawValue, userInfo: [NSLocalizedDescriptionKey: errorDescription]), type: self, errorTitle: self.errorTitle, errorIcon: self.errorIcon)
@@ -122,6 +125,8 @@ class ErrorHelper {
                 return PredefinedError.unauthenticatedError.prepareError()
             case .userNotFound:
                 return PredefinedError.userNotFound.prepareError()
+            case .commentIn20s:
+                return PredefinedError.commentIn20s.prepareError()
             default:
                 log.error(error)
                 return defaultError(message: error.message)
@@ -165,4 +170,5 @@ fileprivate enum AppApiErrorCode: Int {
     case unauthenticateError = 4
     case accessDenied = 10
     case userNotFound = 12
+    case commentIn20s = 27
 }

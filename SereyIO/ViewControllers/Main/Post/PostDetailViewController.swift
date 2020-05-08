@@ -125,6 +125,7 @@ extension PostDetailViewController {
         setUpControlsObsservers()
         setUpContentChangedObservers()
         setUpShouldPresentObservers()
+        setUpShouldPresentErrorObsevers()
     }
     
     func setUpControlsObsservers() {
@@ -206,6 +207,13 @@ extension PostDetailViewController {
                     self.showDownvoteDialog(downvoteDialogViewModel)
                 }
             }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentErrorObsevers() {
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [unowned self] errorInfo in
+                self.showDialogError(errorInfo, positiveButton: R.string.common.confirm.localized(), positiveCompletion: nil)
+            }).disposed(by: self.disposeBag)
     }
     
     func setUpKeyboardObservers() {

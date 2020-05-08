@@ -36,6 +36,15 @@ class PostTableViewController: BaseTableViewController, AlertDialogController {
         setUpRxObservers()
         viewModel.downloadData()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if viewModel.shouldRefresh {
+            viewModel.shouldRefresh = false
+            self.refreshControl?.beginRefreshing()
+        }
+    }
 }
 
 // MARK: - Preparations & Tools

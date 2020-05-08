@@ -124,7 +124,10 @@ extension PostDetailViewModel {
 fileprivate extension PostDetailViewModel {
     
     func handleMorePressed() {
-        let items: [PostMenu] = [.edit, .delete]
+        var items: [PostMenu] = [.edit]
+        if let post = self.post.value, post.upvote == 0 {
+            items.append(.delete)
+        }
         let bottomMenuViewModel = BottomListMenuViewModel(items.map { $0.cellModel })
         
         bottomMenuViewModel.shouldSelectMenuItem.asObservable()

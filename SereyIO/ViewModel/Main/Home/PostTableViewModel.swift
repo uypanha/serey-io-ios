@@ -37,6 +37,9 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         super.init(type)
         
         setUpRxObservers()
+        if case .new = type {
+            registerForNotifs()
+        }
     }
     
     func shouldRefreshData() {
@@ -44,7 +47,10 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
     }
     
     override func onMorePressed(of postModel: PostModel) {
-        let items: [PostMenu] = [.edit, .delete]
+        var items: [PostMenu] = [.edit]
+        if postModel.upvote == 0 {
+            items.append(.delete)
+        }
         let bottomMenuViewModel = BottomListMenuViewModel(items.map { $0.cellModel })
         
         bottomMenuViewModel.shouldSelectMenuItem.asObservable()
@@ -55,6 +61,10 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
             }) ~ bottomMenuViewModel.disposeBag
         
         self.shouldPresent(.moreDialogController(bottomMenuViewModel))
+    }
+    
+    deinit {
+        unregisterFromNotifs()
     }
 }
 
@@ -117,5 +127,19 @@ fileprivate extension PostTableViewModel {
                     self?.discussions.renotify()
                 }
             }) ~ self.disposeBag
+    }
+}
+
+// MARK: - NotificationObserver
+extension PostTableViewModel: NotificationObserver {
+    
+    func notificationReceived(_ notification: Notification) {
+        guard let appNotif = notification.appNotification else { return }
+        switch appNotif {
+        case .postCreated:
+            self.shouldRefresh = true
+        default:
+            break
+        }
     }
 }

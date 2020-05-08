@@ -36,12 +36,12 @@ extension DiscussionApi: AuthorizedApiTargetType {
     
     var parameters: [String : Any] {
         switch self {
-        case .getDiscussions(let data):
-            return data.1.prepareParameters(data.0.authorParamName, authorName: data.0.authorName)
-        case .getPostDetail(let data):
+        case .getDiscussions(let type, let query):
+            return query.prepareParameters(type)
+        case .getPostDetail(let permlink, let authorName):
             return [
-                "permlink"      : data.permlink,
-                "authorName"    : data.authorName
+                "permlink"      : permlink,
+                "authorName"    : authorName
             ]
         case .getCommentReply(let username, let type):
             return [
@@ -52,27 +52,27 @@ extension DiscussionApi: AuthorizedApiTargetType {
             return data.parameters
         case .submitComment(let data):
             return data.parameters
-        case .deletPost(let data):
+        case .deletPost(let username, let permlink):
             return [
-                "username"  : data.username,
-                "permlink"  : data.permlink
+                "username"  : username,
+                "permlink"  : permlink
             ]
-        case .upVote(let data):
+        case .upVote(let permlink, let author, let weight):
             return [
-                "author"    : data.author,
-                "permlink"  : data.permlink,
-                "weight"    : data.weight
+                "author"    : author,
+                "permlink"  : permlink,
+                "weight"    : weight
             ]
-        case .flag(let data):
+        case .flag(let permlink, let author, let weight):
             return [
-                "author"    : data.author,
-                "permlink"  : data.permlink,
-                "weight"    : data.weight
+                "author"    : author,
+                "permlink"  : permlink,
+                "weight"    : weight
             ]
-        case .downVote(let data):
+        case .downVote(let permlink, let author):
             return [
-                "author"    : data.author,
-                "permlink"  : data.permlink
+                "author"    : author,
+                "permlink"  : permlink
             ]
         default:
             return [:]
@@ -83,8 +83,8 @@ extension DiscussionApi: AuthorizedApiTargetType {
         switch self {
         case .getCategories:
             return "/api/v1/sereyweb/getAllWebCategories"
-        case .getDiscussions(let data):
-            return "/api/v1/sereyweb/\(data.0.path)"
+        case .getDiscussions(let type, _):
+            return "/api/v1/sereyweb/\(type.path)"
         case .getPostDetail:
             return "/api/v1/sereyweb/findDetailBypermlink"
         case .getCommentReply:
@@ -142,6 +142,8 @@ fileprivate extension DiscussionType {
             return "findByNew"
         case .byUser:
             return "findByUserId"
+        case .byCategoryId:
+            return "getPostsByCategoryId"
         }
     }
 }
@@ -163,16 +165,16 @@ enum GetCommentType {
 // MARK: - QueryDiscussionsBy
 extension QueryDiscussionsBy {
     
-    func prepareParameters(_ authorFieldName: String = "authorName", authorName: String? = nil) -> [String: Any] {
+    func prepareParameters(_ type: DiscussionType) -> [String: Any] {
         var parameters: [String: Any] = [:]
         if let permlink = start_permlink {
-        parameters["permlink"] = permlink
+            parameters["permlink"] = permlink
         }
-        if let authorName = authorName ?? start_author {
-        parameters[authorFieldName] = authorName
+        if let authorName = type.authorName ?? start_author {
+            parameters[type.authorParamName] = authorName
         }
-        if let categoryName = tag {
-        parameters["categoryName"] = categoryName
+        if let categoryName = type.categoryName ?? tag {
+            parameters[type.categoryParamName] = categoryName
         }
         parameters["limit"] = limit
         return parameters

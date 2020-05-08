@@ -126,7 +126,7 @@ fileprivate extension SearchViewModel {
     func handleEditingChanged() {
         self.editingDisposable?.dispose()
         self.editingDisposable = Observable<Int>.just(1)
-            .delay(1, scheduler: MainScheduler.instance)
+            .delay(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
                 self?.downloadData()
             })
@@ -168,4 +168,3 @@ fileprivate extension SearchViewModel {
             }).disposed(by: self.disposeBag)
     }
 }
-

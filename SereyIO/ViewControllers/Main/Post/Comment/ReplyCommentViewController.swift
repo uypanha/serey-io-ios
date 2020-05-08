@@ -13,7 +13,7 @@ import RxBinding
 import RxDataSources
 import RxKeyboard
 
-class ReplyCommentViewController: BaseViewController, KeyboardController, LoadingIndicatorController, VoteDialogProtocol {
+class ReplyCommentViewController: BaseViewController, KeyboardController, LoadingIndicatorController, VoteDialogProtocol, AlertDialogController {
     
     fileprivate lazy var keyboardDisposeBag = DisposeBag()
     
@@ -98,6 +98,7 @@ fileprivate extension ReplyCommentViewController {
         setUpContentChangedObsesrvers()
         setUpTableViewObservers()
         setUpShouldPresentObservers()
+        setUpShouldPresentErrorObsevers()
         setUpTabSelfToDismissKeyboard(true, cancelsTouchesInView: true)?.disposed(by: self.disposeBag)
     }
     
@@ -146,6 +147,13 @@ fileprivate extension ReplyCommentViewController {
                     self.showDownvoteDialog(downvoteDialogViewModel)
                 }
             }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentErrorObsevers() {
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [unowned self] errorInfo in
+                self.showDialogError(errorInfo, positiveButton: R.string.common.confirm.localized(), positiveCompletion: nil)
+            }).disposed(by: self.disposeBag)
     }
     
     func setUpKeyboardObservers() {

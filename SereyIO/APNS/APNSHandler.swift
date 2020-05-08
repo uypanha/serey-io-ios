@@ -160,7 +160,7 @@ extension APNSHandler {
     }
     
     func applicationDidEnterBackground() {
-        Messaging.messaging().shouldEstablishDirectChannel = false
+//        Messaging.messaging().shouldEstablishDirectChannel = false
         log.info("Disconnected from FCM.")
     }
     
@@ -193,7 +193,7 @@ extension APNSHandler {
                 print("Error fetching remote instance ID: \(error)")
             } else if let result = result {
                 print("Remote instance ID token: \(result.token)")
-                Messaging.messaging().shouldEstablishDirectChannel = true
+//                Messaging.messaging().shouldEstablishDirectChannel = true
             }
         }
     }
@@ -233,7 +233,7 @@ extension APNSHandler: MessagingDelegate {
         }
     }
     
-    func applicationReceivedRemoteMessage(_ remoteMessage: MessagingRemoteMessage) {
-        log.debug(remoteMessage.appData)
-    }
+//    func applicationReceivedRemoteMessage(_ remoteMessage: MessagingRemoteMessage) {
+//        log.debug(remoteMessage.appData)
+//    }
 }

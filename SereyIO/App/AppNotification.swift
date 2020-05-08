@@ -13,5 +13,6 @@ enum AppNotification {
     case userDidLogin
     case userDidLogOut
     case languageChanged
-    case postSubmitted
+    case postCreated
+    case postUpdated(permlink: String, author: String)
 }

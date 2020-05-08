@@ -25,6 +25,7 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     let discussionService: DiscussionService
     let canDownloadMorePages: BehaviorRelay<Bool>
     var isRefresh: Bool = true
+    var shouldRefresh: Bool = false
     lazy var pageModel: QueryDiscussionsBy = QueryDiscussionsBy()
     lazy var downloadDisposeBag: DisposeBag = DisposeBag()
     lazy var isDownloading: BehaviorRelay<Bool> = BehaviorRelay(value: false)

@@ -116,7 +116,7 @@ extension CreatePostViewModel {
         let submitModel = self.prepareSubmitModel(with: thumnailUrl)
         self.discussionService.submitPost(submitModel)
             .subscribe(onNext: { [weak self] data in
-                NotificationDispatcher.sharedInstance.dispatch(.postSubmitted)
+                NotificationDispatcher.sharedInstance.dispatch(.postCreated)
                 self?.shouldPresent(.loading(false))
                 self?.shouldPresent(.dismiss)
             }, onError: { [weak self] error in

@@ -174,6 +174,7 @@ enum DiscussionType {
     case hot
     case new
     case byUser(String)
+    case byCategoryId(String)
     
     var title: String {
         switch self {
@@ -185,6 +186,8 @@ enum DiscussionType {
             return R.string.post.new.localized()
         case .byUser:
             return "User"
+        case .byCategoryId(let category):
+            return String(format: R.string.post.postsByCategory.localized(), category)
         }
     }
     
@@ -197,10 +200,28 @@ enum DiscussionType {
         }
     }
     
+    var categoryParamName: String {
+        switch self {
+        case .byCategoryId:
+            return "categoryId"
+        default:
+            return "categoryName"
+        }
+    }
+    
     var authorName: String? {
         switch self {
         case .byUser(let username):
             return username
+        default:
+            return nil
+        }
+    }
+    
+    var categoryName: String? {
+        switch self {
+        case .byCategoryId(let categoryId):
+            return categoryId
         default:
             return nil
         }
@@ -220,6 +241,8 @@ enum DiscussionType {
             return R.string.post.noNewPostMessage.localized()
         case .byUser(let username):
             return username == AuthData.shared.username ? R.string.post.noPostMessage.localized() : String(format: R.string.post.noPostUserMessage.localized(), username, username)
+        case .byCategoryId(let category):
+            return String(format: R.string.post.noPostByCategoryMessage.localized(), category)
         }
     }
 }
