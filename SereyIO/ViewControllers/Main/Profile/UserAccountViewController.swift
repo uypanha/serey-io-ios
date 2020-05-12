@@ -233,6 +233,11 @@ extension UserAccountViewController {
                         signInViewController.viewModel = SignInViewModel()
                         self.show(CloseableNavigationController(rootViewController: signInViewController), sender: nil)
                     }
+                case .postsByCategoryController(let postTableViewModel):
+                    let postTableViewController = CategoryPostsViewController()
+                    postTableViewController.viewModel = postTableViewModel
+                    postTableViewController.title = postTableViewModel.title
+                    self.show(postTableViewController, sender: nil)
                 }
             }) ~ self.disposeBag
     }

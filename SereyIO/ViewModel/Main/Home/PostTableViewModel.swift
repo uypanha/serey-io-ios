@@ -25,6 +25,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         case moreDialogController(BottomListMenuViewModel)
         case editPostController(CreatePostViewModel)
         case deletePostDialog(confirm: () -> Void)
+        case postsByCategoryController(PostTableViewModel)
     }
     
     // input:
@@ -61,6 +62,18 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
             }) ~ bottomMenuViewModel.disposeBag
         
         self.shouldPresent(.moreDialogController(bottomMenuViewModel))
+    }
+    
+    override func onCategoryPressed(of postModel: PostModel) {
+        switch self.postType.value {
+        case .byCategoryId:
+            return
+        default:
+            if let categoryId = postModel.categoryItem.first {
+                let postTableViewModel = PostTableViewModel(.byCategoryId(categoryId))
+                self.shouldPresent(.postsByCategoryController(postTableViewModel))
+            }
+        }
     }
     
     deinit {

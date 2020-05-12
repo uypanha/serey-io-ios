@@ -61,6 +61,7 @@
 		DC1C6EC923FC3F6100BA701D /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1C6EC823FC3F6100BA701D /* BaseCollectionViewCell.swift */; };
 		DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1C6ECA23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift */; };
 		DC1C6ECD23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1C6ECB23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib */; };
+		DC243FC624666A19007B2EC5 /* CategoryPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC243FC524666A19007B2EC5 /* CategoryPostsViewController.swift */; };
 		DC26812A23F2FCB30045776E /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26812823F2FCB30045776E /* ProfileTableViewCell.swift */; };
 		DC26812B23F2FCB30045776E /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC26812923F2FCB30045776E /* ProfileTableViewCell.xib */; };
 		DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26812C23F2FCD50045776E /* ProfileCellViewModel.swift */; };
@@ -371,6 +372,7 @@
 		DC1C6EC823FC3F6100BA701D /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC1C6ECA23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubPostCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC1C6ECB23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubPostCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		DC243FC524666A19007B2EC5 /* CategoryPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPostsViewController.swift; sourceTree = "<group>"; };
 		DC26812823F2FCB30045776E /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		DC26812923F2FCB30045776E /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		DC26812C23F2FCD50045776E /* ProfileCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellViewModel.swift; sourceTree = "<group>"; };
@@ -1452,6 +1454,7 @@
 		DC9E36DA241299FF00289693 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				DC243FC524666A19007B2EC5 /* CategoryPostsViewController.swift */,
 				DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */,
 				DC9E36DB24129ACA00289693 /* PostDetailViewController.swift */,
 				DCDE00652446013D00D09717 /* Comment */,
@@ -2240,6 +2243,7 @@
 				DC8EAB8123E7231200E00A00 /* HomeViewController.swift in Sources */,
 				DCD39873232E204000C812EB /* Rx+Extensions.swift in Sources */,
 				DC5D59DD2432437A0048C921 /* SelectCategoryViewModel.swift in Sources */,
+				DC243FC624666A19007B2EC5 /* CategoryPostsViewController.swift in Sources */,
 				DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */,
 				DC1C6EC923FC3F6100BA701D /* BaseCollectionViewCell.swift in Sources */,
 				DC115F34241A9744006BE78C /* MDCPasswordTextField.swift in Sources */,

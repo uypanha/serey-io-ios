@@ -45,6 +45,13 @@ class PostTableViewController: BaseTableViewController, AlertDialogController {
             self.refreshControl?.beginRefreshing()
         }
     }
+    
+    func setUpRxObservers() {
+        setUpControlsObsservers()
+        setUpContentChangedObservers()
+        shouldPresentObservers()
+        setUpShouldPresentErrorObservers()
+    }
 }
 
 // MARK: - Preparations & Tools
@@ -95,13 +102,6 @@ fileprivate extension PostTableViewController {
 
 // MARK: - SetUp Rx Observers
 fileprivate extension PostTableViewController {
-    
-    func setUpRxObservers() {
-        setUpControlsObsservers()
-        setUpContentChangedObservers()
-        shouldPresentObservers()
-        setUpShouldPresentErrorObservers()
-    }
     
     func setUpControlsObsservers() {
         self.refreshControl?.rx.controlEvent(.valueChanged)

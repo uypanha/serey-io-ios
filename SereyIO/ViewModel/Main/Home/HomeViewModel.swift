@@ -28,6 +28,7 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
         case createPostViewController
         case signInViewController
         case loading(Bool)
+        case postsByCategoryController(PostTableViewModel)
     }
     
     // input:
@@ -161,6 +162,8 @@ extension HomeViewModel {
                     self?.shouldPresent(.editPostController(createPostViewModel))
                 case .loading(let loading):
                     self?.shouldPresent(.loading(loading))
+                case .postsByCategoryController(let postTableViewModel):
+                    self?.shouldPresent(.postsByCategoryController(postTableViewModel))
                 default:
                     break
                 }
@@ -187,7 +190,7 @@ enum DiscussionType {
         case .byUser:
             return "User"
         case .byCategoryId(let category):
-            return String(format: R.string.post.postsByCategory.localized(), category)
+            return String(format: R.string.post.postsByCategory.localized(), category.capitalized)
         }
     }
     

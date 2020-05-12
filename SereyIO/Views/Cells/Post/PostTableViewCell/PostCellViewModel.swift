@@ -30,6 +30,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
     let isMoreHidden: BehaviorSubject<Bool>
     
     let shouldShowMoreOption: PublishSubject<PostModel>
+    let shouldShowPostsByCategory: PublishSubject<PostModel>
     
     init(_ post: PostModel?) {
         self.post = BehaviorRelay(value: post)
@@ -48,6 +49,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
         self.isMoreHidden = BehaviorSubject(value: true)
         
         self.shouldShowMoreOption = PublishSubject()
+        self.shouldShowPostsByCategory = PublishSubject()
         super.init()
         
         setUpRxObservers()
@@ -79,6 +81,12 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
     func onMoreButtonPressed() {
         if let postModel = self.post.value {
             self.shouldShowMoreOption.onNext(postModel)
+        }
+    }
+    
+    func onCategoryPressed() {
+        if let postModel = self.post.value {
+            self.shouldShowPostsByCategory.onNext(postModel)
         }
     }
 }

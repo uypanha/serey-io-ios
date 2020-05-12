@@ -14,6 +14,7 @@ import RxDataSources
 
 class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, InfiniteNetworkProtocol {
     
+    let title: String
     let postType: BehaviorRelay<DiscussionType>
     let discussions: BehaviorRelay<[PostModel]>
     let selectedCategory: BehaviorRelay<DiscussionCategoryModel?>
@@ -31,6 +32,7 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     lazy var isDownloading: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
     init(_ type: DiscussionType) {
+        self.title = type.title
         self.cells = BehaviorRelay(value: [])
         self.emptyOrError = BehaviorSubject(value: nil)
         self.discussions = BehaviorRelay(value: [])
@@ -64,9 +66,9 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
         }
     }
     
-    internal func onMorePressed(of postModel: PostModel) {
-        
-    }
+    internal func onMorePressed(of postModel: PostModel) {}
+    
+    internal func onCategoryPressed(of postModel: PostModel) {}
 }
 
 // MARK: - Networks
@@ -183,6 +185,11 @@ fileprivate extension BasePostViewModel {
         cellModel.shouldShowMoreOption.asObservable()
             .subscribe(onNext: { [weak self] postModel in
                 self?.onMorePressed(of: postModel)
+            }) ~ cellModel.disposeBag
+        
+        cellModel.shouldShowPostsByCategory.asObservable()
+            .subscribe(onNext: { [weak self] postModel in
+                self?.onCategoryPressed(of: postModel)
             }) ~ cellModel.disposeBag
     }
 }

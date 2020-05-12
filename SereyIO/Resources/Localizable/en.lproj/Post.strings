@@ -17,7 +17,7 @@
 "noHotPostMessage"          = "Hot post will be shown here afer someone made a post.";
 "new"                       = "New";
 "noNewPostMessage"          = "New post will be shown here afer someone made a post.";
-"postsByCategory"           = "Posts for %@";
+"postsByCategory"           = "%@'s Posts";
 "noPostByCategoryMessage"   = "%@'s pots will be shown here after someone made a post to this category.";
 
 "post"                      = "Post";

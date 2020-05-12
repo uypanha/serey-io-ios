@@ -45,6 +45,15 @@ class PostTableViewCell: BaseTableViewCell {
     @IBOutlet weak var commentImageView: UIImageView!
     @IBOutlet weak var commentCountLabel: UILabel!
     
+    private var categoryGesture: UITapGestureRecognizer? {
+        didSet {
+            guard let gesture = self.categoryGesture else { return }
+            
+            self.tagContainerView.isUserInteractionEnabled = true
+            self.tagContainerView.addGestureRecognizer(gesture)
+        }
+    }
+    
     var cellModel: PostCellViewModel? {
         didSet {
             guard let cellModel = self.cellModel else { return }
@@ -72,13 +81,14 @@ class PostTableViewCell: BaseTableViewCell {
             setUpControlsObservers()
         }
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
         self.vwShimmer.shimmeringSpeed = 400
         self.vwShimmer.contentView = self.mainView
+        self.categoryGesture = UITapGestureRecognizer()
     }
 }
 
@@ -118,5 +128,10 @@ extension PostTableViewCell {
             .subscribe(onNext: { [weak self] _ in
                 self?.cellModel?.onMoreButtonPressed()
             }) ~ self.disposeBag
+        
+        self.categoryGesture?.rx.event.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.cellModel?.onCategoryPressed()
+            }).disposed(by: self.disposeBag)
     }
 }

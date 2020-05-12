@@ -29,6 +29,7 @@ class UserAccountViewModel: BaseViewModel, DownloadStateNetworkProtocol, ShouldP
         case loading(Bool)
         case followLoading(Bool)
         case signInController
+        case postsByCategoryController(PostTableViewModel)
     }
     
     // input:
@@ -105,15 +106,15 @@ extension UserAccountViewModel {
             .flatMap { [unowned self] data -> Observable<FollowerListResponse> in
                 self.userInfo.accept(data.data.result)
                 return self.userService.getFollowerList(self.username.value)
-            }
-            .subscribe(onNext: { [weak self] data in
-                self?.isDownloading.accept(false)
-                self?.followers.accept(data.followerList)
+        }
+        .subscribe(onNext: { [weak self] data in
+            self?.isDownloading.accept(false)
+            self?.followers.accept(data.followerList)
             }, onError: { [weak self] error in
                 self?.isDownloading.accept(false)
                 let errorInfo = ErrorHelper.prepareError(error: error)
                 self?.shouldPresentError(errorInfo)
-            }) ~ self.disposeBag
+        }) ~ self.disposeBag
     }
     
     func followAction(_ action: FollowActionType) {
@@ -130,11 +131,11 @@ extension UserAccountViewModel {
                         self.followers.remove(at: indexToRemove)
                     }
                 }
-            }, onError: { [weak self] error in
-                self?.isFollowHidden.onNext(false)
-                self?.shouldPresent(.followLoading(false))
-                let errorInfo = ErrorHelper.prepareError(error: error)
-                self?.shouldPresentError(errorInfo)
+                }, onError: { [weak self] error in
+                    self?.isFollowHidden.onNext(false)
+                    self?.shouldPresent(.followLoading(false))
+                    let errorInfo = ErrorHelper.prepareError(error: error)
+                    self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
     }
 }
@@ -282,6 +283,8 @@ fileprivate extension UserAccountViewModel {
                     self?.shouldPresent(.editPostController(createPostViewModel))
                 case .loading(let loading):
                     self?.shouldPresent(.loading(loading))
+                case .postsByCategoryController(let postTableViewModel):
+                    self?.shouldPresent(.postsByCategoryController(postTableViewModel))
                 default:
                     break
                 }

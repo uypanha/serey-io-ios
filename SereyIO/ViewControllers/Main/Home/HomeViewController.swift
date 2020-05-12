@@ -242,6 +242,11 @@ fileprivate extension HomeViewController {
                     }
                 case .loading(let loading):
                     loading ? self.showLoading() : self.dismissLoading()
+                case .postsByCategoryController(let postTableViewModel):
+                    let postTableViewController = CategoryPostsViewController()
+                    postTableViewController.viewModel = postTableViewModel
+                    postTableViewController.title = postTableViewModel.title
+                    self.show(postTableViewController, sender: nil)
                 }
             }) ~ self.disposeBag
     }

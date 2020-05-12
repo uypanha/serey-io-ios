@@ -36,6 +36,7 @@ class CreatePostViewModel: BaseCellViewModel, CollectionSingleSecitionProviderMo
     var imageType: MediaChooserType? = nil
     
     let cells: BehaviorRelay<[CellViewModel]>
+    let submitType: BehaviorRelay<SubmitPostType>
     let post: BehaviorRelay<PostModel?>
     let categories: BehaviorRelay<[DiscussionCategoryModel]>
     let selectedCategory: BehaviorRelay<DiscussionCategoryModel?>
@@ -59,6 +60,7 @@ class CreatePostViewModel: BaseCellViewModel, CollectionSingleSecitionProviderMo
     let postTitle: String!
     
     init(_ type: SubmitPostType) {
+        self.submitType = BehaviorRelay(value: type)
         self.post = BehaviorRelay(value: type.postModel)
         self.titleText = type.pageTitle
         self.postTitle = type.postTitle
@@ -270,7 +272,12 @@ fileprivate extension CreatePostViewModel {
         if let item = self.item(at: indexPath) as? SelectCategoryCellViewModel {
             switch item.category {
             case .category(let category):
-                self.prepareOpenSelectCategory(self.categories.value, selected: category)
+                switch self.submitType.value {
+                case .create:
+                    self.prepareOpenSelectCategory(self.categories.value, selected: category)
+                default:
+                    break
+                }
             case .subCategory(let category):
                 if let sub = self.selectedCategory.value?.sub {
                     self.prepareOpenSelectSubCategory(sub, selected: category)
