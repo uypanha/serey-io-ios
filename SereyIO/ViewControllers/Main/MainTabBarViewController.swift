@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainTabBarViewController: BaseTabBarViewController {
+class MainTabBarViewController: BaseTabBarViewController, VoteDialogProtocol {
     
     private var previousController: UIViewController? = nil
 

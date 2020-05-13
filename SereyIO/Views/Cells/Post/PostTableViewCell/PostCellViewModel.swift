@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class PostCellViewModel: CellViewModel, ShimmeringProtocol {
+class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
     
     let post: BehaviorRelay<PostModel?>
     let isShimmering: BehaviorRelay<Bool>
@@ -29,9 +29,19 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
     let commentCount: BehaviorSubject<String?>
     let isMoreHidden: BehaviorSubject<Bool>
     
+    let isVoteAllowed: BehaviorRelay<Bool>
+    let upVoteEnabled: BehaviorSubject<Bool>
+    let flagEnabled: BehaviorSubject<Bool>
+    let isVoting: BehaviorSubject<VotedType?>
+    
     let shouldShowMoreOption: PublishSubject<PostModel>
     let shouldShowPostsByCategory: PublishSubject<PostModel>
     let shouldShowAuthorProfile: PublishSubject<PostModel>
+    
+    let shouldUpVote: PublishSubject<PostModel>
+    let shouldFlag: PublishSubject<PostModel>
+    let shouldDownvote: PublishSubject<(VotedType, PostModel)>
+    let votedType: BehaviorRelay<VotedType?>
     
     init(_ post: PostModel?) {
         self.post = BehaviorRelay(value: post)
@@ -49,9 +59,19 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
         self.isShimmering = BehaviorRelay(value: false)
         self.isMoreHidden = BehaviorSubject(value: true)
         
+        self.isVoteAllowed = BehaviorRelay(value: false)
+        self.upVoteEnabled = BehaviorSubject(value: true)
+        self.flagEnabled = BehaviorSubject(value: true)
+        self.isVoting = BehaviorSubject(value: nil)
+        
         self.shouldShowMoreOption = PublishSubject()
         self.shouldShowPostsByCategory = PublishSubject()
         self.shouldShowAuthorProfile = PublishSubject()
+        
+        self.shouldUpVote = PublishSubject()
+        self.shouldFlag = PublishSubject()
+        self.shouldDownvote = PublishSubject()
+        self.votedType = BehaviorRelay(value: nil)
         super.init()
         
         setUpRxObservers()
@@ -78,6 +98,11 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
         let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.authorName == AuthData.shared.username : false
         let isOverAWeek = data?.isOverAWeek ?? false
         self.isMoreHidden.onNext(isOverAWeek || !isMorePresent)
+        
+        self.isVoteAllowed.accept(data?.authorName != AuthData.shared.username)
+        self.votedType.accept(data?.votedType)
+        self.upVoteEnabled.onNext(data?.votedType != .flag)
+        self.flagEnabled.onNext(data?.votedType != .upvote)
     }
     
     func onMoreButtonPressed() {
@@ -95,6 +120,42 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
     func onProfilePressed() {
         if let postModel = self.post.value {
             self.shouldShowAuthorProfile.onNext(postModel)
+        }
+    }
+    
+    func didUpvotePressed() {
+        if self.isVoteAllowed.value {
+            handleUpVotePressed()
+        }
+    }
+    
+    func didFlagPressed() {
+        if self.isVoteAllowed.value {
+            handleFlagPressed()
+        }
+    }
+}
+
+// MARK: - Actiion Handlers
+extension PostCellViewModel {
+    
+    internal func handleFlagPressed() {
+        if let postModel = self.post.value {
+            if let votedType = self.votedType.value {
+                self.shouldDownvote.onNext((votedType, postModel))
+            } else {
+                self.shouldFlag.onNext(postModel)
+            }
+        }
+    }
+    
+    internal func handleUpVotePressed() {
+        if let postModel = self.post.value {
+            if let votedType = self.votedType.value {
+                self.shouldDownvote.onNext((votedType, postModel))
+            } else {
+                self.shouldUpVote.onNext(postModel)
+            }
         }
     }
 }

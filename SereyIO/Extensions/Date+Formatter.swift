@@ -25,7 +25,7 @@ extension Date {
         if let dateString = from {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = format
-            dateFormatter.timeZone = TimeZone.current
+            dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
             dateFormatter.locale = Locale(identifier: "en_US_POSIX") // set locale to reliable US_POSIX
             
             return dateFormatter.date(from:dateString)

@@ -176,11 +176,6 @@ extension BasePostDetailViewModel {
 // MARK: - Preparations & Tools
 extension BasePostDetailViewModel {
     
-    enum VotePostType {
-        case comment
-        case article
-    }
-    
     internal func prepareSubmitCommentModel(_ comment: String) -> SubmitCommentModel {
         let permlink = self.post.value?.permlink ?? ""
         let author = self.post.value?.authorName ?? ""
@@ -195,6 +190,12 @@ extension BasePostDetailViewModel {
             self.post.accept(post)
         }
     }
+}
+
+// MARK: - Vote Post Type
+enum VotePostType {
+    case comment
+    case article
 }
 
 // MARK: - SetUp RxObservers

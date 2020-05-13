@@ -45,6 +45,8 @@ class PostTableViewCell: BaseTableViewCell {
     @IBOutlet weak var commentImageView: UIImageView!
     @IBOutlet weak var commentCountLabel: UILabel!
     
+    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    
     private var categoryGesture: UITapGestureRecognizer? {
         didSet {
             guard let gesture = self.categoryGesture else { return }
@@ -72,6 +74,24 @@ class PostTableViewCell: BaseTableViewCell {
         }
     }
     
+    private var upVoteGesture: UITapGestureRecognizer? {
+        didSet {
+            guard let gesture = self.upVoteGesture else { return }
+            
+            self.upVoteContainerView.isUserInteractionEnabled = true
+            self.upVoteContainerView.addGestureRecognizer(gesture)
+        }
+    }
+    
+    private var downVoteGesture: UITapGestureRecognizer? {
+        didSet {
+            guard let gesture = self.downVoteGesture else { return }
+            
+            self.downVoteContainerView.isUserInteractionEnabled = true
+            self.downVoteContainerView.addGestureRecognizer(gesture)
+        }
+    }
+    
     var cellModel: PostCellViewModel? {
         didSet {
             guard let cellModel = self.cellModel else { return }
@@ -88,7 +108,22 @@ class PostTableViewCell: BaseTableViewCell {
                 cellModel.commentCount ~> self.commentCountLabel.rx.text,
                 cellModel.thumbnailURL.asObservable().map { $0 }
                     .bind(to: self.thumbnailImageView.kf.rx.image(placeholder: ViewUtiliesHelper.prepareDefualtPlaceholder())),
-                cellModel.isMoreHidden ~> self.moreButton.rx.isHidden
+                cellModel.isMoreHidden ~> self.moreButton.rx.isHidden,
+                cellModel.votedType.asObservable()
+                    .subscribe(onNext: { [weak self] voteType in
+                        self?.preparepVoteTypeStyle(voteType)
+                    }),
+                cellModel.upVoteEnabled ~> self.upVoteContainerView.rx.isUserInteractionEnabled,
+                cellModel.flagEnabled ~> self.downVoteContainerView.rx.isUserInteractionEnabled,
+                cellModel.isVoting.asObservable()
+                    .subscribe(onNext: { [unowned self] voteType in
+                        self.upVoteContainerView.isHidden = voteType == .upvote
+                        self.downVoteContainerView.isHidden = voteType == .flag
+                        self.loadingIndicator.isHidden = voteType == nil
+                        if voteType != nil {
+                            self.loadingIndicator.startAnimating()
+                        }
+                    })
             ]
             
             cellModel.isShimmering.asObservable()
@@ -108,6 +143,8 @@ class PostTableViewCell: BaseTableViewCell {
         self.vwShimmer.contentView = self.mainView
         self.categoryGesture = UITapGestureRecognizer()
         self.profileViewGesture = UITapGestureRecognizer()
+        self.upVoteGesture = UITapGestureRecognizer()
+        self.downVoteGesture = UITapGestureRecognizer()
     }
 }
 
@@ -137,6 +174,20 @@ extension PostTableViewCell {
             self.vwShimmer.isShimmering = isShimmering
         }
     }
+    
+    func preparepVoteTypeStyle(_ voteType: VotedType?) {
+        let downVoteTintColor: UIColor = voteType == .flag ? ColorName.primary.color : .lightGray
+        let downVoteIcon: UIImage? = voteType == .flag ? R.image.downVoteFilledIcon() : R.image.downVoteIcon()
+        self.downVoteImageView.tintColor = downVoteTintColor
+        self.downVoteCountLabel.textColor = downVoteTintColor
+        self.downVoteImageView.image = downVoteIcon
+        
+        let upVoteTintColor: UIColor = voteType == .upvote ? ColorName.primary.color : .lightGray
+        let upVoteIcon: UIImage? = voteType == .upvote ? R.image.upVoteFilledIcon() : R.image.upVoteIcon()
+        self.upVoteImageView.tintColor = upVoteTintColor
+        self.upVoteCountLabel.textColor = upVoteTintColor
+        self.upVoteImageView.image = upVoteIcon
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -161,6 +212,17 @@ extension PostTableViewCell {
         self.profileLabelGesture?.rx.event.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.cellModel?.onProfilePressed()
+            }).disposed(by: self.disposeBag)
+        
+        
+        self.upVoteGesture?.rx.event.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.cellModel?.didUpvotePressed()
+            }).disposed(by: self.disposeBag)
+        
+        self.downVoteGesture?.rx.event.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.cellModel?.didFlagPressed()
             }).disposed(by: self.disposeBag)
     }
 }

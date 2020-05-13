@@ -238,6 +238,15 @@ extension UserAccountViewController {
                     postTableViewController.viewModel = postTableViewModel
                     postTableViewController.title = postTableViewModel.title
                     self.show(postTableViewController, sender: nil)
+                case .signInViewController:
+                    if let signInViewController = R.storyboard.auth.signInViewController() {
+                        signInViewController.viewModel = SignInViewModel()
+                        self.show(CloseableNavigationController(rootViewController: signInViewController), sender: nil)
+                    }
+                case .voteDialogController(let voteDialogViewModel):
+                    (self.tabBarController as? MainTabBarViewController)?.showVoteDialog(voteDialogViewModel)
+                case .downVoteDialogController(let downvoteDialogViewModel):
+                    (self.tabBarController as? MainTabBarViewController)?.showDownvoteDialog(downvoteDialogViewModel)
                 }
             }) ~ self.disposeBag
     }

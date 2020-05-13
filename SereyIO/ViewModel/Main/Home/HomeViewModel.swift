@@ -30,6 +30,8 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
         case loading(Bool)
         case postsByCategoryController(PostTableViewModel)
         case userAccountController(UserAccountViewModel)
+        case voteDialogController(VoteDialogViewModel)
+        case downVoteDialogController(DownvoteDialogViewModel)
     }
     
     // input:
@@ -167,6 +169,12 @@ extension HomeViewModel {
                     self?.shouldPresent(.postsByCategoryController(postTableViewModel))
                 case .userAccountController(let userAccountViewModel):
                     self?.shouldPresent(.userAccountController(userAccountViewModel))
+                case .voteDialogController(let voteDialogViewModel):
+                    self?.shouldPresent(.voteDialogController(voteDialogViewModel))
+                case .downVoteDialogController(let downVoteDialogViewModel):
+                    self?.shouldPresent(.downVoteDialogController(downVoteDialogViewModel))
+                case .signInViewController:
+                    self?.shouldPresent(.signInViewController)
                 default:
                     break
                 }

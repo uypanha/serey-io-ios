@@ -128,7 +128,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="41g-8o-hUV">
-                                <rect key="frame" x="16" y="359" width="284" height="16"/>
+                                <rect key="frame" x="16" y="359" width="322" height="16"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="RMt-vQ-kDu">
                                         <rect key="frame" x="0.0" y="0.0" width="114" height="16"/>
@@ -168,8 +168,11 @@
                                             </label>
                                         </subviews>
                                     </stackView>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="8cx-fN-pSQ">
+                                        <rect key="frame" x="193" y="0.0" width="20" height="16"/>
+                                    </activityIndicatorView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="fJk-3f-8mp">
-                                        <rect key="frame" x="193" y="0.0" width="36.5" height="16"/>
+                                        <rect key="frame" x="231" y="0.0" width="36.5" height="16"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downVoteIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Y4V-3w-kLX">
                                                 <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -188,7 +191,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="PQs-vn-fg8">
-                                        <rect key="frame" x="247.5" y="0.0" width="36.5" height="16"/>
+                                        <rect key="frame" x="285.5" y="0.0" width="36.5" height="16"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="commentIcon" translatesAutoresizingMaskIntoConstraints="NO" id="5PJ-zO-X2Z">
                                                 <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -249,6 +252,7 @@
                 <outlet property="downVoteContainerView" destination="fJk-3f-8mp" id="1M2-vP-I9E"/>
                 <outlet property="downVoteCountLabel" destination="vKS-vq-OAn" id="Beb-xa-fVF"/>
                 <outlet property="downVoteImageView" destination="Y4V-3w-kLX" id="xeL-up-jpy"/>
+                <outlet property="loadingIndicator" destination="8cx-fN-pSQ" id="pfX-Io-6fV"/>
                 <outlet property="mainView" destination="sWv-07-EAJ" id="lWS-be-8pu"/>
                 <outlet property="moreButton" destination="4ot-1V-mWq" id="xmV-G4-CuZ"/>
                 <outlet property="profileView" destination="b3R-JE-DPu" id="u6A-6R-rmV"/>

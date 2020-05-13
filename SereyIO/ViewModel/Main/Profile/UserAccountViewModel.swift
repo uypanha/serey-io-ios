@@ -30,6 +30,9 @@ class UserAccountViewModel: BaseViewModel, DownloadStateNetworkProtocol, ShouldP
         case followLoading(Bool)
         case signInController
         case postsByCategoryController(PostTableViewModel)
+        case voteDialogController(VoteDialogViewModel)
+        case downVoteDialogController(DownvoteDialogViewModel)
+        case signInViewController
     }
     
     // input:
@@ -285,6 +288,12 @@ fileprivate extension UserAccountViewModel {
                     self?.shouldPresent(.loading(loading))
                 case .postsByCategoryController(let postTableViewModel):
                     self?.shouldPresent(.postsByCategoryController(postTableViewModel))
+                case .voteDialogController(let voteDialogViewModel):
+                    self?.shouldPresent(.voteDialogController(voteDialogViewModel))
+                case .downVoteDialogController(let downVoteDialogViewModel):
+                    self?.shouldPresent(.downVoteDialogController(downVoteDialogViewModel))
+                case .signInViewController:
+                    self?.shouldPresent(.signInViewController)
                 default:
                     break
                 }

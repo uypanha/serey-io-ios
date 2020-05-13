@@ -17,6 +17,9 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
     enum Action {
         case itemSelected(IndexPath)
         case refresh
+        case upVotePressed(VotePostType, PostModel, BehaviorSubject<VotedType?>)
+        case flagPressed(VotePostType, PostModel, BehaviorSubject<VotedType?>)
+        case downVotePressed(DownvoteDialogViewModel.DownVoteType, PostModel, BehaviorSubject<VotedType?>)
     }
     
     enum ViewToPresent {
@@ -27,6 +30,9 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         case deletePostDialog(confirm: () -> Void)
         case postsByCategoryController(PostTableViewModel)
         case userAccountController(UserAccountViewModel)
+        case voteDialogController(VoteDialogViewModel)
+        case downVoteDialogController(DownvoteDialogViewModel)
+        case signInViewController
     }
     
     // input:
@@ -80,6 +86,25 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         self.shouldPresent(.userAccountController(userAccountViewModel))
     }
     
+    override func setUpPostCellViewModel(_ cellModel: PostCellViewModel) {
+        super.setUpPostCellViewModel(cellModel)
+        
+        cellModel.shouldUpVote.asObservable()
+            .map { Action.upVotePressed(.article, $0, cellModel.isVoting) }
+            ~> self.didActionSubject
+            ~ cellModel.disposeBag
+        
+        cellModel.shouldFlag.asObservable()
+            .map { Action.flagPressed(.article, $0, cellModel.isVoting) }
+            ~> self.didActionSubject
+            ~ cellModel.disposeBag
+        
+        cellModel.shouldDownvote.asObservable()
+            .map { Action.downVotePressed($0.0 == .flag ? .flagPost : .upvotePost, $0.1, cellModel.isVoting) }
+            ~> self.didActionSubject
+            ~ cellModel.disposeBag
+    }
+    
     deinit {
         unregisterFromNotifs()
     }
@@ -131,6 +156,46 @@ fileprivate extension PostTableViewModel {
             updatePost(post)
         }
     }
+    
+    func handleUpVotePressed(_ voteType: VotePostType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
+        if AuthData.shared.isUserLoggedIn {
+            let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .upVoteComment : .upvotePost)
+            voteDialogViewModel.shouldConfirm
+                .subscribe(onNext: { [weak self] weight in
+                    self?.upVote(postModel, weight, isVoting)
+                }) ~ voteDialogViewModel.disposeBag
+            self.shouldPresent(.voteDialogController(voteDialogViewModel))
+        } else {
+            self.shouldPresent(.signInViewController)
+        }
+    }
+    
+    func handleFlagPressed(_ voteType: VotePostType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
+        if AuthData.shared.isUserLoggedIn {
+            let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .flagComment : .flagPost)
+            voteDialogViewModel.shouldConfirm
+                .subscribe(onNext: { [weak self] weight in
+                    self?.flag(postModel, -weight, isVoting)
+                }) ~ voteDialogViewModel.disposeBag
+            self.shouldPresent(.voteDialogController(voteDialogViewModel))
+        } else {
+            self.shouldPresent(.signInViewController)
+        }
+    }
+    
+    func handlDownvotePressed(_ downvoteType: DownvoteDialogViewModel.DownVoteType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
+        if AuthData.shared.isUserLoggedIn {
+            let downvoteViewModel = DownvoteDialogViewModel(downvoteType)
+            downvoteViewModel.shouldConfirm
+                .subscribe(onNext: { [weak self] _ in
+                    let votedType : VotedType = (downvoteType == .upVoteComment || downvoteType == .upvotePost) ? .upvote : .flag
+                    self?.downVote(postModel, votedType, isVoting)
+                }) ~ downvoteViewModel.disposeBag
+            self.shouldPresent(.downVoteDialogController(downvoteViewModel))
+        } else {
+            self.shouldPresent(.signInViewController)
+        }
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -149,6 +214,12 @@ fileprivate extension PostTableViewModel {
                 case .refresh:
                     self?.reset()
                     self?.discussions.renotify()
+                case .upVotePressed(let type, let post, let votedType):
+                    self?.handleUpVotePressed(type, post, votedType)
+                case .flagPressed(let type, let post, let votedType):
+                    self?.handleFlagPressed(type, post, votedType)
+                case .downVotePressed(let type, let post, let votedType):
+                    self?.handlDownvotePressed(type, post, votedType)
                 }
             }) ~ self.disposeBag
     }

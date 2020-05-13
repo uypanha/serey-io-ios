@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class CommentCellViewModel: PostCellViewModel, ShouldReactToAction, PostCellProtocol {
+class CommentCellViewModel: PostCellViewModel, ShouldReactToAction {
     
     enum Action {
         case upVotePressed
@@ -27,16 +27,7 @@ class CommentCellViewModel: PostCellViewModel, ShouldReactToAction, PostCellProt
     let isViewConversationHidden: BehaviorSubject<Bool>
     let isReplyHidden: BehaviorRelay<Bool>
     let leadingConstraint: BehaviorRelay<CGFloat>
-    let isVoteAllowed: BehaviorSubject<Bool>
-    let upVoteEnabled: BehaviorSubject<Bool>
-    let flagEnabled: BehaviorSubject<Bool>
-    let isVoting: BehaviorSubject<VotedType?>
-    
     let shouldReplyComment: PublishSubject<CommentCellViewModel>
-    let shouldUpVote: PublishSubject<PostModel>
-    let shouldFlag: PublishSubject<PostModel>
-    let shouldDownvote: PublishSubject<(VotedType, PostModel)>
-    let votedType: BehaviorRelay<VotedType?>
     
     init(_ discussion: PostModel?, canReply: Bool = true, leading: CGFloat = 16) {
         self.contentAttributedString = BehaviorSubject(value: nil)
@@ -46,16 +37,8 @@ class CommentCellViewModel: PostCellViewModel, ShouldReactToAction, PostCellProt
         self.isViewConversationHidden = BehaviorSubject(value: isConversationHidden )
         self.isReplyHidden = BehaviorRelay(value: !canReply)
         self.leadingConstraint = BehaviorRelay(value: leading)
-        self.isVoteAllowed = BehaviorSubject(value: false)
-        self.votedType = BehaviorRelay(value: nil)
-        self.upVoteEnabled = BehaviorSubject(value: true)
-        self.flagEnabled = BehaviorSubject(value: true)
-        self.isVoting = BehaviorSubject(value: nil)
         
         self.shouldReplyComment = PublishSubject()
-        self.shouldUpVote = PublishSubject()
-        self.shouldFlag = PublishSubject()
-        self.shouldDownvote = PublishSubject()
         super.init(discussion)
         
         setUpRxObservers()
@@ -72,34 +55,6 @@ class CommentCellViewModel: PostCellViewModel, ShouldReactToAction, PostCellProt
         
         self.contentAttributedString.onNext(data?.description?.htmlAttributed(size: 12))
         self.conversationText.onNext(String(format: R.string.post.viewConversation.localized(), "\(data?.answerCount ?? 0)"))
-        self.isVoteAllowed.onNext(data?.authorName != AuthData.shared.username)
-        self.votedType.accept(data?.votedType)
-        self.upVoteEnabled.onNext(data?.votedType != .flag)
-        self.flagEnabled.onNext(data?.votedType != .upvote)
-    }
-}
-
-// MARK: - Action Handlers
-fileprivate extension CommentCellViewModel {
-    
-    func handleUpVotePressed() {
-        if let postModel = self.post.value {
-            if let votedType = self.votedType.value {
-                self.shouldDownvote.onNext((votedType, postModel))
-            } else {
-                self.shouldUpVote.onNext(postModel)
-            }
-        }
-    }
-    
-    func handleFlagPressed() {
-        if let postModel = self.post.value {
-            if let votedType = self.votedType.value {
-                self.shouldDownvote.onNext((votedType, postModel))
-            } else {
-                self.shouldFlag.onNext(postModel)
-            }
-        }
     }
 }
 

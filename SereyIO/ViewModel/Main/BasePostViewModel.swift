@@ -66,6 +66,23 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
         }
     }
     
+    open func setUpPostCellViewModel(_ cellModel: PostCellViewModel) {
+        cellModel.shouldShowMoreOption.asObservable()
+            .subscribe(onNext: { [weak self] postModel in
+                self?.onMorePressed(of: postModel)
+            }) ~ cellModel.disposeBag
+        
+        cellModel.shouldShowPostsByCategory.asObservable()
+            .subscribe(onNext: { [weak self] postModel in
+                self?.onCategoryPressed(of: postModel)
+            }) ~ cellModel.disposeBag
+        
+        cellModel.shouldShowAuthorProfile.asObservable()
+            .subscribe(onNext: { [weak self] postModel in
+                self?.onProfilePressed(of: postModel)
+            }) ~ cellModel.disposeBag
+    }
+    
     internal func onMorePressed(of postModel: PostModel) {}
     
     internal func onCategoryPressed(of postModel: PostModel) {}
@@ -87,6 +104,56 @@ extension BasePostViewModel {
                 self.cells.accept(self.prepareCells(self.discussions.value, true))
                 self.shouldPresentError(errorInfo)
             }) ~ self.downloadDisposeBag
+    }
+    
+    private func fetchPostDetial(_ permlink: String, _ author: String) {
+        self.discussionService.getPostDetail(permlink: permlink, authorName: author)
+            .subscribe(onNext: { response in
+                NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: response.content.permlink, author: response.content.authorName, post: response.content))
+            }, onError: { [weak self] error in
+                self?.isDownloading.accept(false)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    internal func upVote(_ post: PostModel, _ weight: Int, _ isVoting: BehaviorSubject<VotedType?>) {
+        isVoting.onNext(.upvote)
+        self.discussionService.upVote(post.permlink, author: post.authorName, weight: weight)
+            .subscribe(onNext: { [weak self] _ in
+                self?.fetchPostDetial(post.permlink, post.authorName)
+                isVoting.onNext(nil)
+            }, onError: { [weak self] error in
+                isVoting.onNext(nil)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    internal func flag(_ post: PostModel, _ weight: Int, _ isVoting: BehaviorSubject<VotedType?>) {
+        isVoting.onNext(.flag)
+        self.discussionService.flag(post.permlink, author: post.authorName, weight: weight)
+            .subscribe(onNext: { [weak self] _ in
+                self?.fetchPostDetial(post.permlink, post.authorName)
+                isVoting.onNext(nil)
+            }, onError: { [weak self] error in
+                isVoting.onNext(nil)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    internal func downVote(_ post: PostModel, _ votedType: VotedType, _ isVoting: BehaviorSubject<VotedType?>) {
+        isVoting.onNext(votedType)
+        self.discussionService.downVote(post.permlink, author: post.authorName)
+            .subscribe(onNext: { [weak self] _ in
+                self?.fetchPostDetial(post.permlink, post.authorName)
+                isVoting.onNext(nil)
+            }, onError: { [weak self] error in
+                isVoting.onNext(nil)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
     }
 }
 
@@ -197,23 +264,6 @@ fileprivate extension BasePostViewModel {
             .map { _ in return nil }
             ~> self.selectedCategory
             ~ cellModel.disposeBag
-    }
-    
-    func setUpPostCellViewModel(_ cellModel: PostCellViewModel) {
-        cellModel.shouldShowMoreOption.asObservable()
-            .subscribe(onNext: { [weak self] postModel in
-                self?.onMorePressed(of: postModel)
-            }) ~ cellModel.disposeBag
-        
-        cellModel.shouldShowPostsByCategory.asObservable()
-            .subscribe(onNext: { [weak self] postModel in
-                self?.onCategoryPressed(of: postModel)
-            }) ~ cellModel.disposeBag
-        
-        cellModel.shouldShowAuthorProfile.asObservable()
-            .subscribe(onNext: { [weak self] postModel in
-                self?.onProfilePressed(of: postModel)
-            }) ~ cellModel.disposeBag
     }
 }
 

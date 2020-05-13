@@ -252,6 +252,10 @@ fileprivate extension HomeViewController {
                         accountViewController.viewModel = userAccountViewModel
                         self.show(accountViewController, sender: nil)
                     }
+                case .voteDialogController(let voteDialogViewModel):
+                    (self.tabBarController as? MainTabBarViewController)?.showVoteDialog(voteDialogViewModel)
+                case .downVoteDialogController(let downvoteDialogViewModel):
+                    (self.tabBarController as? MainTabBarViewController)?.showDownvoteDialog(downvoteDialogViewModel)
                 }
             }) ~ self.disposeBag
     }
