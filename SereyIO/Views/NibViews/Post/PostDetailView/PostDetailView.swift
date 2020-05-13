@@ -22,6 +22,24 @@ class PostDetailView: NibView {
     @IBOutlet weak var editorHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    private var profileViewGesture: UITapGestureRecognizer? {
+        didSet {
+            guard let gesture = self.profileViewGesture else { return }
+            
+            self.profileView.isUserInteractionEnabled = true
+            self.profileView.addGestureRecognizer(gesture)
+        }
+    }
+    
+    private var profileLabelGesture: UITapGestureRecognizer? {
+        didSet {
+            guard let gesture = self.profileLabelGesture else { return }
+            
+            self.profileNameLabel.isUserInteractionEnabled = true
+            self.profileNameLabel.addGestureRecognizer(gesture)
+        }
+    }
+    
     var viewModel: PostDetailCellViewModel? {
         didSet {
             self.disposeBag = DisposeBag()
@@ -35,7 +53,7 @@ class PostDetailView: NibView {
                 cellModel.contentDesc ~> self.editorView.rx.html
             ]
             
-            self.setUpCollectionView(cellModel)
+            self.setUpRxObservers(cellModel)
         }
     }
     
@@ -56,11 +74,27 @@ class PostDetailView: NibView {
             layout.estimatedItemSize = CGSize(width: 1, height: 1)
         }
         self.collectionView.register(SubPostCategoryCollectionViewCell.self)
+        self.profileViewGesture = UITapGestureRecognizer()
+        self.profileLabelGesture = UITapGestureRecognizer()
     }
 }
 
 // MARK: - SetUp RxObservers
 extension PostDetailView {
+    
+    func setUpRxObservers(_ viewModel: PostDetailCellViewModel) {
+        self.profileViewGesture?.rx.event.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel?.onProfilePressed()
+            }).disposed(by: self.disposeBag)
+        
+        self.profileLabelGesture?.rx.event.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel?.onProfilePressed()
+            }).disposed(by: self.disposeBag)
+        
+        setUpCollectionView(viewModel)
+    }
     
     func setUpCollectionView(_ viewModel: PostDetailCellViewModel) {
         

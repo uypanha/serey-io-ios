@@ -214,7 +214,6 @@ extension PostTableViewCell {
                 self?.cellModel?.onProfilePressed()
             }).disposed(by: self.disposeBag)
         
-        
         self.upVoteGesture?.rx.event.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.cellModel?.didUpvotePressed()

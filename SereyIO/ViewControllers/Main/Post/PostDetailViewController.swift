@@ -207,6 +207,11 @@ extension PostDetailViewController {
                     self.showVoteDialog(voteDialogViewModel)
                 case .downVoteDialogController(let downvoteDialogViewModel):
                     self.showDownvoteDialog(downvoteDialogViewModel)
+                case .userAccountController(let userAccountViewModel):
+                    if let accountViewController = R.storyboard.profile.userAccountViewController() {
+                        accountViewController.viewModel = userAccountViewModel
+                        self.show(accountViewController, sender: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

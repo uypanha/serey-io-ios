@@ -32,6 +32,7 @@ class PostDetailViewModel: BasePostDetailViewModel, ShouldReactToAction, ShouldP
         case downVoteDialogController(DownvoteDialogViewModel)
         case signInViewController
         case loading(Bool)
+        case userAccountController(UserAccountViewModel)
     }
     
     // input:
@@ -71,7 +72,9 @@ class PostDetailViewModel: BasePostDetailViewModel, ShouldReactToAction, ShouldP
     override func notifyDataChanged(_ data: PostModel?) {
         super.notifyDataChanged(data)
         
-        let postDetailViewModel = data == nil ? PostDetailCellViewModel(true) : PostDetailCellViewModel(data)
+        let postDetailViewModel = data == nil ? PostDetailCellViewModel(true) : PostDetailCellViewModel(data).then {
+            self.setUpPostDetailViewModelObsevers($0)
+        }
         let commentPostViewModel = data == nil ? PostCommentViewModel(true) : PostCommentViewModel(data).then {
             self.setUpCommentViewModelObservers($0)
         }
@@ -203,6 +206,11 @@ fileprivate extension PostDetailViewModel {
             self.shouldPresent(.signInViewController)
         }
     }
+    
+    func handleProfilePressed(of postModel: PostModel) {
+        let userAccountViewModel = UserAccountViewModel(postModel.authorName)
+        self.shouldPresent(.userAccountController(userAccountViewModel))
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -227,6 +235,13 @@ extension PostDetailViewModel {
                     self?.handlDownvotePressed(type, post, votedType)
                 }
             }) ~ self.disposeBag
+    }
+    
+    func setUpPostDetailViewModelObsevers(_ viewModel: PostDetailCellViewModel) {
+        viewModel.shouldShowAuthorProfile.asObservable()
+            .subscribe(onNext: { [weak self] postModel in
+                self?.handleProfilePressed(of: postModel)
+            }) ~ viewModel.disposeBag
     }
     
     func setUpCommentViewModelObservers(_ viewModel: PostCommentViewModel) {
