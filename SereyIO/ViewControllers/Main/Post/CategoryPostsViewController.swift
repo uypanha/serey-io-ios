@@ -39,6 +39,11 @@ extension CategoryPostsViewController {
                         postDetailViewController.hidesBottomBarWhenPushed = true
                         self.show(postDetailViewController, sender: nil)
                     }
+                case .userAccountController(let userAccountViewModel):
+                    if let accountViewController = R.storyboard.profile.userAccountViewController() {
+                        accountViewController.viewModel = userAccountViewModel
+                        self.show(accountViewController, sender: nil)
+                    }
                 default:
                     break
                 }

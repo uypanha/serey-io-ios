@@ -69,6 +69,8 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     internal func onMorePressed(of postModel: PostModel) {}
     
     internal func onCategoryPressed(of postModel: PostModel) {}
+    
+    internal func onProfilePressed(of postModel: PostModel) {}
 }
 
 // MARK: - Networks
@@ -91,6 +93,14 @@ extension BasePostViewModel {
 // MARK: - Preparations & Tools
 extension BasePostViewModel {
     
+    internal func updatePost(_ post: PostModel) {
+        var posts = self.discussions.value
+        if let indexToUpdate = posts.index(where: { $0.permlink == post.permlink && $0.authorName == post.authorName }) {
+            posts[indexToUpdate] = post
+        }
+        self.discussions.accept(posts)
+    }
+    
     fileprivate func updateData(_ data: [PostModel]) {
         var discussions = self.discussions.value
         
@@ -109,6 +119,14 @@ extension BasePostViewModel {
         
         discussions.append(contentsOf: data)
         self.discussions.accept(discussions)
+    }
+    
+    internal func removePost(permlink: String, author: String) {
+        var posts = self.discussions.value
+        if let indexToRemove = posts.index(where: { $0.permlink == permlink && $0.authorName == author }) {
+            posts.remove(at: indexToRemove)
+        }
+        self.discussions.accept(posts)
     }
     
     fileprivate func prepareCells(_ discussions: [PostModel], _ error: Bool) -> [SectionItem] {
@@ -190,6 +208,11 @@ fileprivate extension BasePostViewModel {
         cellModel.shouldShowPostsByCategory.asObservable()
             .subscribe(onNext: { [weak self] postModel in
                 self?.onCategoryPressed(of: postModel)
+            }) ~ cellModel.disposeBag
+        
+        cellModel.shouldShowAuthorProfile.asObservable()
+            .subscribe(onNext: { [weak self] postModel in
+                self?.onProfilePressed(of: postModel)
             }) ~ cellModel.disposeBag
     }
 }

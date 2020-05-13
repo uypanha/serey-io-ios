@@ -41,7 +41,6 @@
 "deleteArticleQ"            = "Delete Article?";
 "deleteArticleMessage"      = "Are you sure you want to delete this article?";
 
-"articleBody"               = "Article body";
 "replies"                   = "Replies";
 "comments"                  = "Comments";
 

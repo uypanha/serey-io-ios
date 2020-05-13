@@ -26,6 +26,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         case editPostController(CreatePostViewModel)
         case deletePostDialog(confirm: () -> Void)
         case postsByCategoryController(PostTableViewModel)
+        case userAccountController(UserAccountViewModel)
     }
     
     // input:
@@ -38,9 +39,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         super.init(type)
         
         setUpRxObservers()
-        if case .new = type {
-            registerForNotifs()
-        }
+        registerForNotifs()
     }
     
     func shouldRefreshData() {
@@ -76,6 +75,11 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         }
     }
     
+    override func onProfilePressed(of postModel: PostModel) {
+        let userAccountViewModel = UserAccountViewModel(postModel.authorName)
+        self.shouldPresent(.userAccountController(userAccountViewModel))
+    }
+    
     deinit {
         unregisterFromNotifs()
     }
@@ -89,6 +93,7 @@ extension PostTableViewModel {
         self.discussionService.deletePost(post.authorName, post.permlink)
             .subscribe(onNext: { [weak self] _ in
                 self?.shouldPresent(.loading(false))
+                NotificationDispatcher.sharedInstance.dispatch(.postDeleted(permlink: post.permlink, author: post.authorName))
             }, onError: { [weak self] error in
                 self?.shouldPresent(.loading(false))
                 let errorInfo = ErrorHelper.prepareError(error: error)
@@ -118,6 +123,12 @@ fileprivate extension PostTableViewModel {
             self.shouldPresent(.deletePostDialog(confirm: {
                 self.deletePost(post)
             }))
+        }
+    }
+    
+    func handlePostUpdated(permlink: String, author: String, post: PostModel?) {
+        if let post = post {
+            updatePost(post)
         }
     }
 }
@@ -151,6 +162,10 @@ extension PostTableViewModel: NotificationObserver {
         switch appNotif {
         case .postCreated:
             self.shouldRefresh = true
+        case .postUpdated(let permlink, let author, let post):
+            self.handlePostUpdated(permlink: permlink, author: author, post: post)
+        case .postDeleted(let permlink, let author):
+            self.removePost(permlink: permlink, author: author)
         default:
             break
         }

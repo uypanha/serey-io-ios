@@ -45,7 +45,6 @@ class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, 
         super.init(comment.permlink, comment.authorName)
         
         self.post.accept(comment)
-        registerForNotifs()
     }
     
     override func setUpRxObservers() {
@@ -101,8 +100,14 @@ class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, 
         self.post.accept(post)
     }
     
-    deinit {
-        unregisterFromNotifs()
+    override func notificationReceived(_ notification: Notification) {
+        guard let appNotif = notification.appNotification else { return }
+        switch appNotif {
+        case .userDidLogin, .userDidLogOut:
+            self.commentHidden.onNext(!AuthData.shared.isUserLoggedIn)
+        default:
+            super.notificationReceived(notification)
+        }
     }
 }
 
@@ -183,19 +188,5 @@ extension ReplyCommentTableViewModel {
             .subscribe(onNext: { [unowned self] comment in
                 self.submitComment(comment, self.commentViewModel.isUploading)
             }) ~ self.disposeBag
-    }
-}
-
-// MARK: - NotificationObserver
-extension ReplyCommentTableViewModel: NotificationObserver {
-    
-    func notificationReceived(_ notification: Notification) {
-        guard let appNotif = notification.appNotification else { return }
-        switch appNotif {
-        case .userDidLogin, .userDidLogOut:
-            self.commentHidden.onNext(!AuthData.shared.isUserLoggedIn)
-        default:
-            break
-        }
     }
 }

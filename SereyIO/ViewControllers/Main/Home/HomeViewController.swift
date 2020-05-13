@@ -247,6 +247,11 @@ fileprivate extension HomeViewController {
                     postTableViewController.viewModel = postTableViewModel
                     postTableViewController.title = postTableViewModel.title
                     self.show(postTableViewController, sender: nil)
+                case .userAccountController(let userAccountViewModel):
+                    if let accountViewController = R.storyboard.profile.userAccountViewController() {
+                        accountViewController.viewModel = userAccountViewModel
+                        self.show(accountViewController, sender: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

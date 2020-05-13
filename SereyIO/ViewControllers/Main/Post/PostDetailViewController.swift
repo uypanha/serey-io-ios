@@ -176,6 +176,8 @@ extension PostDetailViewController {
         self.viewModel.shouldPresent.asObservable()
             .subscribe(onNext: { viewToPresent in
                 switch viewToPresent {
+                case .dismiss:
+                    self.navigationController?.popViewController(animated: true)
                 case .moreDialogController(let bottomMenuViewModel):
                     let bottomMenuController = BottomMenuViewController(bottomMenuViewModel)
                     self.present(bottomMenuController, animated: true, completion: nil)

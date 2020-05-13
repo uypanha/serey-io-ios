@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, DownloadStateNetworkProtocol {
+class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, DownloadStateNetworkProtocol, NotificationObserver {
     
     let cells: BehaviorRelay<[SectionItem]>
     
@@ -41,6 +41,7 @@ class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
         super.init()
         
         setUpRxObservers()
+        registerForNotifs()
     }
     
     convenience init(_ post: PostModel) {
@@ -94,8 +95,22 @@ class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
     }
     
     internal func updateData(_ data: PostDetailResponse) {
-        self.post.accept(data.content)
+        NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: data.content.permlink, author: data.content.authorName, post: data.content))
         self.replies.accept(data.replies)
+    }
+    
+    func notificationReceived(_ notification: Notification) {
+        guard let appNotif = notification.appNotification else { return }
+        switch appNotif {
+        case .postUpdated(let permlink, let author, let post):
+            self.handlePostUpdated(permlink: permlink, author: author, post: post)
+        default:
+            break
+        }
+    }
+    
+    deinit {
+        unregisterFromNotifs()
     }
 }
 
@@ -173,6 +188,12 @@ extension BasePostDetailViewModel {
         let category = self.post.value?.categoryItem.first ?? ""
         
         return SubmitCommentModel(parentAuthor: author, parentPermlink: permlink, title: title, body: comment, mainCategory: category)
+    }
+    
+    func handlePostUpdated(permlink: String, author: String, post: PostModel?) {
+        if let post = post {
+            self.post.accept(post)
+        }
     }
 }
 

@@ -54,6 +54,24 @@ class PostTableViewCell: BaseTableViewCell {
         }
     }
     
+    private var profileViewGesture: UITapGestureRecognizer? {
+        didSet {
+            guard let gesture = self.profileViewGesture else { return }
+            
+            self.profileView.isUserInteractionEnabled = true
+            self.profileView.addGestureRecognizer(gesture)
+        }
+    }
+    
+    private var profileLabelGesture: UITapGestureRecognizer? {
+        didSet {
+            guard let gesture = self.profileLabelGesture else { return }
+            
+            self.authorNameLabel.isUserInteractionEnabled = true
+            self.authorNameLabel.addGestureRecognizer(gesture)
+        }
+    }
+    
     var cellModel: PostCellViewModel? {
         didSet {
             guard let cellModel = self.cellModel else { return }
@@ -89,6 +107,7 @@ class PostTableViewCell: BaseTableViewCell {
         self.vwShimmer.shimmeringSpeed = 400
         self.vwShimmer.contentView = self.mainView
         self.categoryGesture = UITapGestureRecognizer()
+        self.profileViewGesture = UITapGestureRecognizer()
     }
 }
 
@@ -132,6 +151,16 @@ extension PostTableViewCell {
         self.categoryGesture?.rx.event.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.cellModel?.onCategoryPressed()
+            }).disposed(by: self.disposeBag)
+        
+        self.profileViewGesture?.rx.event.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.cellModel?.onProfilePressed()
+            }).disposed(by: self.disposeBag)
+        
+        self.profileLabelGesture?.rx.event.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.cellModel?.onProfilePressed()
             }).disposed(by: self.disposeBag)
     }
 }

@@ -23,6 +23,7 @@ class PostDetailViewModel: BasePostDetailViewModel, ShouldReactToAction, ShouldP
     }
     
     enum ViewToPresent {
+        case dismiss
         case moreDialogController(BottomListMenuViewModel)
         case editPostController(CreatePostViewModel)
         case deletePostDialog(confirm: () -> Void)
@@ -105,18 +106,18 @@ class PostDetailViewModel: BasePostDetailViewModel, ShouldReactToAction, ShouldP
 // MARK: - Networks
 extension PostDetailViewModel {
     
-    private func deletePost() {
-        if let post = self.post.value {
-            self.shouldPresent(.loading(true))
-            self.discussionService.deletePost(post.authorName, post.permlink)
-                .subscribe(onNext: { [weak self] _ in
-                    self?.shouldPresent(.loading(false))
-                }, onError: { [weak self] error in
-                    self?.shouldPresent(.loading(false))
-                    let errorInfo = ErrorHelper.prepareError(error: error)
-                    self?.shouldPresentError(errorInfo)
-                }) ~ self.disposeBag
-        }
+    private func deletePost(_ post: PostModel) {
+        self.shouldPresent(.loading(true))
+        self.discussionService.deletePost(post.authorName, post.permlink)
+            .subscribe(onNext: { [weak self] _ in
+                NotificationDispatcher.sharedInstance.dispatch(.postDeleted(permlink: post.permlink, author: post.authorName))
+                self?.shouldPresent(.loading(false))
+                self?.shouldPresent(.dismiss)
+            }, onError: { [weak self] error in
+                self?.shouldPresent(.loading(false))
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
     }
 }
 
@@ -149,7 +150,9 @@ fileprivate extension PostDetailViewModel {
             }
         case .delete:
             self.shouldPresent(.deletePostDialog(confirm: {
-                self.deletePost()
+                if let post = self.post.value {
+                    self.deletePost(post)
+                }
             }))
         }
     }

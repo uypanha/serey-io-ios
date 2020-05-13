@@ -29,6 +29,7 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
         case signInViewController
         case loading(Bool)
         case postsByCategoryController(PostTableViewModel)
+        case userAccountController(UserAccountViewModel)
     }
     
     // input:
@@ -164,6 +165,8 @@ extension HomeViewModel {
                     self?.shouldPresent(.loading(loading))
                 case .postsByCategoryController(let postTableViewModel):
                     self?.shouldPresent(.postsByCategoryController(postTableViewModel))
+                case .userAccountController(let userAccountViewModel):
+                    self?.shouldPresent(.userAccountController(userAccountViewModel))
                 default:
                     break
                 }

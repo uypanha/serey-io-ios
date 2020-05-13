@@ -43,6 +43,7 @@ class PostTableViewController: BaseTableViewController, AlertDialogController {
         if viewModel.shouldRefresh {
             viewModel.shouldRefresh = false
             self.refreshControl?.beginRefreshing()
+            self.viewModel.didAction(with: .refresh)
         }
     }
     

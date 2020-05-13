@@ -31,6 +31,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
     
     let shouldShowMoreOption: PublishSubject<PostModel>
     let shouldShowPostsByCategory: PublishSubject<PostModel>
+    let shouldShowAuthorProfile: PublishSubject<PostModel>
     
     init(_ post: PostModel?) {
         self.post = BehaviorRelay(value: post)
@@ -50,6 +51,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
         
         self.shouldShowMoreOption = PublishSubject()
         self.shouldShowPostsByCategory = PublishSubject()
+        self.shouldShowAuthorProfile = PublishSubject()
         super.init()
         
         setUpRxObservers()
@@ -87,6 +89,12 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol {
     func onCategoryPressed() {
         if let postModel = self.post.value {
             self.shouldShowPostsByCategory.onNext(postModel)
+        }
+    }
+    
+    func onProfilePressed() {
+        if let postModel = self.post.value {
+            self.shouldShowAuthorProfile.onNext(postModel)
         }
     }
 }

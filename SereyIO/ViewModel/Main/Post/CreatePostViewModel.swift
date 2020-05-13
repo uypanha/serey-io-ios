@@ -97,6 +97,21 @@ extension CreatePostViewModel {
         }
     }
     
+    private func fetchPostDetial() {
+        if let post = self.post.value {
+            self.discussionService.getPostDetail(permlink: post.permlink, authorName: post.authorName)
+                .subscribe(onNext: { [weak self] response in
+                    NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: post.permlink, author: post.authorName, post: response.content))
+                    self?.shouldPresent(.loading(false))
+                    self?.shouldPresent(.dismiss)
+                }, onError: { [weak self] error in
+                    NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: post.permlink, author: post.authorName, post: nil))
+                    self?.shouldPresent(.loading(false))
+                    self?.shouldPresent(.dismiss)
+                }) ~ self.disposeBag
+        }
+    }
+    
     private func fetchCategories() {
         self.isDownloading.accept(true)
         self.discussionService.getCategories()
@@ -117,10 +132,8 @@ extension CreatePostViewModel {
     private func submitPost(with thumnailUrl: String) {
         let submitModel = self.prepareSubmitModel(with: thumnailUrl)
         self.discussionService.submitPost(submitModel)
-            .subscribe(onNext: { [weak self] data in
-                NotificationDispatcher.sharedInstance.dispatch(.postCreated)
-                self?.shouldPresent(.loading(false))
-                self?.shouldPresent(.dismiss)
+            .subscribe(onNext: { [weak self] _ in
+                self?.handlePostSubmitted()
             }, onError: { [weak self] error in
                 self?.shouldPresent(.loading(false))
                 let errorInfo = ErrorHelper.prepareError(error: error)
@@ -315,6 +328,17 @@ fileprivate extension CreatePostViewModel {
             self.validateThumbnail { url in
                 self.submitPost(with: url)
             }
+        }
+    }
+    
+    func handlePostSubmitted() {
+        if self.post.value != nil {
+            // must be updated post
+            self.fetchPostDetial()
+        } else {
+            NotificationDispatcher.sharedInstance.dispatch(.postCreated)
+            self.shouldPresent(.loading(false))
+            self.shouldPresent(.dismiss)
         }
     }
 }
