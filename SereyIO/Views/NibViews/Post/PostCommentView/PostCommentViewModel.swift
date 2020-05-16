@@ -26,7 +26,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
     
     let upVoteCount: BehaviorSubject<String?>
     let downVoteCount: BehaviorSubject<String?>
-    let isVoteAllowed: BehaviorSubject<Bool>
+    let isVoteAllowed: BehaviorRelay<Bool>
     
     let shouldComment: PublishSubject<String>
     let shouldUpVote: PublishSubject<PostModel>
@@ -47,7 +47,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
         self.isShimmering = BehaviorRelay(value: false)
         self.upVoteCount = BehaviorSubject(value: nil)
         self.downVoteCount = BehaviorSubject(value: nil)
-        self.isVoteAllowed = BehaviorSubject(value: true)
+        self.isVoteAllowed = BehaviorRelay(value: true)
         self.votedType = BehaviorRelay(value: nil)
         self.upVoteEnabled = BehaviorSubject(value: true)
         self.flagEnabled = BehaviorSubject(value: true)
@@ -86,7 +86,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
     internal func notifyDataChanged(_ data: PostModel?) {
         self.upVoteCount.onNext("\(data?.upvote ?? 0)")
         self.downVoteCount.onNext("\(data?.flag ?? 0)")
-        self.isVoteAllowed.onNext(AuthData.shared.username != data?.authorName)
+        self.isVoteAllowed.accept(AuthData.shared.username != data?.authorName)
         self.votedType.accept(data?.votedType)
         self.upVoteEnabled.onNext(data?.votedType != .flag)
         self.flagEnabled.onNext(data?.votedType != .upvote)
@@ -94,7 +94,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
     }
     
     deinit {
-        self.unregisterFromNotifs()
+        unregisterFromNotifs()
     }
 }
 
@@ -102,7 +102,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
 fileprivate extension PostCommentViewModel {
     
     func handleUpVotePressed() {
-        if let postModel = self.post.value {
+        if let postModel = self.post.value, self.isVoteAllowed.value {
             if let votedType = self.votedType.value {
                 self.shouldDownvote.onNext((votedType, postModel))
             } else {
@@ -112,7 +112,7 @@ fileprivate extension PostCommentViewModel {
     }
     
     func handleFlagPressed() {
-        if let postModel = self.post.value {
+        if let postModel = self.post.value, self.isVoteAllowed.value {
             if let votedType = self.votedType.value {
                 self.shouldDownvote.onNext((votedType, postModel))
             } else {

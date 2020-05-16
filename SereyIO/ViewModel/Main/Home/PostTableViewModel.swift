@@ -237,6 +237,9 @@ extension PostTableViewModel: NotificationObserver {
             self.handlePostUpdated(permlink: permlink, author: author, post: post)
         case .postDeleted(let permlink, let author):
             self.removePost(permlink: permlink, author: author)
+        case .userDidLogin, .userDidLogOut:
+            self.discussionService = DiscussionService()
+            self.discussions.renotify()
         default:
             break
         }

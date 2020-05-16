@@ -87,6 +87,7 @@ class MediaPickerHelper: NSObject {
         }
         pickerController.sourceType = .photoLibrary
         pickerController.mediaTypes = UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum)!
+        pickerController.modalPresentationStyle = .fullScreen
         
         self.presentingViewController.present(pickerController, animated: true, completion: nil)
     }

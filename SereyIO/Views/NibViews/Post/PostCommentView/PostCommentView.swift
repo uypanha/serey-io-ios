@@ -28,7 +28,6 @@ class PostCommentView: NibView {
             self.disposeBag ~ [
                 viewModel.upVoteCount ~> self.upVoteButton.rx.title(for: .normal),
                 viewModel.downVoteCount ~> self.downVoteButton.rx.title(for: .normal),
-                viewModel.isVoteAllowed.map { !$0 } ~> self.voteContainerView.rx.isHidden,
                 viewModel.commentHidden ~> self.commentTextView.rx.isHidden,
                 viewModel.votedType
                     .subscribe(onNext: { [weak self] voteType in
@@ -61,9 +60,6 @@ class PostCommentView: NibView {
 fileprivate extension PostCommentView {
     
     func preparepVoteTypeStyle(_ voteType: VotedType?) {
-        self.downVoteButton.isHidden = voteType == .upvote
-        self.upVoteButton.isHidden = voteType == .flag
-        
         let downVoteTintColor: UIColor = voteType == .flag ? ColorName.primary.color : .gray
         let downVoteIcon: UIImage? = voteType == .flag ? R.image.downVoteFilledIcon() : R.image.downVoteIcon()
         self.downVoteButton.tintColor = downVoteTintColor

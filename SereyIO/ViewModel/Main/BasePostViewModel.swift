@@ -23,7 +23,7 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     let emptyOrError: BehaviorSubject<EmptyOrErrorViewModel?>
     let endRefresh: BehaviorSubject<Bool>
     
-    let discussionService: DiscussionService
+    var discussionService: DiscussionService
     let canDownloadMorePages: BehaviorRelay<Bool>
     var isRefresh: Bool = true
     var shouldRefresh: Bool = false

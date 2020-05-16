@@ -11,6 +11,16 @@ import UIKit
 @IBDesignable
 class UIPlaceHolderTextView: UITextView {
     
+    override var text: String! {
+        didSet {
+            if self.text.isEmpty {
+                if let placeholderLabel = self.viewWithTag(100) as? UILabel {
+                    placeholderLabel.isHidden = self.text.count > 0
+                }
+            }
+        }
+    }
+    
     @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
             self.layer.cornerRadius = cornerRadius

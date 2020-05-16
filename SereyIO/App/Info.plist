@@ -37,6 +37,8 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>${app_name} needs access to your camera to take photos.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>${app_name} needs access to your photo library to store photos.</string>
 	<key>Notificaton Center URL</key>

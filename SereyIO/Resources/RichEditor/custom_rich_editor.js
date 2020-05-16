@@ -46,8 +46,7 @@ RE.insertImage = function(url, alt) {
 };
 
 RE.setHtml = function(contents) {
-    console.log("https://serey.io/");
-    RE.setBaseUrl("https://serey.io/");
+    RE.setBaseUrl('https://serey.io/');
     var tempWrapper = document.createElement('div');
     tempWrapper.innerHTML = contents;
     var images = tempWrapper.querySelectorAll("img");
@@ -61,5 +60,11 @@ RE.setHtml = function(contents) {
 };
 
 RE.setBaseUrl = function(url) {
-    $('base').attr('href', url);
+    if ($('base').attr('href') == undefined) {
+        var newBase = document.createElement("base");
+        newBase.setAttribute("href", url);
+        document.getElementsByTagName("head")[0].appendChild(newBase);
+    } else {
+        $('base').attr('href', url);
+    }
 };

@@ -23,7 +23,7 @@ class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
     let isMoreHidden: BehaviorSubject<Bool>
     let endRefresh: BehaviorSubject<Bool>
     
-    let discussionService: DiscussionService
+    var discussionService: DiscussionService
     let isDownloading: BehaviorRelay<Bool>
     
     init(_ permlink: String, _ authorName: String) {
@@ -104,6 +104,8 @@ class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
         switch appNotif {
         case .postUpdated(let permlink, let author, let post):
             self.handlePostUpdated(permlink: permlink, author: author, post: post)
+        case .userDidLogin, .userDidLogOut:
+            self.discussionService = DiscussionService()
         default:
             break
         }
