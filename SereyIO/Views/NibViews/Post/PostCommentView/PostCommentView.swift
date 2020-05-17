@@ -19,6 +19,7 @@ class PostCommentView: NibView {
     @IBOutlet weak var upVoteButton: UIButton!
     @IBOutlet weak var downVoteButton: UIButton!
     @IBOutlet weak var commentTextView: CommentTextView!
+    @IBOutlet weak var voterButton: UIButton!
     
     var viewModel: PostCommentViewModel? {
         didSet {
@@ -40,8 +41,12 @@ class PostCommentView: NibView {
                         self.loadingIndicator.isHidden = voteType == nil
                         if voteType != nil {
                             self.loadingIndicator.startAnimating()
+                        } else {
+                            self.upVoteButton.isHidden = false
+                            self.downVoteButton.isHidden = false
                         }
-                    })
+                    }),
+                viewModel.isVotersHidden ~> self.voterButton.rx.isHidden
             ]
             
             commentTextView.viewModel = viewModel.commentTextViewModel
@@ -52,6 +57,8 @@ class PostCommentView: NibView {
     override func xibSetup() {
         super.xibSetup()
         
+        self.voterButton.setTitleColor(.gray, for: .normal)
+        self.voterButton.setTitleColor(.lightGray, for: .highlighted)
         setUpRxObservers()
     }
 }
@@ -91,6 +98,11 @@ fileprivate extension PostCommentView {
         self.downVoteButton.rx.tap.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel?.didAction(with: .flagPressed)
+            }) ~ self.disposeBag
+        
+        self.voterButton.rx.tap.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel?.didAction(with: .votersPressed)
             }) ~ self.disposeBag
     }
 }

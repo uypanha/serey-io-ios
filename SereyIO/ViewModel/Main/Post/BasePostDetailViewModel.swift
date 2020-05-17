@@ -73,6 +73,10 @@ class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
             }) ~ self.disposeBag
     }
     
+    internal func postTitle() -> String {
+        return self.post.value?.title ?? ""
+    }
+    
     internal func notifyDataChanged(_ data: PostModel?) {
         let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.authorName == AuthData.shared.username : false
         let isOVerAWeek = data?.isOverAWeek ?? false
@@ -181,7 +185,7 @@ extension BasePostDetailViewModel {
     internal func prepareSubmitCommentModel(_ comment: String) -> SubmitCommentModel {
         let permlink = self.post.value?.permlink ?? ""
         let author = self.post.value?.authorName ?? ""
-        let title = self.post.value?.title ?? ""
+        let title = self.postTitle()
         let category = self.post.value?.categoryItem.first ?? ""
         
         return SubmitCommentModel(parentAuthor: author, parentPermlink: permlink, title: title, body: comment, mainCategory: category)
@@ -189,7 +193,15 @@ extension BasePostDetailViewModel {
     
     func handlePostUpdated(permlink: String, author: String, post: PostModel?) {
         if let post = post {
-            self.post.accept(post)
+            if self.post.value?.permlink == permlink {
+                self.post.accept(post)
+            } else {
+                var replies = self.replies.value
+                if let indexToUpdate = replies.index(where: { $0.permlink == permlink && $0.authorName == author }) {
+                    replies[indexToUpdate] = post
+                }
+                self.replies.accept(replies)
+            }
         }
     }
 }

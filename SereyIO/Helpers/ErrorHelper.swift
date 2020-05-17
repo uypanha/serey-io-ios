@@ -33,8 +33,8 @@ class ErrorHelper {
         case unknownError = 9000
         case unknownServerError = 9001
         case unauthenticatedError = 9002
-        case userNotFound = 9004
-        case commentIn20s = 9006
+        case invalidCredentials = 9004
+        case commentIn20s = 9008
         case networkOffline = 9999
         
         var errorTitle: String? {
@@ -43,6 +43,8 @@ class ErrorHelper {
                 return R.string.common.networkOfflineTitle.localized()
             case .unknownServerError:
                 return R.string.common.errorFetchingDataTitle.localized()
+            case .invalidCredentials:
+                return R.string.auth.signIn.localized()
             default:
                 return R.string.common.oops.localized()
             }
@@ -69,10 +71,10 @@ class ErrorHelper {
                 errorDescription = errorMessage ?? R.string.common.notAuthenticated.localized()
             case .networkOffline:
                 errorDescription = R.string.common.networkOfflineMessage.localized()
-            case .userNotFound:
-                errorDescription = "User not found."
             case .commentIn20s:
                 errorDescription = "You may only comment once every 20 seconds."
+            case .invalidCredentials:
+                errorDescription = "Your login credentials are incorrect. Please make sure you put in the right credentials"
             }
             
             return ErrorInfo(error: NSError(domain: ErrorHelper.errorDomain, code: self.rawValue, userInfo: [NSLocalizedDescriptionKey: errorDescription]), type: self, errorTitle: self.errorTitle, errorIcon: self.errorIcon)
@@ -115,7 +117,7 @@ class ErrorHelper {
     fileprivate static func prepareAppError(_ error: AppError) -> ErrorInfo {
         switch error {
         case .appApiError(let error, _):
-            switch AppApiErrorCode(rawValue: error.statusCode ?? 0) {
+            switch AppApiErrorCode(rawValue: error.errorCode) {
             case .signinFailed?:
                 return PredefinedError.unauthenticatedError.prepareError(errorMessage: error.message)
             case .unauthorized?, .accessDenied?, .unauthenticateError?:
@@ -123,8 +125,8 @@ class ErrorHelper {
                     AuthData.shared.removeAuthData(notify: true)
                 }
                 return PredefinedError.unauthenticatedError.prepareError()
-            case .userNotFound:
-                return PredefinedError.userNotFound.prepareError()
+            case .userNotFound, .invalidCredentials:
+                return PredefinedError.invalidCredentials.prepareError()
             case .commentIn20s:
                 return PredefinedError.commentIn20s.prepareError()
             default:
@@ -170,5 +172,6 @@ fileprivate enum AppApiErrorCode: Int {
     case unauthenticateError = 4
     case accessDenied = 10
     case userNotFound = 12
+    case invalidCredentials = 15
     case commentIn20s = 27
 }

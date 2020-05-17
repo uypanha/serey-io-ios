@@ -126,7 +126,7 @@ fileprivate extension SignInViewController {
     func setUpShouldPresentErrorObservers() {
         self.viewModel.shouldPresentError.asObservable()
             .subscribe(onNext: { [weak self] errorInfo in
-                self?.showDialogError(errorInfo, positiveButton: R.string.common.confirm.localized(), positiveCompletion: nil)
+                self?.showDialogError(errorInfo, positiveButton: R.string.common.tryAgain.localized(), positiveCompletion: nil)
             }).disposed(by: self.disposeBag)
     }
     

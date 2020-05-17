@@ -16,6 +16,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
     enum Action {
         case upVotePressed
         case flagPressed
+        case votersPressed
     }
     
     // input:
@@ -32,12 +33,14 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
     let shouldUpVote: PublishSubject<PostModel>
     let shouldFlag: PublishSubject<PostModel>
     let shouldDownvote: PublishSubject<(VotedType, PostModel)>
+    let shouldShowVoters: PublishSubject<Void>
+    
     let votedType: BehaviorRelay<VotedType?>
     let upVoteEnabled: BehaviorSubject<Bool>
     let flagEnabled: BehaviorSubject<Bool>
     let isVoting: BehaviorSubject<VotedType?>
     let commentHidden: BehaviorSubject<Bool>
-    
+    let isVotersHidden: BehaviorSubject<Bool>
     let isUploading: BehaviorSubject<Bool>
     
     let commentTextViewModel: CommentTextViewModel
@@ -53,11 +56,13 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
         self.flagEnabled = BehaviorSubject(value: true)
         self.isVoting = BehaviorSubject(value: nil)
         self.commentHidden = BehaviorSubject(value: false)
+        self.isVotersHidden = BehaviorSubject(value: true)
         
         self.shouldComment = PublishSubject()
         self.shouldUpVote = PublishSubject()
         self.shouldFlag = PublishSubject()
         self.shouldDownvote = PublishSubject()
+        self.shouldShowVoters = PublishSubject()
         
         self.isUploading = BehaviorSubject(value: false)
         
@@ -90,6 +95,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
         self.votedType.accept(data?.votedType)
         self.upVoteEnabled.onNext(data?.votedType != .flag)
         self.flagEnabled.onNext(data?.votedType != .upvote)
+        self.isVotersHidden.onNext((data?.upvote ?? 0) == 0)
         self.commentHidden.onNext(!AuthData.shared.isUserLoggedIn)
     }
     
@@ -156,6 +162,8 @@ fileprivate extension PostCommentViewModel {
                     self?.handleUpVotePressed()
                 case .flagPressed:
                     self?.handleFlagPressed()
+                case .votersPressed:
+                    self?.shouldShowVoters.onNext(())
                 }
             }) ~ self.disposeBag
     }

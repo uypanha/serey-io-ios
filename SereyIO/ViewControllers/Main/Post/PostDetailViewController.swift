@@ -212,6 +212,10 @@ extension PostDetailViewController {
                         accountViewController.viewModel = userAccountViewModel
                         self.show(accountViewController, sender: nil)
                     }
+                case .votersViewController(let voterListViewModel):
+                    let votersViewController = VotersViewController(voterListViewModel)
+                    let bottomSheet = BottomSheetListViewController(contentViewController: votersViewController)
+                    self.present(bottomSheet, animated: true, completion: nil)
                 }
             }) ~ self.disposeBag
     }

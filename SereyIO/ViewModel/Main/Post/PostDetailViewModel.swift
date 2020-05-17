@@ -33,6 +33,7 @@ class PostDetailViewModel: BasePostDetailViewModel, ShouldReactToAction, ShouldP
         case signInViewController
         case loading(Bool)
         case userAccountController(UserAccountViewModel)
+        case votersViewController(VoterListViewModel)
     }
     
     // input:
@@ -211,6 +212,19 @@ fileprivate extension PostDetailViewModel {
         let userAccountViewModel = UserAccountViewModel(postModel.authorName)
         self.shouldPresent(.userAccountController(userAccountViewModel))
     }
+    
+    func handleShowVotersPressed() {
+        if let voters = self.post.value?.voter {
+            let voterListViewModel = VoterListViewModel(voters)
+            
+            voterListViewModel.shouldShowUserAccount.asObservable()
+                .subscribe(onNext: { [weak self] userAccountViewModel in
+                    self?.shouldPresent(.userAccountController(userAccountViewModel))
+                }) ~ voterListViewModel.disposeBag
+            
+            self.shouldPresent(.votersViewController(voterListViewModel))
+        }
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -263,6 +277,11 @@ extension PostDetailViewModel {
         viewModel.shouldComment.asObservable()
             .subscribe(onNext: { [weak self] comment in
                 self?.submitComment(comment, viewModel.isUploading)
+            }) ~ viewModel.disposeBag
+        
+        viewModel.shouldShowVoters.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.handleShowVotersPressed()
             }) ~ viewModel.disposeBag
     }
 }

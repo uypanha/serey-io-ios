@@ -70,6 +70,10 @@ class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, 
         return [SectionItem(items: cells)]
     }
     
+    override func postTitle() -> String {
+        return self.title.value
+    }
+    
     override func notifyDataChanged(_ data: PostModel?) {
         super.notifyDataChanged(data)
         
@@ -98,15 +102,17 @@ class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, 
         var post = data.content
         post.replies = data.replies
         self.post.accept(post)
+        NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: data.content.permlink, author: data.content.authorName, post: post))
     }
     
     override func notificationReceived(_ notification: Notification) {
+        super.notificationReceived(notification)
         guard let appNotif = notification.appNotification else { return }
         switch appNotif {
         case .userDidLogin, .userDidLogOut:
             self.commentHidden.onNext(!AuthData.shared.isUserLoggedIn)
         default:
-            super.notificationReceived(notification)
+            break
         }
     }
 }
