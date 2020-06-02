@@ -174,7 +174,7 @@
 		DC75DABB244E07EE00D80CB2 /* FollowerListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */; };
 		DC7C09C22326AFF60006D0BF /* FireBaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C09C12326AFF60006D0BF /* FireBaseHandler.swift */; };
 		DC7C740B24717B0F00610526 /* VoterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C740A24717B0F00610526 /* VoterListViewModel.swift */; };
-		DC7C740D24717C5500610526 /* Voters.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C740C24717C5500610526 /* Voters.swift */; };
+		DC7C740D24717C5500610526 /* VotersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C740C24717C5500610526 /* VotersViewController.swift */; };
 		DC7C740F2471803200610526 /* BottomSheetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C740E2471803200610526 /* BottomSheetListViewController.swift */; };
 		DC8654C5245B26540066DAB8 /* MoreAppsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8654C4245B26540066DAB8 /* MoreAppsViewController.swift */; };
 		DC88A73323DF3D3900EB7F79 /* OnBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */; };
@@ -514,7 +514,7 @@
 		DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListResponse.swift; sourceTree = "<group>"; };
 		DC7C09C12326AFF60006D0BF /* FireBaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseHandler.swift; sourceTree = "<group>"; };
 		DC7C740A24717B0F00610526 /* VoterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoterListViewModel.swift; sourceTree = "<group>"; };
-		DC7C740C24717C5500610526 /* Voters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Voters.swift; sourceTree = "<group>"; };
+		DC7C740C24717C5500610526 /* VotersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotersViewController.swift; sourceTree = "<group>"; };
 		DC7C740E2471803200610526 /* BottomSheetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetListViewController.swift; sourceTree = "<group>"; };
 		DC8654C4245B26540066DAB8 /* MoreAppsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreAppsViewController.swift; sourceTree = "<group>"; };
 		DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnBoard.storyboard; sourceTree = "<group>"; };
@@ -1464,7 +1464,7 @@
 				DC243FC524666A19007B2EC5 /* CategoryPostsViewController.swift */,
 				DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */,
 				DC9E36DB24129ACA00289693 /* PostDetailViewController.swift */,
-				DC7C740C24717C5500610526 /* Voters.swift */,
+				DC7C740C24717C5500610526 /* VotersViewController.swift */,
 				DCDE00652446013D00D09717 /* Comment */,
 			);
 			path = Post;
@@ -2341,7 +2341,7 @@
 				DC6ED57C2326A43700770B31 /* Store.swift in Sources */,
 				DC6A78F323CA1FEB001D1009 /* CollectionSingleSecitionProviderModel.swift in Sources */,
 				DC9E36DF2412A01000289693 /* PostDetailViewModel.swift in Sources */,
-				DC7C740D24717C5500610526 /* Voters.swift in Sources */,
+				DC7C740D24717C5500610526 /* VotersViewController.swift in Sources */,
 				DC9AC6E32406C4F7008FAFA6 /* Moya+Extensions.swift in Sources */,
 				DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */,
 				DC26812A23F2FCB30045776E /* ProfileTableViewCell.swift in Sources */,

@@ -96,6 +96,12 @@ class PostTableViewCell: BaseTableViewCell {
         didSet {
             guard let cellModel = self.cellModel else { return }
             
+            let imageOptions: KingfisherOptionsInfo = [
+                .processor(DownsamplingImageProcessor(size: self.thumbnailImageView.frame.size)),
+                .scaleFactor(UIScreen.main.scale),
+                .cacheOriginalImage
+            ]
+            
             self.disposeBag ~ [
                 cellModel.profileViewModel ~> self.profileView.rx.profileViewModel,
                 cellModel.authorName ~> self.authorNameLabel.rx.text,
@@ -107,7 +113,7 @@ class PostTableViewCell: BaseTableViewCell {
                 cellModel.downVoteCount ~> self.downVoteCountLabel.rx.text,
                 cellModel.commentCount ~> self.commentCountLabel.rx.text,
                 cellModel.thumbnailURL.asObservable().map { $0 }
-                    .bind(to: self.thumbnailImageView.kf.rx.image(placeholder: ViewUtiliesHelper.prepareDefualtPlaceholder())),
+                    .bind(to: self.thumbnailImageView.kf.rx.image(placeholder: ViewUtiliesHelper.prepareDefualtPlaceholder(), options: imageOptions)),
                 cellModel.isMoreHidden ~> self.moreButton.rx.isHidden,
                 cellModel.votedType.asObservable()
                     .subscribe(onNext: { [weak self] voteType in
