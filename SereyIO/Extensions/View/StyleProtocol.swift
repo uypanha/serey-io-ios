@@ -18,6 +18,30 @@ protocol StyleProtocol {
     func dangerouseStyle()
 }
 
+// MARK: - MDCOutlinedTextField {
+extension MDCOutlinedTextField: StyleProtocol {
+    
+    func primaryStyle() {
+        let containerScheme = MDCContainerScheme()
+        let colorScheme = MDCSemanticColorScheme()
+        colorScheme.primaryColor = ColorName.primary.color
+        colorScheme.errorColor = .red
+        containerScheme.colorScheme = colorScheme
+        applyTheme(withScheme: containerScheme)
+        
+        setOutlineColor(.clear, for: .normal)
+        setNormalLabelColor(.gray, for: .normal)
+    }
+    
+    func secondaryStyle() {
+        
+    }
+    
+    func dangerouseStyle() {
+        
+    }
+}
+
 // MARK: - MDCTextField
 extension MDCTextField {
     
@@ -36,6 +60,7 @@ extension MDCTextField {
         controller.leadingUnderlineLabelFont = UIFont.systemFont(ofSize: fontSize - 4)
         controller.trailingUnderlineLabelFont = UIFont.systemFont(ofSize: fontSize - 4)
         controller.floatingPlaceholderScale = 0.8
+        controller.borderRadius = 8
         
         return controller
     }

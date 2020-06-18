@@ -12,6 +12,7 @@ import RxCocoa
 import RichEditorView
 
 extension ObservableType where Element == ErrorInfo {
+    
     func asDriverWithDefaultError() -> Driver<ErrorInfo> {
         return asDriver(onErrorJustReturn: ErrorHelper.defaultError())
     }

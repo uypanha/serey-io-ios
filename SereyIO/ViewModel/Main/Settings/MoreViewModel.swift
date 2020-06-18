@@ -30,6 +30,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case languagesViewController
         case notificationSettingsController
         case webViewController(WebViewViewModel)
+        case walletViewController
         case signOutDialog
     }
     
@@ -125,7 +126,13 @@ extension MoreViewModel {
                 sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value, true)]
             }
         } else {
-            sectionItems[.signIn] = [SignInCellViewModel().then { [weak self] in self?.setUpSignInCellViewModelObservers($0) }]
+            let signInCellViewModel = SignInCellViewModel().then { [weak self] in self?.setUpSignInCellViewModelObservers($0) }
+            #if DEVELOPMENT
+                let walletCellViewModel = SettingCellViewModel(.myWallet, true)
+                sectionItems[.signIn] = [signInCellViewModel, walletCellViewModel]
+            #else
+                sectionItems[.signIn] = [signInCellViewModel]
+            #endif
         }
         sectionItems[.general] = [SettingCellViewModel(.lagnauge), SettingCellViewModel(.notificationSettings, true)]
         sectionItems[.about] = [
@@ -178,6 +185,8 @@ fileprivate extension MoreViewModel {
                 self.shouldPresent(.moreAppsController(moreAppsViewModel))
             case .notificationSettings:
                 self.shouldPresent(.notificationSettingsController)
+            case .myWallet:
+                self.shouldPresent(.walletViewController)
             default:
                 break
             }

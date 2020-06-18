@@ -56,7 +56,7 @@ def frameworks_pods
   
   # MARK: - Google SDKs
   pod 'Firebase/Analytics'
-  pod 'Firebase/Core'
+  pod 'Firebase/Core' 
   pod 'Firebase/Messaging'
   
   # MARK: - Material Components
@@ -64,7 +64,8 @@ def frameworks_pods
   pod 'MaterialComponents/PageControl'
   pod 'MaterialComponents/BottomSheet'
   pod 'MaterialComponents/Chips'
-  pod 'MaterialComponents/Buttons'
+  pod 'MaterialComponents/TextControls+OutlinedTextFields'
+  pod 'MaterialComponents/TextControls+OutlinedTextFieldsTheming'
   
 end
 

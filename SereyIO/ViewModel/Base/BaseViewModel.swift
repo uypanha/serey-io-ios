@@ -18,7 +18,7 @@ public protocol ShouldPresentError {
 // MARK: - ShouldPresent
 public protocol ShouldPresent {
     associatedtype ViewToPresent
-    var shouldPresentSubject: PublishSubject<ViewToPresent> { get set }
+    var shouldPresentSubject: PublishSubject<ViewToPresent> { get }
 }
 
 extension ShouldPresent where Self: BaseViewModel {

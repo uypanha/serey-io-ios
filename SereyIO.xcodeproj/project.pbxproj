@@ -215,6 +215,18 @@
 		DCA5255B2425166B00284CD8 /* ButtonCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA525582425166B00284CD8 /* ButtonCellViewModel.swift */; };
 		DCA5255D2426636F00284CD8 /* AlertDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5255C2426636F00284CD8 /* AlertDialogController.swift */; };
 		DCA5255F242921EA00284CD8 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */; };
+		DCB5BD6B2497BF880042E5AF /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCB5BD6A2497BF880042E5AF /* Wallet.storyboard */; };
+		DCB5BD712497CAE40042E5AF /* SecurityMethodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5BD6F2497CAE40042E5AF /* SecurityMethodeTableViewCell.swift */; };
+		DCB5BD722497CAE40042E5AF /* SecurityMethodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB5BD702497CAE40042E5AF /* SecurityMethodeTableViewCell.xib */; };
+		DCB5BD742497D2E10042E5AF /* SecurityMethodCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5BD732497D2E10042E5AF /* SecurityMethodCellViewModel.swift */; };
+		DCB5BD762497D3180042E5AF /* SecurityMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5BD752497D3180042E5AF /* SecurityMethod.swift */; };
+		DCB5BD792497D7820042E5AF /* ChooseSecurityMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5BD782497D7820042E5AF /* ChooseSecurityMethodViewController.swift */; };
+		DCB5BD7F2497D9400042E5AF /* ChooseSecurityMethodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5BD7E2497D9400042E5AF /* ChooseSecurityMethodViewModel.swift */; };
+		DCB5BD812499170A0042E5AF /* LAContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5BD802499170A0042E5AF /* LAContext.swift */; };
+		DCB5BD83249926E80042E5AF /* Biometry.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCB5BD82249926E80042E5AF /* Biometry.storyboard */; };
+		DCB5BD8624992C4F0042E5AF /* ActiveBiometryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5BD8524992C4F0042E5AF /* ActiveBiometryViewController.swift */; };
+		DCB5BD8E249A669C0042E5AF /* SignUpWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5BD8D249A669B0042E5AF /* SignUpWalletViewController.swift */; };
+		DCB5BD90249A68EC0042E5AF /* SereyWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5BD8F249A68EC0042E5AF /* SereyWallet.swift */; };
 		DCB629EC2417E83500C64BD6 /* PostCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB629EB2417E83500C64BD6 /* PostCommentView.swift */; };
 		DCB629EE2417E84F00C64BD6 /* PostCommentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB629ED2417E84F00C64BD6 /* PostCommentView.xib */; };
 		DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */; };
@@ -271,6 +283,7 @@
 		DCDE007A2448B0DC00D09717 /* VoteDialogViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCDE00792448B0DC00D09717 /* VoteDialogViewController.xib */; };
 		DCDE007C2448B3DB00D09717 /* VoteDialogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE007B2448B3DA00D09717 /* VoteDialogViewModel.swift */; };
 		DCE19A9F240822FD0054F752 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE19A9E240822FD0054F752 /* PostModel.swift */; };
+		DCE6D526249BCB2900C273C2 /* SignUpWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE6D525249BCB2900C273C2 /* SignUpWalletViewModel.swift */; };
 		DCEC0CBC240907D0002F4B6F /* Date+Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CBB240907D0002F4B6F /* Date+Formatter.swift */; };
 		DCEC0CBE240971AE002F4B6F /* ShimmeringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CBD240971AE002F4B6F /* ShimmeringProtocol.swift */; };
 		DCEC0CC3240A530B002F4B6F /* FilteredCategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CC1240A530B002F4B6F /* FilteredCategoryTableViewCell.swift */; };
@@ -555,6 +568,18 @@
 		DCA525582425166B00284CD8 /* ButtonCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCellViewModel.swift; sourceTree = "<group>"; };
 		DCA5255C2426636F00284CD8 /* AlertDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDialogController.swift; sourceTree = "<group>"; };
 		DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
+		DCB5BD6A2497BF880042E5AF /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
+		DCB5BD6F2497CAE40042E5AF /* SecurityMethodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityMethodeTableViewCell.swift; sourceTree = "<group>"; };
+		DCB5BD702497CAE40042E5AF /* SecurityMethodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecurityMethodeTableViewCell.xib; sourceTree = "<group>"; };
+		DCB5BD732497D2E10042E5AF /* SecurityMethodCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityMethodCellViewModel.swift; sourceTree = "<group>"; };
+		DCB5BD752497D3180042E5AF /* SecurityMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityMethod.swift; sourceTree = "<group>"; };
+		DCB5BD782497D7820042E5AF /* ChooseSecurityMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSecurityMethodViewController.swift; sourceTree = "<group>"; };
+		DCB5BD7E2497D9400042E5AF /* ChooseSecurityMethodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseSecurityMethodViewModel.swift; sourceTree = "<group>"; };
+		DCB5BD802499170A0042E5AF /* LAContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LAContext.swift; sourceTree = "<group>"; };
+		DCB5BD82249926E80042E5AF /* Biometry.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Biometry.storyboard; sourceTree = "<group>"; };
+		DCB5BD8524992C4F0042E5AF /* ActiveBiometryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveBiometryViewController.swift; sourceTree = "<group>"; };
+		DCB5BD8D249A669B0042E5AF /* SignUpWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWalletViewController.swift; sourceTree = "<group>"; };
+		DCB5BD8F249A68EC0042E5AF /* SereyWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SereyWallet.swift; sourceTree = "<group>"; };
 		DCB629EB2417E83500C64BD6 /* PostCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCommentView.swift; sourceTree = "<group>"; };
 		DCB629ED2417E84F00C64BD6 /* PostCommentView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostCommentView.xib; sourceTree = "<group>"; };
 		DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardFeatureView.swift; sourceTree = "<group>"; };
@@ -611,6 +636,7 @@
 		DCDE00792448B0DC00D09717 /* VoteDialogViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VoteDialogViewController.xib; sourceTree = "<group>"; };
 		DCDE007B2448B3DA00D09717 /* VoteDialogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDialogViewModel.swift; sourceTree = "<group>"; };
 		DCE19A9E240822FD0054F752 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
+		DCE6D525249BCB2900C273C2 /* SignUpWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWalletViewModel.swift; sourceTree = "<group>"; };
 		DCEC0CBB240907D0002F4B6F /* Date+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Formatter.swift"; sourceTree = "<group>"; };
 		DCEC0CBD240971AE002F4B6F /* ShimmeringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmeringProtocol.swift; sourceTree = "<group>"; };
 		DCEC0CC1240A530B002F4B6F /* FilteredCategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredCategoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -1163,6 +1189,7 @@
 				DC6A791323CB66E5001D1009 /* Main */,
 				DC88A73723DF3F3300EB7F79 /* OnBoard */,
 				DCD3985A232E102D00C812EB /* SlashScreen */,
+				DCB5BD772497D6640042E5AF /* Wallet */,
 				DCD39892232E28B400C812EB /* WebView */,
 			);
 			path = ViewControllers;
@@ -1172,6 +1199,7 @@
 			isa = PBXGroup;
 			children = (
 				DC115F31241A962A006BE78C /* Auth.storyboard */,
+				DCB5BD82249926E80042E5AF /* Biometry.storyboard */,
 				DC8EAB7623E7218600E00A00 /* Home.storyboard */,
 				DC26812E23F450BE0045776E /* More.storyboard */,
 				DC13408F24573A1E00CC9856 /* Notifications.storyboard */,
@@ -1180,6 +1208,7 @@
 				DC26813023F45A8C0045776E /* Profile.storyboard */,
 				DC19DBF023EC6DEB00571CC8 /* Search.storyboard */,
 				DCD39858232E0F9600C812EB /* Slash.storyboard */,
+				DCB5BD6A2497BF880042E5AF /* Wallet.storyboard */,
 				DC6ED52923267EF000770B31 /* LaunchScreen.storyboard */,
 				DC6ED52423267EED00770B31 /* Main.storyboard */,
 			);
@@ -1223,6 +1252,7 @@
 			isa = PBXGroup;
 			children = (
 				DCEC0CBB240907D0002F4B6F /* Date+Formatter.swift */,
+				DCB5BD802499170A0042E5AF /* LAContext.swift */,
 				DC115F2D241A8E18006BE78C /* NSAttributedString+Extensions.swift */,
 				DC9E36EF24154BC900289693 /* PFColorHash.swift */,
 				DCD39882232E24BF00C812EB /* Realm+Cnfigure.swift */,
@@ -1535,6 +1565,77 @@
 			path = ButtonTableViewCell;
 			sourceTree = "<group>";
 		};
+		DCB5BD6C2497CAB90042E5AF /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				DCB5BD6D2497CABF0042E5AF /* Auth */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		DCB5BD6D2497CABF0042E5AF /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				DCB5BD6E2497CAC60042E5AF /* SecurityMethodeTableViewCell */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		DCB5BD6E2497CAC60042E5AF /* SecurityMethodeTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DCB5BD752497D3180042E5AF /* SecurityMethod.swift */,
+				DCB5BD732497D2E10042E5AF /* SecurityMethodCellViewModel.swift */,
+				DCB5BD6F2497CAE40042E5AF /* SecurityMethodeTableViewCell.swift */,
+				DCB5BD702497CAE40042E5AF /* SecurityMethodeTableViewCell.xib */,
+			);
+			path = SecurityMethodeTableViewCell;
+			sourceTree = "<group>";
+		};
+		DCB5BD772497D6640042E5AF /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				DCB5BD8F249A68EC0042E5AF /* SereyWallet.swift */,
+				DCB5BD7D2497D92C0042E5AF /* Auth */,
+				DCB5BD8424992C280042E5AF /* Biometry */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		DCB5BD7A2497D9140042E5AF /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				DCB5BD7C2497D9270042E5AF /* Auth */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		DCB5BD7C2497D9270042E5AF /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				DCB5BD7E2497D9400042E5AF /* ChooseSecurityMethodViewModel.swift */,
+				DCE6D525249BCB2900C273C2 /* SignUpWalletViewModel.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		DCB5BD7D2497D92C0042E5AF /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				DCB5BD782497D7820042E5AF /* ChooseSecurityMethodViewController.swift */,
+				DCB5BD8D249A669B0042E5AF /* SignUpWalletViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		DCB5BD8424992C280042E5AF /* Biometry */ = {
+			isa = PBXGroup;
+			children = (
+				DCB5BD8524992C4F0042E5AF /* ActiveBiometryViewController.swift */,
+			);
+			path = Biometry;
+			sourceTree = "<group>";
+		};
 		DCB629EA2417E7F700C64BD6 /* PostCommentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1661,6 +1762,7 @@
 				DC19DBE823EC5F8400571CC8 /* Main */,
 				DC88A73A23DF4A7700EB7F79 /* OnBoard */,
 				DCD39874232E20BF00C812EB /* Slash */,
+				DCB5BD7A2497D9140042E5AF /* Wallet */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1761,6 +1863,7 @@
 				DC05FDA523F1AB1E0093B47B /* More */,
 				DCEC0CBF240A52CC002F4B6F /* Post */,
 				DCF67FDE240FFD21003061A7 /* Search */,
+				DCB5BD6C2497CAB90042E5AF /* Wallet */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2056,6 +2159,8 @@
 				DCEE3F7A2439DB57000A75C5 /* Post.strings in Resources */,
 				DCC49AC823E8632B00119BAA /* BoardFeatureView.xib in Resources */,
 				DCEE3F802439DCA8000A75C5 /* Account.strings in Resources */,
+				DCB5BD6B2497BF880042E5AF /* Wallet.storyboard in Resources */,
+				DCB5BD722497CAE40042E5AF /* SecurityMethodeTableViewCell.xib in Resources */,
 				DC7558B8245898EC00AD40FA /* SereyAppTableViewCell.xib in Resources */,
 				DC6ED56523269B6600770B31 /* colors.txt in Resources */,
 				DC9E36F92416947900289693 /* CommentTableViewCell.xib in Resources */,
@@ -2068,6 +2173,7 @@
 				DC26813123F45A8C0045776E /* Profile.storyboard in Resources */,
 				DC115F32241A962A006BE78C /* Auth.storyboard in Resources */,
 				DC9E36F2241628E000289693 /* custom_rich_editor.js in Resources */,
+				DCB5BD83249926E80042E5AF /* Biometry.storyboard in Resources */,
 				DC0079102438D4150063C3FF /* GoogleService-Info-Development.plist in Resources */,
 				DC13409024573A1F00CC9856 /* Notifications.storyboard in Resources */,
 				DC6ED52623267EED00770B31 /* Main.storyboard in Resources */,
@@ -2324,6 +2430,7 @@
 				DC40D5D623E32A6B00B0DD96 /* ImageTextModel.swift in Sources */,
 				DCD39866232E1CC600C812EB /* BaseViewModel.swift in Sources */,
 				DCD3988D232E259700C812EB /* KeyboardController+Actions.swift in Sources */,
+				DCB5BD762497D3180042E5AF /* SecurityMethod.swift in Sources */,
 				DC6FCE7823F05D1700D72F6D /* Api.swift in Sources */,
 				DC6A791523CB676E001D1009 /* MainViewController.swift in Sources */,
 				DC6A790923CA2510001D1009 /* RealmManager.swift in Sources */,
@@ -2332,6 +2439,7 @@
 				DCDE007C2448B3DB00D09717 /* VoteDialogViewModel.swift in Sources */,
 				DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */,
 				DCC49AD523E865D700119BAA /* ProfileViewModel.swift in Sources */,
+				DCB5BD7F2497D9400042E5AF /* ChooseSecurityMethodViewModel.swift in Sources */,
 				DC562433241E73D80076A78C /* SignInViewModel.swift in Sources */,
 				DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */,
 				DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */,
@@ -2350,10 +2458,12 @@
 				DC9E36DC24129ACA00289693 /* PostDetailViewController.swift in Sources */,
 				DCD3988B232E255E00C812EB /* UIImage+Extensions.swift in Sources */,
 				DCF8738223F6FA3B007A8724 /* BasePostViewModel.swift in Sources */,
+				DCB5BD742497D2E10042E5AF /* SecurityMethodCellViewModel.swift in Sources */,
 				DCEC0CC6240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift in Sources */,
 				DC9AC6E62406C5BA008FAFA6 /* DiscussionCategoryModel.swift in Sources */,
 				DC6A78FA23CA20B3001D1009 /* FieldViewModelProtocol.swift in Sources */,
 				DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */,
+				DCB5BD812499170A0042E5AF /* LAContext.swift in Sources */,
 				DCF67FEF24100C6F003061A7 /* ListDataResponseModel.swift in Sources */,
 				DC75DABB244E07EE00D80CB2 /* FollowerListResponse.swift in Sources */,
 				DC42AF0423E9CFB5008F8A0F /* PostTableViewCell.swift in Sources */,
@@ -2363,9 +2473,11 @@
 				DC7558B32458932700AD40FA /* PreferenceStore.swift in Sources */,
 				DC357A4E243CC72C00B2D3B7 /* ContentSizedCollectionView.swift in Sources */,
 				DCEC0CC8240A5E0E002F4B6F /* CicularButton.swift in Sources */,
+				DCB5BD8624992C4F0042E5AF /* ActiveBiometryViewController.swift in Sources */,
 				DCC49ACE23E865B600119BAA /* BoardFeatureViewModel.swift in Sources */,
 				DC6ED5842326A4BA00770B31 /* NotificationDispatcher.swift in Sources */,
 				DCD39870232E1F7E00C812EB /* LanguageManager.swift in Sources */,
+				DCB5BD8E249A669C0042E5AF /* SignUpWalletViewController.swift in Sources */,
 				DC0044092433A98200244607 /* FileUploadModel.swift in Sources */,
 				DC12F21624227AB40099C479 /* AccountModel.swift in Sources */,
 				DCDE00782448B0B800D09717 /* VoteDialogViewController.swift in Sources */,
@@ -2397,6 +2509,7 @@
 				DC6ED5912326A8F400770B31 /* Appearance.swift in Sources */,
 				DC5FC21C245484B000CA6117 /* CommentReplyTableViewController.swift in Sources */,
 				DC6ED56F2326A30000770B31 /* String+Extensions.swift in Sources */,
+				DCB5BD90249A68EC0042E5AF /* SereyWallet.swift in Sources */,
 				DC05FDAC23F1AB620093B47B /* SettingTableViewCell.swift in Sources */,
 				DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */,
 				DCD12D68242D03850084F66C /* BottomMenuViewModel.swift in Sources */,
@@ -2412,6 +2525,7 @@
 				DCEC0CBE240971AE002F4B6F /* ShimmeringProtocol.swift in Sources */,
 				DCC49ACC23E864E500119BAA /* FeatureStore.swift in Sources */,
 				DC56243C241E82B80076A78C /* AuthService.swift in Sources */,
+				DCB5BD712497CAE40042E5AF /* SecurityMethodeTableViewCell.swift in Sources */,
 				DC010D3B2434F6C6002BE182 /* MimeType.swift in Sources */,
 				DCDE007124475DFA00D09717 /* CommentTextView.swift in Sources */,
 				DCD3985C232E104400C812EB /* SlashScreenViewController.swift in Sources */,
@@ -2422,6 +2536,7 @@
 				DC6ED5822326A47D00770B31 /* AuthData.swift in Sources */,
 				DC0044062433A87900244607 /* FileUploadService.swift in Sources */,
 				DC6ED5722326A36500770B31 /* DeeplinkType.swift in Sources */,
+				DCB5BD792497D7820042E5AF /* ChooseSecurityMethodViewController.swift in Sources */,
 				DC6ED5882326A4F900770B31 /* APNSTokenStore.swift in Sources */,
 				DCB629EC2417E83500C64BD6 /* PostCommentView.swift in Sources */,
 				DC19DBE523EC5D0700571CC8 /* BaseTableViewController.swift in Sources */,
@@ -2463,6 +2578,7 @@
 				DC6ED56823269B8400770B31 /* R.generated.swift in Sources */,
 				DC115F3E241A9BA5006BE78C /* SignInCellViewModel.swift in Sources */,
 				DCD3987F232E238800C812EB /* UIView+Appearance.swift in Sources */,
+				DCE6D526249BCB2900C273C2 /* SignUpWalletViewModel.swift in Sources */,
 				DC6FCE7123F05D1700D72F6D /* Auth.swift in Sources */,
 				DC8EAB8523E7232800E00A00 /* NotificationViewController.swift in Sources */,
 				DC6A78F723CA202C001D1009 /* CollectionMultiSectionsProviderModel.swift in Sources */,
