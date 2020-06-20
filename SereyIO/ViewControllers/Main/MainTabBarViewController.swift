@@ -19,6 +19,14 @@ class MainTabBarViewController: BaseTabBarViewController, VoteDialogProtocol {
         setUpViews()
         setUpRxObservers()
     }
+    
+    override func setUpLocalizedTexts() {
+        if let viewControllers = self.viewControllers {
+            for i in 0..<viewControllers.count {
+                ((viewControllers[i] as? UINavigationController)?.viewControllers.first as? TabBarControllerDelegate)?.configureTabBar(i)
+            }
+        }
+    }
 }
 
 // MARK: - Preparations & Tools

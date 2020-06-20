@@ -5,10 +5,10 @@
   Created by Panha Uy on 4/29/20.
   Copyright © 2020 Phanha Uy. All rights reserved.
 */
-"search"                    = "Search";
+"search"                    = "ស្វែងរក";
 
-"peopleNotFound"            = "People not found";
-"peopleNotFoundMessage"     = "No people found for '%@' at this moment";
+"peopleNotFound"            = "រកមិនឃើញអ្នកប្រើប្រាស់";
+"peopleNotFoundMessage"     = "រកមិនឃើញអ្នកប្រើប្រាស់សម្រាប់ '%@' នៅពេលនេះទេ";
 
-"searchPeople"              = "Search People";
-"searchPeopleMessage"       = "Enter a name of people you want to search for.";
+"searchPeople"              = "ស្វែងរកអ្នកប្រើប្រាស់";
+"searchPeopleMessage"       = "បញ្ចូលឈ្មោះមនុស្សដែលអ្នកចង់ស្វែងរក";

@@ -12,12 +12,14 @@ import RxSwift
 import RxBinding
 import RxDataSources
 import SnapKit
+import MaterialComponents
 
 class SearchViewController: BaseViewController, KeyboardController, AlertDialogController {
     
     @IBOutlet weak var searchTextField: PaddingTextField!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var activityIndicator: MDCProgressView!
     
     fileprivate weak var emptyView: EmptyOrErrorView? = nil {
         didSet {
@@ -54,6 +56,9 @@ extension SearchViewController {
         self.searchTextField.makeMeCircular()
         self.searchTextField.rightView = UIImageView(image: R.image.tabSearch()?.image(withTintColor: .black))
         self.searchTextField.rightViewMode = .always
+        
+        self.activityIndicator.progressTintColor = ColorName.primary.color
+        self.activityIndicator.mode = .indeterminate
         
         prepareTableView()
     }
@@ -94,7 +99,7 @@ extension SearchViewController {
 extension SearchViewController: TabBarControllerDelegate {
     
     func configureTabBar(_ tag: Int) {
-        self.tabBarItem = UITabBarItem(title: "Search", image: R.image.tabSearch(), selectedImage: R.image.tabSearchSelected())
+        self.tabBarItem = UITabBarItem(title: R.string.search.search.localized(), image: R.image.tabSearch(), selectedImage: R.image.tabSearchSelected())
         self.tabBarItem?.tag = tag
     }
 }
@@ -133,6 +138,12 @@ fileprivate extension SearchViewController {
             .map { SearchViewModel.Action.searchEditingChanged }
             .bind(to: self.viewModel.didActionSubject)
             .disposed(by: self.disposeBag)
+        
+        self.viewModel.isDownloading.asObservable()
+            .subscribe(onNext: { [weak self] isDownloading in
+                isDownloading ? self?.activityIndicator.startAnimating() : self?.activityIndicator.stopAnimating()
+                self?.activityIndicator.isHidden = !isDownloading
+            }) ~ self.disposeBag
     }
     
     func setUpShouldPresentObservers() {

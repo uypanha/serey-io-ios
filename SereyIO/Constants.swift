@@ -58,6 +58,7 @@ public struct Constants {
         case non = ""
         case email = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         case phone = "[0-9]{7,12}"
+        case strongPassword = "^(?=.*[a-z])(?=.*[0-9])(?=.*[$@$#!%*?&])(?=.*[A-Z]).{8,16}$"
         
         func validate(_ string: String) -> Bool {
             return string.validate(with: self.rawValue)

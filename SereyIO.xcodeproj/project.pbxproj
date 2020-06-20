@@ -196,6 +196,9 @@
 		DC9AC6E62406C5BA008FAFA6 /* DiscussionCategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9AC6E52406C5BA008FAFA6 /* DiscussionCategoryModel.swift */; };
 		DC9AC6E82406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9AC6E72406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift */; };
 		DC9AC6EA2406CD90008FAFA6 /* PostCategoryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9AC6E92406CD90008FAFA6 /* PostCategoryCellViewModel.swift */; };
+		DC9C659E249D260E0042C829 /* CreateCredentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C659D249D260E0042C829 /* CreateCredentialViewController.swift */; };
+		DC9C65A0249DE4F10042C829 /* CreateCredentialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C659F249DE4F10042C829 /* CreateCredentialViewModel.swift */; };
+		DC9C65A3249E6F0A0042C829 /* ActiveBiometryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C65A2249E6F0A0042C829 /* ActiveBiometryViewModel.swift */; };
 		DC9E36D92412997800289693 /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC9E36D82412997800289693 /* Post.storyboard */; };
 		DC9E36DC24129ACA00289693 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E36DB24129ACA00289693 /* PostDetailViewController.swift */; };
 		DC9E36DF2412A01000289693 /* PostDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E36DE2412A01000289693 /* PostDetailViewModel.swift */; };
@@ -549,6 +552,9 @@
 		DC9AC6E52406C5BA008FAFA6 /* DiscussionCategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionCategoryModel.swift; sourceTree = "<group>"; };
 		DC9AC6E72406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCategorySheetViewModel.swift; sourceTree = "<group>"; };
 		DC9AC6E92406CD90008FAFA6 /* PostCategoryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCategoryCellViewModel.swift; sourceTree = "<group>"; };
+		DC9C659D249D260E0042C829 /* CreateCredentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCredentialViewController.swift; sourceTree = "<group>"; };
+		DC9C659F249DE4F10042C829 /* CreateCredentialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCredentialViewModel.swift; sourceTree = "<group>"; };
+		DC9C65A2249E6F0A0042C829 /* ActiveBiometryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveBiometryViewModel.swift; sourceTree = "<group>"; };
 		DC9E36D82412997800289693 /* Post.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
 		DC9E36DB24129ACA00289693 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		DC9E36DE2412A01000289693 /* PostDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewModel.swift; sourceTree = "<group>"; };
@@ -1488,6 +1494,14 @@
 			path = Discussion;
 			sourceTree = "<group>";
 		};
+		DC9C65A1249E6EFE0042C829 /* Biometry */ = {
+			isa = PBXGroup;
+			children = (
+				DC9C65A2249E6F0A0042C829 /* ActiveBiometryViewModel.swift */,
+			);
+			path = Biometry;
+			sourceTree = "<group>";
+		};
 		DC9E36DA241299FF00289693 /* Post */ = {
 			isa = PBXGroup;
 			children = (
@@ -1605,6 +1619,7 @@
 		DCB5BD7A2497D9140042E5AF /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				DC9C65A1249E6EFE0042C829 /* Biometry */,
 				DCB5BD7C2497D9270042E5AF /* Auth */,
 			);
 			path = Wallet;
@@ -1614,6 +1629,7 @@
 			isa = PBXGroup;
 			children = (
 				DCB5BD7E2497D9400042E5AF /* ChooseSecurityMethodViewModel.swift */,
+				DC9C659F249DE4F10042C829 /* CreateCredentialViewModel.swift */,
 				DCE6D525249BCB2900C273C2 /* SignUpWalletViewModel.swift */,
 			);
 			path = Auth;
@@ -1623,6 +1639,7 @@
 			isa = PBXGroup;
 			children = (
 				DCB5BD782497D7820042E5AF /* ChooseSecurityMethodViewController.swift */,
+				DC9C659D249D260E0042C829 /* CreateCredentialViewController.swift */,
 				DCB5BD8D249A669B0042E5AF /* SignUpWalletViewController.swift */,
 			);
 			path = Auth;
@@ -2376,6 +2393,7 @@
 				DC19DBE723EC5E7500571CC8 /* PostTableViewController.swift in Sources */,
 				DC5FC218245431CB00CA6117 /* UserCommentReplyCellViewModel.swift in Sources */,
 				DC5FC21524542E5600CA6117 /* UserCommentReplyTableViewCell.swift in Sources */,
+				DC9C65A0249DE4F10042C829 /* CreateCredentialViewModel.swift in Sources */,
 				DC40D5D823E32AB800B0DD96 /* Utilities.swift in Sources */,
 				DC12F212242278F90099C479 /* UserModel.swift in Sources */,
 				DC19DBEF23EC60C900571CC8 /* PostCellViewModel.swift in Sources */,
@@ -2395,6 +2413,7 @@
 				DC12F21424227A340099C479 /* UserService.swift in Sources */,
 				DC115F2C241A8D38006BE78C /* UtilsHelper.swift in Sources */,
 				DC9AC6E12406C1D1008FAFA6 /* DiscussionService.swift in Sources */,
+				DC9C65A3249E6F0A0042C829 /* ActiveBiometryViewModel.swift in Sources */,
 				DCF67FE724100221003061A7 /* CircularView.swift in Sources */,
 				DC7C09C22326AFF60006D0BF /* FireBaseHandler.swift in Sources */,
 				DC8654C5245B26540066DAB8 /* MoreAppsViewController.swift in Sources */,
@@ -2439,6 +2458,7 @@
 				DCDE007C2448B3DB00D09717 /* VoteDialogViewModel.swift in Sources */,
 				DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */,
 				DCC49AD523E865D700119BAA /* ProfileViewModel.swift in Sources */,
+				DC9C659E249D260E0042C829 /* CreateCredentialViewController.swift in Sources */,
 				DCB5BD7F2497D9400042E5AF /* ChooseSecurityMethodViewModel.swift in Sources */,
 				DC562433241E73D80076A78C /* SignInViewModel.swift in Sources */,
 				DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */,

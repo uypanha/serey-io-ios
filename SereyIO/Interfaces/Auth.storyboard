@@ -232,10 +232,10 @@ Sign up now and get free Serey coins!</string>
             </objects>
             <point key="canvasLocation" x="864" y="147"/>
         </scene>
-        <!--View Controller-->
+        <!--Create Credential View Controller-->
         <scene sceneID="6ou-sB-MdH">
             <objects>
-                <viewController id="bmW-Wb-gbJ" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CreateCredentialViewController" id="bmW-Wb-gbJ" customClass="CreateCredentialViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="m7C-Qd-8dm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -244,7 +244,7 @@ Sign up now and get free Serey coins!</string>
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="F3G-98-CAW">
-                                        <rect key="frame" x="42" y="115" width="330" height="261"/>
+                                        <rect key="frame" x="42" y="108" width="330" height="275"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Credential" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7i-Bk-5je">
                                                 <rect key="frame" x="74.5" y="0.0" width="181" height="29"/>
@@ -269,14 +269,17 @@ Sign up now and get free Serey coins!</string>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you check remember key, it will be encrypted and store inside your local storage only." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xKn-IX-vDy">
-                                                <rect key="frame" x="10.5" y="161" width="309.5" height="28"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xKn-IX-vDy">
+                                                <rect key="frame" x="21" y="161" width="288.5" height="42"/>
+                                                <string key="text">Password should be [8,16] symbols contain at least
+1 upper case, 1 lower case letter, 1 digit and 1 special
+symbol.</string>
                                                 <fontDescription key="fontDescription" name="CircularStd-Book" family="Circular Std" pointSize="12"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOf-aA-GP9">
-                                                <rect key="frame" x="0.0" y="221" width="330" height="40"/>
+                                                <rect key="frame" x="0.0" y="235" width="330" height="40"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="fRD-Ma-Px0"/>
@@ -312,6 +315,13 @@ Sign up now and get free Serey coins!</string>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ddn-ri-aWx"/>
                     </view>
+                    <connections>
+                        <outlet property="confirmPasswordTextField" destination="wHW-Ve-drq" id="F7d-3A-vTZ"/>
+                        <outlet property="descriptionLabel" destination="xKn-IX-vDy" id="HRv-c2-sBC"/>
+                        <outlet property="nextButton" destination="tOf-aA-GP9" id="fwW-Xg-x3z"/>
+                        <outlet property="passwordTextField" destination="nPm-Uj-NXw" id="FB5-S6-Jc3"/>
+                        <outlet property="titleLabel" destination="D7i-Bk-5je" id="4mg-nI-BcW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EUc-SX-wvX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

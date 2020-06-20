@@ -15,7 +15,7 @@ protocol TabBarControllerDelegate {
     func configureTabBar(_ tag: Int)
 }
 
-class BaseTabBarViewController: UITabBarController {
+class BaseTabBarViewController: UITabBarController, NotificationObserver {
 
     lazy var disposeBag: DisposeBag = DisposeBag()
 
@@ -24,9 +24,28 @@ class BaseTabBarViewController: UITabBarController {
 
         // Do any additional setup after loading the view.
         overrideBackItem()
+        registerForNotifs()
+    }
+    
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setUpLocalizedTexts()
+    }
+    
+    open func setUpLocalizedTexts() {}
+    
+    open func notificationReceived(_ notification: Notification) {
+        switch notification.appNotification {
+        case .languageChanged:
+            setUpLocalizedTexts()
+        default:
+            break
+        }
     }
     
     deinit {
+        unregisterFromNotifs()
         #if DEBUG
         print("\(type(of: self).className) ====> DeInit")
         #endif

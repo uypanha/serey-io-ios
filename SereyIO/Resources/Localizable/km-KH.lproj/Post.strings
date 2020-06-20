@@ -11,11 +11,11 @@
 "noPostMessage"             = "Your post will be shown here after you made a post.";
 "noPostUserMessage"         = "%@'s post will be shown here after %@ made a post.";
 
-"trending"                  = "Trending";
+"trending"                  = "និន្នាការ";
 "noTrendingPostMessage"     = "Trending post will be shown here afer someone made a post.";
-"hot"                       = "Hot";
+"hot"                       = "ក្តៅៗ";
 "noHotPostMessage"          = "Hot post will be shown here afer someone made a post.";
-"new"                       = "New";
+"new"                       = "ថ្មីៗ";
 "noNewPostMessage"          = "New post will be shown here afer someone made a post.";
 "postsByCategory"           = "%@'s Posts";
 "noPostByCategoryMessage"   = "%@'s pots will be shown here after someone made a post to this category.";

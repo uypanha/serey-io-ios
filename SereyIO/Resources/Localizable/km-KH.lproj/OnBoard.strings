@@ -6,8 +6,8 @@
   Copyright © 2020 Phanha Uy. All rights reserved.
 */
 
-"selectLanguage"    = "ជ្រើសរើសភាសា";
-"getStarted"        = "ចាប់ផ្តើម";
+"selectLanguage"            = "ជ្រើសរើសភាសា";
+"getStarted"                = "ចាប់ផ្តើម";
 
 "shareAndEarn"              = "ចែករំលែក និងទទួលបាន";
 "shareAndEarnMessage"       = "រកប្រាក់ចំណូលបានកាក់សេរីដោយសរសេរអត្ថបទ និងចែករំលែកមាតិកា។";

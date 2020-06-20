@@ -6,8 +6,8 @@
   Copyright © 2020 Phanha Uy. All rights reserved.
 */
 
-"selectLanguage"    = "Select Language";
-"getStarted"        = "Get Started";
+"selectLanguage"            = "Select Language";
+"getStarted"                = "Get Started";
 
 "shareAndEarn"              = "Share & Earn";
 "shareAndEarnMessage"       = "Earn Serey coins by posting and sharing content.";

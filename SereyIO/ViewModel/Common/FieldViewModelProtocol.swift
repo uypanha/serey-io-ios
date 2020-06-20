@@ -44,6 +44,7 @@ enum TextFieldValidation {
     case min(Int)
     case notEmpty
     case password(Int)
+    case strongPassword
     case phone
     case none
     
@@ -59,6 +60,8 @@ enum TextFieldValidation {
             return Constants.PatternValidation.phone.validate(text)
         case .password(let min):
             return text.count >= min
+        case .strongPassword:
+            return Constants.PatternValidation.strongPassword.validate(text)
         case .none:
             return true
         }
@@ -113,6 +116,19 @@ class TextFieldViewModel: CellViewModel, FieldViewModelProtocol {
         }
         errorText.accept(nil)
         return true
+    }
+    
+    func validate(with text: String?) -> Bool {
+        guard self.validate() && self.value == text else {
+            errorText.accept(errorMessage)
+            return false
+        }
+        errorText.accept(nil)
+        return true
+    }
+    
+    func isSame(as text: String?) -> Bool {
+        return self.value == text
     }
 }
 

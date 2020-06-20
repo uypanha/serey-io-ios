@@ -91,8 +91,9 @@ extension ChooseSecurityMethodViewController {
         self.viewModel.shouldPresent.asObservable()
             .subscribe(onNext: { [weak self] viewToPresent in
                 switch viewToPresent {
-                case .activeBiometryController:
+                case .activeBiometryController(let activeBiometryViewModel):
                     if let activeBiometryController = R.storyboard.biometry.activeBiometryViewController() {
+                        activeBiometryController.viewModel = activeBiometryViewModel
                         self?.show(activeBiometryController, sender: nil)
                     }
                 }

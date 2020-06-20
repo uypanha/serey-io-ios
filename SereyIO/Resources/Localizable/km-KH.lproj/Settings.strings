@@ -6,16 +6,16 @@
   Copyright © 2020 Phanha Uy. All rights reserved.
 */
 
-"general"                   = "General";
-"about"                     = "About";
+"general"                   = "ទូទៅ";
+"about"                     = "អំពី";
 
-"myWallet"                  = "My wallet";
-"languages"                 = "Languages";
-"language"                  = "Languages (%@)";
-"notificationSettings"      = "Notification Settings";
+"myWallet"                  = "កាបូុបរបស់ខ្ញុំ";
+"languages"                 = "ភាសា";
+"language"                  = "ភាសា (%@)";
+"notificationSettings"      = "ការកំណត់ការជូនដំណឹង";
 "sereyApps"                 = "Serey Apps";
-"version"                   = "Version";
+"version"                   = "កំណែ";
 
-"signOutQ"                  = "Sign Out?";
-"signOut"                   = "Sign Out?";
-"signOutMessage"            = "Are you sure you want to sign out?";
+"signOutQ"                  = "ចាកចេញ?";
+"signOut"                   = "ចាកចេញ?";
+"signOutMessage"            = "តើអ្នកប្រាកដហើយឬ ដែលអ្នកចង់ចាកចេញ?";

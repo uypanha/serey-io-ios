@@ -52,6 +52,43 @@ extension SignUpWalletViewController {
 extension SignUpWalletViewController {
     
     func setUpRxObservers() {
+        setUpContentChangedObservers()
+        setUpShouldPresentObservers()
+        setUpControlsObservers()
         setUpTabSelfToDismissKeyboard()?.disposed(by: self.disposeBag)
+    }
+    
+    func setUpContentChangedObservers() {
+        self.viewModel.userNameTextFieldViewModel.bind(with: usernameTextField, controller: userNameController)
+        self.viewModel.ownerKeyTextFieldViewModel.bind(with: ownerKeyTextField, controller: ownerKeyController)
+        
+        self.viewModel.shouldEnbleSignUp ~> self.nextButton.rx.isEnabled ~ self.disposeBag
+    }
+    
+    func setUpControlsObservers() {
+        self.nextButton.rx.tap.asObservable()
+            .map { SignUpWalletViewModel.Action.signUpPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+        
+        self.backToSignInButton.rx.tap.asObservable()
+            .map { SignUpWalletViewModel.Action.backToSignInPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentObservers() {
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { [unowned self] viewToPresent in
+                switch viewToPresent {
+                case .createCredentialController(let createCredentialViewModel):
+                    if let createCredentialController = R.storyboard.auth.createCredentialViewController() {
+                        createCredentialController.viewModel = createCredentialViewModel
+                        self.show(createCredentialController, sender: nil)
+                    }
+                case .dismiss:
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }) ~ self.disposeBag
     }
 }
