@@ -104,6 +104,9 @@
 		DC5FC218245431CB00CA6117 /* UserCommentReplyCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5FC217245431CA00CA6117 /* UserCommentReplyCellViewModel.swift */; };
 		DC5FC21A2454330900CA6117 /* CommentReplyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5FC2192454330900CA6117 /* CommentReplyModel.swift */; };
 		DC5FC21C245484B000CA6117 /* CommentReplyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5FC21B245484B000CA6117 /* CommentReplyTableViewController.swift */; };
+		DC60AC8624A742D70014B77E /* GoogleOTP.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC60AC8824A742D70014B77E /* GoogleOTP.strings */; };
+		DC60AC8B24A745070014B77E /* WalletRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60AC8A24A745070014B77E /* WalletRootViewController.swift */; };
+		DC60AC8D24A905E50014B77E /* BaseRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC60AC8C24A905E50014B77E /* BaseRootViewController.swift */; };
 		DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78E923CA1F38001D1009 /* BaseCellViewModel.swift */; };
 		DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78EB23CA1F57001D1009 /* CellViewModel.swift */; };
 		DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6A78ED23CA1F72001D1009 /* NetworkViewModelProtocol.swift */; };
@@ -176,6 +179,11 @@
 		DC7C740B24717B0F00610526 /* VoterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C740A24717B0F00610526 /* VoterListViewModel.swift */; };
 		DC7C740D24717C5500610526 /* VotersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C740C24717C5500610526 /* VotersViewController.swift */; };
 		DC7C740F2471803200610526 /* BottomSheetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C740E2471803200610526 /* BottomSheetListViewController.swift */; };
+		DC7F097424ACE27800CE8AFC /* WalletCardCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F097224ACE27800CE8AFC /* WalletCardCollectionViewCell.swift */; };
+		DC7F097524ACE27800CE8AFC /* WalletCardCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC7F097324ACE27800CE8AFC /* WalletCardCollectionViewCell.xib */; };
+		DC7F097824ACE31500CE8AFC /* WalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F097724ACE31500CE8AFC /* WalletViewModel.swift */; };
+		DC7F097A24ACE51600CE8AFC /* WalletCardCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F097924ACE51600CE8AFC /* WalletCardCellViewModel.swift */; };
+		DC7F098624AE36B500CE8AFC /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F098524AE36B500CE8AFC /* TransactionHistoryViewController.swift */; };
 		DC8654C5245B26540066DAB8 /* MoreAppsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8654C4245B26540066DAB8 /* MoreAppsViewController.swift */; };
 		DC88A73323DF3D3900EB7F79 /* OnBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */; };
 		DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */; };
@@ -199,6 +207,9 @@
 		DC9C659E249D260E0042C829 /* CreateCredentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C659D249D260E0042C829 /* CreateCredentialViewController.swift */; };
 		DC9C65A0249DE4F10042C829 /* CreateCredentialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C659F249DE4F10042C829 /* CreateCredentialViewModel.swift */; };
 		DC9C65A3249E6F0A0042C829 /* ActiveBiometryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C65A2249E6F0A0042C829 /* ActiveBiometryViewModel.swift */; };
+		DC9C65A5249FC0D10042C829 /* GoogleOTP.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC9C65A4249FC0D10042C829 /* GoogleOTP.storyboard */; };
+		DC9C65A8249FC63C0042C829 /* ActivateGoogleOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C65A7249FC63C0042C829 /* ActivateGoogleOTPViewController.swift */; };
+		DC9C65AB24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C65AA24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift */; };
 		DC9E36D92412997800289693 /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC9E36D82412997800289693 /* Post.storyboard */; };
 		DC9E36DC24129ACA00289693 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E36DB24129ACA00289693 /* PostDetailViewController.swift */; };
 		DC9E36DF2412A01000289693 /* PostDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E36DE2412A01000289693 /* PostDetailViewModel.swift */; };
@@ -245,6 +256,8 @@
 		DCC6F1E2242BBDEA003B9E3A /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6F1E0242BBDEA003B9E3A /* TextTableViewCell.swift */; };
 		DCC6F1E3242BBDEB003B9E3A /* TextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC6F1E1242BBDEA003B9E3A /* TextTableViewCell.xib */; };
 		DCC6F1E5242BBF27003B9E3A /* TextCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC6F1E4242BBF27003B9E3A /* TextCellViewModel.swift */; };
+		DCC883D924A3A4A8002FE917 /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC883D824A3A4A8002FE917 /* WalletViewController.swift */; };
+		DCC883DC24A3A547002FE917 /* Wallet.strings in Resources */ = {isa = PBXBuildFile; fileRef = DCC883DE24A3A547002FE917 /* Wallet.strings */; };
 		DCCD40C924363EF700093A18 /* SubmitPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD40C824363EF700093A18 /* SubmitPostModel.swift */; };
 		DCCD40CB2436422C00093A18 /* BlockChainResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD40CA2436422C00093A18 /* BlockChainResponse.swift */; };
 		DCCD40CE24379BD100093A18 /* BottomMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCCD40CD24379BD100093A18 /* BottomMenuViewController.swift */; };
@@ -437,6 +450,10 @@
 		DC5FC217245431CA00CA6117 /* UserCommentReplyCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCommentReplyCellViewModel.swift; sourceTree = "<group>"; };
 		DC5FC2192454330900CA6117 /* CommentReplyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentReplyModel.swift; sourceTree = "<group>"; };
 		DC5FC21B245484B000CA6117 /* CommentReplyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentReplyTableViewController.swift; sourceTree = "<group>"; };
+		DC60AC8724A742D70014B77E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/GoogleOTP.strings; sourceTree = "<group>"; };
+		DC60AC8924A742DA0014B77E /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/GoogleOTP.strings"; sourceTree = "<group>"; };
+		DC60AC8A24A745070014B77E /* WalletRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRootViewController.swift; sourceTree = "<group>"; };
+		DC60AC8C24A905E50014B77E /* BaseRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRootViewController.swift; sourceTree = "<group>"; };
 		DC6A78E923CA1F38001D1009 /* BaseCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78EB23CA1F57001D1009 /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		DC6A78ED23CA1F72001D1009 /* NetworkViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -532,6 +549,11 @@
 		DC7C740A24717B0F00610526 /* VoterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoterListViewModel.swift; sourceTree = "<group>"; };
 		DC7C740C24717C5500610526 /* VotersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotersViewController.swift; sourceTree = "<group>"; };
 		DC7C740E2471803200610526 /* BottomSheetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetListViewController.swift; sourceTree = "<group>"; };
+		DC7F097224ACE27800CE8AFC /* WalletCardCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardCollectionViewCell.swift; sourceTree = "<group>"; };
+		DC7F097324ACE27800CE8AFC /* WalletCardCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletCardCollectionViewCell.xib; sourceTree = "<group>"; };
+		DC7F097724ACE31500CE8AFC /* WalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewModel.swift; sourceTree = "<group>"; };
+		DC7F097924ACE51600CE8AFC /* WalletCardCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardCellViewModel.swift; sourceTree = "<group>"; };
+		DC7F098524AE36B500CE8AFC /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
 		DC8654C4245B26540066DAB8 /* MoreAppsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreAppsViewController.swift; sourceTree = "<group>"; };
 		DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnBoard.storyboard; sourceTree = "<group>"; };
 		DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICenteredHorizantalButton.swift; sourceTree = "<group>"; };
@@ -555,6 +577,10 @@
 		DC9C659D249D260E0042C829 /* CreateCredentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCredentialViewController.swift; sourceTree = "<group>"; };
 		DC9C659F249DE4F10042C829 /* CreateCredentialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCredentialViewModel.swift; sourceTree = "<group>"; };
 		DC9C65A2249E6F0A0042C829 /* ActiveBiometryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveBiometryViewModel.swift; sourceTree = "<group>"; };
+		DC9C65A4249FC0D10042C829 /* GoogleOTP.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GoogleOTP.storyboard; sourceTree = "<group>"; };
+		DC9C65A7249FC63C0042C829 /* ActivateGoogleOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateGoogleOTPViewController.swift; sourceTree = "<group>"; };
+		DC9C65AA24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateGoogleOTPViewModel.swift; sourceTree = "<group>"; };
+		DC9C65AE24A100720042C829 /* SereyIO-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SereyIO-Bridging-Header.h"; sourceTree = "<group>"; };
 		DC9E36D82412997800289693 /* Post.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
 		DC9E36DB24129ACA00289693 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		DC9E36DE2412A01000289693 /* PostDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewModel.swift; sourceTree = "<group>"; };
@@ -601,6 +627,9 @@
 		DCC6F1E0242BBDEA003B9E3A /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		DCC6F1E1242BBDEA003B9E3A /* TextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextTableViewCell.xib; sourceTree = "<group>"; };
 		DCC6F1E4242BBF27003B9E3A /* TextCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCellViewModel.swift; sourceTree = "<group>"; };
+		DCC883D824A3A4A8002FE917 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
+		DCC883DD24A3A547002FE917 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Wallet.strings; sourceTree = "<group>"; };
+		DCC883DF24A3A54B002FE917 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Wallet.strings"; sourceTree = "<group>"; };
 		DCCD40C824363EF700093A18 /* SubmitPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitPostModel.swift; sourceTree = "<group>"; };
 		DCCD40CA2436422C00093A18 /* BlockChainResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockChainResponse.swift; sourceTree = "<group>"; };
 		DCCD40CD24379BD100093A18 /* BottomMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomMenuViewController.swift; sourceTree = "<group>"; };
@@ -1136,6 +1165,7 @@
 			isa = PBXGroup;
 			children = (
 				DC6CDC3224398014008A52D9 /* SereyIO.entitlements */,
+				DC9C65AE24A100720042C829 /* SereyIO-Bridging-Header.h */,
 				DC6ED5772326A40200770B31 /* AppCoordinator.swift */,
 				DC6ED52023267EED00770B31 /* AppDelegate.swift */,
 				DC6ED5902326A8F400770B31 /* Appearance.swift */,
@@ -1206,6 +1236,7 @@
 			children = (
 				DC115F31241A962A006BE78C /* Auth.storyboard */,
 				DCB5BD82249926E80042E5AF /* Biometry.storyboard */,
+				DC9C65A4249FC0D10042C829 /* GoogleOTP.storyboard */,
 				DC8EAB7623E7218600E00A00 /* Home.storyboard */,
 				DC26812E23F450BE0045776E /* More.storyboard */,
 				DC13408F24573A1E00CC9856 /* Notifications.storyboard */,
@@ -1396,6 +1427,32 @@
 			path = Handlers;
 			sourceTree = "<group>";
 		};
+		DC7F097124ACE25000CE8AFC /* WalletCardCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC7F097924ACE51600CE8AFC /* WalletCardCellViewModel.swift */,
+				DC7F097224ACE27800CE8AFC /* WalletCardCollectionViewCell.swift */,
+				DC7F097324ACE27800CE8AFC /* WalletCardCollectionViewCell.xib */,
+			);
+			path = WalletCardCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		DC7F097624ACE30200CE8AFC /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DC7F097724ACE31500CE8AFC /* WalletViewModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		DC7F098424AE368B00CE8AFC /* Transaction */ = {
+			isa = PBXGroup;
+			children = (
+				DC7F098524AE36B500CE8AFC /* TransactionHistoryViewController.swift */,
+			);
+			path = Transaction;
+			sourceTree = "<group>";
+		};
 		DC88A73423DF3EB600EB7F79 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -1502,6 +1559,22 @@
 			path = Biometry;
 			sourceTree = "<group>";
 		};
+		DC9C65A6249FC5DC0042C829 /* GoogleOTP */ = {
+			isa = PBXGroup;
+			children = (
+				DC9C65A7249FC63C0042C829 /* ActivateGoogleOTPViewController.swift */,
+			);
+			path = GoogleOTP;
+			sourceTree = "<group>";
+		};
+		DC9C65A924A0FCDB0042C829 /* GoogleOTP */ = {
+			isa = PBXGroup;
+			children = (
+				DC9C65AA24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift */,
+			);
+			path = GoogleOTP;
+			sourceTree = "<group>";
+		};
 		DC9E36DA241299FF00289693 /* Post */ = {
 			isa = PBXGroup;
 			children = (
@@ -1582,6 +1655,7 @@
 		DCB5BD6C2497CAB90042E5AF /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				DC7F097124ACE25000CE8AFC /* WalletCardCollectionViewCell */,
 				DCB5BD6D2497CABF0042E5AF /* Auth */,
 			);
 			path = Wallet;
@@ -1610,8 +1684,11 @@
 			isa = PBXGroup;
 			children = (
 				DCB5BD8F249A68EC0042E5AF /* SereyWallet.swift */,
+				DC60AC8A24A745070014B77E /* WalletRootViewController.swift */,
 				DCB5BD7D2497D92C0042E5AF /* Auth */,
 				DCB5BD8424992C280042E5AF /* Biometry */,
+				DC9C65A6249FC5DC0042C829 /* GoogleOTP */,
+				DCC883D724A3A45C002FE917 /* Main */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -1619,8 +1696,10 @@
 		DCB5BD7A2497D9140042E5AF /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
-				DC9C65A1249E6EFE0042C829 /* Biometry */,
 				DCB5BD7C2497D9270042E5AF /* Auth */,
+				DC9C65A1249E6EFE0042C829 /* Biometry */,
+				DC9C65A924A0FCDB0042C829 /* GoogleOTP */,
+				DC7F097624ACE30200CE8AFC /* Main */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -1711,6 +1790,15 @@
 			path = TextTableViewCell;
 			sourceTree = "<group>";
 		};
+		DCC883D724A3A45C002FE917 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				DCC883D824A3A4A8002FE917 /* WalletViewController.swift */,
+				DC7F098424AE368B00CE8AFC /* Transaction */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		DCCD40CC2436425200093A18 /* BlockChain */ = {
 			isa = PBXGroup;
 			children = (
@@ -1750,6 +1838,7 @@
 		DCD3985D232E105A00C812EB /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				DC60AC8C24A905E50014B77E /* BaseRootViewController.swift */,
 				DC8EAB7823E721EE00E00A00 /* BaseTabBarViewController.swift */,
 				DC19DBE423EC5D0700571CC8 /* BaseTableViewController.swift */,
 				DCD3985E232E106E00C812EB /* BaseViewController.swift */,
@@ -1825,6 +1914,8 @@
 				DCEE3F7C2439DB57000A75C5 /* Post.strings */,
 				DC7558CB2459DB0400AD40FA /* Search.strings */,
 				DC05FDB223F1AC4F0093B47B /* Settings.strings */,
+				DCC883DE24A3A547002FE917 /* Wallet.strings */,
+				DC60AC8824A742D70014B77E /* GoogleOTP.strings */,
 			);
 			path = Localizable;
 			sourceTree = "<group>";
@@ -2112,6 +2203,7 @@
 				TargetAttributes = {
 					DC6ED51C23267EED00770B31 = {
 						CreatedOnToolsVersion = 10.3;
+						LastSwiftMigration = 1150;
 					};
 					DC6ED53023267EF000770B31 = {
 						CreatedOnToolsVersion = 10.3;
@@ -2149,6 +2241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCC883DC24A3A547002FE917 /* Wallet.strings in Resources */,
 				DC6ED52B23267EF000770B31 /* LaunchScreen.storyboard in Resources */,
 				DC26812F23F450BE0045776E /* More.storyboard in Resources */,
 				DC115F3C241A9A74006BE78C /* SignInTableViewCell.xib in Resources */,
@@ -2156,9 +2249,11 @@
 				DC8EAB7723E7218600E00A00 /* Home.storyboard in Resources */,
 				DCA525592425166B00284CD8 /* ButtonTableViewCell.xib in Resources */,
 				DC6ED52823267EF000770B31 /* Assets.xcassets in Resources */,
+				DC9C65A5249FC0D10042C829 /* GoogleOTP.storyboard in Resources */,
 				DC7558BD2459C91E00AD40FA /* More.strings in Resources */,
 				DCC6F1E3242BBDEB003B9E3A /* TextTableViewCell.xib in Resources */,
 				DC9E36D92412997800289693 /* Post.storyboard in Resources */,
+				DC7F097524ACE27800CE8AFC /* WalletCardCollectionViewCell.xib in Resources */,
 				DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */,
 				DC7558D42459F1EF00AD40FA /* GoogleService-Info-Release.plist in Resources */,
 				DC0F36AF245093B800916886 /* DownvoteDialogViewController.xib in Resources */,
@@ -2184,6 +2279,7 @@
 				DC9E36EE2413F57800289693 /* common_css.css in Resources */,
 				DC9E36EC2413F52C00289693 /* custom_rich_editor_style.css in Resources */,
 				DCC49AD423E865D700119BAA /* ProfileView.xib in Resources */,
+				DC60AC8624A742D70014B77E /* GoogleOTP.strings in Resources */,
 				DCD39859232E0F9600C812EB /* Slash.storyboard in Resources */,
 				DC7558C92459DB0400AD40FA /* Search.strings in Resources */,
 				DCEC0CC4240A530B002F4B6F /* FilteredCategoryTableViewCell.xib in Resources */,
@@ -2395,11 +2491,14 @@
 				DC5FC21524542E5600CA6117 /* UserCommentReplyTableViewCell.swift in Sources */,
 				DC9C65A0249DE4F10042C829 /* CreateCredentialViewModel.swift in Sources */,
 				DC40D5D823E32AB800B0DD96 /* Utilities.swift in Sources */,
+				DC9C65AB24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift in Sources */,
 				DC12F212242278F90099C479 /* UserModel.swift in Sources */,
 				DC19DBEF23EC60C900571CC8 /* PostCellViewModel.swift in Sources */,
 				DCEC0CC3240A530B002F4B6F /* FilteredCategoryTableViewCell.swift in Sources */,
 				DC9E36F024154BC900289693 /* PFColorHash.swift in Sources */,
 				DC5FC21A2454330900CA6117 /* CommentReplyModel.swift in Sources */,
+				DC60AC8B24A745070014B77E /* WalletRootViewController.swift in Sources */,
+				DCC883D924A3A4A8002FE917 /* WalletViewController.swift in Sources */,
 				DCA5255D2426636F00284CD8 /* AlertDialogController.swift in Sources */,
 				DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */,
 				DC1C6EC323FC3C6D00BA701D /* PostCategoryTableViewCell.swift in Sources */,
@@ -2415,6 +2514,7 @@
 				DC9AC6E12406C1D1008FAFA6 /* DiscussionService.swift in Sources */,
 				DC9C65A3249E6F0A0042C829 /* ActiveBiometryViewModel.swift in Sources */,
 				DCF67FE724100221003061A7 /* CircularView.swift in Sources */,
+				DC7F098624AE36B500CE8AFC /* TransactionHistoryViewController.swift in Sources */,
 				DC7C09C22326AFF60006D0BF /* FireBaseHandler.swift in Sources */,
 				DC8654C5245B26540066DAB8 /* MoreAppsViewController.swift in Sources */,
 				DC6A790323CA242B001D1009 /* EmptyOrErrorViewModel.swift in Sources */,
@@ -2468,6 +2568,7 @@
 				DC9E36E92413F4A100289693 /* RichEditor+Custom.swift in Sources */,
 				DC6ED57C2326A43700770B31 /* Store.swift in Sources */,
 				DC6A78F323CA1FEB001D1009 /* CollectionSingleSecitionProviderModel.swift in Sources */,
+				DC9C65A8249FC63C0042C829 /* ActivateGoogleOTPViewController.swift in Sources */,
 				DC9E36DF2412A01000289693 /* PostDetailViewModel.swift in Sources */,
 				DC7C740D24717C5500610526 /* VotersViewController.swift in Sources */,
 				DC9AC6E32406C4F7008FAFA6 /* Moya+Extensions.swift in Sources */,
@@ -2521,6 +2622,7 @@
 				DC40D5E323E3360D00B0DD96 /* ChooseLanguageViewModel.swift in Sources */,
 				DC6A78F523CA1FFE001D1009 /* CollectionSectionedAnimatedProviderModel.swift in Sources */,
 				DC6FCE7223F05D1700D72F6D /* Broadcast.swift in Sources */,
+				DC7F097424ACE27800CE8AFC /* WalletCardCollectionViewCell.swift in Sources */,
 				DCEC0CBC240907D0002F4B6F /* Date+Formatter.swift in Sources */,
 				DCF67FEC24100C00003061A7 /* PeopleModel.swift in Sources */,
 				DCF67FE5240FFFF9003061A7 /* PeopleCellViewModel.swift in Sources */,
@@ -2591,16 +2693,19 @@
 				DCD3985F232E106E00C812EB /* BaseViewController.swift in Sources */,
 				DC6ED58D2326A5E600770B31 /* APNSHandler.swift in Sources */,
 				DC8EAB8723E7232F00E00A00 /* SearchViewController.swift in Sources */,
+				DC7F097A24ACE51600CE8AFC /* WalletCardCellViewModel.swift in Sources */,
 				DC6ED5802326A46300770B31 /* SimpleStore.swift in Sources */,
 				DCC49AD323E865D700119BAA /* ProfileView.swift in Sources */,
 				DC05FDBC23F1B0500093B47B /* MoreViewModel.swift in Sources */,
 				DC13409924573F0C00CC9856 /* ToggleTextCellModel.swift in Sources */,
 				DC6ED56823269B8400770B31 /* R.generated.swift in Sources */,
+				DC7F097824ACE31500CE8AFC /* WalletViewModel.swift in Sources */,
 				DC115F3E241A9BA5006BE78C /* SignInCellViewModel.swift in Sources */,
 				DCD3987F232E238800C812EB /* UIView+Appearance.swift in Sources */,
 				DCE6D526249BCB2900C273C2 /* SignUpWalletViewModel.swift in Sources */,
 				DC6FCE7123F05D1700D72F6D /* Auth.swift in Sources */,
 				DC8EAB8523E7232800E00A00 /* NotificationViewController.swift in Sources */,
+				DC60AC8D24A905E50014B77E /* BaseRootViewController.swift in Sources */,
 				DC6A78F723CA202C001D1009 /* CollectionMultiSectionsProviderModel.swift in Sources */,
 				DCC49AD723E8795600119BAA /* TabBarIndicator.swift in Sources */,
 				DC6ED56C2326A19B00770B31 /* Constants.swift in Sources */,
@@ -2680,6 +2785,15 @@
 			name = Auth.strings;
 			sourceTree = "<group>";
 		};
+		DC60AC8824A742D70014B77E /* GoogleOTP.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC60AC8724A742D70014B77E /* en */,
+				DC60AC8924A742DA0014B77E /* km-KH */,
+			);
+			name = GoogleOTP.strings;
+			sourceTree = "<group>";
+		};
 		DC6ED52423267EED00770B31 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2730,6 +2844,15 @@
 				DC7558D22459DFDB00AD40FA /* km-KH */,
 			);
 			name = Home.strings;
+			sourceTree = "<group>";
+		};
+		DCC883DE24A3A547002FE917 /* Wallet.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DCC883DD24A3A547002FE917 /* en */,
+				DCC883DF24A3A54B002FE917 /* km-KH */,
+			);
+			name = Wallet.strings;
 			sourceTree = "<group>";
 		};
 		DCEE3F7C2439DB57000A75C5 /* Post.strings */ = {
@@ -2878,6 +3001,7 @@
 			baseConfigurationReference = DC6ED55B2326825A00770B31 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.dev;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SereyIO/SereyIO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3FMB4958C;
@@ -2893,6 +3017,8 @@
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-DDEVELOPMENT";
 				PRODUCT_BUNDLE_IDENTIFIER = "${app_bundle}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SereyIO/SereyIO-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -2903,6 +3029,7 @@
 			baseConfigurationReference = DC6ED55B2326825A00770B31 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon.dev;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SereyIO/SereyIO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3FMB4958C;
@@ -2918,6 +3045,7 @@
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-DDEVELOPMENT";
 				PRODUCT_BUNDLE_IDENTIFIER = "${app_bundle}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SereyIO/SereyIO-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3077,6 +3205,7 @@
 			baseConfigurationReference = DC6ED55C2326826500770B31 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SereyIO/SereyIO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3FMB4958C;
@@ -3091,6 +3220,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "${app_bundle}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SereyIO/SereyIO-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3201,6 +3332,7 @@
 			baseConfigurationReference = DC6ED55C2326826500770B31 /* Release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SereyIO/SereyIO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3FMB4958C;
@@ -3215,6 +3347,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "${app_bundle}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SereyIO/SereyIO-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

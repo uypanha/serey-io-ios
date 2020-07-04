@@ -11,6 +11,6 @@ PostBackground  : #FFFFFF
 Border          : #DBDBDB
 
 NavigationBg    : #FFFFFF
-NavigationTint  : #0c0c0c
+NavigationTint  : #414141
 
 TabBarBg        : #FFFFFF

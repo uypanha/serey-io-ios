@@ -203,9 +203,9 @@ fileprivate extension MoreViewController {
                         self.show(notificationSettingsViewController, sender: nil)
                     }
                 case .walletViewController:
-                    let walletViewConroller = SereyWallet().walletViewController
-                    walletViewConroller.hidesBottomBarWhenPushed = true
-                    self.show(walletViewConroller, sender: nil)
+                    let walletViewConroller = SereyWallet.newInstance().rootViewController
+                    walletViewConroller.modalPresentationStyle = .fullScreen
+                    self.present(walletViewConroller, animated: true, completion: nil)
                 }
             }).disposed(by: self.disposeBag)
     }

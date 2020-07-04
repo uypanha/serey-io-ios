@@ -20,6 +20,7 @@ class ChooseSecurityMethodViewModel: BaseCellViewModel, CollectionSingleSecition
     
     enum ViewToPresent {
         case activeBiometryController(ActiveBiometryViewModel)
+        case activeGoogleOTPController(ActivateGoogleOTPViewModel)
     }
     
     // input:
@@ -70,7 +71,8 @@ fileprivate extension ChooseSecurityMethodViewModel {
                 let viewModel = ActiveBiometryViewModel(item.method == .faceID ? .faceID : .touchID)
                 self.shouldPresent(.activeBiometryController(viewModel))
             case .googleOTP:
-                break
+                let viewModel = ActivateGoogleOTPViewModel()
+                self.shouldPresent(.activeGoogleOTPController(viewModel))
             }
         }
     }

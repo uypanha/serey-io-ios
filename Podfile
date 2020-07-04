@@ -32,6 +32,7 @@ def frameworks_pods
 	# MARK: - Tools + Builders
   pod 'R.swift'
   pod 'SwiftGen'
+  pod 'SwiftOTP'
   
   # MARK: - Coder Tools
   pod 'AnyCodable-FlightSchool', '~> 0.2.3'

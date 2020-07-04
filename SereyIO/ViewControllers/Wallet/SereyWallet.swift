@@ -10,24 +10,18 @@ import UIKit
 
 class SereyWallet {
     
-    var walletViewController: UIViewController
+    var rootViewController: WalletRootViewController
+    
+    static var shared: SereyWallet? = {
+        return SereyWallet()
+    }()
     
     init() {
-        self.walletViewController = UIViewController()
-        prepareViewController()
-    }
-}
-
-// MARK: - Preparations & Tools
-extension SereyWallet {
-    
-    private func prepareViewController() {
-        self.walletViewController = signUpWalletController()
+        self.rootViewController = WalletRootViewController()
     }
     
-    private func signUpWalletController() -> UIViewController {
-        let viewcontroller = R.storyboard.auth.signUpWalletViewController()!
-        viewcontroller.viewModel = SignUpWalletViewModel()
-        return viewcontroller
+    static func newInstance() -> SereyWallet {
+        self.shared = SereyWallet()
+        return self.shared!
     }
 }

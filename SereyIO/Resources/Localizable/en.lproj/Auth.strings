@@ -16,3 +16,7 @@
 "orSignUp"                              = "or Sign up";
 "go"                                    = "Go";
 "donHaveAccountQuestion"                = "Don’t have an account?\n\nSign up now and get free Serey coins!";
+
+// Google OTP
+"verificationCode"                      = "Verification Code";
+"verifyAndActivate"                     = "Verify & Activate";

@@ -17,3 +17,7 @@
 "orSignUp"                              = "ឬចុះ​ឈ្មោះ";
 "go"                                    = "ចូល";
 "donHaveAccountQuestion"                = "មិនមានគណនី?\n\nចុះ​ឈ្មោះឥឡូវនេះ និងទទួលបានកាក់សេរីឥតគិតថ្លៃ!";
+
+// Google OTP
+"verificationCode"                      = "Verification Code";
+"verifyAndActivate"                     = "Verify & Activate";

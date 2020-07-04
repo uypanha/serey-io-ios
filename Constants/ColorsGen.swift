@@ -34,9 +34,9 @@ internal struct ColorName {
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
   /// Alpha: 100% <br/> (0xffffffff)
   internal static let navigationBg = ColorName(rgbaValue: 0xffffffff)
-  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#0c0c0c"></span>
-  /// Alpha: 100% <br/> (0x0c0c0cff)
-  internal static let navigationTint = ColorName(rgbaValue: 0x0c0c0cff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#414141"></span>
+  /// Alpha: 100% <br/> (0x414141ff)
+  internal static let navigationTint = ColorName(rgbaValue: 0x414141ff)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#4ecd77"></span>
   /// Alpha: 100% <br/> (0x4ecd77ff)
   internal static let positive = ColorName(rgbaValue: 0x4ecd77ff)
