@@ -35,7 +35,7 @@ def frameworks_pods
   pod 'SwiftOTP'
   
   # MARK: - Coder Tools
-  pod 'AnyCodable-FlightSchool', '~> 0.2.3'
+#  pod 'AnyCodable-FlightSchool', '~> 0.2.3'
 
 	# MARK: - Logger
   pod 'SwiftyBeaver'

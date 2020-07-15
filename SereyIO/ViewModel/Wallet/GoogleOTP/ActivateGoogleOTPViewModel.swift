@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import RxBinding
 import SwiftOTP
+import Steem
 
 class ActivateGoogleOTPViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
     
@@ -38,7 +39,7 @@ class ActivateGoogleOTPViewModel: BaseViewModel, ShouldReactToAction, ShouldPres
         self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
         
-        self.totpKey = .init(value: "HXDMVJECJJWSRB3HWIZR4IFUGFTMXBOZ")
+        self.totpKey = .init(value: "P5Kac8enBjVAnRGYMY1LK8xJu9AhZ6u3GWua57gytSebG4SQMgvb")
         self.qrImage = .init(value: nil)
         
         self.verificationCodeTextFieldViewModel = .textFieldWith(title: R.string.auth.verificationCode.localized(), errorMessage: nil, validation: .min(6))
@@ -70,7 +71,10 @@ extension ActivateGoogleOTPViewModel {
     }
     
     func prepareTotpUrl(from key: String) -> String {
-        return "otpauth://totp/SereyWallet:iOS?secret=\(key)&issuer=SereyWallet"
+        let privateKeyString = key
+        _ = privateKeyString.dropFirst()
+        let privateKey = PrivateKey(privateKeyString)
+        return "otpauth://totp/SereyWallet:iOS?secret=\(privateKey?.createPublic().address ?? key)&issuer=SereyWallet"
     }
     
     func validate() -> Bool {

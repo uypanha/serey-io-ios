@@ -10,11 +10,14 @@ import Foundation
 import RxCocoa
 import RxSwift
 import RxBinding
+import Steem
 
 class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel {
     
     let cells: BehaviorRelay<[CellViewModel]>
     let wallets: BehaviorRelay<[WalletType]>
+    
+    let ownerKey: String = "P5Kac8enBjVAnRGYMY1LK8xJu9AhZ6u3GWua57gytSebG4SQMgvb"
     
     override init() {
         self.cells = .init(value: [])
@@ -22,6 +25,7 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel 
         super.init()
         
         setUpRxObservers()
+        _ = generateKeys("panhauy", key: ownerKey)
     }
 }
 
@@ -53,6 +57,19 @@ extension WalletViewModel {
     
     func prepareWalletCells(_ types: [WalletType]) -> [CellViewModel] {
         return types.map { WalletCardCellViewModel($0) }
+    }
+    
+    private func generateKeys(_ username: String, key: String) -> [String] {
+        if let ownerKey = PrivateKey(key) {
+            return (0...3).map { _ in ownerKey.createPublic(prefix: .custom("SRY")).address }
+        } else {
+            return ["owner", "active", "posting", "memo"].map { role in
+                let key = PrivateKey(seed: "\(username)\(role)\(key)")?.wif ?? ""
+//                    .createPublic(prefix: .custom("SRY")).address ?? ""
+                print("\(role) Key =======> \(key)")
+                return key
+            }
+        }
     }
 }
 
