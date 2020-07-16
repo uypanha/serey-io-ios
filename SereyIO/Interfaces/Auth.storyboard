@@ -73,10 +73,10 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="Hwk-3r-RXS">
-                                        <rect key="frame" x="105" y="354" width="204" height="101"/>
+                                        <rect key="frame" x="32" y="354" width="350" height="154.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9l8-G2-a3b">
-                                                <rect key="frame" x="0.0" y="0.0" width="204" height="42"/>
+                                                <rect key="frame" x="73" y="0.0" width="204" height="42"/>
                                                 <string key="text">Don’t have an account?
 
 Sign up now and get free Serey coins!</string>
@@ -85,10 +85,17 @@ Sign up now and get free Serey coins!</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="njA-BV-b1G">
-                                                <rect key="frame" x="58" y="60" width="88" height="41"/>
+                                                <rect key="frame" x="131" y="60" width="88" height="41"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <state key="normal" title="Sign-Up"/>
                                             </button>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Term Service" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KoU-6I-OKu">
+                                                <rect key="frame" x="122.5" y="119" width="105" height="35.5"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -97,7 +104,9 @@ Sign up now and get free Serey coins!</string>
                                     <constraint firstAttribute="trailing" secondItem="Ycc-ru-dbW" secondAttribute="trailing" constant="42" id="46p-1q-as6"/>
                                     <constraint firstItem="Ycc-ru-dbW" firstAttribute="centerY" secondItem="a3D-Qs-MdM" secondAttribute="centerY" multiplier="0.6" id="4mg-Wn-qzF"/>
                                     <constraint firstItem="Ycc-ru-dbW" firstAttribute="leading" secondItem="a3D-Qs-MdM" secondAttribute="leading" constant="42" id="BeG-2J-dfW"/>
+                                    <constraint firstItem="Hwk-3r-RXS" firstAttribute="leading" secondItem="a3D-Qs-MdM" secondAttribute="leading" constant="32" id="Ccs-Fq-PzZ"/>
                                     <constraint firstItem="Hwk-3r-RXS" firstAttribute="centerX" secondItem="a3D-Qs-MdM" secondAttribute="centerX" id="TlW-2Q-mcC"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hwk-3r-RXS" secondAttribute="trailing" constant="32" id="pJ7-Zl-x13"/>
                                     <constraint firstItem="Hwk-3r-RXS" firstAttribute="top" secondItem="Ycc-ru-dbW" secondAttribute="bottom" constant="24" id="vYN-dA-bkB"/>
                                 </constraints>
                             </view>
@@ -119,6 +128,7 @@ Sign up now and get free Serey coins!</string>
                         <outlet property="signInButton" destination="LFy-KS-B6l" id="Zet-Mo-5xN"/>
                         <outlet property="signInLabel" destination="1Jr-Td-BoP" id="65L-bt-OK0"/>
                         <outlet property="signUpButton" destination="njA-BV-b1G" id="A5g-0W-KmG"/>
+                        <outlet property="termServiceTextView" destination="KoU-6I-OKu" id="LlJ-Vn-HpO"/>
                         <outlet property="userNameTextField" destination="Odr-XX-uEj" id="Ubx-Tw-OWv"/>
                     </connections>
                 </viewController>

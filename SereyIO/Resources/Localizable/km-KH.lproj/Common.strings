@@ -37,3 +37,8 @@
 // Media
 "takePhoto"                         = "ថតរូប";
 "choosePhoto"                       = "ជ្រើសរូបថត";
+
+// Terms
+"termsAndPrivacyAgreementMessage"   = "By using Serey you accept the\n%@ and %@";
+"termService"                       = "Term Service";
+"policyAndPrivacy"                  = "Policy Privacy";
