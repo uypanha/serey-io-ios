@@ -1,0 +1,11 @@
+/* 
+  GoogleOTP.strings
+  SereyIO
+
+  Created by Panha Uy on 6/27/20.
+  Copyright © 2020 Phanha Uy. All rights reserved.
+*/
+
+"activateGoogleAuthenticationApp"           = "Activate Google Authentication App";
+"activateGoogleAuthenticationAppMessage"    = "Please open your Google Authenticator App in your phone and Scan this QR code or manually add secret code by tapping on Manual Key.";
+"manualKey"                                 = "Manual Key";

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="64" id="KGk-i7-Jjw" customClass="PeopleTableViewCell" customModule="SereyIO" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlB-FT-wKl" customClass="FBShimmeringView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CC9-l6-8Gh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="ckZ-S7-oNs">
+                                <rect key="frame" x="24" y="12" width="284" height="38"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LrL-3K-faB" customClass="ProfileView" customModule="SereyIO" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="38" height="38"/>
+                                        <color key="backgroundColor" red="0.28627450980000002" green="0.4039215686" blue="0.81176470590000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="38" id="9bn-EO-fdY"/>
+                                            <constraint firstAttribute="width" constant="38" id="qLS-pC-MyW"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l4a-tI-VfX">
+                                        <rect key="frame" x="50" y="9.5" width="234" height="19.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19.5" id="ZZz-Iq-mmO"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ckZ-S7-oNs" firstAttribute="leading" secondItem="CC9-l6-8Gh" secondAttribute="leading" constant="24" id="8a0-Nv-QSR"/>
+                            <constraint firstAttribute="bottom" secondItem="ckZ-S7-oNs" secondAttribute="bottom" constant="12" id="FIM-YB-uMW"/>
+                            <constraint firstAttribute="trailing" secondItem="ckZ-S7-oNs" secondAttribute="trailing" constant="12" id="acX-8o-ExM"/>
+                            <constraint firstItem="ckZ-S7-oNs" firstAttribute="top" secondItem="CC9-l6-8Gh" secondAttribute="top" constant="12" id="eMg-le-w0B"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="CC9-l6-8Gh" secondAttribute="trailing" id="4DH-XS-h2d"/>
+                    <constraint firstAttribute="bottom" secondItem="CC9-l6-8Gh" secondAttribute="bottom" id="Fd4-FJ-fwV"/>
+                    <constraint firstItem="CC9-l6-8Gh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="MZc-7u-EvS"/>
+                    <constraint firstAttribute="bottom" secondItem="BlB-FT-wKl" secondAttribute="bottom" id="WeL-qh-Tcs"/>
+                    <constraint firstItem="CC9-l6-8Gh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ZcL-Ce-DsW"/>
+                    <constraint firstItem="BlB-FT-wKl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ai6-Pc-2Od"/>
+                    <constraint firstAttribute="trailing" secondItem="BlB-FT-wKl" secondAttribute="trailing" id="cPp-CO-WTW"/>
+                    <constraint firstItem="BlB-FT-wKl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="cTn-Mr-e4e"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <connections>
+                <outlet property="mainView" destination="CC9-l6-8Gh" id="d0D-9r-Xz0"/>
+                <outlet property="profileNameLabel" destination="l4a-tI-VfX" id="1If-e9-kSl"/>
+                <outlet property="profileView" destination="LrL-3K-faB" id="oi2-qT-Qma"/>
+                <outlet property="vwShimmer" destination="BlB-FT-wKl" id="08Z-GK-HBl"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="122.54464285714285"/>
+        </tableViewCell>
+    </objects>
+</document>

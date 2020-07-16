@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DownvoteDialogViewController" customModule="SereyIO" customModuleProvider="target">
+            <connections>
+                <outlet property="cancelButton" destination="Y7v-kf-iLB" id="JRl-RV-Bpe"/>
+                <outlet property="confirmButton" destination="UMB-Dq-SVj" id="F2v-oi-bzm"/>
+                <outlet property="messageLabel" destination="aox-1v-koo" id="U2H-5W-tC0"/>
+                <outlet property="titleLabel" destination="at7-ql-iC2" id="jGt-Pn-mrm"/>
+                <outlet property="view" destination="iN0-l3-epB" id="IIC-jB-c4D"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="183"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TDE-0v-ti8" customClass="CardView" customModule="SereyIO" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="183"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="iwp-D9-72J">
+                            <rect key="frame" x="24" y="16" width="252" height="151"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Upvote Post" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="at7-ql-iC2">
+                                    <rect key="frame" x="0.0" y="0.0" width="252" height="47.5"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="message here" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aox-1v-koo">
+                                    <rect key="frame" x="0.0" y="71.5" width="252" height="19.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="1ia-Az-bQD">
+                                    <rect key="frame" x="0.0" y="115" width="252" height="36"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UMB-Dq-SVj">
+                                            <rect key="frame" x="0.0" y="0.0" width="118" height="36"/>
+                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="36" id="Dlc-Kc-0lH"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                            <state key="normal" title="Confirm">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y7v-kf-iLB">
+                                            <rect key="frame" x="134" y="0.0" width="118" height="36"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                            <state key="normal" title="Cancel">
+                                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Y7v-kf-iLB" firstAttribute="height" secondItem="UMB-Dq-SVj" secondAttribute="height" id="0ht-wm-h5h"/>
+                                    </constraints>
+                                </stackView>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="iwp-D9-72J" firstAttribute="top" secondItem="TDE-0v-ti8" secondAttribute="top" constant="16" id="AxQ-wT-fQF"/>
+                        <constraint firstAttribute="trailing" secondItem="iwp-D9-72J" secondAttribute="trailing" constant="24" id="Kx7-IU-gcf"/>
+                        <constraint firstAttribute="width" constant="300" id="dxF-6u-Qkj"/>
+                        <constraint firstAttribute="bottom" secondItem="iwp-D9-72J" secondAttribute="bottom" constant="16" id="h5H-aY-G1B"/>
+                        <constraint firstItem="iwp-D9-72J" firstAttribute="leading" secondItem="TDE-0v-ti8" secondAttribute="leading" constant="24" id="rN4-Vw-cwv"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="16"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="showShadow" value="NO"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="TDE-0v-ti8" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="J2A-ZQ-gMJ"/>
+                <constraint firstAttribute="trailing" secondItem="TDE-0v-ti8" secondAttribute="trailing" id="WTq-kD-IUJ"/>
+                <constraint firstAttribute="bottom" secondItem="TDE-0v-ti8" secondAttribute="bottom" id="mRY-Kb-mJy"/>
+                <constraint firstItem="TDE-0v-ti8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xXM-ec-RnS"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="140.57971014492756" y="375.33482142857139"/>
+        </view>
+    </objects>
+</document>

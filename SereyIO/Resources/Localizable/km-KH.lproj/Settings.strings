@@ -1,0 +1,21 @@
+/* 
+  Settings.strings
+  SereyIO
+
+  Created by Phanha Uy on 2/10/20.
+  Copyright © 2020 Phanha Uy. All rights reserved.
+*/
+
+"general"                   = "ទូទៅ";
+"about"                     = "អំពី";
+
+"myWallet"                  = "កាបូុបរបស់ខ្ញុំ";
+"languages"                 = "ភាសា";
+"language"                  = "ភាសា (%@)";
+"notificationSettings"      = "ការកំណត់ការជូនដំណឹង";
+"sereyApps"                 = "Serey Apps";
+"version"                   = "កំណែ";
+
+"signOutQ"                  = "ចាកចេញ?";
+"signOut"                   = "ចាកចេញ?";
+"signOutMessage"            = "តើអ្នកប្រាកដហើយឬ ដែលអ្នកចង់ចាកចេញ?";

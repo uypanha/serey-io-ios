@@ -1,0 +1,44 @@
+/* 
+  Common.strings
+  SereyIO
+
+  Created by Phanha Uy on 9/15/19.
+  Copyright © 2019 Phanha Uy. All rights reserved.
+*/
+
+"error"                             = "Error";
+"errorUknonwServerNotFoundDesc"     = "A server with specified hostname could not be found.";
+"errorUnknownDescription"           = "We track errors automatically, but if the problem persists feel free to contact us. In meantime, try again.";
+"errorFetchingDataTitle"            = "Oops, Fetching data failed";
+"oops"                              = "Oops...!";
+"notAuthenticated"                  = "You are not authenticated.";
+"networkOfflineTitle"               = "Oops, You're Offline";
+"networkOfflineMessage"             = "The Internet connection appears to be offline.";
+
+// MARK: - Normal Text
+"cancel"                            = "Cancel";
+"back"                              = "Back";
+"confirm"                           = "Confirm";
+"yes"                               = "Yes";
+"No"                                = "No";
+"delete"                            = "Delete";
+"skip"                              = "Skip";
+"continue"                          = "Continue";
+"webViewDefaultTitle"               = "Serey.io";
+"tryAgain"                          = "Try again";
+"update"                            = "Update";
+"edit"                              = "Edit";
+"all"                               = "All";
+
+"next"                              = "Next";
+"letBegin"                          = "Let's begin";
+"ploralSuffix"                      = "s";
+
+// Media
+"takePhoto"                         = "Take Photo";
+"choosePhoto"                       = "Choose Photo";
+
+// Terms
+"termsAndPrivacyAgreementMessage"   = "By using Serey you accept the\n%@ and %@";
+"termService"                       = "Term Service";
+"policyAndPrivacy"                  = "Policy Privacy";

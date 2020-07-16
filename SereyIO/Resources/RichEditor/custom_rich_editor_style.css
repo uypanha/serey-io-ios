@@ -1,0 +1,18 @@
+img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+#editor {
+    color: rgba(0,0,0,.87);
+}
+
+#editor[contenteditable] {
+    caret-color: rgba(0, 161, 210, 1);
+}
+
+iframe {
+    width: 100%;
+    height: auto;
+}
