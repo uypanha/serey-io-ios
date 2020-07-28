@@ -17,11 +17,7 @@ class WalletRootViewController: BaseRootViewController {
     }
     
     init() {
-//        let signUpWalletViewController = R.storyboard.auth.signUpWalletViewController()
-//        signUpWalletViewController?.viewModel = SignUpWalletViewModel()
-        let mainWalletViewController = R.storyboard.wallet.walletViewController()
-        mainWalletViewController?.viewModel = WalletViewModel()
-        super.init(CloseableNavigationController(rootViewController: mainWalletViewController!))
+        super.init(CloseableNavigationController(rootViewController: WalletAuthValidateController()))
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,9 +28,85 @@ class WalletRootViewController: BaseRootViewController {
 // MARK: - Switching Screens
 extension WalletRootViewController {
     
+    func switchToSignInScreen(fadeAnimation: Bool = true) {
+        let mainWalletViewController = R.storyboard.auth.signInViewController()!
+        mainWalletViewController.viewModel = SignInViewModel()
+        let closableViewController = CloseableNavigationController(rootViewController: mainWalletViewController)
+        if fadeAnimation {
+            self.animateFadeTransition(to: closableViewController) { [weak self] in
+                self?.handleDeeplink()
+            }
+        } else {
+            self.animateSlideToTopTransition(to: closableViewController) { [weak self] in
+                self?.handleDeeplink()
+            }
+        }
+    }
+    
     func switchToMainScreen(fadeAnimation: Bool = true) {
         let mainWalletViewController = R.storyboard.wallet.walletViewController()!
+        mainWalletViewController.viewModel = WalletViewModel()
         let closableViewController = CloseableNavigationController(rootViewController: mainWalletViewController)
+        if fadeAnimation {
+            self.animateFadeTransition(to: closableViewController) { [weak self] in
+                self?.handleDeeplink()
+            }
+        } else {
+            self.animateSlideToTopTransition(to: closableViewController) { [weak self] in
+                self?.handleDeeplink()
+            }
+        }
+    }
+    
+    func switchToSignUpWallet(fadeAnimation: Bool = true) {
+        let signUpWalletViewController = R.storyboard.auth.signUpWalletViewController()!
+        signUpWalletViewController.viewModel = SignUpWalletViewModel()
+        let closableViewController = CloseableNavigationController(rootViewController: signUpWalletViewController)
+        if fadeAnimation {
+            self.animateFadeTransition(to: closableViewController) { [weak self] in
+                self?.handleDeeplink()
+            }
+        } else {
+            self.animateSlideToTopTransition(to: closableViewController) { [weak self] in
+                self?.handleDeeplink()
+            }
+        }
+    }
+    
+    func switchToSetUpCredential(fadeAnimation: Bool = true) {
+        let askToCreateCredentialViewController = R.storyboard.auth.askToCreateCredentialViewController()!
+        askToCreateCredentialViewController.viewModel = AskToCreateCredentialViewModel()
+        let closableViewController = CloseableNavigationController(rootViewController: askToCreateCredentialViewController)
+        if fadeAnimation {
+            self.animateFadeTransition(to: closableViewController) { [weak self] in
+                self?.handleDeeplink()
+            }
+        } else {
+            self.animateSlideToTopTransition(to: closableViewController) { [weak self] in
+                self?.handleDeeplink()
+            }
+        }
+    }
+    
+    func switchToCreateCredential(fadeAnimation: Bool = true) {
+        let createCredentialViewController = R.storyboard.auth.createCredentialViewController()!
+        createCredentialViewController.viewModel = CreateCredentialViewModel()
+        let closableViewController = CloseableNavigationController(rootViewController: createCredentialViewController)
+        if fadeAnimation {
+            self.animateFadeTransition(to: closableViewController) { [weak self] in
+                self?.handleDeeplink()
+            }
+        } else {
+            self.animateSlideToTopTransition(to: closableViewController) { [weak self] in
+                self?.handleDeeplink()
+            }
+        }
+    }
+    
+    func switchToChooseSecurityMethod(fadeAnimation: Bool = true) {
+        let chooseSecurityMethodViewController = R.storyboard.auth.chooseSecurityMethodViewController()!
+        chooseSecurityMethodViewController.viewModel = ChooseSecurityMethodViewModel()
+        let closableViewController = CloseableNavigationController(rootViewController: chooseSecurityMethodViewController)
         if fadeAnimation {
             self.animateFadeTransition(to: closableViewController) { [weak self] in
                 self?.handleDeeplink()

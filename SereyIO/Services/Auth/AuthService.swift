@@ -16,4 +16,9 @@ class AuthService: AppService<AuthApi> {
         return self.provider.rx.requestObject(.login(userName: userName, password: privateKey), type: DataResponseModel<TokenModel>.self)
             .asObservable()
     }
+    
+    func loginOwner(_ username: String, _ ownerKey: String) -> Observable<DataResponseModel<TokenModel>> {
+        return self.provider.rx.requestObject(.loginOwner(username: username, ownerKey: ownerKey), type: DataResponseModel<TokenModel>.self)
+            .asObservable()
+    }
 }

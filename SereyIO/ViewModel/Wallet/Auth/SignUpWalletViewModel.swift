@@ -10,16 +10,17 @@ import Foundation
 import RxCocoa
 import RxSwift
 import RxBinding
+import Steem
 
 class SignUpWalletViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
     
     enum Action {
         case signUpPressed
-        case backToSignInPressed
     }
     
     enum ViewToPresent {
-        case createCredentialController(CreateCredentialViewModel)
+        case createCredentialController
+        case loading(Bool)
         case dismiss
     }
     
@@ -33,6 +34,8 @@ class SignUpWalletViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
     let ownerKeyTextFieldViewModel: TextFieldViewModel
     let shouldEnbleSignUp: BehaviorSubject<Bool>
     
+    let authService: AuthService
+    
     override init() {
         self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
@@ -40,14 +43,41 @@ class SignUpWalletViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
         self.userNameTextFieldViewModel = .textFieldWith(title: "Username", errorMessage: "", validation: .notEmpty)
         self.ownerKeyTextFieldViewModel = .textFieldWith(title: "Owner Key", errorMessage: "", validation: .notEmpty)
         self.shouldEnbleSignUp = .init(value: false)
+        
+        self.authService = AuthService()
         super.init()
         
         setUpRxObservers()
+        self.userNameTextFieldViewModel.value = AuthData.shared.username
+    }
+}
+
+// MARK: - Networks
+extension SignUpWalletViewModel {
+    
+    func verifyOwnerKey(_ username: String, _ ownerKey: String) {
+        self.shouldPresent(.loading(true))
+        self.authService.loginOwner(username, ownerKey)
+            .subscribe(onNext: { [weak self] data in
+                self?.shouldPresent(.loading(false))
+                self?.handleOwnerKeyVerified(username, ownerKey)
+            }, onError: { [weak self] error in
+                self?.shouldPresent(.loading(false))
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
     }
 }
 
 // MARK: - Preparations & Tools
 extension SignUpWalletViewModel {
+    
+    private func handleOwnerKeyVerified(_ username: String, _ ownerKey: String) {
+        if let activeKey = SereyKeyHelper.generateKey(from: username, ownerKey: ownerKey, type: .active) {
+//            WalletStore.shared.savePassword(username: username, password: activeKey.wif)
+            self.shouldPresent(.createCredentialController)
+        }
+    }
     
     func validateForm() -> Bool {
         return self.userNameTextFieldViewModel.validate()
@@ -64,12 +94,11 @@ extension SignUpWalletViewModel {
 fileprivate extension SignUpWalletViewModel {
     
     func handleSignUpPressed() {
-        let createCredentialViewModel = CreateCredentialViewModel()
-        self.shouldPresent(.createCredentialController(createCredentialViewModel))
-    }
-    
-    func handleBackToSignInPressed() {
-        self.shouldPresent(.dismiss)
+        if self.validateForm() {
+            let username = self.userNameTextFieldViewModel.value ?? ""
+            let ownerKey = self.ownerKeyTextFieldViewModel.value ?? ""
+            self.verifyOwnerKey(username, ownerKey)
+        }
     }
 }
 
@@ -99,8 +128,6 @@ extension SignUpWalletViewModel {
                 switch action {
                 case .signUpPressed:
                     self?.handleSignUpPressed()
-                case .backToSignInPressed:
-                    self?.handleBackToSignInPressed()
                 }
             }) ~ self.disposeBag
     }

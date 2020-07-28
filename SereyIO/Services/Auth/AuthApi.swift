@@ -12,6 +12,8 @@ import Moya
 enum AuthApi {
     
     case login(userName: String, password: String)
+    
+    case loginOwner(username: String, ownerKey: String)
 }
 
 extension AuthApi: AuthorizedApiTargetType {
@@ -24,6 +26,11 @@ extension AuthApi: AuthorizedApiTargetType {
                 "password"  : password,
                 "rememberMe": true
             ]
+        case .loginOwner(let userName, let password):
+            return [
+                "username"  : userName,
+                "password"  : password
+            ]
         }
     }
     
@@ -31,6 +38,8 @@ extension AuthApi: AuthorizedApiTargetType {
         switch self {
         case .login:
             return "/api/v1/authentications/loginKyc"
+        case .loginOwner:
+            return "/api/v1/authentications/login"
         }
     }
     
