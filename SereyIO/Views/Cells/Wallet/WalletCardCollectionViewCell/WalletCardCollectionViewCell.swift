@@ -17,6 +17,8 @@ class WalletCardCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
     
+    @IBOutlet weak var cardHeightConstraint: NSLayoutConstraint!
+    
     var cellModel: WalletCardCellViewModel? {
         didSet {
             guard let cellModel = self.cellModel else { return }
@@ -32,5 +34,4 @@ class WalletCardCollectionViewCell: BaseCollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
 }

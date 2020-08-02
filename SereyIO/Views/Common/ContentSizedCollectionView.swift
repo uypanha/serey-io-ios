@@ -20,4 +20,12 @@ final class ContentSizedCollectionView: UICollectionView {
         layoutIfNeeded()
         return CGSize(width: UIView.noIntrinsicMetric, height: contentSize.height)
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if !__CGSizeEqualToSize(bounds.size, self.intrinsicContentSize) {
+            self.invalidateIntrinsicContentSize()
+        }
+    }
 }

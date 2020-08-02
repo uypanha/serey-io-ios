@@ -36,4 +36,12 @@ class WalletStore {
     func hasPassword(for username: String) -> Bool {
         return password(from: username) != nil
     }
+    
+    func removeAllPassword() {
+        if let keyItems = try? KeychainPasswordItem.passwordItems(forService: KeychainConfiguration.touchMeInServiceName, accessGroup: KeychainConfiguration.accessGroup) {
+            keyItems.forEach { passwordItem in
+                try? passwordItem.deleteItem()
+            }
+        }
+    }
 }

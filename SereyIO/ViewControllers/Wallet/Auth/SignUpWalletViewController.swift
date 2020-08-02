@@ -135,6 +135,8 @@ extension SignUpWalletViewController {
                 switch viewToPresent {
                 case .createCredentialController:
                     SereyWallet.shared?.rootViewController.switchToSetUpCredential()
+                case .chooseSecurityMethodController:
+                    SereyWallet.shared?.rootViewController.switchToChooseSecurityMethod()
                 case .dismiss:
                     self.navigationController?.popViewController(animated: true)
                 case .loading(let loading):

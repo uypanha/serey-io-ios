@@ -47,6 +47,7 @@ enum TextFieldValidation {
     case strongPassword
     case phone
     case none
+    case ownerKey
     
     func validate(textToValidate text: String) -> Bool {
         switch self {
@@ -62,6 +63,8 @@ enum TextFieldValidation {
             return text.count >= min
         case .strongPassword:
             return Constants.PatternValidation.strongPassword.validate(text)
+        case .ownerKey:
+            return text.count == 52 && text.starts(with: "P5K")
         case .none:
             return true
         }

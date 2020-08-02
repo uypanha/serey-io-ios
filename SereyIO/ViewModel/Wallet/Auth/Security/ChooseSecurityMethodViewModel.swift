@@ -16,11 +16,13 @@ class ChooseSecurityMethodViewModel: BaseCellViewModel, CollectionSingleSecition
     
     enum Action {
         case itemSelected(IndexPath)
+        case setUpLaterPressed
     }
     
     enum ViewToPresent {
         case activeBiometryController(ActiveBiometryViewModel)
         case activeGoogleOTPController(ActivateGoogleOTPViewModel)
+        case mainWalletController
     }
     
     // input:
@@ -99,6 +101,8 @@ extension ChooseSecurityMethodViewModel {
                 switch action {
                 case .itemSelected(let indexPath):
                     self?.handleItemSelected(indexPath)
+                case .setUpLaterPressed:
+                    self?.shouldPresent(.mainWalletController)
                 }
             }) ~ self.disposeBag
     }

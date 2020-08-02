@@ -17,7 +17,7 @@ class ChooseSecurityMethodViewController: BaseViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var tableView: ContentSizedTableView!
-    @IBOutlet weak var userLaterButton: UIButton!
+    @IBOutlet weak var setUpLaterButton: UIButton!
     
     @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
@@ -44,7 +44,7 @@ extension ChooseSecurityMethodViewController {
     func setUpViews() {
         prepareTableView()
         
-        self.userLaterButton.primaryStyle()
+        self.setUpLaterButton.primaryStyle()
     }
     
     func prepareTableView() {
@@ -85,6 +85,11 @@ extension ChooseSecurityMethodViewController {
             .map { ChooseSecurityMethodViewModel.Action.itemSelected($0) }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
+        
+        self.setUpLaterButton.rx.tap.asObservable()
+            .map { ChooseSecurityMethodViewModel.Action.setUpLaterPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpShouldPresentObservers() {
@@ -101,6 +106,8 @@ extension ChooseSecurityMethodViewController {
                         activeGoogleOTPController.viewModel = activeGoogleOTPViewModel
                         self?.show(activeGoogleOTPController, sender: nil)
                     }
+                case .mainWalletController:
+                    SereyWallet.shared?.rootViewController.switchToMainScreen()
                 }
             }) ~ self.disposeBag
     }

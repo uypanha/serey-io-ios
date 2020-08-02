@@ -25,6 +25,9 @@ extension Reactive where Base: MoyaProviderType {
                 switch result {
                 case let .success(response):
                     let decoder = JSONDecoder()
+                    let str = String(decoding: response.data, as: UTF8.self)
+                    print("Data Response ==> \(str)")
+                    
                     if response.statusCode >= 200 && response.statusCode <= 202 {
                         if let dataResponse = try? decoder.decode(T.self, from: response.data) {
                             single(.success(dataResponse))

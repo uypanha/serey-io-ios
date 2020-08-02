@@ -85,7 +85,7 @@ extension UIButton: StyleProtocol {
         if self.backgroundColor != nil {
             self.setRadius(all: 8)
             self.setBackgroundColor(ColorName.disabled.color, for: .disabled)
-            self.setBackgroundColor(UIColor.lightGray.withAlphaComponent(0.5), for: .highlighted)
+            self.setBackgroundColor(self.backgroundColor!.withAlphaComponent(0.5), for: .highlighted)
         }
         
         if let image = self.image(for: .normal) {

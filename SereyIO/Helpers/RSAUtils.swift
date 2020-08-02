@@ -15,7 +15,7 @@ open class RSAUtils: NSObject {
     struct Config {
         /// Determines whether to add key hash to the keychain path when searching for a key
         /// or when adding a key to keychain
-        static var useKeyHashes = true
+        static var useKeyHashes = false
     }
     
     // Base64 encode a block of data
@@ -25,7 +25,7 @@ open class RSAUtils: NSObject {
     
     // Base64 decode a base64-ed string
     static fileprivate func base64Decode(_ strBase64: String) -> Data {
-        let data = Data(base64Encoded: strBase64, options: [])
+        let data = Data(base64Encoded: strBase64, options: .ignoreUnknownCharacters)
         return data!
     }
 
@@ -339,10 +339,11 @@ open class RSAUtils: NSObject {
     // Encrypt data with a RSA public key
     // pubkeyBase64: RSA public key in base64 (data between "-----BEGIN PUBLIC KEY-----" and "-----END PUBLIC KEY-----")
     static public func encryptWithRSAPublicKey(_ data: Data, pubkeyBase64: String, keychainTag: String) -> Data? {
-        let myKeychainTag = keychainTag + (Config.useKeyHashes ? "-" + String(pubkeyBase64.hashValue) : "")
+        let keyString = base64Key(in: pubkeyBase64)
+        let myKeychainTag = keychainTag + (Config.useKeyHashes ? "-" + String(keyString.hashValue) : "")
         var keyRef = getRSAKeyFromKeychain(myKeychainTag)
         if ( keyRef == nil ) {
-            keyRef = addRSAPublicKey(pubkeyBase64, tagName: myKeychainTag)
+            keyRef = addRSAPublicKey(keyString, tagName: myKeychainTag)
         }
         if ( keyRef == nil ) {
             return nil
@@ -354,10 +355,11 @@ open class RSAUtils: NSObject {
     // Decrypt an encrypted data with a RSA private key
     // privkeyBase64: RSA private key in base64 (data between "-----BEGIN RSA PRIVATE KEY-----" and "-----END RSA PRIVATE KEY-----")
     static public func decryptWithRSAPrivateKey(_ encryptedData: Data, privkeyBase64: String, keychainTag: String) -> Data? {
-        let myKeychainTag = keychainTag + (Config.useKeyHashes ? "-" + String(privkeyBase64.hashValue) : "")
+        let keyString = base64Key(in: privkeyBase64)
+        let myKeychainTag = keychainTag + (Config.useKeyHashes ? "-" + String(keyString.hashValue) : "")
         var keyRef = getRSAKeyFromKeychain(myKeychainTag)
         if ( keyRef == nil ) {
-            keyRef = addRSAPrivateKey(privkeyBase64, tagName: myKeychainTag)
+            keyRef = addRSAPrivateKey(keyString, tagName: myKeychainTag)
         }
         if ( keyRef == nil ) {
             return nil
@@ -379,5 +381,43 @@ open class RSAUtils: NSObject {
         }
 
         return decryptWithRSAKey(encryptedData, rsaKeyRef: keyRef!, padding: SecPadding())
+    }
+    
+    // MARK: - Tools
+    static func base64Key(in key: String) -> String {
+        let keyString = key.replacingOccurrences(of: "-----BEGIN PUBLIC KEY-----\n", with: "").replacingOccurrences(of: "\n-----END PUBLIC KEY-----", with: "").replacingOccurrences(of: "-----BEGIN PUBLIC KEY-----", with: "").replacingOccurrences(of: "-----END PUBLIC KEY-----", with: "")
+        return keyString
+    }
+    
+    static func encrypt(string: String, publicKey: String?) -> String? {
+        guard let publicKey = publicKey else { return nil }
+        
+        let keyString = publicKey.replacingOccurrences(of: "-----BEGIN PUBLIC KEY-----\n", with: "").replacingOccurrences(of: "\n-----END PUBLIC KEY-----", with: "")
+        guard let data = Data(base64Encoded: keyString, options: .ignoreUnknownCharacters) else { return nil }
+        
+        var attributes: CFDictionary {
+            return [kSecAttrKeyType         : kSecAttrKeyTypeRSA,
+                    kSecAttrKeyClass        : kSecAttrKeyClassPublic,
+                    kSecAttrKeySizeInBits   : 2048,
+                    kSecReturnPersistentRef : kCFBooleanTrue] as CFDictionary
+        }
+        
+        var error: Unmanaged<CFError>? = nil
+        guard let secKey = SecKeyCreateWithData(data as CFData, attributes, &error) else {
+            print(error.debugDescription)
+            return nil
+        }
+        return encrypt(string: string, publicKey: secKey)
+    }
+    
+    static func encrypt(string: String, publicKey: SecKey) -> String? {
+        let buffer = [UInt8](string.utf8)
+        
+        var keySize   = SecKeyGetBlockSize(publicKey)
+        var keyBuffer = [UInt8](repeating: 0, count: keySize)
+        
+        // Encrypto  should less than key length
+        guard SecKeyEncrypt(publicKey, SecPadding.PKCS1, buffer, buffer.count, &keyBuffer, &keySize) == errSecSuccess else { return nil }
+        return Data(bytes: keyBuffer, count: keySize).base64EncodedString()
     }
 }

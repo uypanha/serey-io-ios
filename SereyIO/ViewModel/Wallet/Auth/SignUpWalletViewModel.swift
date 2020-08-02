@@ -20,6 +20,7 @@ class SignUpWalletViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
     
     enum ViewToPresent {
         case createCredentialController
+        case chooseSecurityMethodController
         case loading(Bool)
         case dismiss
     }
@@ -41,7 +42,7 @@ class SignUpWalletViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
         self.shouldPresentSubject = .init()
         
         self.userNameTextFieldViewModel = .textFieldWith(title: "Username", errorMessage: "", validation: .notEmpty)
-        self.ownerKeyTextFieldViewModel = .textFieldWith(title: "Owner Key", errorMessage: "", validation: .notEmpty)
+        self.ownerKeyTextFieldViewModel = .textFieldWith(title: "Owner Key", errorMessage: "Please enter a valid owner key", validation: .ownerKey)
         self.shouldEnbleSignUp = .init(value: false)
         
         self.authService = AuthService()
@@ -57,7 +58,8 @@ extension SignUpWalletViewModel {
     
     func verifyOwnerKey(_ username: String, _ ownerKey: String) {
         self.shouldPresent(.loading(true))
-        self.authService.loginOwner(username, ownerKey)
+        let postingKey = SereyKeyHelper.generateKey(from: username, ownerKey: ownerKey, type: .active)?.wif ?? ""
+        self.authService.loginOwner(username, postingKey)
             .subscribe(onNext: { [weak self] data in
                 self?.shouldPresent(.loading(false))
                 self?.handleOwnerKeyVerified(username, ownerKey)
@@ -74,8 +76,8 @@ extension SignUpWalletViewModel {
     
     private func handleOwnerKeyVerified(_ username: String, _ ownerKey: String) {
         if let activeKey = SereyKeyHelper.generateKey(from: username, ownerKey: ownerKey, type: .active) {
-//            WalletStore.shared.savePassword(username: username, password: activeKey.wif)
-            self.shouldPresent(.createCredentialController)
+            WalletStore.shared.savePassword(username: username, password: activeKey.wif)
+            self.shouldPresent(.chooseSecurityMethodController)
         }
     }
     

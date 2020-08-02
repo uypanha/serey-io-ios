@@ -12,20 +12,67 @@ import RxSwift
 import RxBinding
 import Steem
 
-class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel {
+class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel, ShouldReactToAction, ShouldPresent {
     
+    enum Action {
+        case transactionPressed
+    }
+    
+    enum ViewToPresent {
+        case transactionController
+    }
+    
+    // input:
+    let didActionSubject: PublishSubject<Action>
+    
+    // output:
+    let shouldPresentSubject: PublishSubject<ViewToPresent>
+    
+    let walletCells: BehaviorRelay<[CellViewModel]>
     let cells: BehaviorRelay<[CellViewModel]>
-    let wallets: BehaviorRelay<[WalletType]>
     
-    let ownerKey: String = "P5Kac8enBjVAnRGYMY1LK8xJu9AhZ6u3GWua57gytSebG4SQMgvb"
+    let wallets: BehaviorRelay<[WalletType]>
+    let menu: BehaviorRelay<[WalletMenu]>
+    
+    let transferService: TransferService
     
     override init() {
+        self.didActionSubject = .init()
+        self.shouldPresentSubject = .init()
+        
         self.cells = .init(value: [])
+        self.walletCells = .init(value: [])
         self.wallets = .init(value: WalletType.allCases)
+        self.menu = .init(value: WalletMenu.menuItems)
+        self.transferService = .init()
         super.init()
         
         setUpRxObservers()
-        _ = generateKeys("panhauy", key: ownerKey)
+    }
+}
+
+// MARK: - Networks
+extension WalletViewModel {
+    
+    func initTransaction() {
+        self.transferService.initTransaction()
+            .subscribe(onNext: { [weak self] data in
+                self?.transferService.publicKey = data.publicKey
+                self?.transferService.trxId = data.trxId
+            }, onError: { [weak self] error in
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    func claimReward() {
+        self.transferService.claimReward()
+            .subscribe(onNext: { data in
+                print(data.message)
+            }, onError: { [weak self] error in
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
     }
 }
 
@@ -59,17 +106,8 @@ extension WalletViewModel {
         return types.map { WalletCardCellViewModel($0) }
     }
     
-    private func generateKeys(_ username: String, key: String) -> [String] {
-        if let ownerKey = PrivateKey(key) {
-            return (0...3).map { _ in ownerKey.createPublic(prefix: .custom("SRY")).address }
-        } else {
-            return ["owner", "active", "posting", "memo"].map { role in
-                let key = PrivateKey(seed: "\(username)\(role)\(key)")?.wif ?? ""
-//                    .createPublic(prefix: .custom("SRY")).address ?? ""
-                print("\(role) Key =======> \(key)")
-                return key
-            }
-        }
+    func prepareMenuCells(_ menuItems: [WalletMenu]) -> [CellViewModel] {
+        return menuItems.map { WalletMenuCellViewModel($0) }
     }
 }
 
@@ -78,12 +116,28 @@ extension WalletViewModel {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
+        setUpActionObservers()
     }
     
     func setUpContentChangedObservers() {
         self.wallets.asObservable()
             .map { self.prepareWalletCells($0) }
+            ~> self.walletCells
+            ~ self.disposeBag
+        
+        self.menu.asObservable()
+            .map { self.prepareMenuCells($0) }
             ~> self.cells
             ~ self.disposeBag
+    }
+    
+    func setUpActionObservers() {
+        self.didActionSubject.asObservable()
+            .subscribe(onNext: { [weak self] action in
+                switch action {
+                case .transactionPressed:
+                    self?.shouldPresent(.transactionController)
+                }
+            }) ~ self.disposeBag
     }
 }

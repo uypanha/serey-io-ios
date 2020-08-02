@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="WalletMenuCollectionViewCell" customModule="SereyIO" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="174" height="174"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="174" height="174"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOm-aY-jvv" customClass="CardView" customModule="SereyIO" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="0.0" width="174" height="174"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qHQ-HZ-6Qb">
+                                <rect key="frame" x="24" y="79.5" width="86" height="70.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rC-t3-do2">
+                                        <rect key="frame" x="0.0" y="0.0" width="86" height="48"/>
+                                        <string key="text">Send
+Coin</string>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To another acc" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mMp-ab-jFL" userLabel="Send Coin">
+                                        <rect key="frame" x="0.0" y="56" width="86" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <size key="shadowOffset" width="0.0" height="0.0"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sendCoinIcon" translatesAutoresizingMaskIntoConstraints="NO" id="V4w-Ub-LiZ">
+                                <rect key="frame" x="24" y="24" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="3gR-3p-HaN"/>
+                                    <constraint firstAttribute="height" constant="25" id="CCp-OX-oId"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.89043461324728057" green="0.96324767856192894" blue="0.90430092264866435" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="174" id="9bo-eg-yM0"/>
+                            <constraint firstItem="V4w-Ub-LiZ" firstAttribute="top" secondItem="NOm-aY-jvv" secondAttribute="top" constant="24" id="AmJ-Xw-2aQ"/>
+                            <constraint firstAttribute="bottom" secondItem="qHQ-HZ-6Qb" secondAttribute="bottom" constant="24" id="XDn-ru-flJ"/>
+                            <constraint firstItem="V4w-Ub-LiZ" firstAttribute="leading" secondItem="NOm-aY-jvv" secondAttribute="leading" constant="24" id="dtJ-nj-oH2"/>
+                            <constraint firstAttribute="height" constant="174" id="lt6-Z7-EdJ"/>
+                            <constraint firstItem="qHQ-HZ-6Qb" firstAttribute="leading" secondItem="NOm-aY-jvv" secondAttribute="leading" constant="24" id="qzB-Dd-3fe"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="showShadow" value="NO"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="NOm-aY-jvv" secondAttribute="bottom" id="1xC-E0-eTw"/>
+                <constraint firstItem="NOm-aY-jvv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="3ON-97-gU2"/>
+                <constraint firstItem="NOm-aY-jvv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Jrz-et-VPI"/>
+                <constraint firstItem="NOm-aY-jvv" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="LIF-GG-1NC"/>
+                <constraint firstAttribute="trailing" secondItem="NOm-aY-jvv" secondAttribute="trailing" id="eCr-xc-Qbd"/>
+                <constraint firstItem="NOm-aY-jvv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="t1H-D1-QGe"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="174" height="179"/>
+            <connections>
+                <outlet property="cardView" destination="NOm-aY-jvv" id="9GV-kA-iFg"/>
+                <outlet property="heightConstraint" destination="lt6-Z7-EdJ" id="qQq-4J-m9m"/>
+                <outlet property="iconImageView" destination="V4w-Ub-LiZ" id="EcQ-MA-IsE"/>
+                <outlet property="menuTitleLabel" destination="9rC-t3-do2" id="fy2-US-IOm"/>
+                <outlet property="subTitleLabel" destination="mMp-ab-jFL" id="TRi-wg-nA0"/>
+                <outlet property="widthConstraint" destination="9bo-eg-yM0" id="1Nh-eu-sAF"/>
+            </connections>
+            <point key="canvasLocation" x="227.536231884058" y="155.02232142857142"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="sendCoinIcon" width="25" height="25"/>
+    </resources>
+</document>
