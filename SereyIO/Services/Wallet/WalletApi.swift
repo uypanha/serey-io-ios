@@ -10,5 +10,4 @@ import Foundation
 
 enum WalletApi {
     
-    
 }

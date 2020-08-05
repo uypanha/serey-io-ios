@@ -16,10 +16,12 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
     
     enum Action {
         case transactionPressed
+        case itemSelected(IndexPath)
     }
     
     enum ViewToPresent {
-        case transactionController
+        case transactionController(TransactionHistoryViewModel)
+        case transferCoinController(TransferCoinViewModel)
     }
     
     // input:
@@ -28,6 +30,7 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
     // output:
     let shouldPresentSubject: PublishSubject<ViewToPresent>
     
+    let userInfo: BehaviorRelay<UserModel?>
     let walletCells: BehaviorRelay<[CellViewModel]>
     let cells: BehaviorRelay<[CellViewModel]>
     
@@ -35,16 +38,20 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
     let menu: BehaviorRelay<[WalletMenu]>
     
     let transferService: TransferService
+    let userService: UserService
     
     override init() {
         self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
         
+        self.userInfo = .init(value: AuthData.shared.loggedUserModel)
         self.cells = .init(value: [])
         self.walletCells = .init(value: [])
-        self.wallets = .init(value: WalletType.allCases)
+        self.wallets = .init(value: [.coin(coins: nil), .power(power: nil)])
         self.menu = .init(value: WalletMenu.menuItems)
+        
         self.transferService = .init()
+        self.userService = .init()
         super.init()
         
         setUpRxObservers()
@@ -54,7 +61,12 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
 // MARK: - Networks
 extension WalletViewModel {
     
-    func initTransaction() {
+    func initialNetworkConnection() {
+        initTransaction()
+        fetchProfile()
+    }
+    
+    private func initTransaction() {
         self.transferService.initTransaction()
             .subscribe(onNext: { [weak self] data in
                 self?.transferService.publicKey = data.publicKey
@@ -65,7 +77,7 @@ extension WalletViewModel {
             }) ~ self.disposeBag
     }
     
-    func claimReward() {
+    private func claimReward() {
         self.transferService.claimReward()
             .subscribe(onNext: { data in
                 print(data.message)
@@ -74,40 +86,50 @@ extension WalletViewModel {
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
     }
+    
+    private func fetchProfile() {
+        if let username = AuthData.shared.username {
+            self.userService.fetchProfile(username)
+                .subscribe(onNext: { [weak self] data in
+                    data.data.result.save()
+                    if self?.userInfo.value == nil {
+                        self?.userInfo.accept(data.data.result)
+                    }
+                }) ~ self.disposeBag
+        }
+    }
 }
 
 // MARK: - Preparations & Tools
 extension WalletViewModel {
     
-    enum WalletType: CaseIterable {
-        case coin
-        case power
-        
-        var title: String {
-            switch self {
-            case .coin:
-                return "SEREY COIN"
-            case .power:
-                return "SEREY POWER"
-            }
-        }
-        
-        var cardColor: UIColor? {
-            switch self {
-            case .coin:
-                return UIColor(hexString: "2F3C4D")
-            case .power:
-                return UIColor(hexString: "FACB57")
-            }
-        }
-    }
-    
     func prepareWalletCells(_ types: [WalletType]) -> [CellViewModel] {
-        return types.map { WalletCardCellViewModel($0) }
+        return types.map { $0.value != nil ? WalletCardCellViewModel($0) : WalletCardCellViewModel(true) }
     }
     
     func prepareMenuCells(_ menuItems: [WalletMenu]) -> [CellViewModel] {
         return menuItems.map { WalletMenuCellViewModel($0) }
+    }
+}
+
+// MARK: - Action Handlers
+fileprivate extension WalletViewModel {
+    
+    func handleItemSelected(_ indexPath: IndexPath) {
+        if let item = self.item(at: indexPath) as? WalletMenuCellViewModel {
+            switch item.menu.value {
+            case .sendCoin:
+                let transferCoinViewModel = TransferCoinViewModel()
+                self.shouldPresent(.transferCoinController(transferCoinViewModel))
+            default:
+                break
+            }
+        }
+    }
+    
+    func handleTransactionPressed() {
+        let transactionHistoryViewModel = TransactionHistoryViewModel()
+        self.shouldPresent(.transactionController(transactionHistoryViewModel))
     }
 }
 
@@ -129,6 +151,17 @@ extension WalletViewModel {
             .map { self.prepareMenuCells($0) }
             ~> self.cells
             ~ self.disposeBag
+        
+        self.userInfo.asObservable()
+            .`do`(onNext: { [weak self] userModel in
+                if let userModel = userModel {
+                    self?.setUpUserInfoObservers(userModel)
+                }
+            }).subscribe(onNext: { [unowned self] userModel in
+                let coin = WalletType.coin(coins: userModel?.balance.replacingOccurrences(of: "SEREY", with: ""))
+                let power = WalletType.power(power: userModel?.sereypower.replacingOccurrences(of: "SEREY", with: ""))
+                self.wallets.accept([coin, power])
+            }).disposed(by: self.disposeBag)
     }
     
     func setUpActionObservers() {
@@ -136,8 +169,21 @@ extension WalletViewModel {
             .subscribe(onNext: { [weak self] action in
                 switch action {
                 case .transactionPressed:
-                    self?.shouldPresent(.transactionController)
+                    self?.handleTransactionPressed()
+                case .itemSelected(let indexPath):
+                    self?.handleItemSelected(indexPath)
                 }
             }) ~ self.disposeBag
+    }
+    
+    private func setUpUserInfoObservers(_ userInfo: UserModel) {
+        
+        Observable.from(object: userInfo)
+            .asObservable()
+            .subscribe(onNext: { [unowned self] userModel in
+                let coin = WalletType.coin(coins: userModel.balance.replacingOccurrences(of: "SEREY", with: ""))
+                let power = WalletType.power(power: userModel.sereypower.replacingOccurrences(of: "SEREY", with: ""))
+                self.wallets.accept([coin, power])
+            }).disposed(by: self.disposeBag)
     }
 }

@@ -16,6 +16,10 @@ protocol AlertDialogController {
     func showDialog(_ icon: UIImage?, title: String?, message: String?, dismissable: Bool, positiveButton: String?, positiveCompletion: (() -> Void)?, negativeButton: String?, negativeCompletion: (() -> Void)?)
     
     func showDialogError(_ errorInfo: ErrorInfo, positiveButton: String?, positiveCompletion: (() -> Void)?, negativeButton: String?, negativeCompletion: (() -> Void)?)
+    
+    func showDialog(_ model: AlertDialogModel)
+    
+    func showActionSheet(_ model: AlertDialogModel)
 }
 
 // MARK: - Where Self Extended by UIViewController
@@ -44,7 +48,7 @@ extension AlertDialogController where Self: UIViewController {
         self.present(alertDialogViewController, animated: true, completion: nil)
     }
     
-    func showDialogError(_ errorInfo: ErrorInfo, positiveButton: String?, positiveCompletion: (() -> Void)?, negativeButton: String? = nil, negativeCompletion: (() -> Void)? = nil) {
+    func showDialogError(_ errorInfo: ErrorInfo, positiveButton: String? = R.string.common.confirm.localized(), positiveCompletion: (() -> Void)? = nil, negativeButton: String? = nil, negativeCompletion: (() -> Void)? = nil) {
         let alertDialogViewController = UIAlertController(title: errorInfo.errorTitle, message: errorInfo.error.localizedDescription, preferredStyle: .alert)
         
         if let negativeButton = negativeButton {
@@ -60,6 +64,50 @@ extension AlertDialogController where Self: UIViewController {
             }
             alertDialogViewController.addAction(action)
         }
+        
+        // dismiss old dialog befire display new one
+        self.present(alertDialogViewController, animated: true, completion: nil)
+    }
+    
+    func showDialog(_ model: AlertDialogModel) {
+        self.view.endEditing(true)
+        
+        let alertDialogViewController = UIAlertController(title: model.title, message: model.message, preferredStyle: .alert)
+        alertDialogViewController.view.tintColor = ColorName.primary.color
+        
+        model.actions.forEach { action in
+            let alertAction = UIAlertAction(title: action.title, style: action.actionStyle) { _ in
+                action.completion()
+            }
+            
+            alertDialogViewController.addAction(alertAction)
+        }
+        
+        if model.actions.isEmpty {
+            let alertAction = UIAlertAction(title: R.string.common.confirm.localized(), style: .default)
+            alertDialogViewController.addAction(alertAction)
+        }
+        
+        // dismiss old dialog befire display new one
+        self.present(alertDialogViewController, animated: true, completion: nil)
+    }
+    
+    func showActionSheet(_ model: AlertDialogModel) {
+        self.view.endEditing(true)
+        
+        let alertDialogViewController = UIAlertController(title: model.title, message: model.message, preferredStyle: .actionSheet)
+        alertDialogViewController.view.tintColor = ColorName.primary.color
+        
+        model.actions.forEach { action in
+            let alertAction = UIAlertAction(title: action.title, style: action.actionStyle) { _ in
+                action.completion()
+            }
+            
+            alertDialogViewController.addAction(alertAction)
+        }
+        
+        let alertAction = UIAlertAction(title: R.string.common.cancel.localized(), style: .cancel)
+        alertDialogViewController.addAction(alertAction)
         
         // dismiss old dialog befire display new one
         self.present(alertDialogViewController, animated: true, completion: nil)

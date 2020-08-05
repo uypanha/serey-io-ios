@@ -11,20 +11,27 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class WalletCardCellViewModel: CellViewModel {
+class WalletCardCellViewModel: CellViewModel, ShimmeringProtocol {
     
-    let type: WalletViewModel.WalletType
+    let type: WalletType?
     
     let titleText: BehaviorSubject<String?>
     let cardColor: BehaviorSubject<UIColor?>
     let valueText: BehaviorSubject<String?>
+    let isShimmering: BehaviorRelay<Bool>
     
-    init(_ type: WalletViewModel.WalletType) {
+    init(_ type: WalletType?) {
         self.type = type
         
-        self.titleText = .init(value: type.title)
-        self.cardColor = .init(value: type.cardColor)
-        self.valueText = .init(value: nil)
+        self.titleText = .init(value: type?.title)
+        self.cardColor = .init(value: type?.cardColor)
+        self.valueText = .init(value: type?.value)
+        self.isShimmering = .init(value: false)
         super.init()
+    }
+    
+    required convenience init(_ isShimmering: Bool) {
+        self.init(nil)
+        self.isShimmering.accept(isShimmering)
     }
 }

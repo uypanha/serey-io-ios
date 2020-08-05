@@ -21,7 +21,6 @@ class WalletViewController: BaseViewController {
     
     lazy var settingButton = UIBarButtonItem(image: R.image.settingsIcon(), style: .plain, target: nil, action: nil)
     
-    var cardHeight: CGFloat { return collectionView.frame.height - 32 }
     var menuColumn: CGFloat { return 2 }
     var menuSpace: CGFloat { return 16 }
     
@@ -33,19 +32,21 @@ class WalletViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
-        viewModel.initTransaction()
+        viewModel.initialNetworkConnection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.showNavigationBarBorder()
+        self.navigationController?.setNavigationBarColor(ColorName.navigationBg.color, tintColor: ColorName.navigationTint.color)
     }
     
     override func setUpLocalizedTexts() {
         super.setUpLocalizedTexts()
         
         self.title = R.string.wallet.myWallet.localized()
+        self.transactionButton.setTitle("See Transaction History", for: .normal)
     }
 }
 
@@ -77,10 +78,14 @@ extension WalletViewController {
         self.menuCollectionView.register(WalletMenuCollectionViewCell.self)
     }
     
-    func getMenuItemSized() -> CGSize {
+    func getMenuItemSize() -> CGSize {
         let viewWidth = self.view.frame.width
         let itemWidth = (viewWidth - self.menuSpace - (16 * 2)) / self.menuColumn
         return CGSize(width: itemWidth, height: itemWidth)
+    }
+    
+    func getCardItemSize() -> CGSize {
+        return CGSize(width: self.collectionView.frame.width - 44, height: self.collectionView.frame.height - 32)
     }
 }
 
@@ -123,7 +128,7 @@ extension WalletViewController {
                 switch item {
                 case is WalletCardCellViewModel:
                     let cell: WalletCardCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: IndexPath(row: index, section: 0))
-                    cell.cardHeightConstraint.constant = self.cardHeight
+                    cell.updateSized(self.getCardItemSize())
                     cell.cellModel = item as? WalletCardCellViewModel
                     return cell
                 default:
@@ -136,7 +141,7 @@ extension WalletViewController {
                 switch item {
                 case is WalletMenuCellViewModel:
                     let cell: WalletMenuCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: IndexPath(row: index, section: 0))
-                    cell.updateSize(self.getMenuItemSized())
+                    cell.updateSize(self.getMenuItemSize())
                     cell.cellModel = item as? WalletMenuCellViewModel
                     return cell
                 default:
@@ -150,15 +155,26 @@ extension WalletViewController {
             .map { WalletViewModel.Action.transactionPressed }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
+        
+        self.menuCollectionView.rx.itemSelected.asObservable()
+            .map { WalletViewModel.Action.itemSelected($0) }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpViewToPresentObservers() {
         self.viewModel.shouldPresent.asObservable()
             .subscribe(onNext: { [weak self] viewToPresent in
                 switch viewToPresent {
-                case .transactionController:
+                case .transactionController(let transactionHistoryViewModel):
                     let transactionHistoryViewController = TransactionHistoryViewController()
+                    transactionHistoryViewController.viewModel = transactionHistoryViewModel
                     self?.show(transactionHistoryViewController, sender: nil)
+                case .transferCoinController(let transferCoinViewModel):
+                    if let transferViewController = R.storyboard.transfer.transferViewController() {
+                        transferViewController.viewModel = transferCoinViewModel
+                        self?.show(transferViewController, sender: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

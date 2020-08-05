@@ -22,13 +22,21 @@ class TransferService: AppService<TransferApi> {
             .map { $0.data }
     }
     
+    func transferCoin(_ account: String, amount: String, memo: String) -> Observable<TransferCoinModel> {
+        let activeKey = WalletStore.shared.password(from: AuthData.shared.username ?? "") ?? ""
+        let requestData = TransferCoinRequestModel(activeKey: activeKey, account: account, amount: amount, memo: memo).toJsonString() ?? ""
+        let signTrxData = RSAUtils.encrypt(string: requestData, publicKey: self.publicKey)
+        
+        return provider.rx.requestObject(.transfer(signTrx: signTrxData ?? "", trxId: trxId), type: TransferCoinModel.self)
+            .asObservable()
+    }
+    
     func claimReward() -> Observable<ClaimRewardModel> {
         let activeKey = WalletStore.shared.password(from: AuthData.shared.username ?? "")
         let data = "{ \"active_key\" : \"\(activeKey ?? "")\" }"
-        let encryptedData = RSAUtils.encryptWithRSAPublicKey(data.data(using: .utf8)!, pubkeyBase64: self.publicKey, keychainTag: "")
-        let base64DataText = encryptedData?.base64EncodedString(options: NSData.Base64EncodingOptions()) ?? ""
+        let encryptedData = RSAUtils.encrypt(string: data, publicKey: self.publicKey)
         
-        return provider.rx.requestObject(.claimRewardSerey(signTrx: base64DataText, trxId: trxId), type: ClaimRewardModel.self)
+        return provider.rx.requestObject(.claimRewardSerey(signTrx: encryptedData ?? "", trxId: trxId), type: ClaimRewardModel.self)
             .asObservable()
     }
 }

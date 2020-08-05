@@ -19,20 +19,14 @@ extension UINavigationController {
         
         //  change to opaque all
         self.navigationBar.isTranslucent = false
-        self.view.backgroundColor = ColorName.navigationBg.color
-        if #available(iOS 13, *) {
-            let standardAppearance = self.navigationBar.standardAppearance.copy()
-            standardAppearance.backgroundColor = ColorName.navigationBg.color
-            self.navigationBar.standardAppearance = standardAppearance
-            
-            let compactAppearance = self.navigationBar.compactAppearance?.copy()
-            compactAppearance?.backgroundColor = ColorName.navigationBg.color
-            self.navigationBar.compactAppearance = compactAppearance
-            
-            let scrollEdgeAppearance = self.navigationBar.scrollEdgeAppearance?.copy()
-            scrollEdgeAppearance?.backgroundColor = ColorName.navigationBg.color
-            self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
-        }
+        self.setNavigationBarColor(ColorName.navigationBg.color, tintColor: ColorName.navigationTint.color)
+    }
+    
+    func transparentNavigationBar() {
+        self.removeNavigationBarBorder()
+        self.setNavigationBarColor(.clear, tintColor: .white, isTransparent: true)
+        self.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationBar.isTranslucent = true
     }
     
     func removeNavigationBarBorder() {
@@ -72,6 +66,49 @@ extension UINavigationController {
             scrollEdgeAppearance?.shadowColor = UIColor.lightGray.withAlphaComponent(0.5)
             scrollEdgeAppearance?.shadowImage = UIColor.lightGray.withAlphaComponent(0.5).toImage()
             self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
+        }
+    }
+    
+    func setNavigationBarColor(_ color: UIColor, tintColor: UIColor, isTransparent: Bool = false) {
+        self.navigationBar.backgroundColor = color
+        self.navigationBar.barTintColor = tintColor
+        self.navigationBar.tintColor = tintColor
+        self.navigationBar.titleTextAttributes = [
+            .foregroundColor: tintColor
+        ]
+        
+        if #available(iOS 13, *) {
+            let standardAppearance = self.navigationBar.standardAppearance.copy()
+            if (isTransparent) { standardAppearance.configureWithTransparentBackground() }
+            standardAppearance.backgroundColor = color
+            standardAppearance.titleTextAttributes = [
+                .foregroundColor: tintColor,
+                .font: UIFont.systemFont(ofSize: 17, weight: .medium)
+            ]
+            self.navigationBar.standardAppearance = standardAppearance
+            
+            let compactAppearance = self.navigationBar.compactAppearance?.copy()
+            if (isTransparent) { compactAppearance?.configureWithTransparentBackground() }
+            compactAppearance?.backgroundColor = color
+            compactAppearance?.titleTextAttributes = [
+                .foregroundColor: tintColor,
+                .font: UIFont.systemFont(ofSize: 17, weight: .medium)
+            ]
+            self.navigationBar.compactAppearance = compactAppearance
+            
+            let scrollEdgeAppearance = self.navigationBar.scrollEdgeAppearance?.copy()
+            if (isTransparent) { scrollEdgeAppearance?.configureWithTransparentBackground() }
+            scrollEdgeAppearance?.backgroundColor = color
+            scrollEdgeAppearance?.titleTextAttributes = [
+                .foregroundColor: tintColor,
+                .font: UIFont.systemFont(ofSize: 17, weight: .medium)
+            ]
+            self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
+        } else if #available(iOS 11.0, *) {
+            self.navigationBar.largeTitleTextAttributes = [
+                .foregroundColor: tintColor,
+                .font: UIFont.boldSystemFont(ofSize: 24)
+            ]
         }
     }
 }
