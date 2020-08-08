@@ -22,6 +22,7 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
     enum ViewToPresent {
         case transactionController(TransactionHistoryViewModel)
         case transferCoinController(TransferCoinViewModel)
+        case receiveCoinController
     }
     
     // input:
@@ -121,6 +122,8 @@ fileprivate extension WalletViewModel {
             case .sendCoin:
                 let transferCoinViewModel = TransferCoinViewModel()
                 self.shouldPresent(.transferCoinController(transferCoinViewModel))
+            case .receiveCoin:
+                self.shouldPresent(.receiveCoinController)
             default:
                 break
             }

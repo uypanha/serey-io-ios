@@ -16,6 +16,8 @@ enum TransferApi {
     case claimRewardSerey(signTrx: String, trxId: Int)
     
     case transfer(signTrx: String, trxId: Int)
+    
+    case getAccountHistory
 }
 
 extension TransferApi: AuthorizedApiTargetType {
@@ -36,6 +38,8 @@ extension TransferApi: AuthorizedApiTargetType {
                 "trxId"     : trxId,
                 "signTrx"   : signTrx
             ]
+        default:
+            return [:]
         }
     }
     
@@ -47,6 +51,8 @@ extension TransferApi: AuthorizedApiTargetType {
             return "/api/v1/transfer/claimRewardsSerey"
         case .transfer:
             return "/api/v1/transfer/transferSereyCoin"
+        case .getAccountHistory:
+            return "/api/v1/transfer/getAccountHistory"
         }
     }
     

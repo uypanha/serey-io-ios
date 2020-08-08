@@ -25,7 +25,7 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     
     var discussionService: DiscussionService
     let canDownloadMorePages: BehaviorRelay<Bool>
-    var isRefresh: Bool = true
+    let isRefresh: BehaviorRelay<Bool>
     var shouldRefresh: Bool = false
     lazy var pageModel: QueryDiscussionsBy = QueryDiscussionsBy()
     lazy var downloadDisposeBag: DisposeBag = DisposeBag()
@@ -40,6 +40,7 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
         self.postType = BehaviorRelay(value: type)
         self.discussionService = DiscussionService()
         self.canDownloadMorePages = BehaviorRelay(value: true)
+        self.isRefresh = .init(value: true)
         self.endRefresh = BehaviorSubject(value: false)
         super.init()
         
@@ -171,9 +172,9 @@ extension BasePostViewModel {
     fileprivate func updateData(_ data: [PostModel]) {
         var discussions = self.discussions.value
         
-        if self.isRefresh {
+        if self.isRefresh.value {
             discussions.removeAll()
-            self.isRefresh = false
+            self.isRefresh.accept(false)
         }
         
         if data.count > 0 {

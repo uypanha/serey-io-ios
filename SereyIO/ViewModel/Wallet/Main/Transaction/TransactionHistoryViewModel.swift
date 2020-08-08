@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class TransactionHistoryViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, ShouldPresent {
+class TransactionHistoryViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, ShouldPresent, DownloadStateNetworkProtocol {
     
     enum ViewToPresent {
         case emptyResult(EmptyOrErrorViewModel)
@@ -22,14 +22,20 @@ class TransactionHistoryViewModel: BaseCellViewModel, CollectionMultiSectionsPro
     
     // output:
     let shouldPresentSubject: PublishSubject<ViewToPresent>
+    
+    let transactions: BehaviorRelay<[TransactionModel]>
     let cells: BehaviorRelay<[SectionItem]>
     
     let transferService: TransferService
+    let isDownloading: BehaviorRelay<Bool>
     
     override init() {
         self.shouldPresentSubject = .init()
+        
+        self.transactions = .init(value: [])
         self.cells = .init(value: [])
         self.transferService = .init()
+        self.isDownloading = .init(value: false)
         super.init()
         
         setUpRxObservers()
@@ -40,12 +46,47 @@ class TransactionHistoryViewModel: BaseCellViewModel, CollectionMultiSectionsPro
 extension TransactionHistoryViewModel {
     
     func downloadData() {
-        self.cells.accept([])
+        if !self.isDownloading.value {
+            self.isDownloading.accept(true)
+            fetchAccountHistory()
+            self.transactions.renotify()
+        }
+    }
+    
+    func fetchAccountHistory() {
+        self.transferService.getAccountHistory()
+            .subscribe(onNext: { [weak self] data in
+                self?.isDownloading.accept(false)
+                self?.transactions.accept(data)
+            }, onError: { [weak self] error in
+                self?.isDownloading.accept(false)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
     }
 }
 
 // MARK: - Preparations & Tools
 extension TransactionHistoryViewModel {
+    
+    private func prepareCells(_ transactions: [TransactionModel]) -> [SectionItem] {
+        var sectionItems: [SectionItem] = []
+        
+        if !transactions.isEmpty {
+            let section = SectionItem(items: transactions.map { TransactionCellViewModel($0) })
+            sectionItems.append(section)
+        }
+        
+        if self.isDownloading.value {
+            if transactions.isEmpty {
+                let number = Int.random(in: 4..<10)
+                let section = SectionItem(items: (0...number).map { _ in TransactionCellViewModel(true) })
+                sectionItems.append(section)
+            }
+        }
+        
+        return sectionItems
+    }
     
     fileprivate func prepareEmptyViewModel() -> EmptyOrErrorViewModel {
         let title: String = "You don’t have any transactions"
@@ -72,10 +113,10 @@ fileprivate extension TransactionHistoryViewModel {
     }
     
     func setUpContentChangedObservers() {
-//        self.people.asObservable()
-//            .map { self.prepareCells($0) }
-//            .bind(to: self.cells)
-//            .disposed(by: self.disposeBag)
+        self.transactions.asObservable()
+            .map { self.prepareCells($0) }
+            .bind(to: self.cells)
+            .disposed(by: self.disposeBag)
 
         self.cells.asObservable()
             .subscribe(onNext: { [unowned self] cells in

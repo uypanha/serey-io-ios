@@ -175,6 +175,12 @@ extension WalletViewController {
                         transferViewController.viewModel = transferCoinViewModel
                         self?.show(transferViewController, sender: nil)
                     }
+                case .receiveCoinController:
+                    if let receiveCoinViewController = R.storyboard.receive.receiveCoinViewController() {
+                        receiveCoinViewController.modalPresentationStyle = .overCurrentContext
+                        receiveCoinViewController.modalTransitionStyle = .crossDissolve
+                        self?.present(receiveCoinViewController, animated: true, completion: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

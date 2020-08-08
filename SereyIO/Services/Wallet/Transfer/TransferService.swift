@@ -39,4 +39,9 @@ class TransferService: AppService<TransferApi> {
         return provider.rx.requestObject(.claimRewardSerey(signTrx: encryptedData ?? "", trxId: trxId), type: ClaimRewardModel.self)
             .asObservable()
     }
+    
+    func getAccountHistory() -> Observable<[TransactionModel]> {
+        return provider.rx.requestObject(.getAccountHistory, type: [TransactionModel].self)
+            .asObservable()
+    }
 }

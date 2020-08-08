@@ -52,14 +52,16 @@ extension TransactionHistoryViewController {
     func prepareTableView() {
         self.tableView.separatorColor = ColorName.border.color
         self.tableView.tableFooterView = UIView()
+        
+        self.tableView.register(TransactionTableViewCell.self)
     }
     
     func prepreDataSource() -> RxTableViewSectionedReloadDataSource<SectionItem> {
         let dataSource = RxTableViewSectionedReloadDataSource<SectionItem>(configureCell: { (datasource, tableView, indexPath, item) -> UITableViewCell in
             switch item {
-            case is PeopleCellViewModel:
-                let cell: PeopleTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-                cell.cellModel = item as? PeopleCellViewModel
+            case is TransactionCellViewModel:
+                let cell: TransactionTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+                cell.cellModel = item as? TransactionCellViewModel
                 return cell
             default:
                 return UITableViewCell()
