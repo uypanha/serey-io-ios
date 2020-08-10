@@ -175,11 +175,18 @@ extension WalletViewController {
                         transferViewController.viewModel = transferCoinViewModel
                         self?.show(transferViewController, sender: nil)
                     }
-                case .receiveCoinController:
-                    if let receiveCoinViewController = R.storyboard.receive.receiveCoinViewController() {
+                case .receiveCoinController(let receiveCoinViewModel):
+                    if let receiveCoinViewController = R.storyboard.qrPayment.receiveCoinViewController() {
                         receiveCoinViewController.modalPresentationStyle = .overCurrentContext
                         receiveCoinViewController.modalTransitionStyle = .crossDissolve
+                        receiveCoinViewController.viewModel = receiveCoinViewModel
                         self?.present(receiveCoinViewController, animated: true, completion: nil)
+                    }
+                case .scanQRViewController:
+                    if let payQRViewController = R.storyboard.qrPayment.payQRViewController() {
+                        payQRViewController.modalPresentationStyle = .fullScreen
+                        payQRViewController.modalTransitionStyle = .crossDissolve
+                        self?.present(payQRViewController, animated: true, completion: nil)
                     }
                 }
             }) ~ self.disposeBag

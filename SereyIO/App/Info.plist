@@ -69,7 +69,7 @@
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+	<true/>
 	<key>URL_PROTOCOL</key>
 	<string>${URL_PROTOCOL}</string>
 </dict>

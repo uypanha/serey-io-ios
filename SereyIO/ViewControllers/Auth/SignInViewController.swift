@@ -24,7 +24,7 @@ class SignInViewController: BaseViewController, LoadingIndicatorController, Keyb
     @IBOutlet weak var signInLabel: UILabel!
     @IBOutlet weak var userNameTextField: MDCTextField!
     @IBOutlet weak var passwordTextField: MDCPasswordTextField!
-    @IBOutlet weak var signInButton: UIButton!
+    @IBOutlet weak var signInButton: LoadingButton!
     
     @IBOutlet weak var dontHaveAccountLabel: UILabel!
     @IBOutlet weak var termServiceTextView: UITextView!
@@ -145,6 +145,7 @@ fileprivate extension SignInViewController {
     
     func setUpControlsEventObservers() {
         self.signInButton.rx.tap.asObservable()
+            .filter { !self.signInButton.isLoading }
             .map { SignInViewModel.Action.signInPressed }
             .bind(to: self.viewModel.didActionSubject)
             ~ self.disposeBag
@@ -160,7 +161,11 @@ fileprivate extension SignInViewController {
             .subscribe(onNext: { [weak self] viewToPresent in
                 switch (viewToPresent) {
                 case .loading(let loading):
-                    loading ? self?.showLoading() : self?.dismissLoading()
+                    self?.userNameTextField.isEnabled = !loading
+                    self?.passwordTextField.isEnabled = !loading
+                    self?.signUpButton.isEnabled = !loading
+                    loading ? self?.signInButton.showLoading() : self?.signInButton.hideLoading()
+                    self?.termServiceTextView.isSelectable = !loading
                 case .signUpViewController:
                     let webViewController = WebViewViewController()
                     webViewController.viewModel = WebViewViewModel(withURLToLoad: Constants.kycURL, title: nil)

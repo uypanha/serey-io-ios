@@ -213,6 +213,9 @@
 		DC7F098624AE36B500CE8AFC /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F098524AE36B500CE8AFC /* TransactionHistoryViewController.swift */; };
 		DC7F098924B05ED400CE8AFC /* Steem in Frameworks */ = {isa = PBXBuildFile; productRef = DC7F098824B05ED400CE8AFC /* Steem */; };
 		DC7F098B24B06A0600CE8AFC /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC7F098A24B06A0600CE8AFC /* Colors.xcassets */; };
+		DC83C38224E19DCC008C9EAB /* ConfirmTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83C38124E19DCC008C9EAB /* ConfirmTransferViewController.swift */; };
+		DC83C38424E19F2A008C9EAB /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83C38324E19F2A008C9EAB /* BottomSheetViewController.swift */; };
+		DC83C38624E1A9DE008C9EAB /* ConfirmTransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83C38524E1A9DE008C9EAB /* ConfirmTransferViewModel.swift */; };
 		DC8654C5245B26540066DAB8 /* MoreAppsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8654C4245B26540066DAB8 /* MoreAppsViewController.swift */; };
 		DC88A73323DF3D3900EB7F79 /* OnBoard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */; };
 		DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */; };
@@ -227,8 +230,12 @@
 		DC8EAB8323E7231A00E00A00 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */; };
 		DC8EAB8523E7232800E00A00 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8423E7232800E00A00 /* NotificationViewController.swift */; };
 		DC8EAB8723E7232F00E00A00 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8623E7232F00E00A00 /* SearchViewController.swift */; };
-		DC9A65FD24DE9171001F1B60 /* Receive.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC9A65FC24DE9171001F1B60 /* Receive.storyboard */; };
+		DC9A65FD24DE9171001F1B60 /* QRPayment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC9A65FC24DE9171001F1B60 /* QRPayment.storyboard */; };
 		DC9A660024DE9233001F1B60 /* ReceiveCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A65FF24DE9233001F1B60 /* ReceiveCoinViewController.swift */; };
+		DC9A660324DEB83F001F1B60 /* ReceiveCoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A660224DEB83E001F1B60 /* ReceiveCoinViewModel.swift */; };
+		DC9A660624DFE964001F1B60 /* PayQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A660524DFE963001F1B60 /* PayQRViewController.swift */; };
+		DC9A660824E042BB001F1B60 /* TextBelowImageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A660724E042BB001F1B60 /* TextBelowImageButton.swift */; };
+		DC9A660B24E05725001F1B60 /* PayQRViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A660A24E05725001F1B60 /* PayQRViewModel.swift */; };
 		DC9AC6DF2406BF1C008FAFA6 /* DiscussionApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9AC6DE2406BF1C008FAFA6 /* DiscussionApi.swift */; };
 		DC9AC6E12406C1D1008FAFA6 /* DiscussionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9AC6E02406C1D1008FAFA6 /* DiscussionService.swift */; };
 		DC9AC6E32406C4F7008FAFA6 /* Moya+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9AC6E22406C4F7008FAFA6 /* Moya+Extensions.swift */; };
@@ -621,6 +628,9 @@
 		DC7F097924ACE51600CE8AFC /* WalletCardCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardCellViewModel.swift; sourceTree = "<group>"; };
 		DC7F098524AE36B500CE8AFC /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
 		DC7F098A24B06A0600CE8AFC /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		DC83C38124E19DCC008C9EAB /* ConfirmTransferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTransferViewController.swift; sourceTree = "<group>"; };
+		DC83C38324E19F2A008C9EAB /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
+		DC83C38524E1A9DE008C9EAB /* ConfirmTransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTransferViewModel.swift; sourceTree = "<group>"; };
 		DC8654C4245B26540066DAB8 /* MoreAppsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreAppsViewController.swift; sourceTree = "<group>"; };
 		DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnBoard.storyboard; sourceTree = "<group>"; };
 		DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICenteredHorizantalButton.swift; sourceTree = "<group>"; };
@@ -635,8 +645,12 @@
 		DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		DC8EAB8423E7232800E00A00 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		DC8EAB8623E7232F00E00A00 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		DC9A65FC24DE9171001F1B60 /* Receive.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Receive.storyboard; sourceTree = "<group>"; };
+		DC9A65FC24DE9171001F1B60 /* QRPayment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QRPayment.storyboard; sourceTree = "<group>"; };
 		DC9A65FF24DE9233001F1B60 /* ReceiveCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveCoinViewController.swift; sourceTree = "<group>"; };
+		DC9A660224DEB83E001F1B60 /* ReceiveCoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveCoinViewModel.swift; sourceTree = "<group>"; };
+		DC9A660524DFE963001F1B60 /* PayQRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayQRViewController.swift; sourceTree = "<group>"; };
+		DC9A660724E042BB001F1B60 /* TextBelowImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBelowImageButton.swift; sourceTree = "<group>"; };
+		DC9A660A24E05725001F1B60 /* PayQRViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayQRViewModel.swift; sourceTree = "<group>"; };
 		DC9AC6DE2406BF1C008FAFA6 /* DiscussionApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionApi.swift; sourceTree = "<group>"; };
 		DC9AC6E02406C1D1008FAFA6 /* DiscussionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscussionService.swift; sourceTree = "<group>"; };
 		DC9AC6E22406C4F7008FAFA6 /* Moya+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Moya+Extensions.swift"; sourceTree = "<group>"; };
@@ -1088,6 +1102,7 @@
 				DC7C8F0224DAB93E0051C084 /* AlertDialogModel.swift */,
 				DCCD40CD24379BD100093A18 /* BottomMenuViewController.swift */,
 				DC7C740E2471803200610526 /* BottomSheetListViewController.swift */,
+				DC83C38324E19F2A008C9EAB /* BottomSheetViewController.swift */,
 				DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */,
 				DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */,
 				DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */,
@@ -1360,7 +1375,7 @@
 				DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */,
 				DC9E36D82412997800289693 /* Post.storyboard */,
 				DC26813023F45A8C0045776E /* Profile.storyboard */,
-				DC9A65FC24DE9171001F1B60 /* Receive.storyboard */,
+				DC9A65FC24DE9171001F1B60 /* QRPayment.storyboard */,
 				DC19DBF023EC6DEB00571CC8 /* Search.storyboard */,
 				DCD39858232E0F9600C812EB /* Slash.storyboard */,
 				DCB9F2F624D85E760028D449 /* Transfer.storyboard */,
@@ -1601,6 +1616,7 @@
 			isa = PBXGroup;
 			children = (
 				DC7C8EED24D9B3100051C084 /* TransferCoinViewModel.swift */,
+				DC83C38524E1A9DE008C9EAB /* ConfirmTransferViewModel.swift */,
 			);
 			path = Transfer;
 			sourceTree = "<group>";
@@ -1637,10 +1653,12 @@
 			isa = PBXGroup;
 			children = (
 				DCA459F924D1D22400E21D9A /* WalletMenu.swift */,
+				DC7C8F0724DB099C0051C084 /* WalletType.swift */,
 				DC7F097724ACE31500CE8AFC /* WalletViewModel.swift */,
+				DC9A660924E05710001F1B60 /* Pay */,
+				DC9A660124DEB824001F1B60 /* Receive */,
 				DC7C8F0424DB08C60051C084 /* Transaction */,
 				DC7C8EEC24D9B2E70051C084 /* Transfer */,
-				DC7C8F0724DB099C0051C084 /* WalletType.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1669,6 +1687,7 @@
 				DC19DBF223EC6E4600571CC8 /* PaddingTextField.swift */,
 				DC9E36F3241629F900289693 /* SRichEditorView.swift */,
 				DCC49AD623E8795600119BAA /* TabBarIndicator.swift */,
+				DC9A660724E042BB001F1B60 /* TextBelowImageButton.swift */,
 				DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */,
 				DCDE006D2446161500D09717 /* UIPlaceHolderTextView.swift */,
 				DCB9F2E924D7153D0028D449 /* UIRightIconButton.swift */,
@@ -1737,6 +1756,30 @@
 				DC9A65FF24DE9233001F1B60 /* ReceiveCoinViewController.swift */,
 			);
 			path = Receive;
+			sourceTree = "<group>";
+		};
+		DC9A660124DEB824001F1B60 /* Receive */ = {
+			isa = PBXGroup;
+			children = (
+				DC9A660224DEB83E001F1B60 /* ReceiveCoinViewModel.swift */,
+			);
+			path = Receive;
+			sourceTree = "<group>";
+		};
+		DC9A660424DFE94D001F1B60 /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				DC9A660524DFE963001F1B60 /* PayQRViewController.swift */,
+			);
+			path = Pay;
+			sourceTree = "<group>";
+		};
+		DC9A660924E05710001F1B60 /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				DC9A660A24E05725001F1B60 /* PayQRViewModel.swift */,
+			);
+			path = Pay;
 			sourceTree = "<group>";
 		};
 		DC9AC6DD2406BEFB008FAFA6 /* Discussion */ = {
@@ -1970,6 +2013,7 @@
 		DCB9F2F824D85F380028D449 /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
+				DC83C38124E19DCC008C9EAB /* ConfirmTransferViewController.swift */,
 				DCB9F2F924D85F540028D449 /* TransferViewController.swift */,
 			);
 			path = Transfer;
@@ -2027,6 +2071,7 @@
 			isa = PBXGroup;
 			children = (
 				DCC883D824A3A4A8002FE917 /* WalletViewController.swift */,
+				DC9A660424DFE94D001F1B60 /* Pay */,
 				DC9A65FE24DE9216001F1B60 /* Receive */,
 				DC7F098424AE368B00CE8AFC /* Transaction */,
 				DCB9F2F824D85F380028D449 /* Transfer */,
@@ -2502,7 +2547,7 @@
 				DCB9F2F724D85E760028D449 /* Transfer.storyboard in Resources */,
 				DC9E36E524135A3D00289693 /* PostDetailView.xib in Resources */,
 				DC7558CF2459DFD800AD40FA /* Home.strings in Resources */,
-				DC9A65FD24DE9171001F1B60 /* Receive.storyboard in Resources */,
+				DC9A65FD24DE9171001F1B60 /* QRPayment.storyboard in Resources */,
 				DC562436241E75450076A78C /* Auth.strings in Resources */,
 				DC115F30241A8EA5006BE78C /* trix-editor.css in Resources */,
 				DC26812B23F2FCB30045776E /* ProfileTableViewCell.xib in Resources */,
@@ -2748,6 +2793,7 @@
 				DC7C8EF024D9BDF50051C084 /* TransferCoinRequestModel.swift in Sources */,
 				DC583A8B24C9E95200D9C4D3 /* RSAUtils.swift in Sources */,
 				DC12F212242278F90099C479 /* UserModel.swift in Sources */,
+				DC9A660624DFE964001F1B60 /* PayQRViewController.swift in Sources */,
 				DC19DBEF23EC60C900571CC8 /* PostCellViewModel.swift in Sources */,
 				DC583A9B24CC46F700D9C4D3 /* LoadingButton.swift in Sources */,
 				DCEC0CC3240A530B002F4B6F /* FilteredCategoryTableViewCell.swift in Sources */,
@@ -2755,6 +2801,7 @@
 				DC5FC21A2454330900CA6117 /* CommentReplyModel.swift in Sources */,
 				DC60AC8B24A745070014B77E /* WalletRootViewController.swift in Sources */,
 				DCC883D924A3A4A8002FE917 /* WalletViewController.swift in Sources */,
+				DC9A660324DEB83F001F1B60 /* ReceiveCoinViewModel.swift in Sources */,
 				DCA5255D2426636F00284CD8 /* AlertDialogController.swift in Sources */,
 				DC6A78EE23CA1F72001D1009 /* NetworkViewModelProtocol.swift in Sources */,
 				DC1C6EC323FC3C6D00BA701D /* PostCategoryTableViewCell.swift in Sources */,
@@ -2820,6 +2867,7 @@
 				DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */,
 				DCC49AD523E865D700119BAA /* ProfileViewModel.swift in Sources */,
 				DC9C659E249D260E0042C829 /* CreateCredentialViewController.swift in Sources */,
+				DC83C38624E1A9DE008C9EAB /* ConfirmTransferViewModel.swift in Sources */,
 				DCB5BD7F2497D9400042E5AF /* ChooseSecurityMethodViewModel.swift in Sources */,
 				DC562433241E73D80076A78C /* SignInViewModel.swift in Sources */,
 				DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */,
@@ -2869,10 +2917,12 @@
 				DCB5BD8E249A669C0042E5AF /* SignUpWalletViewController.swift in Sources */,
 				DC0044092433A98200244607 /* FileUploadModel.swift in Sources */,
 				DC12F21624227AB40099C479 /* AccountModel.swift in Sources */,
+				DC9A660824E042BB001F1B60 /* TextBelowImageButton.swift in Sources */,
 				DCDE00782448B0B800D09717 /* VoteDialogViewController.swift in Sources */,
 				DC5FC21124542CB700CA6117 /* CommentsListViewModel.swift in Sources */,
 				DC6FCE7423F05D1700D72F6D /* Steem.swift in Sources */,
 				DCCD40C924363EF700093A18 /* SubmitPostModel.swift in Sources */,
+				DC9A660B24E05725001F1B60 /* PayQRViewModel.swift in Sources */,
 				DC8EAB8323E7231A00E00A00 /* MoreViewController.swift in Sources */,
 				DCC6F1E2242BBDEA003B9E3A /* TextTableViewCell.swift in Sources */,
 				DCF67FDD240FFC4A003061A7 /* SearchApi.swift in Sources */,
@@ -2918,6 +2968,7 @@
 				DCEC0CBE240971AE002F4B6F /* ShimmeringProtocol.swift in Sources */,
 				DCC49ACC23E864E500119BAA /* FeatureStore.swift in Sources */,
 				DC56243C241E82B80076A78C /* AuthService.swift in Sources */,
+				DC83C38224E19DCC008C9EAB /* ConfirmTransferViewController.swift in Sources */,
 				DCB5BD712497CAE40042E5AF /* SecurityMethodeTableViewCell.swift in Sources */,
 				DC010D3B2434F6C6002BE182 /* MimeType.swift in Sources */,
 				DCDE007124475DFA00D09717 /* CommentTextView.swift in Sources */,
@@ -2966,6 +3017,7 @@
 				DC12F20D2422720E0099C479 /* DataResponseModel.swift in Sources */,
 				DC8EAB7923E721EE00E00A00 /* BaseTabBarViewController.swift in Sources */,
 				DC9E36F82416947900289693 /* CommentTableViewCell.swift in Sources */,
+				DC83C38424E19F2A008C9EAB /* BottomSheetViewController.swift in Sources */,
 				DC2DA4D7243B991800B99A86 /* SubmitCommentModel.swift in Sources */,
 				DCD39891232E265F00C812EB /* MediaPickerHelper.swift in Sources */,
 				DCD3985F232E106E00C812EB /* BaseViewController.swift in Sources */,

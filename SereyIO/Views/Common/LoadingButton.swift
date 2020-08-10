@@ -10,8 +10,17 @@ import UIKit
 import NVActivityIndicatorView
 
 class LoadingButton: UIButton {
+    
     var originalButtonText: String?
     var activityIndicator: NVActivityIndicatorView!
+    var isLoading: Bool {
+        get {
+            return !(self.activityIndicator?.isHidden ?? true)
+        }
+        set {
+            newValue ? self.showLoading() : self.hideLoading()
+        }
+    }
     
     func showLoading() {
         originalButtonText = self.titleLabel?.text

@@ -13,6 +13,10 @@ import RxBinding
 import MaterialComponents
 
 class TransferViewController: BaseViewController, KeyboardController, LoadingIndicatorController, AlertDialogController {
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var contentView: UIView!
@@ -33,7 +37,6 @@ class TransferViewController: BaseViewController, KeyboardController, LoadingInd
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
-        viewModel.initialNetworkConnection()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,10 +89,12 @@ extension TransferViewController {
         self.viewModel.memoTextFieldViewModel.bind(with: self.memoTextField, controller: self.memoFieldController)
         
         self.viewModel.isTransferEnabled ~> self.transferButton.rx.isEnabled ~ self.disposeBag
+        self.viewModel.isUsernameEditable ~> self.accountTextField.rx.isEnabled ~ self.disposeBag
     }
     
     func setUpControlObserves() {
         self.transferButton.rx.tap.asObservable()
+            .filter { !self.transferButton.isLoading }
             .map { TransferCoinViewModel.Action.transferPressed }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
@@ -100,11 +105,20 @@ extension TransferViewController {
             .subscribe(onNext: { [weak self] viewToPresent in
                 switch viewToPresent {
                 case .loading(let loading):
-                    loading ? self?.showLoading() : self?.dismissLoading()
+                    self?.transferButton.isLoading = loading
+                    self?.amountTextField.isEnabled = !loading
+                    self?.memoTextField.isEnabled = !loading
                 case .dismiss:
                     self?.navigationController?.popViewController(animated: true)
                 case .showAlertDialogController(let alertDialogModel):
                     self?.showDialog(alertDialogModel)
+                case .confirmTransferController(let confirmTransferViewModel):
+                    if let confirmTransferController = R.storyboard.transfer.confirmTransferViewController(), let _self = self {
+                        confirmTransferController.viewModel = confirmTransferViewModel
+                        let preferedSize = CGSize(width: _self.view.frame.width, height: 268 + _self.bottomSafeAreaHeight + 22)
+                        let bottomSheet = BottomSheetViewController(contentViewController: confirmTransferController, preferredContentSize: preferedSize)
+                        self?.present(bottomSheet, animated: true, completion: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

@@ -22,7 +22,8 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
     enum ViewToPresent {
         case transactionController(TransactionHistoryViewModel)
         case transferCoinController(TransferCoinViewModel)
-        case receiveCoinController
+        case receiveCoinController(ReceiveCoinViewModel)
+        case scanQRViewController
     }
     
     // input:
@@ -123,7 +124,11 @@ fileprivate extension WalletViewModel {
                 let transferCoinViewModel = TransferCoinViewModel()
                 self.shouldPresent(.transferCoinController(transferCoinViewModel))
             case .receiveCoin:
-                self.shouldPresent(.receiveCoinController)
+                guard let username = AuthData.shared.username else { return }
+                let viewModel = ReceiveCoinViewModel(username)
+                self.shouldPresent(.receiveCoinController(viewModel))
+            case .pay:
+                self.shouldPresent(.scanQRViewController)
             default:
                 break
             }

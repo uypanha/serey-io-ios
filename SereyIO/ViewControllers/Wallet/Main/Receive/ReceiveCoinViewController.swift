@@ -21,12 +21,30 @@ class ReceiveCoinViewController: BaseViewController {
     @IBOutlet weak var shareButton: UIButton!
     @IBOutlet weak var copyButton: UIButton!
     
+    private var viewGesture: UITapGestureRecognizer? {
+        didSet {
+            guard let gesture = self.viewGesture else { return }
+            
+            self.view.isUserInteractionEnabled = true
+            self.view.addGestureRecognizer(gesture)
+        }
+    }
+    
+    var viewModel: ReceiveCoinViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
+    }
+    
+    override func setUpLocalizedTexts() {
+        super.setUpLocalizedTexts()
+        
+        self.sryTitleLabel.text = "Your SRY Username"
+        self.messageLabel.text = "Use this username to transfer coins from another wallet to this wallet."
     }
 }
 
@@ -35,6 +53,9 @@ extension ReceiveCoinViewController {
     
     func setUpViews() {
         self.view.backgroundColor = .clear
+        self.qrImageView.isUserInteractionEnabled = true
+        self.viewGesture = UITapGestureRecognizer()
+        
         self.closeButton.setRadius(all: 18)
         self.copyButton.primaryStyle()
         self.shareButton.primaryStyle()
@@ -45,7 +66,15 @@ extension ReceiveCoinViewController {
 extension ReceiveCoinViewController {
     
     func setUpRxObservers() {
+        setUpContentChangedObservers()
         setUpControlObservers()
+    }
+    
+    func setUpContentChangedObservers() {
+        self.disposeBag ~ [
+            self.viewModel.qrImage ~> self.qrImageView.rx.image,
+            self.viewModel.username ~> self.sryAddressLabel.rx.text
+        ]
     }
     
     func setUpControlObservers() {
@@ -53,5 +82,10 @@ extension ReceiveCoinViewController {
             .subscribe(onNext: { [weak self] _ in
                 self?.dismiss(animated: true, completion: nil)
             }) ~ self.disposeBag
+        
+        self.viewGesture?.rx.event.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.dismiss(animated: true, completion: nil)
+            }).disposed(by: self.disposeBag)
     }
 }

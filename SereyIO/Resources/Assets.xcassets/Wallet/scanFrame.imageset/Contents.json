@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "face-24px (2) 1.pdf",
+      "filename" : "Scan Frame.pdf",
       "idiom" : "universal"
     }
   ],
@@ -10,6 +10,6 @@
     "version" : 1
   },
   "properties" : {
-    "template-rendering-intent" : "template"
+    "template-rendering-intent" : "original"
   }
 }
