@@ -22,9 +22,9 @@ class ToggleTextCellModel: ImageTextCellViewModel, ShouldReactToAction {
     let toggleSwitcher: BehaviorSubject<Bool>
     var isEnabled: Bool = false
     
-    init(textModel: ImageTextModel, isOn: Bool = false) {
+    init(textModel: ImageTextModel, isOn: Bool = false, showSeperatorLine: Bool = false) {
         self.toggleSwitcher = BehaviorSubject(value: false)
-        super.init(model: textModel)
+        super.init(model: textModel, false, .default, showSeperatorLine: showSeperatorLine)
         
         self.isEnabled = isOn
         self.toggleSwitcher.onNext(self.isEnabled)

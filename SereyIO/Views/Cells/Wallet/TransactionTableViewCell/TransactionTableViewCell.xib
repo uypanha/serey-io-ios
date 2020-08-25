@@ -25,7 +25,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="417" height="64"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="dbY-vC-LCT">
-                                <rect key="frame" x="24" y="12" width="176" height="40"/>
+                                <rect key="frame" x="16" y="12" width="176" height="40"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JXC-RZ-UY8">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -62,12 +62,12 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+100 SRY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ozV-vP-Zb8">
-                                <rect key="frame" x="318" y="22" width="75" height="20.5"/>
+                                <rect key="frame" x="326" y="22" width="75" height="20.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20.5" id="MI5-6C-Hyh"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="75" id="TRm-qn-bxO"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.33333333329999998" green="0.4549019608" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -76,8 +76,8 @@
                         <constraints>
                             <constraint firstItem="ozV-vP-Zb8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dbY-vC-LCT" secondAttribute="trailing" constant="16" id="GqY-OY-f3l"/>
                             <constraint firstItem="ozV-vP-Zb8" firstAttribute="centerY" secondItem="dbY-vC-LCT" secondAttribute="centerY" id="HUj-kV-KGb"/>
-                            <constraint firstItem="dbY-vC-LCT" firstAttribute="leading" secondItem="pka-Qk-yJc" secondAttribute="leading" constant="24" id="J5N-js-jpQ"/>
-                            <constraint firstAttribute="trailing" secondItem="ozV-vP-Zb8" secondAttribute="trailing" constant="24" id="QjG-DT-gEY"/>
+                            <constraint firstItem="dbY-vC-LCT" firstAttribute="leading" secondItem="pka-Qk-yJc" secondAttribute="leading" constant="16" id="J5N-js-jpQ"/>
+                            <constraint firstAttribute="trailing" secondItem="ozV-vP-Zb8" secondAttribute="trailing" constant="16" id="QjG-DT-gEY"/>
                             <constraint firstAttribute="bottom" secondItem="dbY-vC-LCT" secondAttribute="bottom" constant="12" id="Zfk-of-TOX"/>
                             <constraint firstItem="dbY-vC-LCT" firstAttribute="top" secondItem="pka-Qk-yJc" secondAttribute="top" constant="12" id="cgF-PN-dfh"/>
                         </constraints>

@@ -49,6 +49,9 @@ extension TransactionCellViewModel {
     func notifyDataChanged(_ data: TransactionModel?) {
         self.typeImage.onNext(data?.typeImage)
         self.timeStamp.onNext(data?.createDateString)
+        self.typeText.onNext(data?.typeTitle)
+        self.valueText.onNext(data?.value)
+        self.valueColor.onNext(data?.valueColor)
     }
 }
 

@@ -11,17 +11,22 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class ConfirmTransferViewController: BaseViewController {
+class ConfirmTransferViewController: BaseViewController, BottomSheetProtocol {
+    
+    var preferredBottomSheetContentSize: CGSize? {
+        let preferedSize = CGSize(width: self.view.frame.width, height: 336 + self.bottomSafeAreaHeight + 22)
+        return preferedSize
+    }
 
     @IBOutlet weak var totalAmountLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
-    
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var fromUsernameLabel: UILabel!
-    
     @IBOutlet weak var toLabel: UILabel!
     @IBOutlet weak var toUsernameLabel: UILabel!
     @IBOutlet weak var transferButton: LoadingButton!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var memoLabel: UILabel!
     
     var viewModel: ConfirmTransferViewModel!
     
@@ -61,7 +66,8 @@ extension ConfirmTransferViewController {
         self.disposeBag ~ [
             self.viewModel.amount ~> self.amountLabel.rx.text,
             self.viewModel.fromUsername ~> self.fromUsernameLabel.rx.text,
-            self.viewModel.toUsername ~> self.toUsernameLabel.rx.text
+            self.viewModel.toUsername ~> self.toUsernameLabel.rx.text,
+            self.viewModel.memo ~> self.memoLabel.rx.text
         ]
         
         self.transferButton.rx.tap.asObservable()

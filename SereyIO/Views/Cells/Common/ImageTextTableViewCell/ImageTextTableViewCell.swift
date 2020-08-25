@@ -34,6 +34,13 @@ class ImageTextTableViewCell: BaseTableViewCell {
                 .subscribe(onNext: { [weak self] selectionStyle in
                     self?.selectionStyle = selectionStyle
                 }).disposed(by: self.disposeBag)
+            viewModel.showSeperatorLine.asObservable()
+                .subscribe(onNext: { [weak self] showSeperatorLine in
+                    self?.removeAllBorders()
+                    if (showSeperatorLine) {
+                        self?.addBorder(edges: .bottom, color: UIColor.lightGray.withAlphaComponent(0.5), thickness: 1)
+                    }
+                }).disposed(by: self.disposeBag)
         }
     }
     

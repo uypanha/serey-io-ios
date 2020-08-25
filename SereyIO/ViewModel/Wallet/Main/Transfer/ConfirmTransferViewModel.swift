@@ -30,16 +30,18 @@ class ConfirmTransferViewModel: BaseViewModel, ShouldReactToAction, ShouldPresen
     let fromUsername: BehaviorSubject<String?>
     let toUsername: BehaviorSubject<String?>
     let amount: BehaviorSubject<String?>
+    let memo: BehaviorSubject<String?>
     
     let confirmed: PublishSubject<Void>
     
-    init(from username: String, to: String, amount: String) {
+    init(from username: String, to: String, amount: String, memo: String) {
         self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
         
         self.fromUsername = .init(value: username)
         self.toUsername = .init(value: to)
         self.amount = .init(value: amount)
+        self.memo = .init(value: memo)
         
         self.confirmed = .init()
         super.init()

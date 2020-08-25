@@ -11,19 +11,24 @@ import MaterialComponents
 
 class BottomSheetViewController: MDCBottomSheetController {
 
-    init(contentViewController: UIViewController, preferredContentSize: CGSize? = nil){
+    override init(contentViewController: UIViewController){
         contentViewController.view.roundCorners(corners: [.topLeft, .topRight], radius: 16)
         super.init(contentViewController: contentViewController)
         
         self.isScrimAccessibilityElement = false
         self.automaticallyAdjustsScrollViewInsets = false
         self.dismissOnDraggingDownSheet = true
-        if let preferredContentSize = preferredContentSize {
-            self.preferredContentSize = preferredContentSize
-        }
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let preferredContentSize = (contentViewController as? BottomSheetProtocol)?.preferredBottomSheetContentSize {
+            self.preferredContentSize = preferredContentSize
+        }
     }
 }

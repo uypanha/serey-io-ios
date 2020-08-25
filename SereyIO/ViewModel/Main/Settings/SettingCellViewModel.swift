@@ -12,13 +12,11 @@ import RxSwift
 
 class SettingCellViewModel: ImageTextCellViewModel {
     
-    let showSeperatorLine: BehaviorSubject<Bool>
     let type: BehaviorRelay<SettingType>
     
     init(_ setting: SettingType, _ showSeperatorLine: Bool = false) {
         self.type = BehaviorRelay(value: setting)
-        self.showSeperatorLine = BehaviorSubject(value: showSeperatorLine)
-        super.init(model: setting.imageModel, setting.indicatorAccessory, setting.selectionType)
+        super.init(model: setting.imageModel, setting.indicatorAccessory, setting.selectionType, showSeperatorLine: showSeperatorLine)
     }
 }
 

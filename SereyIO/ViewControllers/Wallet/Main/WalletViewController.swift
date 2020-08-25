@@ -160,6 +160,11 @@ extension WalletViewController {
             .map { WalletViewModel.Action.itemSelected($0) }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
+        
+        self.settingButton.rx.tap.asObservable()
+            .map { WalletViewModel.Action.settingsPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpViewToPresentObservers() {
@@ -182,12 +187,17 @@ extension WalletViewController {
                         receiveCoinViewController.viewModel = receiveCoinViewModel
                         self?.present(receiveCoinViewController, animated: true, completion: nil)
                     }
-                case .scanQRViewController:
+                case .scanQRViewController(let payQRViewModel):
                     if let payQRViewController = R.storyboard.qrPayment.payQRViewController() {
+                        payQRViewController.viewModel = payQRViewModel
                         payQRViewController.modalPresentationStyle = .fullScreen
                         payQRViewController.modalTransitionStyle = .crossDissolve
                         self?.present(payQRViewController, animated: true, completion: nil)
                     }
+                case .settingsController:
+                    let settingsViewController = WalletSettingsViewController()
+                    settingsViewController.viewModel = WalletSettingsViewModel()
+                    self?.show(settingsViewController, sender: nil)
                 }
             }) ~ self.disposeBag
     }

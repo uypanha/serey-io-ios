@@ -13,6 +13,10 @@ import RxBinding
 
 class ReceiveCoinViewController: BaseViewController {
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var sryTitleLabel: UILabel!
     @IBOutlet weak var sryAddressLabel: UILabel!

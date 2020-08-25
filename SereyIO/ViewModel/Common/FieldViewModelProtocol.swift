@@ -130,6 +130,10 @@ class TextFieldViewModel: CellViewModel, FieldViewModelProtocol {
         return true
     }
     
+    func setError(_ error: String) {
+        errorText.accept(error)
+    }
+    
     func isSame(as text: String?) -> Bool {
         return self.value == text
     }

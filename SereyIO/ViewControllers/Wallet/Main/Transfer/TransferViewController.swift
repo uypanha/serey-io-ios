@@ -113,10 +113,9 @@ extension TransferViewController {
                 case .showAlertDialogController(let alertDialogModel):
                     self?.showDialog(alertDialogModel)
                 case .confirmTransferController(let confirmTransferViewModel):
-                    if let confirmTransferController = R.storyboard.transfer.confirmTransferViewController(), let _self = self {
+                    if let confirmTransferController = R.storyboard.transfer.confirmTransferViewController() {
                         confirmTransferController.viewModel = confirmTransferViewModel
-                        let preferedSize = CGSize(width: _self.view.frame.width, height: 268 + _self.bottomSafeAreaHeight + 22)
-                        let bottomSheet = BottomSheetViewController(contentViewController: confirmTransferController, preferredContentSize: preferedSize)
+                        let bottomSheet = BottomSheetViewController(contentViewController: confirmTransferController)
                         self?.present(bottomSheet, animated: true, completion: nil)
                     }
                 }

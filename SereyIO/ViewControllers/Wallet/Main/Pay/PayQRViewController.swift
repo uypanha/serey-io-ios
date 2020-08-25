@@ -28,6 +28,8 @@ class PayQRViewController: BaseViewController {
     var previewLayer: AVCaptureVideoPreviewLayer!
     var metadataOutput: AVCaptureMetadataOutput!
     
+    var viewModel: PayQRViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -39,8 +41,8 @@ class PayQRViewController: BaseViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        previewLayer.frame = self.cameraView.layer.bounds
-        metadataOutput.rectOfInterest = self.convertRectOfInterest(rect: self.scanFrameImageView.frame)
+        previewLayer?.frame = self.cameraView.layer.bounds
+        metadataOutput?.rectOfInterest = self.convertRectOfInterest(rect: self.scanFrameImageView.frame)
         
         self.flashButton.makeMeCircular()
     }
@@ -48,13 +50,13 @@ class PayQRViewController: BaseViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        self.previewLayer?.session?.stopRunning()
+        self.captureSession?.stopRunning()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.previewLayer?.session?.startRunning()
+        self.captureSession?.startRunning()
     }
 }
 
@@ -106,7 +108,6 @@ extension PayQRViewController: AVCaptureMetadataOutputObjectsDelegate {
 
         if (captureSession.canAddInput(videoInput)) {
             captureSession.addInput(videoInput)
-            
         } else {
             failed()
             return
@@ -141,21 +142,15 @@ extension PayQRViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
     
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        captureSession.stopRunning()
 
         if let metadataObject = metadataObjects.first {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let stringValue = readableObject.stringValue else { return }
+            guard let username = CryptLib().decryptCipherTextRandomIV(withCipherText: stringValue, key: AES.AES_KEY) else { return }
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            found(code: stringValue)
+            captureSession.stopRunning()
+            self.viewModel.didAction(with: .qrFound(username))
         }
-
-//        dismiss(animated: true)
-    }
-
-    private func found(code: String) {
-        print(code)
-//        self.delegate?.didScannedCode(code: code)
     }
     
     private func toggleTorch() {
@@ -198,6 +193,7 @@ extension PayQRViewController {
     
     func setUpRxObservers() {
         setUpControlObservers()
+        setUpViewToPresentObservers()
     }
     
     func setUpControlObservers() {
@@ -209,6 +205,28 @@ extension PayQRViewController {
         self.flashButton.rx.tap.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.toggleTorch()
+            }) ~ self.disposeBag
+        
+        self.viewMyQRButton.rx.tap.asObservable()
+            .map { PayQRViewModel.Action.viewMyQRPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+    }
+    
+    func setUpViewToPresentObservers() {
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { [weak self] viewToPresent in
+                switch viewToPresent {
+                case .receiveQRCodeController(let receiveCoinViewModel):
+                    if let receiveCoinViewController = R.storyboard.qrPayment.receiveCoinViewController() {
+                        receiveCoinViewController.viewModel = receiveCoinViewModel
+                        receiveCoinViewController.modalPresentationStyle = .overCurrentContext
+                        receiveCoinViewController.modalTransitionStyle = .crossDissolve
+                        self?.present(receiveCoinViewController, animated: true, completion: nil)
+                    }
+                case .dismiss:
+                    self?.dismiss(animated: true, completion: nil)
+                }
             }) ~ self.disposeBag
     }
 }

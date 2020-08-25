@@ -17,13 +17,15 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
     enum Action {
         case transactionPressed
         case itemSelected(IndexPath)
+        case settingsPressed
     }
     
     enum ViewToPresent {
         case transactionController(TransactionHistoryViewModel)
         case transferCoinController(TransferCoinViewModel)
         case receiveCoinController(ReceiveCoinViewModel)
-        case scanQRViewController
+        case scanQRViewController(PayQRViewModel)
+        case settingsController
     }
     
     // input:
@@ -128,7 +130,8 @@ fileprivate extension WalletViewModel {
                 let viewModel = ReceiveCoinViewModel(username)
                 self.shouldPresent(.receiveCoinController(viewModel))
             case .pay:
-                self.shouldPresent(.scanQRViewController)
+                let payQRViewModel = PayQRViewModel().then { self.setUpPayQRObservers($0) }
+                self.shouldPresent(.scanQRViewController(payQRViewModel))
             default:
                 break
             }
@@ -180,6 +183,8 @@ extension WalletViewModel {
                     self?.handleTransactionPressed()
                 case .itemSelected(let indexPath):
                     self?.handleItemSelected(indexPath)
+                case .settingsPressed:
+                    self?.shouldPresent(.settingsController)
                 }
             }) ~ self.disposeBag
     }
@@ -193,5 +198,13 @@ extension WalletViewModel {
                 let power = WalletType.power(power: userModel.sereypower.replacingOccurrences(of: "SEREY", with: ""))
                 self.wallets.accept([coin, power])
             }).disposed(by: self.disposeBag)
+    }
+    
+    private func setUpPayQRObservers(_ payQrViewModel: PayQRViewModel) {
+        payQrViewModel.didUsernameFound
+            .subscribe(onNext: { [weak self] username in
+                let transferCoinViewModel = TransferCoinViewModel(username)
+                self?.shouldPresent(.transferCoinController(transferCoinViewModel))
+            }).disposed(by: payQrViewModel.disposeBag)
     }
 }

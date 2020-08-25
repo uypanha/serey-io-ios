@@ -29,8 +29,9 @@ class ReceiveCoinViewModel: BaseViewModel {
 extension ReceiveCoinViewModel {
     
     func prepareQRImage(_ username: String) {
+        let encryptedUsername = CryptLib().encryptPlainTextRandomIV(withPlainText: username, key: AES.AES_KEY)
         DispatchQueue.main.async {
-            self.qrImage.onNext(UtilitiesHelper.generateQRCode(from: username))
+            self.qrImage.onNext(UtilitiesHelper.generateQRCode(from: encryptedUsername ?? ""))
         }
     }
 }
