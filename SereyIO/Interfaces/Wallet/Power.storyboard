@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Power Up View Controller-->
+        <scene sceneID="Ekn-Ba-tA3">
+            <objects>
+                <viewController storyboardIdentifier="PowerUpViewController" id="VKy-Zf-7la" customClass="PowerUpViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="TlG-pV-OE9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Eo-Hx-UnB">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="129"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Power Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hi7-xM-deW">
+                                        <rect key="frame" x="24" y="68" width="366" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.33333333329999998" green="0.4549019608" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Hi7-xM-deW" firstAttribute="top" secondItem="51D-LV-9bE" secondAttribute="top" constant="24" id="Aef-V1-v6I"/>
+                                    <constraint firstAttribute="bottom" secondItem="Hi7-xM-deW" secondAttribute="bottom" constant="32" id="Q4d-Gg-J7v"/>
+                                    <constraint firstAttribute="trailing" secondItem="Hi7-xM-deW" secondAttribute="trailing" constant="24" id="RiJ-yb-LHe"/>
+                                    <constraint firstItem="Hi7-xM-deW" firstAttribute="leading" secondItem="4Eo-Hx-UnB" secondAttribute="leading" constant="24" id="osj-mi-AH9"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="51D-LV-9bE"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRi-wp-lNd">
+                                <rect key="frame" x="0.0" y="117" width="414" height="779"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Vft-Va-dYg">
+                                        <rect key="frame" x="24" y="24" width="366" height="68"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XlB-RN-F8K" customClass="MDCTextField">
+                                                <rect key="frame" x="0.0" y="0.0" width="366" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sgj-YR-pFc" customClass="MDCTextField">
+                                                <rect key="frame" x="0.0" y="34" width="366" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2z-aG-QOS" customClass="LoadingButton" customModule="SereyIO" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="685" width="366" height="44"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="WpE-GD-b8Q"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                        <state key="normal" title="Power Up">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="a2z-aG-QOS" secondAttribute="trailing" constant="24" id="ACe-a4-k9M"/>
+                                    <constraint firstItem="OXC-9h-2PL" firstAttribute="bottom" secondItem="a2z-aG-QOS" secondAttribute="bottom" constant="16" id="W1o-b8-wvq"/>
+                                    <constraint firstAttribute="trailing" secondItem="Vft-Va-dYg" secondAttribute="trailing" constant="24" id="hiF-Wu-Mw2"/>
+                                    <constraint firstItem="a2z-aG-QOS" firstAttribute="leading" secondItem="lRi-wp-lNd" secondAttribute="leading" constant="24" id="mrp-fy-JaG"/>
+                                    <constraint firstItem="Vft-Va-dYg" firstAttribute="top" secondItem="lRi-wp-lNd" secondAttribute="top" constant="24" id="set-2j-O2v"/>
+                                    <constraint firstItem="Vft-Va-dYg" firstAttribute="leading" secondItem="lRi-wp-lNd" secondAttribute="leading" constant="24" id="xXO-tI-JkC"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="OXC-9h-2PL"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="lF3-il-T8l" firstAttribute="trailing" secondItem="4Eo-Hx-UnB" secondAttribute="trailing" id="QkP-eB-vu5"/>
+                            <constraint firstItem="4Eo-Hx-UnB" firstAttribute="top" secondItem="TlG-pV-OE9" secondAttribute="top" id="STm-46-WGi"/>
+                            <constraint firstItem="lRi-wp-lNd" firstAttribute="top" secondItem="4Eo-Hx-UnB" secondAttribute="bottom" constant="-12" id="X2i-vr-IXx"/>
+                            <constraint firstItem="lF3-il-T8l" firstAttribute="trailing" secondItem="lRi-wp-lNd" secondAttribute="trailing" id="ekX-aG-Lcc"/>
+                            <constraint firstItem="4Eo-Hx-UnB" firstAttribute="leading" secondItem="TlG-pV-OE9" secondAttribute="leading" id="qgN-6S-hQ8"/>
+                            <constraint firstAttribute="bottom" secondItem="lRi-wp-lNd" secondAttribute="bottom" id="vXm-Sc-cmh"/>
+                            <constraint firstItem="lRi-wp-lNd" firstAttribute="leading" secondItem="TlG-pV-OE9" secondAttribute="leading" id="y5I-qk-vDd"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="lF3-il-T8l"/>
+                    </view>
+                    <connections>
+                        <outlet property="accountTextField" destination="XlB-RN-F8K" id="tXf-Mn-oJk"/>
+                        <outlet property="amountTextField" destination="Sgj-YR-pFc" id="hZD-1d-K9g"/>
+                        <outlet property="contentView" destination="lRi-wp-lNd" id="yfh-tH-mpU"/>
+                        <outlet property="headerView" destination="4Eo-Hx-UnB" id="3me-N4-Nic"/>
+                        <outlet property="powerUpButton" destination="a2z-aG-QOS" id="1v9-in-lJa"/>
+                        <outlet property="titleLabel" destination="Hi7-xM-deW" id="SGK-g2-PrB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dfx-E5-SWK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-151" y="110"/>
+        </scene>
+    </scenes>
+</document>

@@ -25,6 +25,7 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
         case transferCoinController(TransferCoinViewModel)
         case receiveCoinController(ReceiveCoinViewModel)
         case scanQRViewController(PayQRViewModel)
+        case powerUpController(PowerUpViewModel)
         case settingsController
     }
     
@@ -132,6 +133,9 @@ fileprivate extension WalletViewModel {
             case .pay:
                 let payQRViewModel = PayQRViewModel().then { self.setUpPayQRObservers($0) }
                 self.shouldPresent(.scanQRViewController(payQRViewModel))
+            case .powerUp:
+                let powerUpViewModel = PowerUpViewModel()
+                self.shouldPresent(.powerUpController(powerUpViewModel))
             default:
                 break
             }

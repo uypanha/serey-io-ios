@@ -44,9 +44,9 @@ class TransferCoinViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
         self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
         
-        self.accountTextFieldViewModel = .textFieldWith(title: "To account *", validation: .notEmpty)
-        self.amountTextFieldViewModel = .textFieldWith(title: "Amount *", validation: .notEmpty)
-        self.memoTextFieldViewModel = .textFieldWith(title: "Description", validation: .none)
+        self.accountTextFieldViewModel = .textFieldWith(title: R.string.transfer.toAccount.localized() + " *", validation: .notEmpty)
+        self.amountTextFieldViewModel = .textFieldWith(title: R.string.transfer.amount.localized() + " *", validation: .notEmpty)
+        self.memoTextFieldViewModel = .textFieldWith(title: R.string.common.description.localized(), validation: .none)
         
         self.isUsernameEditable = .init(value: username == nil)
         self.isTransferEnabled = .init(value: false)

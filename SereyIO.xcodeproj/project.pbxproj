@@ -192,6 +192,8 @@
 		DC79F11B24CD6A9A007FCECC /* AskToCreateCredentialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC79F11A24CD6A9A007FCECC /* AskToCreateCredentialViewModel.swift */; };
 		DC79F11F24CDD7D3007FCECC /* CreateCredentialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC79F11D24CDD7D3007FCECC /* CreateCredentialTableViewCell.swift */; };
 		DC79F12024CDD7D3007FCECC /* CreateCredentialTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC79F11E24CDD7D3007FCECC /* CreateCredentialTableViewCell.xib */; };
+		DC7AAFF024F8032900ECDF47 /* PowerUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7AAFEF24F8032900ECDF47 /* PowerUpViewModel.swift */; };
+		DC7AAFF424F805C200ECDF47 /* Transfer.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC7AAFF624F805C200ECDF47 /* Transfer.strings */; };
 		DC7C09C22326AFF60006D0BF /* FireBaseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C09C12326AFF60006D0BF /* FireBaseHandler.swift */; };
 		DC7C740B24717B0F00610526 /* VoterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C740A24717B0F00610526 /* VoterListViewModel.swift */; };
 		DC7C740D24717C5500610526 /* VotersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7C740C24717C5500610526 /* VotersViewController.swift */; };
@@ -228,6 +230,8 @@
 		DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73823DF3F5200EB7F79 /* SelectLanguageViewController.swift */; };
 		DC88A73C23DF4A8900EB7F79 /* SelectLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73B23DF4A8900EB7F79 /* SelectLanguageViewModel.swift */; };
 		DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73D23DF4B7900EB7F79 /* BoardingViewController.swift */; };
+		DC88B13324F5729500327C50 /* Power.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC88B13224F5729500327C50 /* Power.storyboard */; };
+		DC88B13624F5739000327C50 /* PowerUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88B13524F5739000327C50 /* PowerUpViewController.swift */; };
 		DC8EAB7523E70ED600E00A00 /* MDCQuadPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB7423E70ED600E00A00 /* MDCQuadPageControl.swift */; };
 		DC8EAB7723E7218600E00A00 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC8EAB7623E7218600E00A00 /* Home.storyboard */; };
 		DC8EAB7923E721EE00E00A00 /* BaseTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB7823E721EE00E00A00 /* BaseTabBarViewController.swift */; };
@@ -618,6 +622,9 @@
 		DC79F11A24CD6A9A007FCECC /* AskToCreateCredentialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskToCreateCredentialViewModel.swift; sourceTree = "<group>"; };
 		DC79F11D24CDD7D3007FCECC /* CreateCredentialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCredentialTableViewCell.swift; sourceTree = "<group>"; };
 		DC79F11E24CDD7D3007FCECC /* CreateCredentialTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateCredentialTableViewCell.xib; sourceTree = "<group>"; };
+		DC7AAFEF24F8032900ECDF47 /* PowerUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpViewModel.swift; sourceTree = "<group>"; };
+		DC7AAFF524F805C200ECDF47 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Transfer.strings; sourceTree = "<group>"; };
+		DC7AAFF724F805C500ECDF47 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Transfer.strings"; sourceTree = "<group>"; };
 		DC7C09C12326AFF60006D0BF /* FireBaseHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireBaseHandler.swift; sourceTree = "<group>"; };
 		DC7C740A24717B0F00610526 /* VoterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoterListViewModel.swift; sourceTree = "<group>"; };
 		DC7C740C24717C5500610526 /* VotersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotersViewController.swift; sourceTree = "<group>"; };
@@ -653,6 +660,8 @@
 		DC88A73823DF3F5200EB7F79 /* SelectLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLanguageViewController.swift; sourceTree = "<group>"; };
 		DC88A73B23DF4A8900EB7F79 /* SelectLanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLanguageViewModel.swift; sourceTree = "<group>"; };
 		DC88A73D23DF4B7900EB7F79 /* BoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingViewController.swift; sourceTree = "<group>"; };
+		DC88B13224F5729500327C50 /* Power.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Power.storyboard; sourceTree = "<group>"; };
+		DC88B13524F5739000327C50 /* PowerUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpViewController.swift; sourceTree = "<group>"; };
 		DC8EAB7423E70ED600E00A00 /* MDCQuadPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDCQuadPageControl.swift; sourceTree = "<group>"; };
 		DC8EAB7623E7218600E00A00 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		DC8EAB7823E721EE00E00A00 /* BaseTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarViewController.swift; sourceTree = "<group>"; };
@@ -1386,22 +1395,17 @@
 			isa = PBXGroup;
 			children = (
 				DC115F31241A962A006BE78C /* Auth.storyboard */,
-				DCB5BD82249926E80042E5AF /* Biometry.storyboard */,
-				DC9C65A4249FC0D10042C829 /* GoogleOTP.storyboard */,
 				DC8EAB7623E7218600E00A00 /* Home.storyboard */,
 				DC26812E23F450BE0045776E /* More.storyboard */,
 				DC13408F24573A1E00CC9856 /* Notifications.storyboard */,
 				DC88A73223DF3D3900EB7F79 /* OnBoard.storyboard */,
-				DC387C8E24E97E7400D8C78E /* Password.storyboard */,
 				DC9E36D82412997800289693 /* Post.storyboard */,
 				DC26813023F45A8C0045776E /* Profile.storyboard */,
-				DC9A65FC24DE9171001F1B60 /* QRPayment.storyboard */,
 				DC19DBF023EC6DEB00571CC8 /* Search.storyboard */,
 				DCD39858232E0F9600C812EB /* Slash.storyboard */,
-				DCB9F2F624D85E760028D449 /* Transfer.storyboard */,
-				DCB5BD6A2497BF880042E5AF /* Wallet.storyboard */,
 				DC6ED52923267EF000770B31 /* LaunchScreen.storyboard */,
 				DC6ED52423267EED00770B31 /* Main.storyboard */,
+				DC88B13124F5726600327C50 /* Wallet */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -1626,6 +1630,14 @@
 			path = CreateCredentialTableViewCell;
 			sourceTree = "<group>";
 		};
+		DC7AAFF124F8035100ECDF47 /* Power */ = {
+			isa = PBXGroup;
+			children = (
+				DC7AAFEF24F8032900ECDF47 /* PowerUpViewModel.swift */,
+			);
+			path = Power;
+			sourceTree = "<group>";
+		};
 		DC7C09C02326AFEA0006D0BF /* Handlers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1678,6 +1690,7 @@
 				DC7C8F0724DB099C0051C084 /* WalletType.swift */,
 				DC7F097724ACE31500CE8AFC /* WalletViewModel.swift */,
 				DC9A660924E05710001F1B60 /* Pay */,
+				DC7AAFF124F8035100ECDF47 /* Power */,
 				DC9A660124DEB824001F1B60 /* Receive */,
 				DCBBD6C324E43A7A0099C406 /* Settings */,
 				DC7C8F0424DB08C60051C084 /* Transaction */,
@@ -1745,6 +1758,28 @@
 				DC88A73B23DF4A8900EB7F79 /* SelectLanguageViewModel.swift */,
 			);
 			path = OnBoard;
+			sourceTree = "<group>";
+		};
+		DC88B13124F5726600327C50 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				DCB5BD82249926E80042E5AF /* Biometry.storyboard */,
+				DC9C65A4249FC0D10042C829 /* GoogleOTP.storyboard */,
+				DC387C8E24E97E7400D8C78E /* Password.storyboard */,
+				DC88B13224F5729500327C50 /* Power.storyboard */,
+				DC9A65FC24DE9171001F1B60 /* QRPayment.storyboard */,
+				DCB9F2F624D85E760028D449 /* Transfer.storyboard */,
+				DCB5BD6A2497BF880042E5AF /* Wallet.storyboard */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		DC88B13424F5737900327C50 /* Power */ = {
+			isa = PBXGroup;
+			children = (
+				DC88B13524F5739000327C50 /* PowerUpViewController.swift */,
+			);
+			path = Power;
 			sourceTree = "<group>";
 		};
 		DC8EAB7C23E722DF00E00A00 /* Home */ = {
@@ -2124,6 +2159,7 @@
 			children = (
 				DCC883D824A3A4A8002FE917 /* WalletViewController.swift */,
 				DC9A660424DFE94D001F1B60 /* Pay */,
+				DC88B13424F5737900327C50 /* Power */,
 				DC9A65FE24DE9216001F1B60 /* Receive */,
 				DCBBD6C024E4373B0099C406 /* Settings */,
 				DC7F098424AE368B00CE8AFC /* Transaction */,
@@ -2250,6 +2286,7 @@
 				DC05FDB223F1AC4F0093B47B /* Settings.strings */,
 				DCC883DE24A3A547002FE917 /* Wallet.strings */,
 				DC60AC8824A742D70014B77E /* GoogleOTP.strings */,
+				DC7AAFF624F805C200ECDF47 /* Transfer.strings */,
 			);
 			path = Localizable;
 			sourceTree = "<group>";
@@ -2613,6 +2650,7 @@
 				DC1C6ECD23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib in Resources */,
 				DCEE3F7A2439DB57000A75C5 /* Post.strings in Resources */,
 				DCC49AC823E8632B00119BAA /* BoardFeatureView.xib in Resources */,
+				DC7AAFF424F805C200ECDF47 /* Transfer.strings in Resources */,
 				DCEE3F802439DCA8000A75C5 /* Account.strings in Resources */,
 				DCB5BD6B2497BF880042E5AF /* Wallet.storyboard in Resources */,
 				DCB5BD722497CAE40042E5AF /* SecurityMethodeTableViewCell.xib in Resources */,
@@ -2620,6 +2658,7 @@
 				DC6ED56523269B6600770B31 /* colors.txt in Resources */,
 				DC9E36F92416947900289693 /* CommentTableViewCell.xib in Resources */,
 				DC9E36EE2413F57800289693 /* common_css.css in Resources */,
+				DC88B13324F5729500327C50 /* Power.storyboard in Resources */,
 				DC9E36EC2413F52C00289693 /* custom_rich_editor_style.css in Resources */,
 				DCC49AD423E865D700119BAA /* ProfileView.xib in Resources */,
 				DC387C8F24E97E7400D8C78E /* Password.storyboard in Resources */,
@@ -2878,6 +2917,7 @@
 				DCF67FE724100221003061A7 /* CircularView.swift in Sources */,
 				DC7F098624AE36B500CE8AFC /* TransactionHistoryViewController.swift in Sources */,
 				DC7C09C22326AFF60006D0BF /* FireBaseHandler.swift in Sources */,
+				DC88B13624F5739000327C50 /* PowerUpViewController.swift in Sources */,
 				DC8654C5245B26540066DAB8 /* MoreAppsViewController.swift in Sources */,
 				DC6A790323CA242B001D1009 /* EmptyOrErrorViewModel.swift in Sources */,
 				DCD39889232E254100C812EB /* UIColor+Converter.swift in Sources */,
@@ -3045,6 +3085,7 @@
 				DCA459F824D1D17100E21D9A /* WalletMenuCellViewModel.swift in Sources */,
 				DC7C8F1224DC68E80051C084 /* TransactionCellViewModel.swift in Sources */,
 				DC19DBE523EC5D0700571CC8 /* BaseTableViewController.swift in Sources */,
+				DC7AAFF024F8032900ECDF47 /* PowerUpViewModel.swift in Sources */,
 				DC5B55AE2451E5B200F8531B /* PushService.swift in Sources */,
 				DCDE00752448A70B00D09717 /* CommentTextViewModel.swift in Sources */,
 				DC387C9224E9821100D8C78E /* ChangePasswordViewController.swift in Sources */,
@@ -3238,6 +3279,15 @@
 				DC7558D22459DFDB00AD40FA /* km-KH */,
 			);
 			name = Home.strings;
+			sourceTree = "<group>";
+		};
+		DC7AAFF624F805C200ECDF47 /* Transfer.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DC7AAFF524F805C200ECDF47 /* en */,
+				DC7AAFF724F805C500ECDF47 /* km-KH */,
+			);
+			name = Transfer.strings;
 			sourceTree = "<group>";
 		};
 		DCC883DE24A3A547002FE917 /* Wallet.strings */ = {

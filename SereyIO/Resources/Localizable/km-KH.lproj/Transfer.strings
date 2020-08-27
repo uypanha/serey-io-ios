@@ -1,0 +1,13 @@
+/* 
+  Power.strings
+  SereyIO
+
+  Created by Panha Uy on 8/27/20.
+  Copyright © 2020 Phanha Uy. All rights reserved.
+*/
+
+"transfer"          = "Transfer";
+"powerUp"           = "Power UP";
+
+"toAccount"         = "To account";
+"amount"            = "Amount";

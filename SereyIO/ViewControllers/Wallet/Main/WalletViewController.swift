@@ -198,6 +198,11 @@ extension WalletViewController {
                     let settingsViewController = WalletSettingsViewController()
                     settingsViewController.viewModel = WalletSettingsViewModel()
                     self?.show(settingsViewController, sender: nil)
+                case .powerUpController(let powerUpViewModel):
+                    if let powerUpViewController = R.storyboard.power.powerUpViewController() {
+                        powerUpViewController.viewModel = powerUpViewModel
+                        self?.show(powerUpViewController, sender: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

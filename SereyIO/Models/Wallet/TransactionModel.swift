@@ -10,13 +10,11 @@ import UIKit
 
 struct TransactionModel: Codable {
     
-    var trxId: String?
-    var timestamp: String?
     var opData: OpModel
     
     var createDateString: String? {
         get {
-            guard let date = Date.date(from: self.timestamp ?? "", format: "yyyy-MM-dd'T'HH:mm:ss") else { return nil }
+            guard let date = Date.date(from: self.opData.timestamp ?? "", format: "yyyy-MM-dd'T'HH:mm:ss") else { return nil }
             
             return date.format("HH:mm, yyy.MM.dd")
         }
@@ -39,14 +37,14 @@ struct TransactionModel: Codable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case trxId = "trx_id"
-        case timestamp
         case opData = "op"
     }
 }
 
 struct OpModel: Codable {
     
+    var trxId: String?
+    var timestamp: String?
     var type: String
     var data: TransactionDataModel
     
@@ -55,8 +53,10 @@ struct OpModel: Codable {
     }
     
     enum CodingKeys: String, CodingKey {
+        case trxId = "trx_id"
         case type
         case data
+        case timestamp
     }
 }
 
