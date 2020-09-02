@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class TransferCoinViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
+class TransferCoinViewModel: BaseInitTransactionViewModel, ShouldReactToAction, ShouldPresent {
     
     enum Action {
         case transferPressed
@@ -37,7 +37,6 @@ class TransferCoinViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
     let isUsernameEditable: BehaviorRelay<Bool>
     let isTransferEnabled: BehaviorSubject<Bool>
     
-    let transferService: TransferService
     let userService: UserService
     
     init(_ username: String? = nil) {
@@ -51,7 +50,6 @@ class TransferCoinViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
         self.isUsernameEditable = .init(value: username == nil)
         self.isTransferEnabled = .init(value: false)
         
-        self.transferService = .init()
         self.userService = .init()
         super.init()
         
@@ -67,24 +65,12 @@ extension TransferCoinViewModel {
         self.shouldPresent(.loading(true))
         self.userService.fetchProfile(username)
             .subscribe(onNext: { [weak self] _ in
-                self?.initTransaction()
+                self?.initTransaction(completion: {
+                    self?.handleConfirmTransfer()
+                })
             }, onError: { [weak self] error in
-                self?.shouldPresent(.loading(false))
+                self?.isLoading.onNext(false)
                 self?.accountTextFieldViewModel.setError("Username not found")
-            }) ~ self.disposeBag
-    }
-    
-    private func initTransaction() {
-        self.transferService.initTransaction()
-            .subscribe(onNext: { [weak self] data in
-                self?.transferService.publicKey = data.publicKey
-                self?.transferService.trxId = data.trxId
-                self?.shouldPresent(.loading(false))
-                self?.handleConfirmTransfer()
-            }, onError: { [weak self] error in
-                self?.shouldPresent(.loading(false))
-                let errorInfo = ErrorHelper.prepareError(error: error)
-                self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
     }
     
@@ -93,13 +79,13 @@ extension TransferCoinViewModel {
         let amount = self.amountTextFieldViewModel.value ?? "0"
         let memo = self.memoTextFieldViewModel.value ?? ""
         
-        self.shouldPresent(.loading(true))
+        self.isLoading.onNext(true)
         self.transferService.transferCoin(account, amount: amount, memo: memo)
             .subscribe(onNext: { [weak self] response in
-                self?.shouldPresent(.loading(false))
+                self?.isLoading.onNext(false)
                 self?.handleTransferSuccess(account, amount: amount)
             }, onError: { [weak self] error in
-                self?.shouldPresent(.loading(false))
+                self?.isLoading.onNext(false)
                 let errorInfo = ErrorHelper.prepareError(error: error)
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
@@ -172,6 +158,11 @@ extension TransferCoinViewModel {
         self.memoTextFieldViewModel.textFieldText
             .map { _ in self.validateForm() }
             ~> self.isTransferEnabled
+            ~ self.disposeBag
+        
+        self.isLoading.asObservable()
+            .map { ViewToPresent.loading($0) }
+            ~> self.shouldPresentSubject
             ~ self.disposeBag
     }
     

@@ -12,7 +12,7 @@ import RxSwift
 import RxBinding
 import MaterialComponents
 
-class PowerUpViewController: BaseViewController, KeyboardController {
+class PowerUpViewController: BaseViewController, KeyboardController, AlertDialogController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var headerView: UIView!
@@ -21,6 +21,7 @@ class PowerUpViewController: BaseViewController, KeyboardController {
     @IBOutlet weak var accountTextField: MDCTextField!
     @IBOutlet weak var amountTextField: MDCTextField!
     
+    @IBOutlet weak var upMyselfButton: UIButton!
     @IBOutlet weak var powerUpButton: LoadingButton!
     
     var accountFieldController: MDCTextInputControllerOutlined?
@@ -52,7 +53,8 @@ class PowerUpViewController: BaseViewController, KeyboardController {
     override func setUpLocalizedTexts() {
         super.setUpLocalizedTexts()
         
-        self.titleLabel.text = "Power Up"
+        self.titleLabel.text = R.string.transfer.powerUp.localized()
+        self.powerUpButton.setTitle(R.string.transfer.powerUp.localized(), for: .normal)
     }
 }
 
@@ -89,44 +91,48 @@ extension PowerUpViewController {
         self.viewModel.accountTextFieldViewModel.bind(with: self.accountTextField, controller: self.accountFieldController)
         self.viewModel.amountTextFieldViewModel.bind(with: self.amountTextField, controller: self.amountFieldController)
         
-//        self.viewModel.isTransferEnabled ~> self.transferButton.rx.isEnabled ~ self.disposeBag
-//        self.viewModel.isUsernameEditable ~> self.accountTextField.rx.isEnabled ~ self.disposeBag
+        self.viewModel.isPowerUpEnabled ~> self.powerUpButton.rx.isEnabled ~ self.disposeBag
     }
     
     func setUpControlObserves() {
-//        self.btnPowerUp.rx.tap.asObservable()
-//            .filter { !self.transferButton.isLoading }
-//            .map { TransferCoinViewModel.Action.transferPressed }
-//            ~> self.viewModel.didActionSubject
-//            ~ self.disposeBag
+        self.upMyselfButton.rx.tap.asObservable()
+            .map { PowerUpViewModel.Action.upToMySelfPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+        
+        self.powerUpButton.rx.tap.asObservable()
+            .filter { !self.powerUpButton.isLoading }
+            .map { PowerUpViewModel.Action.powerUpPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpViewToPresentObservers() {
-//        self.viewModel.shouldPresent.asObservable()
-//            .subscribe(onNext: { [weak self] viewToPresent in
-//                switch viewToPresent {
-//                case .loading(let loading):
-//                    self?.transferButton.isLoading = loading
-//                    self?.amountTextField.isEnabled = !loading
-//                    self?.memoTextField.isEnabled = !loading
-//                case .dismiss:
-//                    self?.navigationController?.popViewController(animated: true)
-//                case .showAlertDialogController(let alertDialogModel):
-//                    self?.showDialog(alertDialogModel)
-//                case .confirmTransferController(let confirmTransferViewModel):
-//                    if let confirmTransferController = R.storyboard.transfer.confirmTransferViewController() {
-//                        confirmTransferController.viewModel = confirmTransferViewModel
-//                        let bottomSheet = BottomSheetViewController(contentViewController: confirmTransferController)
-//                        self?.present(bottomSheet, animated: true, completion: nil)
-//                    }
-//                }
-//            }) ~ self.disposeBag
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { [weak self] viewToPresent in
+                switch viewToPresent {
+                case .loading(let loading):
+                    self?.powerUpButton.isLoading = loading
+                    self?.accountTextField.isEnabled = !loading
+                    self?.amountTextField.isEnabled = !loading
+                case .confirmPowerUpController(let confirmPowerViewModel):
+                    if let confirmPowerUpController = R.storyboard.power.confirmPowerUpViewController() {
+                        confirmPowerUpController.viewModel = confirmPowerViewModel
+                        let bottomSheet = BottomSheetViewController(contentViewController: confirmPowerUpController)
+                        self?.present(bottomSheet, animated: true, completion: nil)
+                    }
+                case .dismiss:
+                    self?.navigationController?.popViewController(animated: true)
+                case .showAlertDialogController(let alertDialogModel):
+                    self?.showDialog(alertDialogModel)
+                }
+            }) ~ self.disposeBag
     }
     
     func setUpShouldPresentErrorObservers() {
-//        self.viewModel.shouldPresentError.asObservable()
-//            .subscribe(onNext: { [weak self] error in
-//                self?.showDialogError(error)
-//            }) ~ self.disposeBag
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [weak self] error in
+                self?.showDialogError(error)
+            }) ~ self.disposeBag
     }
 }

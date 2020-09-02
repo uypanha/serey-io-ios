@@ -203,6 +203,11 @@ extension WalletViewController {
                         powerUpViewController.viewModel = powerUpViewModel
                         self?.show(powerUpViewController, sender: nil)
                     }
+                case .powerDownController:
+                    if let powerDownViewController = R.storyboard.power.powerDownViewController() {
+//                        powerUpViewController.viewModel = powerUpViewModel
+                        self?.show(powerDownViewController, sender: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

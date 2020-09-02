@@ -31,6 +31,16 @@ class TransferService: AppService<TransferApi> {
             .asObservable()
     }
     
+    func powerUp(_ account: String, amount: String) -> Observable<PowerUpModel> {
+        let activeKey = WalletStore.shared.password(from: AuthData.shared.username ?? "") ?? ""
+        let requestData = PowerUpRequestModel(activeKey: activeKey, account: account, amount: amount).toJsonString() ?? ""
+        
+        let signTrxData = RSAUtils.encrypt(string: requestData, publicKey: self.publicKey)
+        
+        return provider.rx.requestObject(.powerUp(signTrx: signTrxData ?? "", trxId: trxId), type: PowerUpModel.self)
+            .asObservable()
+    }
+    
     func claimReward() -> Observable<ClaimRewardModel> {
         let activeKey = WalletStore.shared.password(from: AuthData.shared.username ?? "")
         let data = "{ \"active_key\" : \"\(activeKey ?? "")\" }"

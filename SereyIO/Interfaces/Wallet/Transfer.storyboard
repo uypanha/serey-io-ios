@@ -117,7 +117,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dB1-nY-BHq">
-                                <rect key="frame" x="0.0" y="526" width="414" height="336"/>
+                                <rect key="frame" x="0.0" y="526" width="414" height="370"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="3HQ-tb-1Rm">
                                         <rect key="frame" x="16" y="16" width="382" height="304"/>
@@ -264,12 +264,13 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="3HQ-tb-1Rm" secondAttribute="trailing" constant="16" id="2Xk-Z1-aB0"/>
                                     <constraint firstItem="3HQ-tb-1Rm" firstAttribute="top" secondItem="dB1-nY-BHq" secondAttribute="top" constant="16" id="8ZI-8X-Qhc"/>
-                                    <constraint firstAttribute="bottom" secondItem="3HQ-tb-1Rm" secondAttribute="bottom" constant="16" id="T5B-hB-uQk"/>
+                                    <constraint firstItem="CDZ-5b-D5i" firstAttribute="bottom" secondItem="3HQ-tb-1Rm" secondAttribute="bottom" constant="16" id="T5B-hB-uQk"/>
                                     <constraint firstItem="3HQ-tb-1Rm" firstAttribute="leading" secondItem="dB1-nY-BHq" secondAttribute="leading" constant="16" id="aGK-e1-asI"/>
                                 </constraints>
+                                <viewLayoutGuide key="safeArea" id="CDZ-5b-D5i"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nak-rD-Ea0" customClass="CardView" customModule="SereyIO" customModuleProvider="target">
-                                <rect key="frame" x="177" y="44" width="60" height="4"/>
+                                <rect key="frame" x="177" y="16" width="60" height="4"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="4" id="6FR-zX-o8t"/>
@@ -285,14 +286,13 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="nak-rD-Ea0" firstAttribute="top" secondItem="pZT-vq-bO5" secondAttribute="top" id="6Zv-yx-pF4"/>
-                            <constraint firstItem="dB1-nY-BHq" firstAttribute="leading" secondItem="pZT-vq-bO5" secondAttribute="leading" id="IF8-SE-L63"/>
-                            <constraint firstItem="nak-rD-Ea0" firstAttribute="centerX" secondItem="pZT-vq-bO5" secondAttribute="centerX" id="McQ-tR-u8d"/>
-                            <constraint firstItem="pZT-vq-bO5" firstAttribute="trailing" secondItem="dB1-nY-BHq" secondAttribute="trailing" id="Sib-CW-vv9"/>
-                            <constraint firstItem="pZT-vq-bO5" firstAttribute="bottom" secondItem="dB1-nY-BHq" secondAttribute="bottom" id="bOZ-7v-qMh"/>
-                            <constraint firstItem="dB1-nY-BHq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pZT-vq-bO5" secondAttribute="top" id="veu-KT-Z2w"/>
+                            <constraint firstItem="nak-rD-Ea0" firstAttribute="top" secondItem="66L-80-hNJ" secondAttribute="top" constant="16" id="6Zv-yx-pF4"/>
+                            <constraint firstItem="dB1-nY-BHq" firstAttribute="leading" secondItem="66L-80-hNJ" secondAttribute="leading" id="IF8-SE-L63"/>
+                            <constraint firstItem="nak-rD-Ea0" firstAttribute="centerX" secondItem="66L-80-hNJ" secondAttribute="centerX" id="McQ-tR-u8d"/>
+                            <constraint firstAttribute="trailing" secondItem="dB1-nY-BHq" secondAttribute="trailing" id="Sib-CW-vv9"/>
+                            <constraint firstAttribute="bottom" secondItem="dB1-nY-BHq" secondAttribute="bottom" id="bOZ-7v-qMh"/>
+                            <constraint firstItem="dB1-nY-BHq" firstAttribute="top" relation="greaterThanOrEqual" secondItem="66L-80-hNJ" secondAttribute="top" id="veu-KT-Z2w"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="pZT-vq-bO5"/>
                     </view>
                     <connections>
                         <outlet property="amountLabel" destination="AGA-YE-mib" id="3ON-pI-XoJ"/>

@@ -8,6 +8,7 @@
 
 "transfer"          = "Transfer";
 "powerUp"           = "Power UP";
+"powerDown"         = "Power Down";
 
 "toAccount"         = "To account";
 "amount"            = "Amount";
