@@ -35,8 +35,8 @@ class LoadingButton: UIButton {
     
     func hideLoading() {
         self.setTitle(originalButtonText, for: .normal)
-        activityIndicator.stopAnimating()
-        activityIndicator.isHidden = true
+        activityIndicator?.stopAnimating()
+        activityIndicator?.isHidden = true
     }
     
     private func createActivityIndicator() -> NVActivityIndicatorView {
@@ -46,11 +46,11 @@ class LoadingButton: UIButton {
     }
     
     private func showSpinning() {
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        activityIndicator.isHidden = false
+        activityIndicator?.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator?.isHidden = false
         self.addSubview(activityIndicator)
         centerActivityIndicatorInButton()
-        activityIndicator.startAnimating()
+        activityIndicator?.startAnimating()
     }
     
     private func centerActivityIndicatorInButton() {

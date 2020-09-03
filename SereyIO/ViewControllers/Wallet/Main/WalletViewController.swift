@@ -203,9 +203,9 @@ extension WalletViewController {
                         powerUpViewController.viewModel = powerUpViewModel
                         self?.show(powerUpViewController, sender: nil)
                     }
-                case .powerDownController:
+                case .powerDownController(let powerDownViewModel):
                     if let powerDownViewController = R.storyboard.power.powerDownViewController() {
-//                        powerUpViewController.viewModel = powerUpViewModel
+                        powerDownViewController.viewModel = powerDownViewModel
                         self?.show(powerDownViewController, sender: nil)
                     }
                 }

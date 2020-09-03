@@ -11,4 +11,5 @@
 "powerDown"         = "Power Down";
 
 "toAccount"         = "To account";
+"fromAccount"       = "From account";
 "amount"            = "Amount";

@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+import RxBinding
 import MaterialComponents
 
-class PowerDownViewController: BaseViewController {
+class PowerDownViewController: BaseViewController, KeyboardController, AlertDialogController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var headerView: UIView!
@@ -24,11 +27,14 @@ class PowerDownViewController: BaseViewController {
     var accountFieldController: MDCTextInputControllerOutlined?
     var amountFieldController: MDCTextInputControllerOutlined?
     
+    var viewModel: PowerDownViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         setUpViews()
+        setUpRxObservers()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +66,7 @@ extension PowerDownViewController {
         
         self.accountFieldController = self.accountTextField.primaryController()
         self.amountFieldController = self.amountTextField.primaryController()
+        self.accountTextField.isEnabled = false
         
         self.amountTextField.leftView = UIImageView(image: R.image.amountIcon()).then { $0.tintColor = .gray }
         self.amountTextField.leftViewMode = .always
@@ -67,5 +74,61 @@ extension PowerDownViewController {
         self.accountTextField.leftViewMode = .always
         
         self.powerDownButton.primaryStyle()
+    }
+}
+
+// MARK: - SetUp RxObservers
+extension PowerDownViewController {
+    
+    func setUpRxObservers() {
+        setUpContentChangedObservers()
+        setUpControlObserves()
+        setUpViewToPresentObservers()
+        setUpShouldPresentErrorObservers()
+        setUpTabSelfToDismissKeyboard()?.disposed(by: self.disposeBag)
+    }
+    
+    func setUpContentChangedObservers() {
+        self.viewModel.accountTextFieldViewModel.bind(with: self.accountTextField, controller: self.accountFieldController)
+        self.viewModel.amountTextFieldViewModel.bind(with: self.amountTextField, controller: self.amountFieldController)
+        
+        self.viewModel.isPowerDownEnabled ~> self.powerDownButton.rx.isEnabled ~ self.disposeBag
+    }
+    
+    func setUpControlObserves() {
+        self.powerDownButton.rx.tap.asObservable()
+            .filter { !self.powerDownButton.isLoading }
+            .map { PowerDownViewModel.Action.powerDownPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+    }
+    
+    func setUpViewToPresentObservers() {
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { [weak self] viewToPresent in
+                switch viewToPresent {
+                case .loading(let loading):
+                    self?.powerDownButton.isLoading = loading
+                    self?.accountTextField.isEnabled = !loading
+                    self?.amountTextField.isEnabled = !loading
+                case .confirmPowerDownController(let confirmPowerViewModel):
+                    if let confirmPowerDownController = R.storyboard.power.confirmPowerDownViewController() {
+                        confirmPowerDownController.viewModel = confirmPowerViewModel
+                        let bottomSheet = BottomSheetViewController(contentViewController: confirmPowerDownController)
+                        self?.present(bottomSheet, animated: true, completion: nil)
+                    }
+                case .dismiss:
+                    self?.navigationController?.popViewController(animated: true)
+                case .showAlertDialogController(let alertDialogModel):
+                    self?.showDialog(alertDialogModel)
+                }
+            }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentErrorObservers() {
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [weak self] error in
+                self?.showDialogError(error)
+            }) ~ self.disposeBag
     }
 }

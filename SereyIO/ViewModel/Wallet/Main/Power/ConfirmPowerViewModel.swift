@@ -69,14 +69,14 @@ extension ConfirmPowerViewModel {
 
 enum PowerType {
     case up(account: String, amount: String)
-    case down(account: String, amount: String)
+    case down(amount: String)
     
-    var account: String {
+    var account: String? {
         switch self {
         case .up(let account, _):
             return account
-        case .down(let account, _):
-            return account
+        case .down:
+            return nil
         }
     }
     
@@ -84,7 +84,7 @@ enum PowerType {
         switch self {
         case .up(_ , let amount):
             return amount
-        case .down(_ , let amount):
+        case .down(let amount):
             return amount
         }
     }

@@ -386,6 +386,7 @@
                             <constraint firstItem="Wdu-3C-deN" firstAttribute="centerX" secondItem="yyD-YI-7fJ" secondAttribute="centerX" id="myo-lQ-cLH"/>
                             <constraint firstAttribute="bottom" secondItem="jKa-at-o1b" secondAttribute="bottom" id="qEZ-yT-S3e"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="Tv1-1X-BQd"/>
                     </view>
                     <connections>
                         <outlet property="amountLabel" destination="2SU-Kt-dgs" id="Ear-Sj-cWv"/>
@@ -401,8 +402,162 @@
             </objects>
             <point key="canvasLocation" x="691" y="110"/>
         </scene>
+        <!--Confirm Power Down View Controller-->
+        <scene sceneID="ozY-GN-NFQ">
+            <objects>
+                <viewController storyboardIdentifier="ConfirmPowerDownViewController" id="8Sf-gG-oce" customClass="ConfirmPowerDownViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eAl-hX-bRM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pv5-jK-YQM">
+                                <rect key="frame" x="0.0" y="642" width="414" height="254"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="hg8-Du-tCr">
+                                        <rect key="frame" x="16" y="16" width="382" height="188"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="U31-ht-bOH">
+                                                <rect key="frame" x="0.0" y="0.0" width="382" height="54"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rxx-8I-F3l" customClass="CardView" customModule="SereyIO" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="54" height="54"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="powerDownIcon" translatesAutoresizingMaskIntoConstraints="NO" id="jgc-f5-VVT">
+                                                                <rect key="frame" x="18" y="18" width="18" height="18"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="18" id="MaI-Q3-SlJ"/>
+                                                                    <constraint firstAttribute="width" secondItem="jgc-f5-VVT" secondAttribute="height" multiplier="1:1" id="fav-zH-aPO"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.99215686274509807" green="0.95294117647058818" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <constraints>
+                                                            <constraint firstItem="jgc-f5-VVT" firstAttribute="centerX" secondItem="rxx-8I-F3l" secondAttribute="centerX" id="78W-gz-hFl"/>
+                                                            <constraint firstAttribute="height" constant="54" id="lpj-gZ-5ip"/>
+                                                            <constraint firstItem="jgc-f5-VVT" firstAttribute="centerY" secondItem="rxx-8I-F3l" secondAttribute="centerY" id="qMo-nU-GnS"/>
+                                                            <constraint firstAttribute="width" constant="54" id="tQB-jk-DxW"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                <real key="value" value="27"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="showShadow" value="NO"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="MX0-cC-wdl">
+                                                        <rect key="frame" x="66" y="4.5" width="316" height="45"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Total amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EY6-0u-utL">
+                                                                <rect key="frame" x="0.0" y="0.0" width="316" height="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cxl-Vf-pd8">
+                                                                <rect key="frame" x="0.0" y="21" width="316" height="24"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="54" id="CI3-oT-KbM"/>
+                                                </constraints>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="ydH-Wx-NNB">
+                                                <rect key="frame" x="0.0" y="78" width="382" height="42"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="x3h-mX-0hH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="382" height="42"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="From" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dz-RN-O4G">
+                                                                <rect key="frame" x="0.0" y="0.0" width="382" height="17"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="17" id="wcm-7j-1Ng"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lerum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lc4-26-wqI">
+                                                                <rect key="frame" x="0.0" y="21" width="382" height="21"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="21" id="Nr7-Qd-fzs"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HjV-QY-An6" customClass="LoadingButton" customModule="SereyIO" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="144" width="382" height="44"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="5FN-dy-eu9"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <state key="normal" title="Power Down">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="LNE-ju-g92" firstAttribute="bottom" secondItem="hg8-Du-tCr" secondAttribute="bottom" constant="16" id="SKq-tz-wlh"/>
+                                    <constraint firstItem="hg8-Du-tCr" firstAttribute="leading" secondItem="pv5-jK-YQM" secondAttribute="leading" constant="16" id="fnP-F0-xFB"/>
+                                    <constraint firstItem="hg8-Du-tCr" firstAttribute="top" secondItem="pv5-jK-YQM" secondAttribute="top" constant="16" id="tKi-04-bTy"/>
+                                    <constraint firstAttribute="trailing" secondItem="hg8-Du-tCr" secondAttribute="trailing" constant="16" id="ua2-JY-jdk"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="LNE-ju-g92"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ghp-4p-Q6c" customClass="CardView" customModule="SereyIO" customModuleProvider="target">
+                                <rect key="frame" x="177" y="16" width="60" height="4"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="5Lo-ma-O9A"/>
+                                    <constraint firstAttribute="height" constant="4" id="rAh-Th-BNj"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showShadow" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="pv5-jK-YQM" secondAttribute="trailing" id="Nsl-eX-8Pz"/>
+                            <constraint firstItem="ghp-4p-Q6c" firstAttribute="top" secondItem="eAl-hX-bRM" secondAttribute="top" constant="16" id="SpV-j1-w86"/>
+                            <constraint firstItem="pv5-jK-YQM" firstAttribute="top" relation="greaterThanOrEqual" secondItem="eAl-hX-bRM" secondAttribute="top" id="XRS-hJ-Lda"/>
+                            <constraint firstAttribute="bottom" secondItem="pv5-jK-YQM" secondAttribute="bottom" id="gNR-lZ-W1k"/>
+                            <constraint firstItem="pv5-jK-YQM" firstAttribute="leading" secondItem="eAl-hX-bRM" secondAttribute="leading" id="hXi-9j-M3w"/>
+                            <constraint firstItem="ghp-4p-Q6c" firstAttribute="centerX" secondItem="eAl-hX-bRM" secondAttribute="centerX" id="rbf-yl-XbH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Eev-bb-fgS"/>
+                    </view>
+                    <connections>
+                        <outlet property="amountLabel" destination="cxl-Vf-pd8" id="cOs-a4-BdX"/>
+                        <outlet property="fromLabel" destination="4dz-RN-O4G" id="rPh-aY-Zrs"/>
+                        <outlet property="fromUsernameLabel" destination="Lc4-26-wqI" id="LXC-Oz-eTg"/>
+                        <outlet property="powerDownButton" destination="HjV-QY-An6" id="htm-cS-bgt"/>
+                        <outlet property="totalAmountLabel" destination="EY6-0u-utL" id="7c4-gl-qjz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tg0-H4-pZz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="688.40579710144937" y="892.63392857142856"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="powerDownIcon" width="25" height="25"/>
         <image name="powerUpIcon" width="25" height="25"/>
     </resources>
 </document>

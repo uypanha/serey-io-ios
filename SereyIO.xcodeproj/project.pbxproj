@@ -384,6 +384,10 @@
 		DCF67FEC24100C00003061A7 /* PeopleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FEB24100C00003061A7 /* PeopleModel.swift */; };
 		DCF67FEF24100C6F003061A7 /* ListDataResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FEE24100C6F003061A7 /* ListDataResponseModel.swift */; };
 		DCF8738223F6FA3B007A8724 /* BasePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF8738123F6FA3B007A8724 /* BasePostViewModel.swift */; };
+		DCFBD77225013B29005B6875 /* ConfirmPowerDownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBD77125013B29005B6875 /* ConfirmPowerDownViewController.swift */; };
+		DCFBD77425013D4D005B6875 /* PowerDownViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBD77325013D4D005B6875 /* PowerDownViewModel.swift */; };
+		DCFBD777250140DC005B6875 /* PowerDownRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBD776250140DC005B6875 /* PowerDownRequestModel.swift */; };
+		DCFBD77925014119005B6875 /* PowerDownModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBD77825014119005B6875 /* PowerDownModel.swift */; };
 		DCFF69612448B5BB00416218 /* VoteDialogProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */; };
 /* End PBXBuildFile section */
 
@@ -824,6 +828,10 @@
 		DCF67FEB24100C00003061A7 /* PeopleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleModel.swift; sourceTree = "<group>"; };
 		DCF67FEE24100C6F003061A7 /* ListDataResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDataResponseModel.swift; sourceTree = "<group>"; };
 		DCF8738123F6FA3B007A8724 /* BasePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePostViewModel.swift; sourceTree = "<group>"; };
+		DCFBD77125013B29005B6875 /* ConfirmPowerDownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPowerDownViewController.swift; sourceTree = "<group>"; };
+		DCFBD77325013D4D005B6875 /* PowerDownViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerDownViewModel.swift; sourceTree = "<group>"; };
+		DCFBD776250140DC005B6875 /* PowerDownRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerDownRequestModel.swift; sourceTree = "<group>"; };
+		DCFBD77825014119005B6875 /* PowerDownModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerDownModel.swift; sourceTree = "<group>"; };
 		DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDialogProtocol.swift; sourceTree = "<group>"; };
 		E48D784F3F419D4A8B0116EC /* Pods_SereyIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SereyIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4BA4EF9560F572B6DA8F7A4 /* Pods-SereyIOTests.debug_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.debug_production.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.debug_production.xcconfig"; sourceTree = "<group>"; };
@@ -1069,6 +1077,7 @@
 				DCA45A0F24D317D400E21D9A /* ClaimRewardModel.swift */,
 				DC1F79DA24D089F900B7F0D3 /* InitTransactionModel.swift */,
 				DC7C8F0A24DC61FA0051C084 /* TransactionModel.swift */,
+				DCFBD775250140C7005B6875 /* PowerDown */,
 				DC7AB00124FB991C00ECDF47 /* PowerUp */,
 				DC7AB00024FB98FE00ECDF47 /* Transfer */,
 			);
@@ -1645,8 +1654,9 @@
 		DC7AAFF124F8035100ECDF47 /* Power */ = {
 			isa = PBXGroup;
 			children = (
-				DC7AAFEF24F8032900ECDF47 /* PowerUpViewModel.swift */,
 				DC8AB7BF24FC058600968FCD /* ConfirmPowerViewModel.swift */,
+				DCFBD77325013D4D005B6875 /* PowerDownViewModel.swift */,
+				DC7AAFEF24F8032900ECDF47 /* PowerUpViewModel.swift */,
 			);
 			path = Power;
 			sourceTree = "<group>";
@@ -1809,6 +1819,7 @@
 		DC88B13424F5737900327C50 /* Power */ = {
 			isa = PBXGroup;
 			children = (
+				DCFBD77125013B29005B6875 /* ConfirmPowerDownViewController.swift */,
 				DC8AB7BD24FBA13200968FCD /* ConfirmPowerUpViewController.swift */,
 				DC7AAFFA24F80BD000ECDF47 /* PowerDownViewController.swift */,
 				DC88B13524F5739000327C50 /* PowerUpViewController.swift */,
@@ -2514,6 +2525,15 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		DCFBD775250140C7005B6875 /* PowerDown */ = {
+			isa = PBXGroup;
+			children = (
+				DCFBD776250140DC005B6875 /* PowerDownRequestModel.swift */,
+				DCFBD77825014119005B6875 /* PowerDownModel.swift */,
+			);
+			path = PowerDown;
+			sourceTree = "<group>";
+		};
 		EC758BF2CA0BBE85782B9603 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -3025,6 +3045,7 @@
 				DCF8738223F6FA3B007A8724 /* BasePostViewModel.swift in Sources */,
 				DCB5BD742497D2E10042E5AF /* SecurityMethodCellViewModel.swift in Sources */,
 				DC583A8F24CC281C00D9C4D3 /* WalletAuthValidationViewModel.swift in Sources */,
+				DCFBD77425013D4D005B6875 /* PowerDownViewModel.swift in Sources */,
 				DCEC0CC6240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift in Sources */,
 				DC9AC6E62406C5BA008FAFA6 /* DiscussionCategoryModel.swift in Sources */,
 				DC7C8F0F24DC663B0051C084 /* TransactionTableViewCell.swift in Sources */,
@@ -3128,9 +3149,11 @@
 				DC5B55AE2451E5B200F8531B /* PushService.swift in Sources */,
 				DCDE00752448A70B00D09717 /* CommentTextViewModel.swift in Sources */,
 				DC387C9224E9821100D8C78E /* ChangePasswordViewController.swift in Sources */,
+				DCFBD77925014119005B6875 /* PowerDownModel.swift in Sources */,
 				DC19DBF623EC751700571CC8 /* SearchViewModel.swift in Sources */,
 				DCF67FE1240FFD65003061A7 /* PeopleTableViewCell.swift in Sources */,
 				DCD39876232E20CF00C812EB /* SlashViewModel.swift in Sources */,
+				DCFBD77225013B29005B6875 /* ConfirmPowerDownViewController.swift in Sources */,
 				DC7C8EEE24D9B3100051C084 /* TransferCoinViewModel.swift in Sources */,
 				DC40D5D423E32A4400B0DD96 /* ImageTextCellViewModel.swift in Sources */,
 				DC19DBEB23EC5F9E00571CC8 /* PostTableViewModel.swift in Sources */,
@@ -3163,6 +3186,7 @@
 				DCD3985F232E106E00C812EB /* BaseViewController.swift in Sources */,
 				DC6ED58D2326A5E600770B31 /* APNSHandler.swift in Sources */,
 				DC8EAB8723E7232F00E00A00 /* SearchViewController.swift in Sources */,
+				DCFBD777250140DC005B6875 /* PowerDownRequestModel.swift in Sources */,
 				DC7F097A24ACE51600CE8AFC /* WalletCardCellViewModel.swift in Sources */,
 				DC6ED5802326A46300770B31 /* SimpleStore.swift in Sources */,
 				DCC49AD323E865D700119BAA /* ProfileView.swift in Sources */,
