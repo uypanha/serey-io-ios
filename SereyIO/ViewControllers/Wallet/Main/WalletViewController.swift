@@ -208,6 +208,17 @@ extension WalletViewController {
                         powerDownViewController.viewModel = powerDownViewModel
                         self?.show(powerDownViewController, sender: nil)
                     }
+                case .claimRewardController:
+                    if let claimRewardViewController = R.storyboard.reward.claimRewardViewController() {
+                        let bottomSheet = BottomSheetViewController(contentViewController: claimRewardViewController)
+                        self?.present(bottomSheet, animated: true, completion: nil)
+                    }
+                case .cancelPowerDownController(let cancelPowerDownViewModel):
+                    if let cancelPowerDownViewController = R.storyboard.power.cancelPowerDownViewController() {
+                        cancelPowerDownViewController.viewModel = cancelPowerDownViewModel
+                        let bottomSheet = BottomSheetViewController(contentViewController: cancelPowerDownViewController)
+                        self?.present(bottomSheet, animated: true, completion: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

@@ -555,6 +555,79 @@
             </objects>
             <point key="canvasLocation" x="688.40579710144937" y="892.63392857142856"/>
         </scene>
+        <!--Cancel Power Down View Controller-->
+        <scene sceneID="bAd-gf-EhT">
+            <objects>
+                <viewController storyboardIdentifier="CancelPowerDownViewController" id="A1t-dq-VrB" customClass="CancelPowerDownViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PwX-C5-tCG">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dtg-3Y-Smn">
+                                <rect key="frame" x="0.0" y="710" width="414" height="152"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="knY-gJ-oFj">
+                                        <rect key="frame" x="24" y="24" width="366" height="112"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="beX-HD-cBl">
+                                                <rect key="frame" x="0.0" y="0.0" width="366" height="52"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancel Power Down?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2ZO-Ja-IVb">
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure you want to cancel power down?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tT0-m9-nHx">
+                                                        <rect key="frame" x="0.0" y="32.5" width="366" height="19.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEW-fa-UUL" customClass="LoadingButton" customModule="SereyIO" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="68" width="366" height="44"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="YGZ-V7-iIE"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <state key="normal" title="Cancel Power Down">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="knY-gJ-oFj" firstAttribute="top" secondItem="dtg-3Y-Smn" secondAttribute="top" constant="24" id="NNp-mW-e61"/>
+                                    <constraint firstItem="knY-gJ-oFj" firstAttribute="leading" secondItem="dtg-3Y-Smn" secondAttribute="leading" constant="24" id="Qzc-zN-GdS"/>
+                                    <constraint firstAttribute="trailing" secondItem="knY-gJ-oFj" secondAttribute="trailing" constant="24" id="WGM-mv-QNi"/>
+                                    <constraint firstAttribute="bottom" secondItem="knY-gJ-oFj" secondAttribute="bottom" constant="16" id="ZkR-bp-sok"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="dtg-3Y-Smn" firstAttribute="leading" secondItem="PwX-C5-tCG" secondAttribute="leading" id="6Sq-EY-Y74"/>
+                            <constraint firstItem="1Zw-vS-Jpb" firstAttribute="bottom" secondItem="dtg-3Y-Smn" secondAttribute="bottom" id="J0y-qu-MXy"/>
+                            <constraint firstAttribute="trailing" secondItem="dtg-3Y-Smn" secondAttribute="trailing" id="Y7a-XX-JiX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="1Zw-vS-Jpb"/>
+                    </view>
+                    <connections>
+                        <outlet property="cancelPowerDownButton" destination="GEW-fa-UUL" id="aft-zK-q5A"/>
+                        <outlet property="containerView" destination="dtg-3Y-Smn" id="iId-Kn-Uxw"/>
+                        <outlet property="messageLabel" destination="tT0-m9-nHx" id="SqR-vl-V4z"/>
+                        <outlet property="titleLabel" destination="2ZO-Ja-IVb" id="YvI-pC-n5h"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UJq-Re-dN0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-152" y="1642"/>
+        </scene>
     </scenes>
     <resources>
         <image name="powerDownIcon" width="25" height="25"/>

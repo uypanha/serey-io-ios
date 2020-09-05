@@ -60,6 +60,16 @@ class TransferService: AppService<TransferApi> {
             .asObservable()
     }
     
+    func cancelPower() -> Observable<CancelPowerModel> {
+        let activeKey = WalletStore.shared.password(from: AuthData.shared.username ?? "") ?? ""
+        let requestData = CancelPowerRequestModel(activeKey: activeKey).toJsonString() ?? ""
+        
+        let signTrxData = RSAUtils.encrypt(string: requestData, publicKey: self.publicKey)
+        
+        return provider.rx.requestObject(.cancelPowerDown(signTrx: signTrxData ?? "", trxId: trxId), type: CancelPowerModel.self)
+            .asObservable()
+    }
+    
     func getAccountHistory() -> Observable<[TransactionModel]> {
         return provider.rx.requestObject(.getAccountHistory, type: [TransactionModel].self)
             .asObservable()

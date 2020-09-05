@@ -22,6 +22,8 @@ enum TransferApi {
     case powerDown(signTrx: String, trxId: Int)
     
     case getAccountHistory
+    
+    case cancelPowerDown(signTrx: String, trxId: Int)
 }
 
 extension TransferApi: AuthorizedApiTargetType {
@@ -54,6 +56,12 @@ extension TransferApi: AuthorizedApiTargetType {
                 "trxId"     : trxId,
                 "signTrx"   : signTrx
             ]
+        case .cancelPowerDown(let signTrx, let trxId):
+            return [
+                "trx_type"  : "cancelPower",
+                "trxId"     : trxId,
+                "signTrx"   : signTrx
+            ]
         default:
             return [:]
         }
@@ -73,6 +81,8 @@ extension TransferApi: AuthorizedApiTargetType {
             return "/api/v1/transfer/powerUpSerey"
         case .powerDown:
             return "/api/v1/transfer/powerDownSerey"
+        case .cancelPowerDown:
+            return "/api/v1/transfer/cancelPowerSerey"
         }
     }
     

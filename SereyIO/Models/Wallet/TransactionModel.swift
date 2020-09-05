@@ -71,6 +71,8 @@ struct TransactionDataModel: Codable {
     var amount: String?
     var memo: String?
     
+    var vestingShares: String?
+    
     enum CodingKeys: String, CodingKey {
         case account
         case rewardSteem = "reward_steem"
@@ -79,6 +81,7 @@ struct TransactionDataModel: Codable {
         case to
         case amount
         case memo
+        case vestingShares = "vesting_shares"
     }
 }
 
@@ -86,6 +89,7 @@ enum TransferType: String {
     case transfer = "transfer"
     case transferVesting = "transfer_to_vesting"
     case claimRewardBalance = "claim_reward_balance"
+    case withdrawVesting = "withdraw_vesting"
     
     func image(from username: String?) -> UIImage? {
         switch self {
@@ -95,6 +99,8 @@ enum TransferType: String {
             return R.image.transactionClaimReward()
         case .transferVesting:
             return R.image.transactionPowerUp()
+        case .withdrawVesting:
+            return R.image.transactionPowerDown()
         }
     }
     
@@ -106,6 +112,8 @@ enum TransferType: String {
             return "Claim Reward"
         case .transferVesting:
             return "Power Up"
+        case .withdrawVesting:
+            return "Power Down"
         }
     }
     
@@ -117,6 +125,8 @@ enum TransferType: String {
             return "Claim Reward"
         case .transferVesting:
             return data.amount ?? ""
+        case .withdrawVesting:
+            return data.vestingShares ?? ""
         }
     }
     

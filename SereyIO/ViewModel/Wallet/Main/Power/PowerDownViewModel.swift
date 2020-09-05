@@ -84,6 +84,7 @@ fileprivate extension PowerDownViewModel {
     
     func handlePowerDownPressed() {
         if self.validateForm() {
+            self.isLoading.onNext(true)
             self.initTransaction(completion: {
                 self.handleConfirmTransfer()
             })
