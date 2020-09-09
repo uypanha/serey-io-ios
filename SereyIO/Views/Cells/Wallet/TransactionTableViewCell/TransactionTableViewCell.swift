@@ -37,6 +37,7 @@ class TransactionTableViewCell: BaseTableViewCell {
                     }),
                 cellModel.isShimmering.asObservable()
                     .subscribe(onNext: { [weak self] isShimmering in
+                        self?.selectionStyle = isShimmering ? .none : .default
                         self?.prepareShimmering(isShimmering)
                     })
             ]

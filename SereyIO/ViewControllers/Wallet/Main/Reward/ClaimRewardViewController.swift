@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
+import RxBinding
 
-class ClaimRewardViewController: BaseViewController, BottomSheetProtocol {
+class ClaimRewardViewController: BaseViewController, BottomSheetProtocol, AlertDialogController {
     
     var preferredBottomSheetContentSize: CGSize? {
         let preferedSize = CGSize(width: self.view.frame.width, height: self.containerView.frame.height)
@@ -20,11 +23,14 @@ class ClaimRewardViewController: BaseViewController, BottomSheetProtocol {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var claimButton: LoadingButton!
     
+    var viewModel: ClaimRewardViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         setUpViews()
+        setUpRxObservers()
     }
 }
 
@@ -33,5 +39,43 @@ extension ClaimRewardViewController {
     
     func setUpViews() {
         self.claimButton.primaryStyle()
+    }
+}
+
+// MARK: - SetUp RxObservers
+extension ClaimRewardViewController {
+    
+    func setUpRxObservers() {
+        setUpControlObservers()
+        setUpViewToPresentObservers()
+        setUpShouldPresentErrorObservers()
+    }
+    
+    func setUpControlObservers() {
+        self.claimButton.rx.tap.asObservable()
+            .map { ClaimRewardViewModel.Action.claimRewardPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+    }
+    
+    func setUpViewToPresentObservers() {
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { [weak self] viewToPresent in
+                switch viewToPresent {
+                case .loading(let loading):
+                    self?.claimButton.isLoading = loading
+                case .dismiss:
+                    self?.dismiss(animated: true, completion: nil)
+                case .showAlertDialogController(let alertDialogModel):
+                    self?.showDialog(alertDialogModel)
+                }
+            }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentErrorObservers() {
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [weak self] error in
+                self?.showDialogError(error)
+            }) ~ self.disposeBag
     }
 }

@@ -21,11 +21,11 @@ struct TransactionModel: Codable {
     }
     
     var typeImage: UIImage? {
-        return opData.opType?.image(from: opData.data.from)
+        return opData.opType?.image(opData.data)
     }
     
     var typeTitle: String? {
-        return opData.opType?.title(from: opData.data.from)
+        return opData.opType?.title(opData.data)
     }
     
     var value: String? {
@@ -33,7 +33,11 @@ struct TransactionModel: Codable {
     }
     
     var valueColor: UIColor? {
-        return opData.opType?.valueColor(username: opData.data.from)
+        return opData.opType?.valueColor(opData.data)
+    }
+    
+    var infoCells: [CellViewModel] {
+        return opData.opType?.prepareInfoCells(opData.data) ?? []
     }
     
     enum CodingKeys: String, CodingKey {
@@ -91,29 +95,29 @@ enum TransferType: String {
     case claimRewardBalance = "claim_reward_balance"
     case withdrawVesting = "withdraw_vesting"
     
-    func image(from username: String?) -> UIImage? {
+    func image(_ data: TransactionDataModel) -> UIImage? {
         switch self {
         case .transfer:
-            return username == AuthData.shared.username ? R.image.transactionTransfer() : R.image.transactionReceive()
+            return data.from == AuthData.shared.username ? R.image.transactionTransfer() : R.image.transactionReceive()
         case .claimRewardBalance:
             return R.image.transactionClaimReward()
         case .transferVesting:
             return R.image.transactionPowerUp()
         case .withdrawVesting:
-            return R.image.transactionPowerDown()
+            return data.vestingShares == "0.000000 VESTS" ? R.image.transactionCancelPowerDown() : R.image.transactionPowerDown()
         }
     }
     
-    func title(from username: String?) -> String {
+    func title(_ data: TransactionDataModel) -> String {
         switch self {
         case .transfer:
-            return username == AuthData.shared.username ? "Transfered" : "Received"
+            return data.from == AuthData.shared.username ? "Transfered" : "Received"
         case .claimRewardBalance:
             return "Claim Reward"
         case .transferVesting:
             return "Power Up"
         case .withdrawVesting:
-            return "Power Down"
+            return data.vestingShares == "0.000000 VESTS" ? "Cancel Power" : "Power Down"
         }
     }
     
@@ -122,20 +126,40 @@ enum TransferType: String {
         case .transfer:
             return data.from == AuthData.shared.username ? "-\(data.amount ?? "")" : "+\(data.amount ?? "")"
         case .claimRewardBalance:
-            return "Claim Reward"
+            return "+" + (data.rewardVests ?? "0 SEREY")
         case .transferVesting:
-            return data.amount ?? ""
+            return "+" + (data.amount ?? "")
         case .withdrawVesting:
-            return data.vestingShares ?? ""
+            return data.vestingShares == "0.000000 VESTS" ? (data.vestingShares ?? "") : "+\(data.vestingShares ?? "")"
         }
     }
     
-    func valueColor(username: String?) -> UIColor {
+    func valueColor(_ data: TransactionDataModel) -> UIColor {
         switch self {
         case .transfer:
-            return username == AuthData.shared.username ? .red : ColorName.primary.color
-        default:
-            return .darkGray
+            return data.from == AuthData.shared.username ? .red : ColorName.primary.color
+        case .claimRewardBalance, .transferVesting:
+            return ColorName.primary.color
+        case .withdrawVesting:
+            return data.vestingShares == "0.000000 VESTS" ? .darkGray : ColorName.primary.color
+        }
+    }
+    
+    func prepareInfoCells(_ data: TransactionDataModel) -> [CellViewModel] {
+        let titleCell = TextCellViewModel(with: self.prepareCellTitle(data), properties: .init(font: .boldSystemFont(ofSize: 17), textColor: .black), indicatorAccessory: false)
+        return [titleCell]
+    }
+    
+    func prepareCellTitle(_ data: TransactionDataModel) -> String {
+        switch self {
+        case .transfer:
+            return data.from == AuthData.shared.username ? "Received from \(data.from!)" : "Transfered to \(data.to!)"
+        case .claimRewardBalance:
+            return "Claim Reward"
+        case .transferVesting:
+            return "Power Up"
+        case .withdrawVesting:
+            return data.vestingShares == "0.000000 VESTS" ? "Cancel Power" : "Power Down"
         }
     }
 }

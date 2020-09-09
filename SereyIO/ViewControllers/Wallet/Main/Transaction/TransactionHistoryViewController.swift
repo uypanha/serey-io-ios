@@ -107,10 +107,13 @@ extension TransactionHistoryViewController {
             .disposed(by: self.disposeBag)
         
         // Item Selected
-//        self.tableView.rx.itemSelected.asObservable()
-//            .map { TransactionHistoryViewModel.Action.itemSelected(at: $0) }
-//            .bind(to: self.viewModel.didActionSubject)
-//            .disposed(by: self.disposeBag)
+        self.tableView.rx.itemSelected.asObservable()
+            .`do`(onNext: { [weak self] indexPath  in
+                self?.tableView.deselectRow(at: indexPath, animated: true)
+            })
+            .map { TransactionHistoryViewModel.Action.itemSelected($0) }
+            .bind(to: self.viewModel.didActionSubject)
+            .disposed(by: self.disposeBag)
     }
     
     func setUpShouldPresentObservers() {
@@ -119,6 +122,10 @@ extension TransactionHistoryViewController {
                 switch viewToPresent {
                 case .emptyResult(let emptyViewModel):
                     self?.prepareToDisplayEmptyView(emptyViewModel)
+                case .transactionDetailController(let transactionDetailViewModel):
+                    let listTableViewController = ListTableViewController(transactionDetailViewModel)
+                    let bottomSheet = BottomSheetListViewController(contentViewController: listTableViewController)
+                    self?.present(bottomSheet, animated: true, completion: nil)
                 }
             }) ~ self.disposeBag
     }

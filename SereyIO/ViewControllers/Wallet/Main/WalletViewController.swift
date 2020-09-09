@@ -208,8 +208,9 @@ extension WalletViewController {
                         powerDownViewController.viewModel = powerDownViewModel
                         self?.show(powerDownViewController, sender: nil)
                     }
-                case .claimRewardController:
+                case .claimRewardController(let claimRewardViewModel):
                     if let claimRewardViewController = R.storyboard.reward.claimRewardViewController() {
+                        claimRewardViewController.viewModel = claimRewardViewModel
                         let bottomSheet = BottomSheetViewController(contentViewController: claimRewardViewController)
                         self?.present(bottomSheet, animated: true, completion: nil)
                     }

@@ -11,14 +11,19 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class TransactionHistoryViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, ShouldPresent, DownloadStateNetworkProtocol {
+class TransactionHistoryViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, ShouldPresent, ShouldReactToAction, DownloadStateNetworkProtocol {
+    
+    enum Action {
+        case itemSelected(IndexPath)
+    }
     
     enum ViewToPresent {
         case emptyResult(EmptyOrErrorViewModel)
+        case transactionDetailController(TransactionDetailViewModel)
     }
     
     // input:
-    //    lazy var didActionSubject = PublishSubject<Action>()
+    let didActionSubject: PublishSubject<Action>
     
     // output:
     let shouldPresentSubject: PublishSubject<ViewToPresent>
@@ -30,6 +35,7 @@ class TransactionHistoryViewModel: BaseCellViewModel, CollectionMultiSectionsPro
     let isDownloading: BehaviorRelay<Bool>
     
     override init() {
+        self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
         
         self.transactions = .init(value: [])
@@ -104,6 +110,17 @@ extension TransactionHistoryViewModel {
     }
 }
 
+// MARK: - Action Handler
+fileprivate extension TransactionHistoryViewModel {
+    
+    func handleItemSelected(_ indexPath: IndexPath) {
+        if let item = item(at: indexPath) as? TransactionCellViewModel, let transaction = item.transaction.value {
+            let transactionDetailViewModel = TransactionDetailViewModel(transaction)
+            self.shouldPresent(.transactionDetailController(transactionDetailViewModel))
+        }
+    }
+}
+
 // MARK: - SetUp RxObservers
 fileprivate extension TransactionHistoryViewModel {
     
@@ -127,14 +144,14 @@ fileprivate extension TransactionHistoryViewModel {
     }
     
     func setUpActionObservers() {
-//        self.didActionSubject.asObservable()
-//            .subscribe(onNext: { [weak self] action in
-//                switch action {
-//                case .itemSelected(let indexPath):
-//                    self?.handleItemSelected(indexPath)
+        self.didActionSubject.asObservable()
+            .subscribe(onNext: { [weak self] action in
+                switch action {
+                case .itemSelected(let indexPath):
+                    self?.handleItemSelected(indexPath)
 //                case .searchEditingChanged:
 //                    self?.handleEditingChanged()
-//                }
-//            }).disposed(by: self.disposeBag)
+                }
+            }).disposed(by: self.disposeBag)
     }
 }

@@ -27,7 +27,7 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
         case scanQRViewController(PayQRViewModel)
         case powerUpController(PowerUpViewModel)
         case powerDownController(PowerDownViewModel)
-        case claimRewardController
+        case claimRewardController(ClaimRewardViewModel)
         case cancelPowerDownController(CancelPowerDownViewModel)
         case settingsController
     }
@@ -143,7 +143,8 @@ fileprivate extension WalletViewModel {
                 let powerDownViewModel = PowerDownViewModel()
                 self.shouldPresent(.powerDownController(powerDownViewModel))
             case .claimReward:
-                self.shouldPresent(.claimRewardController)
+                let claimRewardViewModel = ClaimRewardViewModel()
+                self.shouldPresent(.claimRewardController(claimRewardViewModel))
             case .cancelPower:
                 let cancelPowerDownViewModel = CancelPowerDownViewModel()
                 self.shouldPresent(.cancelPowerDownController(cancelPowerDownViewModel))
