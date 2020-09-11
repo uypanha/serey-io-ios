@@ -26,6 +26,7 @@ class TransactionDetailViewModel: BaseListTableViewModel {
     override func registerTableViewCell(_ tableView: UITableView) {
         super.registerTableViewCell(tableView)
         
+        tableView.contentInset = .init(top: 12, left: 0, bottom: 8, right: 0)
         tableView.separatorStyle = .none
         tableView.register(TransactionInfoTableViewCell.self)
         tableView.register(TextTableViewCell.self)
@@ -36,6 +37,10 @@ class TransactionDetailViewModel: BaseListTableViewModel {
         case is TextCellViewModel:
             let cell: TextTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.cellModel = item as? TextCellViewModel
+            return cell
+        case is TransactionInfoCellViewModel:
+            let cell: TransactionInfoTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+            cell.cellModel = item as? TransactionInfoCellViewModel
             return cell
         default:
             return UITableViewCell()

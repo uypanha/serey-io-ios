@@ -37,7 +37,9 @@ struct TransactionModel: Codable {
     }
     
     var infoCells: [CellViewModel] {
-        return opData.opType?.prepareInfoCells(opData.data) ?? []
+        let date = Date.date(from: self.opData.timestamp ?? "", format: "yyyy-MM-dd'T'HH:mm:ss")
+        
+        return opData.opType?.prepareInfoCells(opData.data, date: date?.format("MMMM dd, yyyy hh:mm aa") ?? "") ?? []
     }
     
     enum CodingKeys: String, CodingKey {
@@ -145,15 +147,41 @@ enum TransferType: String {
         }
     }
     
-    func prepareInfoCells(_ data: TransactionDataModel) -> [CellViewModel] {
+    func prepareInfoCells(_ data: TransactionDataModel, date: String) -> [CellViewModel] {
+        var items: [CellViewModel] = []
         let titleCell = TextCellViewModel(with: self.prepareCellTitle(data), properties: .init(font: .boldSystemFont(ofSize: 17), textColor: .black), indicatorAccessory: false)
-        return [titleCell]
+        items.append(titleCell)
+        
+        if let amount = data.amount {
+            let amountCell = TransactionInfoCellViewModel(title: "Amount", description: amount)
+            items.append(amountCell)
+        }
+        
+        if let fromAccount = data.from ?? data.account {
+            let fromCell = TransactionInfoCellViewModel(title: "From", description: fromAccount)
+            items.append(fromCell)
+        }
+        
+        if let toAccount = data.to ?? data.account {
+            let toCell = TransactionInfoCellViewModel(title: "To", description: toAccount)
+            items.append(toCell)
+        }
+        
+        let dateCell = TransactionInfoCellViewModel(title: "Date", description: date)
+        items.append(dateCell)
+        
+        if let memo = data.memo {
+            let memoCell = TransactionInfoCellViewModel(title: "Description", description: memo)
+            items.append(memoCell)
+        }
+        
+        return items
     }
     
     func prepareCellTitle(_ data: TransactionDataModel) -> String {
         switch self {
         case .transfer:
-            return data.from == AuthData.shared.username ? "Received from \(data.from!)" : "Transfered to \(data.to!)"
+            return data.from == AuthData.shared.username ? "Transfered to \(data.to!)" : "Received from \(data.from!)"
         case .claimRewardBalance:
             return "Claim Reward"
         case .transferVesting:
