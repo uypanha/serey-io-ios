@@ -12,7 +12,7 @@ import MaterialComponents
 class BottomSheetListViewController: MDCBottomSheetController {
 
     init(contentViewController: UITableViewController){
-        contentViewController.view.roundCorners(corners: [.topLeft, .topRight], radius: 8)
+        contentViewController.view.roundCorners(corners: [.topLeft, .topRight], radius: 12)
         super.init(contentViewController: contentViewController)
         
         self.isScrimAccessibilityElement = false

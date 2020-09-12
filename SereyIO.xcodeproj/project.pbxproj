@@ -224,6 +224,9 @@
 		DC83C38624E1A9DE008C9EAB /* ConfirmTransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83C38524E1A9DE008C9EAB /* ConfirmTransferViewModel.swift */; };
 		DC83C38824E2E7C5008C9EAB /* AES.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83C38724E2E7C5008C9EAB /* AES.swift */; };
 		DC83C38C24E301F2008C9EAB /* BottomSheetProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83C38B24E301F2008C9EAB /* BottomSheetProtocol.swift */; };
+		DC8450B4250C7F6C00D7E085 /* LineIndicatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8450B2250C7F6B00D7E085 /* LineIndicatorTableViewCell.swift */; };
+		DC8450B5250C7F6C00D7E085 /* LineIndicatorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC8450B3250C7F6B00D7E085 /* LineIndicatorTableViewCell.xib */; };
+		DC8450B7250C802B00D7E085 /* LineIndicatorCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8450B6250C802B00D7E085 /* LineIndicatorCellViewModel.swift */; };
 		DC8654C5245B26540066DAB8 /* MoreAppsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8654C4245B26540066DAB8 /* MoreAppsViewController.swift */; };
 		DC87FEFB24E44770007622D4 /* WalletProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC87FEF924E44770007622D4 /* WalletProfileTableViewCell.swift */; };
 		DC87FEFC24E44770007622D4 /* WalletProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC87FEFA24E44770007622D4 /* WalletProfileTableViewCell.xib */; };
@@ -675,6 +678,9 @@
 		DC83C38524E1A9DE008C9EAB /* ConfirmTransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTransferViewModel.swift; sourceTree = "<group>"; };
 		DC83C38724E2E7C5008C9EAB /* AES.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AES.swift; sourceTree = "<group>"; };
 		DC83C38B24E301F2008C9EAB /* BottomSheetProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetProtocol.swift; sourceTree = "<group>"; };
+		DC8450B2250C7F6B00D7E085 /* LineIndicatorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineIndicatorTableViewCell.swift; sourceTree = "<group>"; };
+		DC8450B3250C7F6B00D7E085 /* LineIndicatorTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LineIndicatorTableViewCell.xib; sourceTree = "<group>"; };
+		DC8450B6250C802B00D7E085 /* LineIndicatorCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineIndicatorCellViewModel.swift; sourceTree = "<group>"; };
 		DC8654C4245B26540066DAB8 /* MoreAppsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreAppsViewController.swift; sourceTree = "<group>"; };
 		DC87FEF924E44770007622D4 /* WalletProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletProfileTableViewCell.swift; sourceTree = "<group>"; };
 		DC87FEFA24E44770007622D4 /* WalletProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletProfileTableViewCell.xib; sourceTree = "<group>"; };
@@ -1147,6 +1153,7 @@
 		DC40D5D123E32A2800B0DD96 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DC8450B1250C7F0400D7E085 /* LineIndicatorTableViewCell */,
 				DC13409424573F0C00CC9856 /* ToggleTextTableViewCell */,
 				DCD12D69242D06AB0084F66C /* ImageTextTableViewCell */,
 				DCA525552425165C00284CD8 /* ButtonTableViewCell */,
@@ -1774,6 +1781,16 @@
 				DC7F098524AE36B500CE8AFC /* TransactionHistoryViewController.swift */,
 			);
 			path = Transaction;
+			sourceTree = "<group>";
+		};
+		DC8450B1250C7F0400D7E085 /* LineIndicatorTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC8450B6250C802B00D7E085 /* LineIndicatorCellViewModel.swift */,
+				DC8450B2250C7F6B00D7E085 /* LineIndicatorTableViewCell.swift */,
+				DC8450B3250C7F6B00D7E085 /* LineIndicatorTableViewCell.xib */,
+			);
+			path = LineIndicatorTableViewCell;
 			sourceTree = "<group>";
 		};
 		DC87FEF824E44754007622D4 /* WalletProfileTableViewCell */ = {
@@ -2761,6 +2778,7 @@
 				DC19DBF123EC6DEB00571CC8 /* Search.storyboard in Resources */,
 				DC1C6ECD23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib in Resources */,
 				DCEE3F7A2439DB57000A75C5 /* Post.strings in Resources */,
+				DC8450B5250C7F6C00D7E085 /* LineIndicatorTableViewCell.xib in Resources */,
 				DCC49AC823E8632B00119BAA /* BoardFeatureView.xib in Resources */,
 				DC7AAFF424F805C200ECDF47 /* Transfer.strings in Resources */,
 				DCEE3F802439DCA8000A75C5 /* Account.strings in Resources */,
@@ -3157,6 +3175,7 @@
 				DC6ED58F2326A7B000770B31 /* AppDelegateHelper.swift in Sources */,
 				DCBBD6C824E43CE50099C406 /* WalletSettingCellViewModel.swift in Sources */,
 				DCFF69612448B5BB00416218 /* VoteDialogProtocol.swift in Sources */,
+				DC8450B4250C7F6C00D7E085 /* LineIndicatorTableViewCell.swift in Sources */,
 				DC9E36F4241629F900289693 /* SRichEditorView.swift in Sources */,
 				DC40D5E323E3360D00B0DD96 /* ChooseLanguageViewModel.swift in Sources */,
 				DC8AB7C224FD54B400968FCD /* PowerUpModel.swift in Sources */,
@@ -3234,6 +3253,7 @@
 				DC19DBE323EC581A00571CC8 /* ChooseCategorySheetViewController.swift in Sources */,
 				DCD3986B232E1DF700C812EB /* AppService.swift in Sources */,
 				DC6CA7B7243CD08D00F1EEC8 /* CategoryCellViewModel.swift in Sources */,
+				DC8450B7250C802B00D7E085 /* LineIndicatorCellViewModel.swift in Sources */,
 				DC0F36B12450944700916886 /* DownvoteDialogViewModel.swift in Sources */,
 				DCF67FE924100B64003061A7 /* SearchService.swift in Sources */,
 				DC6ED56623269B6600770B31 /* ColorsGen.swift in Sources */,

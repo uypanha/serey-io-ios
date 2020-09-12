@@ -26,10 +26,11 @@ class TransactionDetailViewModel: BaseListTableViewModel {
     override func registerTableViewCell(_ tableView: UITableView) {
         super.registerTableViewCell(tableView)
         
-        tableView.contentInset = .init(top: 12, left: 0, bottom: 8, right: 0)
+        tableView.contentInset = .init(top: 4, left: 0, bottom: 8, right: 0)
         tableView.separatorStyle = .none
         tableView.register(TransactionInfoTableViewCell.self)
         tableView.register(TextTableViewCell.self)
+        tableView.register(LineIndicatorTableViewCell.self)
     }
     
     override func configureCell(_ datasource: TableViewSectionedDataSource<SectionItem>, _ tableView: UITableView, _ indexPath: IndexPath, _ item: CellViewModel) -> UITableViewCell {
@@ -42,6 +43,9 @@ class TransactionDetailViewModel: BaseListTableViewModel {
             let cell: TransactionInfoTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
             cell.cellModel = item as? TransactionInfoCellViewModel
             return cell
+        case is LineIndicatorCellViewModel:
+            let cell: LineIndicatorTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+            return cell
         default:
             return UITableViewCell()
         }
@@ -52,6 +56,9 @@ class TransactionDetailViewModel: BaseListTableViewModel {
 extension TransactionDetailViewModel {
     
     func prepareCells(_ transaction: TransactionModel) -> [SectionItem] {
-        return [SectionItem(items: transaction.infoCells)]
+        var items: [CellViewModel] = []
+        items.append(LineIndicatorCellViewModel())
+        items.append(contentsOf: transaction.infoCells)
+        return [SectionItem(items: items)]
     }
 }

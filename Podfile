@@ -69,6 +69,7 @@ def frameworks_pods
   pod 'MaterialComponents/TextControls+OutlinedTextFieldsTheming'
   pod 'MaterialComponents/ProgressView'
   pod 'MaterialComponents/ActivityIndicator'
+  pod 'MaterialComponents/Snackbar'
   
 end
 

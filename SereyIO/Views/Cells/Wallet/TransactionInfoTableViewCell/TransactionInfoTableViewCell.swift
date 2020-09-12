@@ -30,5 +30,7 @@ class TransactionInfoTableViewCell: BaseTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        self.selectionStyle = .none
     }
 }

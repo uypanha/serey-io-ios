@@ -149,7 +149,7 @@ enum TransferType: String {
     
     func prepareInfoCells(_ data: TransactionDataModel, date: String) -> [CellViewModel] {
         var items: [CellViewModel] = []
-        let titleCell = TextCellViewModel(with: self.prepareCellTitle(data), properties: .init(font: .boldSystemFont(ofSize: 17), textColor: .black), indicatorAccessory: false)
+        let titleCell = TextCellViewModel(with: self.prepareCellTitle(data), properties: .init(font: .boldSystemFont(ofSize: 17), textColor: .black), indicatorAccessory: false, isSelectionEnabled: false)
         items.append(titleCell)
         
         if let amount = data.amount {

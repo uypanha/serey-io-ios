@@ -15,7 +15,7 @@ class BottomMenuViewController: MDCBottomSheetController {
         let listViewController = ListTableViewController(viewModel)
         listViewController.sepereatorStyle = .none
         listViewController.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 8, right: 0)
-        listViewController.view.roundCorners(corners: [.topLeft, .topRight], radius: 8)
+        listViewController.view.roundCorners(corners: [.topLeft, .topRight], radius: 12)
         super.init(contentViewController: listViewController)
         
         self.isScrimAccessibilityElement = false

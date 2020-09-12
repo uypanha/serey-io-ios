@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import RxBinding
+import MaterialComponents
 
 class ReceiveCoinViewController: BaseViewController {
     
@@ -66,12 +67,34 @@ extension ReceiveCoinViewController {
     }
 }
 
+// MARK: - Handle View TO Present
+fileprivate extension ReceiveCoinViewController {
+    
+    func shareImage(image: UIImage) {
+        let activityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        
+        let excludeActivities: [UIActivity.ActivityType] = [
+            .assignToContact,
+            .addToReadingList,
+            .copyToPasteboard,
+            .saveToCameraRoll,
+            .print
+        ]
+        activityViewController.excludedActivityTypes = excludeActivities
+        
+        // present the view controller
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+}
+
 // MARK: - SetUP RxObservers
 extension ReceiveCoinViewController {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
         setUpControlObservers()
+        setUpViewToPresentObservers()
     }
     
     func setUpContentChangedObservers() {
@@ -91,5 +114,29 @@ extension ReceiveCoinViewController {
             .subscribe(onNext: { [weak self] _ in
                 self?.dismiss(animated: true, completion: nil)
             }).disposed(by: self.disposeBag)
+        
+        self.shareButton.rx.tap
+            .map { ReceiveCoinViewModel.Action.sharePressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+        
+        self.copyButton.rx.tap
+            .map { ReceiveCoinViewModel.Action.copyPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+    }
+    
+    func setUpViewToPresentObservers() {
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { [weak self] viewToPresent in
+                switch viewToPresent {
+                case .shareQRImage(let image):
+                    self?.shareImage(image: image)
+                case .snackbar(let messageText):
+                    let message = MDCSnackbarMessage()
+                    message.text = messageText
+                    MDCSnackbarManager.show(message)
+                }
+            }) ~ self.disposeBag
     }
 }
