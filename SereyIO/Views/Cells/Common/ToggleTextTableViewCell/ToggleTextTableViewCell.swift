@@ -27,6 +27,13 @@ class ToggleTextTableViewCell: BaseTableViewCell {
                 .subscribe(onNext: { indicatorAccessory in
                     self.accessoryView = indicatorAccessory ? ViewUtiliesHelper.prepareIndicatorAccessory() : nil
                 }).disposed(by: self.disposeBag)
+            viewModel.showSeperatorLine.asObservable()
+                .subscribe(onNext: { [weak self] showSeperatorLine in
+                    self?.removeAllBorders()
+                    if (showSeperatorLine) {
+                        self?.addBorder(edges: .bottom, color: UIColor.lightGray.withAlphaComponent(0.5), thickness: 1)
+                    }
+                }).disposed(by: self.disposeBag)
             
             setUpRxObservers()
         }

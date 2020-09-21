@@ -29,6 +29,7 @@
 "update"                            = "Update";
 "edit"                              = "Edit";
 "all"                               = "All";
+"description"                       = "Description";
 
 "next"                              = "Next";
 "letBegin"                          = "Let's begin";

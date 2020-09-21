@@ -11,25 +11,37 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class TransactionHistoryViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, ShouldPresent {
+class TransactionHistoryViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, ShouldPresent, ShouldReactToAction, DownloadStateNetworkProtocol {
+    
+    enum Action {
+        case itemSelected(IndexPath)
+    }
     
     enum ViewToPresent {
         case emptyResult(EmptyOrErrorViewModel)
+        case transactionDetailController(TransactionDetailViewModel)
     }
     
     // input:
-    //    lazy var didActionSubject = PublishSubject<Action>()
+    let didActionSubject: PublishSubject<Action>
     
     // output:
     let shouldPresentSubject: PublishSubject<ViewToPresent>
+    
+    let transactions: BehaviorRelay<[TransactionModel]>
     let cells: BehaviorRelay<[SectionItem]>
     
     let transferService: TransferService
+    let isDownloading: BehaviorRelay<Bool>
     
     override init() {
+        self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
+        
+        self.transactions = .init(value: [])
         self.cells = .init(value: [])
         self.transferService = .init()
+        self.isDownloading = .init(value: false)
         super.init()
         
         setUpRxObservers()
@@ -40,12 +52,47 @@ class TransactionHistoryViewModel: BaseCellViewModel, CollectionMultiSectionsPro
 extension TransactionHistoryViewModel {
     
     func downloadData() {
-        self.cells.accept([])
+        if !self.isDownloading.value {
+            self.isDownloading.accept(true)
+            fetchAccountHistory()
+            self.transactions.renotify()
+        }
+    }
+    
+    func fetchAccountHistory() {
+        self.transferService.getAccountHistory()
+            .subscribe(onNext: { [weak self] data in
+                self?.isDownloading.accept(false)
+                self?.transactions.accept(data.data)
+            }, onError: { [weak self] error in
+                self?.isDownloading.accept(false)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
     }
 }
 
 // MARK: - Preparations & Tools
 extension TransactionHistoryViewModel {
+    
+    private func prepareCells(_ transactions: [TransactionModel]) -> [SectionItem] {
+        var sectionItems: [SectionItem] = []
+        
+        if !transactions.isEmpty {
+            let section = SectionItem(items: transactions.map { TransactionCellViewModel($0) })
+            sectionItems.append(section)
+        }
+        
+        if self.isDownloading.value {
+            if transactions.isEmpty {
+                let number = Int.random(in: 4..<10)
+                let section = SectionItem(items: (0...number).map { _ in TransactionCellViewModel(true) })
+                sectionItems.append(section)
+            }
+        }
+        
+        return sectionItems
+    }
     
     fileprivate func prepareEmptyViewModel() -> EmptyOrErrorViewModel {
         let title: String = "You don’t have any transactions"
@@ -63,6 +110,17 @@ extension TransactionHistoryViewModel {
     }
 }
 
+// MARK: - Action Handler
+fileprivate extension TransactionHistoryViewModel {
+    
+    func handleItemSelected(_ indexPath: IndexPath) {
+        if let item = item(at: indexPath) as? TransactionCellViewModel, let transaction = item.transaction.value {
+            let transactionDetailViewModel = TransactionDetailViewModel(transaction)
+            self.shouldPresent(.transactionDetailController(transactionDetailViewModel))
+        }
+    }
+}
+
 // MARK: - SetUp RxObservers
 fileprivate extension TransactionHistoryViewModel {
     
@@ -72,10 +130,10 @@ fileprivate extension TransactionHistoryViewModel {
     }
     
     func setUpContentChangedObservers() {
-//        self.people.asObservable()
-//            .map { self.prepareCells($0) }
-//            .bind(to: self.cells)
-//            .disposed(by: self.disposeBag)
+        self.transactions.asObservable()
+            .map { self.prepareCells($0) }
+            .bind(to: self.cells)
+            .disposed(by: self.disposeBag)
 
         self.cells.asObservable()
             .subscribe(onNext: { [unowned self] cells in
@@ -86,14 +144,14 @@ fileprivate extension TransactionHistoryViewModel {
     }
     
     func setUpActionObservers() {
-//        self.didActionSubject.asObservable()
-//            .subscribe(onNext: { [weak self] action in
-//                switch action {
-//                case .itemSelected(let indexPath):
-//                    self?.handleItemSelected(indexPath)
+        self.didActionSubject.asObservable()
+            .subscribe(onNext: { [weak self] action in
+                switch action {
+                case .itemSelected(let indexPath):
+                    self?.handleItemSelected(indexPath)
 //                case .searchEditingChanged:
 //                    self?.handleEditingChanged()
-//                }
-//            }).disposed(by: self.disposeBag)
+                }
+            }).disposed(by: self.disposeBag)
     }
 }

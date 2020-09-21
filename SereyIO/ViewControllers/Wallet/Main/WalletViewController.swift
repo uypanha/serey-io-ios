@@ -160,6 +160,11 @@ extension WalletViewController {
             .map { WalletViewModel.Action.itemSelected($0) }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
+        
+        self.settingButton.rx.tap.asObservable()
+            .map { WalletViewModel.Action.settingsPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpViewToPresentObservers() {
@@ -174,6 +179,46 @@ extension WalletViewController {
                     if let transferViewController = R.storyboard.transfer.transferViewController() {
                         transferViewController.viewModel = transferCoinViewModel
                         self?.show(transferViewController, sender: nil)
+                    }
+                case .receiveCoinController(let receiveCoinViewModel):
+                    if let receiveCoinViewController = R.storyboard.qrPayment.receiveCoinViewController() {
+                        receiveCoinViewController.modalPresentationStyle = .overCurrentContext
+                        receiveCoinViewController.modalTransitionStyle = .crossDissolve
+                        receiveCoinViewController.viewModel = receiveCoinViewModel
+                        self?.present(receiveCoinViewController, animated: true, completion: nil)
+                    }
+                case .scanQRViewController(let payQRViewModel):
+                    if let payQRViewController = R.storyboard.qrPayment.payQRViewController() {
+                        payQRViewController.viewModel = payQRViewModel
+                        payQRViewController.modalPresentationStyle = .fullScreen
+                        payQRViewController.modalTransitionStyle = .crossDissolve
+                        self?.present(payQRViewController, animated: true, completion: nil)
+                    }
+                case .settingsController:
+                    let settingsViewController = WalletSettingsViewController()
+                    settingsViewController.viewModel = WalletSettingsViewModel()
+                    self?.show(settingsViewController, sender: nil)
+                case .powerUpController(let powerUpViewModel):
+                    if let powerUpViewController = R.storyboard.power.powerUpViewController() {
+                        powerUpViewController.viewModel = powerUpViewModel
+                        self?.show(powerUpViewController, sender: nil)
+                    }
+                case .powerDownController(let powerDownViewModel):
+                    if let powerDownViewController = R.storyboard.power.powerDownViewController() {
+                        powerDownViewController.viewModel = powerDownViewModel
+                        self?.show(powerDownViewController, sender: nil)
+                    }
+                case .claimRewardController(let claimRewardViewModel):
+                    if let claimRewardViewController = R.storyboard.reward.claimRewardViewController() {
+                        claimRewardViewController.viewModel = claimRewardViewModel
+                        let bottomSheet = BottomSheetViewController(contentViewController: claimRewardViewController)
+                        self?.present(bottomSheet, animated: true, completion: nil)
+                    }
+                case .cancelPowerDownController(let cancelPowerDownViewModel):
+                    if let cancelPowerDownViewController = R.storyboard.power.cancelPowerDownViewController() {
+                        cancelPowerDownViewController.viewModel = cancelPowerDownViewModel
+                        let bottomSheet = BottomSheetViewController(contentViewController: cancelPowerDownViewController)
+                        self?.present(bottomSheet, animated: true, completion: nil)
                     }
                 }
             }) ~ self.disposeBag

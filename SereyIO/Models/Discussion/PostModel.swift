@@ -37,7 +37,11 @@ struct PostModel: Codable {
         get {
             guard let date = Date.date(from: self.publishDate, format: "yyyy-MM-dd HH:mm") else { return nil }
             
-            return date.timeAgo(to: Date())
+            if (date.daysCount(to: Date()) < 7) {
+                return date.timeAgo(to: Date())
+            }
+            
+            return date.format("MMM, dd yyyy")
         }
     }
     

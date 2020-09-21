@@ -68,7 +68,7 @@ extension MoreViewController {
         
         self.tableView.register(SignInTableViewCell.self)
         self.tableView.register(ProfileTableViewCell.self)
-        self.tableView.register(SettingTableViewCell.self)
+        self.tableView.register(ImageTextTableViewCell.self)
         self.tableView.register(ButtonTableViewCell.self)
     }
     
@@ -84,7 +84,7 @@ extension MoreViewController {
                 cell.cellModel = item as? ProfileCellViewModel
                 return cell
             case is SettingCellViewModel:
-                let cell: SettingTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+                let cell: ImageTextTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
                 cell.cellModel = item as? SettingCellViewModel
                 return cell
             case is ButtonCellViewModel:

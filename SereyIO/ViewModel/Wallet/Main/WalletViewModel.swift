@@ -17,11 +17,19 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
     enum Action {
         case transactionPressed
         case itemSelected(IndexPath)
+        case settingsPressed
     }
     
     enum ViewToPresent {
         case transactionController(TransactionHistoryViewModel)
         case transferCoinController(TransferCoinViewModel)
+        case receiveCoinController(ReceiveCoinViewModel)
+        case scanQRViewController(PayQRViewModel)
+        case powerUpController(PowerUpViewModel)
+        case powerDownController(PowerDownViewModel)
+        case claimRewardController(ClaimRewardViewModel)
+        case cancelPowerDownController(CancelPowerDownViewModel)
+        case settingsController
     }
     
     // input:
@@ -121,6 +129,25 @@ fileprivate extension WalletViewModel {
             case .sendCoin:
                 let transferCoinViewModel = TransferCoinViewModel()
                 self.shouldPresent(.transferCoinController(transferCoinViewModel))
+            case .receiveCoin:
+                guard let username = AuthData.shared.username else { return }
+                let viewModel = ReceiveCoinViewModel(username)
+                self.shouldPresent(.receiveCoinController(viewModel))
+            case .pay:
+                let payQRViewModel = PayQRViewModel().then { self.setUpPayQRObservers($0) }
+                self.shouldPresent(.scanQRViewController(payQRViewModel))
+            case .powerUp:
+                let powerUpViewModel = PowerUpViewModel()
+                self.shouldPresent(.powerUpController(powerUpViewModel))
+            case .powerDown:
+                let powerDownViewModel = PowerDownViewModel()
+                self.shouldPresent(.powerDownController(powerDownViewModel))
+            case .claimReward:
+                let claimRewardViewModel = ClaimRewardViewModel()
+                self.shouldPresent(.claimRewardController(claimRewardViewModel))
+            case .cancelPower:
+                let cancelPowerDownViewModel = CancelPowerDownViewModel()
+                self.shouldPresent(.cancelPowerDownController(cancelPowerDownViewModel))
             default:
                 break
             }
@@ -172,6 +199,8 @@ extension WalletViewModel {
                     self?.handleTransactionPressed()
                 case .itemSelected(let indexPath):
                     self?.handleItemSelected(indexPath)
+                case .settingsPressed:
+                    self?.shouldPresent(.settingsController)
                 }
             }) ~ self.disposeBag
     }
@@ -185,5 +214,13 @@ extension WalletViewModel {
                 let power = WalletType.power(power: userModel.sereypower.replacingOccurrences(of: "SEREY", with: ""))
                 self.wallets.accept([coin, power])
             }).disposed(by: self.disposeBag)
+    }
+    
+    private func setUpPayQRObservers(_ payQrViewModel: PayQRViewModel) {
+        payQrViewModel.didUsernameFound
+            .subscribe(onNext: { [weak self] username in
+                let transferCoinViewModel = TransferCoinViewModel(username)
+                self?.shouldPresent(.transferCoinController(transferCoinViewModel))
+            }).disposed(by: payQrViewModel.disposeBag)
     }
 }
