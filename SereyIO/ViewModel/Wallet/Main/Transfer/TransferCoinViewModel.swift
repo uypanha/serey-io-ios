@@ -80,7 +80,7 @@ extension TransferCoinViewModel {
         let memo = self.memoTextFieldViewModel.value ?? ""
         
         self.isLoading.onNext(true)
-        self.transferService.transferCoin(account, amount: amount, memo: memo)
+        self.transferService.transferCoin(account, amount: Double(amount) ?? 0.0, memo: memo)
             .subscribe(onNext: { [weak self] response in
                 self?.isLoading.onNext(false)
                 self?.handleTransferSuccess(account, amount: amount)

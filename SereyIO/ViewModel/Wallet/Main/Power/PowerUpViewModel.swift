@@ -75,7 +75,7 @@ extension PowerUpViewModel {
         let amount = self.amountTextFieldViewModel.value ?? "0"
         
         self.isLoading.onNext(true)
-        self.transferService.powerUp(account, amount: amount)
+        self.transferService.powerUp(account, amount: Double(amount) ?? 0.0)
             .subscribe(onNext: { [weak self] data in
                 self?.isLoading.onNext(false)
                 self?.handlePowerUpSuccess(account, amount: amount)

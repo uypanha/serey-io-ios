@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class ClaimRewardViewController: BaseViewController, BottomSheetProtocol, AlertDialogController {
+class ClaimRewardViewController: BaseViewController, BottomSheetProtocol, AlertDialogController, LoadingIndicatorController {
     
     var preferredBottomSheetContentSize: CGSize? {
         let preferedSize = CGSize(width: self.view.frame.width, height: self.containerView.frame.height)
@@ -63,7 +63,7 @@ extension ClaimRewardViewController {
             .subscribe(onNext: { [weak self] viewToPresent in
                 switch viewToPresent {
                 case .loading(let loading):
-                    self?.claimButton.isLoading = loading
+                    loading ? self?.showLoading() : self?.dismissLoading()
                 case .dismiss:
                     self?.dismiss(animated: true, completion: nil)
                 case .showAlertDialogController(let alertDialogModel):

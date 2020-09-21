@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import RxBinding
 
-class CancelPowerDownViewController: BaseViewController, BottomSheetProtocol, AlertDialogController {
+class CancelPowerDownViewController: BaseViewController, BottomSheetProtocol, AlertDialogController, LoadingIndicatorController {
     
     var preferredBottomSheetContentSize: CGSize? {
         let preferedSize = CGSize(width: self.view.frame.width, height: self.containerView.frame.height)
@@ -63,7 +63,7 @@ extension CancelPowerDownViewController {
             .subscribe(onNext: { [weak self] viewToPresent in
                 switch viewToPresent {
                 case .loading(let loading):
-                    self?.cancelPowerDownButton.isLoading = loading
+                    loading ? self?.showLoading() : self?.dismissLoading()
                 case .dismiss:
                     self?.dismiss(animated: true, completion: nil)
                 case .showAlertDialogController(let alertDialogModel):

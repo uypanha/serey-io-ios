@@ -12,7 +12,7 @@ struct TransferCoinRequestModel: Codable {
     
     var activeKey: String
     var account: String
-    var amount: String
+    var amount: Double
     var memo: String
     
     enum CodingKeys: String, CodingKey {

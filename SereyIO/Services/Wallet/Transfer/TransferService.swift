@@ -22,7 +22,7 @@ class TransferService: AppService<TransferApi> {
             .map { $0.data }
     }
     
-    func transferCoin(_ account: String, amount: String, memo: String) -> Observable<TransferCoinModel> {
+    func transferCoin(_ account: String, amount: Double, memo: String) -> Observable<TransferCoinModel> {
         let activeKey = WalletStore.shared.password(from: AuthData.shared.username ?? "") ?? ""
         let requestData = TransferCoinRequestModel(activeKey: activeKey, account: account, amount: amount, memo: memo).toJsonString() ?? ""
         let signTrxData = RSAUtils.encrypt(string: requestData, publicKey: self.publicKey)
@@ -31,7 +31,7 @@ class TransferService: AppService<TransferApi> {
             .asObservable()
     }
     
-    func powerUp(_ account: String, amount: String) -> Observable<PowerUpModel> {
+    func powerUp(_ account: String, amount: Double) -> Observable<PowerUpModel> {
         let activeKey = WalletStore.shared.password(from: AuthData.shared.username ?? "") ?? ""
         let requestData = PowerUpRequestModel(activeKey: activeKey, account: account, amount: amount).toJsonString() ?? ""
         
@@ -41,7 +41,7 @@ class TransferService: AppService<TransferApi> {
             .asObservable()
     }
     
-    func powerDown(amount: String) -> Observable<PowerDownModel> {
+    func powerDown(amount: Double) -> Observable<PowerDownModel> {
         let activeKey = WalletStore.shared.password(from: AuthData.shared.username ?? "") ?? ""
         let requestData = PowerDownRequestModel(activeKey: activeKey, amount: amount).toJsonString() ?? ""
         
@@ -70,8 +70,8 @@ class TransferService: AppService<TransferApi> {
             .asObservable()
     }
     
-    func getAccountHistory() -> Observable<[TransactionModel]> {
-        return provider.rx.requestObject(.getAccountHistory, type: [TransactionModel].self)
+    func getAccountHistory() -> Observable<DataResponseModel<[TransactionModel]>> {
+        return provider.rx.requestObject(.getAccountHistory, type: DataResponseModel<[TransactionModel]>.self)
             .asObservable()
     }
 }

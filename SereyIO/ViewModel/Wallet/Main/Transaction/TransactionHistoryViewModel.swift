@@ -63,7 +63,7 @@ extension TransactionHistoryViewModel {
         self.transferService.getAccountHistory()
             .subscribe(onNext: { [weak self] data in
                 self?.isDownloading.accept(false)
-                self?.transactions.accept(data)
+                self?.transactions.accept(data.data)
             }, onError: { [weak self] error in
                 self?.isDownloading.accept(false)
                 let errorInfo = ErrorHelper.prepareError(error: error)

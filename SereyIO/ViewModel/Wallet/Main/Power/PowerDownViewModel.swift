@@ -58,7 +58,7 @@ extension PowerDownViewModel {
         let amount = self.amountTextFieldViewModel.value ?? "0"
         
         self.isLoading.onNext(true)
-        self.transferService.powerDown(amount: amount)
+        self.transferService.powerDown(amount: Double(amount) ?? 0.0)
             .subscribe(onNext: { [weak self] data in
                 self?.isLoading.onNext(false)
                 self?.handlePowerDownSuccess(account, amount: amount)

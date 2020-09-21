@@ -12,7 +12,7 @@ struct PowerUpRequestModel: Codable {
     
     var activeKey: String
     var account: String
-    var amount: String
+    var amount: Double
     
     enum CodingKeys: String, CodingKey {
         case activeKey = "active_key"

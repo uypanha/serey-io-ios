@@ -14,7 +14,7 @@ class BottomMenuViewController: MDCBottomSheetController {
     init(_ viewModel: BottomListMenuViewModel) {
         let listViewController = ListTableViewController(viewModel)
         listViewController.sepereatorStyle = .none
-        listViewController.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 8, right: 0)
+        listViewController.contentInset = .init(top: 16, left: 0, bottom: 8, right: 0)
         listViewController.view.roundCorners(corners: [.topLeft, .topRight], radius: 12)
         super.init(contentViewController: listViewController)
         
