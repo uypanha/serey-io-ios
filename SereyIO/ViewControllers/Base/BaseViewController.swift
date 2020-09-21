@@ -31,6 +31,8 @@ open class BaseViewController: UIViewController, LocalizeProtocol, NotificationO
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.setNeedsStatusBarAppearanceUpdate()
+        self.setNeedsStatusBarAppearanceUpdate()
         setUpLocalizedTexts()
     }
     

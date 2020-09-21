@@ -18,10 +18,12 @@ class SlashViewModel: BaseViewModel, ShouldPresent {
     }
     
     // output:
-    lazy var shouldPresent: Observable<ViewToPresent> = { [unowned self] in
-        return self.shouldPresentSubject.asObservable()
-    }()
-    internal lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
+    let shouldPresentSubject: PublishSubject<ViewToPresent>
+    
+    override init() {
+        self.shouldPresentSubject = .init()
+        super.init()
+    }
     
     func determineInitialScreen() {
         if AuthData.shared.isUserLoggedIn, let expiry = AuthData.shared.expiration {

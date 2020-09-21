@@ -30,7 +30,7 @@ protocol InfiniteNetworkProtocol: DownloadStateNetworkProtocol where P: Paginati
     associatedtype P
     
     var canDownloadMorePages: BehaviorRelay<Bool> { get }
-    var isRefresh: Bool { get set }
+    var isRefresh: BehaviorRelay<Bool> { get }
     var pageModel: P { get set }
     var downloadDisposeBag: DisposeBag { get set }
     
@@ -48,7 +48,7 @@ extension InfiniteNetworkProtocol {
     mutating func reset(_ handler: @escaping () -> Void = {}) {
         self.canDownloadMorePages.accept(true)
         self.pageModel.reset()
-        self.isRefresh = true
+        self.isRefresh.accept(true)
         self.isDownloading.accept(false)
         self.downloadDisposeBag = DisposeBag()
         handler()

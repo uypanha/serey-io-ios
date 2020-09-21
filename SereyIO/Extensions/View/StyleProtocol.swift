@@ -85,11 +85,15 @@ extension UIButton: StyleProtocol {
         if self.backgroundColor != nil {
             self.setRadius(all: 8)
             self.setBackgroundColor(ColorName.disabled.color, for: .disabled)
-            self.setBackgroundColor(UIColor.lightGray.withAlphaComponent(0.5), for: .highlighted)
+            self.setBackgroundColor(self.backgroundColor!.withAlphaComponent(0.5), for: .highlighted)
         }
         
         if let image = self.image(for: .normal) {
-            self.setImage(image.image(withTintColor: self.tintColor.withAlphaComponent(0.5)), for: .highlighted)
+            if image.renderingMode == .alwaysOriginal {
+                self.setImage(image.image(with: 0.5), for: .highlighted)
+            } else {
+                self.setImage(image.image(withTintColor: self.tintColor.withAlphaComponent(0.5)), for: .highlighted)
+            }
         } else {
             self.setImage(nil, for: .highlighted)
         }
@@ -117,7 +121,11 @@ extension UIButton: StyleProtocol {
         self.setBorder(borderWith: borderWidth, borderColor: borderColor ?? ColorName.primary.color)
         
         if let image = self.image(for: .normal) {
-            self.setImage(image.image(withTintColor: self.tintColor.withAlphaComponent(0.5)), for: .highlighted)
+            if image.renderingMode == .alwaysOriginal {
+                self.setImage(image.image(with: 0.5), for: .highlighted)
+            } else {
+                self.setImage(image.image(withTintColor: self.tintColor.withAlphaComponent(0.5)), for: .highlighted)
+            }
         } else {
             self.setImage(nil, for: .highlighted)
         }

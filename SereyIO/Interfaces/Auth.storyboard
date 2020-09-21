@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -28,7 +28,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Ycc-ru-dbW">
-                                        <rect key="frame" x="42" y="161" width="330" height="169"/>
+                                        <rect key="frame" x="42" y="159" width="330" height="173"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign-In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Jr-Td-BoP">
                                                 <rect key="frame" x="127" y="0.0" width="76" height="29"/>
@@ -53,11 +53,11 @@
                                                     </textField>
                                                 </subviews>
                                             </stackView>
-                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFy-KS-B6l">
-                                                <rect key="frame" x="0.0" y="129" width="330" height="40"/>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFy-KS-B6l" customClass="LoadingButton" customModule="SereyIO" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="129" width="330" height="44"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="JfG-sn-10m"/>
+                                                    <constraint firstAttribute="height" constant="44" id="JfG-sn-10m"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="CircularStd-Medium" family="Circular Std" pointSize="16"/>
                                                 <state key="normal" title="Sign-In">
@@ -73,7 +73,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="Hwk-3r-RXS">
-                                        <rect key="frame" x="32" y="354" width="350" height="154.5"/>
+                                        <rect key="frame" x="32" y="356" width="350" height="154.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9l8-G2-a3b">
                                                 <rect key="frame" x="73" y="0.0" width="204" height="42"/>
@@ -148,16 +148,16 @@ Sign up now and get free Serey coins!</string>
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="MYj-md-kdN">
-                                        <rect key="frame" x="42" y="149" width="330" height="193"/>
+                                        <rect key="frame" x="42" y="147" width="330" height="197"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign-Up" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ii-GR-FDR">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign-Up Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ii-GR-FDR">
                                                 <rect key="frame" x="0.0" y="0.0" width="330" height="29"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="pdi-5Q-gXy">
-                                                <rect key="frame" x="0.0" y="61" width="330" height="132"/>
+                                                <rect key="frame" x="0.0" y="61" width="330" height="136"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="KRl-4y-Lyh">
                                                         <rect key="frame" x="0.0" y="0.0" width="330" height="68"/>
@@ -176,11 +176,11 @@ Sign up now and get free Serey coins!</string>
                                                             </textField>
                                                         </subviews>
                                                     </stackView>
-                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3N5-xs-NMd">
-                                                        <rect key="frame" x="0.0" y="92" width="330" height="40"/>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3N5-xs-NMd" customClass="LoadingButton" customModule="SereyIO" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="92" width="330" height="44"/>
                                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="40" id="BhR-na-scg"/>
+                                                            <constraint firstAttribute="height" constant="44" id="BhR-na-scg"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="CircularStd-Medium" family="Circular Std" pointSize="16"/>
                                                         <state key="normal" title="Next">
@@ -192,19 +192,15 @@ Sign up now and get free Serey coins!</string>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="QAz-hR-oS0">
-                                        <rect key="frame" x="32" y="374" width="350" height="101"/>
+                                        <rect key="frame" x="32" y="376" width="350" height="35.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you check remember key, it will be encrypted and store inside your local storage only." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIq-0C-ist">
-                                                <rect key="frame" x="3" y="0.0" width="344.5" height="28"/>
-                                                <fontDescription key="fontDescription" name="CircularStd-Book" family="Circular Std" pointSize="12"/>
-                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYa-6L-LZb">
-                                                <rect key="frame" x="98.5" y="60" width="153" height="41"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                <state key="normal" title="Back to Sign In"/>
-                                            </button>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Term Service" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kWX-Xd-mNh">
+                                                <rect key="frame" x="122.5" y="0.0" width="105" height="35.5"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -230,11 +226,10 @@ Sign up now and get free Serey coins!</string>
                         <viewLayoutGuide key="safeArea" id="Kvi-XB-mVv"/>
                     </view>
                     <connections>
-                        <outlet property="backToSignInButton" destination="MYa-6L-LZb" id="tdx-aI-D64"/>
                         <outlet property="nextButton" destination="3N5-xs-NMd" id="Teq-fG-dSa"/>
                         <outlet property="ownerKeyTextField" destination="uvp-L7-owe" id="zM0-FA-T2p"/>
                         <outlet property="signUpLabel" destination="1Ii-GR-FDR" id="K3M-qq-KUS"/>
-                        <outlet property="signUpMessageLabel" destination="DIq-0C-ist" id="7G8-b2-NyT"/>
+                        <outlet property="signUpMessageLabel" destination="kWX-Xd-mNh" id="e6I-Hm-RbH"/>
                         <outlet property="usernameTextField" destination="mHC-t9-qNW" id="g6N-L0-g4d"/>
                     </connections>
                 </viewController>
@@ -254,7 +249,7 @@ Sign up now and get free Serey coins!</string>
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="F3G-98-CAW">
-                                        <rect key="frame" x="42" y="108" width="330" height="275"/>
+                                        <rect key="frame" x="42" y="106" width="330" height="279"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Credential" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7i-Bk-5je">
                                                 <rect key="frame" x="74.5" y="0.0" width="181" height="29"/>
@@ -289,10 +284,10 @@ symbol.</string>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOf-aA-GP9">
-                                                <rect key="frame" x="0.0" y="235" width="330" height="40"/>
+                                                <rect key="frame" x="0.0" y="235" width="330" height="44"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="fRD-Ma-Px0"/>
+                                                    <constraint firstAttribute="height" constant="44" id="fRD-Ma-Px0"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="CircularStd-Medium" family="Circular Std" pointSize="16"/>
                                                 <state key="normal" title="Next">
@@ -335,7 +330,7 @@ symbol.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EUc-SX-wvX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1728.985507246377" y="146.65178571428569"/>
+            <point key="canvasLocation" x="2484" y="147"/>
         </scene>
         <!--Choose Security Method View Controller-->
         <scene sceneID="3du-KE-dOU">
@@ -427,15 +422,114 @@ symbol.</string>
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="oeu-kQ-jwP" id="0NA-f8-zNX"/>
+                        <outlet property="setUpLaterButton" destination="9Fq-pL-7F9" id="ywe-1f-YmR"/>
                         <outlet property="tableView" destination="yhf-8R-sLi" id="zyY-wD-gLs"/>
                         <outlet property="tableViewHeightConstraint" destination="snZ-eH-peH" id="0UB-4p-Zwy"/>
                         <outlet property="titleLabel" destination="4gL-AY-5GF" id="wuD-LG-rU1"/>
-                        <outlet property="userLaterButton" destination="9Fq-pL-7F9" id="ywe-1f-YmR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="POz-pQ-Js5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2623" y="147"/>
+            <point key="canvasLocation" x="3358" y="147"/>
+        </scene>
+        <!--Ask To Create Credential View Controller-->
+        <scene sceneID="0qp-A0-KdA">
+            <objects>
+                <viewController storyboardIdentifier="AskToCreateCredentialViewController" id="Dgb-1d-vg1" customClass="AskToCreateCredentialViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="j3k-E2-3rC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VQK-oc-IK1">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i6C-wt-VuS">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="345"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Gfn-SP-nhg">
+                                                <rect key="frame" x="24" y="54" width="366" height="263"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="vVh-0G-z90">
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="101"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Credential?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b26-wa-wCo">
+                                                                <rect key="frame" x="86.5" y="0.0" width="193" height="29"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xMi-Aw-AiJ">
+                                                                <rect key="frame" x="8" y="45" width="350" height="56"/>
+                                                                <string key="text">If you are already created Credential (aka Password) for Serey Wallet account. You can skip creating it by clicking “Skip” button below. But you are also allow to create new creditial for your account by clicking on “Create Credential” button below.</string>
+                                                                <fontDescription key="fontDescription" name="CircularStd-Book" family="Circular Std" pointSize="12"/>
+                                                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="KxT-aL-Th4">
+                                                        <rect key="frame" x="0.0" y="133" width="366" height="54"/>
+                                                        <subviews>
+                                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="h92-uf-Cwb" customClass="ContentSizedTableView" customModule="SereyIO" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="366" height="54"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="54" id="xyo-j9-ZNX"/>
+                                                                </constraints>
+                                                            </tableView>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="glZ-cb-kew">
+                                                        <rect key="frame" x="0.0" y="219" width="366" height="44"/>
+                                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="44" id="xMk-tb-Vyb"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="CircularStd-Medium" family="Circular Std" pointSize="16"/>
+                                                        <state key="normal" title="Skip">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstItem="Gfn-SP-nhg" firstAttribute="leading" secondItem="i6C-wt-VuS" secondAttribute="leading" constant="24" id="9hr-44-x09"/>
+                                            <constraint firstAttribute="trailing" secondItem="Gfn-SP-nhg" secondAttribute="trailing" constant="24" id="jlG-gS-TE9"/>
+                                            <constraint firstAttribute="bottom" secondItem="Gfn-SP-nhg" secondAttribute="bottom" constant="32" id="tFL-X0-5nd"/>
+                                            <constraint firstItem="Gfn-SP-nhg" firstAttribute="top" secondItem="i6C-wt-VuS" secondAttribute="top" constant="54" id="z6R-F7-fsu"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="i6C-wt-VuS" firstAttribute="top" secondItem="VQK-oc-IK1" secondAttribute="top" id="9ol-eZ-Udw"/>
+                                    <constraint firstItem="i6C-wt-VuS" firstAttribute="width" secondItem="VQK-oc-IK1" secondAttribute="width" id="IED-bO-Fy4"/>
+                                    <constraint firstAttribute="bottom" secondItem="i6C-wt-VuS" secondAttribute="bottom" id="Ily-El-rxy"/>
+                                    <constraint firstItem="i6C-wt-VuS" firstAttribute="leading" secondItem="VQK-oc-IK1" secondAttribute="leading" id="gsb-OV-Bud"/>
+                                    <constraint firstAttribute="trailing" secondItem="i6C-wt-VuS" secondAttribute="trailing" id="qiS-Y3-GQK"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="VQK-oc-IK1" secondAttribute="bottom" id="AFW-qH-2YL"/>
+                            <constraint firstItem="VQK-oc-IK1" firstAttribute="top" secondItem="EGI-MB-PMH" secondAttribute="top" id="PGN-Vk-2KW"/>
+                            <constraint firstItem="VQK-oc-IK1" firstAttribute="leading" secondItem="EGI-MB-PMH" secondAttribute="leading" id="YS1-Wm-dUv"/>
+                            <constraint firstItem="EGI-MB-PMH" firstAttribute="trailing" secondItem="VQK-oc-IK1" secondAttribute="trailing" id="j6v-7O-iYE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EGI-MB-PMH"/>
+                    </view>
+                    <connections>
+                        <outlet property="descriptionLabel" destination="xMi-Aw-AiJ" id="lC5-ct-Lu9"/>
+                        <outlet property="skipButton" destination="glZ-cb-kew" id="9Sk-2Z-erO"/>
+                        <outlet property="tableView" destination="h92-uf-Cwb" id="DwA-TJ-2EA"/>
+                        <outlet property="titleLabel" destination="b26-wa-wCo" id="Rs6-AO-mR4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GYN-f3-QpO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1655" y="147"/>
         </scene>
     </scenes>
 </document>

@@ -11,12 +11,10 @@ import Locksmith
 
 class KeychainStore: SimpleStore {
     
-    private let rootDataKey = "data"
-    
     func setValue(_ value: Any?, forKey key: String) {
         if let value = value {
             do {
-                try Locksmith.saveOrUpdateData(data: [rootDataKey: value], forUserAccount: key)
+                try Locksmith.saveOrUpdateData(data: [KeychainConfiguration.dataServiceName: value], forUserAccount: key)
             } catch {
                 log.error("Could not save or update data to keychain for key: \(key)")
                 if let error = error as? LocksmithError {
@@ -36,7 +34,7 @@ class KeychainStore: SimpleStore {
     }
     
     func value(forKey key: String) -> Any? {
-        if let data = Locksmith.loadDataForUserAccount(userAccount: key), let value = data[rootDataKey] {
+        if let data = Locksmith.loadDataForUserAccount(userAccount: key), let value = data[KeychainConfiguration.dataServiceName] {
             return value
         }
         return nil

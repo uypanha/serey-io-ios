@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="122" id="KGk-i7-Jjw" customClass="WalletProfileTableViewCell" customModule="SereyIO" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KLV-pi-ie1">
+                        <rect key="frame" x="120" y="24" width="80" height="80"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y2w-9u-jWa" customClass="ProfileView" customModule="SereyIO" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9P-y0-FUC">
+                                <rect key="frame" x="52" y="52" width="28" height="28"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.39966823630136988" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="BXD-3L-BaW"/>
+                                    <constraint firstAttribute="height" constant="28" id="s9P-y3-t4N"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="cameraIcon"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="y2w-9u-jWa" secondAttribute="bottom" id="JoK-zT-5N2"/>
+                            <constraint firstAttribute="trailing" secondItem="y2w-9u-jWa" secondAttribute="trailing" id="Kjg-oV-CBv"/>
+                            <constraint firstItem="y2w-9u-jWa" firstAttribute="leading" secondItem="KLV-pi-ie1" secondAttribute="leading" id="M9A-u5-44W"/>
+                            <constraint firstAttribute="width" constant="80" id="lm0-3F-HqQ"/>
+                            <constraint firstAttribute="trailing" secondItem="j9P-y0-FUC" secondAttribute="trailing" id="myb-2o-muf"/>
+                            <constraint firstItem="y2w-9u-jWa" firstAttribute="top" secondItem="KLV-pi-ie1" secondAttribute="top" id="n6n-nl-3bO"/>
+                            <constraint firstAttribute="height" constant="80" id="tIH-0C-QLE"/>
+                            <constraint firstAttribute="bottom" secondItem="j9P-y0-FUC" secondAttribute="bottom" id="vzw-5O-AN9"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="KLV-pi-ie1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="Stx-yA-qIa"/>
+                    <constraint firstAttribute="bottom" secondItem="KLV-pi-ie1" secondAttribute="bottom" constant="24" id="nWm-xl-LzQ"/>
+                    <constraint firstItem="KLV-pi-ie1" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="zwG-EF-cbe"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="cameraButton" destination="j9P-y0-FUC" id="Iwe-I1-csB"/>
+                <outlet property="profileView" destination="y2w-9u-jWa" id="5RK-hM-6wp"/>
+            </connections>
+            <point key="canvasLocation" x="140.57971014492756" y="136.60714285714286"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="cameraIcon" width="16" height="16"/>
+    </resources>
+</document>

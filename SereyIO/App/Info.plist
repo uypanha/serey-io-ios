@@ -39,6 +39,10 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>${app_name} needs access to your camera to take photos.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>We use Face ID to authentiate your account.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>${app_name} needs access to your photo library to store photos.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>${app_name} needs access to your photo library to store photos.</string>
 	<key>Notificaton Center URL</key>
@@ -51,6 +55,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDarkContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -64,6 +70,8 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
 	<key>URL_PROTOCOL</key>
 	<string>${URL_PROTOCOL}</string>
 </dict>
