@@ -1,6 +1,16 @@
-Primary         : #BA309F
+Primary         : #3F5AC4
+Secondary       : #1E358F
+PrimaryRed      : #D30020
 Positive        : #4ECD77
 AlmostRed       : #FF5B5B
+Shimmering      : #E8E8E8
+Disabled        : #CCCCCC
+
+ButtonBg        : #7F98ED
+PostBackground  : #FFFFFF
+Border          : #DBDBDB
 
 NavigationBg    : #FFFFFF
-NavigationTint  : #0c0c0c
+NavigationTint  : #414141
+
+TabBarBg        : #FFFFFF

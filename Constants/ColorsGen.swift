@@ -22,18 +22,42 @@ internal struct ColorName {
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ff5b5b"></span>
   /// Alpha: 100% <br/> (0xff5b5bff)
   internal static let almostRed = ColorName(rgbaValue: 0xff5b5bff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#dbdbdb"></span>
+  /// Alpha: 100% <br/> (0xdbdbdbff)
+  internal static let border = ColorName(rgbaValue: 0xdbdbdbff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#7f98ed"></span>
+  /// Alpha: 100% <br/> (0x7f98edff)
+  internal static let buttonBg = ColorName(rgbaValue: 0x7f98edff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#cccccc"></span>
+  /// Alpha: 100% <br/> (0xccccccff)
+  internal static let disabled = ColorName(rgbaValue: 0xccccccff)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
   /// Alpha: 100% <br/> (0xffffffff)
   internal static let navigationBg = ColorName(rgbaValue: 0xffffffff)
-  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#0c0c0c"></span>
-  /// Alpha: 100% <br/> (0x0c0c0cff)
-  internal static let navigationTint = ColorName(rgbaValue: 0x0c0c0cff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#414141"></span>
+  /// Alpha: 100% <br/> (0x414141ff)
+  internal static let navigationTint = ColorName(rgbaValue: 0x414141ff)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#4ecd77"></span>
   /// Alpha: 100% <br/> (0x4ecd77ff)
   internal static let positive = ColorName(rgbaValue: 0x4ecd77ff)
-  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ba309f"></span>
-  /// Alpha: 100% <br/> (0xba309fff)
-  internal static let primary = ColorName(rgbaValue: 0xba309fff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
+  /// Alpha: 100% <br/> (0xffffffff)
+  internal static let postBackground = ColorName(rgbaValue: 0xffffffff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#3f5ac4"></span>
+  /// Alpha: 100% <br/> (0x3f5ac4ff)
+  internal static let primary = ColorName(rgbaValue: 0x3f5ac4ff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#d30020"></span>
+  /// Alpha: 100% <br/> (0xd30020ff)
+  internal static let primaryRed = ColorName(rgbaValue: 0xd30020ff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#1e358f"></span>
+  /// Alpha: 100% <br/> (0x1e358fff)
+  internal static let secondary = ColorName(rgbaValue: 0x1e358fff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#e8e8e8"></span>
+  /// Alpha: 100% <br/> (0xe8e8e8ff)
+  internal static let shimmering = ColorName(rgbaValue: 0xe8e8e8ff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
+  /// Alpha: 100% <br/> (0xffffffff)
+  internal static let tabBarBg = ColorName(rgbaValue: 0xffffffff)
 }
 // swiftlint:enable identifier_name line_length type_body_length
 

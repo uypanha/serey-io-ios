@@ -1,0 +1,23 @@
+/* 
+  File.strings
+  SereyIO
+
+  Created by Panha Uy on 3/15/20.
+  Copyright © 2020 Phanha Uy. All rights reserved.
+*/
+
+"userName"                              = "ឈ្មោះ​អ្នកប្រើប្រាស់";
+"userNameRequiredMessage"               = "Username field is required.";
+"privateKeyOrPassword"                  = "សោឯកជន ឬពាក្យសម្ងាត់";
+"privateKeyOrPasswordRequireMessage"    = "Private key or password field is required.";
+
+"signOut"                               = "ចាកចេញ";
+"signIn"                                = "ចូល";
+"signUp"                                = "ចុះ​ឈ្មោះ";
+"orSignUp"                              = "ឬចុះ​ឈ្មោះ";
+"go"                                    = "ចូល";
+"donHaveAccountQuestion"                = "មិនមានគណនី?\n\nចុះ​ឈ្មោះឥឡូវនេះ និងទទួលបានកាក់សេរីឥតគិតថ្លៃ!";
+
+// Google OTP
+"verificationCode"                      = "Verification Code";
+"verifyAndActivate"                     = "Verify & Activate";

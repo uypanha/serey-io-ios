@@ -1,0 +1,11 @@
+/* 
+  Wallet.strings
+  SereyIO
+
+  Created by Panha Uy on 6/24/20.
+  Copyright © 2020 Phanha Uy. All rights reserved.
+*/
+
+"myWallet"                          = "My Wallet";
+"signUpWallet"                      = "Sign-Up Wallet";
+"termsAndPrivacyAgreementMessage"   = "By signing-up Wallet you accept the\n%@ and %@";

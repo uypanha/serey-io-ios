@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Claim Reward View Controller-->
+        <scene sceneID="Z0p-FR-WV0">
+            <objects>
+                <viewController storyboardIdentifier="ClaimRewardViewController" id="iea-rs-5qb" customClass="ClaimRewardViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fOQ-Fd-Gev">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zqc-XR-73l">
+                                <rect key="frame" x="0.0" y="710" width="414" height="152"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="L3w-nu-xrd">
+                                        <rect key="frame" x="24" y="24" width="366" height="112"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="zxo-Ww-qXi">
+                                                <rect key="frame" x="0.0" y="0.0" width="366" height="52"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Claim Reward?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5n7-Rd-ynH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure you want to claim your reward?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NeX-i7-5Dw">
+                                                        <rect key="frame" x="0.0" y="32.5" width="366" height="19.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPn-uD-b3m" customClass="LoadingButton" customModule="SereyIO" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="68" width="366" height="44"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="Wba-fZ-AyY"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <state key="normal" title="Claim Now">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="L3w-nu-xrd" firstAttribute="top" secondItem="Zqc-XR-73l" secondAttribute="top" constant="24" id="LX5-4g-b8E"/>
+                                    <constraint firstAttribute="trailing" secondItem="L3w-nu-xrd" secondAttribute="trailing" constant="24" id="Qga-2n-KLX"/>
+                                    <constraint firstItem="L3w-nu-xrd" firstAttribute="leading" secondItem="Zqc-XR-73l" secondAttribute="leading" constant="24" id="iKN-5n-nFY"/>
+                                    <constraint firstAttribute="bottom" secondItem="L3w-nu-xrd" secondAttribute="bottom" constant="16" id="lAr-hd-YiG"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Zqc-XR-73l" firstAttribute="leading" secondItem="fOQ-Fd-Gev" secondAttribute="leading" id="Asc-1R-l3l"/>
+                            <constraint firstItem="aHE-cc-xxA" firstAttribute="bottom" secondItem="Zqc-XR-73l" secondAttribute="bottom" id="jGE-61-f5V"/>
+                            <constraint firstAttribute="trailing" secondItem="Zqc-XR-73l" secondAttribute="trailing" id="v2L-Yl-9OC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aHE-cc-xxA"/>
+                    </view>
+                    <connections>
+                        <outlet property="claimButton" destination="dPn-uD-b3m" id="TRy-XL-sNO"/>
+                        <outlet property="containerView" destination="Zqc-XR-73l" id="cHx-ZU-sqt"/>
+                        <outlet property="messageLabel" destination="NeX-i7-5Dw" id="ATB-4d-f8D"/>
+                        <outlet property="titleLabel" destination="5n7-Rd-ynH" id="Ojl-Z8-2EP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fff-he-Za7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="114" y="-181"/>
+        </scene>
+    </scenes>
+</document>

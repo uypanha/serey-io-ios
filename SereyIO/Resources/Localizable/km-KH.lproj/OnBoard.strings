@@ -1,0 +1,17 @@
+/* 
+  OnBoard.strings
+  SereyIO
+
+  Created by Phanha Uy on 1/31/20.
+  Copyright © 2020 Phanha Uy. All rights reserved.
+*/
+
+"selectLanguage"            = "ជ្រើសរើសភាសា";
+"getStarted"                = "ចាប់ផ្តើម";
+
+"shareAndEarn"              = "ចែករំលែក និងទទួលបាន";
+"shareAndEarnMessage"       = "រកប្រាក់ចំណូលបានកាក់សេរីដោយសរសេរអត្ថបទ និងចែករំលែកមាតិកា។";
+"transparency"              = "តម្លាភាព";
+"transparencyMessage"       = "ប្រកាសទាំងអស់នៅលើសេរីត្រូវបានរក្សាទុកជាអចិន្ត្រៃវិមជ្ឍការ blockchain នៅលើសេរី។";
+"walletMarketplace"         = "កាបូប និងទីផ្សារ";
+"walletMarketplaceMessage"  = "ទាញយកកាបូបសេរីដើម្បីផ្ញើ និងទទួលកាក់ ឬទៅទីផ្សារសេរីដើម្បីទិញ និងផលិតផលលក់។";

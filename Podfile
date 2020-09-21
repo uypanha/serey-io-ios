@@ -1,71 +1,89 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
 
-# Pods for Sharing to multiple targets
+# MARK: - Pods for Sharing to multiple targets
+install! 'cocoapods',
+:deterministic_uuids => false
+
 def frameworks_pods
   
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  # MARK: - Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   platform :ios, '10'
   use_frameworks!
   inhibit_all_warnings!
+  
+  # MARK: - RX
+  pod 'RxSwift', '~> 5'
+  pod 'RxCocoa', '~> 5'
+  pod 'RxDataSources', '~> 4.0'
+  pod 'RxKeyboard', '1.0.0'
+  pod 'RxKingfisher', '1.0.0'
+  pod 'RxAlamofire', '5.2.0'
+  pod 'RxRealm', '2.0.0'
+  pod 'RxBinding', '0.3.1'
 
-	# Data Store
+	# MARK: - Data Store
   pod 'Locksmith'
-	pod 'RealmSwift'
+	pod 'RealmSwift', '4.0'
 
-	# Extentions
+	# MARK: - Extentions
   pod 'Then'
 
-	# Tools + Builders
+	# MARK: - Tools + Builders
   pod 'R.swift'
   pod 'SwiftGen'
+  pod 'SwiftOTP'
+  
+  # MARK: - Coder Tools
+#  pod 'AnyCodable-FlightSchool', '~> 0.2.3'
 
-	# Logger
+	# MARK: - Logger
   pod 'SwiftyBeaver'
 	
-	#Network Framework
+	# MARK: - Network Framework
   pod 'Kingfisher'
   pod 'Alamofire'
-  pod 'AlamofireObjectMapper'
+  pod 'AlamofireObjectMapper', :git => 'https://github.com/uypanha/AlamofireObjectMapper.git'
   pod 'ReachabilitySwift'
   pod 'Moya/RxSwift'
 
-	# UI + Controllers
+	# MARK: - UI + Controllers
 	pod 'SnapKit'
 	pod 'NVActivityIndicatorView'
 	pod 'NotificationBannerSwift'
-
-	# RX
-  pod 'RxSwift'
-  pod 'RxCocoa'
-  pod 'RxDataSources'
-  pod 'RxKeyboard'
-  pod 'RxKingfisher'
-  pod 'RxAlamofire'
-  pod 'RxRealm'
-  pod 'RxBinding'
+  pod 'Shimmer'
+  pod 'RichEditorView', :git => 'https://github.com/uyphanha/RichEditorView.git'
+  pod 'LSDialogViewController', :git => 'https://github.com/uyphanha/LSDialogViewController.git'
   
-  # Google SDKs
-  pod 'Firebase/Core'
+  # MARK: - Google SDKs
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Core' 
   pod 'Firebase/Messaging'
   
-  # Material Components
-  pod 'MaterialComponents/Cards'
-  pod 'MaterialComponents/Cards+ColorThemer'
+  # MARK: - Material Components
+  pod 'MaterialComponents/Tabs'
+  pod 'MaterialComponents/PageControl'
+  pod 'MaterialComponents/BottomSheet'
+  pod 'MaterialComponents/Chips'
+  pod 'MaterialComponents/TextControls+OutlinedTextFields'
+  pod 'MaterialComponents/TextControls+OutlinedTextFieldsTheming'
+  pod 'MaterialComponents/ProgressView'
+  pod 'MaterialComponents/ActivityIndicator'
+  pod 'MaterialComponents/Snackbar'
   
 end
 
-target 'iOSTemplate' do
+target 'SereyIO' do
 
-  # Pods for iOSTemplate
+  # Pods for SereyIO
 	frameworks_pods
 
-  target 'iOSTemplateTests' do
+  target 'SereyIOTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'iOSTemplateUITests' do
+  target 'SereyIOUITests' do
     inherit! :search_paths
     # Pods for testing
   end

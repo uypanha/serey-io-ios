@@ -1,0 +1,28 @@
+//
+//  Development.xcconfig
+//  SereyIO
+//
+//  Created by Phanha Uy on 9/9/19.
+//  Copyright © 2019 Phanha Uy. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+//#include "Pods/Target Support Files/Pods-SereyIO/Pods-SereyIO.release_development.xcconfig"
+//#include "Pods/Target Support Files/Pods-SereyIO/Pods-SereyIO.debug_development.xcconfig"
+
+// Server URL
+BASE_DOMAIN             = serey.io
+API_URL                 = test-api.serey.io
+KYC_URL                 = testkyc.serey.io
+CHAIN_URL               = api.serey.io
+URL_PROTOCOL            = https:/$()/
+NOTIFICATION_URL        = http:/$()/116.203.93.152:9292
+
+// APP INFO
+app_name                = Serey.io Dev
+app_bundle              = io.serey.ios-dev
+app_version_name        = 1.0.0
+app_version_code        = 1
+
+INCLUDE_WALLET          = true

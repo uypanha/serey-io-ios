@@ -1,0 +1,57 @@
+/* 
+  Post.strings
+  SereyIO
+
+  Created by Panha Uy on 4/5/20.
+  Copyright © 2020 Phanha Uy. All rights reserved.
+*/
+
+// MARK: Empty or Errors
+"noPostYet"                 = "No Post Yet!";
+"noPostMessage"             = "Your post will be shown here after you made a post.";
+"noPostUserMessage"         = "%@'s post will be shown here after %@ made a post.";
+
+"trending"                  = "Trending";
+"noTrendingPostMessage"     = "Trending post will be shown here afer someone made a post.";
+"hot"                       = "Hot";
+"noHotPostMessage"          = "Hot post will be shown here afer someone made a post.";
+"new"                       = "New";
+"noNewPostMessage"          = "New post will be shown here afer someone made a post.";
+"postsByCategory"           = "%@'s Posts";
+"noPostByCategoryMessage"   = "%@'s pots will be shown here after someone made a post to this category.";
+
+"post"                      = "Post";
+"postAnArticle"             = "Post an Article";
+"updateAnArticle"           = "Update an Article";
+"postAComment"              = "Post a comment...";
+
+"enterTitle"                = "Enter title";
+"articleBody"               = "Write an article";
+"shortDescription"          = "Short description";
+
+"selectCategory"            = "Select category";
+"selectSubCategory"         = "Select sub-category";
+
+"chooseThumbnailWith"       = "Choose Thumbnail with";
+"insertImageWith"           = "Insert Image with";
+
+"changeThumbnail"           = "Change Thumbnail";
+"uploadThumbnail"           = "Upload Thumbnail";
+
+"deleteArticleQ"            = "Delete Article?";
+"deleteArticleMessage"      = "Are you sure you want to delete this article?";
+
+"replies"                   = "Replies";
+"comments"                  = "Comments";
+
+"confirmRemoveVote"         = "Confirm Remove Vote";
+"confirmRemoveFlage"        = "Confirm Remove Flag";
+"removeVotePostMessage"     = "Removing your vote will reset your curation rewards for this post.";
+"removeVoteCommentMessage"  = "Removing your vote will reset your curation rewards for this comment.";
+
+"upVotePost"                = "Upvote Post";
+"upVoteComment"             = "Upvote Comment";
+"flagPost"                  = "Flag Post";
+"flagComment"               = "Flag Comment";
+
+"viewConversation"          = "View Conversation (%@)";
