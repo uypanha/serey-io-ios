@@ -19,6 +19,7 @@ extension UINavigationController {
         
         //  change to opaque all
         self.navigationBar.isTranslucent = false
+        self.view.backgroundColor = ColorName.navigationBg.color
         self.setNavigationBarColor(ColorName.navigationBg.color, tintColor: ColorName.navigationTint.color)
     }
     

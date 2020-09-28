@@ -121,7 +121,7 @@ class TextFieldViewModel: CellViewModel, FieldViewModelProtocol {
         return true
     }
     
-    func validate(with text: String?) -> Bool {
+    func validate(match text: String?) -> Bool {
         guard self.validate() && self.value == text else {
             errorText.accept(errorMessage)
             return false

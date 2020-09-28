@@ -73,24 +73,9 @@ extension WalletRootViewController {
         }
     }
     
-    func switchToSetUpCredential(fadeAnimation: Bool = true) {
-        let askToCreateCredentialViewController = R.storyboard.auth.askToCreateCredentialViewController()!
-        askToCreateCredentialViewController.viewModel = AskToCreateCredentialViewModel()
-        let closableViewController = CloseableNavigationController(rootViewController: askToCreateCredentialViewController)
-        if fadeAnimation {
-            self.animateFadeTransition(to: closableViewController) { [weak self] in
-                self?.handleDeeplink()
-            }
-        } else {
-            self.animateSlideToTopTransition(to: closableViewController) { [weak self] in
-                self?.handleDeeplink()
-            }
-        }
-    }
-    
-    func switchToCreateCredential(fadeAnimation: Bool = true) {
+    func switchToCreateCredential(fadeAnimation: Bool = true, viewModel: CreateCredentialViewModel) {
         let createCredentialViewController = R.storyboard.auth.createCredentialViewController()!
-        createCredentialViewController.viewModel = CreateCredentialViewModel()
+        createCredentialViewController.viewModel = viewModel
         let closableViewController = CloseableNavigationController(rootViewController: createCredentialViewController)
         if fadeAnimation {
             self.animateFadeTransition(to: closableViewController) { [weak self] in

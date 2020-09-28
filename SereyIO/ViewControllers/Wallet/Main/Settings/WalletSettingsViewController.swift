@@ -36,6 +36,13 @@ class WalletSettingsViewController: BaseTableViewController {
         setUpRxObservers()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.showNavigationBarBorder()
+        self.navigationController?.setNavigationBarColor(ColorName.navigationBg.color, tintColor: ColorName.navigationTint.color)
+    }
+    
     override func setUpLocalizedTexts() {
         super.setUpLocalizedTexts()
         
@@ -135,8 +142,9 @@ extension WalletSettingsViewController {
         self.viewModel.shouldPresent.asObservable()
             .subscribe(onNext: { [weak self] viewToPresent in
                 switch viewToPresent {
-                case .changePasswordController:
+                case .changePasswordController(let changePasswordViewModel):
                     if let changePasswordController = R.storyboard.password.changePasswordViewController() {
+                        changePasswordController.viewModel = changePasswordViewModel
                         self?.show(changePasswordController, sender: nil)
                     }
                 }

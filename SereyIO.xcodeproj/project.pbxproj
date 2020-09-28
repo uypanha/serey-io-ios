@@ -188,8 +188,6 @@
 		DC75DAB7244DF0C100D80CB2 /* PostCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */; };
 		DC75DAB9244E055000D80CB2 /* FollowActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */; };
 		DC75DABB244E07EE00D80CB2 /* FollowerListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */; };
-		DC79F11724CD612F007FCECC /* AskToCreateCredentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC79F11624CD612F007FCECC /* AskToCreateCredentialViewController.swift */; };
-		DC79F11B24CD6A9A007FCECC /* AskToCreateCredentialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC79F11A24CD6A9A007FCECC /* AskToCreateCredentialViewModel.swift */; };
 		DC79F11F24CDD7D3007FCECC /* CreateCredentialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC79F11D24CDD7D3007FCECC /* CreateCredentialTableViewCell.swift */; };
 		DC79F12024CDD7D3007FCECC /* CreateCredentialTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC79F11E24CDD7D3007FCECC /* CreateCredentialTableViewCell.xib */; };
 		DC7AAFF024F8032900ECDF47 /* PowerUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7AAFEF24F8032900ECDF47 /* PowerUpViewModel.swift */; };
@@ -402,6 +400,8 @@
 		DCFBD78425029CE8005B6875 /* CancelPowerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBD78325029CE8005B6875 /* CancelPowerModel.swift */; };
 		DCFBD78625029D01005B6875 /* CancelPowerRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBD78525029D01005B6875 /* CancelPowerRequestModel.swift */; };
 		DCFBD7892503E119005B6875 /* ClaimRewardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBD7882503E119005B6875 /* ClaimRewardViewModel.swift */; };
+		DCFF5875251F0D40002E570A /* SignUpWalletModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFF5874251F0D40002E570A /* SignUpWalletModel.swift */; };
+		DCFF5877251F7A66002E570A /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFF5876251F7A66002E570A /* ChangePasswordViewModel.swift */; };
 		DCFF69612448B5BB00416218 /* VoteDialogProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */; };
 /* End PBXBuildFile section */
 
@@ -642,8 +642,6 @@
 		DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellProtocol.swift; sourceTree = "<group>"; };
 		DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowActionModel.swift; sourceTree = "<group>"; };
 		DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListResponse.swift; sourceTree = "<group>"; };
-		DC79F11624CD612F007FCECC /* AskToCreateCredentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskToCreateCredentialViewController.swift; sourceTree = "<group>"; };
-		DC79F11A24CD6A9A007FCECC /* AskToCreateCredentialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskToCreateCredentialViewModel.swift; sourceTree = "<group>"; };
 		DC79F11D24CDD7D3007FCECC /* CreateCredentialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCredentialTableViewCell.swift; sourceTree = "<group>"; };
 		DC79F11E24CDD7D3007FCECC /* CreateCredentialTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateCredentialTableViewCell.xib; sourceTree = "<group>"; };
 		DC7AAFEF24F8032900ECDF47 /* PowerUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpViewModel.swift; sourceTree = "<group>"; };
@@ -860,6 +858,8 @@
 		DCFBD78325029CE8005B6875 /* CancelPowerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelPowerModel.swift; sourceTree = "<group>"; };
 		DCFBD78525029D01005B6875 /* CancelPowerRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelPowerRequestModel.swift; sourceTree = "<group>"; };
 		DCFBD7882503E119005B6875 /* ClaimRewardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimRewardViewModel.swift; sourceTree = "<group>"; };
+		DCFF5874251F0D40002E570A /* SignUpWalletModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWalletModel.swift; sourceTree = "<group>"; };
+		DCFF5876251F7A66002E570A /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDialogProtocol.swift; sourceTree = "<group>"; };
 		E48D784F3F419D4A8B0116EC /* Pods_SereyIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SereyIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4BA4EF9560F572B6DA8F7A4 /* Pods-SereyIOTests.debug_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.debug_production.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.debug_production.xcconfig"; sourceTree = "<group>"; };
@@ -999,6 +999,7 @@
 			isa = PBXGroup;
 			children = (
 				DC12F20A242271B60099C479 /* TokenModel.swift */,
+				DCFF5874251F0D40002E570A /* SignUpWalletModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1497,6 +1498,7 @@
 		DC6ED56D2326A2E100770B31 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DC7C8EF124D9BEBF0051C084 /* Codable.swift */,
 				DCEC0CBB240907D0002F4B6F /* Date+Formatter.swift */,
 				DCB5BD802499170A0042E5AF /* LAContext.swift */,
 				DC115F2D241A8E18006BE78C /* NSAttributedString+Extensions.swift */,
@@ -1509,7 +1511,6 @@
 				DCD3988E232E259B00C812EB /* Controller */,
 				DCD39871232E203000C812EB /* Rx+Extension */,
 				DCD39860232E112A00C812EB /* View */,
-				DC7C8EF124D9BEBF0051C084 /* Codable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1639,7 +1640,6 @@
 		DC79F11424CD60FE007FCECC /* CreateCredential */ = {
 			isa = PBXGroup;
 			children = (
-				DC79F11624CD612F007FCECC /* AskToCreateCredentialViewController.swift */,
 				DC9C659D249D260E0042C829 /* CreateCredentialViewController.swift */,
 			);
 			path = CreateCredential;
@@ -1656,7 +1656,6 @@
 		DC79F11824CD6A72007FCECC /* Credentail */ = {
 			isa = PBXGroup;
 			children = (
-				DC79F11A24CD6A9A007FCECC /* AskToCreateCredentialViewModel.swift */,
 				DC9C659F249DE4F10042C829 /* CreateCredentialViewModel.swift */,
 			);
 			path = Credentail;
@@ -2192,6 +2191,7 @@
 		DCBBD6C324E43A7A0099C406 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				DCFF5876251F7A66002E570A /* ChangePasswordViewModel.swift */,
 				DCBBD6C724E43CE50099C406 /* WalletSettingCellViewModel.swift */,
 				DCBBD6C424E43A870099C406 /* WalletSettingsViewModel.swift */,
 			);
@@ -3069,7 +3069,6 @@
 				DCD12D6C242D06C20084F66C /* ImageTextTableViewCell.swift in Sources */,
 				DCFBD78025022FBF005B6875 /* CancelPowerDownViewController.swift in Sources */,
 				DC40D5DF23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift in Sources */,
-				DC79F11724CD612F007FCECC /* AskToCreateCredentialViewController.swift in Sources */,
 				DC7558BA24589A4C00AD40FA /* SereyAppCellViewModel.swift in Sources */,
 				DCD3987A232E230B00C812EB /* NibView.swift in Sources */,
 				DCD39896232E28E100C812EB /* WebViewViewModel.swift in Sources */,
@@ -3106,6 +3105,7 @@
 				DCB5BD7F2497D9400042E5AF /* ChooseSecurityMethodViewModel.swift in Sources */,
 				DC562433241E73D80076A78C /* SignInViewModel.swift in Sources */,
 				DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */,
+				DCFF5877251F7A66002E570A /* ChangePasswordViewModel.swift in Sources */,
 				DC1F79CF24CF294200B7F0D3 /* CreateCredentialCellViewModel.swift in Sources */,
 				DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */,
 				DCA5255B2425166B00284CD8 /* ButtonCellViewModel.swift in Sources */,
@@ -3120,7 +3120,6 @@
 				DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */,
 				DC26812A23F2FCB30045776E /* ProfileTableViewCell.swift in Sources */,
 				DC7558AE24587B3D00AD40FA /* FeatureBoarding.swift in Sources */,
-				DC79F11B24CD6A9A007FCECC /* AskToCreateCredentialViewModel.swift in Sources */,
 				DCD39883232E24BF00C812EB /* Realm+Cnfigure.swift in Sources */,
 				DC9E36DC24129ACA00289693 /* PostDetailViewController.swift in Sources */,
 				DCCC15C825092AE500ED4C52 /* TransactionDetailViewModel.swift in Sources */,
@@ -3137,6 +3136,7 @@
 				DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */,
 				DCB5BD812499170A0042E5AF /* LAContext.swift in Sources */,
 				DCF67FEF24100C6F003061A7 /* ListDataResponseModel.swift in Sources */,
+				DCFF5875251F0D40002E570A /* SignUpWalletModel.swift in Sources */,
 				DC75DABB244E07EE00D80CB2 /* FollowerListResponse.swift in Sources */,
 				DC42AF0423E9CFB5008F8A0F /* PostTableViewCell.swift in Sources */,
 				DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */,

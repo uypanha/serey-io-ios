@@ -19,7 +19,7 @@ class WalletSettingsViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
     }
     
     enum ViewToPresent {
-        case changePasswordController
+        case changePasswordController(ChangePasswordViewModel)
     }
     
     // input:
@@ -96,7 +96,8 @@ fileprivate extension WalletSettingsViewModel {
         if let item = self.item(at: indexPath) as? WalletSettingCellViewModel {
             switch item.type.value {
             case .changePassword:
-                self.shouldPresent(.changePasswordController)
+                let changePasswordViewModel = ChangePasswordViewModel()
+                self.shouldPresent(.changePasswordController(changePasswordViewModel))
             default:
                 break
             }
