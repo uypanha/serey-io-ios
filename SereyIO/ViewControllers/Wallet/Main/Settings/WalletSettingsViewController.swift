@@ -147,6 +147,16 @@ extension WalletSettingsViewController {
                         changePasswordController.viewModel = changePasswordViewModel
                         self?.show(changePasswordController, sender: nil)
                     }
+                case .activateGoogleOTPContronner(let activateGoogleOTPViewModel):
+                    if let activateGoogleOTPController = R.storyboard.googleOTP.activateGoogleOTPViewController() {
+                        activateGoogleOTPController.viewModel = activateGoogleOTPViewModel
+                        self?.show(CloseableNavigationController(rootViewController: activateGoogleOTPController), sender: nil)
+                    }
+                case .activeBiometryViewController(let activeBiometryViewModel):
+                    if let activeBiometryViewController = R.storyboard.biometry.activeBiometryViewController() {
+                        activeBiometryViewController.viewModel = activeBiometryViewModel
+                        self?.show(CloseableNavigationController(rootViewController: activeBiometryViewController), sender: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

@@ -19,12 +19,12 @@ def frameworks_pods
   pod 'RxKeyboard', '1.0.0'
   pod 'RxKingfisher', '1.0.0'
   pod 'RxAlamofire', '5.2.0'
-  pod 'RxRealm', '2.0.0'
+  pod 'RxRealm', '3.1.0'
   pod 'RxBinding', '0.3.1'
 
 	# MARK: - Data Store
   pod 'Locksmith'
-	pod 'RealmSwift', '4.0'
+	pod 'RealmSwift', '5.2'
 
 	# MARK: - Extentions
   pod 'Then'
@@ -50,6 +50,7 @@ def frameworks_pods
 	# MARK: - UI + Controllers
 	pod 'SnapKit'
 	pod 'NVActivityIndicatorView'
+  pod 'NVActivityIndicatorView/Extended'
 	pod 'NotificationBannerSwift'
   pod 'Shimmer'
   pod 'RichEditorView', :git => 'https://github.com/uyphanha/RichEditorView.git'
@@ -86,5 +87,13 @@ target 'SereyIO' do
   target 'SereyIOUITests' do
     inherit! :search_paths
     # Pods for testing
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+    end
   end
 end

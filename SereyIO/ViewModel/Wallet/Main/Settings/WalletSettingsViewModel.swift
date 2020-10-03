@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import RxBinding
 import RxDataSources
+import LocalAuthentication
 
 class WalletSettingsViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, ShouldReactToAction, ShouldPresent {
     
@@ -20,6 +21,8 @@ class WalletSettingsViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
     
     enum ViewToPresent {
         case changePasswordController(ChangePasswordViewModel)
+        case activateGoogleOTPContronner(ActivateGoogleOTPViewModel)
+        case activeBiometryViewController(ActiveBiometryViewModel)
     }
     
     // input:
@@ -71,7 +74,13 @@ extension WalletSettingsViewModel {
         sectionItems[.profileInfo] = [WalletSettingType.profileInfo.cellModel]
         
         let securityItems: [WalletSettingType] = [.changePassword, .fingerPrint, .googleOTP]
-        sectionItems[.security] = securityItems.map { $0.cellModel }
+        sectionItems[.security] = securityItems.map { type in
+            let cell = type.cellModel
+            if let toggledCell = cell as? WalletSettingToggleCellViewModel {
+                self.setUpToggleCellObserver(cellModel: toggledCell)
+            }
+            return cell
+        }
         
         return sectionItems
     }
@@ -101,6 +110,24 @@ fileprivate extension WalletSettingsViewModel {
             default:
                 break
             }
+        }
+    }
+    
+    func handleToggledSecurityType(isOn: Bool, type: WalletSettingType) {
+        switch type {
+        case .googleOTP:
+            if (isOn) {
+                let activateGoogleOTPViewModel = ActivateGoogleOTPViewModel()
+                self.shouldPresent(.activateGoogleOTPContronner(activateGoogleOTPViewModel))
+            }
+        case .fingerPrint:
+            if (isOn) {
+                let biometricType = LAContext().biometricType
+                let activeBiometryViewModel = ActiveBiometryViewModel(biometricType)
+                self.shouldPresent(.activeBiometryViewController(activeBiometryViewModel))
+            }
+        default:
+            break
         }
     }
 }
@@ -137,5 +164,13 @@ extension WalletSettingsViewModel {
                     self?.handleItemSelected(indexPath)
                 }
             }) ~ self.disposeBag
+    }
+    
+    func setUpToggleCellObserver(cellModel: WalletSettingToggleCellViewModel) {
+        cellModel.didToggledUpdated.asObservable()
+            .subscribe(onNext: { [weak self] (isOn, type) in
+                self?.handleToggledSecurityType(isOn: isOn, type: type)
+            }) ~ cellModel.disposeBag
+
     }
 }

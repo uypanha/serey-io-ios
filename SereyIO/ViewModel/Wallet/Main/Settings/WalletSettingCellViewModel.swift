@@ -23,10 +23,16 @@ class WalletSettingCellViewModel: ImageTextCellViewModel {
 class WalletSettingToggleCellViewModel: ToggleTextCellModel {
     
     let type: BehaviorRelay<WalletSettingType>
+    let didToggledUpdated: PublishSubject<(Bool, WalletSettingType)>
     
     init(_ type: WalletSettingType, _ showSeperatorLine: Bool = false) {
         self.type = .init(value: type)
+        self.didToggledUpdated = .init()
         super.init(textModel: type.imageModel)
+    }
+    
+    override func didToggleChanged(_ isOn: Bool) {
+        self.didToggledUpdated.onNext((isOn, self.type.value))
     }
 }
 

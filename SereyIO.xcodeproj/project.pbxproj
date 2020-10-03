@@ -164,7 +164,6 @@
 		DC6ED58D2326A5E600770B31 /* APNSHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6ED58C2326A5E600770B31 /* APNSHandler.swift */; };
 		DC6ED58F2326A7B000770B31 /* AppDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6ED58E2326A7B000770B31 /* AppDelegateHelper.swift */; };
 		DC6ED5912326A8F400770B31 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6ED5902326A8F400770B31 /* Appearance.swift */; };
-		DC6FCE5623F05D0400D72F6D /* OAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6A790D23CA2B51001D1009 /* OAuth2.framework */; };
 		DC6FCE7123F05D1700D72F6D /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE6623F05D1700D72F6D /* Auth.swift */; };
 		DC6FCE7223F05D1700D72F6D /* Broadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE6723F05D1700D72F6D /* Broadcast.swift */; };
 		DC6FCE7323F05D1700D72F6D /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE6823F05D1700D72F6D /* HttpClient.swift */; };
@@ -872,7 +871,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC7F098924B05ED400CE8AFC /* Steem in Frameworks */,
-				DC6FCE5623F05D0400D72F6D /* OAuth2.framework in Frameworks */,
 				26AE9EB0BA60B5822CF0E5D5 /* Pods_SereyIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2976,7 +2974,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen colors -t swift3 --output \"$PROJECT_DIR/Constants/ColorsGen.swift\" \"$PROJECT_DIR/Constants/colors.txt\"\n";
+			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen colors -t swift4 --output \"$PROJECT_DIR/Constants/ColorsGen.swift\" \"$PROJECT_DIR/Constants/colors.txt\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
