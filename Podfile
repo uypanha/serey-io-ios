@@ -55,6 +55,7 @@ def frameworks_pods
   pod 'Shimmer'
   pod 'RichEditorView', :git => 'https://github.com/uyphanha/RichEditorView.git'
   pod 'LSDialogViewController', :git => 'https://github.com/uyphanha/LSDialogViewController.git'
+  pod 'PinCodeTextField', :git => 'https://github.com/uypanha/PinCodeTextField.git'
   
   # MARK: - Google SDKs
   pod 'Firebase/Analytics'

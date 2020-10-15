@@ -288,6 +288,8 @@
 		DCA5255B2425166B00284CD8 /* ButtonCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA525582425166B00284CD8 /* ButtonCellViewModel.swift */; };
 		DCA5255D2426636F00284CD8 /* AlertDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5255C2426636F00284CD8 /* AlertDialogController.swift */; };
 		DCA5255F242921EA00284CD8 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */; };
+		DCA74DA3253746680041EAAE /* VerifyGoogleOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA74DA2253746680041EAAE /* VerifyGoogleOTPViewModel.swift */; };
+		DCA74DA82537EDBA0041EAAE /* WalletPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA74DA72537EDBA0041EAAE /* WalletPreferenceStore.swift */; };
 		DCB5BD6B2497BF880042E5AF /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCB5BD6A2497BF880042E5AF /* Wallet.storyboard */; };
 		DCB5BD712497CAE40042E5AF /* SecurityMethodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5BD6F2497CAE40042E5AF /* SecurityMethodeTableViewCell.swift */; };
 		DCB5BD722497CAE40042E5AF /* SecurityMethodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB5BD702497CAE40042E5AF /* SecurityMethodeTableViewCell.xib */; };
@@ -375,9 +377,13 @@
 		DCEC0CC4240A530B002F4B6F /* FilteredCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCEC0CC2240A530B002F4B6F /* FilteredCategoryTableViewCell.xib */; };
 		DCEC0CC6240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CC5240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift */; };
 		DCEC0CC8240A5E0E002F4B6F /* CicularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CC7240A5E0E002F4B6F /* CicularButton.swift */; };
+		DCED6A062534ADF7003C9A43 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCED6A052534ADF7003C9A43 /* CheckBox.swift */; };
+		DCED6A0B2534B007003C9A43 /* CornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCED6A0A2534B007003C9A43 /* CornerView.swift */; };
+		DCED6A102534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCED6A0F2534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift */; };
 		DCEE3F7A2439DB57000A75C5 /* Post.strings in Resources */ = {isa = PBXBuildFile; fileRef = DCEE3F7C2439DB57000A75C5 /* Post.strings */; };
 		DCEE3F802439DCA8000A75C5 /* Account.strings in Resources */ = {isa = PBXBuildFile; fileRef = DCEE3F822439DCA8000A75C5 /* Account.strings */; };
 		DCEF9D37243E1680002B7E99 /* MoreAppsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEF9D36243E1680002B7E99 /* MoreAppsViewModel.swift */; };
+		DCF20B4A2535F9C500206786 /* VerifyGoogleOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF20B492535F9C500206786 /* VerifyGoogleOTPViewController.swift */; };
 		DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */; };
 		DCF67FDD240FFC4A003061A7 /* SearchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FDC240FFC4A003061A7 /* SearchApi.swift */; };
 		DCF67FE1240FFD65003061A7 /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FDF240FFD65003061A7 /* PeopleTableViewCell.swift */; };
@@ -743,6 +749,8 @@
 		DCA525582425166B00284CD8 /* ButtonCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCellViewModel.swift; sourceTree = "<group>"; };
 		DCA5255C2426636F00284CD8 /* AlertDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDialogController.swift; sourceTree = "<group>"; };
 		DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
+		DCA74DA2253746680041EAAE /* VerifyGoogleOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyGoogleOTPViewModel.swift; sourceTree = "<group>"; };
+		DCA74DA72537EDBA0041EAAE /* WalletPreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPreferenceStore.swift; sourceTree = "<group>"; };
 		DCB5BD6A2497BF880042E5AF /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
 		DCB5BD6F2497CAE40042E5AF /* SecurityMethodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityMethodeTableViewCell.swift; sourceTree = "<group>"; };
 		DCB5BD702497CAE40042E5AF /* SecurityMethodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecurityMethodeTableViewCell.xib; sourceTree = "<group>"; };
@@ -831,11 +839,15 @@
 		DCEC0CC2240A530B002F4B6F /* FilteredCategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilteredCategoryTableViewCell.xib; sourceTree = "<group>"; };
 		DCEC0CC5240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredCategoryCellViewModel.swift; sourceTree = "<group>"; };
 		DCEC0CC7240A5E0E002F4B6F /* CicularButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CicularButton.swift; sourceTree = "<group>"; };
+		DCED6A052534ADF7003C9A43 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		DCED6A0A2534B007003C9A43 /* CornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerView.swift; sourceTree = "<group>"; };
+		DCED6A0F2534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateGoogleOTP2ViewController.swift; sourceTree = "<group>"; };
 		DCEE3F7B2439DB57000A75C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Post.strings; sourceTree = "<group>"; };
 		DCEE3F7D2439DB5A000A75C5 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Post.strings"; sourceTree = "<group>"; };
 		DCEE3F812439DCA8000A75C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Account.strings; sourceTree = "<group>"; };
 		DCEE3F832439DCA9000A75C5 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Account.strings"; sourceTree = "<group>"; };
 		DCEF9D36243E1680002B7E99 /* MoreAppsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreAppsViewModel.swift; sourceTree = "<group>"; };
+		DCF20B492535F9C500206786 /* VerifyGoogleOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyGoogleOTPViewController.swift; sourceTree = "<group>"; };
 		DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingViewModel.swift; sourceTree = "<group>"; };
 		DCF67FDC240FFC4A003061A7 /* SearchApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchApi.swift; sourceTree = "<group>"; };
 		DCF67FDF240FFD65003061A7 /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
@@ -1238,6 +1250,7 @@
 		DC583A9024CC2E6E00D9C4D3 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				DCA74DA72537EDBA0041EAAE /* WalletPreferenceStore.swift */,
 				DC583A9124CC2E7A00D9C4D3 /* WalletStore.swift */,
 			);
 			path = Wallet;
@@ -1545,6 +1558,7 @@
 			isa = PBXGroup;
 			children = (
 				DC6ED57D2326A44A00770B31 /* DefaultsStore.swift */,
+				DC583A9324CC303A00D9C4D3 /* KeychainConfiguration.swift */,
 				DC583A8824C89AB400D9C4D3 /* KeychainPasswordItem.swift */,
 				DC6ED5892326A53B00770B31 /* KeyChainStore.swift */,
 				DC6ED57F2326A46300770B31 /* SimpleStore.swift */,
@@ -1552,7 +1566,6 @@
 				DCC49AC923E864AA00119BAA /* Settings */,
 				DCC49ACA23E864BA00119BAA /* User */,
 				DC583A9024CC2E6E00D9C4D3 /* Wallet */,
-				DC583A9324CC303A00D9C4D3 /* KeychainConfiguration.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -1803,6 +1816,7 @@
 		DC88A73423DF3EB600EB7F79 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DCED6A052534ADF7003C9A43 /* CheckBox.swift */,
 				DC42AF0623E9D39B008F8A0F /* CardView.swift */,
 				DCC6F1DB242BB041003B9E3A /* CenteredImageButton.swift */,
 				DCEC0CC7240A5E0E002F4B6F /* CicularButton.swift */,
@@ -1820,6 +1834,7 @@
 				DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */,
 				DCDE006D2446161500D09717 /* UIPlaceHolderTextView.swift */,
 				DCB9F2E924D7153D0028D449 /* UIRightIconButton.swift */,
+				DCED6A0A2534B007003C9A43 /* CornerView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1971,7 +1986,9 @@
 		DC9C65A6249FC5DC0042C829 /* GoogleOTP */ = {
 			isa = PBXGroup;
 			children = (
+				DCED6A0F2534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift */,
 				DC9C65A7249FC63C0042C829 /* ActivateGoogleOTPViewController.swift */,
+				DCF20B492535F9C500206786 /* VerifyGoogleOTPViewController.swift */,
 			);
 			path = GoogleOTP;
 			sourceTree = "<group>";
@@ -1980,6 +1997,7 @@
 			isa = PBXGroup;
 			children = (
 				DC9C65AA24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift */,
+				DCA74DA2253746680041EAAE /* VerifyGoogleOTPViewModel.swift */,
 			);
 			path = GoogleOTP;
 			sourceTree = "<group>";
@@ -2985,6 +3003,7 @@
 			files = (
 				DC583A9D24CC7EEF00D9C4D3 /* SereyKeyHelper.swift in Sources */,
 				DC8EAB8123E7231200E00A00 /* HomeViewController.swift in Sources */,
+				DCED6A102534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift in Sources */,
 				DCD39873232E204000C812EB /* Rx+Extensions.swift in Sources */,
 				DC5D59DD2432437A0048C921 /* SelectCategoryViewModel.swift in Sources */,
 				DC243FC624666A19007B2EC5 /* CategoryPostsViewController.swift in Sources */,
@@ -3086,6 +3105,7 @@
 				DC9AC6E82406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift in Sources */,
 				DCDE00672446016800D09717 /* ReplyCommentViewController.swift in Sources */,
 				DC6CDC342439B077008A52D9 /* PostCommentViewModel.swift in Sources */,
+				DCED6A0B2534B007003C9A43 /* CornerView.swift in Sources */,
 				DC40D5D623E32A6B00B0DD96 /* ImageTextModel.swift in Sources */,
 				DCD39866232E1CC600C812EB /* BaseViewModel.swift in Sources */,
 				DCD3988D232E259700C812EB /* KeyboardController+Actions.swift in Sources */,
@@ -3127,6 +3147,7 @@
 				DCB5BD742497D2E10042E5AF /* SecurityMethodCellViewModel.swift in Sources */,
 				DC583A8F24CC281C00D9C4D3 /* WalletAuthValidationViewModel.swift in Sources */,
 				DCFBD77425013D4D005B6875 /* PowerDownViewModel.swift in Sources */,
+				DCF20B4A2535F9C500206786 /* VerifyGoogleOTPViewController.swift in Sources */,
 				DCEC0CC6240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift in Sources */,
 				DC9AC6E62406C5BA008FAFA6 /* DiscussionCategoryModel.swift in Sources */,
 				DC7C8F0F24DC663B0051C084 /* TransactionTableViewCell.swift in Sources */,
@@ -3201,6 +3222,7 @@
 				DCCD40CE24379BD100093A18 /* BottomMenuViewController.swift in Sources */,
 				DCC6F1E5242BBF27003B9E3A /* TextCellViewModel.swift in Sources */,
 				DC88A73C23DF4A8900EB7F79 /* SelectLanguageViewModel.swift in Sources */,
+				DCA74DA82537EDBA0041EAAE /* WalletPreferenceStore.swift in Sources */,
 				DC8AB7BE24FBA13200968FCD /* ConfirmPowerUpViewController.swift in Sources */,
 				DC13409A24573F0C00CC9856 /* ToggleTextTableViewCell.swift in Sources */,
 				DC6A790523CA242B001D1009 /* EmptyOrErrorView.swift in Sources */,
@@ -3242,6 +3264,7 @@
 				DC40D5D423E32A4400B0DD96 /* ImageTextCellViewModel.swift in Sources */,
 				DC19DBEB23EC5F9E00571CC8 /* PostTableViewModel.swift in Sources */,
 				DCFBD7892503E119005B6875 /* ClaimRewardViewModel.swift in Sources */,
+				DCED6A062534ADF7003C9A43 /* CheckBox.swift in Sources */,
 				DC6FCE7523F05D1700D72F6D /* Misc.swift in Sources */,
 				DC6ED52123267EED00770B31 /* AppDelegate.swift in Sources */,
 				DCDE006A244601A600D09717 /* ReplyCommentTableViewModel.swift in Sources */,
@@ -3253,6 +3276,7 @@
 				DC6CA7B7243CD08D00F1EEC8 /* CategoryCellViewModel.swift in Sources */,
 				DC8450B7250C802B00D7E085 /* LineIndicatorCellViewModel.swift in Sources */,
 				DC0F36B12450944700916886 /* DownvoteDialogViewModel.swift in Sources */,
+				DCA74DA3253746680041EAAE /* VerifyGoogleOTPViewModel.swift in Sources */,
 				DCF67FE924100B64003061A7 /* SearchService.swift in Sources */,
 				DC6ED56623269B6600770B31 /* ColorsGen.swift in Sources */,
 				DC40D5CC23E3298F00B0DD96 /* LanguageTableViewCell.swift in Sources */,

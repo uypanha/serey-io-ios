@@ -42,7 +42,6 @@ class WalletSettingsViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
         super.init()
         
         setUpRxObservers()
-        self.cellModels.accept(self.prepareCellModels())
     }
 }
 
@@ -64,6 +63,10 @@ extension WalletSettingsViewModel {
                 return nil
             }
         }
+    }
+    
+    func loadCells() {
+        self.cellModels.accept(self.prepareCellModels())
     }
     
     fileprivate func prepareCellModels() -> [SectionType: [CellViewModel]] {
@@ -117,8 +120,10 @@ fileprivate extension WalletSettingsViewModel {
         switch type {
         case .googleOTP:
             if (isOn) {
-                let activateGoogleOTPViewModel = ActivateGoogleOTPViewModel()
+                let activateGoogleOTPViewModel = ActivateGoogleOTPViewModel(.settings)
                 self.shouldPresent(.activateGoogleOTPContronner(activateGoogleOTPViewModel))
+            } else {
+                WalletPreferenceStore.shared.disableGoogleOTP()
             }
         case .fingerPrint:
             if (isOn) {

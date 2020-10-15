@@ -25,10 +25,10 @@ class WalletSettingToggleCellViewModel: ToggleTextCellModel {
     let type: BehaviorRelay<WalletSettingType>
     let didToggledUpdated: PublishSubject<(Bool, WalletSettingType)>
     
-    init(_ type: WalletSettingType, _ showSeperatorLine: Bool = false) {
+    init(_ type: WalletSettingType, isOn: Bool, _ showSeperatorLine: Bool = false) {
         self.type = .init(value: type)
         self.didToggledUpdated = .init()
-        super.init(textModel: type.imageModel)
+        super.init(textModel: type.imageModel, isOn: isOn)
     }
     
     override func didToggleChanged(_ isOn: Bool) {
@@ -50,7 +50,8 @@ enum WalletSettingType {
         case .profile:
             return WalletProfileCellViewModel()
         case .fingerPrint, .googleOTP:
-            return WalletSettingToggleCellViewModel(self, self == .googleOTP)
+            let isOn = self == .googleOTP ? WalletPreferenceStore.shared.googleOTPEnabled : false
+            return WalletSettingToggleCellViewModel(self, isOn: isOn, self == .googleOTP)
         }
     }
     

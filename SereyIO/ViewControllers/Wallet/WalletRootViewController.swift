@@ -28,6 +28,21 @@ class WalletRootViewController: BaseRootViewController {
 // MARK: - Switching Screens
 extension WalletRootViewController {
     
+    func switchToVerifyGoogleOTPScreen(viewModel: VerifyGoogleOTPViewModel, fadeAnimation: Bool = true) {
+        let verifyOTPViewController = R.storyboard.googleOTP.verifyGoogleOTPViewController()!
+        verifyOTPViewController.viewModel = viewModel
+        let closableViewController = CloseableNavigationController(rootViewController: verifyOTPViewController)
+        if fadeAnimation {
+            self.animateFadeTransition(to: closableViewController) { [weak self] in
+                self?.handleDeeplink()
+            }
+        } else {
+            self.animateSlideToTopTransition(to: closableViewController) { [weak self] in
+                self?.handleDeeplink()
+            }
+        }
+    }
+    
     func switchToSignInScreen(fadeAnimation: Bool = true) {
         let mainWalletViewController = R.storyboard.auth.signInViewController()!
         mainWalletViewController.viewModel = SignInViewModel()

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -47,7 +48,7 @@
                                                                 <rect key="frame" x="0.0" y="97" width="316.5" height="125"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NY5-XW-8Ud">
-                                                                        <rect key="frame" x="2" y="0.0" width="312" height="67"/>
+                                                                        <rect key="frame" x="1.5" y="0.0" width="313" height="67"/>
                                                                         <string key="text">Activate
 Google Authenticator App</string>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
@@ -75,7 +76,7 @@ Google Authenticator App</string>
                                                                         <rect key="frame" x="12" y="12" width="146" height="146"/>
                                                                     </imageView>
                                                                 </subviews>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="7Bn-rB-J92" secondAttribute="height" multiplier="1:1" id="0zc-qK-Tb4"/>
                                                                     <constraint firstItem="vaO-f1-wzf" firstAttribute="top" secondItem="7Bn-rB-J92" secondAttribute="top" constant="12" id="KrO-2N-k8D"/>
@@ -142,7 +143,7 @@ Google Authenticator App</string>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="91s-Bf-8bJ" firstAttribute="top" secondItem="sWh-ED-T3f" secondAttribute="top" constant="24" id="Ogq-zc-l6h"/>
                                             <constraint firstAttribute="trailing" secondItem="91s-Bf-8bJ" secondAttribute="trailing" constant="42" id="X7B-JT-COV"/>
@@ -160,14 +161,14 @@ Google Authenticator App</string>
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="NrL-Rq-jKr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="0pF-UH-VZk" firstAttribute="leading" secondItem="NrL-Rq-jKr" secondAttribute="leading" id="68A-yS-7bK"/>
                             <constraint firstItem="0pF-UH-VZk" firstAttribute="top" secondItem="NrL-Rq-jKr" secondAttribute="top" id="6eG-3m-Z2C"/>
                             <constraint firstItem="NrL-Rq-jKr" firstAttribute="trailing" secondItem="0pF-UH-VZk" secondAttribute="trailing" id="dRJ-BD-aYv"/>
                             <constraint firstAttribute="bottom" secondItem="0pF-UH-VZk" secondAttribute="bottom" id="mkY-Dl-Hqn"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="NrL-Rq-jKr"/>
                     </view>
                     <connections>
                         <outlet property="bottomConstraint" destination="mkY-Dl-Hqn" id="2lT-cg-wCq"/>
@@ -184,9 +185,293 @@ Google Authenticator App</string>
             </objects>
             <point key="canvasLocation" x="-162" y="153"/>
         </scene>
+        <!--Activate GoogleOTP2 View Controller-->
+        <scene sceneID="ySb-nA-3op">
+            <objects>
+                <viewController storyboardIdentifier="ActivateGoogleOTP2ViewController" id="TdG-I8-vra" customClass="ActivateGoogleOTP2ViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EZO-sB-1mS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V5g-FO-nyv" customClass="CornerView" customModule="SereyIO" customModuleProvider="target">
+                                <rect key="frame" x="83" y="329" width="248" height="248"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="S5W-uV-hqY">
+                                        <rect key="frame" x="54" y="54" width="140" height="140"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="S5W-uV-hqY" firstAttribute="top" secondItem="V5g-FO-nyv" secondAttribute="top" constant="54" id="JdL-PV-ctR"/>
+                                    <constraint firstItem="S5W-uV-hqY" firstAttribute="leading" secondItem="V5g-FO-nyv" secondAttribute="leading" constant="54" id="Mw8-Zz-1Bh"/>
+                                    <constraint firstAttribute="bottom" secondItem="S5W-uV-hqY" secondAttribute="bottom" constant="54" id="cIY-kK-MZf"/>
+                                    <constraint firstAttribute="trailing" secondItem="S5W-uV-hqY" secondAttribute="trailing" constant="54" id="lXt-Kk-sGk"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="lineWidth">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="lineColor">
+                                        <color key="value" systemColor="systemIndigoColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="sizeMultiplier">
+                                        <real key="value" value="0.12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOs-tn-CQ0" customClass="CardView" customModule="SereyIO" customModuleProvider="target">
+                                <rect key="frame" x="32" y="68" width="350" height="124"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="BGR-xp-Gyf">
+                                        <rect key="frame" x="24" y="24" width="302" height="76"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMC-y4-hFj">
+                                                <rect key="frame" x="91.5" y="0.0" width="119" height="21.5"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please use Google authentiator app to scan the QR Code to activate your Two Factor OTP authentication." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLx-dh-rcm">
+                                                <rect key="frame" x="3" y="25.5" width="296.5" height="50.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="BGR-xp-Gyf" secondAttribute="bottom" constant="24" id="9tY-Ot-QPC"/>
+                                    <constraint firstAttribute="trailing" secondItem="BGR-xp-Gyf" secondAttribute="trailing" constant="24" id="BPx-1K-dEs"/>
+                                    <constraint firstItem="BGR-xp-Gyf" firstAttribute="top" secondItem="NOs-tn-CQ0" secondAttribute="top" constant="24" id="DBu-HE-gCd"/>
+                                    <constraint firstItem="BGR-xp-Gyf" firstAttribute="leading" secondItem="NOs-tn-CQ0" secondAttribute="leading" constant="24" id="J9i-gO-vDV"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="showShadow" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="v9C-vn-qQV">
+                                <rect key="frame" x="32" y="758" width="350" height="88"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WNV-n6-Yit">
+                                        <rect key="frame" x="13.5" y="0.0" width="323" height="24"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MR7-Wy-kPu" customClass="CheckBox" customModule="SereyIO" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="24" id="7s9-X2-FrD"/>
+                                                    <constraint firstAttribute="height" constant="24" id="Lfh-fS-q5M"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="uncheckedBorderColor">
+                                                        <color key="value" systemColor="systemPinkColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="checkedBorderColor">
+                                                        <color key="value" systemColor="systemPinkColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="checkmarkColor">
+                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="checkedBackgroundColor">
+                                                        <color key="value" systemColor="systemRedColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="uncheckedBackgroundColor">
+                                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isChecked" value="NO"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="4"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="didChecked:" destination="TdG-I8-vra" eventType="valueChanged" id="Oiu-DG-xeo"/>
+                                                </connections>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am ready to add QR Code to Google Authenticator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBK-Fs-eKT">
+                                                <rect key="frame" x="32" y="0.0" width="291" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A5R-Zs-qwk">
+                                        <rect key="frame" x="92" y="48" width="166" height="40"/>
+                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="VW3-P1-GKF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="CircularStd-Medium" family="Circular Std" pointSize="16"/>
+                                        <inset key="contentEdgeInsets" minX="54" minY="0.0" maxX="54" maxY="0.0"/>
+                                        <state key="normal" title="Activate">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0Xw-Lh-vQd"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="NOs-tn-CQ0" firstAttribute="leading" secondItem="0Xw-Lh-vQd" secondAttribute="leading" constant="32" id="3Ob-4I-Z6m"/>
+                            <constraint firstItem="0Xw-Lh-vQd" firstAttribute="trailing" secondItem="NOs-tn-CQ0" secondAttribute="trailing" constant="32" id="KjF-am-DcT"/>
+                            <constraint firstItem="v9C-vn-qQV" firstAttribute="leading" secondItem="0Xw-Lh-vQd" secondAttribute="leading" constant="32" id="LxG-pw-3hV"/>
+                            <constraint firstItem="V5g-FO-nyv" firstAttribute="centerX" secondItem="0Xw-Lh-vQd" secondAttribute="centerX" id="PIn-IH-3Fm"/>
+                            <constraint firstItem="V5g-FO-nyv" firstAttribute="width" secondItem="V5g-FO-nyv" secondAttribute="height" multiplier="1:1" id="Pod-Fr-hLg"/>
+                            <constraint firstItem="NOs-tn-CQ0" firstAttribute="top" secondItem="0Xw-Lh-vQd" secondAttribute="top" constant="24" id="UpV-5h-eWJ"/>
+                            <constraint firstItem="V5g-FO-nyv" firstAttribute="width" secondItem="EZO-sB-1mS" secondAttribute="width" multiplier="0.6" id="gOh-hC-hU4"/>
+                            <constraint firstItem="0Xw-Lh-vQd" firstAttribute="trailing" secondItem="v9C-vn-qQV" secondAttribute="trailing" constant="32" id="h1X-So-IZo"/>
+                            <constraint firstItem="V5g-FO-nyv" firstAttribute="centerY" secondItem="0Xw-Lh-vQd" secondAttribute="centerY" id="iH1-cY-fTw"/>
+                            <constraint firstItem="0Xw-Lh-vQd" firstAttribute="bottom" secondItem="v9C-vn-qQV" secondAttribute="bottom" constant="16" id="kpU-zW-7Jd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activateButton" destination="A5R-Zs-qwk" id="rmy-hj-Bwn"/>
+                        <outlet property="checkbox" destination="MR7-Wy-kPu" id="QsI-pD-QM2"/>
+                        <outlet property="otpMessageLabel" destination="kLx-dh-rcm" id="u8U-qm-DHL"/>
+                        <outlet property="qrImageView" destination="S5W-uV-hqY" id="gg8-LJ-9qt"/>
+                        <outlet property="scanLabel" destination="rMC-y4-hFj" id="6pb-eZ-SEm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3gl-iI-M8V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="741" y="153"/>
+        </scene>
+        <!--Verify GoogleOTP View Controller-->
+        <scene sceneID="1Al-Kg-VGf">
+            <objects>
+                <viewController storyboardIdentifier="VerifyGoogleOTPViewController" id="i5F-eL-Rxw" customClass="VerifyGoogleOTPViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hUi-E3-KHr">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="2n1-20-jmN">
+                                <rect key="frame" x="32" y="80" width="350" height="150"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="V5n-1t-nlm">
+                                        <rect key="frame" x="60" y="0.0" width="230.5" height="56.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Verify Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XTb-2E-Zls">
+                                                <rect key="frame" x="49" y="0.0" width="132" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your 6 digits OTP" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNr-E8-gSW">
+                                                <rect key="frame" x="0.0" y="36" width="230.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just incase of missing OTP generator app, please re-activate your wallet app to reset your two factor authenticator." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tom-vi-BTd">
+                                        <rect key="frame" x="2.5" y="92.5" width="345" height="57.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ds1-p0-6V7" customClass="PinCodeTextField" customModule="PinCodeTextField">
+                                <rect key="frame" x="32" y="272" width="350" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="UUp-wv-epH"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="underlineWidth">
+                                        <real key="value" value="40"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="underlineHSpacing">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="underlineVMargin">
+                                        <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="characterLimit">
+                                        <integer key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="underlineHeight">
+                                        <real key="value" value="2.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="fontSize">
+                                        <real key="value" value="30"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="underlineColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="secureText" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="updatedUnderlineColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="needToUpdateUnderlines" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAC-V3-eWw">
+                                <rect key="frame" x="106" y="356" width="202" height="40"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="U3X-BP-CxV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="CircularStd-Medium" family="Circular Std" pointSize="16"/>
+                                <inset key="contentEdgeInsets" minX="54" minY="0.0" maxX="54" maxY="0.0"/>
+                                <state key="normal" title="Confirm OTP">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="v3H-Re-eT5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="v3H-Re-eT5" firstAttribute="trailing" secondItem="2n1-20-jmN" secondAttribute="trailing" constant="32" id="20G-qS-AHI"/>
+                            <constraint firstItem="ds1-p0-6V7" firstAttribute="leading" secondItem="v3H-Re-eT5" secondAttribute="leading" constant="32" id="Bva-uU-DPt"/>
+                            <constraint firstItem="eAC-V3-eWw" firstAttribute="centerX" secondItem="v3H-Re-eT5" secondAttribute="centerX" id="GTU-2a-tmU"/>
+                            <constraint firstItem="2n1-20-jmN" firstAttribute="leading" secondItem="v3H-Re-eT5" secondAttribute="leading" constant="32" id="L80-ma-R1s"/>
+                            <constraint firstItem="2n1-20-jmN" firstAttribute="top" secondItem="v3H-Re-eT5" secondAttribute="top" constant="36" id="L8d-dw-qij"/>
+                            <constraint firstItem="v3H-Re-eT5" firstAttribute="trailing" secondItem="ds1-p0-6V7" secondAttribute="trailing" constant="32" id="TKy-b1-KbX"/>
+                            <constraint firstItem="eAC-V3-eWw" firstAttribute="top" secondItem="ds1-p0-6V7" secondAttribute="bottom" constant="34" id="Yoa-Tg-FSH"/>
+                            <constraint firstItem="ds1-p0-6V7" firstAttribute="top" secondItem="2n1-20-jmN" secondAttribute="bottom" constant="42" id="xUW-un-XTa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="confirmOTPButton" destination="eAC-V3-eWw" id="vCC-c8-vXK"/>
+                        <outlet property="enterDigitsLabel" destination="pNr-E8-gSW" id="XdC-iu-6XZ"/>
+                        <outlet property="messageLabel" destination="tom-vi-BTd" id="v98-EQ-VJJ"/>
+                        <outlet property="pinTextFields" destination="ds1-p0-6V7" id="RkJ-Yz-xMQ"/>
+                        <outlet property="verifyAccountLabel" destination="XTb-2E-Zls" id="pXF-tM-Dba"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j1Y-zr-B10" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1584" y="153"/>
+        </scene>
     </scenes>
     <resources>
         <image name="copyIcon" width="20" height="20"/>
         <image name="googleOTP" width="94" height="94"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

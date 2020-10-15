@@ -121,6 +121,7 @@ fileprivate extension PowerUpViewModel {
     func handlePowerUpSuccess(_ account: String, amount: String) {
         let confirmAction = ActionModel(R.string.common.confirm.localized(), style: .default) {
             self.shouldPresent(.dismiss)
+            self.didTransactionUpdate.onNext(())
         }
         
         let alerDialogModel = AlertDialogModel(title: "Power Up", message: "You just power Up Serey coin with \(amount) SEREY to \(account).", actions: [confirmAction])

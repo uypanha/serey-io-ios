@@ -39,6 +39,7 @@ class WalletSettingsViewController: BaseTableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.viewModel.loadCells()
         self.navigationController?.showNavigationBarBorder()
         self.navigationController?.setNavigationBarColor(ColorName.navigationBg.color, tintColor: ColorName.navigationTint.color)
     }
@@ -148,7 +149,7 @@ extension WalletSettingsViewController {
                         self?.show(changePasswordController, sender: nil)
                     }
                 case .activateGoogleOTPContronner(let activateGoogleOTPViewModel):
-                    if let activateGoogleOTPController = R.storyboard.googleOTP.activateGoogleOTPViewController() {
+                    if let activateGoogleOTPController = R.storyboard.googleOTP.activateGoogleOTP2ViewController() {
                         activateGoogleOTPController.viewModel = activateGoogleOTPViewModel
                         self?.show(CloseableNavigationController(rootViewController: activateGoogleOTPController), sender: nil)
                     }

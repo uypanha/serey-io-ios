@@ -41,6 +41,8 @@ extension WalletAuthValidateController {
                     SereyWallet.shared?.rootViewController.switchToMainScreen()
                 case .signInController:
                     SereyWallet.shared?.rootViewController.switchToSignInScreen()
+                case .verifyOTPController(let verifyGoogleOTPViewModel):
+                    SereyWallet.shared?.rootViewController.switchToVerifyGoogleOTPScreen(viewModel: verifyGoogleOTPViewModel)
                 }
             }) ~ self.disposeBag
     }

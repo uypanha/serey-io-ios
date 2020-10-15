@@ -96,29 +96,30 @@ extension ActivateGoogleOTPViewController {
     }
     
     func setUpContentChangedObservers() {
-        self.viewModel.verificationCodeTextFieldViewModel.bind(with: self.verificationCodeTextField, controller: self.verificationCodeController)
         self.disposeBag ~ [
             self.viewModel.qrImage ~> self.qrImageView.rx.image
         ]
     }
     
     func setUpControlObservers() {
-        self.verifyButton.rx.tap.asObservable()
-            .map { ActivateGoogleOTPViewModel.Action.verifyPressed }
-            ~> self.viewModel.didActionSubject
-            ~ self.disposeBag
+//        self.verifyButton.rx.tap.asObservable()
+//            .map { ActivateGoogleOTPViewModel.Action.verifyPressed }
+//            ~> self.viewModel.didActionSubject
+//            ~ self.disposeBag
     }
     
     func setUpShouldPresentObservers() {
-        self.viewModel.shouldPresent.asObservable()
-            .subscribe(onNext: { [weak self] viewToPresent in
-                switch viewToPresent {
-                case .loading(let loading):
-                    self?.manualCopyKeyButton.isHidden = loading
-                case .walletViewController:
-                    SereyWallet.shared?.rootViewController.switchToMainScreen()
-                }
-            }) ~ self.disposeBag
+//        self.viewModel.shouldPresent.asObservable()
+//            .subscribe(onNext: { [weak self] viewToPresent in
+//                switch viewToPresent {
+////                case .loading(let loading):
+////                    self?.manualCopyKeyButton.isHidden = loading
+////                case .walletViewController:
+////                    SereyWallet.shared?.rootViewController.switchToMainScreen()
+//                case .verifyGoogleOTPController:
+//                    break
+//                }
+//            }) ~ self.disposeBag
     }
     
     func setUpRxKeyboardObservers() {
