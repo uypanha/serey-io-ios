@@ -80,6 +80,8 @@ extension ActivateGoogleOTP2ViewController {
                     self?.dismiss(animated: true, completion: nil)
                 case .showAlertDialog(let alertDialogModel):
                     self?.showDialog(alertDialogModel)
+                case .walletController:
+                    SereyWallet.shared?.rootViewController.switchToMainScreen()
                 }
             }) ~ self.disposeBag
     }

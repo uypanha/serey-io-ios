@@ -12,7 +12,7 @@ import RxSwift
 import RxBinding
 import PinCodeTextField
 
-class VerifyGoogleOTPViewController: BaseViewController {
+class VerifyGoogleOTPViewController: BaseViewController, AlertDialogController {
     
     @IBOutlet weak var verifyAccountLabel: UILabel!
     @IBOutlet weak var enterDigitsLabel: UILabel!
@@ -63,7 +63,8 @@ extension VerifyGoogleOTPViewController {
     func setUpContentObservers() {
         self.disposeBag ~ [
             self.viewModel.messageText ~> self.messageLabel.rx.text,
-            self.viewModel.verifyButtonTitle ~> self.confirmOTPButton.rx.title(for: .normal)
+            self.viewModel.verifyButtonTitle ~> self.confirmOTPButton.rx.title(for: .normal),
+            self.viewModel.isVerifyEnabled ~> self.confirmOTPButton.rx.isEnabled
         ]
     }
     
@@ -82,6 +83,8 @@ extension VerifyGoogleOTPViewController {
                     self?.navigationController?.popViewController(animated: true)
                 case .walletController:
                     SereyWallet.shared?.rootViewController.switchToMainScreen()
+                case .alertDialogController(let alertDialogModel):
+                    self?.showDialog(alertDialogModel)
                 }
             }) ~ self.disposeBag
     }

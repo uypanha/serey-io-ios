@@ -74,6 +74,7 @@ extension SignUpWalletViewModel {
 extension SignUpWalletViewModel {
     
     private func handleOwnerKeyVerified(_ username: String, _ ownerKey: String, token: TokenModel) {
+        WalletPreferenceStore.shared.disableAllSecurity()
         let createCredentialViewModel = CreateCredentialViewModel(username, ownerKey: ownerKey, token: token)
         self.shouldPresent(.createCredentialViewController(createCredentialViewModel))
     }

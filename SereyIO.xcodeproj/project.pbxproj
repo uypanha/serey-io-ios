@@ -263,7 +263,6 @@
 		DC9C65A0249DE4F10042C829 /* CreateCredentialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C659F249DE4F10042C829 /* CreateCredentialViewModel.swift */; };
 		DC9C65A3249E6F0A0042C829 /* ActiveBiometryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C65A2249E6F0A0042C829 /* ActiveBiometryViewModel.swift */; };
 		DC9C65A5249FC0D10042C829 /* GoogleOTP.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC9C65A4249FC0D10042C829 /* GoogleOTP.storyboard */; };
-		DC9C65A8249FC63C0042C829 /* ActivateGoogleOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C65A7249FC63C0042C829 /* ActivateGoogleOTPViewController.swift */; };
 		DC9C65AB24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C65AA24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift */; };
 		DC9E36D92412997800289693 /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC9E36D82412997800289693 /* Post.storyboard */; };
 		DC9E36DC24129ACA00289693 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E36DB24129ACA00289693 /* PostDetailViewController.swift */; };
@@ -726,7 +725,6 @@
 		DC9C659F249DE4F10042C829 /* CreateCredentialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCredentialViewModel.swift; sourceTree = "<group>"; };
 		DC9C65A2249E6F0A0042C829 /* ActiveBiometryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveBiometryViewModel.swift; sourceTree = "<group>"; };
 		DC9C65A4249FC0D10042C829 /* GoogleOTP.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GoogleOTP.storyboard; sourceTree = "<group>"; };
-		DC9C65A7249FC63C0042C829 /* ActivateGoogleOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateGoogleOTPViewController.swift; sourceTree = "<group>"; };
 		DC9C65AA24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateGoogleOTPViewModel.swift; sourceTree = "<group>"; };
 		DC9C65AE24A100720042C829 /* SereyIO-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SereyIO-Bridging-Header.h"; sourceTree = "<group>"; };
 		DC9E36D82412997800289693 /* Post.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
@@ -1995,7 +1993,6 @@
 			isa = PBXGroup;
 			children = (
 				DCED6A0F2534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift */,
-				DC9C65A7249FC63C0042C829 /* ActivateGoogleOTPViewController.swift */,
 				DCF20B492535F9C500206786 /* VerifyGoogleOTPViewController.swift */,
 			);
 			path = GoogleOTP;
@@ -3141,7 +3138,6 @@
 				DC9E36E92413F4A100289693 /* RichEditor+Custom.swift in Sources */,
 				DC6ED57C2326A43700770B31 /* Store.swift in Sources */,
 				DC6A78F323CA1FEB001D1009 /* CollectionSingleSecitionProviderModel.swift in Sources */,
-				DC9C65A8249FC63C0042C829 /* ActivateGoogleOTPViewController.swift in Sources */,
 				DC9E36DF2412A01000289693 /* PostDetailViewModel.swift in Sources */,
 				DC7C740D24717C5500610526 /* VotersViewController.swift in Sources */,
 				DC9AC6E32406C4F7008FAFA6 /* Moya+Extensions.swift in Sources */,

@@ -58,4 +58,9 @@ class WalletPreferenceStore {
     func disableBiometry() {
         self.biometryEnabled = false
     }
+    
+    func disableAllSecurity() {
+        self.disableBiometry()
+        self.disableGoogleOTP()
+    }
 }

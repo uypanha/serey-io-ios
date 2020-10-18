@@ -72,6 +72,8 @@ extension ActiveBiometryViewController {
                     }
                 case .dismiss:
                     self?.dismiss(animated: true, completion: nil)
+                case .walletController:
+                    SereyWallet.shared?.rootViewController.switchToMainScreen()
                 }
             }) ~ self.disposeBag
     }

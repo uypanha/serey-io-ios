@@ -9,6 +9,7 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import LocalAuthentication
 
 class WalletSettingCellViewModel: ImageTextCellViewModel {
     
@@ -40,7 +41,7 @@ enum WalletSettingType {
     case profile
     case profileInfo
     case changePassword
-    case fingerPrint
+    case biometry
     case googleOTP
     
     var cellModel: CellViewModel {
@@ -49,8 +50,8 @@ enum WalletSettingType {
             return WalletSettingCellViewModel(self, self == .profileInfo)
         case .profile:
             return WalletProfileCellViewModel()
-        case .fingerPrint, .googleOTP:
-            let isOn = self == .googleOTP ? WalletPreferenceStore.shared.googleOTPEnabled : self == .fingerPrint ? WalletPreferenceStore.shared.biometryEnabled : false
+        case .biometry, .googleOTP:
+            let isOn = self == .googleOTP ? WalletPreferenceStore.shared.googleOTPEnabled : self == .biometry ? WalletPreferenceStore.shared.biometryEnabled : false
             return WalletSettingToggleCellViewModel(self, isOn: isOn, self == .googleOTP)
         }
     }
@@ -62,8 +63,10 @@ enum WalletSettingType {
                 return ImageTextModel(image: R.image.accountIcon(), titleText: AuthData.shared.username ?? "")
             case .changePassword:
                 return ImageTextModel(image: R.image.keyIcon(), titleText: "Change Password")
-            case .fingerPrint:
-                return ImageTextModel(image: R.image.fingerPrintSettingsIcon(), titleText: "Enable Fingerprint")
+            case .biometry:
+                let biometricType = LAContext().biometricType
+                let image = biometricType.iconImage
+                return ImageTextModel(image: image, titleText: "Enable \(biometricType.settingTitle)")
             case .googleOTP:
                 return ImageTextModel(image: R.image.otpIcon(), titleText: "Enable Google Authenticator")
             case .profile:

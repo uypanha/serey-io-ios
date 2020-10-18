@@ -72,7 +72,7 @@ extension UINavigationController {
     
     func setNavigationBarColor(_ color: UIColor, tintColor: UIColor, isTransparent: Bool = false) {
         self.navigationBar.backgroundColor = color
-        self.navigationBar.barTintColor = tintColor
+        self.navigationBar.barTintColor = color
         self.navigationBar.tintColor = tintColor
         self.navigationBar.titleTextAttributes = [
             .foregroundColor: tintColor

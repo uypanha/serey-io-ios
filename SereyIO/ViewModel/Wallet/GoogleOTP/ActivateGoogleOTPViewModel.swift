@@ -24,6 +24,7 @@ class ActivateGoogleOTPViewModel: BaseViewModel, ShouldReactToAction, ShouldPres
     enum ViewToPresent {
         case verifyGoogleOTPController(VerifyGoogleOTPViewModel)
         case showAlertDialog(AlertDialogModel)
+        case walletController
         case dismiss
     }
     
@@ -90,7 +91,11 @@ fileprivate extension ActivateGoogleOTPViewModel {
             WalletPreferenceStore.shared.enableGoogleOTP(secret)
             
             let confirmAction = ActionModel(R.string.common.confirm.localized()) {
-                self.shouldPresent(.dismiss)
+                if self.parent.value == .signUp {
+                    self.shouldPresent(.walletController)
+                } else {
+                    self.shouldPresent(.dismiss)
+                }
             }
             
             let alertDialogModel = AlertDialogModel(title: "Google OTP", message: "You've successfully enabled Google OTP.", actions: [confirmAction])

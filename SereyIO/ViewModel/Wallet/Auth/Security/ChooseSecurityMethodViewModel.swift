@@ -70,7 +70,7 @@ fileprivate extension ChooseSecurityMethodViewModel {
         if let item = item(at: indexPath) as? SecurityMethodCellViewModel {
             switch item.method {
             case .faceID, .fingerPrintID:
-                let viewModel = ActiveBiometryViewModel(item.method == .faceID ? .faceID : .touchID)
+                let viewModel = ActiveBiometryViewModel(parent: .signUp, item.method == .faceID ? .faceID : .touchID)
                 self.shouldPresent(.activeBiometryController(viewModel))
             case .googleOTP:
                 let viewModel = ActivateGoogleOTPViewModel(.signUp)

@@ -20,8 +20,14 @@ class ActiveBiometryViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent
     
     enum ViewToPresent {
         case showAlertDialogController(AlertDialogModel)
+        case walletController
         case openUrl(URL)
         case dismiss
+    }
+    
+    enum ParentController {
+        case signUp
+        case settings
     }
     
     // input:
@@ -30,6 +36,7 @@ class ActiveBiometryViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent
     // output:
     let shouldPresentSubject: PublishSubject<ViewToPresent>
     
+    let parent: ParentController
     let biometricType: BehaviorRelay<LAContext.BiometricType>
     let iconImage: BehaviorSubject<UIImage?>
     let titleText: BehaviorSubject<String?>
@@ -37,7 +44,8 @@ class ActiveBiometryViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent
     
     let touchMe: BiometricIDAuth
     
-    init(_ biometricType: LAContext.BiometricType) {
+    init(parent: ParentController, _ biometricType: LAContext.BiometricType) {
+        self.parent = parent
         self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
         
@@ -81,7 +89,11 @@ extension ActiveBiometryViewModel {
         WalletPreferenceStore.shared.enableBiometry()
         
         let confirmAction = ActionModel(R.string.common.confirm.localized()) {
-            self.shouldPresent(.dismiss)
+            if self.parent == .settings {
+                self.shouldPresent(.dismiss)
+            } else {
+                self.shouldPresent(.walletController)
+            }
         }
         let alertDialogModel = AlertDialogModel(title: self.biometricType.value.title, message: "You are now can use wallet with your \(self.biometricType.value.title)", actions: [confirmAction])
         self.shouldPresent(.showAlertDialogController(alertDialogModel))

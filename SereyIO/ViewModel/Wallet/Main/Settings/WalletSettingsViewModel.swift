@@ -76,7 +76,7 @@ extension WalletSettingsViewModel {
         
         sectionItems[.profileInfo] = [WalletSettingType.profileInfo.cellModel]
         
-        let securityItems: [WalletSettingType] = [.changePassword, .fingerPrint, .googleOTP]
+        let securityItems: [WalletSettingType] = [.changePassword, .biometry, .googleOTP]
         sectionItems[.security] = securityItems.map { type in
             let cell = type.cellModel
             if let toggledCell = cell as? WalletSettingToggleCellViewModel {
@@ -125,10 +125,10 @@ fileprivate extension WalletSettingsViewModel {
             } else {
                 WalletPreferenceStore.shared.disableGoogleOTP()
             }
-        case .fingerPrint:
+        case .biometry:
             if (isOn) {
                 let biometricType = LAContext().biometricType
-                let activeBiometryViewModel = ActiveBiometryViewModel(biometricType)
+                let activeBiometryViewModel = ActiveBiometryViewModel(parent: .settings, biometricType)
                 self.shouldPresent(.activeBiometryViewController(activeBiometryViewModel))
             } else {
                 WalletPreferenceStore.shared.disableBiometry()

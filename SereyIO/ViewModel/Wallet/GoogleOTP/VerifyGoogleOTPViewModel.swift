@@ -21,6 +21,7 @@ class VerifyGoogleOTPViewModel: BaseViewModel, ShouldReactToAction, ShouldPresen
     enum ViewToPresent {
         case dismiss
         case walletController
+        case alertDialogController(AlertDialogModel)
     }
     
     enum ParentController {
@@ -40,6 +41,7 @@ class VerifyGoogleOTPViewModel: BaseViewModel, ShouldReactToAction, ShouldPresen
     
     let messageText: BehaviorSubject<String?>
     let verifyButtonTitle: BehaviorSubject<String?>
+    let isVerifyEnabled: BehaviorSubject<Bool>
     
     let otpCodeVerified: PublishSubject<Void>
     
@@ -51,6 +53,7 @@ class VerifyGoogleOTPViewModel: BaseViewModel, ShouldReactToAction, ShouldPresen
         self.shouldPresentSubject = .init()
         self.messageText = .init(value: nil)
         self.verifyButtonTitle = .init(value: nil)
+        self.isVerifyEnabled = .init(value: false)
         
         self.otpCodeVerified = .init()
         super.init()
@@ -81,6 +84,8 @@ extension VerifyGoogleOTPViewModel {
                     } else {
                         self.shouldPresent(.walletController)
                     }
+                } else {
+                    self.handleFailedToVerify()
                 }
             }
         }
@@ -100,13 +105,27 @@ fileprivate extension VerifyGoogleOTPViewModel {
             self.verifyCode(code)
         }
     }
+    
+    func handleFailedToVerify() {
+        let confirmAction = ActionModel(R.string.common.confirm.localized())
+        let alertDialogModel = AlertDialogModel(title: "Google Authenticator", message: "Sorry, your verification code is invalid.", actions: [confirmAction])
+        self.shouldPresent(.alertDialogController(alertDialogModel))
+    }
 }
 
 // MARK: - SetUp RxObservers
 extension VerifyGoogleOTPViewModel {
     
     func setUpRxObservers() {
+        setUpContentChangedObservers()
         setUpActionObservers()
+    }
+    
+    func setUpContentChangedObservers() {
+        self.pinCodeTextFieldViewModel.textFieldText
+            .map { _ in self.validate() }
+            ~> self.isVerifyEnabled
+            ~ self.disposeBag
     }
     
     func setUpActionObservers() {
