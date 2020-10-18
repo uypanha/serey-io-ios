@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import RxBinding
 import RxDataSources
+import LocalAuthentication
 
 class WalletSettingsViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, ShouldReactToAction, ShouldPresent {
     
@@ -19,7 +20,9 @@ class WalletSettingsViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
     }
     
     enum ViewToPresent {
-        case changePasswordController
+        case changePasswordController(ChangePasswordViewModel)
+        case activateGoogleOTPContronner(ActivateGoogleOTPViewModel)
+        case activeBiometryViewController(ActiveBiometryViewModel)
     }
     
     // input:
@@ -39,7 +42,6 @@ class WalletSettingsViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
         super.init()
         
         setUpRxObservers()
-        self.cellModels.accept(self.prepareCellModels())
     }
 }
 
@@ -63,6 +65,10 @@ extension WalletSettingsViewModel {
         }
     }
     
+    func loadCells() {
+        self.cellModels.accept(self.prepareCellModels())
+    }
+    
     fileprivate func prepareCellModels() -> [SectionType: [CellViewModel]] {
         var sectionItems: [SectionType: [CellViewModel]] = [:]
         
@@ -70,8 +76,14 @@ extension WalletSettingsViewModel {
         
         sectionItems[.profileInfo] = [WalletSettingType.profileInfo.cellModel]
         
-        let securityItems: [WalletSettingType] = [.changePassword, .fingerPrint, .googleOTP]
-        sectionItems[.security] = securityItems.map { $0.cellModel }
+        let securityItems: [WalletSettingType] = [.changePassword, .biometry, .googleOTP]
+        sectionItems[.security] = securityItems.map { type in
+            let cell = type.cellModel
+            if let toggledCell = cell as? WalletSettingToggleCellViewModel {
+                self.setUpToggleCellObserver(cellModel: toggledCell)
+            }
+            return cell
+        }
         
         return sectionItems
     }
@@ -96,10 +108,33 @@ fileprivate extension WalletSettingsViewModel {
         if let item = self.item(at: indexPath) as? WalletSettingCellViewModel {
             switch item.type.value {
             case .changePassword:
-                self.shouldPresent(.changePasswordController)
+                let changePasswordViewModel = ChangePasswordViewModel()
+                self.shouldPresent(.changePasswordController(changePasswordViewModel))
             default:
                 break
             }
+        }
+    }
+    
+    func handleToggledSecurityType(isOn: Bool, type: WalletSettingType) {
+        switch type {
+        case .googleOTP:
+            if (isOn) {
+                let activateGoogleOTPViewModel = ActivateGoogleOTPViewModel(.settings)
+                self.shouldPresent(.activateGoogleOTPContronner(activateGoogleOTPViewModel))
+            } else {
+                WalletPreferenceStore.shared.disableGoogleOTP()
+            }
+        case .biometry:
+            if (isOn) {
+                let biometricType = LAContext().biometricType
+                let activeBiometryViewModel = ActiveBiometryViewModel(parent: .settings, biometricType)
+                self.shouldPresent(.activeBiometryViewController(activeBiometryViewModel))
+            } else {
+                WalletPreferenceStore.shared.disableBiometry()
+            }
+        default:
+            break
         }
     }
 }
@@ -136,5 +171,13 @@ extension WalletSettingsViewModel {
                     self?.handleItemSelected(indexPath)
                 }
             }) ~ self.disposeBag
+    }
+    
+    func setUpToggleCellObserver(cellModel: WalletSettingToggleCellViewModel) {
+        cellModel.didToggledUpdated.asObservable()
+            .subscribe(onNext: { [weak self] (isOn, type) in
+                self?.handleToggledSecurityType(isOn: isOn, type: type)
+            }) ~ cellModel.disposeBag
+
     }
 }

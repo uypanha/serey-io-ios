@@ -105,6 +105,7 @@ fileprivate extension PowerDownViewModel {
     func handlePowerDownSuccess(_ account: String, amount: String) {
         let confirmAction = ActionModel(R.string.common.confirm.localized(), style: .default) {
             self.shouldPresent(.dismiss)
+            self.didTransactionUpdate.onNext(())
         }
         
         let alerDialogModel = AlertDialogModel(title: "Power Down", message: "You just power down Serey Power with \(amount).", actions: [confirmAction])

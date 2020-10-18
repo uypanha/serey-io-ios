@@ -15,6 +15,28 @@ extension LAContext {
         case touchID
         case faceID
         case none
+        
+        var title: String {
+            switch self {
+            case .touchID:
+                return "Touch ID"
+            case .faceID:
+                return "Face ID"
+            default:
+                return ""
+            }
+        }
+        
+        var settingTitle: String {
+            switch self {
+            case .touchID:
+                return "Fingerprint"
+            case .faceID:
+                return "Face ID"
+            default:
+                return ""
+            }
+        }
     }
     
     var biometricType: BiometricType {

@@ -64,6 +64,7 @@
 		DC1F79D824D088AB00B7F0D3 /* TransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F79D724D088AB00B7F0D3 /* TransferService.swift */; };
 		DC1F79DB24D089FA00B7F0D3 /* InitTransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F79DA24D089F900B7F0D3 /* InitTransactionModel.swift */; };
 		DC243FC624666A19007B2EC5 /* CategoryPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC243FC524666A19007B2EC5 /* CategoryPostsViewController.swift */; };
+		DC24E113253AF10700724CE4 /* VerifyBiometryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC24E112253AF10700724CE4 /* VerifyBiometryViewModel.swift */; };
 		DC26812A23F2FCB30045776E /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26812823F2FCB30045776E /* ProfileTableViewCell.swift */; };
 		DC26812B23F2FCB30045776E /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC26812923F2FCB30045776E /* ProfileTableViewCell.xib */; };
 		DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26812C23F2FCD50045776E /* ProfileCellViewModel.swift */; };
@@ -164,7 +165,6 @@
 		DC6ED58D2326A5E600770B31 /* APNSHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6ED58C2326A5E600770B31 /* APNSHandler.swift */; };
 		DC6ED58F2326A7B000770B31 /* AppDelegateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6ED58E2326A7B000770B31 /* AppDelegateHelper.swift */; };
 		DC6ED5912326A8F400770B31 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6ED5902326A8F400770B31 /* Appearance.swift */; };
-		DC6FCE5623F05D0400D72F6D /* OAuth2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6A790D23CA2B51001D1009 /* OAuth2.framework */; };
 		DC6FCE7123F05D1700D72F6D /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE6623F05D1700D72F6D /* Auth.swift */; };
 		DC6FCE7223F05D1700D72F6D /* Broadcast.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE6723F05D1700D72F6D /* Broadcast.swift */; };
 		DC6FCE7323F05D1700D72F6D /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC6FCE6823F05D1700D72F6D /* HttpClient.swift */; };
@@ -188,8 +188,6 @@
 		DC75DAB7244DF0C100D80CB2 /* PostCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */; };
 		DC75DAB9244E055000D80CB2 /* FollowActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */; };
 		DC75DABB244E07EE00D80CB2 /* FollowerListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */; };
-		DC79F11724CD612F007FCECC /* AskToCreateCredentialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC79F11624CD612F007FCECC /* AskToCreateCredentialViewController.swift */; };
-		DC79F11B24CD6A9A007FCECC /* AskToCreateCredentialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC79F11A24CD6A9A007FCECC /* AskToCreateCredentialViewModel.swift */; };
 		DC79F11F24CDD7D3007FCECC /* CreateCredentialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC79F11D24CDD7D3007FCECC /* CreateCredentialTableViewCell.swift */; };
 		DC79F12024CDD7D3007FCECC /* CreateCredentialTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC79F11E24CDD7D3007FCECC /* CreateCredentialTableViewCell.xib */; };
 		DC7AAFF024F8032900ECDF47 /* PowerUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7AAFEF24F8032900ECDF47 /* PowerUpViewModel.swift */; };
@@ -265,7 +263,6 @@
 		DC9C65A0249DE4F10042C829 /* CreateCredentialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C659F249DE4F10042C829 /* CreateCredentialViewModel.swift */; };
 		DC9C65A3249E6F0A0042C829 /* ActiveBiometryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C65A2249E6F0A0042C829 /* ActiveBiometryViewModel.swift */; };
 		DC9C65A5249FC0D10042C829 /* GoogleOTP.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC9C65A4249FC0D10042C829 /* GoogleOTP.storyboard */; };
-		DC9C65A8249FC63C0042C829 /* ActivateGoogleOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C65A7249FC63C0042C829 /* ActivateGoogleOTPViewController.swift */; };
 		DC9C65AB24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9C65AA24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift */; };
 		DC9E36D92412997800289693 /* Post.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC9E36D82412997800289693 /* Post.storyboard */; };
 		DC9E36DC24129ACA00289693 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9E36DB24129ACA00289693 /* PostDetailViewController.swift */; };
@@ -291,6 +288,10 @@
 		DCA5255B2425166B00284CD8 /* ButtonCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA525582425166B00284CD8 /* ButtonCellViewModel.swift */; };
 		DCA5255D2426636F00284CD8 /* AlertDialogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5255C2426636F00284CD8 /* AlertDialogController.swift */; };
 		DCA5255F242921EA00284CD8 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */; };
+		DCA74DA3253746680041EAAE /* VerifyGoogleOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA74DA2253746680041EAAE /* VerifyGoogleOTPViewModel.swift */; };
+		DCA74DA82537EDBA0041EAAE /* WalletPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA74DA72537EDBA0041EAAE /* WalletPreferenceStore.swift */; };
+		DCA74DC12539F6700041EAAE /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA74DC02539F6700041EAAE /* BiometricIDAuth.swift */; };
+		DCA74DC9253AD6A40041EAAE /* VerifyBiometryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA74DC8253AD6A30041EAAE /* VerifyBiometryViewController.swift */; };
 		DCB5BD6B2497BF880042E5AF /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCB5BD6A2497BF880042E5AF /* Wallet.storyboard */; };
 		DCB5BD712497CAE40042E5AF /* SecurityMethodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5BD6F2497CAE40042E5AF /* SecurityMethodeTableViewCell.swift */; };
 		DCB5BD722497CAE40042E5AF /* SecurityMethodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB5BD702497CAE40042E5AF /* SecurityMethodeTableViewCell.xib */; };
@@ -378,9 +379,13 @@
 		DCEC0CC4240A530B002F4B6F /* FilteredCategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCEC0CC2240A530B002F4B6F /* FilteredCategoryTableViewCell.xib */; };
 		DCEC0CC6240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CC5240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift */; };
 		DCEC0CC8240A5E0E002F4B6F /* CicularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC0CC7240A5E0E002F4B6F /* CicularButton.swift */; };
+		DCED6A062534ADF7003C9A43 /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCED6A052534ADF7003C9A43 /* CheckBox.swift */; };
+		DCED6A0B2534B007003C9A43 /* CornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCED6A0A2534B007003C9A43 /* CornerView.swift */; };
+		DCED6A102534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCED6A0F2534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift */; };
 		DCEE3F7A2439DB57000A75C5 /* Post.strings in Resources */ = {isa = PBXBuildFile; fileRef = DCEE3F7C2439DB57000A75C5 /* Post.strings */; };
 		DCEE3F802439DCA8000A75C5 /* Account.strings in Resources */ = {isa = PBXBuildFile; fileRef = DCEE3F822439DCA8000A75C5 /* Account.strings */; };
 		DCEF9D37243E1680002B7E99 /* MoreAppsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEF9D36243E1680002B7E99 /* MoreAppsViewModel.swift */; };
+		DCF20B4A2535F9C500206786 /* VerifyGoogleOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF20B492535F9C500206786 /* VerifyGoogleOTPViewController.swift */; };
 		DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */; };
 		DCF67FDD240FFC4A003061A7 /* SearchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FDC240FFC4A003061A7 /* SearchApi.swift */; };
 		DCF67FE1240FFD65003061A7 /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FDF240FFD65003061A7 /* PeopleTableViewCell.swift */; };
@@ -402,6 +407,8 @@
 		DCFBD78425029CE8005B6875 /* CancelPowerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBD78325029CE8005B6875 /* CancelPowerModel.swift */; };
 		DCFBD78625029D01005B6875 /* CancelPowerRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBD78525029D01005B6875 /* CancelPowerRequestModel.swift */; };
 		DCFBD7892503E119005B6875 /* ClaimRewardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFBD7882503E119005B6875 /* ClaimRewardViewModel.swift */; };
+		DCFF5875251F0D40002E570A /* SignUpWalletModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFF5874251F0D40002E570A /* SignUpWalletModel.swift */; };
+		DCFF5877251F7A66002E570A /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFF5876251F7A66002E570A /* ChangePasswordViewModel.swift */; };
 		DCFF69612448B5BB00416218 /* VoteDialogProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */; };
 /* End PBXBuildFile section */
 
@@ -490,6 +497,7 @@
 		DC1F79D724D088AB00B7F0D3 /* TransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferService.swift; sourceTree = "<group>"; };
 		DC1F79DA24D089F900B7F0D3 /* InitTransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitTransactionModel.swift; sourceTree = "<group>"; };
 		DC243FC524666A19007B2EC5 /* CategoryPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPostsViewController.swift; sourceTree = "<group>"; };
+		DC24E112253AF10700724CE4 /* VerifyBiometryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyBiometryViewModel.swift; sourceTree = "<group>"; };
 		DC26812823F2FCB30045776E /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		DC26812923F2FCB30045776E /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		DC26812C23F2FCD50045776E /* ProfileCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellViewModel.swift; sourceTree = "<group>"; };
@@ -642,8 +650,6 @@
 		DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellProtocol.swift; sourceTree = "<group>"; };
 		DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowActionModel.swift; sourceTree = "<group>"; };
 		DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListResponse.swift; sourceTree = "<group>"; };
-		DC79F11624CD612F007FCECC /* AskToCreateCredentialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskToCreateCredentialViewController.swift; sourceTree = "<group>"; };
-		DC79F11A24CD6A9A007FCECC /* AskToCreateCredentialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskToCreateCredentialViewModel.swift; sourceTree = "<group>"; };
 		DC79F11D24CDD7D3007FCECC /* CreateCredentialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCredentialTableViewCell.swift; sourceTree = "<group>"; };
 		DC79F11E24CDD7D3007FCECC /* CreateCredentialTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreateCredentialTableViewCell.xib; sourceTree = "<group>"; };
 		DC7AAFEF24F8032900ECDF47 /* PowerUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpViewModel.swift; sourceTree = "<group>"; };
@@ -719,7 +725,6 @@
 		DC9C659F249DE4F10042C829 /* CreateCredentialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCredentialViewModel.swift; sourceTree = "<group>"; };
 		DC9C65A2249E6F0A0042C829 /* ActiveBiometryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveBiometryViewModel.swift; sourceTree = "<group>"; };
 		DC9C65A4249FC0D10042C829 /* GoogleOTP.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GoogleOTP.storyboard; sourceTree = "<group>"; };
-		DC9C65A7249FC63C0042C829 /* ActivateGoogleOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateGoogleOTPViewController.swift; sourceTree = "<group>"; };
 		DC9C65AA24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateGoogleOTPViewModel.swift; sourceTree = "<group>"; };
 		DC9C65AE24A100720042C829 /* SereyIO-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SereyIO-Bridging-Header.h"; sourceTree = "<group>"; };
 		DC9E36D82412997800289693 /* Post.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Post.storyboard; sourceTree = "<group>"; };
@@ -746,6 +751,10 @@
 		DCA525582425166B00284CD8 /* ButtonCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCellViewModel.swift; sourceTree = "<group>"; };
 		DCA5255C2426636F00284CD8 /* AlertDialogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDialogController.swift; sourceTree = "<group>"; };
 		DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
+		DCA74DA2253746680041EAAE /* VerifyGoogleOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyGoogleOTPViewModel.swift; sourceTree = "<group>"; };
+		DCA74DA72537EDBA0041EAAE /* WalletPreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPreferenceStore.swift; sourceTree = "<group>"; };
+		DCA74DC02539F6700041EAAE /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
+		DCA74DC8253AD6A30041EAAE /* VerifyBiometryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyBiometryViewController.swift; sourceTree = "<group>"; };
 		DCB5BD6A2497BF880042E5AF /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
 		DCB5BD6F2497CAE40042E5AF /* SecurityMethodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityMethodeTableViewCell.swift; sourceTree = "<group>"; };
 		DCB5BD702497CAE40042E5AF /* SecurityMethodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecurityMethodeTableViewCell.xib; sourceTree = "<group>"; };
@@ -834,11 +843,15 @@
 		DCEC0CC2240A530B002F4B6F /* FilteredCategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilteredCategoryTableViewCell.xib; sourceTree = "<group>"; };
 		DCEC0CC5240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredCategoryCellViewModel.swift; sourceTree = "<group>"; };
 		DCEC0CC7240A5E0E002F4B6F /* CicularButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CicularButton.swift; sourceTree = "<group>"; };
+		DCED6A052534ADF7003C9A43 /* CheckBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		DCED6A0A2534B007003C9A43 /* CornerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerView.swift; sourceTree = "<group>"; };
+		DCED6A0F2534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateGoogleOTP2ViewController.swift; sourceTree = "<group>"; };
 		DCEE3F7B2439DB57000A75C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Post.strings; sourceTree = "<group>"; };
 		DCEE3F7D2439DB5A000A75C5 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Post.strings"; sourceTree = "<group>"; };
 		DCEE3F812439DCA8000A75C5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Account.strings; sourceTree = "<group>"; };
 		DCEE3F832439DCA9000A75C5 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Account.strings"; sourceTree = "<group>"; };
 		DCEF9D36243E1680002B7E99 /* MoreAppsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreAppsViewModel.swift; sourceTree = "<group>"; };
+		DCF20B492535F9C500206786 /* VerifyGoogleOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyGoogleOTPViewController.swift; sourceTree = "<group>"; };
 		DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingViewModel.swift; sourceTree = "<group>"; };
 		DCF67FDC240FFC4A003061A7 /* SearchApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchApi.swift; sourceTree = "<group>"; };
 		DCF67FDF240FFD65003061A7 /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
@@ -860,6 +873,8 @@
 		DCFBD78325029CE8005B6875 /* CancelPowerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelPowerModel.swift; sourceTree = "<group>"; };
 		DCFBD78525029D01005B6875 /* CancelPowerRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelPowerRequestModel.swift; sourceTree = "<group>"; };
 		DCFBD7882503E119005B6875 /* ClaimRewardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimRewardViewModel.swift; sourceTree = "<group>"; };
+		DCFF5874251F0D40002E570A /* SignUpWalletModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpWalletModel.swift; sourceTree = "<group>"; };
+		DCFF5876251F7A66002E570A /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
 		DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoteDialogProtocol.swift; sourceTree = "<group>"; };
 		E48D784F3F419D4A8B0116EC /* Pods_SereyIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SereyIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4BA4EF9560F572B6DA8F7A4 /* Pods-SereyIOTests.debug_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.debug_production.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.debug_production.xcconfig"; sourceTree = "<group>"; };
@@ -872,7 +887,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC7F098924B05ED400CE8AFC /* Steem in Frameworks */,
-				DC6FCE5623F05D0400D72F6D /* OAuth2.framework in Frameworks */,
 				26AE9EB0BA60B5822CF0E5D5 /* Pods_SereyIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -999,6 +1013,7 @@
 			isa = PBXGroup;
 			children = (
 				DC12F20A242271B60099C479 /* TokenModel.swift */,
+				DCFF5874251F0D40002E570A /* SignUpWalletModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1239,6 +1254,7 @@
 		DC583A9024CC2E6E00D9C4D3 /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				DCA74DA72537EDBA0041EAAE /* WalletPreferenceStore.swift */,
 				DC583A9124CC2E7A00D9C4D3 /* WalletStore.swift */,
 			);
 			path = Wallet;
@@ -1497,6 +1513,7 @@
 		DC6ED56D2326A2E100770B31 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				DC7C8EF124D9BEBF0051C084 /* Codable.swift */,
 				DCEC0CBB240907D0002F4B6F /* Date+Formatter.swift */,
 				DCB5BD802499170A0042E5AF /* LAContext.swift */,
 				DC115F2D241A8E18006BE78C /* NSAttributedString+Extensions.swift */,
@@ -1509,7 +1526,6 @@
 				DCD3988E232E259B00C812EB /* Controller */,
 				DCD39871232E203000C812EB /* Rx+Extension */,
 				DCD39860232E112A00C812EB /* View */,
-				DC7C8EF124D9BEBF0051C084 /* Codable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1528,6 +1544,7 @@
 			isa = PBXGroup;
 			children = (
 				DC83C38724E2E7C5008C9EAB /* AES.swift */,
+				DCA74DC02539F6700041EAAE /* BiometricIDAuth.swift */,
 				DCD39867232E1D1B00C812EB /* ErrorHelper.swift */,
 				DCD3986F232E1F7E00C812EB /* LanguageManager.swift */,
 				DC6A790823CA2510001D1009 /* RealmManager.swift */,
@@ -1546,6 +1563,7 @@
 			isa = PBXGroup;
 			children = (
 				DC6ED57D2326A44A00770B31 /* DefaultsStore.swift */,
+				DC583A9324CC303A00D9C4D3 /* KeychainConfiguration.swift */,
 				DC583A8824C89AB400D9C4D3 /* KeychainPasswordItem.swift */,
 				DC6ED5892326A53B00770B31 /* KeyChainStore.swift */,
 				DC6ED57F2326A46300770B31 /* SimpleStore.swift */,
@@ -1553,7 +1571,6 @@
 				DCC49AC923E864AA00119BAA /* Settings */,
 				DCC49ACA23E864BA00119BAA /* User */,
 				DC583A9024CC2E6E00D9C4D3 /* Wallet */,
-				DC583A9324CC303A00D9C4D3 /* KeychainConfiguration.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -1639,7 +1656,6 @@
 		DC79F11424CD60FE007FCECC /* CreateCredential */ = {
 			isa = PBXGroup;
 			children = (
-				DC79F11624CD612F007FCECC /* AskToCreateCredentialViewController.swift */,
 				DC9C659D249D260E0042C829 /* CreateCredentialViewController.swift */,
 			);
 			path = CreateCredential;
@@ -1656,7 +1672,6 @@
 		DC79F11824CD6A72007FCECC /* Credentail */ = {
 			isa = PBXGroup;
 			children = (
-				DC79F11A24CD6A9A007FCECC /* AskToCreateCredentialViewModel.swift */,
 				DC9C659F249DE4F10042C829 /* CreateCredentialViewModel.swift */,
 			);
 			path = Credentail;
@@ -1806,6 +1821,7 @@
 		DC88A73423DF3EB600EB7F79 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DCED6A052534ADF7003C9A43 /* CheckBox.swift */,
 				DC42AF0623E9D39B008F8A0F /* CardView.swift */,
 				DCC6F1DB242BB041003B9E3A /* CenteredImageButton.swift */,
 				DCEC0CC7240A5E0E002F4B6F /* CicularButton.swift */,
@@ -1823,6 +1839,7 @@
 				DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */,
 				DCDE006D2446161500D09717 /* UIPlaceHolderTextView.swift */,
 				DCB9F2E924D7153D0028D449 /* UIRightIconButton.swift */,
+				DCED6A0A2534B007003C9A43 /* CornerView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1967,6 +1984,7 @@
 			isa = PBXGroup;
 			children = (
 				DC9C65A2249E6F0A0042C829 /* ActiveBiometryViewModel.swift */,
+				DC24E112253AF10700724CE4 /* VerifyBiometryViewModel.swift */,
 			);
 			path = Biometry;
 			sourceTree = "<group>";
@@ -1974,7 +1992,8 @@
 		DC9C65A6249FC5DC0042C829 /* GoogleOTP */ = {
 			isa = PBXGroup;
 			children = (
-				DC9C65A7249FC63C0042C829 /* ActivateGoogleOTPViewController.swift */,
+				DCED6A0F2534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift */,
+				DCF20B492535F9C500206786 /* VerifyGoogleOTPViewController.swift */,
 			);
 			path = GoogleOTP;
 			sourceTree = "<group>";
@@ -1983,6 +2002,7 @@
 			isa = PBXGroup;
 			children = (
 				DC9C65AA24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift */,
+				DCA74DA2253746680041EAAE /* VerifyGoogleOTPViewModel.swift */,
 			);
 			path = GoogleOTP;
 			sourceTree = "<group>";
@@ -2157,6 +2177,7 @@
 			isa = PBXGroup;
 			children = (
 				DCB5BD8524992C4F0042E5AF /* ActiveBiometryViewController.swift */,
+				DCA74DC8253AD6A30041EAAE /* VerifyBiometryViewController.swift */,
 			);
 			path = Biometry;
 			sourceTree = "<group>";
@@ -2192,6 +2213,7 @@
 		DCBBD6C324E43A7A0099C406 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				DCFF5876251F7A66002E570A /* ChangePasswordViewModel.swift */,
 				DCBBD6C724E43CE50099C406 /* WalletSettingCellViewModel.swift */,
 				DCBBD6C424E43A870099C406 /* WalletSettingsViewModel.swift */,
 			);
@@ -2976,7 +2998,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen colors -t swift3 --output \"$PROJECT_DIR/Constants/ColorsGen.swift\" \"$PROJECT_DIR/Constants/colors.txt\"\n";
+			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen colors -t swift4 --output \"$PROJECT_DIR/Constants/ColorsGen.swift\" \"$PROJECT_DIR/Constants/colors.txt\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2987,6 +3009,7 @@
 			files = (
 				DC583A9D24CC7EEF00D9C4D3 /* SereyKeyHelper.swift in Sources */,
 				DC8EAB8123E7231200E00A00 /* HomeViewController.swift in Sources */,
+				DCED6A102534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift in Sources */,
 				DCD39873232E204000C812EB /* Rx+Extensions.swift in Sources */,
 				DC5D59DD2432437A0048C921 /* SelectCategoryViewModel.swift in Sources */,
 				DC243FC624666A19007B2EC5 /* CategoryPostsViewController.swift in Sources */,
@@ -3044,6 +3067,7 @@
 				DC9E36E324135A3400289693 /* PostDetailView.swift in Sources */,
 				DC583A8D24CC26A200D9C4D3 /* WalletAuthValidateController.swift in Sources */,
 				DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */,
+				DCA74DC9253AD6A40041EAAE /* VerifyBiometryViewController.swift in Sources */,
 				DC12F21424227A340099C479 /* UserService.swift in Sources */,
 				DC115F2C241A8D38006BE78C /* UtilsHelper.swift in Sources */,
 				DC9AC6E12406C1D1008FAFA6 /* DiscussionService.swift in Sources */,
@@ -3069,7 +3093,6 @@
 				DCD12D6C242D06C20084F66C /* ImageTextTableViewCell.swift in Sources */,
 				DCFBD78025022FBF005B6875 /* CancelPowerDownViewController.swift in Sources */,
 				DC40D5DF23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift in Sources */,
-				DC79F11724CD612F007FCECC /* AskToCreateCredentialViewController.swift in Sources */,
 				DC7558BA24589A4C00AD40FA /* SereyAppCellViewModel.swift in Sources */,
 				DCD3987A232E230B00C812EB /* NibView.swift in Sources */,
 				DCD39896232E28E100C812EB /* WebViewViewModel.swift in Sources */,
@@ -3089,6 +3112,7 @@
 				DC9AC6E82406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift in Sources */,
 				DCDE00672446016800D09717 /* ReplyCommentViewController.swift in Sources */,
 				DC6CDC342439B077008A52D9 /* PostCommentViewModel.swift in Sources */,
+				DCED6A0B2534B007003C9A43 /* CornerView.swift in Sources */,
 				DC40D5D623E32A6B00B0DD96 /* ImageTextModel.swift in Sources */,
 				DCD39866232E1CC600C812EB /* BaseViewModel.swift in Sources */,
 				DCD3988D232E259700C812EB /* KeyboardController+Actions.swift in Sources */,
@@ -3106,6 +3130,7 @@
 				DCB5BD7F2497D9400042E5AF /* ChooseSecurityMethodViewModel.swift in Sources */,
 				DC562433241E73D80076A78C /* SignInViewModel.swift in Sources */,
 				DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */,
+				DCFF5877251F7A66002E570A /* ChangePasswordViewModel.swift in Sources */,
 				DC1F79CF24CF294200B7F0D3 /* CreateCredentialCellViewModel.swift in Sources */,
 				DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */,
 				DCA5255B2425166B00284CD8 /* ButtonCellViewModel.swift in Sources */,
@@ -3113,14 +3138,12 @@
 				DC9E36E92413F4A100289693 /* RichEditor+Custom.swift in Sources */,
 				DC6ED57C2326A43700770B31 /* Store.swift in Sources */,
 				DC6A78F323CA1FEB001D1009 /* CollectionSingleSecitionProviderModel.swift in Sources */,
-				DC9C65A8249FC63C0042C829 /* ActivateGoogleOTPViewController.swift in Sources */,
 				DC9E36DF2412A01000289693 /* PostDetailViewModel.swift in Sources */,
 				DC7C740D24717C5500610526 /* VotersViewController.swift in Sources */,
 				DC9AC6E32406C4F7008FAFA6 /* Moya+Extensions.swift in Sources */,
 				DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */,
 				DC26812A23F2FCB30045776E /* ProfileTableViewCell.swift in Sources */,
 				DC7558AE24587B3D00AD40FA /* FeatureBoarding.swift in Sources */,
-				DC79F11B24CD6A9A007FCECC /* AskToCreateCredentialViewModel.swift in Sources */,
 				DCD39883232E24BF00C812EB /* Realm+Cnfigure.swift in Sources */,
 				DC9E36DC24129ACA00289693 /* PostDetailViewController.swift in Sources */,
 				DCCC15C825092AE500ED4C52 /* TransactionDetailViewModel.swift in Sources */,
@@ -3130,6 +3153,7 @@
 				DCB5BD742497D2E10042E5AF /* SecurityMethodCellViewModel.swift in Sources */,
 				DC583A8F24CC281C00D9C4D3 /* WalletAuthValidationViewModel.swift in Sources */,
 				DCFBD77425013D4D005B6875 /* PowerDownViewModel.swift in Sources */,
+				DCF20B4A2535F9C500206786 /* VerifyGoogleOTPViewController.swift in Sources */,
 				DCEC0CC6240A59CE002F4B6F /* FilteredCategoryCellViewModel.swift in Sources */,
 				DC9AC6E62406C5BA008FAFA6 /* DiscussionCategoryModel.swift in Sources */,
 				DC7C8F0F24DC663B0051C084 /* TransactionTableViewCell.swift in Sources */,
@@ -3137,6 +3161,7 @@
 				DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */,
 				DCB5BD812499170A0042E5AF /* LAContext.swift in Sources */,
 				DCF67FEF24100C6F003061A7 /* ListDataResponseModel.swift in Sources */,
+				DCFF5875251F0D40002E570A /* SignUpWalletModel.swift in Sources */,
 				DC75DABB244E07EE00D80CB2 /* FollowerListResponse.swift in Sources */,
 				DC42AF0423E9CFB5008F8A0F /* PostTableViewCell.swift in Sources */,
 				DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */,
@@ -3157,6 +3182,7 @@
 				DC9A660824E042BB001F1B60 /* TextBelowImageButton.swift in Sources */,
 				DCDE00782448B0B800D09717 /* VoteDialogViewController.swift in Sources */,
 				DC5FC21124542CB700CA6117 /* CommentsListViewModel.swift in Sources */,
+				DCA74DC12539F6700041EAAE /* BiometricIDAuth.swift in Sources */,
 				DC6FCE7423F05D1700D72F6D /* Steem.swift in Sources */,
 				DCCD40C924363EF700093A18 /* SubmitPostModel.swift in Sources */,
 				DC9A660B24E05725001F1B60 /* PayQRViewModel.swift in Sources */,
@@ -3203,6 +3229,7 @@
 				DCCD40CE24379BD100093A18 /* BottomMenuViewController.swift in Sources */,
 				DCC6F1E5242BBF27003B9E3A /* TextCellViewModel.swift in Sources */,
 				DC88A73C23DF4A8900EB7F79 /* SelectLanguageViewModel.swift in Sources */,
+				DCA74DA82537EDBA0041EAAE /* WalletPreferenceStore.swift in Sources */,
 				DC8AB7BE24FBA13200968FCD /* ConfirmPowerUpViewController.swift in Sources */,
 				DC13409A24573F0C00CC9856 /* ToggleTextTableViewCell.swift in Sources */,
 				DC6A790523CA242B001D1009 /* EmptyOrErrorView.swift in Sources */,
@@ -3232,6 +3259,7 @@
 				DC7C8F1224DC68E80051C084 /* TransactionCellViewModel.swift in Sources */,
 				DC19DBE523EC5D0700571CC8 /* BaseTableViewController.swift in Sources */,
 				DC7AAFF024F8032900ECDF47 /* PowerUpViewModel.swift in Sources */,
+				DC24E113253AF10700724CE4 /* VerifyBiometryViewModel.swift in Sources */,
 				DC5B55AE2451E5B200F8531B /* PushService.swift in Sources */,
 				DCDE00752448A70B00D09717 /* CommentTextViewModel.swift in Sources */,
 				DC387C9224E9821100D8C78E /* ChangePasswordViewController.swift in Sources */,
@@ -3244,6 +3272,7 @@
 				DC40D5D423E32A4400B0DD96 /* ImageTextCellViewModel.swift in Sources */,
 				DC19DBEB23EC5F9E00571CC8 /* PostTableViewModel.swift in Sources */,
 				DCFBD7892503E119005B6875 /* ClaimRewardViewModel.swift in Sources */,
+				DCED6A062534ADF7003C9A43 /* CheckBox.swift in Sources */,
 				DC6FCE7523F05D1700D72F6D /* Misc.swift in Sources */,
 				DC6ED52123267EED00770B31 /* AppDelegate.swift in Sources */,
 				DCDE006A244601A600D09717 /* ReplyCommentTableViewModel.swift in Sources */,
@@ -3255,6 +3284,7 @@
 				DC6CA7B7243CD08D00F1EEC8 /* CategoryCellViewModel.swift in Sources */,
 				DC8450B7250C802B00D7E085 /* LineIndicatorCellViewModel.swift in Sources */,
 				DC0F36B12450944700916886 /* DownvoteDialogViewModel.swift in Sources */,
+				DCA74DA3253746680041EAAE /* VerifyGoogleOTPViewModel.swift in Sources */,
 				DCF67FE924100B64003061A7 /* SearchService.swift in Sources */,
 				DC6ED56623269B6600770B31 /* ColorsGen.swift in Sources */,
 				DC40D5CC23E3298F00B0DD96 /* LanguageTableViewCell.swift in Sources */,

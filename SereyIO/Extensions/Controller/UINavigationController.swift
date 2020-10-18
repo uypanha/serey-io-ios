@@ -19,6 +19,7 @@ extension UINavigationController {
         
         //  change to opaque all
         self.navigationBar.isTranslucent = false
+        self.view.backgroundColor = ColorName.navigationBg.color
         self.setNavigationBarColor(ColorName.navigationBg.color, tintColor: ColorName.navigationTint.color)
     }
     
@@ -71,7 +72,7 @@ extension UINavigationController {
     
     func setNavigationBarColor(_ color: UIColor, tintColor: UIColor, isTransparent: Bool = false) {
         self.navigationBar.backgroundColor = color
-        self.navigationBar.barTintColor = tintColor
+        self.navigationBar.barTintColor = color
         self.navigationBar.tintColor = tintColor
         self.navigationBar.titleTextAttributes = [
             .foregroundColor: tintColor

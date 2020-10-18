@@ -20,6 +20,12 @@ class WalletRootViewController: BaseRootViewController {
         super.init(CloseableNavigationController(rootViewController: WalletAuthValidateController()))
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.backgroundColor = .clear
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -28,18 +34,35 @@ class WalletRootViewController: BaseRootViewController {
 // MARK: - Switching Screens
 extension WalletRootViewController {
     
+    func switchToVerifyGoogleOTPScreen(viewModel: VerifyGoogleOTPViewModel, fadeAnimation: Bool = true) {
+        let verifyOTPViewController = R.storyboard.googleOTP.verifyGoogleOTPViewController()!
+        verifyOTPViewController.viewModel = viewModel
+        let closableViewController = CloseableNavigationController(rootViewController: verifyOTPViewController)
+        if fadeAnimation {
+            self.animateFadeTransition(to: closableViewController)
+        } else {
+            self.animateSlideToTopTransition(to: closableViewController)
+        }
+    }
+    
+    func switchToVerifyBiometryScreen(_ fadeAnimation: Bool = true) {
+        let verifyBiometryViewController = R.storyboard.biometry.verifyBiometryViewController()!
+        verifyBiometryViewController.viewModel = VerifyBiometryViewModel()
+        if fadeAnimation {
+            self.animateFadeTransition(to: verifyBiometryViewController)
+        } else {
+            self.animateSlideToTopTransition(to: verifyBiometryViewController)
+        }
+    }
+    
     func switchToSignInScreen(fadeAnimation: Bool = true) {
         let mainWalletViewController = R.storyboard.auth.signInViewController()!
         mainWalletViewController.viewModel = SignInViewModel()
         let closableViewController = CloseableNavigationController(rootViewController: mainWalletViewController)
         if fadeAnimation {
-            self.animateFadeTransition(to: closableViewController) { [weak self] in
-                self?.handleDeeplink()
-            }
+            self.animateFadeTransition(to: closableViewController)
         } else {
-            self.animateSlideToTopTransition(to: closableViewController) { [weak self] in
-                self?.handleDeeplink()
-            }
+            self.animateSlideToTopTransition(to: closableViewController)
         }
     }
     
@@ -73,24 +96,9 @@ extension WalletRootViewController {
         }
     }
     
-    func switchToSetUpCredential(fadeAnimation: Bool = true) {
-        let askToCreateCredentialViewController = R.storyboard.auth.askToCreateCredentialViewController()!
-        askToCreateCredentialViewController.viewModel = AskToCreateCredentialViewModel()
-        let closableViewController = CloseableNavigationController(rootViewController: askToCreateCredentialViewController)
-        if fadeAnimation {
-            self.animateFadeTransition(to: closableViewController) { [weak self] in
-                self?.handleDeeplink()
-            }
-        } else {
-            self.animateSlideToTopTransition(to: closableViewController) { [weak self] in
-                self?.handleDeeplink()
-            }
-        }
-    }
-    
-    func switchToCreateCredential(fadeAnimation: Bool = true) {
+    func switchToCreateCredential(fadeAnimation: Bool = true, viewModel: CreateCredentialViewModel) {
         let createCredentialViewController = R.storyboard.auth.createCredentialViewController()!
-        createCredentialViewController.viewModel = CreateCredentialViewModel()
+        createCredentialViewController.viewModel = viewModel
         let closableViewController = CloseableNavigationController(rootViewController: createCredentialViewController)
         if fadeAnimation {
             self.animateFadeTransition(to: closableViewController) { [weak self] in

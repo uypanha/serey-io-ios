@@ -16,10 +16,12 @@ class BaseInitTransactionViewModel: BaseViewModel {
     let transferService: TransferService
     
     let isLoading: BehaviorSubject<Bool>
+    let didTransactionUpdate: PublishSubject<Void>
     
     override init() {
         self.transferService = .init()
         self.isLoading = .init(value: false)
+        self.didTransactionUpdate = .init()
         super.init()
     }
 }

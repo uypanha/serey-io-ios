@@ -69,6 +69,7 @@ fileprivate extension CancelPowerDownViewModel {
     func handleCancelPowerSuccess() {
         let confirmAction = ActionModel(R.string.common.confirm.localized(), style: .default) {
             self.shouldPresent(.dismiss)
+            self.didTransactionUpdate.onNext(())
         }
         
         let alerDialogModel = AlertDialogModel(title: "Cancel Power", message: "You just cancel Serey Power.", actions: [confirmAction])

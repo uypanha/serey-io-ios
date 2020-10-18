@@ -9,6 +9,7 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import AnyCodable
 
 class UserService: AppService<UserApi> {
     
@@ -24,6 +25,11 @@ class UserService: AppService<UserApi> {
     
     func followAction(_ username: String, action: FollowActionType) -> Observable<FollowActionModel> {
         return self.provider.rx.requestObject(.followAction(author: username, actionType: action), type: FollowActionModel.self)
+            .asObservable()
+    }
+    
+    func changePassword(_ current: String, _ new: String) -> Observable<AnyCodable> {
+        return self.provider.rx.requestObject(.changePassword(current: current, new: new), type: AnyCodable.self)
             .asObservable()
     }
 }

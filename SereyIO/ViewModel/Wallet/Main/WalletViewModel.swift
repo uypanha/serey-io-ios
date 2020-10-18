@@ -45,7 +45,6 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
     let wallets: BehaviorRelay<[WalletType]>
     let menu: BehaviorRelay<[WalletMenu]>
     
-    let transferService: TransferService
     let userService: UserService
     
     override init() {
@@ -58,7 +57,6 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
         self.wallets = .init(value: [.coin(coins: nil), .power(power: nil)])
         self.menu = .init(value: WalletMenu.menuItems)
         
-        self.transferService = .init()
         self.userService = .init()
         super.init()
         
@@ -70,29 +68,7 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
 extension WalletViewModel {
     
     func initialNetworkConnection() {
-        initTransaction()
         fetchProfile()
-    }
-    
-    private func initTransaction() {
-        self.transferService.initTransaction()
-            .subscribe(onNext: { [weak self] data in
-                self?.transferService.publicKey = data.publicKey
-                self?.transferService.trxId = data.trxId
-            }, onError: { [weak self] error in
-                let errorInfo = ErrorHelper.prepareError(error: error)
-                self?.shouldPresentError(errorInfo)
-            }) ~ self.disposeBag
-    }
-    
-    private func claimReward() {
-        self.transferService.claimReward()
-            .subscribe(onNext: { data in
-                print(data.message)
-            }, onError: { [weak self] error in
-                let errorInfo = ErrorHelper.prepareError(error: error)
-                self?.shouldPresentError(errorInfo)
-            }) ~ self.disposeBag
     }
     
     private func fetchProfile() {
@@ -128,6 +104,7 @@ fileprivate extension WalletViewModel {
             switch item.menu.value {
             case .sendCoin:
                 let transferCoinViewModel = TransferCoinViewModel()
+                self.setUpTransactionObserers(transferCoinViewModel)
                 self.shouldPresent(.transferCoinController(transferCoinViewModel))
             case .receiveCoin:
                 guard let username = AuthData.shared.username else { return }
@@ -138,15 +115,19 @@ fileprivate extension WalletViewModel {
                 self.shouldPresent(.scanQRViewController(payQRViewModel))
             case .powerUp:
                 let powerUpViewModel = PowerUpViewModel()
+                self.setUpTransactionObserers(powerUpViewModel)
                 self.shouldPresent(.powerUpController(powerUpViewModel))
             case .powerDown:
                 let powerDownViewModel = PowerDownViewModel()
+                self.setUpTransactionObserers(powerDownViewModel)
                 self.shouldPresent(.powerDownController(powerDownViewModel))
             case .claimReward:
                 let claimRewardViewModel = ClaimRewardViewModel()
+                self.setUpTransactionObserers(claimRewardViewModel)
                 self.shouldPresent(.claimRewardController(claimRewardViewModel))
             case .cancelPower:
                 let cancelPowerDownViewModel = CancelPowerDownViewModel()
+                self.setUpTransactionObserers(cancelPowerDownViewModel)
                 self.shouldPresent(.cancelPowerDownController(cancelPowerDownViewModel))
             default:
                 break
@@ -220,7 +201,15 @@ extension WalletViewModel {
         payQrViewModel.didUsernameFound
             .subscribe(onNext: { [weak self] username in
                 let transferCoinViewModel = TransferCoinViewModel(username)
+                self?.setUpTransactionObserers(transferCoinViewModel)
                 self?.shouldPresent(.transferCoinController(transferCoinViewModel))
             }).disposed(by: payQrViewModel.disposeBag)
+    }
+    
+    private func setUpTransactionObserers(_ viewModel: BaseInitTransactionViewModel) {
+        viewModel.didTransactionUpdate
+            .subscribe(onNext: { [weak self] _ in
+                self?.fetchProfile()
+            }) ~ self.disposeBag
     }
 }

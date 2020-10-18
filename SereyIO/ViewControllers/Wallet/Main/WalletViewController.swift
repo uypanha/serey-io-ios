@@ -66,21 +66,21 @@ extension WalletViewController {
     }
     
     func prepareWalletCollectionView() {
+        self.collectionView.register(WalletCardCollectionViewCell.self)
         if let collectionViewLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             collectionViewLayout.scrollDirection = .horizontal
         }
         self.collectionView.delegate = self
-        self.collectionView.register(WalletCardCollectionViewCell.self)
     }
     
     func prepareMenuCollectionView() {
-        self.menuCollectionView.delegate = self
         self.menuCollectionView.register(WalletMenuCollectionViewCell.self)
+        self.menuCollectionView.delegate = self
     }
     
     func getMenuItemSize() -> CGSize {
         let viewWidth = self.view.frame.width
-        let itemWidth = (viewWidth - self.menuSpace - (16 * 2)) / self.menuColumn
+        let itemWidth = (viewWidth - self.menuSpace - (18 * 2)) / self.menuColumn
         return CGSize(width: itemWidth, height: itemWidth)
     }
     
@@ -110,6 +110,14 @@ extension WalletViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         (collectionView.cellForItem(at: indexPath) as? WalletMenuCollectionViewCell)?.setHighlighted(false, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == self.menuCollectionView {
+            return getMenuItemSize()
+        } else {
+            return getCardItemSize()
+        }
     }
 }
 

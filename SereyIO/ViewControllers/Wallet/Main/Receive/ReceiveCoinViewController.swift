@@ -135,7 +135,7 @@ extension ReceiveCoinViewController {
                 case .snackbar(let messageText):
                     let message = MDCSnackbarMessage()
                     message.text = messageText
-                    MDCSnackbarManager.show(message)
+                    MDCSnackbarManager.default.show(message)
                 }
             }) ~ self.disposeBag
     }

@@ -18,6 +18,8 @@ enum UserApi {
     case getFollowerList(author: String)
     
     case followAction(author: String, actionType: FollowActionType)
+    
+    case changePassword(current: String, new: String)
 }
 
 extension UserApi: AuthorizedApiTargetType {
@@ -38,6 +40,11 @@ extension UserApi: AuthorizedApiTargetType {
             return [
                 "username"  : data
             ]
+        case .changePassword(let current, let new):
+            return [
+               "currentPassword"    : current,
+               "newPassword"        : new
+            ]
         default:
             return [:]
         }
@@ -53,12 +60,14 @@ extension UserApi: AuthorizedApiTargetType {
             return "/api/v1/follow/action"
         case .getFollowerList:
             return "/api/v1/follow/getFollowerList"
+        case .changePassword:
+            return "/api/v1/accounts/changePassword"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .followAction:
+        case .followAction, .changePassword:
             return .post
         default:
             return .get
@@ -67,7 +76,7 @@ extension UserApi: AuthorizedApiTargetType {
     
     var task: Task {
         switch self {
-        case .followAction:
+        case .followAction, .changePassword:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         default:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)

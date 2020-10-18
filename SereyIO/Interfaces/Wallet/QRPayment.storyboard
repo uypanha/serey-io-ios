@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -28,16 +29,16 @@
                                 <rect key="frame" x="44" y="278.5" width="326" height="349.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SCu-Dm-fgN">
-                                        <rect key="frame" x="86.5" y="0.0" width="153.5" height="49"/>
+                                        <rect key="frame" x="86.5" y="0.0" width="153" height="49"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your SRY address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R1m-w1-kH3">
-                                                <rect key="frame" x="0.0" y="0.0" width="153.5" height="21.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="153" height="21.5"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your SRY address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USa-kr-ioL">
-                                                <rect key="frame" x="12" y="29.5" width="129.5" height="19.5"/>
+                                                <rect key="frame" x="12" y="29.5" width="129" height="19.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -51,7 +52,7 @@
                                                 <rect key="frame" x="12" y="12" width="146" height="146"/>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="DVJ-Ti-7if" firstAttribute="top" secondItem="6Ek-JC-6U1" secondAttribute="top" constant="12" id="0Uq-Su-gpB"/>
                                             <constraint firstAttribute="width" constant="170" id="5vs-sj-CjU"/>
@@ -74,7 +75,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use this address to transfer props from another wallet to this wallet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LV7-Nk-nO4">
-                                        <rect key="frame" x="18.5" y="251" width="289" height="38.5"/>
+                                        <rect key="frame" x="19" y="251" width="288.5" height="38.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -129,7 +130,8 @@
                                 <state key="normal" image="clearIcon"/>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="zEo-oS-xqD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="zEo-oS-xqD" firstAttribute="trailing" secondItem="zIJ-nf-BIm" secondAttribute="trailing" id="0ox-5W-Ra2"/>
                             <constraint firstItem="Izq-nj-vHa" firstAttribute="leading" secondItem="zEo-oS-xqD" secondAttribute="leading" constant="44" id="40s-eV-1Yz"/>
@@ -141,7 +143,6 @@
                             <constraint firstItem="zEo-oS-xqD" firstAttribute="trailing" secondItem="Izq-nj-vHa" secondAttribute="trailing" constant="44" id="UT4-6l-5qh"/>
                             <constraint firstItem="Vj9-mv-x48" firstAttribute="trailing" secondItem="Izq-nj-vHa" secondAttribute="trailing" constant="18" id="vKV-hn-HkJ"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="zEo-oS-xqD"/>
                     </view>
                     <connections>
                         <outlet property="closeButton" destination="Vj9-mv-x48" id="2w0-Rc-bXp"/>
@@ -226,7 +227,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgE-Fh-9Kd" customClass="TextBelowImageButton" customModule="SereyIO" customModuleProvider="target">
-                                        <rect key="frame" x="132.5" y="124.5" width="149" height="62"/>
+                                        <rect key="frame" x="132" y="124.5" width="150" height="62"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="View my QR" image="qrCode">
                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -243,7 +244,8 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="iot-7W-qpN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Bzj-rn-73Z" firstAttribute="top" secondItem="pvX-nA-TEy" secondAttribute="top" id="0Dl-f2-mF0"/>
                             <constraint firstItem="PLU-lK-rJ3" firstAttribute="leading" secondItem="iot-7W-qpN" secondAttribute="leading" id="6Hv-Do-4iZ"/>
@@ -262,7 +264,6 @@
                             <constraint firstItem="vYp-F4-nDz" firstAttribute="leading" secondItem="iot-7W-qpN" secondAttribute="leading" id="xWA-Vr-6n3"/>
                             <constraint firstItem="R1p-D2-CwV" firstAttribute="centerY" secondItem="Bzj-rn-73Z" secondAttribute="centerY" constant="16" id="xp2-8Z-h24"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="iot-7W-qpN"/>
                     </view>
                     <connections>
                         <outlet property="cameraView" destination="Bzj-rn-73Z" id="7L0-a3-SZp"/>
@@ -283,5 +284,8 @@
         <image name="flashOffIcon" width="19" height="19"/>
         <image name="qrCode" width="62" height="62"/>
         <image name="scanFrame" width="347" height="236"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

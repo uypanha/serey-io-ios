@@ -133,19 +133,13 @@ extension SignUpWalletViewController {
         self.viewModel.shouldPresent.asObservable()
             .subscribe(onNext: { [unowned self] viewToPresent in
                 switch viewToPresent {
-                case .createCredentialController:
-                    SereyWallet.shared?.rootViewController.switchToSetUpCredential()
-                case .chooseSecurityMethodController:
-                    SereyWallet.shared?.rootViewController.switchToChooseSecurityMethod()
+                case .createCredentialViewController(let createCredentialViewModel):
+                    SereyWallet.shared?.rootViewController.switchToCreateCredential(viewModel: createCredentialViewModel)
                 case .dismiss:
                     self.navigationController?.popViewController(animated: true)
                 case .loading(let loading):
                     self.ownerKeyTextField.isEnabled = !loading
-                    if loading {
-                        self.nextButton.showLoading()
-                    } else {
-                        self.nextButton.hideLoading()
-                    }
+                    self.nextButton.isLoading = loading
                 }
             }) ~ self.disposeBag
     }

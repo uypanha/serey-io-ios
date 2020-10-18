@@ -12,18 +12,49 @@ import RxSwift
 import RxBinding
 import LocalAuthentication
 
-class ActiveBiometryViewModel: BaseViewModel {
+class ActiveBiometryViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
     
+    enum Action {
+        case enablePressed
+    }
+    
+    enum ViewToPresent {
+        case showAlertDialogController(AlertDialogModel)
+        case walletController
+        case openUrl(URL)
+        case dismiss
+    }
+    
+    enum ParentController {
+        case signUp
+        case settings
+    }
+    
+    // input:
+    let didActionSubject: PublishSubject<Action>
+    
+    // output:
+    let shouldPresentSubject: PublishSubject<ViewToPresent>
+    
+    let parent: ParentController
     let biometricType: BehaviorRelay<LAContext.BiometricType>
     let iconImage: BehaviorSubject<UIImage?>
     let titleText: BehaviorSubject<String?>
     let descriptionText: BehaviorSubject<String?>
     
-    init(_ biometricType: LAContext.BiometricType) {
+    let touchMe: BiometricIDAuth
+    
+    init(parent: ParentController, _ biometricType: LAContext.BiometricType) {
+        self.parent = parent
+        self.didActionSubject = .init()
+        self.shouldPresentSubject = .init()
+        
         self.biometricType = .init(value: biometricType)
         self.iconImage = .init(value: nil)
         self.titleText = .init(value: nil)
         self.descriptionText = .init(value: nil)
+        
+        self.touchMe = .init()
         super.init()
         
         setUpRxObservers()
@@ -40,17 +71,63 @@ extension ActiveBiometryViewModel {
     }
 }
 
+// MARK: - Action Handlers
+ fileprivate extension ActiveBiometryViewModel {
+    
+    func handleEnablePressed() {
+        touchMe.authenticateUser { errorMessage, requiredSetup in
+            if let errorMessage = errorMessage {
+                self.handleAuthenticationFailed(message: errorMessage)
+            }
+            
+            // else it means success
+            self.handleAuthenticated()
+        }
+    }
+    
+    func handleAuthenticated() {
+        WalletPreferenceStore.shared.enableBiometry()
+        
+        let confirmAction = ActionModel(R.string.common.confirm.localized()) {
+            if self.parent == .settings {
+                self.shouldPresent(.dismiss)
+            } else {
+                self.shouldPresent(.walletController)
+            }
+        }
+        let alertDialogModel = AlertDialogModel(title: self.biometricType.value.title, message: "You are now can use wallet with your \(self.biometricType.value.title)", actions: [confirmAction])
+        self.shouldPresent(.showAlertDialogController(alertDialogModel))
+    }
+    
+    func handleAuthenticationFailed(message: String) {
+        let defaultAction = ActionModel(R.string.common.confirm.localized(), style: .cancel)
+        let alertDialogModel = AlertDialogModel(title: self.biometricType.value.title, message: message, actions: [defaultAction])
+        self.shouldPresent(.showAlertDialogController(alertDialogModel))
+    }
+}
+
 // MAKR: - SetUp RxObservers
 extension ActiveBiometryViewModel {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
+        setUpActionObservers()
     }
     
     func setUpContentChangedObservers() {
         self.biometricType.asObservable()
             .subscribe(onNext: { [weak self] type in
                 self?.notifyDataChanged(type)
+            }) ~ self.disposeBag
+    }
+    
+    func setUpActionObservers() {
+        self.didActionSubject.asObservable()
+            .subscribe(onNext: { [weak self] action in
+                switch action {
+                case .enablePressed:
+                    self?.handleEnablePressed()
+                }
             }) ~ self.disposeBag
     }
 }
@@ -75,6 +152,17 @@ extension LAContext.BiometricType {
             return "Activate Face ID"
         case .touchID:
             return "Activate FingerPrint ID"
+        default:
+            return nil
+        }
+    }
+    
+    var scanTitle: String? {
+        switch self {
+        case .faceID:
+            return "Scan Your Face to Continue"
+        case .touchID:
+            return "Scan Finger Print to Continue"
         default:
             return nil
         }

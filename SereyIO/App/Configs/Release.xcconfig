@@ -22,7 +22,7 @@ NOTIFICATION_URL        = http:/$()/116.203.93.152:9292
 // APP INFO
 app_name                = Serey.io
 app_bundle              = io.serey.ios
-app_version_name        = 1.1.0
-app_version_code        = 11
+app_version_name        = 1.0.0
+app_version_code        = 12
 
-INCLUDE_WALLET          = false
+INCLUDE_WALLET          = true

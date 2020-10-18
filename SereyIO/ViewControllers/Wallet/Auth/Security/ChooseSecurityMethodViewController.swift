@@ -102,7 +102,7 @@ extension ChooseSecurityMethodViewController {
                         self?.show(activeBiometryController, sender: nil)
                     }
                 case .activeGoogleOTPController(let activeGoogleOTPViewModel):
-                    if let activeGoogleOTPController = R.storyboard.googleOTP.activateGoogleOTPViewController() {
+                    if let activeGoogleOTPController = R.storyboard.googleOTP.activateGoogleOTP2ViewController() {
                         activeGoogleOTPController.viewModel = activeGoogleOTPViewModel
                         self?.show(activeGoogleOTPController, sender: nil)
                     }

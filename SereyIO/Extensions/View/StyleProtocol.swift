@@ -82,10 +82,13 @@ extension MDCTextField {
 extension UIButton: StyleProtocol {
     
     private func commonBackgroundStyle() {
-        if self.backgroundColor != nil {
+        if self.backgroundColor != nil && self.backgroundColor != .clear {
             self.setRadius(all: 8)
             self.setBackgroundColor(ColorName.disabled.color, for: .disabled)
             self.setBackgroundColor(self.backgroundColor!.withAlphaComponent(0.5), for: .highlighted)
+        } else {
+            self.setBackgroundColor(nil, for: .disabled)
+            self.setBackgroundColor(nil, for: .highlighted)
         }
         
         if let image = self.image(for: .normal) {
@@ -159,6 +162,10 @@ extension UIButton: StyleProtocol {
     }
     
     func setBackgroundColor(_ color: UIColor?, for state: UIControl.State) {
-        self.setBackgroundImage(color?.toImage(), for: state)
+        if let color = color, color != .clear {
+            self.setBackgroundImage(color.toImage(), for: state)
+        } else {
+            self.setBackgroundImage(nil, for: state)
+        }
     }
 }

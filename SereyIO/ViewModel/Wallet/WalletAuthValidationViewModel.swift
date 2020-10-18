@@ -17,6 +17,8 @@ class WalletAuthValidationViewModel: BaseViewModel, ShouldPresent {
         case signInController
         case signUpWalletController
         case homeWalletController
+        case verifyOTPController(VerifyGoogleOTPViewModel)
+        case verifyBiometryController
     }
     
     let shouldPresentSubject: PublishSubject<ViewToPresent>
@@ -29,7 +31,14 @@ class WalletAuthValidationViewModel: BaseViewModel, ShouldPresent {
     func determineInitialScreen() {
         if let username = AuthData.shared.username {
             if WalletStore.shared.hasPassword(for: username) {
-                self.shouldPresent(.homeWalletController)
+                if WalletPreferenceStore.shared.googleOTPEnabled, let secret = WalletPreferenceStore.shared.googleOTPSecret {
+                    let verifyGoogleOTPViewModel = VerifyGoogleOTPViewModel(secret, parent: .verifyToUseWallet)
+                    self.shouldPresent(.verifyOTPController(verifyGoogleOTPViewModel))
+                } else if WalletPreferenceStore.shared.biometryEnabled {
+                    self.shouldPresent(.verifyBiometryController)
+                } else {
+                    self.shouldPresent(.homeWalletController)
+                }
             } else {
                 self.shouldPresent(.signUpWalletController)
             }

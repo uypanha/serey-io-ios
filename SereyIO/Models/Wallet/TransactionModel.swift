@@ -77,6 +77,8 @@ struct TransactionDataModel: Codable {
     var amount: String?
     var memo: String?
     
+    var delegatee: String?
+    var delegator: String?
     var vestingShares: String?
     
     enum CodingKeys: String, CodingKey {
@@ -88,6 +90,8 @@ struct TransactionDataModel: Codable {
         case amount
         case memo
         case vestingShares = "vesting_shares"
+        case delegatee
+        case delegator
     }
 }
 
@@ -96,6 +100,7 @@ enum TransferType: String {
     case transferVesting = "transfer_to_vesting"
     case claimRewardBalance = "claim_reward_balance"
     case withdrawVesting = "withdraw_vesting"
+    case delegatePower = "delegate_vesting_shares"
     
     func image(_ data: TransactionDataModel) -> UIImage? {
         switch self {
@@ -107,6 +112,8 @@ enum TransferType: String {
             return R.image.transactionPowerUp()
         case .withdrawVesting:
             return data.vestingShares == "0.000000 VESTS" ? R.image.transactionCancelPowerDown() : R.image.transactionPowerDown()
+        case .delegatePower:
+            return R.image.transactionDelegatePower()
         }
     }
     
@@ -120,6 +127,8 @@ enum TransferType: String {
             return "Power Up"
         case .withdrawVesting:
             return data.vestingShares == "0.000000 VESTS" ? "Cancel Power" : "Power Down"
+        case .delegatePower:
+            return "Delegate Power"
         }
     }
     
@@ -133,6 +142,8 @@ enum TransferType: String {
             return "+" + (data.amount ?? "")
         case .withdrawVesting:
             return data.vestingShares == "0.000000 VESTS" ? (data.vestingShares ?? "") : "+\(data.vestingShares ?? "")"
+        case .delegatePower:
+            return data.vestingShares ?? ""
         }
     }
     
@@ -144,6 +155,8 @@ enum TransferType: String {
             return ColorName.primary.color
         case .withdrawVesting:
             return data.vestingShares == "0.000000 VESTS" ? .darkGray : ColorName.primary.color
+        case .delegatePower:
+            return .darkGray
         }
     }
     
@@ -152,17 +165,17 @@ enum TransferType: String {
         let titleCell = TextCellViewModel(with: self.prepareCellTitle(data), properties: .init(font: .boldSystemFont(ofSize: 17), textColor: .black), indicatorAccessory: false, isSelectionEnabled: false)
         items.append(titleCell)
         
-        if let amount = data.amount {
+        if let amount = data.amount ?? data.vestingShares {
             let amountCell = TransactionInfoCellViewModel(title: "Amount", description: amount)
             items.append(amountCell)
         }
         
-        if let fromAccount = data.from ?? data.account {
+        if let fromAccount = data.from ?? data.account ?? data.delegator {
             let fromCell = TransactionInfoCellViewModel(title: "From", description: fromAccount)
             items.append(fromCell)
         }
         
-        if let toAccount = data.to ?? data.account {
+        if let toAccount = data.to ?? data.account ?? data.delegatee {
             let toCell = TransactionInfoCellViewModel(title: "To", description: toAccount)
             items.append(toCell)
         }
@@ -188,6 +201,8 @@ enum TransferType: String {
             return "Power Up"
         case .withdrawVesting:
             return data.vestingShares == "0.000000 VESTS" ? "Cancel Power" : "Power Down"
+        case .delegatePower:
+            return "Delegate Power"
         }
     }
 }

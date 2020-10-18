@@ -19,6 +19,7 @@ class WalletAuthValidateController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = .clear
         setRxObservers()
         self.viewModel.determineInitialScreen()
     }
@@ -41,6 +42,10 @@ extension WalletAuthValidateController {
                     SereyWallet.shared?.rootViewController.switchToMainScreen()
                 case .signInController:
                     SereyWallet.shared?.rootViewController.switchToSignInScreen()
+                case .verifyOTPController(let verifyGoogleOTPViewModel):
+                    SereyWallet.shared?.rootViewController.switchToVerifyGoogleOTPScreen(viewModel: verifyGoogleOTPViewModel)
+                case .verifyBiometryController:
+                    SereyWallet.shared?.rootViewController.switchToVerifyBiometryScreen()
                 }
             }) ~ self.disposeBag
     }
