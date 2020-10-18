@@ -79,7 +79,7 @@ enum WalletMenu: CaseIterable {
         case .pay:
             return "Pay another acc"
         case .powerUp:
-            return "Up your power"
+            return "Up to account"
         case .powerDown:
             return "Down from your acc"
         case .cancelPower:
