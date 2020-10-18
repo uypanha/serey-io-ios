@@ -20,6 +20,12 @@ class WalletRootViewController: BaseRootViewController {
         super.init(CloseableNavigationController(rootViewController: WalletAuthValidateController()))
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.backgroundColor = .clear
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -33,13 +39,19 @@ extension WalletRootViewController {
         verifyOTPViewController.viewModel = viewModel
         let closableViewController = CloseableNavigationController(rootViewController: verifyOTPViewController)
         if fadeAnimation {
-            self.animateFadeTransition(to: closableViewController) { [weak self] in
-                self?.handleDeeplink()
-            }
+            self.animateFadeTransition(to: closableViewController)
         } else {
-            self.animateSlideToTopTransition(to: closableViewController) { [weak self] in
-                self?.handleDeeplink()
-            }
+            self.animateSlideToTopTransition(to: closableViewController)
+        }
+    }
+    
+    func switchToVerifyBiometryScreen(_ fadeAnimation: Bool = true) {
+        let verifyBiometryViewController = R.storyboard.biometry.verifyBiometryViewController()!
+        verifyBiometryViewController.viewModel = VerifyBiometryViewModel()
+        if fadeAnimation {
+            self.animateFadeTransition(to: verifyBiometryViewController)
+        } else {
+            self.animateSlideToTopTransition(to: verifyBiometryViewController)
         }
     }
     
@@ -48,13 +60,9 @@ extension WalletRootViewController {
         mainWalletViewController.viewModel = SignInViewModel()
         let closableViewController = CloseableNavigationController(rootViewController: mainWalletViewController)
         if fadeAnimation {
-            self.animateFadeTransition(to: closableViewController) { [weak self] in
-                self?.handleDeeplink()
-            }
+            self.animateFadeTransition(to: closableViewController)
         } else {
-            self.animateSlideToTopTransition(to: closableViewController) { [weak self] in
-                self?.handleDeeplink()
-            }
+            self.animateSlideToTopTransition(to: closableViewController)
         }
     }
     

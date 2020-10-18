@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -32,6 +33,7 @@
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fingerPrintIcon" translatesAutoresizingMaskIntoConstraints="NO" id="1gL-X5-NeW">
                                                 <rect key="frame" x="117" y="0.0" width="65" height="65"/>
+                                                <color key="tintColor" red="0.068560823800000004" green="0.37250679730000003" blue="0.80004227159999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="1gL-X5-NeW" secondAttribute="height" multiplier="1:1" id="KMz-Pz-i6W"/>
                                                     <constraint firstAttribute="width" constant="65" id="VSw-u5-L2V"/>
@@ -41,7 +43,7 @@
                                                 <rect key="frame" x="0.0" y="97" width="299" height="63.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activate Finger Print" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYy-NW-WH8">
-                                                        <rect key="frame" x="29" y="0.0" width="241.5" height="33.5"/>
+                                                        <rect key="frame" x="28.5" y="0.0" width="242.5" height="33.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
@@ -74,13 +76,13 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="N0x-Dk-Brh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="BMq-hL-H7h" firstAttribute="leading" secondItem="N0x-Dk-Brh" secondAttribute="leading" constant="42" id="LgO-Aj-bpm"/>
                             <constraint firstAttribute="trailing" secondItem="BMq-hL-H7h" secondAttribute="trailing" constant="42" id="etx-CO-3ms"/>
                             <constraint firstItem="BMq-hL-H7h" firstAttribute="centerY" secondItem="N0x-Dk-Brh" secondAttribute="centerY" multiplier="0.85" id="rGa-pD-J5u"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="N0x-Dk-Brh"/>
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="uIP-K5-HJs" id="rM1-zQ-UCi"/>
@@ -93,8 +95,82 @@
             </objects>
             <point key="canvasLocation" x="296" y="-180"/>
         </scene>
+        <!--Verify Biometry View Controller-->
+        <scene sceneID="6A0-47-BxF">
+            <objects>
+                <viewController storyboardIdentifier="VerifyBiometryViewController" id="1BE-9E-G3J" customClass="VerifyBiometryViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hhK-dr-etu">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5CK-H9-lc7">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" red="0.091454215350000007" green="0.38773792979999999" blue="0.8314163685" alpha="0.053777825342465752" colorSpace="custom" customColorSpace="displayP3"/>
+                            </view>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FjE-yT-rGb">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="0JO-SF-zhV">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="7CS-Cf-GV6">
+                                <rect key="frame" x="32" y="392.5" width="350" height="121"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fingerPrintIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Mmx-C5-TG1">
+                                        <rect key="frame" x="142.5" y="0.0" width="65" height="65"/>
+                                        <color key="tintColor" red="0.091454215350000007" green="0.38773792979999999" blue="0.8314163685" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Mmx-C5-TG1" secondAttribute="height" multiplier="1:1" id="D3p-z8-JtK"/>
+                                            <constraint firstAttribute="width" constant="65" id="zeP-0j-9ED"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Yeu-tp-Ok3">
+                                        <rect key="frame" x="47.5" y="97" width="255.5" height="24"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan Finger Print to Continue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8z-GF-OjO">
+                                                <rect key="frame" x="0.0" y="0.0" width="255.5" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="9fH-ds-gPm"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7CS-Cf-GV6" firstAttribute="centerY" secondItem="9fH-ds-gPm" secondAttribute="centerY" id="6hv-gI-XUe"/>
+                            <constraint firstItem="7CS-Cf-GV6" firstAttribute="leading" secondItem="9fH-ds-gPm" secondAttribute="leading" constant="32" id="79i-Fb-BNm"/>
+                            <constraint firstItem="5CK-H9-lc7" firstAttribute="top" secondItem="hhK-dr-etu" secondAttribute="top" id="7av-O8-DbY"/>
+                            <constraint firstItem="7CS-Cf-GV6" firstAttribute="centerX" secondItem="9fH-ds-gPm" secondAttribute="centerX" id="840-JB-Rno"/>
+                            <constraint firstItem="9fH-ds-gPm" firstAttribute="trailing" secondItem="5CK-H9-lc7" secondAttribute="trailing" id="8k5-VY-SBo"/>
+                            <constraint firstAttribute="bottom" secondItem="FjE-yT-rGb" secondAttribute="bottom" id="Eb3-4T-7yV"/>
+                            <constraint firstItem="5CK-H9-lc7" firstAttribute="leading" secondItem="9fH-ds-gPm" secondAttribute="leading" id="FiM-MK-wGA"/>
+                            <constraint firstItem="9fH-ds-gPm" firstAttribute="trailing" secondItem="FjE-yT-rGb" secondAttribute="trailing" id="Pec-Gp-NPJ"/>
+                            <constraint firstItem="FjE-yT-rGb" firstAttribute="leading" secondItem="9fH-ds-gPm" secondAttribute="leading" id="TaE-uD-gQI"/>
+                            <constraint firstItem="9fH-ds-gPm" firstAttribute="trailing" secondItem="7CS-Cf-GV6" secondAttribute="trailing" constant="32" id="hdJ-z1-K8Z"/>
+                            <constraint firstAttribute="bottom" secondItem="5CK-H9-lc7" secondAttribute="bottom" id="hl4-rx-ipC"/>
+                            <constraint firstItem="FjE-yT-rGb" firstAttribute="top" secondItem="hhK-dr-etu" secondAttribute="top" id="mdq-xu-Wjd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="iconImageView" destination="Mmx-C5-TG1" id="qW5-rn-l1m"/>
+                        <outlet property="scanTitleLabel" destination="e8z-GF-OjO" id="LmE-b4-b8f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sbg-Jo-cnD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1214" y="-180"/>
+        </scene>
     </scenes>
     <resources>
         <image name="fingerPrintIcon" width="65" height="65"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

@@ -64,6 +64,7 @@
 		DC1F79D824D088AB00B7F0D3 /* TransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F79D724D088AB00B7F0D3 /* TransferService.swift */; };
 		DC1F79DB24D089FA00B7F0D3 /* InitTransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F79DA24D089F900B7F0D3 /* InitTransactionModel.swift */; };
 		DC243FC624666A19007B2EC5 /* CategoryPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC243FC524666A19007B2EC5 /* CategoryPostsViewController.swift */; };
+		DC24E113253AF10700724CE4 /* VerifyBiometryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC24E112253AF10700724CE4 /* VerifyBiometryViewModel.swift */; };
 		DC26812A23F2FCB30045776E /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26812823F2FCB30045776E /* ProfileTableViewCell.swift */; };
 		DC26812B23F2FCB30045776E /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC26812923F2FCB30045776E /* ProfileTableViewCell.xib */; };
 		DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC26812C23F2FCD50045776E /* ProfileCellViewModel.swift */; };
@@ -290,6 +291,8 @@
 		DCA5255F242921EA00284CD8 /* CreatePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */; };
 		DCA74DA3253746680041EAAE /* VerifyGoogleOTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA74DA2253746680041EAAE /* VerifyGoogleOTPViewModel.swift */; };
 		DCA74DA82537EDBA0041EAAE /* WalletPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA74DA72537EDBA0041EAAE /* WalletPreferenceStore.swift */; };
+		DCA74DC12539F6700041EAAE /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA74DC02539F6700041EAAE /* BiometricIDAuth.swift */; };
+		DCA74DC9253AD6A40041EAAE /* VerifyBiometryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA74DC8253AD6A30041EAAE /* VerifyBiometryViewController.swift */; };
 		DCB5BD6B2497BF880042E5AF /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCB5BD6A2497BF880042E5AF /* Wallet.storyboard */; };
 		DCB5BD712497CAE40042E5AF /* SecurityMethodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5BD6F2497CAE40042E5AF /* SecurityMethodeTableViewCell.swift */; };
 		DCB5BD722497CAE40042E5AF /* SecurityMethodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB5BD702497CAE40042E5AF /* SecurityMethodeTableViewCell.xib */; };
@@ -495,6 +498,7 @@
 		DC1F79D724D088AB00B7F0D3 /* TransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferService.swift; sourceTree = "<group>"; };
 		DC1F79DA24D089F900B7F0D3 /* InitTransactionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitTransactionModel.swift; sourceTree = "<group>"; };
 		DC243FC524666A19007B2EC5 /* CategoryPostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPostsViewController.swift; sourceTree = "<group>"; };
+		DC24E112253AF10700724CE4 /* VerifyBiometryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyBiometryViewModel.swift; sourceTree = "<group>"; };
 		DC26812823F2FCB30045776E /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		DC26812923F2FCB30045776E /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		DC26812C23F2FCD50045776E /* ProfileCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellViewModel.swift; sourceTree = "<group>"; };
@@ -751,6 +755,8 @@
 		DCA5255E242921EA00284CD8 /* CreatePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostViewController.swift; sourceTree = "<group>"; };
 		DCA74DA2253746680041EAAE /* VerifyGoogleOTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyGoogleOTPViewModel.swift; sourceTree = "<group>"; };
 		DCA74DA72537EDBA0041EAAE /* WalletPreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPreferenceStore.swift; sourceTree = "<group>"; };
+		DCA74DC02539F6700041EAAE /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
+		DCA74DC8253AD6A30041EAAE /* VerifyBiometryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyBiometryViewController.swift; sourceTree = "<group>"; };
 		DCB5BD6A2497BF880042E5AF /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
 		DCB5BD6F2497CAE40042E5AF /* SecurityMethodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityMethodeTableViewCell.swift; sourceTree = "<group>"; };
 		DCB5BD702497CAE40042E5AF /* SecurityMethodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecurityMethodeTableViewCell.xib; sourceTree = "<group>"; };
@@ -1540,6 +1546,7 @@
 			isa = PBXGroup;
 			children = (
 				DC83C38724E2E7C5008C9EAB /* AES.swift */,
+				DCA74DC02539F6700041EAAE /* BiometricIDAuth.swift */,
 				DCD39867232E1D1B00C812EB /* ErrorHelper.swift */,
 				DCD3986F232E1F7E00C812EB /* LanguageManager.swift */,
 				DC6A790823CA2510001D1009 /* RealmManager.swift */,
@@ -1979,6 +1986,7 @@
 			isa = PBXGroup;
 			children = (
 				DC9C65A2249E6F0A0042C829 /* ActiveBiometryViewModel.swift */,
+				DC24E112253AF10700724CE4 /* VerifyBiometryViewModel.swift */,
 			);
 			path = Biometry;
 			sourceTree = "<group>";
@@ -2172,6 +2180,7 @@
 			isa = PBXGroup;
 			children = (
 				DCB5BD8524992C4F0042E5AF /* ActiveBiometryViewController.swift */,
+				DCA74DC8253AD6A30041EAAE /* VerifyBiometryViewController.swift */,
 			);
 			path = Biometry;
 			sourceTree = "<group>";
@@ -3061,6 +3070,7 @@
 				DC9E36E324135A3400289693 /* PostDetailView.swift in Sources */,
 				DC583A8D24CC26A200D9C4D3 /* WalletAuthValidateController.swift in Sources */,
 				DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */,
+				DCA74DC9253AD6A40041EAAE /* VerifyBiometryViewController.swift in Sources */,
 				DC12F21424227A340099C479 /* UserService.swift in Sources */,
 				DC115F2C241A8D38006BE78C /* UtilsHelper.swift in Sources */,
 				DC9AC6E12406C1D1008FAFA6 /* DiscussionService.swift in Sources */,
@@ -3176,6 +3186,7 @@
 				DC9A660824E042BB001F1B60 /* TextBelowImageButton.swift in Sources */,
 				DCDE00782448B0B800D09717 /* VoteDialogViewController.swift in Sources */,
 				DC5FC21124542CB700CA6117 /* CommentsListViewModel.swift in Sources */,
+				DCA74DC12539F6700041EAAE /* BiometricIDAuth.swift in Sources */,
 				DC6FCE7423F05D1700D72F6D /* Steem.swift in Sources */,
 				DCCD40C924363EF700093A18 /* SubmitPostModel.swift in Sources */,
 				DC9A660B24E05725001F1B60 /* PayQRViewModel.swift in Sources */,
@@ -3252,6 +3263,7 @@
 				DC7C8F1224DC68E80051C084 /* TransactionCellViewModel.swift in Sources */,
 				DC19DBE523EC5D0700571CC8 /* BaseTableViewController.swift in Sources */,
 				DC7AAFF024F8032900ECDF47 /* PowerUpViewModel.swift in Sources */,
+				DC24E113253AF10700724CE4 /* VerifyBiometryViewModel.swift in Sources */,
 				DC5B55AE2451E5B200F8531B /* PushService.swift in Sources */,
 				DCDE00752448A70B00D09717 /* CommentTextViewModel.swift in Sources */,
 				DC387C9224E9821100D8C78E /* ChangePasswordViewController.swift in Sources */,

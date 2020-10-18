@@ -13,4 +13,7 @@ class Store {
     static let standard: SimpleStore = DefaultsStore()
     static let secure: SimpleStore = KeychainStore()
     
+    static func secure(custom serviceName: String) -> KeychainStore {
+        return KeychainStore(serviceName)
+    }
 }

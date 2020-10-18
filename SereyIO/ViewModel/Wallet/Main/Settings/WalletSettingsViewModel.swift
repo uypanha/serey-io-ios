@@ -130,6 +130,8 @@ fileprivate extension WalletSettingsViewModel {
                 let biometricType = LAContext().biometricType
                 let activeBiometryViewModel = ActiveBiometryViewModel(biometricType)
                 self.shouldPresent(.activeBiometryViewController(activeBiometryViewModel))
+            } else {
+                WalletPreferenceStore.shared.disableBiometry()
             }
         default:
             break

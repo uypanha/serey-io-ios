@@ -50,7 +50,7 @@ enum WalletSettingType {
         case .profile:
             return WalletProfileCellViewModel()
         case .fingerPrint, .googleOTP:
-            let isOn = self == .googleOTP ? WalletPreferenceStore.shared.googleOTPEnabled : false
+            let isOn = self == .googleOTP ? WalletPreferenceStore.shared.googleOTPEnabled : self == .fingerPrint ? WalletPreferenceStore.shared.biometryEnabled : false
             return WalletSettingToggleCellViewModel(self, isOn: isOn, self == .googleOTP)
         }
     }
