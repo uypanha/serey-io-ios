@@ -242,12 +242,7 @@ extension CreatePostViewController {
                     let listTableViewController = ListTableViewController(viewModel)
                     listTableViewController.title = title
                     listTableViewController.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 8, right: 0)
-                    listTableViewController.view.roundCorners(corners: [.topLeft, .topRight], radius: 8)
-                    let bottomSheet = MDCBottomSheetController(contentViewController: listTableViewController)
-                    bottomSheet.isScrimAccessibilityElement = false
-                    bottomSheet.automaticallyAdjustsScrollViewInsets = false
-                    bottomSheet.dismissOnDraggingDownSheet = true
-                    bottomSheet.trackingScrollView = listTableViewController.tableView
+                    let bottomSheet = BottomSheetListViewController(contentViewController: listTableViewController)
                     self.present(bottomSheet, animated: true, completion: nil)
                 case .chooseMediaController(let title, let editable):
                     self.imagePickerHelper.allowEditting = editable

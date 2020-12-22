@@ -18,6 +18,10 @@ class BottomSheetViewController: MDCBottomSheetController {
         self.isScrimAccessibilityElement = false
         self.automaticallyAdjustsScrollViewInsets = false
         self.dismissOnDraggingDownSheet = true
+        
+        if contentViewController is UITableViewController {
+            
+        }
     }
     
     required init?(coder: NSCoder) {

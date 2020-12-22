@@ -68,13 +68,13 @@ class APNSTokenStore {
     }
     
     private func checkForCurrentFCMToken(completion: @escaping (String?) -> Void) {
-        InstanceID.instanceID().instanceID { (result, error) in
+        Messaging.messaging().token { token, error in
             if let error = error {
                 print("Error fetching remote instance ID: \(error)")
                 completion(nil)
-            } else if let result = result {
-                print("Remote instance ID token: \(result.token)")
-                completion(result.token)
+            } else if let token = token {
+                print("Remote instance ID token: \(token)")
+                completion(token)
             }
         }
     }

@@ -59,6 +59,7 @@
 		DC1C6EC923FC3F6100BA701D /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1C6EC823FC3F6100BA701D /* BaseCollectionViewCell.swift */; };
 		DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1C6ECA23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift */; };
 		DC1C6ECD23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1C6ECB23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib */; };
+		DC1CBD1E259250D700CCB714 /* DraftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD1D259250D700CCB714 /* DraftModel.swift */; };
 		DC1F79CF24CF294200B7F0D3 /* CreateCredentialCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F79CE24CF294200B7F0D3 /* CreateCredentialCellViewModel.swift */; };
 		DC1F79D624D0888D00B7F0D3 /* TransferApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F79D524D0888D00B7F0D3 /* TransferApi.swift */; };
 		DC1F79D824D088AB00B7F0D3 /* TransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F79D724D088AB00B7F0D3 /* TransferService.swift */; };
@@ -492,6 +493,7 @@
 		DC1C6EC823FC3F6100BA701D /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC1C6ECA23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubPostCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC1C6ECB23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubPostCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		DC1CBD1D259250D700CCB714 /* DraftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftModel.swift; sourceTree = "<group>"; };
 		DC1F79CE24CF294200B7F0D3 /* CreateCredentialCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCredentialCellViewModel.swift; sourceTree = "<group>"; };
 		DC1F79D524D0888D00B7F0D3 /* TransferApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferApi.swift; sourceTree = "<group>"; };
 		DC1F79D724D088AB00B7F0D3 /* TransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferService.swift; sourceTree = "<group>"; };
@@ -1105,6 +1107,17 @@
 			path = SubPostCategoryCollectionViewCell;
 			sourceTree = "<group>";
 		};
+		DC1CBD082592449800CCB714 /* BottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				DCCD40CD24379BD100093A18 /* BottomMenuViewController.swift */,
+				DC7C740E2471803200610526 /* BottomSheetListViewController.swift */,
+				DC83C38B24E301F2008C9EAB /* BottomSheetProtocol.swift */,
+				DC83C38324E19F2A008C9EAB /* BottomSheetViewController.swift */,
+			);
+			path = BottomSheet;
+			sourceTree = "<group>";
+		};
 		DC1F79D424D0886800B7F0D3 /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1191,13 +1204,10 @@
 			children = (
 				DCA5255C2426636F00284CD8 /* AlertDialogController.swift */,
 				DC7C8F0224DAB93E0051C084 /* AlertDialogModel.swift */,
-				DCCD40CD24379BD100093A18 /* BottomMenuViewController.swift */,
-				DC7C740E2471803200610526 /* BottomSheetListViewController.swift */,
-				DC83C38B24E301F2008C9EAB /* BottomSheetProtocol.swift */,
-				DC83C38324E19F2A008C9EAB /* BottomSheetViewController.swift */,
 				DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */,
 				DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */,
 				DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */,
+				DC1CBD082592449800CCB714 /* BottomSheet */,
 				DC0F36AB2450937700916886 /* DialogViewController */,
 				DCDE00762448B08600D09717 /* VoteDialogController */,
 			);
@@ -2587,11 +2597,12 @@
 		DCF67FEA24100BC7003061A7 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				DCF67FEB24100C00003061A7 /* PeopleModel.swift */,
 				DC12F21524227AB40099C479 /* AccountModel.swift */,
-				DC12F211242278F90099C479 /* UserModel.swift */,
+				DC1CBD1D259250D700CCB714 /* DraftModel.swift */,
 				DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */,
 				DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */,
+				DCF67FEB24100C00003061A7 /* PeopleModel.swift */,
+				DC12F211242278F90099C479 /* UserModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -2998,7 +3009,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen colors -t swift4 --output \"$PROJECT_DIR/Constants/ColorsGen.swift\" \"$PROJECT_DIR/Constants/colors.txt\"\n";
+			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen run colors -t swift4 --output \"$PROJECT_DIR/Constants/ColorsGen.swift\" \"$PROJECT_DIR/Constants/colors.txt\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3281,6 +3292,7 @@
 				DCCD40CB2436422C00093A18 /* BlockChainResponse.swift in Sources */,
 				DC19DBE323EC581A00571CC8 /* ChooseCategorySheetViewController.swift in Sources */,
 				DCD3986B232E1DF700C812EB /* AppService.swift in Sources */,
+				DC1CBD1E259250D700CCB714 /* DraftModel.swift in Sources */,
 				DC6CA7B7243CD08D00F1EEC8 /* CategoryCellViewModel.swift in Sources */,
 				DC8450B7250C802B00D7E085 /* LineIndicatorCellViewModel.swift in Sources */,
 				DC0F36B12450944700916886 /* DownvoteDialogViewModel.swift in Sources */,

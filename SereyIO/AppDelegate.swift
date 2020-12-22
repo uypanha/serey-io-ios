@@ -98,7 +98,6 @@ extension AppDelegate {
     }
     
     func turnOnPushNotification() {
-        apnsHandler?.setupFirebaseTokenRefresh()
         apnsHandler?.registerAPNS()
     }
     

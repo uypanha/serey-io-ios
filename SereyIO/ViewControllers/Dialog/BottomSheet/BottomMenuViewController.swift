@@ -9,7 +9,7 @@
 import UIKit
 import MaterialComponents
 
-class BottomMenuViewController: MDCBottomSheetController {
+class BottomMenuViewController: BottomSheetListViewController {
     
     init(_ viewModel: BottomListMenuViewModel) {
         let listViewController = ListTableViewController(viewModel)
@@ -17,11 +17,6 @@ class BottomMenuViewController: MDCBottomSheetController {
         listViewController.contentInset = .init(top: 16, left: 0, bottom: 8, right: 0)
         listViewController.view.roundCorners(corners: [.topLeft, .topRight], radius: 12)
         super.init(contentViewController: listViewController)
-        
-        self.isScrimAccessibilityElement = false
-        self.automaticallyAdjustsScrollViewInsets = false
-        self.dismissOnDraggingDownSheet = true
-        self.trackingScrollView = listViewController.tableView
     }
     
     required init?(coder: NSCoder) {

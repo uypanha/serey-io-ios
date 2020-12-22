@@ -87,12 +87,6 @@ class APNSHandler: NSObject {
 // MARK: - Preparation/Register
 extension APNSHandler {
     
-    func setupFirebaseTokenRefresh() {
-        NotificationCenter
-            .default
-            .addObserver(self, selector: #selector(self.tokenRefreshNotification), name: Notification.Name.InstanceIDTokenRefresh, object: nil)
-    }
-    
     fileprivate func logNotification(userInfo: [AnyHashable: Any]) {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: userInfo, options: .prettyPrinted)
@@ -160,7 +154,6 @@ extension APNSHandler {
     }
     
     func applicationDidEnterBackground() {
-//        Messaging.messaging().shouldEstablishDirectChannel = false
         log.info("Disconnected from FCM.")
     }
     
@@ -172,28 +165,13 @@ extension APNSHandler {
 // MARK: - Firebase
 extension APNSHandler {
     
-    @objc func tokenRefreshNotification(_ notification: Notification) {
-        
-        InstanceID.instanceID().instanceID { (result, error) in
-            if let error = error {
-                print("Error fetching remote instance ID: \(error)")
-            } else if let result = result {
-                print("Remote instance ID token: \(result.token)")
-                self.tokenStore.saveToken(result.token)
-            }
-        }
-        
-        connectToFcm()
-    }
-    
     func connectToFcm() {
         // Won't connect since there is no token
-        InstanceID.instanceID().instanceID { (result, error) in
+        Messaging.messaging().token { token, error in
             if let error = error {
                 print("Error fetching remote instance ID: \(error)")
-            } else if let result = result {
-                print("Remote instance ID token: \(result.token)")
-//                Messaging.messaging().shouldEstablishDirectChannel = true
+            } else if let token = token {
+                print("Remote instance ID token: \(token)")
             }
         }
     }
