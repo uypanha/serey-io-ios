@@ -19,6 +19,17 @@ class DraftModel: Object {
     @objc dynamic var shortDescription: String? = nil
     @objc dynamic var imageData: Data? = nil
     @objc dynamic var imageUrl: String? = nil
+    let categoryItem = List<String>()
+    
+    init(_ id: Int) {
+        super.init()
+        
+        self.id = id
+    }
+    
+    internal required init() {
+        super.init()
+    }
     
     override static func primaryKey() -> String? {
         return "id"

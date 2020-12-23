@@ -27,7 +27,7 @@ protocol FieldViewModelProtocol {
     init(withTextFieldModel textFieldModel: TextFieldModel)
     
     // Validation
-    func validate() -> Bool
+    func validate(validation: TextFieldValidation?) -> Bool
 }
 
 extension FieldViewModelProtocol {
@@ -112,8 +112,8 @@ class TextFieldViewModel: CellViewModel, FieldViewModelProtocol {
             .disposed(by: self.disposeBag)
     }
     
-    func validate() -> Bool {
-        guard self.textValidation.validate(textToValidate: self.textFieldText.value ?? "") else {
+    func validate(validation: TextFieldValidation? = nil) -> Bool {
+        guard (validation ?? self.textValidation).validate(textToValidate: self.textFieldText.value ?? "") else {
             errorText.accept(errorMessage)
             return false
         }
