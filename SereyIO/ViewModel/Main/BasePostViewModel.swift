@@ -84,6 +84,29 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
             }) ~ cellModel.disposeBag
     }
     
+    open func prepareCells(_ discussions: [PostModel], _ error: Bool) -> [SectionItem] {
+        var cells: [CellViewModel] = []
+        if let selectedCategory = self.selectedCategory.value {
+            cells.append(FilteredCategoryCellViewModel(selectedCategory).then { [weak self] in
+                self?.setUpFilterCellObservers($0)
+            })
+        }
+        
+        cells.append(contentsOf: discussions.map {
+            PostCellViewModel($0).then {
+                setUpPostCellViewModel($0)
+            }
+        })
+        
+        if self.canDownloadMore() {
+            let loadingCells = error ? nil : !discussions.isEmpty ? (0...0) : (0...3)
+            if let loadingCells = loadingCells {
+                cells.append(contentsOf: loadingCells.map { _ in PostCellViewModel(true) })
+            }
+        }
+        return [SectionItem(items: cells)]
+    }
+    
     internal func onMorePressed(of postModel: PostModel) {}
     
     internal func onCategoryPressed(of postModel: PostModel) {}
@@ -195,29 +218,6 @@ extension BasePostViewModel {
             posts.remove(at: indexToRemove)
         }
         self.discussions.accept(posts)
-    }
-    
-    fileprivate func prepareCells(_ discussions: [PostModel], _ error: Bool) -> [SectionItem] {
-        var cells: [CellViewModel] = []
-        if let selectedCategory = self.selectedCategory.value {
-            cells.append(FilteredCategoryCellViewModel(selectedCategory).then { [weak self] in
-                self?.setUpFilterCellObservers($0)
-            })
-        }
-        
-        cells.append(contentsOf: discussions.map {
-            PostCellViewModel($0).then {
-                setUpPostCellViewModel($0)
-            }
-        })
-        
-        if self.canDownloadMore() {
-            let loadingCells = error ? nil : !discussions.isEmpty ? (0...0) : (0...3)
-            if let loadingCells = loadingCells {
-                cells.append(contentsOf: loadingCells.map { _ in PostCellViewModel(true) })
-            }
-        }
-        return [SectionItem(items: cells)]
     }
     
     func setCategory(_ category: DiscussionCategoryModel?) {

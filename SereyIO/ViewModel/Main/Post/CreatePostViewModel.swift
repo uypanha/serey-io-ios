@@ -10,6 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 import RxBinding
+import RealmSwift
 
 class CreatePostViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel, ShouldReactToAction, ShouldPresent, DownloadStateNetworkProtocol {
     
@@ -200,8 +201,8 @@ extension CreatePostViewModel {
         self.titleTextFieldViewModel.value = data.title
         self.descriptionFieldViewModel.value = data.descriptionText
         self.shortDescriptionFieldViewModel.value = data.shortDescription
-        self.thumbnialUrl.accept(data.imageUrl == nil ? nil : URL(string: data.imageUrl!))
-        self.thumbnailImage.accept(data.imageData == nil ? nil : UIImage(data: data.imageData!))
+        self.thumbnialUrl.accept(data.imageURL)
+        self.thumbnailImage.accept(data.image)
         if data.categoryItem.count > 0 {
             var selectedCategory = DiscussionCategoryModel(name: (data.categoryItem.first ?? "").capitalized, sub: nil)
             if data.categoryItem.count > 1 {
@@ -374,11 +375,15 @@ fileprivate extension CreatePostViewModel {
     func handlePostSubmitted() {
         if self.post.value != nil {
             // must be updated post
-            self.fetchPostDetial()
+            fetchPostDetial()
         } else {
             NotificationDispatcher.sharedInstance.dispatch(.postCreated)
             self.shouldPresent(.loading(false))
             self.shouldPresent(.dismiss)
+            
+            if let draft = self.draft.value {
+                RealmManager.delete(draft)
+            }
         }
     }
     
@@ -399,11 +404,12 @@ fileprivate extension CreatePostViewModel {
     }
     
     func handleSaveDraft() {
-        let draftModel = self.draft.value ?? DraftModel(self.generateDraftId())
+        let id: Int = self.draft.value?.id ?? self.generateDraftId()
+        let draftModel = DraftModel(id)
         draftModel.title = self.titleTextFieldViewModel.value
         draftModel.descriptionText = self.descriptionFieldViewModel.value
         draftModel.shortDescription = self.shortDescriptionFieldViewModel.value
-        draftModel.imageData = self.newThumbnailImage.value?.image.pngData()
+        draftModel.imageData = self.newThumbnailImage.value?.image.jpegData(compressionQuality: 0.5)
         draftModel.imageUrl = self.thumbnialUrl.value?.absoluteString
         var categories: [String] = []
         if let category = self.selectedCategory.value?.name {

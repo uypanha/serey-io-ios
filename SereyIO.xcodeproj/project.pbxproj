@@ -60,6 +60,15 @@
 		DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1C6ECA23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift */; };
 		DC1C6ECD23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1C6ECB23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib */; };
 		DC1CBD1E259250D700CCB714 /* DraftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD1D259250D700CCB714 /* DraftModel.swift */; };
+		DC1CBD2625939E9A00CCB714 /* UserPostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD2525939E9A00CCB714 /* UserPostListViewModel.swift */; };
+		DC1CBD3F2593A1CE00CCB714 /* DraftSavedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD3D2593A1CE00CCB714 /* DraftSavedTableViewCell.swift */; };
+		DC1CBD402593A1CE00CCB714 /* DraftSavedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1CBD3E2593A1CE00CCB714 /* DraftSavedTableViewCell.xib */; };
+		DC1CBD4E2594E75F00CCB714 /* DraftSavedCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD4D2594E75F00CCB714 /* DraftSavedCellViewModel.swift */; };
+		DC1CBD562594F53A00CCB714 /* DraftListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD552594F53900CCB714 /* DraftListViewController.swift */; };
+		DC1CBD5E2594F59B00CCB714 /* DraftListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD5D2594F59B00CCB714 /* DraftListViewModel.swift */; };
+		DC1CBD652594F79200CCB714 /* DraftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD632594F79100CCB714 /* DraftTableViewCell.swift */; };
+		DC1CBD662594F79200CCB714 /* DraftTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1CBD642594F79200CCB714 /* DraftTableViewCell.xib */; };
+		DC1CBD6E2596325A00CCB714 /* DraftCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD6D2596325900CCB714 /* DraftCellViewModel.swift */; };
 		DC1F79CF24CF294200B7F0D3 /* CreateCredentialCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F79CE24CF294200B7F0D3 /* CreateCredentialCellViewModel.swift */; };
 		DC1F79D624D0888D00B7F0D3 /* TransferApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F79D524D0888D00B7F0D3 /* TransferApi.swift */; };
 		DC1F79D824D088AB00B7F0D3 /* TransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F79D724D088AB00B7F0D3 /* TransferService.swift */; };
@@ -494,6 +503,15 @@
 		DC1C6ECA23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubPostCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC1C6ECB23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubPostCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		DC1CBD1D259250D700CCB714 /* DraftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftModel.swift; sourceTree = "<group>"; };
+		DC1CBD2525939E9A00CCB714 /* UserPostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostListViewModel.swift; sourceTree = "<group>"; };
+		DC1CBD3D2593A1CE00CCB714 /* DraftSavedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftSavedTableViewCell.swift; sourceTree = "<group>"; };
+		DC1CBD3E2593A1CE00CCB714 /* DraftSavedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftSavedTableViewCell.xib; sourceTree = "<group>"; };
+		DC1CBD4D2594E75F00CCB714 /* DraftSavedCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftSavedCellViewModel.swift; sourceTree = "<group>"; };
+		DC1CBD552594F53900CCB714 /* DraftListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftListViewController.swift; sourceTree = "<group>"; };
+		DC1CBD5D2594F59B00CCB714 /* DraftListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftListViewModel.swift; sourceTree = "<group>"; };
+		DC1CBD632594F79100CCB714 /* DraftTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftTableViewCell.swift; sourceTree = "<group>"; };
+		DC1CBD642594F79200CCB714 /* DraftTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DraftTableViewCell.xib; sourceTree = "<group>"; };
+		DC1CBD6D2596325900CCB714 /* DraftCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftCellViewModel.swift; sourceTree = "<group>"; };
 		DC1F79CE24CF294200B7F0D3 /* CreateCredentialCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCredentialCellViewModel.swift; sourceTree = "<group>"; };
 		DC1F79D524D0888D00B7F0D3 /* TransferApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferApi.swift; sourceTree = "<group>"; };
 		DC1F79D724D088AB00B7F0D3 /* TransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferService.swift; sourceTree = "<group>"; };
@@ -960,6 +978,8 @@
 		DC05FDA523F1AB1E0093B47B /* More */ = {
 			isa = PBXGroup;
 			children = (
+				DC1CBD622594F76800CCB714 /* DraftTableViewCell */,
+				DC1CBD3C2593A1CE00CCB714 /* DraftSavedTableViewCell */,
 				DC26812723F2FC6C0045776E /* ProfileTableViewCell */,
 				DC7558B42458986300AD40FA /* SereyAppTableViewCell */,
 				DC115F38241A9A56006BE78C /* SignInTableViewCell */,
@@ -1118,6 +1138,26 @@
 			path = BottomSheet;
 			sourceTree = "<group>";
 		};
+		DC1CBD3C2593A1CE00CCB714 /* DraftSavedTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC1CBD4D2594E75F00CCB714 /* DraftSavedCellViewModel.swift */,
+				DC1CBD3D2593A1CE00CCB714 /* DraftSavedTableViewCell.swift */,
+				DC1CBD3E2593A1CE00CCB714 /* DraftSavedTableViewCell.xib */,
+			);
+			path = DraftSavedTableViewCell;
+			sourceTree = "<group>";
+		};
+		DC1CBD622594F76800CCB714 /* DraftTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC1CBD6D2596325900CCB714 /* DraftCellViewModel.swift */,
+				DC1CBD632594F79100CCB714 /* DraftTableViewCell.swift */,
+				DC1CBD642594F79200CCB714 /* DraftTableViewCell.xib */,
+			);
+			path = DraftTableViewCell;
+			sourceTree = "<group>";
+		};
 		DC1F79D424D0886800B7F0D3 /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1154,6 +1194,7 @@
 			isa = PBXGroup;
 			children = (
 				DC5FC21B245484B000CA6117 /* CommentReplyTableViewController.swift */,
+				DC1CBD552594F53900CCB714 /* DraftListViewController.swift */,
 				DC5FC20C2453F11100CA6117 /* UserAccountViewController.swift */,
 			);
 			path = Profile;
@@ -2610,8 +2651,10 @@
 		DCF8737E23F6F7B8007A8724 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				DC5FC20E2453F62500CA6117 /* UserAccountViewModel.swift */,
 				DC5FC21024542CB600CA6117 /* CommentsListViewModel.swift */,
+				DC1CBD5D2594F59B00CCB714 /* DraftListViewModel.swift */,
+				DC5FC20E2453F62500CA6117 /* UserAccountViewModel.swift */,
+				DC1CBD2525939E9A00CCB714 /* UserPostListViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2801,6 +2844,7 @@
 				DC9E36E524135A3D00289693 /* PostDetailView.xib in Resources */,
 				DC7558CF2459DFD800AD40FA /* Home.strings in Resources */,
 				DC9A65FD24DE9171001F1B60 /* QRPayment.storyboard in Resources */,
+				DC1CBD662594F79200CCB714 /* DraftTableViewCell.xib in Resources */,
 				DC562436241E75450076A78C /* Auth.strings in Resources */,
 				DC115F30241A8EA5006BE78C /* trix-editor.css in Resources */,
 				DC26812B23F2FCB30045776E /* ProfileTableViewCell.xib in Resources */,
@@ -2848,6 +2892,7 @@
 				DC6A790423CA242B001D1009 /* EmptyOrErrorView.xib in Resources */,
 				DC42AF0523E9CFB5008F8A0F /* PostTableViewCell.xib in Resources */,
 				DC05FDC023F1B3410093B47B /* HeaderView.xib in Resources */,
+				DC1CBD402593A1CE00CCB714 /* DraftSavedTableViewCell.xib in Resources */,
 				DC88A73323DF3D3900EB7F79 /* OnBoard.storyboard in Resources */,
 				DC40D5D923E32F3800B0DD96 /* Common.strings in Resources */,
 				DCDE007A2448B0DC00D09717 /* VoteDialogViewController.xib in Resources */,
@@ -3018,6 +3063,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC1CBD4E2594E75F00CCB714 /* DraftSavedCellViewModel.swift in Sources */,
 				DC583A9D24CC7EEF00D9C4D3 /* SereyKeyHelper.swift in Sources */,
 				DC8EAB8123E7231200E00A00 /* HomeViewController.swift in Sources */,
 				DCED6A102534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift in Sources */,
@@ -3063,6 +3109,7 @@
 				DC9E36F024154BC900289693 /* PFColorHash.swift in Sources */,
 				DC5FC21A2454330900CA6117 /* CommentReplyModel.swift in Sources */,
 				DC60AC8B24A745070014B77E /* WalletRootViewController.swift in Sources */,
+				DC1CBD562594F53A00CCB714 /* DraftListViewController.swift in Sources */,
 				DCC883D924A3A4A8002FE917 /* WalletViewController.swift in Sources */,
 				DC9A660324DEB83F001F1B60 /* ReceiveCoinViewModel.swift in Sources */,
 				DCA5255D2426636F00284CD8 /* AlertDialogController.swift in Sources */,
@@ -3079,6 +3126,7 @@
 				DC583A8D24CC26A200D9C4D3 /* WalletAuthValidateController.swift in Sources */,
 				DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */,
 				DCA74DC9253AD6A40041EAAE /* VerifyBiometryViewController.swift in Sources */,
+				DC1CBD2625939E9A00CCB714 /* UserPostListViewModel.swift in Sources */,
 				DC12F21424227A340099C479 /* UserService.swift in Sources */,
 				DC115F2C241A8D38006BE78C /* UtilsHelper.swift in Sources */,
 				DC9AC6E12406C1D1008FAFA6 /* DiscussionService.swift in Sources */,
@@ -3123,6 +3171,7 @@
 				DC9AC6E82406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift in Sources */,
 				DCDE00672446016800D09717 /* ReplyCommentViewController.swift in Sources */,
 				DC6CDC342439B077008A52D9 /* PostCommentViewModel.swift in Sources */,
+				DC1CBD6E2596325A00CCB714 /* DraftCellViewModel.swift in Sources */,
 				DCED6A0B2534B007003C9A43 /* CornerView.swift in Sources */,
 				DC40D5D623E32A6B00B0DD96 /* ImageTextModel.swift in Sources */,
 				DCD39866232E1CC600C812EB /* BaseViewModel.swift in Sources */,
@@ -3177,6 +3226,7 @@
 				DC42AF0423E9CFB5008F8A0F /* PostTableViewCell.swift in Sources */,
 				DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */,
 				DC115F2E241A8E18006BE78C /* NSAttributedString+Extensions.swift in Sources */,
+				DC1CBD3F2593A1CE00CCB714 /* DraftSavedTableViewCell.swift in Sources */,
 				DCB9F2FA24D85F540028D449 /* TransferViewController.swift in Sources */,
 				DC40D5C623E31FDF00B0DD96 /* ContentSizedTableView.swift in Sources */,
 				DC7558B32458932700AD40FA /* PreferenceStore.swift in Sources */,
@@ -3186,6 +3236,7 @@
 				DCC49ACE23E865B600119BAA /* BoardFeatureViewModel.swift in Sources */,
 				DC6ED5842326A4BA00770B31 /* NotificationDispatcher.swift in Sources */,
 				DC583A8924C89AB400D9C4D3 /* KeychainPasswordItem.swift in Sources */,
+				DC1CBD5E2594F59B00CCB714 /* DraftListViewModel.swift in Sources */,
 				DCD39870232E1F7E00C812EB /* LanguageManager.swift in Sources */,
 				DCB5BD8E249A669C0042E5AF /* SignUpWalletViewController.swift in Sources */,
 				DC0044092433A98200244607 /* FileUploadModel.swift in Sources */,
@@ -3282,6 +3333,7 @@
 				DC7C8EEE24D9B3100051C084 /* TransferCoinViewModel.swift in Sources */,
 				DC40D5D423E32A4400B0DD96 /* ImageTextCellViewModel.swift in Sources */,
 				DC19DBEB23EC5F9E00571CC8 /* PostTableViewModel.swift in Sources */,
+				DC1CBD652594F79200CCB714 /* DraftTableViewCell.swift in Sources */,
 				DCFBD7892503E119005B6875 /* ClaimRewardViewModel.swift in Sources */,
 				DCED6A062534ADF7003C9A43 /* CheckBox.swift in Sources */,
 				DC6FCE7523F05D1700D72F6D /* Misc.swift in Sources */,

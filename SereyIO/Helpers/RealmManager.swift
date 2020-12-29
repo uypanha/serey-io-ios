@@ -48,6 +48,19 @@ class RealmManager {
         }
     }
     
+    static func delete(_ obj: Object) {
+        do {
+            let realm = try Realm()
+            
+            try? realm.write {
+                realm.delete(obj)
+            }
+            try? realm.commitWrite()
+        } catch let error as NSError {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
     static func deleteAllObjects() {
         do {
             let realm = try Realm()

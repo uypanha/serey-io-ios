@@ -33,6 +33,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         case voteDialogController(VoteDialogViewModel)
         case downVoteDialogController(DownvoteDialogViewModel)
         case signInViewController
+        case draftsViewController(DraftListViewModel)
     }
     
     // input:
@@ -105,6 +106,18 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
             ~ cellModel.disposeBag
     }
     
+    func handleItemPressed(_ indexPath: IndexPath) {
+        if let item = self.item(at: indexPath) as? PostCellViewModel {
+            if let discussion = item.post.value {
+                let viewModel = PostDetailViewModel(discussion)
+                self.shouldPresent(.postDetailViewController(viewModel))
+            }
+        } else if self.item(at: indexPath) is DraftSavedCellViewModel {
+            let viewModel = DraftListViewModel()
+            self.shouldPresent(.draftsViewController(viewModel))
+        }
+    }
+    
     deinit {
         unregisterFromNotifs()
     }
@@ -129,15 +142,6 @@ extension PostTableViewModel {
 
 // MARK: - Action Handlers
 fileprivate extension PostTableViewModel {
-    
-    func handleItemPressed(_ indexPath: IndexPath) {
-        if let item = self.item(at: indexPath) as? PostCellViewModel {
-            if let discussion = item.post.value {
-                let viewModel = PostDetailViewModel(discussion)
-                self.shouldPresent(.postDetailViewController(viewModel))
-            }
-        }
-    }
     
     func handleMenuPressed(_ type: PostMenu, _ post: PostModel) {
         switch type {

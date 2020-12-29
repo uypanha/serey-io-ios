@@ -21,6 +21,24 @@ class DraftModel: Object {
     @objc dynamic var imageUrl: String? = nil
     let categoryItem = List<String>()
     
+    var imageURL: URL? {
+        get {
+            if let url = self.imageUrl {
+                return URL(string: url)
+            }
+            return nil
+        }
+    }
+    
+    var image: UIImage? {
+        get {
+            if let imageData = self.imageData {
+                return UIImage(data: imageData)
+            }
+            return nil
+        }
+    }
+    
     init(_ id: Int) {
         super.init()
         

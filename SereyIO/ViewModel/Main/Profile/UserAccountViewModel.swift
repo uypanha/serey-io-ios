@@ -33,6 +33,7 @@ class UserAccountViewModel: BaseViewModel, DownloadStateNetworkProtocol, ShouldP
         case voteDialogController(VoteDialogViewModel)
         case downVoteDialogController(DownvoteDialogViewModel)
         case signInViewController
+        case draftListViewController(DraftListViewModel)
     }
     
     // input:
@@ -165,7 +166,7 @@ extension UserAccountViewModel {
         func prepareViewModel(_ username: String) -> BaseViewModel {
             switch self {
             case .post:
-                return PostTableViewModel(.byUser(username))
+                return UserPostListViewModel(username)
             case .comment:
                 return CommentsListViewModel(username, with: .comments)
             case .replies:
@@ -294,6 +295,8 @@ fileprivate extension UserAccountViewModel {
                     self?.shouldPresent(.downVoteDialogController(downVoteDialogViewModel))
                 case .signInViewController:
                     self?.shouldPresent(.signInViewController)
+                case .draftsViewController(let draftListViewModel):
+                    self?.shouldPresent(.draftListViewController(draftListViewModel))
                 default:
                     break
                 }

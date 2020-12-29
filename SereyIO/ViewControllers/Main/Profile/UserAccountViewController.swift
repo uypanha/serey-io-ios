@@ -247,6 +247,10 @@ extension UserAccountViewController {
                     (self.tabBarController as? MainTabBarViewController)?.showVoteDialog(voteDialogViewModel)
                 case .downVoteDialogController(let downvoteDialogViewModel):
                     (self.tabBarController as? MainTabBarViewController)?.showDownvoteDialog(downvoteDialogViewModel)
+                case .draftListViewController(let draftListViewModel):
+                    let draftListViewController = DraftListViewController(draftListViewModel)
+                    draftListViewController.hidesBottomBarWhenPushed = true
+                    self.show(draftListViewController, sender: nil)
                 }
             }) ~ self.disposeBag
     }

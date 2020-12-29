@@ -43,6 +43,7 @@ extension Realm {
     static func writeRealm(_ writeCompletion: @escaping (Realm) -> Void) {
         do {
             let realm = try Realm()
+            
             try realm.write {
                 writeCompletion(realm)
             }
@@ -128,9 +129,13 @@ extension Object {
         }
     }
     
-    func save(){
-        Realm.writeRealm { (realm) in
+    func save() {
+        if let realm = self.realm {
             realm.add(self, update: .all)
+        } else {
+            Realm.writeRealm { (realm) in
+                realm.add(self, update: .all)
+            }
         }
     }
 }
