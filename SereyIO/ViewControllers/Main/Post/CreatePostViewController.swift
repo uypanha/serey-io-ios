@@ -229,6 +229,7 @@ extension CreatePostViewController {
             ~ self.disposeBag
         
         self.viewModel.thumbnialUrl.asObservable()
+            .filter { $0 != nil }
             .map { $0 }
             .bind(to: self.thumbnailImageView.kf.rx.image())
             ~ self.disposeBag

@@ -70,6 +70,13 @@ extension DraftListViewModel {
         let properties = TextLabelProperties(font: UIFont.systemFont(ofSize: 22, weight: .semibold), textColor: .black, backgroundColor: .clear, alignment: .left)
         return TextCellViewModel(with: "Your draft articles", properties: properties, indicatorAccessory: false, isSelectionEnabled: false)
     }
+    
+    private func handleItemSelected(_ indexPath: IndexPath) {
+        if let item = self.item(at: indexPath) as? DraftCellViewModel {
+            let editDraftViewModel = CreatePostViewModel(.draft(item.draft.value))
+            self.shouldPresent(.editDraftController(editDraftViewModel))
+        }
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -85,6 +92,11 @@ extension DraftListViewModel {
             .map { self.prepareCells($0) }
             ~> self.cells
             ~ self.disposeBag
+        
+        self.itemSelected.asObservable()
+            .subscribe(onNext: { [weak self] indexPath in
+                self?.handleItemSelected(indexPath)
+            }) ~ self.disposeBag
     }
     
     func setUpCellObservers(_ cellModel: DraftCellViewModel) {

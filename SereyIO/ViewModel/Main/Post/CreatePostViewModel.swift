@@ -46,7 +46,6 @@ class CreatePostViewModel: BaseCellViewModel, CollectionSingleSecitionProviderMo
     let categories: BehaviorRelay<[DiscussionCategoryModel]>
     let selectedCategory: BehaviorRelay<DiscussionCategoryModel?>
     let selectedSubCategory: BehaviorRelay<DiscussionCategoryModel?>
-    let newThumbnailImage: BehaviorRelay<PickerPhotoModel?>
     
     let titleTextFieldViewModel: TextFieldViewModel
     let descriptionFieldViewModel: TextFieldViewModel
@@ -75,7 +74,6 @@ class CreatePostViewModel: BaseCellViewModel, CollectionSingleSecitionProviderMo
         self.categories = .init(value: [])
         self.selectedCategory = .init(value: nil)
         self.selectedSubCategory = .init(value: nil)
-        self.newThumbnailImage = .init(value: nil)
         
         self.titleTextFieldViewModel = .textFieldWith(title: R.string.post.enterTitle.localized(), errorMessage: nil, validation: .notEmpty)
         self.descriptionFieldViewModel = .textFieldWith(title: R.string.post.articleBody.localized(), errorMessage: "", validation: .notEmpty)
@@ -288,8 +286,7 @@ extension CreatePostViewModel {
     }
     
     fileprivate func determineUploadThumbnailState() {
-        self.thumbnailImage.accept(self.newThumbnailImage.value?.image)
-        let selectedImage = (self.thumbnialUrl.value != nil || self.newThumbnailImage.value != nil)
+        let selectedImage = (self.thumbnialUrl.value != nil || self.thumbnailImage.value != nil)
         let title = selectedImage ? R.string.post.changeThumbnail : R.string.post.uploadThumbnail
         let image = selectedImage ? R.image.bigEditIcon() : R.image.bigPlusIcon()
         self.addThumbnailState.onNext((title.localized(), image))
@@ -300,7 +297,7 @@ extension CreatePostViewModel {
             && self.descriptionFieldViewModel.validate()
             && self.shortDescriptionFieldViewModel.validate()
             && self.selectedCategory.value != nil
-            && (self.newThumbnailImage.value != nil || self.thumbnialUrl.value != nil)
+            && (self.thumbnailImage.value != nil || self.thumbnialUrl.value != nil)
     }
     
     func isFilledSomeInfo() -> Bool {
@@ -308,7 +305,7 @@ extension CreatePostViewModel {
             || self.descriptionFieldViewModel.validate()
             || self.shortDescriptionFieldViewModel.validate(validation: .notEmpty)
             || self.selectedCategory.value != nil
-            || self.newThumbnailImage.value != nil
+            || self.thumbnailImage.value != nil
             || self.thumbnialUrl.value != nil
     }
     
@@ -327,7 +324,7 @@ fileprivate extension CreatePostViewModel {
             switch item.category {
             case .category(let category):
                 switch self.submitType.value {
-                case .create:
+                case .create, .draft:
                     self.prepareOpenSelectCategory(self.categories.value, selected: category)
                 default:
                     break
@@ -344,7 +341,7 @@ fileprivate extension CreatePostViewModel {
         if let imageType = self.imageType {
             switch imageType {
             case .thumbnail:
-                self.newThumbnailImage.accept(photoModel)
+                self.thumbnailImage.accept(photoModel.image)
             case .insertImage:
                 self.shouldPresent(.loading(true))
                 self.uploadImage(photoModel.image)
@@ -393,7 +390,7 @@ fileprivate extension CreatePostViewModel {
                 self.handleSaveDraft()
             }
             
-            let cancelAction = ActionModel("No", style: .cancel) {
+            let cancelAction = ActionModel(R.string.common.no.localized(), style: .cancel) {
                 self.shouldPresent(.dismiss)
             }
             let alertDialogModel = AlertDialogModel(title: "Unfinished article", message: "You’re about to leave the unfinsihed article.\nDo you wish to save it as a draft?", actions: [yesAction, cancelAction])
@@ -409,7 +406,7 @@ fileprivate extension CreatePostViewModel {
         draftModel.title = self.titleTextFieldViewModel.value
         draftModel.descriptionText = self.descriptionFieldViewModel.value
         draftModel.shortDescription = self.shortDescriptionFieldViewModel.value
-        draftModel.imageData = self.newThumbnailImage.value?.image.jpegData(compressionQuality: 0.5)
+        draftModel.imageData = self.thumbnailImage.value?.jpegData(compressionQuality: 0.5)
         draftModel.imageUrl = self.thumbnialUrl.value?.absoluteString
         var categories: [String] = []
         if let category = self.selectedCategory.value?.name {
@@ -458,7 +455,7 @@ extension CreatePostViewModel {
             ~> self.shouldEnablePost
             ~ self.disposeBag
         
-        self.newThumbnailImage
+        self.thumbnailImage
             .`do`(onNext: { [weak self] _ in
                 self?.determineUploadThumbnailState()
             })
