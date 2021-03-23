@@ -19,6 +19,12 @@ class DraftListViewController: ListTableViewController<DraftListViewModel> {
         // Do any additional setup after loading the view.
         setUpRxObservers()
     }
+    
+    override func setUpView() {
+        super.setUpView()
+        
+        self.tableView.delegate = self
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -26,6 +32,12 @@ extension DraftListViewController {
     
     func setUpRxObservers() {
         setUpViewToPresentObservers()
+        
+        self.tableView.rx.didScroll.asObservable()
+            .subscribe(onNext: { [unowned self] _ in
+                let offsetY = self.tableView.contentOffset.y
+                self.title = offsetY > 40 ? "Your draft articles" : ""
+            }) ~ self.disposeBag
     }
     
     func setUpViewToPresentObservers() {
