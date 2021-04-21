@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/9/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -205,7 +205,7 @@ extension APNSHandler: UNUserNotificationCenterDelegate {
 // MARK: - FIRMessagingDelegate
 extension APNSHandler: MessagingDelegate {
     
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         if let token = Messaging.messaging().fcmToken {
             tokenStore.saveToken(token)
         }

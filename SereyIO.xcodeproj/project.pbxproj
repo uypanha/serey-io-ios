@@ -1872,13 +1872,14 @@
 		DC88A73423DF3EB600EB7F79 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				DCED6A052534ADF7003C9A43 /* CheckBox.swift */,
 				DC42AF0623E9D39B008F8A0F /* CardView.swift */,
 				DCC6F1DB242BB041003B9E3A /* CenteredImageButton.swift */,
+				DCED6A052534ADF7003C9A43 /* CheckBox.swift */,
 				DCEC0CC7240A5E0E002F4B6F /* CicularButton.swift */,
 				DCF67FE624100220003061A7 /* CircularView.swift */,
 				DC357A4D243CC72C00B2D3B7 /* ContentSizedCollectionView.swift */,
 				DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */,
+				DCED6A0A2534B007003C9A43 /* CornerView.swift */,
 				DC40D5C523E31FDF00B0DD96 /* GradientView.swift */,
 				DC583A9A24CC46F700D9C4D3 /* LoadingButton.swift */,
 				DC115F33241A9744006BE78C /* MDCPasswordTextField.swift */,
@@ -1890,7 +1891,6 @@
 				DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */,
 				DCDE006D2446161500D09717 /* UIPlaceHolderTextView.swift */,
 				DCB9F2E924D7153D0028D449 /* UIRightIconButton.swift */,
-				DCED6A0A2534B007003C9A43 /* CornerView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2777,7 +2777,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1030;
 				LastUpgradeCheck = 1030;
-				ORGANIZATIONNAME = "Phanha Uy";
+				ORGANIZATIONNAME = "Serey IO";
 				TargetAttributes = {
 					DC6ED51C23267EED00770B31 = {
 						CreatedOnToolsVersion = 10.3;

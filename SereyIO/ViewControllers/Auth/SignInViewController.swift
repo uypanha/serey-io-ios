@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 3/12/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -22,7 +22,7 @@ class SignInViewController: BaseViewController, LoadingIndicatorController, Keyb
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var signInLabel: UILabel!
-    @IBOutlet weak var userNameTextField: MDCTextField!
+    @IBOutlet weak var userNameTextField: MDCOutlinedTextField!
     @IBOutlet weak var passwordTextField: MDCPasswordTextField!
     @IBOutlet weak var signInButton: LoadingButton!
     
@@ -31,7 +31,7 @@ class SignInViewController: BaseViewController, LoadingIndicatorController, Keyb
     
     @IBOutlet weak var signUpButton: UIButton!
     
-    var userNameController: MDCTextInputControllerOutlined?
+//    var userNameController: MDCTextInputControllerOutlined?
     var passwordController: MDCTextInputControllerOutlined?
     
     var viewModel: SignInViewModel!
@@ -73,7 +73,7 @@ fileprivate extension SignInViewController {
     func setUpViews() {
         self.signInButton.customStyle(with: ColorName.buttonBg.color)
         
-        self.userNameController = self.userNameTextField.primaryController()
+        self.userNameTextField.primaryStyle()
         self.passwordController = self.passwordTextField.primaryController()
         self.termServiceTextView.delegate = self
     }
@@ -138,7 +138,7 @@ fileprivate extension SignInViewController {
     }
     
     func setUpContentObservers() {
-        self.viewModel.userNameTextFieldViewModel.bind(with: self.userNameTextField, controller: self.userNameController)
+        self.viewModel.userNameTextFieldViewModel.bind(withMDC: self.userNameTextField)
         self.viewModel.privateKeyOrPwdTextFieldViewModel.bind(with: self.passwordTextField, controller: self.passwordController)
         self.viewModel.shouldEnbleSigIn ~> self.signInButton.rx.isEnabled ~ self.disposeBag
     }

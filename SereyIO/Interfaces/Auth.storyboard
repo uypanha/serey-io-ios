@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -31,7 +32,7 @@
                                         <rect key="frame" x="42" y="159" width="330" height="173"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign-In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Jr-Td-BoP">
-                                                <rect key="frame" x="127" y="0.0" width="76" height="29"/>
+                                                <rect key="frame" x="127.5" y="0.0" width="75.5" height="29"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -39,7 +40,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="HLq-51-kLc">
                                                 <rect key="frame" x="0.0" y="45" width="330" height="68"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Odr-XX-uEj" customClass="MDCTextField">
+                                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Odr-XX-uEj" customClass="MDCOutlinedTextField">
                                                         <rect key="frame" x="0.0" y="0.0" width="330" height="34"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -84,15 +85,15 @@ Sign up now and get free Serey coins!</string>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="njA-BV-b1G">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="njA-BV-b1G">
                                                 <rect key="frame" x="131" y="60" width="88" height="41"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <state key="normal" title="Sign-Up"/>
                                             </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Term Service" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KoU-6I-OKu">
                                                 <rect key="frame" x="122.5" y="119" width="105" height="35.5"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -111,14 +112,14 @@ Sign up now and get free Serey coins!</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="bUe-F4-AeS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="a3D-Qs-MdM" firstAttribute="leading" secondItem="bUe-F4-AeS" secondAttribute="leading" id="1S2-2h-CxC"/>
                             <constraint firstItem="bUe-F4-AeS" firstAttribute="bottom" secondItem="a3D-Qs-MdM" secondAttribute="bottom" id="1qL-vJ-LQS"/>
                             <constraint firstItem="a3D-Qs-MdM" firstAttribute="top" secondItem="bUe-F4-AeS" secondAttribute="top" id="ivQ-aZ-EbP"/>
                             <constraint firstItem="bUe-F4-AeS" firstAttribute="trailing" secondItem="a3D-Qs-MdM" secondAttribute="trailing" id="mOv-Cb-xNX"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="bUe-F4-AeS"/>
                     </view>
                     <connections>
                         <outlet property="bottomConstraint" destination="1qL-vJ-LQS" id="Xcd-iT-vcM"/>
@@ -162,7 +163,7 @@ Sign up now and get free Serey coins!</string>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="KRl-4y-Lyh">
                                                         <rect key="frame" x="0.0" y="0.0" width="330" height="68"/>
                                                         <subviews>
-                                                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mHC-t9-qNW" customClass="MDCTextField">
+                                                            <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mHC-t9-qNW" customClass="MDCOutlinedTextField">
                                                                 <rect key="frame" x="0.0" y="0.0" width="330" height="34"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -196,8 +197,8 @@ Sign up now and get free Serey coins!</string>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Term Service" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kWX-Xd-mNh">
                                                 <rect key="frame" x="122.5" y="0.0" width="105" height="35.5"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -216,14 +217,14 @@ Sign up now and get free Serey coins!</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Kvi-XB-mVv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="yKq-h5-pRg" firstAttribute="leading" secondItem="Kvi-XB-mVv" secondAttribute="leading" id="02Q-e3-cvK"/>
                             <constraint firstAttribute="trailing" secondItem="yKq-h5-pRg" secondAttribute="trailing" id="FCf-7B-Efx"/>
                             <constraint firstItem="Kvi-XB-mVv" firstAttribute="bottom" secondItem="yKq-h5-pRg" secondAttribute="bottom" id="QnE-0t-XVR"/>
                             <constraint firstItem="yKq-h5-pRg" firstAttribute="top" secondItem="Kvi-XB-mVv" secondAttribute="top" id="Rx0-rW-3H2"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Kvi-XB-mVv"/>
                     </view>
                     <connections>
                         <outlet property="nextButton" destination="3N5-xs-NMd" id="Teq-fG-dSa"/>
@@ -252,7 +253,7 @@ Sign up now and get free Serey coins!</string>
                                         <rect key="frame" x="42" y="51.5" width="330" height="388"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Credential" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7i-Bk-5je">
-                                                <rect key="frame" x="74.5" y="0.0" width="181" height="29"/>
+                                                <rect key="frame" x="75" y="0.0" width="180.5" height="29"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -333,14 +334,14 @@ symbol.</string>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="ddn-ri-aWx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="ddn-ri-aWx" firstAttribute="trailing" secondItem="dhF-1a-9AV" secondAttribute="trailing" id="3PV-We-nDR"/>
                             <constraint firstItem="ddn-ri-aWx" firstAttribute="bottom" secondItem="dhF-1a-9AV" secondAttribute="bottom" id="CcG-38-i7a"/>
                             <constraint firstItem="dhF-1a-9AV" firstAttribute="top" secondItem="ddn-ri-aWx" secondAttribute="top" id="bc8-wt-om5"/>
                             <constraint firstItem="dhF-1a-9AV" firstAttribute="leading" secondItem="m7C-Qd-8dm" secondAttribute="leading" id="m8W-OO-UY1"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ddn-ri-aWx"/>
                     </view>
                     <connections>
                         <outlet property="confirmPasswordTextField" destination="wHW-Ve-drq" id="F7d-3A-vTZ"/>
@@ -377,7 +378,7 @@ symbol.</string>
                                                         <rect key="frame" x="0.0" y="0.0" width="366" height="101"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a Security Method" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gL-AY-5GF">
-                                                                <rect key="frame" x="46" y="0.0" width="274.5" height="29"/>
+                                                                <rect key="frame" x="46" y="0.0" width="274" height="29"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -396,7 +397,7 @@ symbol.</string>
                                                         <subviews>
                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yhf-8R-sLi" customClass="ContentSizedTableView" customModule="SereyIO" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="366" height="54"/>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="54" id="snZ-eH-peH"/>
                                                                 </constraints>
@@ -417,7 +418,7 @@ symbol.</string>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="ORC-ZZ-SFy" firstAttribute="leading" secondItem="WLN-5S-hNB" secondAttribute="leading" constant="24" id="KHW-0q-3xi"/>
                                             <constraint firstAttribute="trailing" secondItem="ORC-ZZ-SFy" secondAttribute="trailing" constant="24" id="QTX-ju-AkY"/>
@@ -435,14 +436,14 @@ symbol.</string>
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="nky-22-9Cm"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="EWV-vy-ekI" firstAttribute="leading" secondItem="nky-22-9Cm" secondAttribute="leading" id="3l6-8t-Eyb"/>
                             <constraint firstItem="EWV-vy-ekI" firstAttribute="top" secondItem="nky-22-9Cm" secondAttribute="top" id="Kb9-vC-Ono"/>
                             <constraint firstAttribute="bottom" secondItem="EWV-vy-ekI" secondAttribute="bottom" id="VvQ-14-gGC"/>
                             <constraint firstItem="nky-22-9Cm" firstAttribute="trailing" secondItem="EWV-vy-ekI" secondAttribute="trailing" id="xEr-6Y-n6J"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="nky-22-9Cm"/>
                     </view>
                     <connections>
                         <outlet property="descriptionLabel" destination="oeu-kQ-jwP" id="0NA-f8-zNX"/>
@@ -457,4 +458,12 @@ symbol.</string>
             <point key="canvasLocation" x="2619" y="147"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

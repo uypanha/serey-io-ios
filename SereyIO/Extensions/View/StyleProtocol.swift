@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/15/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -21,24 +21,31 @@ protocol StyleProtocol {
 // MARK: - MDCOutlinedTextField {
 extension MDCOutlinedTextField: StyleProtocol {
     
-    func primaryStyle() {
+    fileprivate func prepareContainerScheme() -> MDCContainerScheme {
         let containerScheme = MDCContainerScheme()
         let colorScheme = MDCSemanticColorScheme()
+        colorScheme.surfaceColor = ColorName.primary.color
         colorScheme.primaryColor = ColorName.primary.color
         colorScheme.errorColor = .red
         containerScheme.colorScheme = colorScheme
-        applyTheme(withScheme: containerScheme)
-        
-        setOutlineColor(.clear, for: .normal)
+        return containerScheme
+    }
+    
+    func primaryStyle() {
+        applyTheme(withScheme: prepareContainerScheme())
+        self.font = UIFont.systemFont(ofSize: 14)
+        setOutlineColor(.lightGray, for: .normal)
         setNormalLabelColor(.gray, for: .normal)
     }
     
     func secondaryStyle() {
-        
     }
     
     func dangerouseStyle() {
-        
+        applyErrorTheme(withScheme: prepareContainerScheme())
+        self.font = UIFont.systemFont(ofSize: 14)
+        setOutlineColor(.lightGray, for: .normal)
+        setNormalLabelColor(.gray, for: .normal)
     }
 }
 

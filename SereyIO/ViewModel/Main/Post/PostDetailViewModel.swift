@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 3/6/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit

@@ -3,7 +3,7 @@
 //  KongBeiClient
 //
 //  Created by Phanha Uy on 2/15/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
