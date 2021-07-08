@@ -28,3 +28,23 @@ extension LoadingIndicatorController where Self: UIViewController {
         self.stopAnimating()
     }
 }
+
+//func showLoading(_ message: String? = nil) {
+//    self.view.endEditing(true)
+//    let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+//
+//    let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+//    loadingIndicator.hidesWhenStopped = true
+//    loadingIndicator.style = UIActivityIndicatorView.Style.gray
+//    loadingIndicator.startAnimating();
+//
+//    alert.view.addSubview(loadingIndicator)
+//    loadingIndicator.snp.makeConstraints { make in
+//        make.edges.equalToSuperview()
+//    }
+//    present(alert, animated: true, completion: nil)
+//}
+//
+//func dismissLoading() {
+//    dismiss(animated: true, completion: nil)
+//}

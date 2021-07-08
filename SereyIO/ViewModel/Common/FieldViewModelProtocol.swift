@@ -187,14 +187,6 @@ extension TextFieldViewModel {
                 textField.leadingAssistiveLabel.text = errorText
             }).disposed(by: self.disposeBag)
     }
-    
-    func bind(with textField: MDCTextField, controller: MDCTextInputControllerBase? = nil) {
-        bind(with: textField as UITextField)
-        errorText.asObservable()
-            .subscribe(onNext: { errorText in
-                controller?.setErrorText(errorText, errorAccessibilityValue: errorText)
-            }).disposed(by: self.disposeBag)
-    }
 }
 
 struct TextFieldModel {

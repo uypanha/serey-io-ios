@@ -13,6 +13,12 @@ import AnyCodable
 
 class UserService: AppService<UserApi> {
     
+    func fetchIpTrace() -> Observable<String?> {
+        return self.provider.rx.request(.iPTrace)
+            .asObservable()
+            .map { String(data: $0.data, encoding: .utf8) }
+    }
+    
     func fetchProfile(_ username: String) -> Observable<DataResponseModel<AccountModel>> {
         return self.provider.rx.requestObject(.profile(userName: username), type: DataResponseModel<AccountModel>.self)
             .asObservable()

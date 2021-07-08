@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CountryPicker
 
 class PreferenceStore {
     
@@ -28,6 +29,20 @@ class PreferenceStore {
         set {
             Store.standard.setValue(newValue, forKey: Constants.UserDefaultsKeys.userDisabledNotifs.rawValue)
         }
+    }
+    
+    var currentUserCountryCode: String? {
+        get {
+            return Store.standard.value(forKey: "currentUserCountryCode") as? String
+        }
+        set {
+            Store.standard.setValue(newValue, forKey: "currentUserCountryCode")
+        }
+    }
+    
+    var currentCountry: Country? {
+        guard let countryCode = self.currentUserCountryCode else { return nil }
+        return CountryManager.shared.country(withCode: countryCode)
     }
     
     func setNotification(_ enabled: Bool) {

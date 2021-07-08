@@ -45,7 +45,7 @@ class DraftModel: Object {
         self.id = id
     }
     
-    internal required init() {
+    override init() {
         super.init()
     }
     

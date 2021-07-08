@@ -257,6 +257,7 @@
 		DC8EAB8323E7231A00E00A00 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */; };
 		DC8EAB8523E7232800E00A00 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8423E7232800E00A00 /* NotificationViewController.swift */; };
 		DC8EAB8723E7232F00E00A00 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8623E7232F00E00A00 /* SearchViewController.swift */; };
+		DC952FB2268A2D1000B6D3D7 /* PaginationRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC952FB1268A2D1000B6D3D7 /* PaginationRequestModel.swift */; };
 		DC9A65FD24DE9171001F1B60 /* QRPayment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC9A65FC24DE9171001F1B60 /* QRPayment.storyboard */; };
 		DC9A660024DE9233001F1B60 /* ReceiveCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A65FF24DE9233001F1B60 /* ReceiveCoinViewController.swift */; };
 		DC9A660324DEB83F001F1B60 /* ReceiveCoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A660224DEB83E001F1B60 /* ReceiveCoinViewModel.swift */; };
@@ -372,6 +373,7 @@
 		DCD39896232E28E100C812EB /* WebViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39895232E28E100C812EB /* WebViewViewModel.swift */; };
 		DCD39898232E2AD700C812EB /* CloseableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39897232E2AD700C812EB /* CloseableNavigationController.swift */; };
 		DCD3989A232E2DE700C812EB /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39899232E2DE700C812EB /* UINavigationController.swift */; };
+		DCDD97C42694B6D7006A6CFA /* CountryPicker in Frameworks */ = {isa = PBXBuildFile; productRef = DCDD97C32694B6D7006A6CFA /* CountryPicker */; };
 		DCDE00672446016800D09717 /* ReplyCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE00662446016800D09717 /* ReplyCommentViewController.swift */; };
 		DCDE006A244601A600D09717 /* ReplyCommentTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE0069244601A600D09717 /* ReplyCommentTableViewModel.swift */; };
 		DCDE006E2446161500D09717 /* UIPlaceHolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE006D2446161500D09717 /* UIPlaceHolderTextView.swift */; };
@@ -729,6 +731,7 @@
 		DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		DC8EAB8423E7232800E00A00 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		DC8EAB8623E7232F00E00A00 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		DC952FB1268A2D1000B6D3D7 /* PaginationRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationRequestModel.swift; sourceTree = "<group>"; };
 		DC9A65FC24DE9171001F1B60 /* QRPayment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QRPayment.storyboard; sourceTree = "<group>"; };
 		DC9A65FF24DE9233001F1B60 /* ReceiveCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveCoinViewController.swift; sourceTree = "<group>"; };
 		DC9A660224DEB83E001F1B60 /* ReceiveCoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveCoinViewModel.swift; sourceTree = "<group>"; };
@@ -907,6 +910,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC7F098924B05ED400CE8AFC /* Steem in Frameworks */,
+				DCDD97C42694B6D7006A6CFA /* CountryPicker in Frameworks */,
 				26AE9EB0BA60B5822CF0E5D5 /* Pods_SereyIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1397,6 +1401,7 @@
 				DC0044072433A97000244607 /* File */,
 				DCF67FEA24100BC7003061A7 /* User */,
 				DC1F79D924D089E000B7F0D3 /* Wallet */,
+				DC952FB1268A2D1000B6D3D7 /* PaginationRequestModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2726,6 +2731,7 @@
 			name = SereyIO;
 			packageProductDependencies = (
 				DC7F098824B05ED400CE8AFC /* Steem */,
+				DCDD97C32694B6D7006A6CFA /* CountryPicker */,
 			);
 			productName = iOSTemplate;
 			productReference = DC6ED51D23267EED00770B31 /* SereyIO.app */;
@@ -2805,6 +2811,7 @@
 			mainGroup = DC6ED51423267EED00770B31;
 			packageReferences = (
 				DC7F098724B05ED300CE8AFC /* XCRemoteSwiftPackageReference "swift-steem" */,
+				DCDD97C22694B6D7006A6CFA /* XCRemoteSwiftPackageReference "CountryPicker" */,
 			);
 			productRefGroup = DC6ED51E23267EED00770B31 /* Products */;
 			projectDirPath = "";
@@ -3284,6 +3291,7 @@
 				DCB5BD90249A68EC0042E5AF /* SereyWallet.swift in Sources */,
 				DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */,
 				DCD12D68242D03850084F66C /* BottomMenuViewModel.swift in Sources */,
+				DC952FB2268A2D1000B6D3D7 /* PaginationRequestModel.swift in Sources */,
 				DC79F11F24CDD7D3007FCECC /* CreateCredentialTableViewCell.swift in Sources */,
 				DC9AC6EA2406CD90008FAFA6 /* PostCategoryCellViewModel.swift in Sources */,
 				DC6ED58A2326A53B00770B31 /* KeyChainStore.swift in Sources */,
@@ -4144,6 +4152,14 @@
 				kind = branch;
 			};
 		};
+		DCDD97C22694B6D7006A6CFA /* XCRemoteSwiftPackageReference "CountryPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SURYAKANTSHARMA/CountryPicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -4151,6 +4167,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DC7F098724B05ED300CE8AFC /* XCRemoteSwiftPackageReference "swift-steem" */;
 			productName = Steem;
+		};
+		DCDD97C32694B6D7006A6CFA /* CountryPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCDD97C22694B6D7006A6CFA /* XCRemoteSwiftPackageReference "CountryPicker" */;
+			productName = CountryPicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

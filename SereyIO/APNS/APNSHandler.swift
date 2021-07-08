@@ -10,7 +10,6 @@ import UIKit
 import UserNotifications
 import Firebase
 import FirebaseMessaging
-import FirebaseInstanceID
 
 enum APNSNotificationType: String {
     case local = "local"

@@ -89,13 +89,13 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
     }
     
     internal func notifyDataChanged(_ data: PostModel?) {
-        self.upVoteCount.onNext("\(data?.upvote ?? 0)")
-        self.downVoteCount.onNext("\(data?.flag ?? 0)")
-        self.isVoteAllowed.accept(AuthData.shared.username != data?.authorName)
+        self.upVoteCount.onNext("\(data?.voterCount ?? 0)")
+        self.downVoteCount.onNext("\(data?.flaggerCount ?? 0)")
+        self.isVoteAllowed.accept(AuthData.shared.username != data?.author)
         self.votedType.accept(data?.votedType)
         self.upVoteEnabled.onNext(data?.votedType != .flag)
         self.flagEnabled.onNext(data?.votedType != .upvote)
-        self.isVotersHidden.onNext((data?.upvote ?? 0) == 0)
+        self.isVotersHidden.onNext((data?.voterCount ?? 0) == 0)
         self.commentHidden.onNext(!AuthData.shared.isUserLoggedIn)
     }
     

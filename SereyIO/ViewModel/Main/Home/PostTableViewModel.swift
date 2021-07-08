@@ -55,7 +55,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
     
     override func onMorePressed(of postModel: PostModel) {
         var items: [PostMenu] = [.edit]
-        if postModel.upvote == 0 {
+        if postModel.voterCount == 0 {
             items.append(.delete)
         }
         let bottomMenuViewModel = BottomListMenuViewModel(items.map { $0.cellModel })
@@ -75,7 +75,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         case .byCategoryId:
             return
         default:
-            if let categoryId = postModel.categoryItem.first {
+            if let categoryId = postModel.categories.first {
                 let postTableViewModel = PostTableViewModel(.byCategoryId(categoryId))
                 self.shouldPresent(.postsByCategoryController(postTableViewModel))
             }
@@ -83,7 +83,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
     }
     
     override func onProfilePressed(of postModel: PostModel) {
-        let userAccountViewModel = UserAccountViewModel(postModel.authorName)
+        let userAccountViewModel = UserAccountViewModel(postModel.author)
         self.shouldPresent(.userAccountController(userAccountViewModel))
     }
     
@@ -128,10 +128,10 @@ extension PostTableViewModel {
     
     private func deletePost(_ post: PostModel) {
         self.shouldPresent(.loading(true))
-        self.discussionService.deletePost(post.authorName, post.permlink)
+        self.discussionService.deletePost(post.author, post.permlink)
             .subscribe(onNext: { [weak self] _ in
                 self?.shouldPresent(.loading(false))
-                NotificationDispatcher.sharedInstance.dispatch(.postDeleted(permlink: post.permlink, author: post.authorName))
+                NotificationDispatcher.sharedInstance.dispatch(.postDeleted(permlink: post.permlink, author: post.author))
             }, onError: { [weak self] error in
                 self?.shouldPresent(.loading(false))
                 let errorInfo = ErrorHelper.prepareError(error: error)

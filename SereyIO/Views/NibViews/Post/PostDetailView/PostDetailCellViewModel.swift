@@ -29,7 +29,7 @@ class PostDetailCellViewModel: PostCellViewModel, CollectionSingleSecitionProvid
     override func notifyDataChanged(_ data: PostModel?) {
         super.notifyDataChanged(data)
         
-        self.cells.accept(self.prepareCells(data?.categoryItem ?? []))
+        self.cells.accept(self.prepareCells(data?.categories ?? []))
     }
 }
 

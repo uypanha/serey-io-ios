@@ -32,17 +32,17 @@ extension Reactive where Base: MoyaProviderType {
                         if let dataResponse = try? decoder.decode(T.self, from: response.data) {
                             single(.success(dataResponse))
                         } else {
-                            single(.error(NSError(domain: "Data Mapping Error", code: 0, userInfo: nil)))
+                            single(.failure(NSError(domain: "Data Mapping Error", code: 0, userInfo: nil)))
                         }
                     } else {
                         if let errorModel = try? decoder.decode(AppApiError.self, from: response.data) {
-                            single(.error(AppError.appApiError(errorModel, code: response.statusCode)))
+                            single(.failure(AppError.appApiError(errorModel, code: response.statusCode)))
                         } else {
-                            single(.error(NSError(domain: "Unknown Error", code: response.statusCode, userInfo: nil)))
+                            single(.failure(NSError(domain: "Unknown Error", code: response.statusCode, userInfo: nil)))
                         }
                     }
                 case let .failure(error):
-                    single(.error(error))
+                    single(.failure(error))
                 }
             }
             

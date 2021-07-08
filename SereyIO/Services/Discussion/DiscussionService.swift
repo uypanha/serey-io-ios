@@ -18,8 +18,8 @@ class DiscussionService: AppService<DiscussionApi> {
             .asObservable()
     }
     
-    func getDiscussionList(_ type: DiscussionType, _ query: QueryDiscussionsBy) -> Observable<[PostModel]> {
-        return self.provider.rx.requestObject(.getDiscussions(type, query), type: [PostModel].self)
+    func getDiscussionList(_ type: DiscussionType, _ pageModel: PaginationRequestModel) -> Observable<[PostModel]> {
+        return self.provider.rx.requestObject(.getDiscussions(type, pageModel), type: [PostModel].self)
             .asObservable()
     }
     

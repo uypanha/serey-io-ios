@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import MaterialComponents
 
-class MDCPasswordTextField: MDCTextField {
+class MDCPasswordTextField: MDCOutlinedTextField {
 
     lazy var disposeBag = DisposeBag()
     lazy var passwordToggleImageView: UIImageView? = { [unowned self] in

@@ -11,11 +11,14 @@ import UIKit
 enum FeatureBoarding: CaseIterable {
     
 //    case shareAndEarn
+    case choosePreferedCountry
     case transparency
 //    case walletAndMarketPlace
     
     var image: UIImage? {
         switch self {
+        case .choosePreferedCountry:
+            return nil
 //        case .shareAndEarn:
 //            return R.image.shareaAndEarn()
         case .transparency:
@@ -27,6 +30,8 @@ enum FeatureBoarding: CaseIterable {
     
     var title: String {
         switch self  {
+        case .choosePreferedCountry:
+            return "Prefered Country Articles"
 //        case .shareAndEarn:
 //            return R.string.onBoard.shareAndEarn.localized()
         case .transparency:
@@ -38,6 +43,8 @@ enum FeatureBoarding: CaseIterable {
     
     var message: String {
         switch self {
+        case .choosePreferedCountry:
+            return "Our platform provide you the best article in your area."
 //        case .shareAndEarn:
 //            return R.string.onBoard.shareAndEarnMessage.localized()
         case .transparency:

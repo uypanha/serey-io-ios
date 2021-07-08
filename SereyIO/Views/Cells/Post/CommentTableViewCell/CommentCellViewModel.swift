@@ -53,7 +53,7 @@ class CommentCellViewModel: PostCellViewModel, ShouldReactToAction {
     override func notifyDataChanged(_ data: PostModel?) {
         super.notifyDataChanged(data)
         
-        self.contentAttributedString.onNext(data?.description?.htmlAttributed(size: 12))
+        self.contentAttributedString.onNext(data?.descriptionText?.htmlAttributed(size: 12))
         self.conversationText.onNext(String(format: R.string.post.viewConversation.localized(), "\(data?.answerCount ?? 0)"))
     }
 }

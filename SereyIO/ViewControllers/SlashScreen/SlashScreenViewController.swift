@@ -18,7 +18,9 @@ class SlashScreenViewController: BaseViewController {
         super.viewDidAppear(animated)
         
         self.setUpRxObservers()
-        self.viewModel.determineInitialScreen()
+        DispatchQueue.main.async {
+            self.viewModel.updateIpTrace()
+        }
     }
 }
 

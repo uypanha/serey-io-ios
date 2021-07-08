@@ -9,6 +9,7 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import CountryPicker
 
 class SettingCellViewModel: ImageTextCellViewModel {
     
@@ -22,6 +23,7 @@ class SettingCellViewModel: ImageTextCellViewModel {
 
 enum SettingType {
     case myWallet
+    case country
     case lagnauge
     case notificationSettings
     case sereyApps
@@ -32,6 +34,9 @@ enum SettingType {
             switch self {
             case .myWallet:
                 return ImageTextModel(image: R.image.walletIcon(), titleText: R.string.settings.myWallet.localized())
+            case .country:
+                let country = CountryManager.shared.country(withCode: PreferenceStore.shared.currentUserCountryCode ?? "")
+                return ImageTextModel(image: country?.flag, titleText: "Country (\(country?.countryName ?? ""))")
             case .lagnauge:
                 let text = String(format: R.string.settings.language.localized(), LanguageManger.shared.currentLanguage.languageText ?? "")
                 return ImageTextModel(image: R.image.languageIcon(), titleText: text)

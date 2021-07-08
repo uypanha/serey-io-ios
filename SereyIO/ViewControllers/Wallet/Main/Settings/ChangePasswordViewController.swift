@@ -22,10 +22,6 @@ class ChangePasswordViewController: BaseViewController, KeyboardController, Aler
     @IBOutlet weak var confirmNewPasswordField: MDCPasswordTextField!
     @IBOutlet weak var changeButton: LoadingButton!
     
-    var currentPWDController: MDCTextInputControllerOutlined?
-    var newPWDController: MDCTextInputControllerOutlined?
-    var confirmPWDController: MDCTextInputControllerOutlined?
-    
     var viewModel: ChangePasswordViewModel!
  
     override func viewDidLoad() {
@@ -54,9 +50,9 @@ extension ChangePasswordViewController {
     
     func setUpViews() {
         self.headerView.backgroundColor = ColorName.primary.color
-        self.currentPWDController = self.currentPasswordField.primaryController()
-        self.newPWDController = self.newPasswordField.primaryController()
-        self.confirmPWDController = self.confirmNewPasswordField.primaryController()
+        self.currentPasswordField.primaryStyle()
+        self.newPasswordField.primaryStyle()
+        self.confirmNewPasswordField.primaryStyle()
         
         self.changeButton.primaryStyle()
     }
@@ -74,9 +70,9 @@ extension ChangePasswordViewController {
     }
     
     func setUpContentChangedObservers() {
-        self.viewModel.currentPasswordTextFieldViewModel.bind(with: self.currentPasswordField, controller: self.currentPWDController)
-        self.viewModel.newPasswordTextFieldViewModel.bind(with: self.newPasswordField, controller: self.newPWDController)
-        self.viewModel.confirmPasswordTextFieldViewModel.bind(with: self.confirmNewPasswordField, controller: self.confirmPWDController)
+        self.viewModel.currentPasswordTextFieldViewModel.bind(withMDC: self.currentPasswordField)
+        self.viewModel.newPasswordTextFieldViewModel.bind(withMDC: self.newPasswordField)
+        self.viewModel.confirmPasswordTextFieldViewModel.bind(withMDC: self.confirmNewPasswordField)
         
         self.viewModel.isChangePasswordEnabled
             ~> self.changeButton.rx.isEnabled

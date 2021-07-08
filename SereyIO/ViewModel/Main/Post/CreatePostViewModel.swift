@@ -105,13 +105,13 @@ extension CreatePostViewModel {
     
     private func fetchPostDetial() {
         if let post = self.post.value {
-            self.discussionService.getPostDetail(permlink: post.permlink, authorName: post.authorName)
+            self.discussionService.getPostDetail(permlink: post.permlink, authorName: post.author)
                 .subscribe(onNext: { [weak self] response in
-                    NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: post.permlink, author: post.authorName, post: response.content))
+                    NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: post.permlink, author: post.author, post: response.content))
                     self?.shouldPresent(.loading(false))
                     self?.shouldPresent(.dismiss)
                 }, onError: { [weak self] error in
-                    NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: post.permlink, author: post.authorName, post: nil))
+                    NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: post.permlink, author: post.author, post: nil))
                     self?.shouldPresent(.loading(false))
                     self?.shouldPresent(.dismiss)
                 }) ~ self.disposeBag
@@ -181,13 +181,13 @@ extension CreatePostViewModel {
     
     fileprivate func notifyDataToUpdate(_ data: PostModel) {
         self.titleTextFieldViewModel.value = data.title
-        self.descriptionFieldViewModel.value = data.description
+        self.descriptionFieldViewModel.value = data.descriptionText
         self.shortDescriptionFieldViewModel.value = data.shortDesc
         self.thumbnialUrl.accept(data.firstThumnailURL)
-        if data.categoryItem.count > 0 {
-            var selectedCategory = DiscussionCategoryModel(name: (data.categoryItem.first ?? "").capitalized, sub: nil)
-            if data.categoryItem.count > 1 {
-                let subCategory = DiscussionCategoryModel(name: data.categoryItem[1].capitalized, sub: nil)
+        if data.categories.count > 0 {
+            var selectedCategory = DiscussionCategoryModel(name: (data.categories.first ?? "").capitalized, sub: nil)
+            if data.categories.count > 1 {
+                let subCategory = DiscussionCategoryModel(name: data.categories[1].capitalized, sub: nil)
                 selectedCategory.sub = [subCategory]
                 self.selectedSubCategory.accept(subCategory)
             }

@@ -11,24 +11,22 @@ import Moya
 
 enum SearchApi {
     
-    case searchAuthor(query: String)
+    case search(PaginationRequestModel)
 }
 
 extension SearchApi: AuthorizedApiTargetType {
 
     var parameters: [String : Any] {
         switch self {
-        case .searchAuthor(let query):
-            return [
-                "name" : query
-            ]
+        case .search(let pageModel):
+            return pageModel.parameters
         }
     }
     
     var path: String {
         switch self {
-        case .searchAuthor:
-            return "/api/v1/accounts/findUser"
+        case .search:
+            return "/api/v1/sereyweb/getAllPostsByNew"
         }
     }
     
@@ -38,7 +36,7 @@ extension SearchApi: AuthorizedApiTargetType {
     
     var task: Task {
         switch self {
-        case .searchAuthor:
+        case .search:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         }
     }

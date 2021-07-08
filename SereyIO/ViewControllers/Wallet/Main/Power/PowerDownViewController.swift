@@ -19,13 +19,10 @@ class PowerDownViewController: BaseViewController, KeyboardController, AlertDial
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var powerDownMessageLabel: UILabel!
     
-    @IBOutlet weak var accountTextField: MDCTextField!
-    @IBOutlet weak var amountTextField: MDCTextField!
+    @IBOutlet weak var accountTextField: MDCOutlinedTextField!
+    @IBOutlet weak var amountTextField: MDCOutlinedTextField!
     
     @IBOutlet weak var powerDownButton: LoadingButton!
-    
-    var accountFieldController: MDCTextInputControllerOutlined?
-    var amountFieldController: MDCTextInputControllerOutlined?
     
     var viewModel: PowerDownViewModel!
     
@@ -64,8 +61,8 @@ extension PowerDownViewController {
     func setUpViews() {
         self.headerView.backgroundColor = ColorName.primary.color
         
-        self.accountFieldController = self.accountTextField.primaryController()
-        self.amountFieldController = self.amountTextField.primaryController()
+        self.accountTextField.primaryStyle()
+        self.amountTextField.primaryStyle()
         self.accountTextField.isEnabled = false
         
         self.amountTextField.leftView = UIImageView(image: R.image.amountIcon()).then { $0.tintColor = .gray }
@@ -89,8 +86,8 @@ extension PowerDownViewController {
     }
     
     func setUpContentChangedObservers() {
-        self.viewModel.accountTextFieldViewModel.bind(with: self.accountTextField, controller: self.accountFieldController)
-        self.viewModel.amountTextFieldViewModel.bind(with: self.amountTextField, controller: self.amountFieldController)
+        self.viewModel.accountTextFieldViewModel.bind(withMDC: self.accountTextField)
+        self.viewModel.amountTextFieldViewModel.bind(withMDC: self.amountTextField)
         
         self.viewModel.isPowerDownEnabled ~> self.powerDownButton.rx.isEnabled ~ self.disposeBag
     }

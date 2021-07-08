@@ -54,7 +54,7 @@ class PostDetailViewModel: BasePostDetailViewModel, ShouldReactToAction, ShouldP
     }
     
     convenience init(_ post: PostModel) {
-        self.init(post.permlink, post.authorName)
+        self.init(post.permlink, post.author)
         self.post.accept(post)
     }
     
@@ -112,9 +112,9 @@ extension PostDetailViewModel {
     
     private func deletePost(_ post: PostModel) {
         self.shouldPresent(.loading(true))
-        self.discussionService.deletePost(post.authorName, post.permlink)
+        self.discussionService.deletePost(post.author, post.permlink)
             .subscribe(onNext: { [weak self] _ in
-                NotificationDispatcher.sharedInstance.dispatch(.postDeleted(permlink: post.permlink, author: post.authorName))
+                NotificationDispatcher.sharedInstance.dispatch(.postDeleted(permlink: post.permlink, author: post.author))
                 self?.shouldPresent(.loading(false))
                 self?.shouldPresent(.dismiss)
             }, onError: { [weak self] error in
@@ -130,7 +130,7 @@ fileprivate extension PostDetailViewModel {
     
     func handleMorePressed() {
         var items: [PostMenu] = [.edit]
-        if let post = self.post.value, post.upvote == 0 {
+        if let post = self.post.value, post.voterCount == 0 {
             items.append(.delete)
         }
         let bottomMenuViewModel = BottomListMenuViewModel(items.map { $0.cellModel })
@@ -209,12 +209,12 @@ fileprivate extension PostDetailViewModel {
     }
     
     func handleProfilePressed(of postModel: PostModel) {
-        let userAccountViewModel = UserAccountViewModel(postModel.authorName)
+        let userAccountViewModel = UserAccountViewModel(postModel.author)
         self.shouldPresent(.userAccountController(userAccountViewModel))
     }
     
     func handleShowVotersPressed() {
-        if let voters = self.post.value?.voter {
+        if let voters = self.post.value?.voters {
             let voterListViewModel = VoterListViewModel(voters)
             
             voterListViewModel.shouldShowUserAccount.asObservable()

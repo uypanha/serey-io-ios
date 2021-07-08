@@ -23,9 +23,6 @@ class SignUpWalletViewController: BaseViewController, KeyboardController {
     @IBOutlet weak var nextButton: LoadingButton!
     @IBOutlet weak var signUpMessageLabel: UITextView!
     
-//    var userNameController: MDCTextInputControllerOutlined?
-    var ownerKeyController: MDCTextInputControllerOutlined?
-    
     var viewModel: SignUpWalletViewModel!
     
     override func viewDidLoad() {
@@ -49,8 +46,8 @@ extension SignUpWalletViewController {
     
     func setUpViews() {
         self.usernameTextField.primaryStyle()
-//        self.userNameController = self.usernameTextField.primaryController()
-        self.ownerKeyController = self.ownerKeyTextField.primaryController()
+        self.ownerKeyTextField.primaryStyle()
+        
         self.usernameTextField.textColor = .lightGray
         self.nextButton.primaryStyle()
         self.signUpMessageLabel.delegate = self
@@ -117,8 +114,8 @@ extension SignUpWalletViewController {
     }
     
     func setUpContentChangedObservers() {
-        self.viewModel.userNameTextFieldViewModel.bind(with: usernameTextField)
-        self.viewModel.ownerKeyTextFieldViewModel.bind(with: ownerKeyTextField, controller: ownerKeyController)
+        self.viewModel.userNameTextFieldViewModel.bind(withMDC: usernameTextField)
+        self.viewModel.ownerKeyTextFieldViewModel.bind(withMDC: ownerKeyTextField)
         
         self.viewModel.shouldEnbleSignUp ~> self.nextButton.rx.isEnabled ~ self.disposeBag
     }

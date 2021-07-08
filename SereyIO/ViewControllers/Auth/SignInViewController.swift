@@ -31,9 +31,6 @@ class SignInViewController: BaseViewController, LoadingIndicatorController, Keyb
     
     @IBOutlet weak var signUpButton: UIButton!
     
-//    var userNameController: MDCTextInputControllerOutlined?
-    var passwordController: MDCTextInputControllerOutlined?
-    
     var viewModel: SignInViewModel!
 
     override func viewDidLoad() {
@@ -74,7 +71,7 @@ fileprivate extension SignInViewController {
         self.signInButton.customStyle(with: ColorName.buttonBg.color)
         
         self.userNameTextField.primaryStyle()
-        self.passwordController = self.passwordTextField.primaryController()
+        self.passwordTextField.primaryStyle()
         self.termServiceTextView.delegate = self
     }
     
@@ -139,7 +136,7 @@ fileprivate extension SignInViewController {
     
     func setUpContentObservers() {
         self.viewModel.userNameTextFieldViewModel.bind(withMDC: self.userNameTextField)
-        self.viewModel.privateKeyOrPwdTextFieldViewModel.bind(with: self.passwordTextField, controller: self.passwordController)
+        self.viewModel.privateKeyOrPwdTextFieldViewModel.bind(withMDC: self.passwordTextField)
         self.viewModel.shouldEnbleSigIn ~> self.signInButton.rx.isEnabled ~ self.disposeBag
     }
     

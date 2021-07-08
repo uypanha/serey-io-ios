@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import RxBinding
 
 class SlashViewModel: BaseViewModel, ShouldPresent {
     
@@ -19,10 +20,24 @@ class SlashViewModel: BaseViewModel, ShouldPresent {
     
     // output:
     let shouldPresentSubject: PublishSubject<ViewToPresent>
+    let userService: UserService
     
     override init() {
         self.shouldPresentSubject = .init()
+        self.userService = .init()
         super.init()
+    }
+    
+    func updateIpTrace() {
+        self.userService.fetchIpTrace()
+            .subscribe(onNext: { [weak self] data in
+                if let loc = data?.split(separator: "\n").first(where: { $0.contains("loc=") }) {
+                    PreferenceStore.shared.currentUserCountryCode = loc.replacingOccurrences(of: "loc=", with: "")
+                }
+                self?.determineInitialScreen()
+            }, onError: { [weak self] error in
+                self?.determineInitialScreen()
+            }) ~ self.disposeBag
     }
     
     func determineInitialScreen() {

@@ -134,9 +134,15 @@ extension MoreViewModel {
                 sectionItems[.signIn] = [signInCellViewModel]
             #endif
         }
-        sectionItems[.general] = [SettingCellViewModel(.lagnauge), SettingCellViewModel(.notificationSettings, true)]
+        sectionItems[.general] = [
+            SettingCellViewModel(.lagnauge),
+            SettingCellViewModel(.notificationSettings, true)
+        ]
+        if PreferenceStore.shared.currentUserCountryCode != nil {
+            sectionItems[.general]?.insert(SettingCellViewModel(.country), at: 0)
+        }
         sectionItems[.about] = [
-//            SettingCellViewModel(.sereyApps),
+            SettingCellViewModel(.sereyApps),
             SettingCellViewModel(.version, true)
         ]
         
