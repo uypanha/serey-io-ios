@@ -51,8 +51,8 @@ extension RootViewController {
     }
     
     func switchToBoardingScreen() {
-        if let boardingViewController = R.storyboard.onBoard.boardingViewController() {
-            boardingViewController.viewModel = BoardingViewModel()
+        if let boardingViewController = R.storyboard.onBoard.onBoardingViewController() {
+            boardingViewController.viewModel = .init()
             self.animateFadeTransition(to: UINavigationController(rootViewController: boardingViewController).then {
                 $0.removeNavigationBarBorder()
             })

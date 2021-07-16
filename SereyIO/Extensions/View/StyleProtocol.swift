@@ -81,11 +81,14 @@ extension UIButton: StyleProtocol {
     }
     
     func primaryStyle() {
+        self.setTitleColor(.white, for: .normal)
         self.customStyle(with: ColorName.primary.color)
     }
     
     func secondaryStyle() {
-        self.secondaryStyle(borderColor: ColorName.primary.color, borderWidth: 2, isCircular: false)
+        self.tintColor = ColorName.primary.color
+        self.setTitleColor(ColorName.primary.color, for: .normal)
+        self.customStyle(with: ColorName.lightPrimary.color)
     }
 
     func secondaryStyle(borderColor: UIColor? = nil, borderWidth: CGFloat = 2, isCircular: Bool = true) {

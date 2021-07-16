@@ -19,7 +19,7 @@ class SlashScreenViewController: BaseViewController {
         
         self.setUpRxObservers()
         DispatchQueue.main.async {
-            self.viewModel.updateIpTrace()
+            self.viewModel.determineInitialScreen()
         }
     }
 }
@@ -39,6 +39,8 @@ fileprivate extension SlashScreenViewController {
                     AppDelegate.shared?.rootViewController?.switchToMainScreen(fadeAnimation: true)
                 case .selectLanguageController:
                     AppDelegate.shared?.rootViewController?.switchToSelectLanguageBoardScreen()
+                case .onBoardingViewController:
+                    AppDelegate.shared?.rootViewController?.switchToBoardingScreen()
                 }
             }).disposed(by: self.disposeBag)
     }

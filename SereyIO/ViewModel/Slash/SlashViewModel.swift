@@ -16,6 +16,7 @@ class SlashViewModel: BaseViewModel, ShouldPresent {
     enum ViewToPresent {
         case homeViewController
         case selectLanguageController
+        case onBoardingViewController
     }
     
     // output:
@@ -28,18 +29,6 @@ class SlashViewModel: BaseViewModel, ShouldPresent {
         super.init()
     }
     
-    func updateIpTrace() {
-        self.userService.fetchIpTrace()
-            .subscribe(onNext: { [weak self] data in
-                if let loc = data?.split(separator: "\n").first(where: { $0.contains("loc=") }) {
-                    PreferenceStore.shared.currentUserCountryCode = loc.replacingOccurrences(of: "loc=", with: "")
-                }
-                self?.determineInitialScreen()
-            }, onError: { [weak self] error in
-                self?.determineInitialScreen()
-            }) ~ self.disposeBag
-    }
-    
     func determineInitialScreen() {
         if AuthData.shared.isUserLoggedIn, let expiry = AuthData.shared.expiration {
             let now = Date().timeIntervalSince1970
@@ -48,10 +37,13 @@ class SlashViewModel: BaseViewModel, ShouldPresent {
             }
         }
         
-        if FeatureStore.shared.areFeaturesIntroduced {
-            self.shouldPresentSubject.onNext(.homeViewController)
+        if !PreferenceStore.shared.isAppRunBefore {
+            PreferenceStore.shared.isAppRunBefore = true
+            self.shouldPresent(.selectLanguageController)
+        } else if !FeatureBoarding.areAllFeauturesSeen {
+            self.shouldPresentSubject.onNext(.onBoardingViewController)
         } else {
-            self.shouldPresentSubject.onNext(.selectLanguageController)
+            self.shouldPresentSubject.onNext(.homeViewController)
         }
     }
 }

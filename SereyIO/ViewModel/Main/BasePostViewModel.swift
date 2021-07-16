@@ -27,6 +27,8 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     let canDownloadMorePages: BehaviorRelay<Bool>
     let isRefresh: BehaviorRelay<Bool>
     var shouldRefresh: Bool = false
+    var currentCountryCode: String?
+    
     lazy var pageModel: PaginationRequestModel = PaginationRequestModel()
     lazy var downloadDisposeBag: DisposeBag = DisposeBag()
     lazy var isDownloading: BehaviorRelay<Bool> = BehaviorRelay(value: false)
@@ -42,6 +44,7 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
         self.canDownloadMorePages = BehaviorRelay(value: true)
         self.isRefresh = .init(value: true)
         self.endRefresh = BehaviorSubject(value: false)
+        self.currentCountryCode = PreferenceStore.shared.currentUserCountryCode
         super.init()
         
         setUpRxObservers()
@@ -105,6 +108,14 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
             }
         }
         return [SectionItem(items: cells)]
+    }
+    
+    func validateCountry() {
+        if self.currentCountryCode != PreferenceStore.shared.currentUserCountryCode {
+            self.currentCountryCode = PreferenceStore.shared.currentUserCountryCode
+            var _self = self
+            _self.reset()
+        }
     }
     
     internal func onMorePressed(of postModel: PostModel) {}

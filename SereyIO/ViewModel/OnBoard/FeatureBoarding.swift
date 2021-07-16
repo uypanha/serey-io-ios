@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum FeatureBoarding: CaseIterable {
+enum FeatureBoarding: String, CaseIterable {
     
 //    case shareAndEarn
     case choosePreferedCountry
@@ -18,7 +18,7 @@ enum FeatureBoarding: CaseIterable {
     var image: UIImage? {
         switch self {
         case .choosePreferedCountry:
-            return nil
+            return R.image.readingImage()
 //        case .shareAndEarn:
 //            return R.image.shareaAndEarn()
         case .transparency:
@@ -51,6 +51,35 @@ enum FeatureBoarding: CaseIterable {
             return R.string.onBoard.transparencyMessage.localized()
 //        case .walletAndMarketPlace:
 //            return R.string.onBoard.walletMarketplaceMessage.localized()
+        }
+    }
+}
+
+// MARK: - Properties
+extension FeatureBoarding {
+    
+    var isSeen: Bool {
+        return (Store.standard.value(forKey: preferenceKey) as? Bool) ?? false
+    }
+    
+    var preferenceKey: String {
+        return "isSeen\(self.rawValue)"
+    }
+    
+    static var areAllFeauturesSeen: Bool {
+        return featuresToIntroduce.count == 0
+    }
+    
+    static var featuresToIntroduce: [FeatureBoarding] {
+        return self.allCases.filter { !$0.isSeen }
+    }
+    
+    var viewModel: CellViewModel {
+        switch self {
+        case .choosePreferedCountry:
+            return ChooseCountryViewModel(self)
+        default:
+            return FeatureViewModel(self)
         }
     }
 }

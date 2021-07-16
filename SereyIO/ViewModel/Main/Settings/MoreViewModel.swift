@@ -12,6 +12,7 @@ import RxSwift
 import RxBinding
 import RxRealm
 import Then
+import CountryPicker
 
 class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, CollectionMultiSectionsProviderModel, ShouldReactToAction, ShouldPresent {
     
@@ -21,6 +22,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case termsPressed
         case signOutPressed
         case signOutConfirmed
+        case countrySelected(Country)
     }
     
     enum ViewToPresent {
@@ -32,6 +34,8 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case webViewController(WebViewViewModel)
         case walletViewController
         case signOutDialog
+        case bottomListViewController(BottomListMenuViewModel)
+        case showCountryPicker
     }
     
     // input:
@@ -135,12 +139,10 @@ extension MoreViewModel {
             #endif
         }
         sectionItems[.general] = [
+            SettingCellViewModel(.country),
             SettingCellViewModel(.lagnauge),
             SettingCellViewModel(.notificationSettings, true)
         ]
-        if PreferenceStore.shared.currentUserCountryCode != nil {
-            sectionItems[.general]?.insert(SettingCellViewModel(.country), at: 0)
-        }
         sectionItems[.about] = [
             SettingCellViewModel(.sereyApps),
             SettingCellViewModel(.version, true)
@@ -193,6 +195,25 @@ fileprivate extension MoreViewModel {
                 self.shouldPresent(.notificationSettingsController)
             case .myWallet:
                 self.shouldPresent(.walletViewController)
+            case .country:
+                let items = ChooseCountryOption.allCases.map { $0.cellModel }
+                let bottomListMenuViewModel = BottomListMenuViewModel(header: "Choose Country Option", items)
+                bottomListMenuViewModel.shouldSelectMenuItem
+                    .map { $0 as? ChooseCountryOptionCellViewModel }
+                    .map { $0?.option }
+                    .subscribe(onNext: { [unowned self] option in
+                        guard let option = option else { return }
+                        switch option {
+                        case .chooseCountry:
+                            self.shouldPresent(.showCountryPicker)
+                        case .detectAutomatically:
+                            break
+                        case .global:
+                            PreferenceStore.shared.currentUserCountryCode = nil
+                            self.cellModels.accept(self.prepareCellModels())
+                        }
+                    }) ~ self.disposeBag
+                self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
             default:
                 break
             }
@@ -253,6 +274,9 @@ fileprivate extension MoreViewModel {
                     self?.shouldPresent(.signOutDialog)
                 case .signOutConfirmed:
                     AuthData.shared.removeAuthData()
+                case .countrySelected(let country):
+                    PreferenceStore.shared.currentUserCountryCode = country.countryCode
+                    self?.cellModels.accept(self?.prepareCellModels() ?? [:])
                 }
             }).disposed(by: self.disposeBag)
     }

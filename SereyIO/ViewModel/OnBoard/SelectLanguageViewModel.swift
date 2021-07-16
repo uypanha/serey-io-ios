@@ -21,6 +21,7 @@ class SelectLanguageViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent
     enum ViewToPresent {
         case languagesBottomSheetController
         case boardingViewController
+        case mainViewController
     }
     
     // input:
@@ -77,7 +78,11 @@ fileprivate extension SelectLanguageViewModel {
                 case .itemSelected(let indexPath):
                     self?.handleItemSelected(indexPath)
                 case .continuePressed:
-                    self?.shouldPresent(.boardingViewController)
+                    if FeatureBoarding.areAllFeauturesSeen {
+                        self?.shouldPresent(.mainViewController)
+                    } else {
+                        self?.shouldPresent(.boardingViewController)
+                    }
                 }
             }) ~ self.disposeBag
     }

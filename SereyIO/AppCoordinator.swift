@@ -28,8 +28,6 @@ class AppCoordinator {
             return
         }
         
-        PreferenceStore.shared.isAppRunBefore = true
-        
         // Removing data from keychain
         // TODO: (PŁ) remove all data ??
         AuthData.shared.removeAuthData(notify: false)

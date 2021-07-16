@@ -121,6 +121,8 @@ fileprivate extension SelectLanguageViewController {
 //                        self.bottomSheet?.trackingScrollView = chooseLanguageSheetViewController.tableView
                         self.present(self.bottomSheet!, animated: true, completion: nil)
                     }
+                case .mainViewController:
+                    AppDelegate.shared?.rootViewController?.switchToMainScreen()
                 }
             }) ~ self.disposeBag
     }

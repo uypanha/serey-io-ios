@@ -53,4 +53,8 @@ class PreferenceStore {
             AppDelegate.shared?.turnOffPushNotification()
         }
     }
+    
+    func setFeautureSeen(of feature: FeatureBoarding, seen: Bool) {
+        Store.standard.setValue(seen, forKey: feature.preferenceKey)
+    }
 }

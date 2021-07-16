@@ -47,6 +47,12 @@ class PostTableViewController: BaseTableViewController, AlertDialogController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.viewModel.validateCountry()
+    }
+    
     func setUpRxObservers() {
         setUpControlsObsservers()
         setUpContentChangedObservers()

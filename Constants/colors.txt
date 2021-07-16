@@ -1,4 +1,5 @@
 Primary         : #3F5AC4
+LightPrimary    : #EFF2FC
 Secondary       : #1E358F
 PrimaryRed      : #D30020
 Positive        : #4ECD77

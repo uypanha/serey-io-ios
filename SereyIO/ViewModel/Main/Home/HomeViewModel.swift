@@ -47,6 +47,7 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
     let categories: BehaviorRelay<[DiscussionCategoryModel]>
     
     let discussionService: DiscussionService
+    var currentCountryCode: String?
     lazy var isDownloading = BehaviorRelay<Bool>(value: false)
     
     override init() {
@@ -55,12 +56,23 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
         self.postViewModels = BehaviorRelay(value: [])
         self.categories = BehaviorRelay(value: [])
         self.discussionService = DiscussionService()
+        self.currentCountryCode = PreferenceStore.shared.currentUserCountryCode
         super.init()
         
         setUpRxObservers()
         let discussionTypes: [DiscussionType] = [.trending, .hot, .new]
         self.postTabTitles.accept(discussionTypes.map { $0.title })
         self.postViewModels.accept(discussionTypes.map { $0.viewModel })
+    }
+    
+    func validateCountry() {
+        if self.currentCountryCode != PreferenceStore.shared.currentUserCountryCode {
+            self.currentCountryCode = PreferenceStore.shared.currentUserCountryCode
+            self.downloadData()
+            self.postViewModels.value.forEach { viewModel in
+                viewModel.validateCountry()
+            }
+        }
     }
 }
 

@@ -60,6 +60,12 @@ class HomeViewController: BaseViewController, AlertDialogController, LoadingIndi
         viewModel.downloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.viewModel.validateCountry()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import CountryPicker
+import FlagKit
 
 class SettingCellViewModel: ImageTextCellViewModel {
     
@@ -36,7 +37,8 @@ enum SettingType {
                 return ImageTextModel(image: R.image.walletIcon(), titleText: R.string.settings.myWallet.localized())
             case .country:
                 let country = CountryManager.shared.country(withCode: PreferenceStore.shared.currentUserCountryCode ?? "")
-                return ImageTextModel(image: country?.flag, titleText: "Country (\(country?.countryName ?? ""))")
+                let image = country == nil ? R.image.globalIcon() : Flag.init(countryCode: country!.countryCode)?.image(style: .roundedRect)
+                return ImageTextModel(image: image, titleText: "Country (\(country?.countryName ?? "Global"))")
             case .lagnauge:
                 let text = String(format: R.string.settings.language.localized(), LanguageManger.shared.currentLanguage.languageText ?? "")
                 return ImageTextModel(image: R.image.languageIcon(), titleText: text)
