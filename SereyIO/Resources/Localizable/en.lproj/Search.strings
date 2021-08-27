@@ -12,3 +12,9 @@
 
 "searchPeople"              = "Search People";
 "searchPeopleMessage"       = "Enter a name of people you want to search for.";
+
+"articleNotFound"           = "Articles not found";
+"articleNotFoundMessage"    = "No articles found for '%@' at this moment";
+
+"searchArticle"             = "Search Articles";
+"searchArticlesMessage"     = "Enter a word to search.";

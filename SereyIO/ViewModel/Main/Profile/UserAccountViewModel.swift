@@ -59,6 +59,7 @@ class UserAccountViewModel: BaseViewModel, DownloadStateNetworkProtocol, ShouldP
     
     let userService: UserService
     let isDownloading: BehaviorRelay<Bool>
+    var didScrolledToIndex: Bool = false
     
     init(_ username: String) {
         self.username = BehaviorRelay(value: username)

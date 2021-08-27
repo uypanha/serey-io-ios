@@ -22,7 +22,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case termsPressed
         case signOutPressed
         case signOutConfirmed
-        case countrySelected(Country)
+        case countrySelected(Country?)
     }
     
     enum ViewToPresent {
@@ -87,6 +87,21 @@ extension MoreViewModel {
                 response.data.result.save()
                 if self?.userInfo.value == nil {
                     self?.userInfo.accept(response.data.result)
+                }
+            }, onError: { [weak self] error in
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    func fetchIpTrace() {
+        self.userService.fetchIpTrace()
+            .subscribe(onNext: { [weak self] data in
+                if let loc = data?.split(separator: "\n").first(where: { $0.contains("loc=") }) {
+                    let countryCode = loc.replacingOccurrences(of: "loc=", with: "")
+                    if let country = CountryManager.shared.country(withCode: countryCode) {
+                        self?.didAction(with: .countrySelected(country))
+                    }
                 }
             }, onError: { [weak self] error in
                 let errorInfo = ErrorHelper.prepareError(error: error)
@@ -207,10 +222,9 @@ fileprivate extension MoreViewModel {
                         case .chooseCountry:
                             self.shouldPresent(.showCountryPicker)
                         case .detectAutomatically:
-                            break
+                            self.fetchIpTrace()
                         case .global:
-                            PreferenceStore.shared.currentUserCountryCode = nil
-                            self.cellModels.accept(self.prepareCellModels())
+                            self.didAction(with: .countrySelected(nil))
                         }
                     }) ~ self.disposeBag
                 self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
@@ -275,7 +289,7 @@ fileprivate extension MoreViewModel {
                 case .signOutConfirmed:
                     AuthData.shared.removeAuthData()
                 case .countrySelected(let country):
-                    PreferenceStore.shared.currentUserCountryCode = country.countryCode
+                    PreferenceStore.shared.currentUserCountryCode = country?.countryCode
                     self?.cellModels.accept(self?.prepareCellModels() ?? [:])
                 }
             }).disposed(by: self.disposeBag)

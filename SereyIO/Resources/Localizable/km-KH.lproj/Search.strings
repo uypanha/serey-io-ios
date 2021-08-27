@@ -12,3 +12,9 @@
 
 "searchPeople"              = "ស្វែងរកអ្នកប្រើប្រាស់";
 "searchPeopleMessage"       = "បញ្ចូលឈ្មោះមនុស្សដែលអ្នកចង់ស្វែងរក";
+
+"articleNotFound"           = "Articles not found";
+"articleNotFoundMessage"    = "No articles found for '%@' at this moment";
+
+"searchArticle"             = "Search Articles";
+"searchArticlesMessage"     = "Enter a word to search.";

@@ -48,6 +48,7 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
     
     let discussionService: DiscussionService
     var currentCountryCode: String?
+    var didScrolledToIndex: Bool = false
     lazy var isDownloading = BehaviorRelay<Bool>(value: false)
     
     override init() {

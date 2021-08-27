@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Urw-qo-YAF" customClass="MDCTabBar">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Urw-qo-YAF" customClass="MDCTabBarView">
                                 <rect key="frame" x="0.0" y="44" width="375" height="48"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -126,7 +126,7 @@
     </scenes>
     <designables>
         <designable name="Urw-qo-YAF">
-            <size key="intrinsicContentSize" width="-1" height="48"/>
+            <size key="intrinsicContentSize" width="0.0" height="48"/>
         </designable>
     </designables>
     <resources>

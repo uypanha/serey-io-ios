@@ -98,11 +98,11 @@ extension SearchViewModel {
         let title: String
         let emptyMessage: String
         if let searchText = self.searchTextFieldViewModel.value, !searchText.isEmpty {
-            title = R.string.search.peopleNotFound.localized()
-            emptyMessage = String(format: R.string.search.peopleNotFoundMessage.localized(), searchText)
+            title = R.string.search.articleNotFound.localized()
+            emptyMessage = String(format: R.string.search.articleNotFoundMessage.localized(), searchText)
         } else {
-            title = R.string.search.searchPeople.localized()
-            emptyMessage = R.string.search.searchPeopleMessage.localized()
+            title = R.string.search.searchArticle.localized()
+            emptyMessage = R.string.search.searchArticlesMessage.localized()
         }
         return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withEmptyTitle: title, emptyDescription: emptyMessage, iconImage: R.image.searchPeople()))
     }

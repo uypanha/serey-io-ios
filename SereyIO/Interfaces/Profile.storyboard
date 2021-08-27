@@ -107,7 +107,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="plx-Dt-EMN">
                                                 <rect key="frame" x="0.0" y="263.5" width="414" height="554.5"/>
                                                 <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dEW-d9-ABp" customClass="MDCTabBar">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dEW-d9-ABp" customClass="MDCTabBarView">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
@@ -179,7 +179,7 @@
     </scenes>
     <designables>
         <designable name="dEW-d9-ABp">
-            <size key="intrinsicContentSize" width="-1" height="48"/>
+            <size key="intrinsicContentSize" width="0.0" height="48"/>
         </designable>
     </designables>
     <resources>

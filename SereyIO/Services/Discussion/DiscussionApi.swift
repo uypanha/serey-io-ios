@@ -62,7 +62,11 @@ extension DiscussionApi: AuthorizedApiTargetType {
                 "typeId"    : type.typeId
             ]
         case .submitPost(let data):
-            return data.parameters
+            var parameters = data.parameters
+            if let country = PreferenceStore.shared.currentCountry {
+                parameters["country_name"] = country.countryName
+            }
+            return parameters
         case .submitComment(let data):
             return data.parameters
         case .deletPost(let username, let permlink):

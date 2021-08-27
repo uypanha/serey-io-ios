@@ -24,7 +24,7 @@ class UserAccountViewController: BaseViewController, AlertDialogController, Load
     @IBOutlet weak var profileContainerView: UIView!
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var followLoadingIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var tabBar: MDCTabBar!
+    @IBOutlet weak var tabBar: MDCTabBarView!
     
     private var tabItems: [UITabBarItem] = [] {
         didSet {
@@ -53,6 +53,12 @@ class UserAccountViewController: BaseViewController, AlertDialogController, Load
         super.viewDidLayoutSubviews()
         
         setupSlideScrollView(slides: self.slideViews.map { $0.view })
+        if self.slideViews.count > 0 && self.slideViews.count == self.tabItems.count && !self.viewModel.didScrolledToIndex {
+            let item = self.tabItems[0]
+            self.tabBar.setSelectedItem(item, animated: true)
+            self.parentScrollView.scrollRectToVisible(self.slideViews[item.tag].view.frame, animated: false)
+            self.viewModel.didScrolledToIndex = true
+        }
     }
 }
 
@@ -70,17 +76,15 @@ extension UserAccountViewController {
         tabBar.tintColor = ColorName.primary.color
         tabBar.setTitleColor(.gray, for: .normal)
         tabBar.setTitleColor(ColorName.primary.color, for: .selected)
-        tabBar.selectedItemTitleFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        tabBar.unselectedItemTitleFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        tabBar.displaysUppercaseTitles = false
+        
+        tabBar.setTitleFont(UIFont.systemFont(ofSize: 14, weight: .medium), for: .selected)
+        tabBar.setTitleFont(UIFont.systemFont(ofSize: 14, weight: .medium), for: .normal)
         tabBar.rippleColor = .clear
-        tabBar.enableRippleBehavior = false
-        tabBar.inkColor = .clear
-        tabBar.itemAppearance = .titles
-        tabBar.alignment = .justified
+        tabBar.selectionIndicatorStrokeColor = ColorName.primary.color
+        
         tabBar.selectionIndicatorTemplate = TabBarIndicator()
         tabBar.bottomDividerColor = ColorName.border.color
-        tabBar.delegate = self
+        tabBar.tabBarDelegate = self
     }
     
     func addSlidesToScrollView() {
@@ -129,9 +133,9 @@ extension UserAccountViewController {
 }
 
 // MARK: - UIScrollViewDelegate
-extension UserAccountViewController: MDCTabBarDelegate {
+extension UserAccountViewController: MDCTabBarViewDelegate {
     
-    func tabBar(_ tabBar: MDCTabBar, willSelect item: UITabBarItem) {
+    func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
         self.contentScrollView.scrollRectToVisible(self.slideViews[item.tag].view.frame, animated: true)
     }
 }
