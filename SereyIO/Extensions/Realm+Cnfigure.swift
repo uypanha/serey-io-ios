@@ -13,12 +13,12 @@ extension Realm {
     
     static func configureRealm(schemaVersion: UInt64) {
         
-        let deleteRealmIfMigrationNeeded: Bool
-        #if DEBUG
-        deleteRealmIfMigrationNeeded = true
-        #else
-        deleteRealmIfMigrationNeeded = false
-        #endif
+        let deleteRealmIfMigrationNeeded: Bool = true
+//        #if DEBUG
+//        deleteRealmIfMigrationNeeded = true
+//        #else
+//        deleteRealmIfMigrationNeeded = false
+//        #endif
         
         let encryptionConfig = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
@@ -30,9 +30,11 @@ extension Realm {
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
                 if (oldSchemaVersion == 0) {
+                    migration.enumerateObjects(ofType: UserModel.className()) { oldObject, newObject in
+                        oldObject?["isClaimReward"] = false
+                    }
                 }
         },
-            
             deleteRealmIfMigrationNeeded: deleteRealmIfMigrationNeeded
         )
         

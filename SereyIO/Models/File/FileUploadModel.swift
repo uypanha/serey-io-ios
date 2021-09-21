@@ -7,21 +7,16 @@
 //
 
 import Foundation
-import ObjectMapper
 
-class FileUploadModel: Mappable {
+class FileUploadModel: Codable {
     
     var responseCode: Int = 0
     var status: String = ""
     var url: String = ""
     
-    required convenience init?(map: Map) {
-        self.init()
-    }
-
-    func mapping(map: Map) {
-        self.responseCode   <- map["responseCode"]
-        self.status         <- map["status"]
-        self.url            <- map["url"]
+    enum CodingKeys: String, CodingKey {
+        case responseCode
+        case status
+        case url
     }
 }

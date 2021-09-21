@@ -46,7 +46,7 @@ extension PushApi: AuthorizedApiTargetType {
         case .login:
             return [
                 "username"      : "mobile",
-                "password"      : "kgx?tMjn@RhBqQ4<",
+                "password"      : "&_3W!nEv'}5cq}XX",
                 "rememberMe"    : true
             ]
         }
@@ -55,13 +55,13 @@ extension PushApi: AuthorizedApiTargetType {
     var path: String {
         switch self {
         case .register:
-            return "/api/notification/user/register"
+            return "/api/notification/user/createToken"
         case .remove:
-            return "/api/notification/user/remove"
+            return "/api/notification/user/removeToken"
         case .login:
             return "/api/notification/user/login"
         case .updateToken:
-            return "/api/notification/user/update"
+            return "/api/notification/user/updateToken"
         }
     }
     
@@ -70,7 +70,12 @@ extension PushApi: AuthorizedApiTargetType {
     }
     
     var task: Task {
-        return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+        switch self {
+        case .login:
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+        default:
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+        }
     }
     
     var headers: [String : String]? {

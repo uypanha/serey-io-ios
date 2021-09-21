@@ -9,6 +9,7 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import RxRelay
 import RxBinding
 
 class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, DownloadStateNetworkProtocol, NotificationObserver {
@@ -100,6 +101,9 @@ class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
     
     internal func updateData(_ data: PostDetailResponse) {
         NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: data.content.permlink, author: data.content.author, post: data.content))
+        if self.post.value == nil {
+            self.post.accept(data.content)
+        }
         self.replies.accept(data.replies)
     }
     

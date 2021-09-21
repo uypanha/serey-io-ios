@@ -17,7 +17,7 @@ API_URL                 = test-api.serey.io
 KYC_URL                 = testkyc.serey.io
 CHAIN_URL               = api.serey.io
 URL_PROTOCOL            = https:/$()/
-NOTIFICATION_URL        = http:/$()/116.203.93.152:9292
+NOTIFICATION_URL        = https:/$()/notification.serey.io
 
 // APP INFO
 app_name                = Serey.io Dev

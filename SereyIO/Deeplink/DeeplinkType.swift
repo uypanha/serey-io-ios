@@ -9,9 +9,9 @@
 import UIKit
 
 enum DeeplinkType {
-    case news(value: String)
-    case reward(value: String)
-    case tripFinished(value: String)
+    case post(permlink: String, author: String)
+    case vote
+    case followFrom(username: String)
     case browser(url: URL)
 }
 

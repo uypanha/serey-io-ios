@@ -9,6 +9,7 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import RxRelay
 import RxBinding
 
 class PostDetailViewModel: BasePostDetailViewModel, ShouldReactToAction, ShouldPresent{

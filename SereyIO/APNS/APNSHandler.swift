@@ -29,7 +29,7 @@ class APNSHandler: NSObject {
     fileprivate lazy var tokenStore = APNSTokenStore()
     private var messageHandlers = [APNSNotificationHandler]()
     
-    required init(withApplication application: UIApplication) {
+    required init(with application: UIApplication) {
         self.application = application
         super.init()
         

@@ -74,6 +74,33 @@ fileprivate extension MainTabBarViewController {
     }
 }
 
+// MARK: - Action Navigations & Tools
+extension MainTabBarViewController {
+    
+    func handleDeeplink(_ deeplink: DeeplinkType) {
+        switch deeplink {
+        case .post(let permlink, let author):
+            if let navVC = (self.selectedViewController as? UINavigationController) {
+                if let postDetailViewController = R.storyboard.post.postDetailViewController() {
+                    postDetailViewController.viewModel = .init(permlink, author)
+                    postDetailViewController.hidesBottomBarWhenPushed = true
+                    navVC.pushViewController(postDetailViewController, animated: true)
+                }
+            }
+        case .followFrom(let username):
+            if let navVC = (self.selectedViewController as? UINavigationController) {
+                if let accountViewController = R.storyboard.profile.userAccountViewController() {
+                    accountViewController.viewModel = .init(username)
+                    accountViewController.hidesBottomBarWhenPushed = true
+                    navVC.show(accountViewController, sender: nil)
+                }
+            }
+        default:
+            break
+        }
+    }
+}
+
 // MARK: - UITabBarControllerDelegate
 extension MainTabBarViewController: UITabBarControllerDelegate {
 

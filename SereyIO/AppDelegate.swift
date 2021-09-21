@@ -123,7 +123,7 @@ fileprivate extension AppDelegate {
     
     func initRealm() {
         // Start to configure realm
-        Realm.configureRealm(schemaVersion: 0)
+        Realm.configureRealm(schemaVersion: 1)
     }
     
     func initSwiftyBeaver() {
@@ -135,6 +135,6 @@ fileprivate extension AppDelegate {
     }
     
     func initAPNSHandler(withApplication application: UIApplication) {
-        apnsHandler = APNSHandler(withApplication: application)
+        apnsHandler = APNSHandler(with: application)
     }
 }

@@ -11,7 +11,6 @@ import Moya
 import RxSwift
 import RxCocoa
 import Alamofire
-import ObjectMapper
 
 /// An `Error` emitted by `AppService Provider`.
 enum AppError: Error {

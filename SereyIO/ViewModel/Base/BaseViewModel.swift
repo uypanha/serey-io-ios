@@ -9,6 +9,7 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import RxBinding
 
 // MARK: - ShouldPresentError
 public protocol ShouldPresentError {

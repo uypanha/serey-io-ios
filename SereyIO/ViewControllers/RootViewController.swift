@@ -74,14 +74,11 @@ extension RootViewController {
                 // reset the deeplink back no nil, so it will not be triggered more than once
                 self.deeplink = nil
             default:
-//                if let mainNavigationController = currentViewController as? MainNavigationViewController {
-//
-//                    mainNavigationController.handleDeeplink(deeplink)
-//
-//                    // reset the deeplink back no nil, so it will not be triggered more than once
-//                    self.deeplink = nil
-//                }
-                break
+                if let mainNavigationController = currentViewController as? MainTabBarViewController {
+                    mainNavigationController.handleDeeplink(deeplink)
+                    // reset the deeplink back no nil, so it will not be triggered more than once
+                    self.deeplink = nil
+                }
             }
         }
     }

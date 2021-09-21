@@ -6,7 +6,8 @@
 //  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import RxMoya
 import RxCocoa
 import RxSwift
 import AnyCodable
