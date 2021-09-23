@@ -23,6 +23,6 @@ NOTIFICATION_URL        = https:/$()/notification.serey.io
 app_name                = Serey.io
 app_bundle              = io.serey.ios
 app_version_name        = 1.0.0
-app_version_code        = 14
+app_version_code        = 15
 
 INCLUDE_WALLET          = true

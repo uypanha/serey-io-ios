@@ -8,7 +8,7 @@ install! 'cocoapods',
 def frameworks_pods
   
   # MARK: - Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  platform :ios, '11'
+  platform :ios, '12'
   use_frameworks!
   inhibit_all_warnings!
 
