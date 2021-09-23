@@ -3,12 +3,13 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/22/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
 import RxCocoa
 import RxSwift
+import RxRelay
 import RxBinding
 
 class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, DownloadStateNetworkProtocol, NotificationObserver {
@@ -45,7 +46,7 @@ class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
     }
     
     convenience init(_ post: PostModel) {
-        self.init(post.permlink, post.authorName)
+        self.init(post.permlink, post.author)
         self.post.accept(post)
     }
     
@@ -78,7 +79,7 @@ class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
     }
     
     internal func notifyDataChanged(_ data: PostModel?) {
-        let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.authorName == AuthData.shared.username : false
+        let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.author == AuthData.shared.username : false
         let isOVerAWeek = data?.isOverAWeek ?? false
         self.isMoreHidden.onNext(isOVerAWeek || !isMorePresent)
     }
@@ -99,7 +100,10 @@ class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
     }
     
     internal func updateData(_ data: PostDetailResponse) {
-        NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: data.content.permlink, author: data.content.authorName, post: data.content))
+        NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: data.content.permlink, author: data.content.author, post: data.content))
+        if self.post.value == nil {
+            self.post.accept(data.content)
+        }
         self.replies.accept(data.replies)
     }
     
@@ -141,7 +145,7 @@ extension BasePostDetailViewModel {
     
     internal func upVote(_ post: PostModel, _ weight: Int, _ isVoting: BehaviorSubject<VotedType?>) {
         isVoting.onNext(.upvote)
-        self.discussionService.upVote(post.permlink, author: post.authorName, weight: weight)
+        self.discussionService.upVote(post.permlink, author: post.author, weight: weight)
             .subscribe(onNext: { [weak self] _ in
                 self?.fetchPostDetial()
                 isVoting.onNext(nil)
@@ -154,7 +158,7 @@ extension BasePostDetailViewModel {
     
     internal func flag(_ post: PostModel, _ weight: Int, _ isVoting: BehaviorSubject<VotedType?>) {
         isVoting.onNext(.flag)
-        self.discussionService.flag(post.permlink, author: post.authorName, weight: weight)
+        self.discussionService.flag(post.permlink, author: post.author, weight: weight)
             .subscribe(onNext: { [weak self] _ in
                 self?.fetchPostDetial()
                 isVoting.onNext(nil)
@@ -167,7 +171,7 @@ extension BasePostDetailViewModel {
     
     internal func downVote(_ post: PostModel, _ votedType: VotedType, _ isVoting: BehaviorSubject<VotedType?>) {
         isVoting.onNext(votedType)
-        self.discussionService.downVote(post.permlink, author: post.authorName)
+        self.discussionService.downVote(post.permlink, author: post.author)
             .subscribe(onNext: { [weak self] _ in
                 self?.fetchPostDetial()
                 isVoting.onNext(nil)
@@ -184,9 +188,9 @@ extension BasePostDetailViewModel {
     
     internal func prepareSubmitCommentModel(_ comment: String) -> SubmitCommentModel {
         let permlink = self.post.value?.permlink ?? ""
-        let author = self.post.value?.authorName ?? ""
+        let author = self.post.value?.author ?? ""
         let title = self.postTitle()
-        let category = self.post.value?.categoryItem.first ?? ""
+        let category = self.post.value?.categories.first ?? ""
         
         return SubmitCommentModel(parentAuthor: author, parentPermlink: permlink, title: title, body: comment, mainCategory: category)
     }
@@ -197,7 +201,7 @@ extension BasePostDetailViewModel {
                 self.post.accept(post)
             } else {
                 var replies = self.replies.value
-                if let indexToUpdate = replies.index(where: { $0.permlink == permlink && $0.authorName == author }) {
+                if let indexToUpdate = replies.index(where: { $0.permlink == permlink && $0.author == author }) {
                     replies[indexToUpdate] = post
                 }
                 self.replies.accept(replies)

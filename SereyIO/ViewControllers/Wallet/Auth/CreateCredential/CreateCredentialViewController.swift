@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 6/19/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -21,9 +21,6 @@ class CreateCredentialViewController: BaseViewController, KeyboardController, Lo
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var skipMessageLabel: UILabel!
     @IBOutlet weak var skipButton: UIButton!
-    
-    var passwordController: MDCTextInputControllerOutlined?
-    var confirmPasswordController: MDCTextInputControllerOutlined?
     
     var viewModel: CreateCredentialViewModel!
     
@@ -44,8 +41,8 @@ extension CreateCredentialViewController {
         self.skipButton.setTitleColor(ColorName.primary.color, for: .normal)
         self.skipButton.customStyle(with: .clear)
         
-        self.passwordController = self.passwordTextField.primaryController()
-        self.confirmPasswordController = self.confirmPasswordTextField.primaryController()
+        self.passwordTextField.primaryStyle()
+        self.confirmPasswordTextField.primaryStyle()
     }
 }
 
@@ -60,8 +57,8 @@ extension CreateCredentialViewController {
     }
     
     func setUpContentChangedObservers() {
-        self.viewModel.passwordTextFieldViewModel.bind(with: passwordTextField, controller: passwordController)
-        self.viewModel.confirmPasswordTextFieldViewModel.bind(with: confirmPasswordTextField, controller: confirmPasswordController)
+        self.viewModel.passwordTextFieldViewModel.bind(withMDC: passwordTextField)
+        self.viewModel.confirmPasswordTextFieldViewModel.bind(withMDC: confirmPasswordTextField)
         
         self.viewModel.shouldEnbleNext ~> self.nextButton.rx.isEnabled ~ self.disposeBag
     }

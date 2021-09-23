@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 6/17/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -18,13 +18,10 @@ class SignUpWalletViewController: BaseViewController, KeyboardController {
     fileprivate lazy var keyboardDisposeBag = DisposeBag()
     
     @IBOutlet weak var signUpLabel: UILabel!
-    @IBOutlet weak var usernameTextField: MDCTextField!
+    @IBOutlet weak var usernameTextField: MDCOutlinedTextField!
     @IBOutlet weak var ownerKeyTextField: MDCPasswordTextField!
     @IBOutlet weak var nextButton: LoadingButton!
     @IBOutlet weak var signUpMessageLabel: UITextView!
-    
-    var userNameController: MDCTextInputControllerOutlined?
-    var ownerKeyController: MDCTextInputControllerOutlined?
     
     var viewModel: SignUpWalletViewModel!
     
@@ -48,8 +45,9 @@ class SignUpWalletViewController: BaseViewController, KeyboardController {
 extension SignUpWalletViewController {
     
     func setUpViews() {
-        self.userNameController = self.usernameTextField.primaryController()
-        self.ownerKeyController = self.ownerKeyTextField.primaryController()
+        self.usernameTextField.primaryStyle()
+        self.ownerKeyTextField.primaryStyle()
+        
         self.usernameTextField.textColor = .lightGray
         self.nextButton.primaryStyle()
         self.signUpMessageLabel.delegate = self
@@ -116,8 +114,8 @@ extension SignUpWalletViewController {
     }
     
     func setUpContentChangedObservers() {
-        self.viewModel.userNameTextFieldViewModel.bind(with: usernameTextField, controller: userNameController)
-        self.viewModel.ownerKeyTextFieldViewModel.bind(with: ownerKeyTextField, controller: ownerKeyController)
+        self.viewModel.userNameTextFieldViewModel.bind(withMDC: usernameTextField)
+        self.viewModel.ownerKeyTextFieldViewModel.bind(withMDC: ownerKeyTextField)
         
         self.viewModel.shouldEnbleSignUp ~> self.nextButton.rx.isEnabled ~ self.disposeBag
     }

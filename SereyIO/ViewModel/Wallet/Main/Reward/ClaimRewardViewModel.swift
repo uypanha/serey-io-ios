@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 9/5/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -47,7 +47,7 @@ extension ClaimRewardViewModel {
         self.transferService.claimReward()
             .subscribe(onNext: { [weak self] data in
                 self?.isLoading.onNext(false)
-                self?.handleClaimRewardSuccess()
+                self?.handleClaimRewardSuccess(data)
             }, onError: { [weak self] error in
                 self?.isLoading.onNext(false)
                 let errorInfo = ErrorHelper.prepareError(error: error)
@@ -66,13 +66,13 @@ fileprivate extension ClaimRewardViewModel {
         }
     }
     
-    func handleClaimRewardSuccess() {
+    func handleClaimRewardSuccess(_ data: ClaimRewardModel) {
         let confirmAction = ActionModel(R.string.common.confirm.localized(), style: .default) {
             self.shouldPresent(.dismiss)
             self.didTransactionUpdate.onNext(())
         }
         
-        let alerDialogModel = AlertDialogModel(title: "Claim Reward", message: "You just cliam your reward.", actions: [confirmAction])
+        let alerDialogModel = AlertDialogModel(title: "Claim Reward", message: data.message ?? data.Message, actions: [confirmAction])
         self.shouldPresent(.showAlertDialogController(alerDialogModel))
     }
 }

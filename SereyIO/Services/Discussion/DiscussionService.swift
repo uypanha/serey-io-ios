@@ -3,10 +3,10 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/26/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxCocoa
 import RxSwift
 import AnyCodable
@@ -18,8 +18,8 @@ class DiscussionService: AppService<DiscussionApi> {
             .asObservable()
     }
     
-    func getDiscussionList(_ type: DiscussionType, _ query: QueryDiscussionsBy) -> Observable<[PostModel]> {
-        return self.provider.rx.requestObject(.getDiscussions(type, query), type: [PostModel].self)
+    func getDiscussionList(_ type: DiscussionType, _ pageModel: PaginationRequestModel) -> Observable<[PostModel]> {
+        return self.provider.rx.requestObject(.getDiscussions(type, pageModel), type: [PostModel].self)
             .asObservable()
     }
     

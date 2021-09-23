@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/14/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -42,7 +42,7 @@ class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, 
         self.commentHidden = BehaviorSubject(value: false)
         
         self.commentViewModel = CommentTextViewModel()
-        super.init(comment.permlink, comment.authorName)
+        super.init(comment.permlink, comment.author)
         
         self.post.accept(comment)
     }
@@ -102,7 +102,7 @@ class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, 
         var post = data.content
         post.replies = data.replies
         self.post.accept(post)
-        NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: data.content.permlink, author: data.content.authorName, post: post))
+        NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: data.content.permlink, author: data.content.author, post: post))
     }
     
     override func notificationReceived(_ notification: Notification) {

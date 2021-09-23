@@ -3,12 +3,14 @@
 //  Emergency
 //
 //  Created by Phanha Uy on 12/4/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
 import RxCocoa
 import RxSwift
+import CountryPicker
+import FlagKit
 
 class SettingCellViewModel: ImageTextCellViewModel {
     
@@ -22,6 +24,7 @@ class SettingCellViewModel: ImageTextCellViewModel {
 
 enum SettingType {
     case myWallet
+    case country
     case lagnauge
     case notificationSettings
     case sereyApps
@@ -32,6 +35,10 @@ enum SettingType {
             switch self {
             case .myWallet:
                 return ImageTextModel(image: R.image.walletIcon(), titleText: R.string.settings.myWallet.localized())
+            case .country:
+                let country = CountryManager.shared.country(withCode: PreferenceStore.shared.currentUserCountryCode ?? "")
+                let image = country == nil ? R.image.globalIcon() : Flag.init(countryCode: country!.countryCode)?.image(style: .roundedRect)
+                return ImageTextModel(image: image, titleText: "Country (\(country?.countryName ?? "Global"))")
             case .lagnauge:
                 let text = String(format: R.string.settings.language.localized(), LanguageManger.shared.currentLanguage.languageText ?? "")
                 return ImageTextModel(image: R.image.languageIcon(), titleText: text)

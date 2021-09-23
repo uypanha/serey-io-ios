@@ -3,10 +3,10 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/25/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxCocoa
 import RxSwift
 import RxBinding
@@ -33,6 +33,7 @@ class UserAccountViewModel: BaseViewModel, DownloadStateNetworkProtocol, ShouldP
         case voteDialogController(VoteDialogViewModel)
         case downVoteDialogController(DownvoteDialogViewModel)
         case signInViewController
+        case draftListViewController(DraftListViewModel)
     }
     
     // input:
@@ -58,6 +59,7 @@ class UserAccountViewModel: BaseViewModel, DownloadStateNetworkProtocol, ShouldP
     
     let userService: UserService
     let isDownloading: BehaviorRelay<Bool>
+    var didScrolledToIndex: Bool = false
     
     init(_ username: String) {
         self.username = BehaviorRelay(value: username)
@@ -165,7 +167,7 @@ extension UserAccountViewModel {
         func prepareViewModel(_ username: String) -> BaseViewModel {
             switch self {
             case .post:
-                return PostTableViewModel(.byUser(username))
+                return UserPostListViewModel(username)
             case .comment:
                 return CommentsListViewModel(username, with: .comments)
             case .replies:
@@ -294,6 +296,8 @@ fileprivate extension UserAccountViewModel {
                     self?.shouldPresent(.downVoteDialogController(downVoteDialogViewModel))
                 case .signInViewController:
                     self?.shouldPresent(.signInViewController)
+                case .draftsViewController(let draftListViewModel):
+                    self?.shouldPresent(.draftListViewController(draftListViewModel))
                 default:
                     break
                 }

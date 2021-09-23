@@ -3,10 +3,10 @@
 //  KongBeiClient
 //
 //  Created by Phanha Uy on 6/5/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import RxCocoa
 

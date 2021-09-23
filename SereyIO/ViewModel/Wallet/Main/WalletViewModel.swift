@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 7/1/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -92,7 +92,11 @@ extension WalletViewModel {
     }
     
     func prepareMenuCells(_ menuItems: [WalletMenu]) -> [CellViewModel] {
-        return menuItems.map { WalletMenuCellViewModel($0) }
+        return menuItems.map { menu in
+            var isEnabled = true
+            if menu == .claimReward { isEnabled = self.userInfo.value?.isClaimReward ?? true }
+            return WalletMenuCellViewModel(menu, isEnabled: isEnabled)
+        }
     }
 }
 
@@ -122,9 +126,11 @@ fileprivate extension WalletViewModel {
                 self.setUpTransactionObserers(powerDownViewModel)
                 self.shouldPresent(.powerDownController(powerDownViewModel))
             case .claimReward:
-                let claimRewardViewModel = ClaimRewardViewModel()
-                self.setUpTransactionObserers(claimRewardViewModel)
-                self.shouldPresent(.claimRewardController(claimRewardViewModel))
+                if self.userInfo.value?.isClaimReward == true {
+                    let claimRewardViewModel = ClaimRewardViewModel()
+                    self.setUpTransactionObserers(claimRewardViewModel)
+                    self.shouldPresent(.claimRewardController(claimRewardViewModel))
+                }
             case .cancelPower:
                 let cancelPowerDownViewModel = CancelPowerDownViewModel()
                 self.setUpTransactionObserers(cancelPowerDownViewModel)
@@ -169,6 +175,7 @@ extension WalletViewModel {
                 let coin = WalletType.coin(coins: userModel?.balance.replacingOccurrences(of: "SEREY", with: ""))
                 let power = WalletType.power(power: userModel?.sereypower.replacingOccurrences(of: "SEREY", with: ""))
                 self.wallets.accept([coin, power])
+                self.menu.accept(WalletMenu.menuItems)
             }).disposed(by: self.disposeBag)
     }
     

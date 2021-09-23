@@ -3,10 +3,10 @@
 //  Emergency
 //
 //  Created by Phanha Uy on 5/14/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxCocoa
 import RxSwift
 

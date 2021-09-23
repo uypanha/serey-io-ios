@@ -3,10 +3,11 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 7/28/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import RxMoya
 import RxCocoa
 import RxSwift
 import AnyCodable

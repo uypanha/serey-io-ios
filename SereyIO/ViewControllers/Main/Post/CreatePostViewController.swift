@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 3/23/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -37,6 +37,9 @@ class CreatePostViewController: BaseViewController, KeyboardController, LoadingI
         return MediaPickerHelper(withPresenting: self)
     }()
     
+    lazy var closeButton: UIBarButtonItem = {
+        return UIBarButtonItem(image: R.image.clearIcon(), style: .plain, target: nil, action: nil)
+    }()
     lazy var postButton: UIBarButtonItem = { [unowned self] in
         return UIBarButtonItem(title: self.viewModel.postTitle, style: .plain, target: nil, action: nil)
     }()
@@ -90,6 +93,7 @@ extension CreatePostViewController {
         setUpEditorView(self.richEditorView)
         
         self.navigationItem.rightBarButtonItem = self.postButton
+        self.navigationItem.leftBarButtonItem = self.closeButton
         self.prepareTableView()
     }
     
@@ -178,6 +182,11 @@ extension CreatePostViewController {
             .map { CreatePostViewModel.Action.postPressed }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
+        
+        self.closeButton.rx.tap
+            .map { CreatePostViewModel.Action.closePressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpContentChangedObservers() {
@@ -202,9 +211,8 @@ extension CreatePostViewController {
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
         
-        self.viewModel.newThumbnailImage.asObservable()
+        self.viewModel.thumbnailImage.asObservable()
             .filter { $0 != nil }
-            .map { $0!.image }
             ~> self.thumbnailImageView.rx.image
             ~ self.disposeBag
         
@@ -221,6 +229,7 @@ extension CreatePostViewController {
             ~ self.disposeBag
         
         self.viewModel.thumbnialUrl.asObservable()
+            .filter { $0 != nil }
             .map { $0 }
             .bind(to: self.thumbnailImageView.kf.rx.image())
             ~ self.disposeBag
@@ -242,18 +251,15 @@ extension CreatePostViewController {
                     let listTableViewController = ListTableViewController(viewModel)
                     listTableViewController.title = title
                     listTableViewController.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 8, right: 0)
-                    listTableViewController.view.roundCorners(corners: [.topLeft, .topRight], radius: 8)
-                    let bottomSheet = MDCBottomSheetController(contentViewController: listTableViewController)
-                    bottomSheet.isScrimAccessibilityElement = false
-                    bottomSheet.automaticallyAdjustsScrollViewInsets = false
-                    bottomSheet.dismissOnDraggingDownSheet = true
-                    bottomSheet.trackingScrollView = listTableViewController.tableView
+                    let bottomSheet = BottomSheetListViewController(contentViewController: listTableViewController)
                     self.present(bottomSheet, animated: true, completion: nil)
                 case .chooseMediaController(let title, let editable):
                     self.imagePickerHelper.allowEditting = editable
                     self.imagePickerHelper.showImagePickerAlert(title: title)
                 case .dismiss:
                     self.dismiss(animated: true, completion: nil)
+                case .showAlertDialogController(let alertDialogModel):
+                    self.showDialog(alertDialogModel)
                 }
             }) ~ self.disposeBag
     }

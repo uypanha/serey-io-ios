@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/2/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import RxBinding
 import RxDataSources
+import CountryPicker
 
 class MoreViewController: BaseViewController, AlertDialogController {
     
@@ -101,6 +102,17 @@ extension MoreViewController {
         }
         
         return dataSource
+    }
+    
+    func showCountryPicker() {
+        let countryController = CountryPickerWithSectionViewController.presentController(on: self) { [weak self] (country: Country) in
+            guard let self = self else { return }
+            
+            self.viewModel.didAction(with: .countrySelected(country))
+        }
+        countryController.flagStyle = .circular
+        countryController.isCountryDialHidden = true
+        countryController.labelFont = UIFont.systemFont(ofSize: 16, weight: .medium)
     }
 }
 
@@ -206,6 +218,11 @@ fileprivate extension MoreViewController {
                     let walletViewConroller = SereyWallet.newInstance().rootViewController
                     walletViewConroller.modalPresentationStyle = .fullScreen
                     self.present(walletViewConroller, animated: true, completion: nil)
+                case .bottomListViewController(let bottomListMenuViewModel):
+                    let bottomMenuViewController = BottomMenuViewController(bottomListMenuViewModel)
+                    self.present(bottomMenuViewController, animated: true, completion: nil)
+                case .showCountryPicker:
+                    self.showCountryPicker()
                 }
             }).disposed(by: self.disposeBag)
     }

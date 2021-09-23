@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 1/11/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -27,7 +27,7 @@ protocol FieldViewModelProtocol {
     init(withTextFieldModel textFieldModel: TextFieldModel)
     
     // Validation
-    func validate() -> Bool
+    func validate(validation: TextFieldValidation?) -> Bool
 }
 
 extension FieldViewModelProtocol {
@@ -112,8 +112,8 @@ class TextFieldViewModel: CellViewModel, FieldViewModelProtocol {
             .disposed(by: self.disposeBag)
     }
     
-    func validate() -> Bool {
-        guard self.textValidation.validate(textToValidate: self.textFieldText.value ?? "") else {
+    func validate(validation: TextFieldValidation? = nil) -> Bool {
+        guard (validation ?? self.textValidation).validate(textToValidate: self.textFieldText.value ?? "") else {
             errorText.accept(errorMessage)
             return false
         }
@@ -143,15 +143,15 @@ class TextFieldViewModel: CellViewModel, FieldViewModelProtocol {
 extension TextFieldViewModel {
     
     static func userNameTextFieldViewModel() -> TextFieldViewModel {
-        return textFieldWith(title: R.string.auth.userName.localized(), errorMessage: R.string.auth.userNameRequiredMessage.localized(), validation: .notEmpty)
+        return textFieldWith(title: R.string.auth.userName.localized(), placeholder: "ex: sereyuser", errorMessage: R.string.auth.userNameRequiredMessage.localized(), validation: .notEmpty)
     }
     
     static func privateKeyOrPwdTextFieldViewModel(_ placeholder: String = R.string.auth.privateKeyOrPassword.localized(), _ errorMessage: String = R.string.auth.privateKeyOrPasswordRequireMessage.localized()) -> TextFieldViewModel {
         return textFieldWith(title: placeholder, errorMessage: errorMessage, validation: .notEmpty)
     }
     
-    static func textFieldWith(title: String, errorMessage: String? = nil, validation: TextFieldValidation = .none) -> TextFieldViewModel {
-        let textFieldModel = TextFieldModel(titleText: title, placeholderText: title, textFieldText: BehaviorRelay(value: ""), errorText: errorMessage, textValidation: validation)
+    static func textFieldWith(title: String, placeholder: String? = nil, errorMessage: String? = nil, validation: TextFieldValidation = .none) -> TextFieldViewModel {
+        let textFieldModel = TextFieldModel(titleText: title, placeholderText: placeholder ?? title, textFieldText: BehaviorRelay(value: ""), errorText: errorMessage, textValidation: validation)
         
         return TextFieldViewModel(withTextFieldModel: textFieldModel)
     }
@@ -176,11 +176,15 @@ extension TextFieldViewModel {
         }
     }
     
-    func bind(with textField: MDCTextField, controller: MDCTextInputControllerBase? = nil) {
-        bind(with: textField as UITextField)
+    func bind(withMDC textField: MDCOutlinedTextField, clearErrorOnEdit: Bool = true) {
+        bind(with: textField)
+        
+        titleText.bind(to: textField.label.rx.text).disposed(by: self.disposeBag)
+        
         errorText.asObservable()
             .subscribe(onNext: { errorText in
-                controller?.setErrorText(errorText, errorAccessibilityValue: errorText)
+                errorText == nil ? textField.primaryStyle() : textField.dangerouseStyle()
+                textField.leadingAssistiveLabel.text = errorText
             }).disposed(by: self.disposeBag)
     }
 }

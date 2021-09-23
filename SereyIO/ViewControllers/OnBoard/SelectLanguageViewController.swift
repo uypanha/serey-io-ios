@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 1/27/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -121,6 +121,8 @@ fileprivate extension SelectLanguageViewController {
 //                        self.bottomSheet?.trackingScrollView = chooseLanguageSheetViewController.tableView
                         self.present(self.bottomSheet!, animated: true, completion: nil)
                     }
+                case .mainViewController:
+                    AppDelegate.shared?.rootViewController?.switchToMainScreen()
                 }
             }) ~ self.disposeBag
     }

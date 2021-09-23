@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 3/18/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -24,6 +24,7 @@ import RealmSwift
     @objc dynamic var followersCount: Int = 0
     @objc dynamic var profilePicture: String? = nil
     @objc dynamic var recoveryAccount: String? = nil
+    @objc dynamic var isClaimReward: Bool = false
     
     override static func primaryKey() -> String? {
         return "id"
@@ -42,6 +43,7 @@ import RealmSwift
         case followersCount
         case profilePicture
         case recoveryAccount = "recovery_account"
+        case isClaimReward
     }
 }
 

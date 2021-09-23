@@ -3,15 +3,16 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/10/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxCocoa
 import RxSwift
 import RxBinding
 import RxRealm
 import Then
+import CountryPicker
 
 class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, CollectionMultiSectionsProviderModel, ShouldReactToAction, ShouldPresent {
     
@@ -21,6 +22,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case termsPressed
         case signOutPressed
         case signOutConfirmed
+        case countrySelected(Country?)
     }
     
     enum ViewToPresent {
@@ -32,6 +34,8 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case webViewController(WebViewViewModel)
         case walletViewController
         case signOutDialog
+        case bottomListViewController(BottomListMenuViewModel)
+        case showCountryPicker
     }
     
     // input:
@@ -90,6 +94,21 @@ extension MoreViewModel {
             }) ~ self.disposeBag
     }
     
+    func fetchIpTrace() {
+        self.userService.fetchIpTrace()
+            .subscribe(onNext: { [weak self] data in
+                if let loc = data?.split(separator: "\n").first(where: { $0.contains("loc=") }) {
+                    let countryCode = loc.replacingOccurrences(of: "loc=", with: "")
+                    if let country = CountryManager.shared.country(withCode: countryCode) {
+                        self?.didAction(with: .countrySelected(country))
+                    }
+                }
+            }, onError: { [weak self] error in
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
     fileprivate func signOutRequest() {
     }
 }
@@ -134,9 +153,13 @@ extension MoreViewModel {
                 sectionItems[.signIn] = [signInCellViewModel]
             #endif
         }
-        sectionItems[.general] = [SettingCellViewModel(.lagnauge), SettingCellViewModel(.notificationSettings, true)]
+        sectionItems[.general] = [
+            SettingCellViewModel(.country),
+            SettingCellViewModel(.lagnauge),
+            SettingCellViewModel(.notificationSettings, true)
+        ]
         sectionItems[.about] = [
-//            SettingCellViewModel(.sereyApps),
+            SettingCellViewModel(.sereyApps),
             SettingCellViewModel(.version, true)
         ]
         
@@ -187,6 +210,24 @@ fileprivate extension MoreViewModel {
                 self.shouldPresent(.notificationSettingsController)
             case .myWallet:
                 self.shouldPresent(.walletViewController)
+            case .country:
+                let items = ChooseCountryOption.allCases.map { $0.cellModel }
+                let bottomListMenuViewModel = BottomListMenuViewModel(header: "Choose Country Option", items)
+                bottomListMenuViewModel.shouldSelectMenuItem
+                    .map { $0 as? ChooseCountryOptionCellViewModel }
+                    .map { $0?.option }
+                    .subscribe(onNext: { [unowned self] option in
+                        guard let option = option else { return }
+                        switch option {
+                        case .chooseCountry:
+                            self.shouldPresent(.showCountryPicker)
+                        case .detectAutomatically:
+                            self.fetchIpTrace()
+                        case .global:
+                            self.didAction(with: .countrySelected(nil))
+                        }
+                    }) ~ self.disposeBag
+                self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
             default:
                 break
             }
@@ -247,6 +288,9 @@ fileprivate extension MoreViewModel {
                     self?.shouldPresent(.signOutDialog)
                 case .signOutConfirmed:
                     AuthData.shared.removeAuthData()
+                case .countrySelected(let country):
+                    PreferenceStore.shared.currentUserCountryCode = country?.countryCode
+                    self?.cellModels.accept(self?.prepareCellModels() ?? [:])
                 }
             }).disposed(by: self.disposeBag)
     }

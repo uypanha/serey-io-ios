@@ -3,17 +3,18 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/26/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
 import Moya
+import CountryPicker
 
 enum DiscussionApi {
     
     case getCategories
     
-    case getDiscussions(DiscussionType, QueryDiscussionsBy)
+    case getDiscussions(DiscussionType, PaginationRequestModel)
     
     case getPostDetail(permlink: String, authorName: String)
     
@@ -36,8 +37,20 @@ extension DiscussionApi: AuthorizedApiTargetType {
     
     var parameters: [String : Any] {
         switch self {
-        case .getDiscussions(let type, let query):
-            return query.prepareParameters(type)
+        case .getCategories:
+            if let country = PreferenceStore.shared.currentCountry {
+                return [ "type" : country.countryName.lowercased() ]
+            }
+            return [:]
+        case .getDiscussions(let type, let pageModel):
+            var parameters: [String: Any] = pageModel.parameters
+            type.params.forEach { param in
+                parameters[param.key] = param.value
+            }
+            if let country = PreferenceStore.shared.currentCountry {
+                parameters["country_name"] = country.countryName
+            }
+            return parameters
         case .getPostDetail(let permlink, let authorName):
             return [
                 "permlink"      : permlink,
@@ -49,7 +62,11 @@ extension DiscussionApi: AuthorizedApiTargetType {
                 "typeId"    : type.typeId
             ]
         case .submitPost(let data):
-            return data.parameters
+            var parameters = data.parameters
+            if let country = PreferenceStore.shared.currentCountry {
+                parameters["country_name"] = country.countryName
+            }
+            return parameters
         case .submitComment(let data):
             return data.parameters
         case .deletPost(let username, let permlink):
@@ -74,8 +91,6 @@ extension DiscussionApi: AuthorizedApiTargetType {
                 "author"    : author,
                 "permlink"  : permlink
             ]
-        default:
-            return [:]
         }
     }
     
@@ -86,7 +101,7 @@ extension DiscussionApi: AuthorizedApiTargetType {
         case .getDiscussions(let type, _):
             return "/api/v1/sereyweb/\(type.path)"
         case .getPostDetail:
-            return "/api/v1/sereyweb/findDetailBypermlink"
+            return "/api/v1/sereyweb/getDetailByPermlink"
         case .getCommentReply:
             return "/api/v1/sereyweb/findRepliesOrCommentsByUserId"
         case .submitPost:
@@ -115,12 +130,10 @@ extension DiscussionApi: AuthorizedApiTargetType {
     
     var task: Task {
         switch self {
-        case .getDiscussions, .getPostDetail, .getCommentReply:
+        case .getDiscussions, .getPostDetail, .getCommentReply, .getCategories:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         case .submitPost, .submitComment, .deletPost, .upVote, .flag, .downVote:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
-        default:
-            return .requestPlain
         }
     }
     
@@ -135,15 +148,24 @@ fileprivate extension DiscussionType {
     var path: String {
         switch self {
         case .trending:
-            return "getPostsByTrending"
+            return "getAllPostsByTrending"
         case .hot:
-            return "getPostsByHot"
+            return "getAllPostsByHot"
         case .new:
-            return "findByNew"
+            return "getAllPostsByNew"
         case .byUser:
-            return "findByUserId"
+            return "getAllPostsByUserId"
         case .byCategoryId:
             return "getPostsByCategoryId"
+        }
+    }
+    
+    var params: [String: Any] {
+        switch self {
+        case .byUser(let username):
+            return ["userId" : username]
+        default:
+            return [:]
         }
     }
 }

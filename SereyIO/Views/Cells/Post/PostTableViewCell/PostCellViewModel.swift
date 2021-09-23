@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/6/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -85,21 +85,21 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
     
     internal func notifyDataChanged(_ data: PostModel?) {
         self.profileViewModel.onNext(data?.profileViewModel)
-        self.authorName.onNext(data?.authorName.capitalized)
+        self.authorName.onNext(data?.author.capitalized)
         self.publishedAt.onNext(data?.publishedDateString)
         self.thumbnailURL.onNext(data?.firstThumnailURL)
-        self.tags.onNext(data?.categoryItem ?? [])
+        self.tags.onNext(data?.categories ?? [])
         self.titleText.onNext(data?.title)
-        self.contentDesc.onNext(data?.description)
+        self.contentDesc.onNext(data?.descriptionText)
         self.sereyValue.onNext(data?.sereyValue)
-        self.upVoteCount.onNext("\(data?.upvote ?? 0)")
-        self.downVoteCount.onNext("\(data?.flag ?? 0)")
+        self.upVoteCount.onNext("\(data?.voterCount ?? 0)")
+        self.downVoteCount.onNext("\(data?.flaggerCount ?? 0)")
         self.commentCount.onNext("\(data?.answerCount ?? 0)")
-        let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.authorName == AuthData.shared.username : false
+        let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.author == AuthData.shared.username : false
         let isOverAWeek = data?.isOverAWeek ?? false
         self.isMoreHidden.onNext(isOverAWeek || !isMorePresent)
         
-        self.isVoteAllowed.accept(data?.authorName != AuthData.shared.username)
+        self.isVoteAllowed.accept(data?.author != AuthData.shared.username)
         self.votedType.accept(data?.votedType)
         self.upVoteEnabled.onNext(data?.votedType != .flag)
         self.flagEnabled.onNext(data?.votedType != .upvote)

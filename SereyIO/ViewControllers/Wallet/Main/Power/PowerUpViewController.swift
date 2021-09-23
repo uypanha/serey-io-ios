@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/25/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -18,14 +18,11 @@ class PowerUpViewController: BaseViewController, KeyboardController, AlertDialog
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var contentView: UIView!
     
-    @IBOutlet weak var accountTextField: MDCTextField!
-    @IBOutlet weak var amountTextField: MDCTextField!
+    @IBOutlet weak var accountTextField: MDCOutlinedTextField!
+    @IBOutlet weak var amountTextField: MDCOutlinedTextField!
     
     @IBOutlet weak var upMyselfButton: UIButton!
     @IBOutlet weak var powerUpButton: LoadingButton!
-    
-    var accountFieldController: MDCTextInputControllerOutlined?
-    var amountFieldController: MDCTextInputControllerOutlined?
     
     var viewModel: PowerUpViewModel!
     
@@ -64,8 +61,8 @@ extension PowerUpViewController {
     func setUpViews() {
         self.headerView.backgroundColor = ColorName.primary.color
         
-        self.accountFieldController = self.accountTextField.primaryController()
-        self.amountFieldController = self.amountTextField.primaryController()
+        self.accountTextField.primaryStyle()
+        self.amountTextField.primaryStyle()
         
         self.amountTextField.leftView = UIImageView(image: R.image.amountIcon()).then { $0.tintColor = .gray }
         self.amountTextField.leftViewMode = .always
@@ -88,8 +85,8 @@ extension PowerUpViewController {
     }
     
     func setUpContentChangedObservers() {
-        self.viewModel.accountTextFieldViewModel.bind(with: self.accountTextField, controller: self.accountFieldController)
-        self.viewModel.amountTextFieldViewModel.bind(with: self.amountTextField, controller: self.amountFieldController)
+        self.viewModel.accountTextFieldViewModel.bind(withMDC: self.accountTextField)
+        self.viewModel.amountTextFieldViewModel.bind(withMDC: self.amountTextField)
         
         self.viewModel.isPowerUpEnabled ~> self.powerUpButton.rx.isEnabled ~ self.disposeBag
     }

@@ -3,13 +3,15 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 3/18/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
 import Moya
 
 enum UserApi {
+    
+    case iPTrace
     
     case profile(userName: String)
     
@@ -23,6 +25,15 @@ enum UserApi {
 }
 
 extension UserApi: AuthorizedApiTargetType {
+    
+    public var baseURL: URL {
+        switch self {
+        case .iPTrace:
+            return URL(string: "https://www.cloudflare.com")!
+        default:
+            return Constants.apiEndPoint
+        }
+    }
     
     var parameters: [String : Any] {
         switch self {
@@ -52,6 +63,8 @@ extension UserApi: AuthorizedApiTargetType {
     
     var path: String {
         switch self {
+        case .iPTrace:
+            return "/cdn-cgi/trace"
         case .profile(let username):
             return "/api/v1/accounts/\(username)"
         case .getFollowAction:

@@ -59,6 +59,16 @@
 		DC1C6EC923FC3F6100BA701D /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1C6EC823FC3F6100BA701D /* BaseCollectionViewCell.swift */; };
 		DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1C6ECA23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift */; };
 		DC1C6ECD23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1C6ECB23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib */; };
+		DC1CBD1E259250D700CCB714 /* DraftModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD1D259250D700CCB714 /* DraftModel.swift */; };
+		DC1CBD2625939E9A00CCB714 /* UserPostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD2525939E9A00CCB714 /* UserPostListViewModel.swift */; };
+		DC1CBD3F2593A1CE00CCB714 /* DraftSavedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD3D2593A1CE00CCB714 /* DraftSavedTableViewCell.swift */; };
+		DC1CBD402593A1CE00CCB714 /* DraftSavedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1CBD3E2593A1CE00CCB714 /* DraftSavedTableViewCell.xib */; };
+		DC1CBD4E2594E75F00CCB714 /* DraftSavedCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD4D2594E75F00CCB714 /* DraftSavedCellViewModel.swift */; };
+		DC1CBD562594F53A00CCB714 /* DraftListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD552594F53900CCB714 /* DraftListViewController.swift */; };
+		DC1CBD5E2594F59B00CCB714 /* DraftListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD5D2594F59B00CCB714 /* DraftListViewModel.swift */; };
+		DC1CBD652594F79200CCB714 /* DraftTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD632594F79100CCB714 /* DraftTableViewCell.swift */; };
+		DC1CBD662594F79200CCB714 /* DraftTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC1CBD642594F79200CCB714 /* DraftTableViewCell.xib */; };
+		DC1CBD6E2596325A00CCB714 /* DraftCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1CBD6D2596325900CCB714 /* DraftCellViewModel.swift */; };
 		DC1F79CF24CF294200B7F0D3 /* CreateCredentialCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F79CE24CF294200B7F0D3 /* CreateCredentialCellViewModel.swift */; };
 		DC1F79D624D0888D00B7F0D3 /* TransferApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F79D524D0888D00B7F0D3 /* TransferApi.swift */; };
 		DC1F79D824D088AB00B7F0D3 /* TransferService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1F79D724D088AB00B7F0D3 /* TransferService.swift */; };
@@ -93,6 +103,9 @@
 		DC42AF0423E9CFB5008F8A0F /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC42AF0223E9CFB5008F8A0F /* PostTableViewCell.swift */; };
 		DC42AF0523E9CFB5008F8A0F /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC42AF0323E9CFB5008F8A0F /* PostTableViewCell.xib */; };
 		DC42AF0723E9D39B008F8A0F /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC42AF0623E9D39B008F8A0F /* CardView.swift */; };
+		DC4B162A2698933B0070A442 /* ChooseCountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4B16292698933B0070A442 /* ChooseCountryViewController.swift */; };
+		DC4B162C269893F10070A442 /* ChooseCountryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4B162B269893F10070A442 /* ChooseCountryViewModel.swift */; };
+		DC4B162E26989A780070A442 /* AccesoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC4B162D26989A770070A442 /* AccesoryButton.swift */; };
 		DC562433241E73D80076A78C /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC562432241E73D80076A78C /* SignInViewModel.swift */; };
 		DC562436241E75450076A78C /* Auth.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC562438241E75450076A78C /* Auth.strings */; };
 		DC56243C241E82B80076A78C /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC56243B241E82B80076A78C /* AuthService.swift */; };
@@ -184,7 +197,6 @@
 		DC7558C32459D1DD00AD40FA /* Notifications.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC7558C52459D1DD00AD40FA /* Notifications.strings */; };
 		DC7558C92459DB0400AD40FA /* Search.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC7558CB2459DB0400AD40FA /* Search.strings */; };
 		DC7558CF2459DFD800AD40FA /* Home.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC7558D12459DFD800AD40FA /* Home.strings */; };
-		DC7558D42459F1EF00AD40FA /* GoogleService-Info-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC7558D32459F1EE00AD40FA /* GoogleService-Info-Release.plist */; };
 		DC75DAB7244DF0C100D80CB2 /* PostCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */; };
 		DC75DAB9244E055000D80CB2 /* FollowActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */; };
 		DC75DABB244E07EE00D80CB2 /* FollowerListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */; };
@@ -217,6 +229,30 @@
 		DC7F098624AE36B500CE8AFC /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7F098524AE36B500CE8AFC /* TransactionHistoryViewController.swift */; };
 		DC7F098924B05ED400CE8AFC /* Steem in Frameworks */ = {isa = PBXBuildFile; productRef = DC7F098824B05ED400CE8AFC /* Steem */; };
 		DC7F098B24B06A0600CE8AFC /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC7F098A24B06A0600CE8AFC /* Colors.xcassets */; };
+		DC803C512697492200FCD2B2 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC803C502697492200FCD2B2 /* OnBoardingViewController.swift */; };
+		DC803C5326974A8800FCD2B2 /* OnBoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC803C5226974A8800FCD2B2 /* OnBoardingViewModel.swift */; };
+		DC803C5626974C3B00FCD2B2 /* PageItemControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC803C5526974C3B00FCD2B2 /* PageItemControllerProtocol.swift */; };
+		DC803C5826974C9300FCD2B2 /* FeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC803C5726974C9300FCD2B2 /* FeatureViewController.swift */; };
+		DC803C5B26974CD600FCD2B2 /* FeatureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC803C5A26974CD600FCD2B2 /* FeatureViewModel.swift */; };
+		DC817F8726D7F11C001E2BAE /* GoogleService-Info-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC817F8626D7F11C001E2BAE /* GoogleService-Info-Release.plist */; };
+		DC817F8A26D7FB72001E2BAE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F8926D7FB72001E2BAE /* SnapKit */; };
+		DC817F8D26D7FCFC001E2BAE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F8C26D7FCFC001E2BAE /* FirebaseAnalytics */; };
+		DC817F8F26D7FCFC001E2BAE /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F8E26D7FCFC001E2BAE /* FirebaseMessaging */; };
+		DC817F9126D7FCFC001E2BAE /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F9026D7FCFC001E2BAE /* FirebaseCrashlytics */; };
+		DC817F9426D7FD75001E2BAE /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F9326D7FD75001E2BAE /* Then */; };
+		DC817F9726D7FF0E001E2BAE /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F9626D7FF0E001E2BAE /* Moya */; };
+		DC817F9926D7FF0E001E2BAE /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F9826D7FF0E001E2BAE /* RxMoya */; };
+		DC817F9B26D7FF0E001E2BAE /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F9A26D7FF0E001E2BAE /* ReactiveMoya */; };
+		DC817F9E26D7FF9D001E2BAE /* FlagKit in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F9D26D7FF9D001E2BAE /* FlagKit */; };
+		DC817FA126D7FFE8001E2BAE /* RxAlamofire in Frameworks */ = {isa = PBXBuildFile; productRef = DC817FA026D7FFE8001E2BAE /* RxAlamofire */; };
+		DC817FA426D80129001E2BAE /* RxRealm in Frameworks */ = {isa = PBXBuildFile; productRef = DC817FA326D80129001E2BAE /* RxRealm */; };
+		DC817FA726D801A8001E2BAE /* RxBinding in Frameworks */ = {isa = PBXBuildFile; productRef = DC817FA626D801A8001E2BAE /* RxBinding */; };
+		DC817FAA26D8021D001E2BAE /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = DC817FA926D8021D001E2BAE /* RxDataSources */; };
+		DC817FAC26D8021D001E2BAE /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = DC817FAB26D8021D001E2BAE /* Differentiator */; };
+		DC817FAF26D80251001E2BAE /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = DC817FAE26D80251001E2BAE /* RxKeyboard */; };
+		DC817FB226D802C0001E2BAE /* RxKingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = DC817FB126D802C0001E2BAE /* RxKingfisher */; };
+		DC817FB526D80335001E2BAE /* RxReachability in Frameworks */ = {isa = PBXBuildFile; productRef = DC817FB426D80335001E2BAE /* RxReachability */; };
+		DC817FB826D803C1001E2BAE /* AlamofireNetworkActivityLogger in Frameworks */ = {isa = PBXBuildFile; productRef = DC817FB726D803C1001E2BAE /* AlamofireNetworkActivityLogger */; };
 		DC83C38224E19DCC008C9EAB /* ConfirmTransferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83C38124E19DCC008C9EAB /* ConfirmTransferViewController.swift */; };
 		DC83C38424E19F2A008C9EAB /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83C38324E19F2A008C9EAB /* BottomSheetViewController.swift */; };
 		DC83C38624E1A9DE008C9EAB /* ConfirmTransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC83C38524E1A9DE008C9EAB /* ConfirmTransferViewModel.swift */; };
@@ -233,9 +269,9 @@
 		DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */; };
 		DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73823DF3F5200EB7F79 /* SelectLanguageViewController.swift */; };
 		DC88A73C23DF4A8900EB7F79 /* SelectLanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73B23DF4A8900EB7F79 /* SelectLanguageViewModel.swift */; };
-		DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88A73D23DF4B7900EB7F79 /* BoardingViewController.swift */; };
 		DC88B13324F5729500327C50 /* Power.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC88B13224F5729500327C50 /* Power.storyboard */; };
 		DC88B13624F5739000327C50 /* PowerUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88B13524F5739000327C50 /* PowerUpViewController.swift */; };
+		DC88B1A0269F278A001FA62A /* ChooseCountryOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC88B19F269F278A001FA62A /* ChooseCountryOption.swift */; };
 		DC8AB7BE24FBA13200968FCD /* ConfirmPowerUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8AB7BD24FBA13200968FCD /* ConfirmPowerUpViewController.swift */; };
 		DC8AB7C024FC058600968FCD /* ConfirmPowerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8AB7BF24FC058600968FCD /* ConfirmPowerViewModel.swift */; };
 		DC8AB7C224FD54B400968FCD /* PowerUpModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8AB7C124FD54B400968FCD /* PowerUpModel.swift */; };
@@ -247,6 +283,7 @@
 		DC8EAB8323E7231A00E00A00 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */; };
 		DC8EAB8523E7232800E00A00 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8423E7232800E00A00 /* NotificationViewController.swift */; };
 		DC8EAB8723E7232F00E00A00 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8623E7232F00E00A00 /* SearchViewController.swift */; };
+		DC952FB2268A2D1000B6D3D7 /* PaginationRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC952FB1268A2D1000B6D3D7 /* PaginationRequestModel.swift */; };
 		DC9A65FD24DE9171001F1B60 /* QRPayment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC9A65FC24DE9171001F1B60 /* QRPayment.storyboard */; };
 		DC9A660024DE9233001F1B60 /* ReceiveCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A65FF24DE9233001F1B60 /* ReceiveCoinViewController.swift */; };
 		DC9A660324DEB83F001F1B60 /* ReceiveCoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A660224DEB83E001F1B60 /* ReceiveCoinViewModel.swift */; };
@@ -312,10 +349,6 @@
 		DCBBD6C224E4375F0099C406 /* WalletSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBBD6C124E4375F0099C406 /* WalletSettingsViewController.swift */; };
 		DCBBD6C524E43A870099C406 /* WalletSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBBD6C424E43A870099C406 /* WalletSettingsViewModel.swift */; };
 		DCBBD6C824E43CE50099C406 /* WalletSettingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBBD6C724E43CE50099C406 /* WalletSettingCellViewModel.swift */; };
-		DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */; };
-		DCC49AC823E8632B00119BAA /* BoardFeatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC49AC623E8632B00119BAA /* BoardFeatureView.xib */; };
-		DCC49ACC23E864E500119BAA /* FeatureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49ACB23E864E500119BAA /* FeatureStore.swift */; };
-		DCC49ACE23E865B600119BAA /* BoardFeatureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49ACD23E865B600119BAA /* BoardFeatureViewModel.swift */; };
 		DCC49AD323E865D700119BAA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AD023E865D700119BAA /* ProfileView.swift */; };
 		DCC49AD423E865D700119BAA /* ProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCC49AD123E865D700119BAA /* ProfileView.xib */; };
 		DCC49AD523E865D700119BAA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC49AD223E865D700119BAA /* ProfileViewModel.swift */; };
@@ -362,6 +395,7 @@
 		DCD39896232E28E100C812EB /* WebViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39895232E28E100C812EB /* WebViewViewModel.swift */; };
 		DCD39898232E2AD700C812EB /* CloseableNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39897232E2AD700C812EB /* CloseableNavigationController.swift */; };
 		DCD3989A232E2DE700C812EB /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39899232E2DE700C812EB /* UINavigationController.swift */; };
+		DCDD97C42694B6D7006A6CFA /* CountryPicker in Frameworks */ = {isa = PBXBuildFile; productRef = DCDD97C32694B6D7006A6CFA /* CountryPicker */; };
 		DCDE00672446016800D09717 /* ReplyCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE00662446016800D09717 /* ReplyCommentViewController.swift */; };
 		DCDE006A244601A600D09717 /* ReplyCommentTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE0069244601A600D09717 /* ReplyCommentTableViewModel.swift */; };
 		DCDE006E2446161500D09717 /* UIPlaceHolderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE006D2446161500D09717 /* UIPlaceHolderTextView.swift */; };
@@ -386,7 +420,6 @@
 		DCEE3F802439DCA8000A75C5 /* Account.strings in Resources */ = {isa = PBXBuildFile; fileRef = DCEE3F822439DCA8000A75C5 /* Account.strings */; };
 		DCEF9D37243E1680002B7E99 /* MoreAppsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEF9D36243E1680002B7E99 /* MoreAppsViewModel.swift */; };
 		DCF20B4A2535F9C500206786 /* VerifyGoogleOTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF20B492535F9C500206786 /* VerifyGoogleOTPViewController.swift */; };
-		DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */; };
 		DCF67FDD240FFC4A003061A7 /* SearchApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FDC240FFC4A003061A7 /* SearchApi.swift */; };
 		DCF67FE1240FFD65003061A7 /* PeopleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF67FDF240FFD65003061A7 /* PeopleTableViewCell.swift */; };
 		DCF67FE2240FFD65003061A7 /* PeopleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCF67FE0240FFD65003061A7 /* PeopleTableViewCell.xib */; };
@@ -492,6 +525,16 @@
 		DC1C6EC823FC3F6100BA701D /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC1C6ECA23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubPostCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		DC1C6ECB23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubPostCategoryCollectionViewCell.xib; sourceTree = "<group>"; };
+		DC1CBD1D259250D700CCB714 /* DraftModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftModel.swift; sourceTree = "<group>"; };
+		DC1CBD2525939E9A00CCB714 /* UserPostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPostListViewModel.swift; sourceTree = "<group>"; };
+		DC1CBD3D2593A1CE00CCB714 /* DraftSavedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraftSavedTableViewCell.swift; sourceTree = "<group>"; };
+		DC1CBD3E2593A1CE00CCB714 /* DraftSavedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DraftSavedTableViewCell.xib; sourceTree = "<group>"; };
+		DC1CBD4D2594E75F00CCB714 /* DraftSavedCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftSavedCellViewModel.swift; sourceTree = "<group>"; };
+		DC1CBD552594F53900CCB714 /* DraftListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftListViewController.swift; sourceTree = "<group>"; };
+		DC1CBD5D2594F59B00CCB714 /* DraftListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftListViewModel.swift; sourceTree = "<group>"; };
+		DC1CBD632594F79100CCB714 /* DraftTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftTableViewCell.swift; sourceTree = "<group>"; };
+		DC1CBD642594F79200CCB714 /* DraftTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DraftTableViewCell.xib; sourceTree = "<group>"; };
+		DC1CBD6D2596325900CCB714 /* DraftCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftCellViewModel.swift; sourceTree = "<group>"; };
 		DC1F79CE24CF294200B7F0D3 /* CreateCredentialCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCredentialCellViewModel.swift; sourceTree = "<group>"; };
 		DC1F79D524D0888D00B7F0D3 /* TransferApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferApi.swift; sourceTree = "<group>"; };
 		DC1F79D724D088AB00B7F0D3 /* TransferService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferService.swift; sourceTree = "<group>"; };
@@ -529,6 +572,9 @@
 		DC42AF0223E9CFB5008F8A0F /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		DC42AF0323E9CFB5008F8A0F /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		DC42AF0623E9D39B008F8A0F /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		DC4B16292698933B0070A442 /* ChooseCountryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCountryViewController.swift; sourceTree = "<group>"; };
+		DC4B162B269893F10070A442 /* ChooseCountryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCountryViewModel.swift; sourceTree = "<group>"; };
+		DC4B162D26989A770070A442 /* AccesoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccesoryButton.swift; sourceTree = "<group>"; };
 		DC562432241E73D80076A78C /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		DC562437241E75450076A78C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Auth.strings; sourceTree = "<group>"; };
 		DC562439241E75470076A78C /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Auth.strings"; sourceTree = "<group>"; };
@@ -646,7 +692,6 @@
 		DC7558CC2459DB0700AD40FA /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Search.strings"; sourceTree = "<group>"; };
 		DC7558D02459DFD800AD40FA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Home.strings; sourceTree = "<group>"; };
 		DC7558D22459DFDB00AD40FA /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Home.strings"; sourceTree = "<group>"; };
-		DC7558D32459F1EE00AD40FA /* GoogleService-Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Release.plist"; sourceTree = "<group>"; };
 		DC75DAB6244DF0C100D80CB2 /* PostCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCellProtocol.swift; sourceTree = "<group>"; };
 		DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowActionModel.swift; sourceTree = "<group>"; };
 		DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListResponse.swift; sourceTree = "<group>"; };
@@ -679,6 +724,12 @@
 		DC7F097924ACE51600CE8AFC /* WalletCardCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardCellViewModel.swift; sourceTree = "<group>"; };
 		DC7F098524AE36B500CE8AFC /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
 		DC7F098A24B06A0600CE8AFC /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		DC803C502697492200FCD2B2 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		DC803C5226974A8800FCD2B2 /* OnBoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewModel.swift; sourceTree = "<group>"; };
+		DC803C5526974C3B00FCD2B2 /* PageItemControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageItemControllerProtocol.swift; sourceTree = "<group>"; };
+		DC803C5726974C9300FCD2B2 /* FeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureViewController.swift; sourceTree = "<group>"; };
+		DC803C5A26974CD600FCD2B2 /* FeatureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureViewModel.swift; sourceTree = "<group>"; };
+		DC817F8626D7F11C001E2BAE /* GoogleService-Info-Release.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Release.plist"; sourceTree = "<group>"; };
 		DC83C38124E19DCC008C9EAB /* ConfirmTransferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTransferViewController.swift; sourceTree = "<group>"; };
 		DC83C38324E19F2A008C9EAB /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		DC83C38524E1A9DE008C9EAB /* ConfirmTransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmTransferViewModel.swift; sourceTree = "<group>"; };
@@ -695,9 +746,9 @@
 		DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICenteredHorizantalButton.swift; sourceTree = "<group>"; };
 		DC88A73823DF3F5200EB7F79 /* SelectLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLanguageViewController.swift; sourceTree = "<group>"; };
 		DC88A73B23DF4A8900EB7F79 /* SelectLanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLanguageViewModel.swift; sourceTree = "<group>"; };
-		DC88A73D23DF4B7900EB7F79 /* BoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingViewController.swift; sourceTree = "<group>"; };
 		DC88B13224F5729500327C50 /* Power.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Power.storyboard; sourceTree = "<group>"; };
 		DC88B13524F5739000327C50 /* PowerUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpViewController.swift; sourceTree = "<group>"; };
+		DC88B19F269F278A001FA62A /* ChooseCountryOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCountryOption.swift; sourceTree = "<group>"; };
 		DC8AB7BD24FBA13200968FCD /* ConfirmPowerUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPowerUpViewController.swift; sourceTree = "<group>"; };
 		DC8AB7BF24FC058600968FCD /* ConfirmPowerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmPowerViewModel.swift; sourceTree = "<group>"; };
 		DC8AB7C124FD54B400968FCD /* PowerUpModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerUpModel.swift; sourceTree = "<group>"; };
@@ -709,6 +760,7 @@
 		DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
 		DC8EAB8423E7232800E00A00 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		DC8EAB8623E7232F00E00A00 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		DC952FB1268A2D1000B6D3D7 /* PaginationRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationRequestModel.swift; sourceTree = "<group>"; };
 		DC9A65FC24DE9171001F1B60 /* QRPayment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QRPayment.storyboard; sourceTree = "<group>"; };
 		DC9A65FF24DE9233001F1B60 /* ReceiveCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveCoinViewController.swift; sourceTree = "<group>"; };
 		DC9A660224DEB83E001F1B60 /* ReceiveCoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveCoinViewModel.swift; sourceTree = "<group>"; };
@@ -775,10 +827,6 @@
 		DCBBD6C124E4375F0099C406 /* WalletSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSettingsViewController.swift; sourceTree = "<group>"; };
 		DCBBD6C424E43A870099C406 /* WalletSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSettingsViewModel.swift; sourceTree = "<group>"; };
 		DCBBD6C724E43CE50099C406 /* WalletSettingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletSettingCellViewModel.swift; sourceTree = "<group>"; };
-		DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoardFeatureView.swift; sourceTree = "<group>"; };
-		DCC49AC623E8632B00119BAA /* BoardFeatureView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BoardFeatureView.xib; sourceTree = "<group>"; };
-		DCC49ACB23E864E500119BAA /* FeatureStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureStore.swift; sourceTree = "<group>"; };
-		DCC49ACD23E865B600119BAA /* BoardFeatureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardFeatureViewModel.swift; sourceTree = "<group>"; };
 		DCC49AD023E865D700119BAA /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		DCC49AD123E865D700119BAA /* ProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileView.xib; sourceTree = "<group>"; };
 		DCC49AD223E865D700119BAA /* ProfileViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -852,7 +900,6 @@
 		DCEE3F832439DCA9000A75C5 /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Account.strings"; sourceTree = "<group>"; };
 		DCEF9D36243E1680002B7E99 /* MoreAppsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreAppsViewModel.swift; sourceTree = "<group>"; };
 		DCF20B492535F9C500206786 /* VerifyGoogleOTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyGoogleOTPViewController.swift; sourceTree = "<group>"; };
-		DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardingViewModel.swift; sourceTree = "<group>"; };
 		DCF67FDC240FFC4A003061A7 /* SearchApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchApi.swift; sourceTree = "<group>"; };
 		DCF67FDF240FFD65003061A7 /* PeopleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleTableViewCell.swift; sourceTree = "<group>"; };
 		DCF67FE0240FFD65003061A7 /* PeopleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PeopleTableViewCell.xib; sourceTree = "<group>"; };
@@ -886,8 +933,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC817FB226D802C0001E2BAE /* RxKingfisher in Frameworks */,
+				DC817F9926D7FF0E001E2BAE /* RxMoya in Frameworks */,
+				DC817FAF26D80251001E2BAE /* RxKeyboard in Frameworks */,
+				DC817FB826D803C1001E2BAE /* AlamofireNetworkActivityLogger in Frameworks */,
+				DC817FA726D801A8001E2BAE /* RxBinding in Frameworks */,
+				DC817FAC26D8021D001E2BAE /* Differentiator in Frameworks */,
+				DC817F8F26D7FCFC001E2BAE /* FirebaseMessaging in Frameworks */,
 				DC7F098924B05ED400CE8AFC /* Steem in Frameworks */,
+				DC817F9726D7FF0E001E2BAE /* Moya in Frameworks */,
+				DC817FAA26D8021D001E2BAE /* RxDataSources in Frameworks */,
+				DC817F8A26D7FB72001E2BAE /* SnapKit in Frameworks */,
+				DC817FA126D7FFE8001E2BAE /* RxAlamofire in Frameworks */,
+				DC817FA426D80129001E2BAE /* RxRealm in Frameworks */,
+				DC817F9426D7FD75001E2BAE /* Then in Frameworks */,
+				DC817F9126D7FCFC001E2BAE /* FirebaseCrashlytics in Frameworks */,
+				DCDD97C42694B6D7006A6CFA /* CountryPicker in Frameworks */,
+				DC817F8D26D7FCFC001E2BAE /* FirebaseAnalytics in Frameworks */,
+				DC817F9E26D7FF9D001E2BAE /* FlagKit in Frameworks */,
+				DC817FB526D80335001E2BAE /* RxReachability in Frameworks */,
 				26AE9EB0BA60B5822CF0E5D5 /* Pods_SereyIO.framework in Frameworks */,
+				DC817F9B26D7FF0E001E2BAE /* ReactiveMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -942,7 +1008,7 @@
 		DC0079072438D3620063C3FF /* Release */ = {
 			isa = PBXGroup;
 			children = (
-				DC7558D32459F1EE00AD40FA /* GoogleService-Info-Release.plist */,
+				DC817F8626D7F11C001E2BAE /* GoogleService-Info-Release.plist */,
 			);
 			path = Release;
 			sourceTree = "<group>";
@@ -958,6 +1024,8 @@
 		DC05FDA523F1AB1E0093B47B /* More */ = {
 			isa = PBXGroup;
 			children = (
+				DC1CBD622594F76800CCB714 /* DraftTableViewCell */,
+				DC1CBD3C2593A1CE00CCB714 /* DraftSavedTableViewCell */,
 				DC26812723F2FC6C0045776E /* ProfileTableViewCell */,
 				DC7558B42458986300AD40FA /* SereyAppTableViewCell */,
 				DC115F38241A9A56006BE78C /* SignInTableViewCell */,
@@ -1105,6 +1173,37 @@
 			path = SubPostCategoryCollectionViewCell;
 			sourceTree = "<group>";
 		};
+		DC1CBD082592449800CCB714 /* BottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				DCCD40CD24379BD100093A18 /* BottomMenuViewController.swift */,
+				DC7C740E2471803200610526 /* BottomSheetListViewController.swift */,
+				DC83C38B24E301F2008C9EAB /* BottomSheetProtocol.swift */,
+				DC83C38324E19F2A008C9EAB /* BottomSheetViewController.swift */,
+			);
+			path = BottomSheet;
+			sourceTree = "<group>";
+		};
+		DC1CBD3C2593A1CE00CCB714 /* DraftSavedTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC1CBD4D2594E75F00CCB714 /* DraftSavedCellViewModel.swift */,
+				DC1CBD3D2593A1CE00CCB714 /* DraftSavedTableViewCell.swift */,
+				DC1CBD3E2593A1CE00CCB714 /* DraftSavedTableViewCell.xib */,
+			);
+			path = DraftSavedTableViewCell;
+			sourceTree = "<group>";
+		};
+		DC1CBD622594F76800CCB714 /* DraftTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC1CBD6D2596325900CCB714 /* DraftCellViewModel.swift */,
+				DC1CBD632594F79100CCB714 /* DraftTableViewCell.swift */,
+				DC1CBD642594F79200CCB714 /* DraftTableViewCell.xib */,
+			);
+			path = DraftTableViewCell;
+			sourceTree = "<group>";
+		};
 		DC1F79D424D0886800B7F0D3 /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1141,6 +1240,7 @@
 			isa = PBXGroup;
 			children = (
 				DC5FC21B245484B000CA6117 /* CommentReplyTableViewController.swift */,
+				DC1CBD552594F53900CCB714 /* DraftListViewController.swift */,
 				DC5FC20C2453F11100CA6117 /* UserAccountViewController.swift */,
 			);
 			path = Profile;
@@ -1191,13 +1291,10 @@
 			children = (
 				DCA5255C2426636F00284CD8 /* AlertDialogController.swift */,
 				DC7C8F0224DAB93E0051C084 /* AlertDialogModel.swift */,
-				DCCD40CD24379BD100093A18 /* BottomMenuViewController.swift */,
-				DC7C740E2471803200610526 /* BottomSheetListViewController.swift */,
-				DC83C38B24E301F2008C9EAB /* BottomSheetProtocol.swift */,
-				DC83C38324E19F2A008C9EAB /* BottomSheetViewController.swift */,
 				DC19DBE223EC581A00571CC8 /* ChooseCategorySheetViewController.swift */,
 				DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */,
 				DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */,
+				DC1CBD082592449800CCB714 /* BottomSheet */,
 				DC0F36AB2450937700916886 /* DialogViewController */,
 				DCDE00762448B08600D09717 /* VoteDialogController */,
 			);
@@ -1207,9 +1304,10 @@
 		DC40D5E023E335F200B0DD96 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				DC05FDA823F1AB620093B47B /* SettingCellViewModel.swift */,
+				DC88B19F269F278A001FA62A /* ChooseCountryOption.swift */,
 				DCEF9D36243E1680002B7E99 /* MoreAppsViewModel.swift */,
 				DC05FDBB23F1B0500093B47B /* MoreViewModel.swift */,
+				DC05FDA823F1AB620093B47B /* SettingCellViewModel.swift */,
 				DC40D5E123E335F900B0DD96 /* Language */,
 				DC7558AF24588C1600AD40FA /* Notification */,
 			);
@@ -1346,6 +1444,7 @@
 				DC0044072433A97000244607 /* File */,
 				DCF67FEA24100BC7003061A7 /* User */,
 				DC1F79D924D089E000B7F0D3 /* Wallet */,
+				DC952FB1268A2D1000B6D3D7 /* PaginationRequestModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1798,6 +1897,25 @@
 			path = Transaction;
 			sourceTree = "<group>";
 		};
+		DC803C5426974C2C00FCD2B2 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				DC4B16292698933B0070A442 /* ChooseCountryViewController.swift */,
+				DC803C5726974C9300FCD2B2 /* FeatureViewController.swift */,
+				DC803C5526974C3B00FCD2B2 /* PageItemControllerProtocol.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		DC803C5926974CC200FCD2B2 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				DC803C5A26974CD600FCD2B2 /* FeatureViewModel.swift */,
+				DC4B162B269893F10070A442 /* ChooseCountryViewModel.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
 		DC8450B1250C7F0400D7E085 /* LineIndicatorTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1821,13 +1939,14 @@
 		DC88A73423DF3EB600EB7F79 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				DCED6A052534ADF7003C9A43 /* CheckBox.swift */,
 				DC42AF0623E9D39B008F8A0F /* CardView.swift */,
 				DCC6F1DB242BB041003B9E3A /* CenteredImageButton.swift */,
+				DCED6A052534ADF7003C9A43 /* CheckBox.swift */,
 				DCEC0CC7240A5E0E002F4B6F /* CicularButton.swift */,
 				DCF67FE624100220003061A7 /* CircularView.swift */,
 				DC357A4D243CC72C00B2D3B7 /* ContentSizedCollectionView.swift */,
 				DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */,
+				DCED6A0A2534B007003C9A43 /* CornerView.swift */,
 				DC40D5C523E31FDF00B0DD96 /* GradientView.swift */,
 				DC583A9A24CC46F700D9C4D3 /* LoadingButton.swift */,
 				DC115F33241A9744006BE78C /* MDCPasswordTextField.swift */,
@@ -1839,7 +1958,7 @@
 				DC88A73523DF3EC300EB7F79 /* UICenteredHorizantalButton.swift */,
 				DCDE006D2446161500D09717 /* UIPlaceHolderTextView.swift */,
 				DCB9F2E924D7153D0028D449 /* UIRightIconButton.swift */,
-				DCED6A0A2534B007003C9A43 /* CornerView.swift */,
+				DC4B162D26989A770070A442 /* AccesoryButton.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1847,8 +1966,9 @@
 		DC88A73723DF3F3300EB7F79 /* OnBoard */ = {
 			isa = PBXGroup;
 			children = (
-				DC88A73D23DF4B7900EB7F79 /* BoardingViewController.swift */,
+				DC803C502697492200FCD2B2 /* OnBoardingViewController.swift */,
 				DC88A73823DF3F5200EB7F79 /* SelectLanguageViewController.swift */,
+				DC803C5426974C2C00FCD2B2 /* Features */,
 			);
 			path = OnBoard;
 			sourceTree = "<group>";
@@ -1856,9 +1976,10 @@
 		DC88A73A23DF4A7700EB7F79 /* OnBoard */ = {
 			isa = PBXGroup;
 			children = (
-				DCF3ACB323E5CE070072FA7F /* BoardingViewModel.swift */,
 				DC7558AD24587B3D00AD40FA /* FeatureBoarding.swift */,
+				DC803C5226974A8800FCD2B2 /* OnBoardingViewModel.swift */,
 				DC88A73B23DF4A8900EB7F79 /* SelectLanguageViewModel.swift */,
+				DC803C5926974CC200FCD2B2 /* Features */,
 			);
 			path = OnBoard;
 			sourceTree = "<group>";
@@ -2220,20 +2341,9 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		DCC49AC423E8632B00119BAA /* BoardFeatureView */ = {
-			isa = PBXGroup;
-			children = (
-				DCC49AC523E8632B00119BAA /* BoardFeatureView.swift */,
-				DCC49ACD23E865B600119BAA /* BoardFeatureViewModel.swift */,
-				DCC49AC623E8632B00119BAA /* BoardFeatureView.xib */,
-			);
-			path = BoardFeatureView;
-			sourceTree = "<group>";
-		};
 		DCC49AC923E864AA00119BAA /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				DCC49ACB23E864E500119BAA /* FeatureStore.swift */,
 				DC7558B22458932700AD40FA /* PreferenceStore.swift */,
 			);
 			path = Settings;
@@ -2448,7 +2558,6 @@
 			isa = PBXGroup;
 			children = (
 				DCD39879232E230B00C812EB /* NibView.swift */,
-				DCC49AC423E8632B00119BAA /* BoardFeatureView */,
 				DC6A78FF23CA242B001D1009 /* EmptyOrErrorView */,
 				DC05FDBD23F1B3410093B47B /* HeaderView */,
 				DC9E36E024135A1700289693 /* Post */,
@@ -2587,11 +2696,12 @@
 		DCF67FEA24100BC7003061A7 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				DCF67FEB24100C00003061A7 /* PeopleModel.swift */,
 				DC12F21524227AB40099C479 /* AccountModel.swift */,
-				DC12F211242278F90099C479 /* UserModel.swift */,
+				DC1CBD1D259250D700CCB714 /* DraftModel.swift */,
 				DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */,
 				DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */,
+				DCF67FEB24100C00003061A7 /* PeopleModel.swift */,
+				DC12F211242278F90099C479 /* UserModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -2599,8 +2709,10 @@
 		DCF8737E23F6F7B8007A8724 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				DC5FC20E2453F62500CA6117 /* UserAccountViewModel.swift */,
 				DC5FC21024542CB600CA6117 /* CommentsListViewModel.swift */,
+				DC1CBD5D2594F59B00CCB714 /* DraftListViewModel.swift */,
+				DC5FC20E2453F62500CA6117 /* UserAccountViewModel.swift */,
+				DC1CBD2525939E9A00CCB714 /* UserPostListViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -2672,6 +2784,25 @@
 			name = SereyIO;
 			packageProductDependencies = (
 				DC7F098824B05ED400CE8AFC /* Steem */,
+				DCDD97C32694B6D7006A6CFA /* CountryPicker */,
+				DC817F8926D7FB72001E2BAE /* SnapKit */,
+				DC817F8C26D7FCFC001E2BAE /* FirebaseAnalytics */,
+				DC817F8E26D7FCFC001E2BAE /* FirebaseMessaging */,
+				DC817F9026D7FCFC001E2BAE /* FirebaseCrashlytics */,
+				DC817F9326D7FD75001E2BAE /* Then */,
+				DC817F9626D7FF0E001E2BAE /* Moya */,
+				DC817F9826D7FF0E001E2BAE /* RxMoya */,
+				DC817F9A26D7FF0E001E2BAE /* ReactiveMoya */,
+				DC817F9D26D7FF9D001E2BAE /* FlagKit */,
+				DC817FA026D7FFE8001E2BAE /* RxAlamofire */,
+				DC817FA326D80129001E2BAE /* RxRealm */,
+				DC817FA626D801A8001E2BAE /* RxBinding */,
+				DC817FA926D8021D001E2BAE /* RxDataSources */,
+				DC817FAB26D8021D001E2BAE /* Differentiator */,
+				DC817FAE26D80251001E2BAE /* RxKeyboard */,
+				DC817FB126D802C0001E2BAE /* RxKingfisher */,
+				DC817FB426D80335001E2BAE /* RxReachability */,
+				DC817FB726D803C1001E2BAE /* AlamofireNetworkActivityLogger */,
 			);
 			productName = iOSTemplate;
 			productReference = DC6ED51D23267EED00770B31 /* SereyIO.app */;
@@ -2723,7 +2854,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1030;
 				LastUpgradeCheck = 1030;
-				ORGANIZATIONNAME = "Phanha Uy";
+				ORGANIZATIONNAME = "Serey IO";
 				TargetAttributes = {
 					DC6ED51C23267EED00770B31 = {
 						CreatedOnToolsVersion = 10.3;
@@ -2751,6 +2882,20 @@
 			mainGroup = DC6ED51423267EED00770B31;
 			packageReferences = (
 				DC7F098724B05ED300CE8AFC /* XCRemoteSwiftPackageReference "swift-steem" */,
+				DCDD97C22694B6D7006A6CFA /* XCRemoteSwiftPackageReference "CountryPicker" */,
+				DC817F8826D7FB72001E2BAE /* XCRemoteSwiftPackageReference "SnapKit" */,
+				DC817F8B26D7FCFC001E2BAE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				DC817F9226D7FD74001E2BAE /* XCRemoteSwiftPackageReference "Then" */,
+				DC817F9526D7FF0E001E2BAE /* XCRemoteSwiftPackageReference "Moya" */,
+				DC817F9C26D7FF9D001E2BAE /* XCRemoteSwiftPackageReference "FlagKit" */,
+				DC817F9F26D7FFE7001E2BAE /* XCRemoteSwiftPackageReference "RxAlamofire" */,
+				DC817FA226D80128001E2BAE /* XCRemoteSwiftPackageReference "RxRealm" */,
+				DC817FA526D801A8001E2BAE /* XCRemoteSwiftPackageReference "RxBinding" */,
+				DC817FA826D8021C001E2BAE /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				DC817FAD26D80250001E2BAE /* XCRemoteSwiftPackageReference "RxKeyboard" */,
+				DC817FB026D802BF001E2BAE /* XCRemoteSwiftPackageReference "RxKingfisher" */,
+				DC817FB326D80335001E2BAE /* XCRemoteSwiftPackageReference "RxReachability" */,
+				DC817FB626D803C1001E2BAE /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */,
 			);
 			productRefGroup = DC6ED51E23267EED00770B31 /* Products */;
 			projectDirPath = "";
@@ -2784,12 +2929,12 @@
 				DC9E36D92412997800289693 /* Post.storyboard in Resources */,
 				DC7F097524ACE27800CE8AFC /* WalletCardCollectionViewCell.xib in Resources */,
 				DC40D5E823E487A600B0DD96 /* OnBoard.strings in Resources */,
-				DC7558D42459F1EF00AD40FA /* GoogleService-Info-Release.plist in Resources */,
 				DC0F36AF245093B800916886 /* DownvoteDialogViewController.xib in Resources */,
 				DCB9F2F724D85E760028D449 /* Transfer.storyboard in Resources */,
 				DC9E36E524135A3D00289693 /* PostDetailView.xib in Resources */,
 				DC7558CF2459DFD800AD40FA /* Home.strings in Resources */,
 				DC9A65FD24DE9171001F1B60 /* QRPayment.storyboard in Resources */,
+				DC1CBD662594F79200CCB714 /* DraftTableViewCell.xib in Resources */,
 				DC562436241E75450076A78C /* Auth.strings in Resources */,
 				DC115F30241A8EA5006BE78C /* trix-editor.css in Resources */,
 				DC26812B23F2FCB30045776E /* ProfileTableViewCell.xib in Resources */,
@@ -2801,7 +2946,6 @@
 				DC1C6ECD23FC404C00BA701D /* SubPostCategoryCollectionViewCell.xib in Resources */,
 				DCEE3F7A2439DB57000A75C5 /* Post.strings in Resources */,
 				DC8450B5250C7F6C00D7E085 /* LineIndicatorTableViewCell.xib in Resources */,
-				DCC49AC823E8632B00119BAA /* BoardFeatureView.xib in Resources */,
 				DC7AAFF424F805C200ECDF47 /* Transfer.strings in Resources */,
 				DCEE3F802439DCA8000A75C5 /* Account.strings in Resources */,
 				DCB5BD6B2497BF880042E5AF /* Wallet.storyboard in Resources */,
@@ -2833,10 +2977,12 @@
 				DC7558C32459D1DD00AD40FA /* Notifications.strings in Resources */,
 				DC13409824573F0C00CC9856 /* ToggleTextTableViewCell.xib in Resources */,
 				DCB629EE2417E84F00C64BD6 /* PostCommentView.xib in Resources */,
+				DC817F8726D7F11C001E2BAE /* GoogleService-Info-Release.plist in Resources */,
 				DC40D5CD23E3298F00B0DD96 /* LanguageTableViewCell.xib in Resources */,
 				DC6A790423CA242B001D1009 /* EmptyOrErrorView.xib in Resources */,
 				DC42AF0523E9CFB5008F8A0F /* PostTableViewCell.xib in Resources */,
 				DC05FDC023F1B3410093B47B /* HeaderView.xib in Resources */,
+				DC1CBD402593A1CE00CCB714 /* DraftSavedTableViewCell.xib in Resources */,
 				DC88A73323DF3D3900EB7F79 /* OnBoard.storyboard in Resources */,
 				DC40D5D923E32F3800B0DD96 /* Common.strings in Resources */,
 				DCDE007A2448B0DC00D09717 /* VoteDialogViewController.xib in Resources */,
@@ -2998,7 +3144,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen colors -t swift4 --output \"$PROJECT_DIR/Constants/ColorsGen.swift\" \"$PROJECT_DIR/Constants/colors.txt\"\n";
+			shellScript = "$PODS_ROOT/SwiftGen/bin/swiftgen run colors -t swift4 --output \"$PROJECT_DIR/Constants/ColorsGen.swift\" \"$PROJECT_DIR/Constants/colors.txt\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3007,6 +3153,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC1CBD4E2594E75F00CCB714 /* DraftSavedCellViewModel.swift in Sources */,
 				DC583A9D24CC7EEF00D9C4D3 /* SereyKeyHelper.swift in Sources */,
 				DC8EAB8123E7231200E00A00 /* HomeViewController.swift in Sources */,
 				DCED6A102534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift in Sources */,
@@ -3048,10 +3195,12 @@
 				DC9A660624DFE964001F1B60 /* PayQRViewController.swift in Sources */,
 				DC19DBEF23EC60C900571CC8 /* PostCellViewModel.swift in Sources */,
 				DC583A9B24CC46F700D9C4D3 /* LoadingButton.swift in Sources */,
+				DC803C5626974C3B00FCD2B2 /* PageItemControllerProtocol.swift in Sources */,
 				DCEC0CC3240A530B002F4B6F /* FilteredCategoryTableViewCell.swift in Sources */,
 				DC9E36F024154BC900289693 /* PFColorHash.swift in Sources */,
 				DC5FC21A2454330900CA6117 /* CommentReplyModel.swift in Sources */,
 				DC60AC8B24A745070014B77E /* WalletRootViewController.swift in Sources */,
+				DC1CBD562594F53A00CCB714 /* DraftListViewController.swift in Sources */,
 				DCC883D924A3A4A8002FE917 /* WalletViewController.swift in Sources */,
 				DC9A660324DEB83F001F1B60 /* ReceiveCoinViewModel.swift in Sources */,
 				DCA5255D2426636F00284CD8 /* AlertDialogController.swift in Sources */,
@@ -3066,8 +3215,9 @@
 				DC42AF0723E9D39B008F8A0F /* CardView.swift in Sources */,
 				DC9E36E324135A3400289693 /* PostDetailView.swift in Sources */,
 				DC583A8D24CC26A200D9C4D3 /* WalletAuthValidateController.swift in Sources */,
-				DCF3ACB423E5CE070072FA7F /* BoardingViewModel.swift in Sources */,
 				DCA74DC9253AD6A40041EAAE /* VerifyBiometryViewController.swift in Sources */,
+				DC1CBD2625939E9A00CCB714 /* UserPostListViewModel.swift in Sources */,
+				DC4B162A2698933B0070A442 /* ChooseCountryViewController.swift in Sources */,
 				DC12F21424227A340099C479 /* UserService.swift in Sources */,
 				DC115F2C241A8D38006BE78C /* UtilsHelper.swift in Sources */,
 				DC9AC6E12406C1D1008FAFA6 /* DiscussionService.swift in Sources */,
@@ -3112,6 +3262,7 @@
 				DC9AC6E82406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift in Sources */,
 				DCDE00672446016800D09717 /* ReplyCommentViewController.swift in Sources */,
 				DC6CDC342439B077008A52D9 /* PostCommentViewModel.swift in Sources */,
+				DC1CBD6E2596325A00CCB714 /* DraftCellViewModel.swift in Sources */,
 				DCED6A0B2534B007003C9A43 /* CornerView.swift in Sources */,
 				DC40D5D623E32A6B00B0DD96 /* ImageTextModel.swift in Sources */,
 				DCD39866232E1CC600C812EB /* BaseViewModel.swift in Sources */,
@@ -3119,11 +3270,11 @@
 				DCB5BD762497D3180042E5AF /* SecurityMethod.swift in Sources */,
 				DC6FCE7823F05D1700D72F6D /* Api.swift in Sources */,
 				DC6A791523CB676E001D1009 /* MainViewController.swift in Sources */,
+				DC803C5B26974CD600FCD2B2 /* FeatureViewModel.swift in Sources */,
 				DC6A790923CA2510001D1009 /* RealmManager.swift in Sources */,
 				DC6ED5762326A38B00770B31 /* FMDataParser.swift in Sources */,
 				DC6FCE7723F05D1700D72F6D /* Tag.swift in Sources */,
 				DCDE007C2448B3DB00D09717 /* VoteDialogViewModel.swift in Sources */,
-				DCC49AC723E8632B00119BAA /* BoardFeatureView.swift in Sources */,
 				DCC49AD523E865D700119BAA /* ProfileViewModel.swift in Sources */,
 				DC9C659E249D260E0042C829 /* CreateCredentialViewController.swift in Sources */,
 				DC83C38624E1A9DE008C9EAB /* ConfirmTransferViewModel.swift in Sources */,
@@ -3133,6 +3284,7 @@
 				DCFF5877251F7A66002E570A /* ChangePasswordViewModel.swift in Sources */,
 				DC1F79CF24CF294200B7F0D3 /* CreateCredentialCellViewModel.swift in Sources */,
 				DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */,
+				DC4B162C269893F10070A442 /* ChooseCountryViewModel.swift in Sources */,
 				DCA5255B2425166B00284CD8 /* ButtonCellViewModel.swift in Sources */,
 				DC5D59D624323C200048C921 /* ListTableViewController.swift in Sources */,
 				DC9E36E92413F4A100289693 /* RichEditor+Custom.swift in Sources */,
@@ -3158,23 +3310,24 @@
 				DC9AC6E62406C5BA008FAFA6 /* DiscussionCategoryModel.swift in Sources */,
 				DC7C8F0F24DC663B0051C084 /* TransactionTableViewCell.swift in Sources */,
 				DC6A78FA23CA20B3001D1009 /* FieldViewModelProtocol.swift in Sources */,
-				DC88A73E23DF4B7900EB7F79 /* BoardingViewController.swift in Sources */,
 				DCB5BD812499170A0042E5AF /* LAContext.swift in Sources */,
 				DCF67FEF24100C6F003061A7 /* ListDataResponseModel.swift in Sources */,
 				DCFF5875251F0D40002E570A /* SignUpWalletModel.swift in Sources */,
 				DC75DABB244E07EE00D80CB2 /* FollowerListResponse.swift in Sources */,
 				DC42AF0423E9CFB5008F8A0F /* PostTableViewCell.swift in Sources */,
+				DC88B1A0269F278A001FA62A /* ChooseCountryOption.swift in Sources */,
 				DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */,
 				DC115F2E241A8E18006BE78C /* NSAttributedString+Extensions.swift in Sources */,
+				DC1CBD3F2593A1CE00CCB714 /* DraftSavedTableViewCell.swift in Sources */,
 				DCB9F2FA24D85F540028D449 /* TransferViewController.swift in Sources */,
 				DC40D5C623E31FDF00B0DD96 /* ContentSizedTableView.swift in Sources */,
 				DC7558B32458932700AD40FA /* PreferenceStore.swift in Sources */,
 				DC357A4E243CC72C00B2D3B7 /* ContentSizedCollectionView.swift in Sources */,
 				DCEC0CC8240A5E0E002F4B6F /* CicularButton.swift in Sources */,
 				DCB5BD8624992C4F0042E5AF /* ActiveBiometryViewController.swift in Sources */,
-				DCC49ACE23E865B600119BAA /* BoardFeatureViewModel.swift in Sources */,
 				DC6ED5842326A4BA00770B31 /* NotificationDispatcher.swift in Sources */,
 				DC583A8924C89AB400D9C4D3 /* KeychainPasswordItem.swift in Sources */,
+				DC1CBD5E2594F59B00CCB714 /* DraftListViewModel.swift in Sources */,
 				DCD39870232E1F7E00C812EB /* LanguageManager.swift in Sources */,
 				DCB5BD8E249A669C0042E5AF /* SignUpWalletViewController.swift in Sources */,
 				DC0044092433A98200244607 /* FileUploadModel.swift in Sources */,
@@ -3222,6 +3375,7 @@
 				DCB5BD90249A68EC0042E5AF /* SereyWallet.swift in Sources */,
 				DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */,
 				DCD12D68242D03850084F66C /* BottomMenuViewModel.swift in Sources */,
+				DC952FB2268A2D1000B6D3D7 /* PaginationRequestModel.swift in Sources */,
 				DC79F11F24CDD7D3007FCECC /* CreateCredentialTableViewCell.swift in Sources */,
 				DC9AC6EA2406CD90008FAFA6 /* PostCategoryCellViewModel.swift in Sources */,
 				DC6ED58A2326A53B00770B31 /* KeyChainStore.swift in Sources */,
@@ -3236,7 +3390,6 @@
 				DC583A9224CC2E7A00D9C4D3 /* WalletStore.swift in Sources */,
 				DC7C740F2471803200610526 /* BottomSheetListViewController.swift in Sources */,
 				DCEC0CBE240971AE002F4B6F /* ShimmeringProtocol.swift in Sources */,
-				DCC49ACC23E864E500119BAA /* FeatureStore.swift in Sources */,
 				DC56243C241E82B80076A78C /* AuthService.swift in Sources */,
 				DC7AAFFB24F80BD000ECDF47 /* PowerDownViewController.swift in Sources */,
 				DC83C38224E19DCC008C9EAB /* ConfirmTransferViewController.swift in Sources */,
@@ -3247,6 +3400,7 @@
 				DC7C8F0324DAB93E0051C084 /* AlertDialogModel.swift in Sources */,
 				DC19DBF323EC6E4600571CC8 /* PaddingTextField.swift in Sources */,
 				DCD39894232E28C900C812EB /* WebViewViewController.swift in Sources */,
+				DC803C5826974C9300FCD2B2 /* FeatureViewController.swift in Sources */,
 				DCD39868232E1D1B00C812EB /* ErrorHelper.swift in Sources */,
 				DC6A78FE23CA22B0001D1009 /* LoadingIndicatorController.swift in Sources */,
 				DC6ED5822326A47D00770B31 /* AuthData.swift in Sources */,
@@ -3271,16 +3425,19 @@
 				DC7C8EEE24D9B3100051C084 /* TransferCoinViewModel.swift in Sources */,
 				DC40D5D423E32A4400B0DD96 /* ImageTextCellViewModel.swift in Sources */,
 				DC19DBEB23EC5F9E00571CC8 /* PostTableViewModel.swift in Sources */,
+				DC1CBD652594F79200CCB714 /* DraftTableViewCell.swift in Sources */,
 				DCFBD7892503E119005B6875 /* ClaimRewardViewModel.swift in Sources */,
 				DCED6A062534ADF7003C9A43 /* CheckBox.swift in Sources */,
 				DC6FCE7523F05D1700D72F6D /* Misc.swift in Sources */,
 				DC6ED52123267EED00770B31 /* AppDelegate.swift in Sources */,
+				DC4B162E26989A780070A442 /* AccesoryButton.swift in Sources */,
 				DCDE006A244601A600D09717 /* ReplyCommentTableViewModel.swift in Sources */,
 				DCA459FA24D1D22400E21D9A /* WalletMenu.swift in Sources */,
 				DC6ED5742326A37800770B31 /* DeeplinkParser.swift in Sources */,
 				DCCD40CB2436422C00093A18 /* BlockChainResponse.swift in Sources */,
 				DC19DBE323EC581A00571CC8 /* ChooseCategorySheetViewController.swift in Sources */,
 				DCD3986B232E1DF700C812EB /* AppService.swift in Sources */,
+				DC1CBD1E259250D700CCB714 /* DraftModel.swift in Sources */,
 				DC6CA7B7243CD08D00F1EEC8 /* CategoryCellViewModel.swift in Sources */,
 				DC8450B7250C802B00D7E085 /* LineIndicatorCellViewModel.swift in Sources */,
 				DC0F36B12450944700916886 /* DownvoteDialogViewModel.swift in Sources */,
@@ -3297,6 +3454,7 @@
 				DC87FEFE24E44905007622D4 /* WalletProfileCellViewModel.swift in Sources */,
 				DC12F20D2422720E0099C479 /* DataResponseModel.swift in Sources */,
 				DC8EAB7923E721EE00E00A00 /* BaseTabBarViewController.swift in Sources */,
+				DC803C512697492200FCD2B2 /* OnBoardingViewController.swift in Sources */,
 				DC9E36F82416947900289693 /* CommentTableViewCell.swift in Sources */,
 				DC83C38424E19F2A008C9EAB /* BottomSheetViewController.swift in Sources */,
 				DC2DA4D7243B991800B99A86 /* SubmitCommentModel.swift in Sources */,
@@ -3314,6 +3472,7 @@
 				DC6ED56823269B8400770B31 /* R.generated.swift in Sources */,
 				DC7F097824ACE31500CE8AFC /* WalletViewModel.swift in Sources */,
 				DC115F3E241A9BA5006BE78C /* SignInCellViewModel.swift in Sources */,
+				DC803C5326974A8800FCD2B2 /* OnBoardingViewModel.swift in Sources */,
 				DCA459F524D1CA6000E21D9A /* WalletMenuCollectionViewCell.swift in Sources */,
 				DCD3987F232E238800C812EB /* UIView+Appearance.swift in Sources */,
 				DCE6D526249BCB2900C273C2 /* SignUpWalletViewModel.swift in Sources */,
@@ -3636,6 +3795,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/SereyIO/App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3664,6 +3824,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/SereyIO/App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3840,6 +4001,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/SereyIO/App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3967,6 +4129,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/SereyIO/App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4080,6 +4243,118 @@
 				kind = branch;
 			};
 		};
+		DC817F8826D7FB72001E2BAE /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+		DC817F8B26D7FCFC001E2BAE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.6.0;
+			};
+		};
+		DC817F9226D7FD74001E2BAE /* XCRemoteSwiftPackageReference "Then" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/Then";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.0;
+			};
+		};
+		DC817F9526D7FF0E001E2BAE /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uypanha/Moya.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		DC817F9C26D7FF9D001E2BAE /* XCRemoteSwiftPackageReference "FlagKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/madebybowtie/FlagKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.4.0;
+			};
+		};
+		DC817F9F26D7FFE7001E2BAE /* XCRemoteSwiftPackageReference "RxAlamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxAlamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.2;
+			};
+		};
+		DC817FA226D80128001E2BAE /* XCRemoteSwiftPackageReference "RxRealm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxRealm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
+		DC817FA526D801A8001E2BAE /* XCRemoteSwiftPackageReference "RxBinding" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxBinding";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		DC817FA826D8021C001E2BAE /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+		DC817FAD26D80250001E2BAE /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxKeyboard";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		DC817FB026D802BF001E2BAE /* XCRemoteSwiftPackageReference "RxKingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxKingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.0;
+			};
+		};
+		DC817FB326D80335001E2BAE /* XCRemoteSwiftPackageReference "RxReachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxReachability";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
+		DC817FB626D803C1001E2BAE /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uypanha/AlamofireNetworkActivityLogger";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		DCDD97C22694B6D7006A6CFA /* XCRemoteSwiftPackageReference "CountryPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SURYAKANTSHARMA/CountryPicker.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -4087,6 +4362,101 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DC7F098724B05ED300CE8AFC /* XCRemoteSwiftPackageReference "swift-steem" */;
 			productName = Steem;
+		};
+		DC817F8926D7FB72001E2BAE /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817F8826D7FB72001E2BAE /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		DC817F8C26D7FCFC001E2BAE /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817F8B26D7FCFC001E2BAE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		DC817F8E26D7FCFC001E2BAE /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817F8B26D7FCFC001E2BAE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		DC817F9026D7FCFC001E2BAE /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817F8B26D7FCFC001E2BAE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		DC817F9326D7FD75001E2BAE /* Then */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817F9226D7FD74001E2BAE /* XCRemoteSwiftPackageReference "Then" */;
+			productName = Then;
+		};
+		DC817F9626D7FF0E001E2BAE /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817F9526D7FF0E001E2BAE /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		DC817F9826D7FF0E001E2BAE /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817F9526D7FF0E001E2BAE /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
+		};
+		DC817F9A26D7FF0E001E2BAE /* ReactiveMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817F9526D7FF0E001E2BAE /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = ReactiveMoya;
+		};
+		DC817F9D26D7FF9D001E2BAE /* FlagKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817F9C26D7FF9D001E2BAE /* XCRemoteSwiftPackageReference "FlagKit" */;
+			productName = FlagKit;
+		};
+		DC817FA026D7FFE8001E2BAE /* RxAlamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817F9F26D7FFE7001E2BAE /* XCRemoteSwiftPackageReference "RxAlamofire" */;
+			productName = RxAlamofire;
+		};
+		DC817FA326D80129001E2BAE /* RxRealm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817FA226D80128001E2BAE /* XCRemoteSwiftPackageReference "RxRealm" */;
+			productName = RxRealm;
+		};
+		DC817FA626D801A8001E2BAE /* RxBinding */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817FA526D801A8001E2BAE /* XCRemoteSwiftPackageReference "RxBinding" */;
+			productName = RxBinding;
+		};
+		DC817FA926D8021D001E2BAE /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817FA826D8021C001E2BAE /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
+		};
+		DC817FAB26D8021D001E2BAE /* Differentiator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817FA826D8021C001E2BAE /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = Differentiator;
+		};
+		DC817FAE26D80251001E2BAE /* RxKeyboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817FAD26D80250001E2BAE /* XCRemoteSwiftPackageReference "RxKeyboard" */;
+			productName = RxKeyboard;
+		};
+		DC817FB126D802C0001E2BAE /* RxKingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817FB026D802BF001E2BAE /* XCRemoteSwiftPackageReference "RxKingfisher" */;
+			productName = RxKingfisher;
+		};
+		DC817FB426D80335001E2BAE /* RxReachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817FB326D80335001E2BAE /* XCRemoteSwiftPackageReference "RxReachability" */;
+			productName = RxReachability;
+		};
+		DC817FB726D803C1001E2BAE /* AlamofireNetworkActivityLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC817FB626D803C1001E2BAE /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */;
+			productName = AlamofireNetworkActivityLogger;
+		};
+		DCDD97C32694B6D7006A6CFA /* CountryPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCDD97C22694B6D7006A6CFA /* XCRemoteSwiftPackageReference "CountryPicker" */;
+			productName = CountryPicker;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

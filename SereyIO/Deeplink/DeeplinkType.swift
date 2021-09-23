@@ -3,15 +3,15 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/9/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
 
 enum DeeplinkType {
-    case news(value: String)
-    case reward(value: String)
-    case tripFinished(value: String)
+    case post(permlink: String, author: String)
+    case vote
+    case followFrom(username: String)
     case browser(url: URL)
 }
 

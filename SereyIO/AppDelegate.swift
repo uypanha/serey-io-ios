@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/9/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -98,7 +98,6 @@ extension AppDelegate {
     }
     
     func turnOnPushNotification() {
-        apnsHandler?.setupFirebaseTokenRefresh()
         apnsHandler?.registerAPNS()
     }
     
@@ -124,7 +123,7 @@ fileprivate extension AppDelegate {
     
     func initRealm() {
         // Start to configure realm
-        Realm.configureRealm(schemaVersion: 0)
+        Realm.configureRealm(schemaVersion: 1)
     }
     
     func initSwiftyBeaver() {
@@ -136,6 +135,6 @@ fileprivate extension AppDelegate {
     }
     
     func initAPNSHandler(withApplication application: UIApplication) {
-        apnsHandler = APNSHandler(withApplication: application)
+        apnsHandler = APNSHandler(with: application)
     }
 }

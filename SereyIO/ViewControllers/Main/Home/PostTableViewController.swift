@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/6/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -47,6 +47,12 @@ class PostTableViewController: BaseTableViewController, AlertDialogController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.viewModel.validateCountry()
+    }
+    
     func setUpRxObservers() {
         setUpControlsObsservers()
         setUpContentChangedObservers()
@@ -68,6 +74,7 @@ fileprivate extension PostTableViewController {
         self.tableView.tableFooterView = UIView()
         self.tableView.register(PostTableViewCell.self)
         self.tableView.register(FilteredCategoryTableViewCell.self)
+        self.tableView.register(DraftSavedTableViewCell.self)
     }
     
     func prepreDataSource() -> RxTableViewSectionedReloadDataSource<SectionItem> {
@@ -81,6 +88,10 @@ fileprivate extension PostTableViewController {
                 let cell: FilteredCategoryTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
                 cell.cellModel = item as? FilteredCategoryCellViewModel
                 cell.layoutIfNeeded()
+                return cell
+            case is DraftSavedCellViewModel:
+                let cell: DraftSavedTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+                cell.cellModel = item as? DraftSavedCellViewModel
                 return cell
             default:
                 return UITableViewCell()

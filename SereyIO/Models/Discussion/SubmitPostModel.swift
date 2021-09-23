@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/2/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -20,12 +20,13 @@ struct SubmitPostModel {
     
     var parameters: [String: Any] {
         var params: [String: Any] = [
-            "title"         : self.title,
-            "desc"          : self.shortDesc,
-            "body"          : self.body,
-            "categories"    : self.categories,
-            "subcategories" : self.subcategories,
-            "images"        : self.images
+            "title"             : self.title,
+            "desc"              : self.shortDesc,
+            "body"              : self.body,
+            "categories"        : self.categories,
+            "subcategories"     : self.subcategories,
+            "images"            : self.images,
+            "otherblockchain"   : true
         ]
         
         if let permlink = self.permlink {

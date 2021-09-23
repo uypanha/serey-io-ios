@@ -3,10 +3,10 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 3/26/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxCocoa
 import RxSwift
 import RxBinding
@@ -16,9 +16,9 @@ class BottomListMenuViewModel: BaseListTableViewModel {
     
     let shouldSelectMenuItem: PublishSubject<ImageTextCellViewModel>
     
-    init(_ items: [ImageTextCellViewModel]) {
+    init(header: String? = nil,_ items: [ImageTextCellViewModel]) {
         self.shouldSelectMenuItem = PublishSubject()
-        super.init([SectionItem(items: items)])
+        super.init([SectionItem(model: .init(header: header), items: items)])
         
         setUpRxObservers()
     }

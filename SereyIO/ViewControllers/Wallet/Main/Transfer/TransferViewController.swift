@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/3/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -20,14 +20,10 @@ class TransferViewController: BaseViewController, KeyboardController, LoadingInd
 
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var accountTextField: MDCTextField!
-    @IBOutlet weak var amountTextField: MDCTextField!
-    @IBOutlet weak var memoTextField: MDCTextField!
+    @IBOutlet weak var accountTextField: MDCOutlinedTextField!
+    @IBOutlet weak var amountTextField: MDCOutlinedTextField!
+    @IBOutlet weak var memoTextField: MDCOutlinedTextField!
     @IBOutlet weak var transferButton: LoadingButton!
-    
-    var accountFieldController: MDCTextInputControllerOutlined?
-    var amountFieldController: MDCTextInputControllerOutlined?
-    var memoFieldController: MDCTextInputControllerOutlined?
     
     var viewModel: TransferCoinViewModel!
     
@@ -59,9 +55,9 @@ extension TransferViewController {
     func setUpViews() {
         self.headerView.backgroundColor = ColorName.primary.color
         
-        self.accountFieldController = self.accountTextField.primaryController()
-        self.amountFieldController = self.amountTextField.primaryController()
-        self.memoFieldController = self.memoTextField.primaryController()
+        self.accountTextField.primaryStyle()
+        self.amountTextField.primaryStyle()
+        self.memoTextField.primaryStyle()
         
         self.amountTextField.leftView = UIImageView(image: R.image.amountIcon()).then { $0.tintColor = .gray }
         self.amountTextField.leftViewMode = .always
@@ -84,9 +80,9 @@ extension TransferViewController {
     }
     
     func setUpContentChangedObservers() {
-        self.viewModel.accountTextFieldViewModel.bind(with: self.accountTextField, controller: self.accountFieldController)
-        self.viewModel.amountTextFieldViewModel.bind(with: self.amountTextField, controller: self.amountFieldController)
-        self.viewModel.memoTextFieldViewModel.bind(with: self.memoTextField, controller: self.memoFieldController)
+        self.viewModel.accountTextFieldViewModel.bind(withMDC: self.accountTextField)
+        self.viewModel.amountTextFieldViewModel.bind(withMDC: self.amountTextField)
+        self.viewModel.memoTextFieldViewModel.bind(withMDC: self.memoTextField)
         
         self.viewModel.isTransferEnabled ~> self.transferButton.rx.isEnabled ~ self.disposeBag
         self.viewModel.isUsernameEditable ~> self.accountTextField.rx.isEnabled ~ self.disposeBag

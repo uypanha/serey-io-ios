@@ -3,14 +3,12 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 3/31/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import Alamofire
-import ObjectMapper
-import AlamofireObjectMapper
 
 /// An `Error` emitted by `FileUploadService`.
 public enum FileUploadError: Error {
@@ -74,7 +72,7 @@ extension FileUploadService {
             let mimetype = "image/jpeg"
             multipartFormData.append(imageData, withName: withName, fileName: filename, mimeType: mimetype)
         }, to: uploadURL, headers: self.createHeaders())
-            .responseObject { (response: DataResponse<FileUploadModel, AFError>) in
+            .responseDecodable { (response: DataResponse<FileUploadModel, AFError>) in
                 switch response.result {
                 case .success(let imageModel):
                     uploadSubject.onNext((true, imageModel))

@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/15/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -21,60 +21,34 @@ protocol StyleProtocol {
 // MARK: - MDCOutlinedTextField {
 extension MDCOutlinedTextField: StyleProtocol {
     
-    func primaryStyle() {
+    fileprivate func prepareContainerScheme() -> MDCContainerScheme {
         let containerScheme = MDCContainerScheme()
         let colorScheme = MDCSemanticColorScheme()
+        colorScheme.surfaceColor = ColorName.primary.color
         colorScheme.primaryColor = ColorName.primary.color
         colorScheme.errorColor = .red
         containerScheme.colorScheme = colorScheme
-        applyTheme(withScheme: containerScheme)
-        
-        setOutlineColor(.clear, for: .normal)
+        return containerScheme
+    }
+    
+    func primaryStyle() {
+        applyTheme(withScheme: prepareContainerScheme())
+        self.containerRadius = 8
+        self.font = UIFont.systemFont(ofSize: 14)
+        setOutlineColor(.lightGray, for: .normal)
+        setOutlineColor(.lightGray, for: .disabled)
         setNormalLabelColor(.gray, for: .normal)
     }
     
     func secondaryStyle() {
-        
     }
     
     func dangerouseStyle() {
-        
-    }
-}
-
-// MARK: - MDCTextField
-extension MDCTextField {
-    
-    @discardableResult
-    func primaryController(with fontSize: CGFloat = 14, normalColor: UIColor = .lightGray) -> MDCTextInputControllerOutlined {
-        let controller = MDCTextInputControllerOutlined(textInput: self)
-        controller.activeColor = ColorName.primary.color
-        controller.normalColor = normalColor
-        controller.errorColor = .red
-        controller.disabledColor = .lightGray
-        controller.underlineHeightNormal = 0.5
-        controller.textInputFont = UIFont.systemFont(ofSize: fontSize)
-        controller.floatingPlaceholderActiveColor = ColorName.primary.color
-        controller.floatingPlaceholderNormalColor = normalColor
-        controller.inlinePlaceholderFont = UIFont.systemFont(ofSize: fontSize)
-        controller.leadingUnderlineLabelFont = UIFont.systemFont(ofSize: fontSize - 4)
-        controller.trailingUnderlineLabelFont = UIFont.systemFont(ofSize: fontSize - 4)
-        controller.floatingPlaceholderScale = 0.8
-        controller.borderRadius = 8
-        
-        return controller
-    }
-    
-    func prepareTogglePasswordTextField() {
-        func preparePasswordButton() -> UIButton {
-            return UIButton(type: .custom).then { //[unowned self] in
-                $0.setImage(R.image.eyeClosedIcon(), for: .normal)
-                $0.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            }
-        }
-        
-        self.trailingViewMode = .always
-        self.trailingView = preparePasswordButton()
+        applyErrorTheme(withScheme: prepareContainerScheme())
+        self.font = UIFont.systemFont(ofSize: 14)
+        setOutlineColor(.lightGray, for: .normal)
+        setOutlineColor(.lightGray, for: .disabled)
+        setNormalLabelColor(.gray, for: .normal)
     }
 }
 
@@ -107,11 +81,14 @@ extension UIButton: StyleProtocol {
     }
     
     func primaryStyle() {
+        self.setTitleColor(.white, for: .normal)
         self.customStyle(with: ColorName.primary.color)
     }
     
     func secondaryStyle() {
-        self.secondaryStyle(borderColor: ColorName.primary.color, borderWidth: 2, isCircular: false)
+        self.tintColor = ColorName.primary.color
+        self.setTitleColor(ColorName.primary.color, for: .normal)
+        self.customStyle(with: ColorName.lightPrimary.color)
     }
 
     func secondaryStyle(borderColor: UIColor? = nil, borderWidth: CGFloat = 2, isCircular: Bool = true) {

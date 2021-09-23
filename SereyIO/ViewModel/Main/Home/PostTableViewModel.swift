@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/6/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -33,6 +33,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         case voteDialogController(VoteDialogViewModel)
         case downVoteDialogController(DownvoteDialogViewModel)
         case signInViewController
+        case draftsViewController(DraftListViewModel)
     }
     
     // input:
@@ -54,7 +55,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
     
     override func onMorePressed(of postModel: PostModel) {
         var items: [PostMenu] = [.edit]
-        if postModel.upvote == 0 {
+        if postModel.voterCount == 0 {
             items.append(.delete)
         }
         let bottomMenuViewModel = BottomListMenuViewModel(items.map { $0.cellModel })
@@ -74,7 +75,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         case .byCategoryId:
             return
         default:
-            if let categoryId = postModel.categoryItem.first {
+            if let categoryId = postModel.categories.first {
                 let postTableViewModel = PostTableViewModel(.byCategoryId(categoryId))
                 self.shouldPresent(.postsByCategoryController(postTableViewModel))
             }
@@ -82,7 +83,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
     }
     
     override func onProfilePressed(of postModel: PostModel) {
-        let userAccountViewModel = UserAccountViewModel(postModel.authorName)
+        let userAccountViewModel = UserAccountViewModel(postModel.author)
         self.shouldPresent(.userAccountController(userAccountViewModel))
     }
     
@@ -105,6 +106,18 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
             ~ cellModel.disposeBag
     }
     
+    func handleItemPressed(_ indexPath: IndexPath) {
+        if let item = self.item(at: indexPath) as? PostCellViewModel {
+            if let discussion = item.post.value {
+                let viewModel = PostDetailViewModel(discussion)
+                self.shouldPresent(.postDetailViewController(viewModel))
+            }
+        } else if self.item(at: indexPath) is DraftSavedCellViewModel {
+            let viewModel = DraftListViewModel()
+            self.shouldPresent(.draftsViewController(viewModel))
+        }
+    }
+    
     deinit {
         unregisterFromNotifs()
     }
@@ -115,10 +128,10 @@ extension PostTableViewModel {
     
     private func deletePost(_ post: PostModel) {
         self.shouldPresent(.loading(true))
-        self.discussionService.deletePost(post.authorName, post.permlink)
+        self.discussionService.deletePost(post.author, post.permlink)
             .subscribe(onNext: { [weak self] _ in
                 self?.shouldPresent(.loading(false))
-                NotificationDispatcher.sharedInstance.dispatch(.postDeleted(permlink: post.permlink, author: post.authorName))
+                NotificationDispatcher.sharedInstance.dispatch(.postDeleted(permlink: post.permlink, author: post.author))
             }, onError: { [weak self] error in
                 self?.shouldPresent(.loading(false))
                 let errorInfo = ErrorHelper.prepareError(error: error)
@@ -129,15 +142,6 @@ extension PostTableViewModel {
 
 // MARK: - Action Handlers
 fileprivate extension PostTableViewModel {
-    
-    func handleItemPressed(_ indexPath: IndexPath) {
-        if let item = self.item(at: indexPath) as? PostCellViewModel {
-            if let discussion = item.post.value {
-                let viewModel = PostDetailViewModel(discussion)
-                self.shouldPresent(.postDetailViewController(viewModel))
-            }
-        }
-    }
     
     func handleMenuPressed(_ type: PostMenu, _ post: PostModel) {
         switch type {

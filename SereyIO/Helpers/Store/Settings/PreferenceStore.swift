@@ -3,10 +3,11 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/28/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
+import CountryPicker
 
 class PreferenceStore {
     
@@ -30,6 +31,20 @@ class PreferenceStore {
         }
     }
     
+    var currentUserCountryCode: String? {
+        get {
+            return Store.standard.value(forKey: "currentUserCountryCode") as? String
+        }
+        set {
+            Store.standard.setValue(newValue, forKey: "currentUserCountryCode")
+        }
+    }
+    
+    var currentCountry: Country? {
+        guard let countryCode = self.currentUserCountryCode else { return nil }
+        return CountryManager.shared.country(withCode: countryCode)
+    }
+    
     func setNotification(_ enabled: Bool) {
         self.userDisabledNotifs = !enabled
         if enabled {
@@ -37,5 +52,9 @@ class PreferenceStore {
         } else {
             AppDelegate.shared?.turnOffPushNotification()
         }
+    }
+    
+    func setFeautureSeen(of feature: FeatureBoarding, seen: Bool) {
+        Store.standard.setValue(seen, forKey: feature.preferenceKey)
     }
 }

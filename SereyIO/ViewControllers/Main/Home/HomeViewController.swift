@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/2/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -14,7 +14,7 @@ import MaterialComponents
 
 class HomeViewController: BaseViewController, AlertDialogController, LoadingIndicatorController {
     
-    @IBOutlet weak var tabBar: MDCTabBar!
+    @IBOutlet weak var tabBar: MDCTabBarView!
     @IBOutlet weak var scrollView: UIScrollView!
     
     private lazy var logoBarItem: UIBarButtonItem = {
@@ -60,10 +60,22 @@ class HomeViewController: BaseViewController, AlertDialogController, LoadingIndi
         viewModel.downloadData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.viewModel.validateCountry()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         setupSlideScrollView(slides: self.slideViews.map { $0.view })
+        if self.slideViews.count > 0 && self.slideViews.count == self.tabItems.count && !self.viewModel.didScrolledToIndex {
+            let item = self.tabItems[0]
+            self.tabBar.setSelectedItem(item, animated: true)
+            self.scrollView.scrollRectToVisible(self.slideViews[item.tag].view.frame, animated: false)
+            self.viewModel.didScrolledToIndex = true
+        }
     }
 }
 
@@ -96,17 +108,15 @@ extension HomeViewController {
         tabBar.tintColor = ColorName.primary.color
         tabBar.setTitleColor(.gray, for: .normal)
         tabBar.setTitleColor(ColorName.primary.color, for: .selected)
-        tabBar.selectedItemTitleFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        tabBar.unselectedItemTitleFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        tabBar.displaysUppercaseTitles = false
+        
+        tabBar.setTitleFont(UIFont.systemFont(ofSize: 14, weight: .medium), for: .selected)
+        tabBar.setTitleFont(UIFont.systemFont(ofSize: 14, weight: .medium), for: .normal)
         tabBar.rippleColor = .clear
-        tabBar.enableRippleBehavior = false
-        tabBar.inkColor = .clear
-        tabBar.itemAppearance = .titles
-        tabBar.alignment = .justified
+        tabBar.selectionIndicatorStrokeColor = ColorName.primary.color
+        
         tabBar.selectionIndicatorTemplate = TabBarIndicator()
         tabBar.bottomDividerColor = ColorName.border.color
-        tabBar.delegate = self
+        tabBar.tabBarDelegate = self
     }
     
     func addSlidesToScrollView() {
@@ -156,7 +166,7 @@ extension HomeViewController: TabBarControllerDelegate {
 }
 
 // MARK: - UIScrollViewDelegate
-extension HomeViewController: UIScrollViewDelegate, MDCTabBarDelegate {
+extension HomeViewController: UIScrollViewDelegate, MDCTabBarViewDelegate {
     
 //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
 //        let pageIndex = round(scrollView.contentOffset.x / self.scrollView.frame.width)
@@ -166,7 +176,7 @@ extension HomeViewController: UIScrollViewDelegate, MDCTabBarDelegate {
 //        }
 //    }
 //
-    func tabBar(_ tabBar: MDCTabBar, willSelect item: UITabBarItem) {
+    func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
         self.scrollView.scrollRectToVisible(self.slideViews[item.tag].view.frame, animated: true)
     }
 }

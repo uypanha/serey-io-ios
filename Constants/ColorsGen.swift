@@ -30,6 +30,9 @@ internal struct ColorName {
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#cccccc"></span>
   /// Alpha: 100% <br/> (0xccccccff)
   internal static let disabled = ColorName(rgbaValue: 0xccccccff)
+  /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#eff2fc"></span>
+  /// Alpha: 100% <br/> (0xeff2fcff)
+  internal static let lightPrimary = ColorName(rgbaValue: 0xeff2fcff)
   /// <span style="display:block;width:3em;height:2em;border:1px solid black;background:#ffffff"></span>
   /// Alpha: 100% <br/> (0xffffffff)
   internal static let navigationBg = ColorName(rgbaValue: 0xffffffff)

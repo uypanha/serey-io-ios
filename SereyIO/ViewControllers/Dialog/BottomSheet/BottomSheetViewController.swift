@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/10/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -18,6 +18,10 @@ class BottomSheetViewController: MDCBottomSheetController {
         self.isScrimAccessibilityElement = false
         self.automaticallyAdjustsScrollViewInsets = false
         self.dismissOnDraggingDownSheet = true
+        
+        if contentViewController is UITableViewController {
+            
+        }
     }
     
     required init?(coder: NSCoder) {

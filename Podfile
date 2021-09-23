@@ -8,48 +8,23 @@ install! 'cocoapods',
 def frameworks_pods
   
   # MARK: - Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  platform :ios, '10'
+  platform :ios, '12'
   use_frameworks!
   inhibit_all_warnings!
-  
-  # MARK: - RX
-  pod 'RxSwift', '~> 5'
-  pod 'RxCocoa', '~> 5'
-  pod 'RxDataSources', '~> 4.0'
-  pod 'RxKeyboard', '1.0.0'
-  pod 'RxKingfisher', '1.0.0'
-  pod 'RxAlamofire', '5.2.0'
-  pod 'RxRealm', '3.1.0'
-  pod 'RxBinding', '0.3.1'
 
 	# MARK: - Data Store
-  pod 'Locksmith'
-	pod 'RealmSwift', '5.2'
-
-	# MARK: - Extentions
-  pod 'Then'
+  pod 'Locksmith', :git => 'https://github.com/uypanha/Locksmith.git'
 
 	# MARK: - Tools + Builders
   pod 'R.swift'
   pod 'SwiftGen'
   pod 'SwiftOTP'
-  
-  # MARK: - Coder Tools
-#  pod 'AnyCodable-FlightSchool', '~> 0.2.3'
 
 	# MARK: - Logger
   pod 'SwiftyBeaver'
-	
-	# MARK: - Network Framework
-  pod 'Kingfisher'
-  pod 'Alamofire'
-  pod 'AlamofireObjectMapper', :git => 'https://github.com/uypanha/AlamofireObjectMapper.git'
-  pod 'ReachabilitySwift'
-  pod 'Moya/RxSwift'
 
 	# MARK: - UI + Controllers
-	pod 'SnapKit'
-	pod 'NVActivityIndicatorView'
+  pod 'NVActivityIndicatorView', '~> 5.1.1'
   pod 'NVActivityIndicatorView/Extended'
 	pod 'NotificationBannerSwift'
   pod 'Shimmer'
@@ -57,13 +32,9 @@ def frameworks_pods
   pod 'LSDialogViewController', :git => 'https://github.com/uyphanha/LSDialogViewController.git'
   pod 'PinCodeTextField', :git => 'https://github.com/uypanha/PinCodeTextField.git'
   
-  # MARK: - Google SDKs
-  pod 'Firebase/Analytics'
-  pod 'Firebase/Core' 
-  pod 'Firebase/Messaging'
-  
   # MARK: - Material Components
   pod 'MaterialComponents/Tabs'
+  pod 'MaterialComponents/Tabs+TabBarView'
   pod 'MaterialComponents/PageControl'
   pod 'MaterialComponents/BottomSheet'
   pod 'MaterialComponents/Chips'
@@ -92,9 +63,12 @@ target 'SereyIO' do
 end
 
 post_install do |installer|
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['LD_NO_PIE'] = 'NO'
+            config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+            # Suppress warning of minimum development target
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10'
+        end
     end
-  end
 end

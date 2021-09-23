@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 7/29/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -20,6 +20,8 @@ class WalletMenuCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var menuTitleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
     
+    var isEnabled: Bool = true
+    
     var cellModel: WalletMenuCellViewModel? {
         didSet {
             guard let cellModel = self.cellModel else { return }
@@ -28,7 +30,12 @@ class WalletMenuCollectionViewCell: BaseCollectionViewCell {
                 cellModel.image ~> self.iconImageView.rx.image,
                 cellModel.title ~> self.menuTitleLabel.rx.text,
                 cellModel.subTitle ~> self.subTitleLabel.rx.text,
-                cellModel.backgroundColor ~> self.cardView.rx.backgroundColor
+                cellModel.backgroundColor ~> self.cardView.rx.backgroundColor,
+                cellModel.isEnabled.map { $0 ? 1.0 : 0.35 } ~> self.cardView.rx.alpha,
+                cellModel.isEnabled.asObservable()
+                    .subscribe(onNext: { [weak self] isEnabled in
+                        self?.isEnabled = isEnabled
+                    })
             ]
         }
     }
@@ -46,8 +53,10 @@ class WalletMenuCollectionViewCell: BaseCollectionViewCell {
     }
     
     func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
-            self.cardView.backgroundColor = highlighted ? self.cellModel?.backgroundColor.value?.withAlphaComponent(0.5) : self.cellModel?.backgroundColor.value
-        })
+        if self.isEnabled {
+            UIView.animate(withDuration: animated ? 0.3 : 0, animations: {
+                self.cardView.backgroundColor = highlighted ? self.cellModel?.backgroundColor.value?.withAlphaComponent(0.5) : self.cellModel?.backgroundColor.value
+            })
+        }
     }
 }
