@@ -87,6 +87,11 @@
 		DC387C8D24E6E90C00D8C78E /* CryptLib.m in Sources */ = {isa = PBXBuildFile; fileRef = DC387C8C24E6E90C00D8C78E /* CryptLib.m */; };
 		DC387C8F24E97E7400D8C78E /* Password.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC387C8E24E97E7400D8C78E /* Password.storyboard */; };
 		DC387C9224E9821100D8C78E /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC387C9124E9821100D8C78E /* ChangePasswordViewController.swift */; };
+		DC3E7E162703614D001DA924 /* NotificationTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3E7E152703614D001DA924 /* NotificationTableCell.swift */; };
+		DC3E7E18270362E7001DA924 /* UILabel+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3E7E17270362E7001DA924 /* UILabel+Helper.swift */; };
+		DC3E7E1A270363EC001DA924 /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3E7E19270363EC001DA924 /* UIFont+Extensions.swift */; };
+		DC3E7E1C270364D3001DA924 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3E7E1B270364D3001DA924 /* UIColor+Extensions.swift */; };
+		DC3E7E1E27036815001DA924 /* NotificationCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3E7E1D27036815001DA924 /* NotificationCellViewModel.swift */; };
 		DC40D5C623E31FDF00B0DD96 /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */; };
 		DC40D5C723E31FDF00B0DD96 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C523E31FDF00B0DD96 /* GradientView.swift */; };
 		DC40D5CC23E3298F00B0DD96 /* LanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC40D5C923E3298F00B0DD96 /* LanguageTableViewCell.swift */; };
@@ -284,6 +289,7 @@
 		DC8EAB8523E7232800E00A00 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8423E7232800E00A00 /* NotificationViewController.swift */; };
 		DC8EAB8723E7232F00E00A00 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC8EAB8623E7232F00E00A00 /* SearchViewController.swift */; };
 		DC952FB2268A2D1000B6D3D7 /* PaginationRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC952FB1268A2D1000B6D3D7 /* PaginationRequestModel.swift */; };
+		DC99253C26FCDFA400A098EB /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC99253B26FCDFA400A098EB /* NotificationViewModel.swift */; };
 		DC9A65FD24DE9171001F1B60 /* QRPayment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC9A65FC24DE9171001F1B60 /* QRPayment.storyboard */; };
 		DC9A660024DE9233001F1B60 /* ReceiveCoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A65FF24DE9233001F1B60 /* ReceiveCoinViewController.swift */; };
 		DC9A660324DEB83F001F1B60 /* ReceiveCoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9A660224DEB83E001F1B60 /* ReceiveCoinViewModel.swift */; };
@@ -329,6 +335,10 @@
 		DCA74DA82537EDBA0041EAAE /* WalletPreferenceStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA74DA72537EDBA0041EAAE /* WalletPreferenceStore.swift */; };
 		DCA74DC12539F6700041EAAE /* BiometricIDAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA74DC02539F6700041EAAE /* BiometricIDAuth.swift */; };
 		DCA74DC9253AD6A40041EAAE /* VerifyBiometryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA74DC8253AD6A30041EAAE /* VerifyBiometryViewController.swift */; };
+		DCACDDDE2702103600F69AEA /* NotificationApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACDDDD2702103600F69AEA /* NotificationApi.swift */; };
+		DCACDDE02702104300F69AEA /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACDDDF2702104300F69AEA /* NotificationService.swift */; };
+		DCACDDE32702207800F69AEA /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACDDE22702207800F69AEA /* NotificationModel.swift */; };
+		DCACDDE5270222A900F69AEA /* NotificationsResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCACDDE4270222A900F69AEA /* NotificationsResponseModel.swift */; };
 		DCB5BD6B2497BF880042E5AF /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCB5BD6A2497BF880042E5AF /* Wallet.storyboard */; };
 		DCB5BD712497CAE40042E5AF /* SecurityMethodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB5BD6F2497CAE40042E5AF /* SecurityMethodeTableViewCell.swift */; };
 		DCB5BD722497CAE40042E5AF /* SecurityMethodeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCB5BD702497CAE40042E5AF /* SecurityMethodeTableViewCell.xib */; };
@@ -554,6 +564,11 @@
 		DC387C8C24E6E90C00D8C78E /* CryptLib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CryptLib.m; sourceTree = "<group>"; };
 		DC387C8E24E97E7400D8C78E /* Password.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Password.storyboard; sourceTree = "<group>"; };
 		DC387C9124E9821100D8C78E /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
+		DC3E7E152703614D001DA924 /* NotificationTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableCell.swift; sourceTree = "<group>"; };
+		DC3E7E17270362E7001DA924 /* UILabel+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Helper.swift"; sourceTree = "<group>"; };
+		DC3E7E19270363EC001DA924 /* UIFont+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		DC3E7E1B270364D3001DA924 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		DC3E7E1D27036815001DA924 /* NotificationCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCellViewModel.swift; sourceTree = "<group>"; };
 		DC40D5C423E31FDF00B0DD96 /* ContentSizedTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
 		DC40D5C523E31FDF00B0DD96 /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		DC40D5C923E3298F00B0DD96 /* LanguageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageTableViewCell.swift; sourceTree = "<group>"; };
@@ -761,6 +776,7 @@
 		DC8EAB8423E7232800E00A00 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		DC8EAB8623E7232F00E00A00 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		DC952FB1268A2D1000B6D3D7 /* PaginationRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationRequestModel.swift; sourceTree = "<group>"; };
+		DC99253B26FCDFA400A098EB /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		DC9A65FC24DE9171001F1B60 /* QRPayment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QRPayment.storyboard; sourceTree = "<group>"; };
 		DC9A65FF24DE9233001F1B60 /* ReceiveCoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveCoinViewController.swift; sourceTree = "<group>"; };
 		DC9A660224DEB83E001F1B60 /* ReceiveCoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveCoinViewModel.swift; sourceTree = "<group>"; };
@@ -807,6 +823,10 @@
 		DCA74DA72537EDBA0041EAAE /* WalletPreferenceStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletPreferenceStore.swift; sourceTree = "<group>"; };
 		DCA74DC02539F6700041EAAE /* BiometricIDAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricIDAuth.swift; sourceTree = "<group>"; };
 		DCA74DC8253AD6A30041EAAE /* VerifyBiometryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyBiometryViewController.swift; sourceTree = "<group>"; };
+		DCACDDDD2702103600F69AEA /* NotificationApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationApi.swift; sourceTree = "<group>"; };
+		DCACDDDF2702104300F69AEA /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		DCACDDE22702207800F69AEA /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		DCACDDE4270222A900F69AEA /* NotificationsResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsResponseModel.swift; sourceTree = "<group>"; };
 		DCB5BD6A2497BF880042E5AF /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
 		DCB5BD6F2497CAE40042E5AF /* SecurityMethodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityMethodeTableViewCell.swift; sourceTree = "<group>"; };
 		DCB5BD702497CAE40042E5AF /* SecurityMethodeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SecurityMethodeTableViewCell.xib; sourceTree = "<group>"; };
@@ -1118,6 +1138,7 @@
 			children = (
 				DCF8738123F6FA3B007A8724 /* BasePostViewModel.swift */,
 				DC19DBE923EC5F9100571CC8 /* Home */,
+				DC99253A26FCDF8A00A098EB /* Notifications */,
 				DC9E36DD24129FFD00289693 /* Post */,
 				DCF8737E23F6F7B8007A8724 /* Profile */,
 				DC19DBF423EC750000571CC8 /* Search */,
@@ -1253,6 +1274,15 @@
 				DC387C8C24E6E90C00D8C78E /* CryptLib.m */,
 			);
 			path = AES;
+			sourceTree = "<group>";
+		};
+		DC3E7E14270360A0001DA924 /* NotificationTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				DC3E7E1D27036815001DA924 /* NotificationCellViewModel.swift */,
+				DC3E7E152703614D001DA924 /* NotificationTableCell.swift */,
+			);
+			path = NotificationTableCell;
 			sourceTree = "<group>";
 		};
 		DC40D5C823E3298F00B0DD96 /* LanguageTableViewCell */ = {
@@ -1438,13 +1468,14 @@
 				DC40D5D523E32A6B00B0DD96 /* ImageTextModel.swift */,
 				DC40D5CF23E329E000B0DD96 /* LanguageModel.swift */,
 				DCF67FEE24100C6F003061A7 /* ListDataResponseModel.swift */,
+				DC952FB1268A2D1000B6D3D7 /* PaginationRequestModel.swift */,
 				DC12F209242271A30099C479 /* Auth */,
 				DCCD40CC2436425200093A18 /* BlockChain */,
 				DC9AC6E42406C5A2008FAFA6 /* Discussion */,
 				DC0044072433A97000244607 /* File */,
+				DCACDDE12702205600F69AEA /* Notification */,
 				DCF67FEA24100BC7003061A7 /* User */,
 				DC1F79D924D089E000B7F0D3 /* Wallet */,
-				DC952FB1268A2D1000B6D3D7 /* PaginationRequestModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1620,6 +1651,8 @@
 				DCD39882232E24BF00C812EB /* Realm+Cnfigure.swift */,
 				DC6ED56E2326A30000770B31 /* String+Extensions.swift */,
 				DCD39888232E254100C812EB /* UIColor+Converter.swift */,
+				DC3E7E1B270364D3001DA924 /* UIColor+Extensions.swift */,
+				DC3E7E19270363EC001DA924 /* UIFont+Extensions.swift */,
 				DCD3988A232E255E00C812EB /* UIImage+Extensions.swift */,
 				DC010D382434F685002BE182 /* URL+Helpers.swift */,
 				DCD3988E232E259B00C812EB /* Controller */,
@@ -2047,6 +2080,14 @@
 			path = More;
 			sourceTree = "<group>";
 		};
+		DC99253A26FCDF8A00A098EB /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				DC99253B26FCDFA400A098EB /* NotificationViewModel.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		DC9A65FE24DE9216001F1B60 /* Receive */ = {
 			isa = PBXGroup;
 			children = (
@@ -2213,6 +2254,24 @@
 				DCA525562425166B00284CD8 /* ButtonTableViewCell.xib */,
 			);
 			path = ButtonTableViewCell;
+			sourceTree = "<group>";
+		};
+		DCACDDDC2702101E00F69AEA /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				DCACDDDD2702103600F69AEA /* NotificationApi.swift */,
+				DCACDDDF2702104300F69AEA /* NotificationService.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		DCACDDE12702205600F69AEA /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				DCACDDE22702207800F69AEA /* NotificationModel.swift */,
+				DCACDDE4270222A900F69AEA /* NotificationsResponseModel.swift */,
+			);
+			path = Notification;
 			sourceTree = "<group>";
 		};
 		DCB5BD6C2497CAB90042E5AF /* Wallet */ = {
@@ -2455,9 +2514,10 @@
 			children = (
 				DCD39880232E24A400C812EB /* NSLayoutConstraint+Multiplier.swift */,
 				DCD39884232E24E500C812EB /* Reusable+Extensions.swift */,
-				DCD3987E232E238800C812EB /* UIView+Appearance.swift */,
-				DCD39886232E251C00C812EB /* StyleProtocol.swift */,
 				DC9E36E82413F4A100289693 /* RichEditor+Custom.swift */,
+				DCD39886232E251C00C812EB /* StyleProtocol.swift */,
+				DC3E7E17270362E7001DA924 /* UILabel+Helper.swift */,
+				DCD3987E232E238800C812EB /* UIView+Appearance.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2497,6 +2557,7 @@
 				DC0044052433A87900244607 /* FileUploadService.swift */,
 				DC56243A241E82A90076A78C /* Auth */,
 				DC9AC6DD2406BEFB008FAFA6 /* Discussion */,
+				DCACDDDC2702101E00F69AEA /* Notification */,
 				DC5B55AC2451E59500F8531B /* Push */,
 				DCF67FDB240FFC3B003061A7 /* Search */,
 				DC6FCE6523F05D1700D72F6D /* Steem */,
@@ -2569,6 +2630,7 @@
 		DCD3987B232E234600C812EB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				DC3E7E14270360A0001DA924 /* NotificationTableCell */,
 				DC40D5D223E32A3100B0DD96 /* Base */,
 				DC40D5D123E32A2800B0DD96 /* Common */,
 				DC1C6EBF23FC3C3000BA701D /* Dialog */,
@@ -3233,6 +3295,7 @@
 				DCD39889232E254100C812EB /* UIColor+Converter.swift in Sources */,
 				DCD39885232E24E500C812EB /* Reusable+Extensions.swift in Sources */,
 				DC5B55B02451E5C800F8531B /* PushApi.swift in Sources */,
+				DC3E7E18270362E7001DA924 /* UILabel+Helper.swift in Sources */,
 				DC12F20B242271B60099C479 /* TokenModel.swift in Sources */,
 				DC56243E241E87000076A78C /* AuthApi.swift in Sources */,
 				DCD39881232E24A400C812EB /* NSLayoutConstraint+Multiplier.swift in Sources */,
@@ -3258,6 +3321,7 @@
 				DC7C8EF424D9BFC00051C084 /* TransferCoinModel.swift in Sources */,
 				DC05FDAB23F1AB620093B47B /* SettingCellViewModel.swift in Sources */,
 				DC13409324573AE700CC9856 /* NotificationSettingsViewController.swift in Sources */,
+				DCACDDDE2702103600F69AEA /* NotificationApi.swift in Sources */,
 				DC05FDC323F1BDF10093B47B /* LanguagesViewController.swift in Sources */,
 				DC9AC6E82406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift in Sources */,
 				DCDE00672446016800D09717 /* ReplyCommentViewController.swift in Sources */,
@@ -3280,6 +3344,7 @@
 				DC83C38624E1A9DE008C9EAB /* ConfirmTransferViewModel.swift in Sources */,
 				DCB5BD7F2497D9400042E5AF /* ChooseSecurityMethodViewModel.swift in Sources */,
 				DC562433241E73D80076A78C /* SignInViewModel.swift in Sources */,
+				DCACDDE02702104300F69AEA /* NotificationService.swift in Sources */,
 				DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */,
 				DCFF5877251F7A66002E570A /* ChangePasswordViewModel.swift in Sources */,
 				DC1F79CF24CF294200B7F0D3 /* CreateCredentialCellViewModel.swift in Sources */,
@@ -3303,6 +3368,7 @@
 				DC9A660024DE9233001F1B60 /* ReceiveCoinViewController.swift in Sources */,
 				DCF8738223F6FA3B007A8724 /* BasePostViewModel.swift in Sources */,
 				DCB5BD742497D2E10042E5AF /* SecurityMethodCellViewModel.swift in Sources */,
+				DCACDDE5270222A900F69AEA /* NotificationsResponseModel.swift in Sources */,
 				DC583A8F24CC281C00D9C4D3 /* WalletAuthValidationViewModel.swift in Sources */,
 				DCFBD77425013D4D005B6875 /* PowerDownViewModel.swift in Sources */,
 				DCF20B4A2535F9C500206786 /* VerifyGoogleOTPViewController.swift in Sources */,
@@ -3317,6 +3383,7 @@
 				DC42AF0423E9CFB5008F8A0F /* PostTableViewCell.swift in Sources */,
 				DC88B1A0269F278A001FA62A /* ChooseCountryOption.swift in Sources */,
 				DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */,
+				DC3E7E1E27036815001DA924 /* NotificationCellViewModel.swift in Sources */,
 				DC115F2E241A8E18006BE78C /* NSAttributedString+Extensions.swift in Sources */,
 				DC1CBD3F2593A1CE00CCB714 /* DraftSavedTableViewCell.swift in Sources */,
 				DCB9F2FA24D85F540028D449 /* TransferViewController.swift in Sources */,
@@ -3336,15 +3403,18 @@
 				DCDE00782448B0B800D09717 /* VoteDialogViewController.swift in Sources */,
 				DC5FC21124542CB700CA6117 /* CommentsListViewModel.swift in Sources */,
 				DCA74DC12539F6700041EAAE /* BiometricIDAuth.swift in Sources */,
+				DCACDDE32702207800F69AEA /* NotificationModel.swift in Sources */,
 				DC6FCE7423F05D1700D72F6D /* Steem.swift in Sources */,
 				DCCD40C924363EF700093A18 /* SubmitPostModel.swift in Sources */,
 				DC9A660B24E05725001F1B60 /* PayQRViewModel.swift in Sources */,
 				DC8EAB8323E7231A00E00A00 /* MoreViewController.swift in Sources */,
 				DCC6F1E2242BBDEA003B9E3A /* TextTableViewCell.swift in Sources */,
+				DC3E7E1A270363EC001DA924 /* UIFont+Extensions.swift in Sources */,
 				DCF67FDD240FFC4A003061A7 /* SearchApi.swift in Sources */,
 				DC357A50243CC88E00B2D3B7 /* PostDetailCellViewModel.swift in Sources */,
 				DC0F36B32450A27700916886 /* BasePostDetailViewModel.swift in Sources */,
 				DCA45A1024D317D400E21D9A /* ClaimRewardModel.swift in Sources */,
+				DC3E7E162703614D001DA924 /* NotificationTableCell.swift in Sources */,
 				DCD3987D232E235000C812EB /* BaseTableViewCell.swift in Sources */,
 				DC7558B7245898EC00AD40FA /* SereyAppTableViewCell.swift in Sources */,
 				DC6FCE7323F05D1700D72F6D /* HttpClient.swift in Sources */,
@@ -3393,6 +3463,7 @@
 				DC56243C241E82B80076A78C /* AuthService.swift in Sources */,
 				DC7AAFFB24F80BD000ECDF47 /* PowerDownViewController.swift in Sources */,
 				DC83C38224E19DCC008C9EAB /* ConfirmTransferViewController.swift in Sources */,
+				DC3E7E1C270364D3001DA924 /* UIColor+Extensions.swift in Sources */,
 				DCB5BD712497CAE40042E5AF /* SecurityMethodeTableViewCell.swift in Sources */,
 				DC010D3B2434F6C6002BE182 /* MimeType.swift in Sources */,
 				DCDE007124475DFA00D09717 /* CommentTextView.swift in Sources */,
@@ -3402,6 +3473,7 @@
 				DCD39894232E28C900C812EB /* WebViewViewController.swift in Sources */,
 				DC803C5826974C9300FCD2B2 /* FeatureViewController.swift in Sources */,
 				DCD39868232E1D1B00C812EB /* ErrorHelper.swift in Sources */,
+				DC99253C26FCDFA400A098EB /* NotificationViewModel.swift in Sources */,
 				DC6A78FE23CA22B0001D1009 /* LoadingIndicatorController.swift in Sources */,
 				DC6ED5822326A47D00770B31 /* AuthData.swift in Sources */,
 				DC0044062433A87900244607 /* FileUploadService.swift in Sources */,

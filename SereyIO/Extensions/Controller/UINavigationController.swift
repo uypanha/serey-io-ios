@@ -81,6 +81,7 @@ extension UINavigationController {
         if #available(iOS 13, *) {
             let standardAppearance = self.navigationBar.standardAppearance.copy()
             if (isTransparent) { standardAppearance.configureWithTransparentBackground() }
+            else { standardAppearance.configureWithOpaqueBackground() }
             standardAppearance.backgroundColor = color
             standardAppearance.titleTextAttributes = [
                 .foregroundColor: tintColor,
@@ -104,7 +105,7 @@ extension UINavigationController {
                 .foregroundColor: tintColor,
                 .font: UIFont.systemFont(ofSize: 17, weight: .medium)
             ]
-            self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
+            self.navigationBar.scrollEdgeAppearance = standardAppearance
         } else if #available(iOS 11.0, *) {
             self.navigationBar.largeTitleTextAttributes = [
                 .foregroundColor: tintColor,

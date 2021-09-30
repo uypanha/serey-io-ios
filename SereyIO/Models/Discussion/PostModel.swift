@@ -28,6 +28,7 @@ struct PostModel: Codable {
     let voterCount: Int
     let flaggerCount: Int
     let allowVote: Bool
+    let authorImageUrl: String?
     var replies: [PostModel]?
     
     var firstThumnailURL: URL? {
@@ -68,7 +69,8 @@ struct PostModel: Codable {
         get {
             let firstLetter = author.first == nil ? "" : "\(author.first!)"
             let uniqueColor = UIColor(hexString: PFColorHash().hex("\(author)"))
-            return ProfileViewModel(shortcut: firstLetter, imageUrl: nil, uniqueColor: uniqueColor)
+            let url = URL(string: self.authorImageUrl ?? "")
+            return ProfileViewModel(shortcut: firstLetter, imageUrl: url, uniqueColor: uniqueColor)
         }
     }
     
@@ -105,6 +107,7 @@ struct PostModel: Codable {
         case allowVote = "allow_vote"
         case voterCount = "voter_count"
         case flaggerCount = "flagger_count"
+        case authorImageUrl = "author_image_url"
         case replies
     }
 }

@@ -10,3 +10,8 @@
 
 "manageYourNotification"    = "គ្រប់គ្រងការជូនដំណឹងរបស់អ្នក";
 "pushNotification"          = "ការជំរុញការជូនដំណឹង";
+
+// Activity
+"Started following"         = "%@ started following %@.";
+"Commented on post"         = "%@ commented on %@ post.";
+"Voted on post"             = "%@ voted on %@ post.";

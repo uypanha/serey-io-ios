@@ -34,11 +34,16 @@ fileprivate extension Appearance {
         if #available(iOS 10.0, *) {
             UITabBar.appearance().unselectedItemTintColor = UIColor.darkGray
         }
+        
         if #available(iOS 13.0, *) {
             let tabBarAppearance = UITabBarAppearance()
             tabBarAppearance.configureWithOpaqueBackground()
             tabBarAppearance.backgroundColor = ColorName.tabBarBg.color
             UITabBar.appearance().standardAppearance = tabBarAppearance
+            
+            if #available(iOS 15, *) {
+                UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+            }
         } else {
             UITabBar.appearance().backgroundColor = ColorName.tabBarBg.color
         }
@@ -63,7 +68,7 @@ fileprivate extension Appearance {
                 .foregroundColor: ColorName.navigationTint.color,
                 .font: UIFont.systemFont(ofSize: 17, weight: .medium)
             ]
-            
+            navBarAppearance.backgroundColor = ColorName.navigationBg.color
             UINavigationBar.appearance().standardAppearance = navBarAppearance
             UINavigationBar.appearance().compactAppearance = navBarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance

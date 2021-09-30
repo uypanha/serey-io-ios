@@ -12,9 +12,8 @@ import RxSwift
 
 class SearchService: AppService<SearchApi> {
     
-    func search(_ model: PaginationRequestModel) -> Observable<[PostModel]> {
-        return self.provider.rx.requestObject(.search(model), type: [PostModel].self)
+    func search(_ query: String) -> Observable<[PeopleModel]> {
+        return self.provider.rx.requestObject(.searchAuthor(query: query), type: [PeopleModel].self)
             .asObservable()
-            .map { $0 }
     }
 }
