@@ -20,6 +20,7 @@ class NotificationCellViewModel: CellViewModel, ShimmeringProtocol {
     let createdAt: BehaviorSubject<String?>
     let backgroundColor: BehaviorSubject<UIColor?>
     let isThumbnailHidden: BehaviorSubject<Bool>
+    let thumbnailUrl: BehaviorSubject<URL?>
     
     let isShimmering: BehaviorRelay<Bool>
     
@@ -31,6 +32,8 @@ class NotificationCellViewModel: CellViewModel, ShimmeringProtocol {
         self.createdAt = .init(value: nil)
         self.backgroundColor = .init(value: .white)
         self.isThumbnailHidden = .init(value: false)
+        self.thumbnailUrl = .init(value: nil)
+        
         self.isShimmering = .init(value: false)
         super.init(false, .none)
         
@@ -52,6 +55,7 @@ extension NotificationCellViewModel {
         self.captionAttributedString.onNext(data?.captionAttributedString)
         self.createdAt.onNext(data?.createdTime)
         self.backgroundColor.onNext(data?.isRead == false ? UIColor.color(.primary).withAlphaComponent(0.1) : .clear)
+        self.thumbnailUrl.onNext(data?.postThumbnailUrl)
         self.isThumbnailHidden.onNext(data?.isPost == false)
     }
 }

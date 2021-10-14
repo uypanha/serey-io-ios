@@ -14,6 +14,12 @@ import RxBinding
 
 class NotificationViewController: BaseTableViewController {
     
+    var emptyErrorView: EmptyOrErrorView? = nil {
+        didSet {
+            self.tableView.backgroundView = self.emptyErrorView
+        }
+    }
+    
     lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
         return self.prepreDataSource()
     }()
@@ -33,6 +39,23 @@ class NotificationViewController: BaseTableViewController {
         super.setUpLocalizedTexts()
         
         self.title = R.string.notifications.notifications.localized()
+    }
+    
+    override func notificationReceived(_ notification: Notification) {
+        super.notificationReceived(notification)
+        
+        switch notification.appNotification {
+        case .userDidLogin, .userDidLogOut:
+            DispatchQueue.main.async {
+                self.viewModel.shouldUpdateCells()
+            }
+        case .languageChanged:
+            DispatchQueue.main.async {
+                self.viewModel.shouldPrepareCells()
+            }
+        default:
+            break
+        }
     }
 }
 
@@ -79,6 +102,14 @@ extension NotificationViewController {
         return dataSource
     }
     
+    func prepareEmptyState(_ emptyModel: EmptyOrErrorViewModel?) {
+        self.tableView.backgroundView = nil
+        if let emptyViewModel = emptyModel {
+            self.emptyErrorView = .init().then {
+                $0.viewModel = emptyViewModel
+            }
+        }
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -116,6 +147,11 @@ extension NotificationViewController {
             .bind(to: self.tableView.rx.items(dataSource: self.dataSource))
             ~ self.disposeBag
         
+        self.viewModel.emptyOrErrorViewModel.asObservable()
+            .subscribe(onNext: { [weak self] state in
+                self?.prepareEmptyState(state)
+            }) ~ self.disposeBag
+        
         self.viewModel.isDownloading.asObservable()
             .subscribe(onNext: { [weak self] isDownloading in
                 if !isDownloading {
@@ -137,8 +173,12 @@ extension NotificationViewController {
                 case .profileViewController(let userAccountViewModel):
                     if let userAccountViewController = R.storyboard.profile.userAccountViewController() {
                         userAccountViewController.viewModel = userAccountViewModel
-                        userAccountViewController.hidesBottomBarWhenPushed = true
                         self?.show(userAccountViewController, sender: nil)
+                    }
+                case .signInController(let signInViewModel):
+                    if let signInViewController = R.storyboard.auth.signInViewController() {
+                        signInViewController.viewModel = signInViewModel
+                        self?.show(CloseableNavigationController(rootViewController: signInViewController), sender: nil)
                     }
                 }
             }) ~ self.disposeBag

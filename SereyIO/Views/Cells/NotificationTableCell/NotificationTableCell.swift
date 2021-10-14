@@ -13,6 +13,7 @@ import RxBinding
 import Then
 import SnapKit
 import Shimmer
+import RxKingfisher
 
 class NotificationTableCell: BaseTableViewCell {
     
@@ -66,7 +67,8 @@ class NotificationTableCell: BaseTableViewCell {
                 cellModel.captionAttributedString ~> self.captionLabel.rx.attributedText,
                 cellModel.createdAt ~> self.createdAtLabel.rx.text,
                 cellModel.backgroundColor ~> self.contentView.rx.backgroundColor,
-                cellModel.isThumbnailHidden ~> self.postThumbnailImageView.rx.isHidden
+                cellModel.isThumbnailHidden ~> self.postThumbnailImageView.rx.isHidden,
+                cellModel.thumbnailUrl.map { $0 }.bind(to: self.postThumbnailImageView.kf.rx.image())
             ]
             
             cellModel.isShimmering.asObservable()

@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "tune-variant.pdf",
+      "filename" : "undraw_my_notifications_rjej.pdf",
       "idiom" : "universal"
     }
   ],
@@ -10,6 +10,6 @@
     "version" : 1
   },
   "properties" : {
-    "template-rendering-intent" : "template"
+    "template-rendering-intent" : "original"
   }
 }

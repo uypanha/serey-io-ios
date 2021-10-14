@@ -200,6 +200,9 @@ fileprivate extension MoreViewController {
                 case .webViewController(let webViewViewModel):
                     let webViewController = WebViewViewController()
                     webViewController.viewModel = webViewViewModel
+                    if #available(iOS 13.0, *) {
+                        webViewController.isModalInPresentation = true // available in IOS13
+                    }
                     self.present(UINavigationController(rootViewController: webViewController), animated: true, completion: nil)
                 case .moreAppsController(let moreAppsViewModel):
                     let listTableViewController = MoreAppsViewController(moreAppsViewModel)

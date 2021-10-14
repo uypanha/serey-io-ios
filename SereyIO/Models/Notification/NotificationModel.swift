@@ -17,8 +17,7 @@ class NotificationModel: Codable {
     let isRead: Bool
     let information: NotificationInformationModel
     let createdAt: String
-    let updatedAt: String
-    let deleted: Bool
+    let updatedAt: String?
     let actorImageUrl: String
     
     var isPost: Bool {
@@ -39,9 +38,9 @@ class NotificationModel: Codable {
         return Date.date(from: self.createdAt, format: "yyyy-MM-dd'T'HH:mm:ss.ssS'Z'")?.timeCount(to: Date())
     }
     
-//    lazy var postThumbnailUrl: URL? {
-//        return .init(string: self.information.)
-//    }
+    var postThumbnailUrl: URL? {
+        return .init(string: self.information.postThubmnails?.first ?? "")
+    }
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -52,7 +51,6 @@ class NotificationModel: Codable {
         case information
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case deleted
         case actorImageUrl = "actor_image_url"
     }
 }
@@ -86,6 +84,7 @@ struct NotificationInformationModel: Codable {
     let commentedOnPermlink: String?
     let votedOnAuthor: String?
     let votedOnPermlink: String?
+    let postThubmnails: [String]?
     
     enum CodingKeys: String, CodingKey {
         case commentId = "comment_id"
@@ -96,5 +95,6 @@ struct NotificationInformationModel: Codable {
         case commentedOnPermlink = "commented_on_permlink"
         case votedOnAuthor = "voted_on_author"
         case votedOnPermlink = "voted_on_permlink"
+        case postThubmnails = "post_thumbnail"
     }
 }

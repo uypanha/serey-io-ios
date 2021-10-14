@@ -21,6 +21,7 @@ class NotificationViewModel: BaseViewModel, CollectionMultiSectionsProviderModel
     enum ViewToPresent {
         case postDetailViewController(PostDetailViewModel)
         case profileViewController(UserAccountViewModel)
+        case signInController(SignInViewModel)
     }
     
     // input:
@@ -31,6 +32,7 @@ class NotificationViewModel: BaseViewModel, CollectionMultiSectionsProviderModel
     
     let cells: BehaviorRelay<[SectionItem]>
     let notifications: BehaviorRelay<[NotificationModel]>
+    let emptyOrErrorViewModel: BehaviorSubject<EmptyOrErrorViewModel?>
     
     let canDownloadMorePages: BehaviorRelay<Bool>
     let isRefresh: BehaviorRelay<Bool>
@@ -46,6 +48,7 @@ class NotificationViewModel: BaseViewModel, CollectionMultiSectionsProviderModel
         
         self.cells = .init(value: [])
         self.notifications = .init(value: [])
+        self.emptyOrErrorViewModel = .init(value: nil)
         
         self.canDownloadMorePages = .init(value: true)
         self.isRefresh = .init(value: true)
@@ -128,19 +131,42 @@ extension NotificationViewModel {
     func prepareCells() -> [SectionItem] {
         var sections : [SectionItem] = []
         
-        if !self.notifications.value.isEmpty {
-            sections.append(.init(items: self.notifications.value.map { NotificationCellViewModel($0) }))
-        }
-        
-        if self.canDownloadMore() {
-            if sections.isEmpty {
-                sections.append(.init(items: (0...10).map { _ in NotificationCellViewModel(true) }))
-            } else {
-                sections.append(.init(items: [NotificationCellViewModel(true)]))
+        if AuthData.shared.isUserLoggedIn {
+            if !self.notifications.value.isEmpty {
+                sections.append(.init(items: self.notifications.value.map { NotificationCellViewModel($0) }))
+            }
+            
+            if self.canDownloadMore() {
+                if sections.isEmpty {
+                    sections.append(.init(items: (0...10).map { _ in NotificationCellViewModel(true) }))
+                } else {
+                    sections.append(.init(items: [NotificationCellViewModel(true)]))
+                }
             }
         }
         
         return sections
+    }
+    
+    func prepareEmptyModel() -> EmptyOrErrorViewModel? {
+        if !AuthData.shared.isUserLoggedIn {
+            return .init(withErrorEmptyModel: .init(withEmptyTitle: "You're not logged in", emptyDescription: "To access this feature you need to login first or sign up to create account.", iconImage: R.image.loginIcon(), actionTitle: "Login") {
+                self.shouldPresent(.signInController(.init()))
+            })
+        } else if !self.isDownloading.value && self.notifications.value.isEmpty {
+            return .init(withErrorEmptyModel: .init(withEmptyTitle: "No notification, yet.", emptyDescription: "We will let you know when we've got new for you.", iconImage: R.image.notificationIcon()))
+        }
+        return nil
+    }
+    
+    func shouldUpdateCells() {
+        var _self = self
+        _self.reset()
+        self.notifications.accept([])
+    }
+    
+    func shouldPrepareCells() {
+        self.cells.accept(self.prepareCells())
     }
 }
 
@@ -175,6 +201,11 @@ extension NotificationViewModel {
         self.notifications.asObservable()
             .map { _ in self.prepareCells() }
             ~> self.cells
+            ~ self.disposeBag
+        
+        self.cells.asObservable()
+            .map { _ in self.prepareEmptyModel() }
+            ~> self.emptyOrErrorViewModel
             ~ self.disposeBag
     }
     
