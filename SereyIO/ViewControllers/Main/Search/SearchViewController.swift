@@ -54,7 +54,7 @@ extension SearchViewController {
     
     func setUpViews() {
         self.searchTextField.makeMeCircular()
-        self.searchTextField.rightView = UIImageView(image: R.image.tabSearch()?.image(withTintColor: .black))
+        self.searchTextField.rightView = UIImageView(image: R.image.searchIcon()?.image(withTintColor: .black))
         self.searchTextField.rightViewMode = .always
         
         self.activityIndicator.progressTintColor = ColorName.primary.color

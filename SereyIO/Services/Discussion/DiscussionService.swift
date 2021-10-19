@@ -39,8 +39,8 @@ class DiscussionService: AppService<DiscussionApi> {
             .map { $0.data }
     }
     
-    func submitComment(_ submitModel: SubmitCommentModel) -> Observable<DataResponseModel<[PostModel]>> {
-        return self.provider.rx.requestObject(.submitComment(submitModel), type: DataResponseModel<[PostModel]>.self)
+    func submitComment(_ submitModel: SubmitCommentModel) -> Observable<DataResponseModel<PostModel>> {
+        return self.provider.rx.requestObject(.submitComment(submitModel), type: DataResponseModel<PostModel>.self)
             .asObservable()
     }
     

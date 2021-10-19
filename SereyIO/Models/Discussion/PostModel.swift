@@ -16,9 +16,10 @@ struct PostModel: Codable {
     let title: String
     let permlink: String
     let descriptionText: String?
+    let body: String?
     let shortDesc: String?
     let author: String
-    let categories: [String]
+    let categories: [String]?
     let answerCount: Int?
     let publishDate: String
     let sereyValue: String
@@ -96,6 +97,7 @@ struct PostModel: Codable {
         case author
         case permlink
         case descriptionText = "description"
+        case body
         case shortDesc = "short_desc"
         case categories
         case answerCount = "answer_count"

@@ -18,7 +18,7 @@ class NotificationModel: Codable {
     let information: NotificationInformationModel
     let createdAt: String
     let updatedAt: String?
-    let actorImageUrl: String
+    let actorImageUrl: String?
     
     var isPost: Bool {
         return type == "COMMENT" || type == "VOTE"
@@ -27,7 +27,8 @@ class NotificationModel: Codable {
     var profileViewModel: ProfileViewModel {
         let firstLetter = owner.first == nil ? "" : "\(owner.first!)"
         let uniqueColor = UIColor(hexString: PFColorHash().hex("\(owner)"))
-        return .init(shortcut: firstLetter, imageUrl: URL(string: actorImageUrl), uniqueColor: uniqueColor)
+        let url = actorImageUrl == nil ? nil : URL(string: actorImageUrl ?? "")
+        return .init(shortcut: firstLetter, imageUrl: url, uniqueColor: uniqueColor)
     }
     
     lazy var captionAttributedString: NSAttributedString? = {

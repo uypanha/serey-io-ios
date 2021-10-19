@@ -75,7 +75,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         case .byCategoryId:
             return
         default:
-            if let categoryId = postModel.categories.first {
+            if let categoryId = postModel.categories?.first {
                 let postTableViewModel = PostTableViewModel(.byCategoryId(categoryId))
                 self.shouldPresent(.postsByCategoryController(postTableViewModel))
             }

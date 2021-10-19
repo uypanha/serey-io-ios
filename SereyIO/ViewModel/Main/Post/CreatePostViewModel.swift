@@ -184,10 +184,10 @@ extension CreatePostViewModel {
         self.descriptionFieldViewModel.value = data.descriptionText
         self.shortDescriptionFieldViewModel.value = data.shortDesc
         self.thumbnialUrl.accept(data.firstThumnailURL)
-        if data.categories.count > 0 {
-            var selectedCategory = DiscussionCategoryModel(name: (data.categories.first ?? "").capitalized, sub: nil)
-            if data.categories.count > 1 {
-                let subCategory = DiscussionCategoryModel(name: data.categories[1].capitalized, sub: nil)
+        if let count = data.categories?.count, count > 0 {
+            var selectedCategory = DiscussionCategoryModel(name: (data.categories?.first ?? "").capitalized, sub: nil)
+            if count > 1, let subCategoryTitle = data.categories?[1] {
+                let subCategory = DiscussionCategoryModel(name: subCategoryTitle.capitalized, sub: nil)
                 selectedCategory.sub = [subCategory]
                 self.selectedSubCategory.accept(subCategory)
             }
