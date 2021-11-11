@@ -21,7 +21,7 @@ enum WalletMenu: CaseIterable {
     case claimReward
     
     static var menuItems: [WalletMenu] {
-        return [.sendCoin, .receiveCoin, .pay, .powerUp, .powerDown, .cancelPower, .claimReward]
+        return [.sendCoin, .receiveCoin, .pay, .powerUp, .powerDown, .cancelPower, .delegatePower, .cancelDelegate, .claimReward]
     }
     
     var image: UIImage? {
@@ -85,9 +85,9 @@ enum WalletMenu: CaseIterable {
         case .cancelPower:
             return "Cancel power down"
         case .delegatePower:
-            return ""
+            return "Delegate your power"
         case .cancelDelegate:
-            return ""
+            return "Cancel Delegation"
         case .claimReward:
             return "Claim your reward"
         }
@@ -108,7 +108,7 @@ enum WalletMenu: CaseIterable {
         case .cancelPower:
             return UIColor(hexString: "FAE3E2")
         case .delegatePower:
-            return UIColor(hexString: "FDF3E0")
+            return UIColor(hexString: "E5F2DC")
         case .cancelDelegate:
             return UIColor(hexString: "FAE3E2")
         case .claimReward:

@@ -31,21 +31,23 @@ extension UINavigationController {
     }
     
     func removeNavigationBarBorder() {
-        self.navigationBar.shadowImage = UIImage()
+        let shadowImage = UIColor.clear.toImage()
+        self.navigationBar.shadowImage = shadowImage
+        
         if #available(iOS 13.0, *) {
             let standardAppearance = self.navigationBar.standardAppearance.copy()
             standardAppearance.shadowColor = .clear
-            standardAppearance.shadowImage = UIImage()
+            standardAppearance.shadowImage = shadowImage
             self.navigationBar.standardAppearance = standardAppearance
             
             let compactAppearance = self.navigationBar.compactAppearance?.copy()
             compactAppearance?.shadowColor = .clear
-            compactAppearance?.shadowImage = UIImage()
+            compactAppearance?.shadowImage = shadowImage
             self.navigationBar.compactAppearance = compactAppearance
             
             let scrollEdgeAppearance = self.navigationBar.scrollEdgeAppearance?.copy()
             scrollEdgeAppearance?.shadowColor = .clear
-            scrollEdgeAppearance?.shadowImage = UIImage()
+            scrollEdgeAppearance?.shadowImage = shadowImage
             self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
         }
     }

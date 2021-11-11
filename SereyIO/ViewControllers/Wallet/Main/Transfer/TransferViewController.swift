@@ -38,8 +38,8 @@ class TransferViewController: BaseViewController, KeyboardController, LoadingInd
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.removeNavigationBarBorder()
         self.navigationController?.setNavigationBarColor(ColorName.primary.color, tintColor: .white)
+        self.navigationController?.removeNavigationBarBorder()
     }
     
     override func viewDidLayoutSubviews() {

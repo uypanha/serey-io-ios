@@ -83,7 +83,7 @@ extension NotificationViewModel {
             }, onError: { [weak self] error in
                 self?.isDownloading.accept(false)
                 self?.shouldPresentError(ErrorHelper.prepareError(error: error))
-            }) ~ self.disposeBag
+            }) ~ self.downloadDisposeBag
     }
     
     private func updateRead(id: String) {

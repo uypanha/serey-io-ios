@@ -20,6 +20,10 @@ class NotificationViewController: BaseTableViewController {
         }
     }
     
+    lazy var titleLabel: UILabel = {
+        return .createLabel(20, weight: .medium, textColor: .black)
+    }()
+    
     lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
         return self.prepreDataSource()
     }()
@@ -38,7 +42,7 @@ class NotificationViewController: BaseTableViewController {
     override func setUpLocalizedTexts() {
         super.setUpLocalizedTexts()
         
-        self.title = R.string.notifications.notifications.localized()
+        self.titleLabel.text = R.string.notifications.notifications.localized()
     }
     
     override func notificationReceived(_ notification: Notification) {
@@ -52,6 +56,10 @@ class NotificationViewController: BaseTableViewController {
         case .languageChanged:
             DispatchQueue.main.async {
                 self.viewModel.shouldPrepareCells()
+            }
+        case .notificationRecived:
+            DispatchQueue.main.async {
+                self.viewModel.didAction(with: .refresh)
             }
         default:
             break
@@ -73,6 +81,7 @@ extension NotificationViewController {
     
     func setUpViews() {
         self.navigationController?.removeNavigationBarBorder()
+        self.navigationItem.leftBarButtonItem = .init(customView: self.titleLabel)
         setUpTableView()
     }
     

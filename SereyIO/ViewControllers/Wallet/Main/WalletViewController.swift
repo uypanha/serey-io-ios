@@ -38,8 +38,8 @@ class WalletViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.showNavigationBarBorder()
         self.navigationController?.setNavigationBarColor(ColorName.navigationBg.color, tintColor: ColorName.navigationTint.color)
+        self.navigationController?.showNavigationBarBorder()
     }
     
     override func setUpLocalizedTexts() {
@@ -228,6 +228,10 @@ extension WalletViewController {
                         let bottomSheet = BottomSheetViewController(contentViewController: cancelPowerDownViewController)
                         self?.present(bottomSheet, animated: true, completion: nil)
                     }
+                case .delegatePowerController(let delegatePowerViewModel):
+                    let delegatePowerController = DelegatePowerViewController()
+                    delegatePowerController.viewModel = delegatePowerViewModel
+                    self?.show(delegatePowerController, sender: nil)
                 }
             }) ~ self.disposeBag
     }
