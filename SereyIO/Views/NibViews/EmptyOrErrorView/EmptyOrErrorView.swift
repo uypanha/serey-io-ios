@@ -77,11 +77,16 @@ class EmptyOrErrorView: NibView {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func xibSetup() {
+        super.xibSetup()
+        
+        self.actionButton.secondaryStyle()
+    }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
         
         self.topConstraint.constant = self.topConstraintConstant
         self.errorImageWidthContraint = self.errorImageWidthContraint.changeMultiplier(multiplier: self.imageWidthContraint)
-        self.actionButton.secondaryStyle()
     }
 }

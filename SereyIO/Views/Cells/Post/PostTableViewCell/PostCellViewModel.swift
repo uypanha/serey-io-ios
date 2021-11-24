@@ -85,7 +85,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
     
     internal func notifyDataChanged(_ data: PostModel?) {
         self.profileViewModel.onNext(data?.profileViewModel)
-        self.authorName.onNext(data?.author.capitalized)
+        self.authorName.onNext(data?.author)
         self.publishedAt.onNext(data?.publishedDateString)
         self.thumbnailURL.onNext(data?.firstThumnailURL)
         self.tags.onNext(data?.categories ?? [])

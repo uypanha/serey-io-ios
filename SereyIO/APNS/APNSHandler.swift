@@ -64,6 +64,9 @@ class APNSHandler: NSObject {
         logNotification(userInfo: userInfo)
         
         let isExternalPush = userTap || application?.applicationState != .active
+        if !userTap && application?.applicationState == .active {
+            NotificationDispatcher.sharedInstance.dispatch(.notificationRecived)
+        }
         
         let eventType = self.prepareEventType(userInfo)
         

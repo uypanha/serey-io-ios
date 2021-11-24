@@ -14,7 +14,6 @@ import RxBinding
 class BaseInitTransactionViewModel: BaseViewModel {
     
     let transferService: TransferService
-    
     let isLoading: BehaviorSubject<Bool>
     let didTransactionUpdate: PublishSubject<Void>
     

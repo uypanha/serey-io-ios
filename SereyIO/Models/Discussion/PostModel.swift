@@ -16,9 +16,10 @@ struct PostModel: Codable {
     let title: String
     let permlink: String
     let descriptionText: String?
+    let body: String?
     let shortDesc: String?
     let author: String
-    let categories: [String]
+    let categories: [String]?
     let answerCount: Int?
     let publishDate: String
     let sereyValue: String
@@ -28,6 +29,7 @@ struct PostModel: Codable {
     let voterCount: Int
     let flaggerCount: Int
     let allowVote: Bool
+    let authorImageUrl: String?
     var replies: [PostModel]?
     
     var firstThumnailURL: URL? {
@@ -68,7 +70,8 @@ struct PostModel: Codable {
         get {
             let firstLetter = author.first == nil ? "" : "\(author.first!)"
             let uniqueColor = UIColor(hexString: PFColorHash().hex("\(author)"))
-            return ProfileViewModel(shortcut: firstLetter, imageUrl: nil, uniqueColor: uniqueColor)
+            let url = URL(string: self.authorImageUrl ?? "")
+            return ProfileViewModel(shortcut: firstLetter, imageUrl: url, uniqueColor: uniqueColor)
         }
     }
     
@@ -94,6 +97,7 @@ struct PostModel: Codable {
         case author
         case permlink
         case descriptionText = "description"
+        case body
         case shortDesc = "short_desc"
         case categories
         case answerCount = "answer_count"
@@ -105,6 +109,7 @@ struct PostModel: Codable {
         case allowVote = "allow_vote"
         case voterCount = "voter_count"
         case flaggerCount = "flagger_count"
+        case authorImageUrl = "author_image_url"
         case replies
     }
 }

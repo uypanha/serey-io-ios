@@ -24,11 +24,15 @@ extension UITableViewCell: ReusableView, NibLoadableView {}
 
 extension UITableView {
     
-    func register<T: UITableViewCell>(_: T.Type) {
-        let bundle = Bundle(for: T.self)
-        let nib = UINib(nibName: T.nibName, bundle: bundle)
-        
-        register(nib, forCellReuseIdentifier: T.defaultReuseIdentifier)
+    func register<T: UITableViewCell>(_: T.Type, isNib: Bool = true) {
+        if isNib {
+            let bundle = Bundle(for: T.self)
+            let nib = UINib(nibName: T.nibName, bundle: bundle)
+            
+            register(nib, forCellReuseIdentifier: T.defaultReuseIdentifier)
+        } else {
+            register(T.self, forCellReuseIdentifier: T.defaultReuseIdentifier)
+        }
     }
     
     func dequeueReusableCell<T: UITableViewCell>(forIndexPath indexPath: IndexPath) -> T {

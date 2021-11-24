@@ -24,7 +24,7 @@ class PreferenceStore {
     
     private(set) var userDisabledNotifs: Bool {
         get {
-            return Store.standard.value(forKey: Constants.UserDefaultsKeys.userDisabledNotifs.rawValue) as? Bool ?? true
+            return Store.standard.value(forKey: Constants.UserDefaultsKeys.userDisabledNotifs.rawValue) as? Bool ?? false
         }
         set {
             Store.standard.setValue(newValue, forKey: Constants.UserDefaultsKeys.userDisabledNotifs.rawValue)

@@ -43,3 +43,6 @@
 "termsAndPrivacyAgreementMessage"   = "By using Serey you accept the\n%@ and %@";
 "termService"                       = "Term Service";
 "policyAndPrivacy"                  = "Policy Privacy";
+
+"you"                               = "you";
+"your"                              = "your";

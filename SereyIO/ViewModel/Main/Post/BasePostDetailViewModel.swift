@@ -190,7 +190,7 @@ extension BasePostDetailViewModel {
         let permlink = self.post.value?.permlink ?? ""
         let author = self.post.value?.author ?? ""
         let title = self.postTitle()
-        let category = self.post.value?.categories.first ?? ""
+        let category = self.post.value?.categories?.first ?? ""
         
         return SubmitCommentModel(parentAuthor: author, parentPermlink: permlink, title: title, body: comment, mainCategory: category)
     }

@@ -54,7 +54,7 @@ extension SearchViewController {
     
     func setUpViews() {
         self.searchTextField.makeMeCircular()
-        self.searchTextField.rightView = UIImageView(image: R.image.tabSearch()?.image(withTintColor: .black))
+        self.searchTextField.rightView = UIImageView(image: R.image.searchIcon()?.image(withTintColor: .black))
         self.searchTextField.rightViewMode = .always
         
         self.activityIndicator.progressTintColor = ColorName.primary.color
@@ -66,15 +66,15 @@ extension SearchViewController {
     func prepareTableView() {
         self.tableView.tableFooterView = UIView()
         self.tableView.separatorColor = ColorName.border.color
-        self.tableView.register(PostTableViewCell.self)
+        self.tableView.register(PeopleTableViewCell.self)
     }
     
     func prepreDataSource() -> RxTableViewSectionedReloadDataSource<SectionItem> {
         let dataSource = RxTableViewSectionedReloadDataSource<SectionItem>(configureCell: { (datasource, tableView, indexPath, item) -> UITableViewCell in
             switch item {
-            case is PostCellViewModel:
-                let cell: PostTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
-                cell.cellModel = item as? PostCellViewModel
+            case is PeopleCellViewModel:
+                let cell: PeopleTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+                cell.cellModel = item as? PeopleCellViewModel
                 return cell
             default:
                 return UITableViewCell()
@@ -156,12 +156,6 @@ fileprivate extension SearchViewController {
                     if let accountViewController = R.storyboard.profile.userAccountViewController() {
                         accountViewController.viewModel = accountViewModel
                         self.show(accountViewController, sender: nil)
-                    }
-                case .postDetailViewController(let postDetailViewModel):
-                    if let postDetailViewController = R.storyboard.post.postDetailViewController() {
-                        postDetailViewController.viewModel = postDetailViewModel
-                        postDetailViewController.hidesBottomBarWhenPushed = true
-                        self.show(postDetailViewController, sender: nil)
                     }
                 }
             }).disposed(by: self.disposeBag)

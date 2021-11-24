@@ -183,7 +183,7 @@ extension UserAccountViewModel {
     
     private func notifyDataChanged(_ data: UserModel?) {
         self.profileViewModel.onNext(data?.profileModel ?? prepareProfileViewModel(from: self.username.value))
-        self.accountName.onNext((data?.name ?? self.username.value)?.capitalized)
+        self.accountName.onNext((data?.name ?? self.username.value))
         self.postCountText.onNext(preparePostCountText(data?.postCount ?? 0))
         self.followerCountText.onNext(prepareFollowersCountText(data?.followersCount ?? 0))
         self.followingCountText.onNext(prepareFollowingsCountText(data?.followingCount ?? 0))

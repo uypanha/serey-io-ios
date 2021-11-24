@@ -13,22 +13,24 @@ class FMDataParser {
     private init() { }
     
     func parseDeepLink(_ userInfo: [AnyHashable: Any]) -> DeeplinkType? {
-        if let apsInfo = userInfo["aps"] as? [AnyHashable: Any] {
-            if let permlink = apsInfo["permlink"] as? String, let author = apsInfo["author"] as? String {
-                return .post(permlink: permlink, author: author)
-            }
+        if let type = userInfo["type"] as? String {
+            let actor = (userInfo["actor"] as? String) ?? ""
             
-            if let followFromUsername = apsInfo["followFromUsername"] as? String {
-                return .followFrom(username: followFromUsername)
+            switch type {
+            case "FOLLOW":
+                return .followFrom(username: actor)
+            case "COMMENT", "VOTE":
+                if let information = userInfo["information"] as? String {
+                    if let jsonData = information.data(using: .utf8) {
+                        let jsonDecoder = JSONDecoder()
+                        if let data = try? jsonDecoder.decode(NotificationInformationModel.self, from: jsonData) {
+                            return .post(permlink: data.postPermlink ?? "", author: data.postAuthor ?? "")
+                        }
+                    }
+                }
+            default:
+                break
             }
-        }
-        
-        if let permlink = userInfo["permlink"] as? String, let author = userInfo["author"] as? String {
-            return .post(permlink: permlink, author: author)
-        }
-        
-        if let followFromUsername = userInfo["followFromUsername"] as? String {
-            return .followFrom(username: followFromUsername)
         }
         
         return nil

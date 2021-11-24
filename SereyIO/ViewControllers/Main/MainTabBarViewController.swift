@@ -41,15 +41,16 @@ fileprivate extension MainTabBarViewController {
             switch self {
             case .home:
                 viewController = R.storyboard.home.homeViewController()
-                (viewController as? HomeViewController)?.viewModel = HomeViewModel()
+                (viewController as? HomeViewController)?.viewModel = .init()
             case .search:
                 viewController = R.storyboard.search.searchViewController()
-                (viewController as? SearchViewController)?.viewModel = SearchViewModel()
+                (viewController as? SearchViewController)?.viewModel = .init()
             case .notifications:
                 viewController = NotificationViewController()
+                (viewController as? NotificationViewController)?.viewModel = .init()
             case .more:
                 viewController = R.storyboard.more.moreViewController()
-                (viewController as? MoreViewController)?.viewModel = MoreViewModel()
+                (viewController as? MoreViewController)?.viewModel = .init()
             }
             
             return viewController ?? UIViewController()
@@ -62,7 +63,7 @@ fileprivate extension MainTabBarViewController {
     }
     
     func configureTabBarController() {
-        let controllers: [UIViewController] = [ControllerType.home, .search, .more].map { $0.prepareViewController() }
+        let controllers: [UIViewController] = ControllerType.allCases.map { $0.prepareViewController() }
         
         for i in 0..<controllers.count {
             (controllers[i] as? TabBarControllerDelegate)?.configureTabBar(i)
