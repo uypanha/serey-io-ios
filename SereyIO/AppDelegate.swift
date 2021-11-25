@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var appCoordinator: AppCoordinator?
     var apnsHandler: APNSHandler?
     var appDelegateHelper: AppDelegateHelper?
+    var discussionService: DiscussionService?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -39,6 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         appDelegateHelper = AppDelegateHelper()
         appDelegateHelper?.initMessageHandlers(window: window!, apnsHandler: apnsHandler!)
+        self.discussionService = .init()
         
         return true
     }
@@ -58,6 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         apnsHandler?.applicationDidBecomeActive()
+        self.discussionService?.refreshSereyCountries()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

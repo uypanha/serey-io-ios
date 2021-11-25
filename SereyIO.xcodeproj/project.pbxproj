@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		26AE9EB0BA60B5822CF0E5D5 /* Pods_SereyIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E48D784F3F419D4A8B0116EC /* Pods_SereyIO.framework */; };
 		813EBD3FDAF47C7A45C36443 /* Pods_SereyIOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33886248612D2F97D120B3C9 /* Pods_SereyIOTests.framework */; };
+		967BB0DF274E878C005EBCB8 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BB0DE274E878C005EBCB8 /* CountryModel.swift */; };
 		B6138434D2AC9BE300634E3A /* Pods_SereyIOUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A407BB647B50EB3891A9B90 /* Pods_SereyIOUITests.framework */; };
 		DC0044062433A87900244607 /* FileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0044052433A87900244607 /* FileUploadService.swift */; };
 		DC0044092433A98200244607 /* FileUploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0044082433A98200244607 /* FileUploadModel.swift */; };
@@ -490,6 +491,7 @@
 		4DAEE7E4861FC0F849E6B246 /* Pods-SereyIOTests.release_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.release_development.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.release_development.xcconfig"; sourceTree = "<group>"; };
 		7C94BCB396C37062A37C4EE9 /* Pods-SereyIO.debug_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIO.debug_production.xcconfig"; path = "Target Support Files/Pods-SereyIO/Pods-SereyIO.debug_production.xcconfig"; sourceTree = "<group>"; };
 		8DC4AE990A81B7E80AD7C57E /* Pods-SereyIOUITests.release_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.release_development.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.release_development.xcconfig"; sourceTree = "<group>"; };
+		967BB0DE274E878C005EBCB8 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
 		A1881865A5CB109CA74734FE /* Pods-SereyIOUITests.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.release_production.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.release_production.xcconfig"; sourceTree = "<group>"; };
 		A407EA3FA97859A37E09FEBF /* Pods-SereyIO.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIO.release_production.xcconfig"; path = "Target Support Files/Pods-SereyIO/Pods-SereyIO.release_production.xcconfig"; sourceTree = "<group>"; };
 		B23EDC4C4A4735EC30AE93DA /* Pods-SereyIOTests.debug_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.debug_development.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.debug_development.xcconfig"; sourceTree = "<group>"; };
@@ -1485,6 +1487,7 @@
 		DC6A790A23CA26B1001D1009 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				967BB0DE274E878C005EBCB8 /* CountryModel.swift */,
 				DC12F20C2422720E0099C479 /* DataResponseModel.swift */,
 				DC40D5D523E32A6B00B0DD96 /* ImageTextModel.swift */,
 				DC40D5CF23E329E000B0DD96 /* LanguageModel.swift */,
@@ -3639,6 +3642,7 @@
 				DCBBD6C524E43A870099C406 /* WalletSettingsViewModel.swift in Sources */,
 				DC6ED56823269B8400770B31 /* R.generated.swift in Sources */,
 				DC7F097824ACE31500CE8AFC /* WalletViewModel.swift in Sources */,
+				967BB0DF274E878C005EBCB8 /* CountryModel.swift in Sources */,
 				DC115F3E241A9BA5006BE78C /* SignInCellViewModel.swift in Sources */,
 				DC803C5326974A8800FCD2B2 /* OnBoardingViewModel.swift in Sources */,
 				DCA459F524D1CA6000E21D9A /* WalletMenuCollectionViewCell.swift in Sources */,

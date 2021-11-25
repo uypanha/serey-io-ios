@@ -13,6 +13,7 @@ import RxBinding
 import RxRealm
 import Then
 import CountryPicker
+import RealmSwift
 
 class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, CollectionMultiSectionsProviderModel, ShouldReactToAction, ShouldPresent {
     
@@ -220,7 +221,7 @@ fileprivate extension MoreViewModel {
                         guard let option = option else { return }
                         switch option {
                         case .chooseCountry:
-                            self.shouldPresent(.showCountryPicker)
+                            self.handleChooseCountry()
                         case .detectAutomatically:
                             self.fetchIpTrace()
                         case .global:
@@ -235,6 +236,14 @@ fileprivate extension MoreViewModel {
             let accountViewModel = UserAccountViewModel(user)
             self.shouldPresent(.accountViewController(accountViewModel))
         }
+    }
+    
+    func handleChooseCountry() {
+        let countries: Results<CountryModel> = CountryModel().queryAll()
+        let items: [ImageTextCellViewModel] = countries.toArray().map { CountryCellViewModel($0) }
+        
+        let bottomListMenuViewModel = BottomListMenuViewModel(header: "Select your preffered country", items)
+        self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
     }
     
     func handleOpenWebView(_ title: String, url: URL?) {

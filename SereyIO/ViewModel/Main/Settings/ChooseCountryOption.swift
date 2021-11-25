@@ -50,3 +50,13 @@ class ChooseCountryOptionCellViewModel: ImageTextCellViewModel {
         super.init(model: .init(image: option.icon, titleText: option.title))
     }
 }
+
+class CountryCellViewModel: ImageTextCellViewModel {
+    
+    let country: CountryModel
+    
+    init(_ country: CountryModel) {
+        self.country = country
+        super.init(model: .init(image: country.icon, titleText: country.countryName))
+    }
+}

@@ -10,6 +10,7 @@ import UIKit
 import RxCocoa
 import RxSwift
 import AnyCodable
+import RxBinding
 
 class DiscussionService: AppService<DiscussionApi> {
     
@@ -67,4 +68,16 @@ class DiscussionService: AppService<DiscussionApi> {
             .map { $0.data }
     }
     
+    func getSereyCountries() -> Observable<[CountryModel]> {
+        return self.provider.rx.requestObject(.getSereyCountries, type: [CountryModel].self)
+            .asObservable()
+    }
+    
+    func refreshSereyCountries() {
+        self.getSereyCountries().asObservable()
+            .subscribe(onNext: { countries in
+                RealmManager.deleteAll(CountryModel.self)
+                countries.saveAll()
+            }) ~ self.disposeBag
+    }
 }
