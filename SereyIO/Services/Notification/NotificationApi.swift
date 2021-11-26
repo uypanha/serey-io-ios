@@ -29,7 +29,7 @@ extension NotificationApi: AuthorizedApiTargetType {
     var path: String {
         switch self {
         case .notifications:
-            return "/api/v1/notification/get_all_by_user"
+            return "/api/v1/notification/get_serey_all_by_user"
         case .updateRead(let id):
             return "/api/v1/notification/update_read/\(id)"
         }

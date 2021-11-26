@@ -32,7 +32,8 @@ extension PushApi: AuthorizedApiTargetType {
             return [
                 "username"      : username,
                 "token"         : token,
-                "deviceType"    : "IOS"
+                "deviceType"    : "IOS",
+                "platformType"  : "SEREY_WEB"
             ]
         case .remove(let username):
             return [
@@ -41,7 +42,8 @@ extension PushApi: AuthorizedApiTargetType {
         case .updateToken(let username, let token):
             return [
                 "username"      : username,
-                "newToken"      : token
+                "newToken"      : token,
+                "platformType"  : "SEREY_WEB"
             ]
         case .login:
             return [
