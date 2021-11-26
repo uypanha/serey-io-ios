@@ -44,14 +44,14 @@ extension ChooseCountryViewController {
     }
     
     func showCountryPicker() {
-        let countryController = CountryPickerWithSectionViewController.presentController(on: self) { [weak self] (country: Country) in
-            guard let self = self else { return }
-            
-            self.viewModel.didAction(with: .countrySelected(country))
-        }
-        countryController.flagStyle = .circular
-        countryController.isCountryDialHidden = true
-        countryController.labelFont = UIFont.systemFont(ofSize: 16, weight: .medium)
+//        let countryController = CountryPickerWithSectionViewController.presentController(on: self) { [weak self] (country: Country) in
+//            guard let self = self else { return }
+//
+//            self.viewModel.didAction(with: .countrySelected(country))
+//        }
+//        countryController.flagStyle = .circular
+//        countryController.isCountryDialHidden = true
+//        countryController.labelFont = UIFont.systemFont(ofSize: 16, weight: .medium)
     }
 }
 
@@ -84,9 +84,9 @@ extension ChooseCountryViewController {
         self.viewModel.selectedCountry
             .subscribe(onNext: { [weak self] country in
                 if let country = country {
-                    let flag = Flag(countryCode: country.countryCode)
-                    self?.countryButton.setTitle(country.countryName, for: .normal)
-                    self?.countryButton.setImage(flag?.image(style: .circle), for: .normal)
+//                    let flag = Flag(countryCode: country.countryCode)
+//                    self?.countryButton.setTitle(country.countryName, for: .normal)
+//                    self?.countryButton.setImage(flag?.image(style: .circle), for: .normal)
                 } else {
                     self?.countryButton.setTitle("Global", for: .normal)
                     self?.countryButton.setImage(R.image.earhIcon(), for: .normal)

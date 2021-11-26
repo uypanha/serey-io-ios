@@ -11,11 +11,13 @@ import UIKit
 class ImageTextModel {
     
     var image: UIImage?
+    var imageUrl: String?
     var titleText: String?
     var subTitle: String?
     
-    init(image: UIImage?, titleText: String?, subTitle: String? = nil) {
+    init(image: UIImage? = nil, imageUrl: String? = nil, titleText: String?, subTitle: String? = nil) {
         self.image = image
+        self.imageUrl = imageUrl
         self.titleText = titleText
         self.subTitle = subTitle
     }

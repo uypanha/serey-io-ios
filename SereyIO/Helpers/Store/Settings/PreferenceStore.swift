@@ -31,18 +31,26 @@ class PreferenceStore {
         }
     }
     
-    var currentUserCountryCode: String? {
+    var currentUserCountry: String? {
         get {
-            return Store.standard.value(forKey: "currentUserCountryCode") as? String
+            return Store.standard.value(forKey: "currentUserCountry") as? String
         }
         set {
-            Store.standard.setValue(newValue, forKey: "currentUserCountryCode")
+            Store.standard.setValue(newValue, forKey: "currentUserCountry")
         }
     }
     
-    var currentCountry: Country? {
-        guard let countryCode = self.currentUserCountryCode else { return nil }
-        return CountryManager.shared.country(withCode: countryCode)
+    var currentUserCountryIconUrl: String? {
+        get {
+            return Store.standard.value(forKey: "currentUserCountryIconUrl") as? String
+        } set {
+            Store.standard.setValue(newValue, forKey: "currentUserCountryIconUrl")
+        }
+    }
+    
+    var currentCountry: CountryModel? {
+        guard let countryName = self.currentUserCountry else { return nil }
+        return CountryModel(countryName: countryName, iconUrl: self.currentUserCountryIconUrl)
     }
     
     func setNotification(_ enabled: Bool) {

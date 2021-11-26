@@ -47,7 +47,7 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
     let categories: BehaviorRelay<[DiscussionCategoryModel]>
     
     let discussionService: DiscussionService
-    var currentCountryCode: String?
+    var currentCountry: String?
     var didScrolledToIndex: Bool = false
     lazy var isDownloading = BehaviorRelay<Bool>(value: false)
     
@@ -57,7 +57,7 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
         self.postViewModels = BehaviorRelay(value: [])
         self.categories = BehaviorRelay(value: [])
         self.discussionService = DiscussionService()
-        self.currentCountryCode = PreferenceStore.shared.currentUserCountryCode
+        self.currentCountry = PreferenceStore.shared.currentUserCountry
         super.init()
         
         setUpRxObservers()
@@ -67,8 +67,8 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
     }
     
     func validateCountry() {
-        if self.currentCountryCode != PreferenceStore.shared.currentUserCountryCode {
-            self.currentCountryCode = PreferenceStore.shared.currentUserCountryCode
+        if self.currentCountry != PreferenceStore.shared.currentUserCountry {
+            self.currentCountry = PreferenceStore.shared.currentUserCountry
             self.downloadData()
             self.postViewModels.value.forEach { viewModel in
                 viewModel.validateCountry()

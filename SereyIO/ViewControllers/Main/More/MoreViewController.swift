@@ -105,14 +105,14 @@ extension MoreViewController {
     }
     
     func showCountryPicker() {
-        let countryController = CountryPickerWithSectionViewController.presentController(on: self) { [weak self] (country: Country) in
-            guard let self = self else { return }
-            
-            self.viewModel.didAction(with: .countrySelected(country))
-        }
-        countryController.flagStyle = .circular
-        countryController.isCountryDialHidden = true
-        countryController.labelFont = UIFont.systemFont(ofSize: 16, weight: .medium)
+//        let countryController = CountryPickerWithSectionViewController.presentController(on: self) { [weak self] (country: Country) in
+//            guard let self = self else { return }
+//
+//            self.viewModel.didAction(with: .countrySelected(country))
+//        }
+//        countryController.flagStyle = .circular
+//        countryController.isCountryDialHidden = true
+//        countryController.labelFont = UIFont.systemFont(ofSize: 16, weight: .medium)
     }
 }
 
@@ -224,8 +224,6 @@ fileprivate extension MoreViewController {
                 case .bottomListViewController(let bottomListMenuViewModel):
                     let bottomMenuViewController = BottomMenuViewController(bottomListMenuViewModel)
                     self.present(bottomMenuViewController, animated: true, completion: nil)
-                case .showCountryPicker:
-                    self.showCountryPicker()
                 }
             }).disposed(by: self.disposeBag)
     }

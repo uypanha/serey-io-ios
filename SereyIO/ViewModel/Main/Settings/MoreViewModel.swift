@@ -23,7 +23,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case termsPressed
         case signOutPressed
         case signOutConfirmed
-        case countrySelected(Country?)
+        case countrySelected(CountryModel?)
     }
     
     enum ViewToPresent {
@@ -36,7 +36,6 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case walletViewController
         case signOutDialog
         case bottomListViewController(BottomListMenuViewModel)
-        case showCountryPicker
     }
     
     // input:
@@ -101,7 +100,7 @@ extension MoreViewModel {
                 if let loc = data?.split(separator: "\n").first(where: { $0.contains("loc=") }) {
                     let countryCode = loc.replacingOccurrences(of: "loc=", with: "")
                     if let country = CountryManager.shared.country(withCode: countryCode) {
-                        self?.didAction(with: .countrySelected(country))
+                        self?.didAction(with: .countrySelected(.init(countryName: country.countryName, iconUrl: nil)))
                     }
                 }
             }, onError: { [weak self] error in
@@ -243,6 +242,11 @@ fileprivate extension MoreViewModel {
         let items: [ImageTextCellViewModel] = countries.toArray().map { CountryCellViewModel($0) }
         
         let bottomListMenuViewModel = BottomListMenuViewModel(header: "Select your preffered country", items)
+        bottomListMenuViewModel.shouldSelectMenuItem
+            .map { $0 as? CountryCellViewModel }
+            .subscribe(onNext: { [unowned self] countryModel in
+                self.didAction(with: .countrySelected(countryModel?.country))
+            }) ~ self.disposeBag
         self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
     }
     
@@ -298,7 +302,8 @@ fileprivate extension MoreViewModel {
                 case .signOutConfirmed:
                     AuthData.shared.removeAuthData()
                 case .countrySelected(let country):
-                    PreferenceStore.shared.currentUserCountryCode = country?.countryCode
+                    PreferenceStore.shared.currentUserCountry = country?.countryName
+                    PreferenceStore.shared.currentUserCountryIconUrl = country?.iconUrl
                     self?.cellModels.accept(self?.prepareCellModels() ?? [:])
                 }
             }).disposed(by: self.disposeBag)

@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import Kingfisher
+import RxCocoa
+import RxSwift
+import RxKingfisher
 
 class ImageTextTableViewCell: BaseTableViewCell {
     
@@ -17,11 +21,13 @@ class ImageTextTableViewCell: BaseTableViewCell {
     
     var cellModel: ImageTextCellViewModel? {
         didSet {
+            self.iconImageView.image = nil
             guard let viewModel = self.cellModel else {
                 return
             }
             
-            viewModel.image.bind(to: self.iconImageView.rx.image).disposed(by: self.disposeBag)
+            viewModel.image.filter { $0 != nil }.bind(to: self.iconImageView.rx.image).disposed(by: self.disposeBag)
+            viewModel.imageUrl.filter { $0 != nil }.map { URL(string: $0!) }.bind(to: self.iconImageView.kf.rx.image()).disposed(by: self.disposeBag)
             viewModel.titleText.bind(to: self.titleTextLabel.rx.text).disposed(by: self.disposeBag)
             viewModel.subTitle.bind(to: self.subTitleLabel.rx.text).disposed(by: self.disposeBag)
             viewModel.indicatorAccessory
@@ -46,6 +52,9 @@ class ImageTextTableViewCell: BaseTableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         // Initialization code
+        self.iconImageView.clipsToBounds = true
+        self.iconImageView.contentMode = .scaleAspectFill
     }
 }

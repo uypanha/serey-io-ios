@@ -17,7 +17,7 @@ class ChooseCountryViewModel: FeatureViewModel, ShouldReactToAction, ShouldPrese
     enum Action {
         case countryPickerPressed
         case detectCountryPressed
-        case countrySelected(Country)
+        case countrySelected(CountryModel)
     }
     
     enum ViewToPresent {
@@ -31,7 +31,7 @@ class ChooseCountryViewModel: FeatureViewModel, ShouldReactToAction, ShouldPrese
     // output:
     let shouldPresentSubject: PublishSubject<ViewToPresent>
     
-    let selectedCountry: BehaviorRelay<Country?>
+    let selectedCountry: BehaviorRelay<CountryModel?>
     let userService: UserService
     
     override init(_ feature: FeatureBoarding) {
@@ -57,7 +57,7 @@ extension ChooseCountryViewModel {
                 if let loc = data?.split(separator: "\n").first(where: { $0.contains("loc=") }) {
                     let countryCode = loc.replacingOccurrences(of: "loc=", with: "")
                     if let country = CountryManager.shared.country(withCode: countryCode) {
-                        self?.selectedCountry.accept(country)
+                        self?.selectedCountry.accept(.init(countryName: country.countryName, iconUrl: nil))
                     }
                 }
             }, onError: { [weak self] error in
@@ -92,7 +92,8 @@ extension ChooseCountryViewModel {
                 case .countryPickerPressed:
                     self?.handleCountryPickerPressed()
                 case .countrySelected(let country):
-                    PreferenceStore.shared.currentUserCountryCode = country.countryCode
+                    PreferenceStore.shared.currentUserCountry = country.countryName
+                    PreferenceStore.shared.currentUserCountryIconUrl = country.iconUrl
                     self?.selectedCountry.accept(country)
                 }
             }) ~ self.disposeBag

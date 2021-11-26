@@ -57,6 +57,6 @@ class CountryCellViewModel: ImageTextCellViewModel {
     
     init(_ country: CountryModel) {
         self.country = country
-        super.init(model: .init(image: country.icon, titleText: country.countryName))
+        super.init(model: .init(imageUrl: country.iconUrl, titleText: country.countryName))
     }
 }

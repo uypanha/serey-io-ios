@@ -36,9 +36,9 @@ enum SettingType {
             case .myWallet:
                 return ImageTextModel(image: R.image.walletIcon(), titleText: R.string.settings.myWallet.localized())
             case .country:
-                let country = CountryManager.shared.country(withCode: PreferenceStore.shared.currentUserCountryCode ?? "")
-                let image = country == nil ? R.image.globalIcon() : Flag.init(countryCode: country!.countryCode)?.image(style: .roundedRect)
-                return ImageTextModel(image: image, titleText: "Country (\(country?.countryName ?? "Global"))")
+                let country = PreferenceStore.shared.currentCountry
+                let image = country == nil ? R.image.globalIcon() : country?.icon
+                return ImageTextModel(image: image, imageUrl: country?.iconUrl, titleText: "Country (\(country?.countryName ?? "Global"))")
             case .lagnauge:
                 let text = String(format: R.string.settings.language.localized(), LanguageManger.shared.currentLanguage.languageText ?? "")
                 return ImageTextModel(image: R.image.languageIcon(), titleText: text)
