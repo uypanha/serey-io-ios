@@ -11,17 +11,18 @@ import RxCocoa
 import RxSwift
 import RxBinding
 import CountryPicker
+import RealmSwift
 
 class ChooseCountryViewModel: FeatureViewModel, ShouldReactToAction, ShouldPresent {
     
     enum Action {
         case countryPickerPressed
         case detectCountryPressed
-        case countrySelected(CountryModel)
+        case countrySelected(CountryModel?)
     }
     
     enum ViewToPresent {
-        case openCountryPicker
+        case bottomListViewController(BottomListMenuViewModel)
         case detectigCountry(Bool)
     }
     
@@ -72,7 +73,17 @@ extension ChooseCountryViewModel {
 fileprivate extension ChooseCountryViewModel {
     
     func handleCountryPickerPressed() {
-        self.shouldPresent(.openCountryPicker)
+//        self.shouldPresent(.openCountryPicker)
+        let countries: Results<CountryModel> = CountryModel().queryAll()
+        let items: [ImageTextCellViewModel] = countries.toArray().map { CountryCellViewModel($0) }
+        
+        let bottomListMenuViewModel = BottomListMenuViewModel(header: "Select your preffered country", items)
+        bottomListMenuViewModel.shouldSelectMenuItem
+            .map { $0 as? CountryCellViewModel }
+            .subscribe(onNext: { [unowned self] countryModel in
+                self.didAction(with: .countrySelected(countryModel?.country))
+            }) ~ self.disposeBag
+        self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
     }
 }
 
@@ -92,8 +103,8 @@ extension ChooseCountryViewModel {
                 case .countryPickerPressed:
                     self?.handleCountryPickerPressed()
                 case .countrySelected(let country):
-                    PreferenceStore.shared.currentUserCountry = country.countryName
-                    PreferenceStore.shared.currentUserCountryIconUrl = country.iconUrl
+                    PreferenceStore.shared.currentUserCountry = country?.countryName
+                    PreferenceStore.shared.currentUserCountryIconUrl = country?.iconUrl
                     self?.selectedCountry.accept(country)
                 }
             }) ~ self.disposeBag

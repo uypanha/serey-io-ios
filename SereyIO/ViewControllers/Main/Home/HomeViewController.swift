@@ -11,6 +11,9 @@ import RxCocoa
 import RxSwift
 import RxBinding
 import MaterialComponents
+import RxKingfisher
+import Kingfisher
+import SnapKit
 
 class HomeViewController: BaseViewController, AlertDialogController, LoadingIndicatorController {
     
@@ -35,6 +38,18 @@ class HomeViewController: BaseViewController, AlertDialogController, LoadingIndi
         button.setElevation(ShadowElevation(rawValue: 4), for: .normal)
         button.setElevation(ShadowElevation(rawValue: 8), for: .highlighted)
         return button
+    }()
+    
+    private lazy var countryButton: AccesoryButton = {
+        return .init().then {
+            $0.rightHandImage = R.image.arrowDownIcon()
+            $0.titleLabel?.font = UIFont.customFont(with: 16, weight: .medium)
+            $0.contentEdgeInsets = .init(top: 0, left: 14, bottom: 0, right: 24)
+            $0.imageEdgeInsets = .init(top: 0, left: -12, bottom: 0, right: 0)
+            $0.snp.makeConstraints { make in
+                make.height.equalTo(34)
+            }
+        }
     }()
     
     private var tabItems: [UITabBarItem] = [] {
@@ -84,7 +99,7 @@ extension HomeViewController {
     
     func setUpViews() {
         self.navigationController?.removeNavigationBarBorder()
-        self.navigationItem.leftBarButtonItem = logoBarItem
+        self.navigationItem.leftBarButtonItems = [logoBarItem, .init(customView: self.countryButton)]
         self.navigationItem.rightBarButtonItem = filterButton
         
         self.scrollView.delegate = self
@@ -200,6 +215,11 @@ fileprivate extension HomeViewController {
             .map { _ in HomeViewModel.Action.createPostPressed }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
+        
+        self.countryButton.rx.tap.asObservable()
+            .map { _ in HomeViewModel.Action.countryPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpContentChangedObservers() {
@@ -212,6 +232,25 @@ fileprivate extension HomeViewController {
             .subscribe(onNext: { [weak self] viewModels in
                 self?.prepareSlidingViews(viewModels)
             }) ~ self.disposeBag
+        
+        self.viewModel.currentCountry.asObservable()
+            .subscribe(onNext: { [weak self] country in
+                if let country = country {
+                    self?.countryButton.setTitle(country.countryName, for: .normal)
+                    if country.icon == nil, let iconUrl = URL(string: country.iconUrl ?? "") {
+                        let resizingProcessor = ResizingImageProcessor(referenceSize: CGSize(width: 16, height: 16))
+                        self?.countryButton.kf.setImage(with: iconUrl, for: .normal, options: [.processor(resizingProcessor)])
+                    } else {
+                        self?.countryButton.setImage(country.icon, for: .normal)
+                    }
+                } else {
+                    self?.countryButton.setTitle("Global", for: .normal)
+                    self?.countryButton.setImage(R.image.earhIcon(), for: .normal)
+                }
+                self?.countryButton.tintColor = .black
+                self?.countryButton.setTitleColor(.black, for: .normal)
+                self?.countryButton.customStyle(with: .color("F5F5F5"))
+            }) ~ self.disposeBag
     }
     
     func setUpShouldPresentObservers() {
@@ -223,7 +262,7 @@ fileprivate extension HomeViewController {
                         choosePostCategoryViewController.viewModel = chooseCategorySheetViewModel
                         let bottomSheet = MDCBottomSheetController(contentViewController: choosePostCategoryViewController)
                         bottomSheet.isScrimAccessibilityElement = false
-                        bottomSheet.automaticallyAdjustsScrollViewInsets = false
+                        bottomSheet.trackingScrollView?.contentInsetAdjustmentBehavior = .never
                         bottomSheet.dismissOnDraggingDownSheet = false
                         self.present(bottomSheet, animated: true, completion: nil)
                     }
@@ -266,6 +305,9 @@ fileprivate extension HomeViewController {
                     (self.tabBarController as? MainTabBarViewController)?.showVoteDialog(voteDialogViewModel)
                 case .downVoteDialogController(let downvoteDialogViewModel):
                     (self.tabBarController as? MainTabBarViewController)?.showDownvoteDialog(downvoteDialogViewModel)
+                case .bottomListViewController(let bottomListMenuViewModel):
+                    let bottomMenuViewController = BottomMenuViewController(bottomListMenuViewModel)
+                    self.present(bottomMenuViewController, animated: true, completion: nil)
                 }
             }) ~ self.disposeBag
     }

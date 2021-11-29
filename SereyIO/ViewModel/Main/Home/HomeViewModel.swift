@@ -13,12 +13,15 @@ import RxBinding
 import RealmSwift
 import Realm
 import RxRealm
+import CountryPicker
 
 class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, DownloadStateNetworkProtocol {
     
     enum Action {
         case filterPressed
         case createPostPressed
+        case countryPressed
+        case countrySelected(CountryModel?)
     }
     
     enum ViewToPresent {
@@ -32,6 +35,7 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
         case userAccountController(UserAccountViewModel)
         case voteDialogController(VoteDialogViewModel)
         case downVoteDialogController(DownvoteDialogViewModel)
+        case bottomListViewController(BottomListMenuViewModel)
     }
     
     // input:
@@ -47,17 +51,19 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
     let categories: BehaviorRelay<[DiscussionCategoryModel]>
     
     let discussionService: DiscussionService
-    var currentCountry: String?
+    let userService: UserService
+    var currentCountry: BehaviorRelay<CountryModel?>
     var didScrolledToIndex: Bool = false
     lazy var isDownloading = BehaviorRelay<Bool>(value: false)
     
     override init() {
-        self.selectedCategory = BehaviorRelay(value: nil)
-        self.postTabTitles = BehaviorRelay(value: [])
-        self.postViewModels = BehaviorRelay(value: [])
-        self.categories = BehaviorRelay(value: [])
-        self.discussionService = DiscussionService()
-        self.currentCountry = PreferenceStore.shared.currentUserCountry
+        self.selectedCategory = .init(value: nil)
+        self.postTabTitles = .init(value: [])
+        self.postViewModels = .init(value: [])
+        self.categories = .init(value: [])
+        self.discussionService = .init()
+        self.userService = .init()
+        self.currentCountry = .init(value: PreferenceStore.shared.currentCountry)
         super.init()
         
         setUpRxObservers()
@@ -67,8 +73,8 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
     }
     
     func validateCountry() {
-        if self.currentCountry != PreferenceStore.shared.currentUserCountry {
-            self.currentCountry = PreferenceStore.shared.currentUserCountry
+        if self.currentCountry.value?.countryName != PreferenceStore.shared.currentUserCountry {
+            self.currentCountry.accept(PreferenceStore.shared.currentCountry)
             self.downloadData()
             self.postViewModels.value.forEach { viewModel in
                 viewModel.validateCountry()
@@ -94,6 +100,21 @@ extension HomeViewModel {
                 self?.updateData(categories)
             }, onError: { [weak self] error in
                 self?.isDownloading.accept(false)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    func fetchIpTrace() {
+        self.userService.fetchIpTrace()
+            .subscribe(onNext: { [weak self] data in
+                if let loc = data?.split(separator: "\n").first(where: { $0.contains("loc=") }) {
+                    let countryCode = loc.replacingOccurrences(of: "loc=", with: "")
+                    if let country = CountryManager.shared.country(withCode: countryCode) {
+                        self?.didAction(with: .countrySelected(.init(countryName: country.countryName, iconUrl: nil)))
+                    }
+                }
+            }, onError: { [weak self] error in
                 let errorInfo = ErrorHelper.prepareError(error: error)
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
@@ -128,6 +149,31 @@ fileprivate extension HomeViewModel {
         } else {
             self.shouldPresent(.signInViewController)
         }
+    }
+    
+    func handleCountryPressed() {
+        var items: [ImageTextCellViewModel] = [ChooseCountryOption.global, ChooseCountryOption.detectAutomatically].map { $0.cellModel }
+        let countries: Results<CountryModel> = CountryModel().queryAll()
+        items.append(contentsOf: countries.toArray().map { CountryCellViewModel($0) })
+        
+        let bottomListMenuViewModel = BottomListMenuViewModel(header: "Select your preffered country", items)
+        bottomListMenuViewModel.shouldSelectMenuItem
+            .subscribe(onNext: { [unowned self] cellModel in
+                if let cellModel = cellModel as? ChooseCountryOptionCellViewModel {
+                    switch cellModel.option {
+                    case .detectAutomatically:
+                        self.fetchIpTrace()
+                    case .global:
+                        self.didAction(with: .countrySelected(nil))
+                    default:
+                        break
+                    }
+                } else if let cellModel = cellModel as? CountryCellViewModel {
+                    self.didAction(with: .countrySelected(cellModel.country))
+                }
+            }) ~ self.disposeBag
+        
+        self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
     }
 }
 
@@ -164,6 +210,12 @@ extension HomeViewModel {
                     self?.handleFilterPressed()
                 case .createPostPressed:
                     self?.handleCreatePost()
+                case .countrySelected(let country):
+                    PreferenceStore.shared.currentUserCountry = country?.countryName
+                    PreferenceStore.shared.currentUserCountryIconUrl = country?.iconUrl
+                    self?.validateCountry()
+                case .countryPressed:
+                    self?.handleCountryPressed()
                 }
             }) ~ self.disposeBag
     }
