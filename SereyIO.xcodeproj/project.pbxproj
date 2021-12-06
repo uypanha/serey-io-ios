@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		26AE9EB0BA60B5822CF0E5D5 /* Pods_SereyIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E48D784F3F419D4A8B0116EC /* Pods_SereyIO.framework */; };
 		813EBD3FDAF47C7A45C36443 /* Pods_SereyIOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33886248612D2F97D120B3C9 /* Pods_SereyIOTests.framework */; };
+		961264AB2757B79900AA1AD2 /* SKActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */; };
+		961264AC2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */; };
 		967BB0DF274E878C005EBCB8 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BB0DE274E878C005EBCB8 /* CountryModel.swift */; };
 		B6138434D2AC9BE300634E3A /* Pods_SereyIOUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A407BB647B50EB3891A9B90 /* Pods_SereyIOUITests.framework */; };
 		DC0044062433A87900244607 /* FileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0044052433A87900244607 /* FileUploadService.swift */; };
@@ -491,6 +493,8 @@
 		4DAEE7E4861FC0F849E6B246 /* Pods-SereyIOTests.release_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.release_development.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.release_development.xcconfig"; sourceTree = "<group>"; };
 		7C94BCB396C37062A37C4EE9 /* Pods-SereyIO.debug_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIO.debug_production.xcconfig"; path = "Target Support Files/Pods-SereyIO/Pods-SereyIO.debug_production.xcconfig"; sourceTree = "<group>"; };
 		8DC4AE990A81B7E80AD7C57E /* Pods-SereyIOUITests.release_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.release_development.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.release_development.xcconfig"; sourceTree = "<group>"; };
+		961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicator.swift; sourceTree = "<group>"; };
+		961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicatorViewStyle.swift; sourceTree = "<group>"; };
 		967BB0DE274E878C005EBCB8 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
 		A1881865A5CB109CA74734FE /* Pods-SereyIOUITests.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.release_production.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.release_production.xcconfig"; sourceTree = "<group>"; };
 		A407EA3FA97859A37E09FEBF /* Pods-SereyIO.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIO.release_production.xcconfig"; path = "Target Support Files/Pods-SereyIO/Pods-SereyIO.release_production.xcconfig"; sourceTree = "<group>"; };
@@ -1028,6 +1032,15 @@
 				2A407BB647B50EB3891A9B90 /* Pods_SereyIOUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		961264A82757B78B00AA1AD2 /* SKActivityIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */,
+				961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */,
+			);
+			path = SKActivityIndicator;
 			sourceTree = "<group>";
 		};
 		DC0044072433A97000244607 /* File */ = {
@@ -2331,6 +2344,7 @@
 		DCB0703F2732DE63004463E7 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
+				961264A82757B78B00AA1AD2 /* SKActivityIndicator */,
 				DCB070402732DE7D004463E7 /* TransactionHeaderView.swift */,
 			);
 			path = Widget;
@@ -3309,6 +3323,7 @@
 				DC8EAB8123E7231200E00A00 /* HomeViewController.swift in Sources */,
 				DCED6A102534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift in Sources */,
 				DCD39873232E204000C812EB /* Rx+Extensions.swift in Sources */,
+				961264AC2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift in Sources */,
 				DC5D59DD2432437A0048C921 /* SelectCategoryViewModel.swift in Sources */,
 				DC243FC624666A19007B2EC5 /* CategoryPostsViewController.swift in Sources */,
 				DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */,
@@ -3396,6 +3411,7 @@
 				DCDE006E2446161500D09717 /* UIPlaceHolderTextView.swift in Sources */,
 				DCD3989A232E2DE700C812EB /* UINavigationController.swift in Sources */,
 				DC6ED57E2326A44A00770B31 /* DefaultsStore.swift in Sources */,
+				961264AB2757B79900AA1AD2 /* SKActivityIndicator.swift in Sources */,
 				DCD12D6C242D06C20084F66C /* ImageTextTableViewCell.swift in Sources */,
 				DCFBD78025022FBF005B6875 /* CancelPowerDownViewController.swift in Sources */,
 				DC40D5DF23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift in Sources */,

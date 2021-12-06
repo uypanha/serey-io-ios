@@ -29,7 +29,10 @@ struct TransactionModel: Codable {
     }
     
     var value: String? {
-        return opData.opType?.preapreValue(opData.data)
+        var value = opData.opType?.preapreValue(opData.data)
+        value = value?.replacingOccurrences(of: "SEREY", with: "SRY")
+        value = value?.replacingOccurrences(of: "VESTS", with: "SRY Power")
+        return value
     }
     
     var valueColor: UIColor? {
@@ -113,7 +116,7 @@ enum TransferType: String {
         case .withdrawVesting:
             return data.vestingShares == "0.000000 VESTS" ? R.image.transactionCancelPowerDown() : R.image.transactionPowerDown()
         case .delegatePower:
-            return R.image.transactionDelegatePower()
+            return data.vestingShares == "0.000000 VESTS" ? R.image.transactionCancelPowerDown() : R.image.transactionDelegatePower()
         }
     }
     
@@ -128,7 +131,7 @@ enum TransferType: String {
         case .withdrawVesting:
             return data.vestingShares == "0.000000 VESTS" ? "Cancel Power" : "Power Down"
         case .delegatePower:
-            return "Delegate Power"
+            return data.vestingShares == "0.000000 VESTS" ? "Cancel Delegate Power" : "Delegate Power"
         }
     }
     
@@ -165,7 +168,9 @@ enum TransferType: String {
         let titleCell = TextCellViewModel(with: self.prepareCellTitle(data), properties: .init(font: .boldSystemFont(ofSize: 17), textColor: .black), indicatorAccessory: false, isSelectionEnabled: false)
         items.append(titleCell)
         
-        if let amount = data.amount ?? data.vestingShares {
+        if var amount = data.amount ?? data.vestingShares {
+            amount = amount.replacingOccurrences(of: "SEREY", with: "SRY")
+            amount = amount.replacingOccurrences(of: "VESTS", with: "SRY Power")
             let amountCell = TransactionInfoCellViewModel(title: "Amount", description: amount)
             items.append(amountCell)
         }
@@ -202,7 +207,7 @@ enum TransferType: String {
         case .withdrawVesting:
             return data.vestingShares == "0.000000 VESTS" ? "Cancel Power" : "Power Down"
         case .delegatePower:
-            return "Delegate Power"
+            return data.vestingShares == "0.000000 VESTS" ? "Cancel Delegate Power" : "Delegate Power"
         }
     }
 }

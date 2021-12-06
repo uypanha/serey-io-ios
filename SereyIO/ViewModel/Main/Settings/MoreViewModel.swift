@@ -60,7 +60,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         super.init()
         
         setUpRxObservers()
-        cellModels.accept(prepareCellModels())
+        refreshScreen()
         registerForNotifs()
     }
     
@@ -192,6 +192,10 @@ extension MoreViewModel {
         }
         
         return sectionItems
+    }
+    
+    func refreshScreen() {
+        cellModels.accept(prepareCellModels())
     }
 }
 

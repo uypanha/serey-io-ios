@@ -57,7 +57,7 @@ extension UserCommentReplyCellViewModel {
     
     func notifyDataChanged(_ data: CommentReplyModel?) {
         self.profileViewModel.onNext(data?.profileViewModel)
-        self.authorName.onNext(data?.author.capitalized)
+        self.authorName.onNext(data?.author)
         self.publishedAt.onNext(data?.publishedDateString)
         self.titleText.onNext(data?.title)
         self.contentAttributedString.onNext(data?.body.htmlAttributed(size: 10))

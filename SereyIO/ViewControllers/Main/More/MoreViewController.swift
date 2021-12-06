@@ -36,6 +36,7 @@ class MoreViewController: BaseViewController, AlertDialogController {
         super.viewWillAppear(animated)
         
         self.navigationController?.removeNavigationBarBorder()
+        self.viewModel.refreshScreen()
     }
     
     override func viewDidLoad() {
