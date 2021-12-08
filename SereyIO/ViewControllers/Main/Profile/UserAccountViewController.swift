@@ -14,6 +14,7 @@ import MaterialComponents
 
 class UserAccountViewController: BaseViewController, AlertDialogController, LoadingIndicatorController {
     
+    @IBOutlet weak var uploadProfileButton: UIButton!
     @IBOutlet weak var profileView: ProfileView!
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var postCountLabel: UILabel!
@@ -25,6 +26,8 @@ class UserAccountViewController: BaseViewController, AlertDialogController, Load
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var followLoadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tabBar: MDCTabBarView!
+    
+    lazy var fileMediaHelper: MediaPickerHelper = .init(withPresenting: self)
     
     private var tabItems: [UITabBarItem] = [] {
         didSet {
@@ -52,6 +55,7 @@ class UserAccountViewController: BaseViewController, AlertDialogController, Load
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        self.uploadProfileButton.makeMeCircular()
         setupSlideScrollView(slides: self.slideViews.map { $0.view })
         if self.slideViews.count > 0 && self.slideViews.count == self.tabItems.count && !self.viewModel.didScrolledToIndex {
             let item = self.tabItems[0]
@@ -69,6 +73,7 @@ extension UserAccountViewController {
         self.navigationController?.removeNavigationBarBorder()
         self.parentScrollView.refreshControl = UIRefreshControl()
         self.followLoadingIndicator.isHidden = true
+        self.uploadProfileButton.setTitle("", for: .normal)
         prepareTabBar()
     }
     
@@ -160,6 +165,11 @@ extension UserAccountViewController {
             .map { UserAccountViewModel.Action.followPressed }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
+        
+        self.uploadProfileButton.rx.tap.asObservable()
+            .map { UserAccountViewModel.Action.changeProfilePressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpContentChangedObservers() {
@@ -179,7 +189,8 @@ extension UserAccountViewController {
             self.viewModel.postCountText ~> self.postCountLabel.rx.text,
             self.viewModel.followerCountText ~> self.followersCountLabel.rx.text,
             self.viewModel.followingCountText ~> self.followingCountLabel.rx.text,
-            self.viewModel.isFollowHidden ~> self.followButton.rx.isHidden
+            self.viewModel.isFollowHidden ~> self.followButton.rx.isHidden,
+            self.viewModel.isUploadProfileHidden ~> self.uploadProfileButton.rx.isHidden
         ]
         
         self.viewModel.isFollowed.asObservable()
@@ -206,6 +217,11 @@ extension UserAccountViewController {
                 if endRefreshing {
                     self?.parentScrollView?.refreshControl?.endRefreshing()
                 }
+            }) ~ self.disposeBag
+        
+        self.fileMediaHelper.selectedPhotoSubject.asObservable()
+            .subscribe(onNext: { [weak self] pickerModel in
+                self?.viewModel.didAction(with: .photoSelected(pickerModel))
             }) ~ self.disposeBag
     }
     
@@ -255,6 +271,8 @@ extension UserAccountViewController {
                     let draftListViewController = DraftListViewController(draftListViewModel)
                     draftListViewController.hidesBottomBarWhenPushed = true
                     self.show(draftListViewController, sender: nil)
+                case .choosePhotoController:
+                    self.fileMediaHelper.showImagePickerAlert()
                 }
             }) ~ self.disposeBag
     }

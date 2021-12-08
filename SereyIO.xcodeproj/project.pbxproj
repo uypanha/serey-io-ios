@@ -12,6 +12,9 @@
 		961264AB2757B79900AA1AD2 /* SKActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */; };
 		961264AC2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */; };
 		967BB0DF274E878C005EBCB8 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BB0DE274E878C005EBCB8 /* CountryModel.swift */; };
+		96D46BAD275FBE010078779A /* UserProfileApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D46BAC275FBE010078779A /* UserProfileApi.swift */; };
+		96D46BAF275FBEC70078779A /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D46BAE275FBEC70078779A /* UserProfileService.swift */; };
+		96D46BB92760F0FB0078779A /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D46BB82760F0FB0078779A /* UserProfileModel.swift */; };
 		B6138434D2AC9BE300634E3A /* Pods_SereyIOUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A407BB647B50EB3891A9B90 /* Pods_SereyIOUITests.framework */; };
 		DC0044062433A87900244607 /* FileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0044052433A87900244607 /* FileUploadService.swift */; };
 		DC0044092433A98200244607 /* FileUploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0044082433A98200244607 /* FileUploadModel.swift */; };
@@ -496,6 +499,9 @@
 		961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicator.swift; sourceTree = "<group>"; };
 		961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicatorViewStyle.swift; sourceTree = "<group>"; };
 		967BB0DE274E878C005EBCB8 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
+		96D46BAC275FBE010078779A /* UserProfileApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileApi.swift; sourceTree = "<group>"; };
+		96D46BAE275FBEC70078779A /* UserProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileService.swift; sourceTree = "<group>"; };
+		96D46BB82760F0FB0078779A /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
 		A1881865A5CB109CA74734FE /* Pods-SereyIOUITests.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.release_production.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.release_production.xcconfig"; sourceTree = "<group>"; };
 		A407EA3FA97859A37E09FEBF /* Pods-SereyIO.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIO.release_production.xcconfig"; path = "Target Support Files/Pods-SereyIO/Pods-SereyIO.release_production.xcconfig"; sourceTree = "<group>"; };
 		B23EDC4C4A4735EC30AE93DA /* Pods-SereyIOTests.debug_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.debug_development.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.debug_development.xcconfig"; sourceTree = "<group>"; };
@@ -1041,6 +1047,15 @@
 				961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */,
 			);
 			path = SKActivityIndicator;
+			sourceTree = "<group>";
+		};
+		96D46BAB275FBDEC0078779A /* UserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				96D46BAC275FBE010078779A /* UserProfileApi.swift */,
+				96D46BAE275FBEC70078779A /* UserProfileService.swift */,
+			);
+			path = UserProfile;
 			sourceTree = "<group>";
 		};
 		DC0044072433A97000244607 /* File */ = {
@@ -2656,6 +2671,7 @@
 				DCF67FDB240FFC3B003061A7 /* Search */,
 				DC6FCE6523F05D1700D72F6D /* Steem */,
 				DC12F20E2422781E0099C479 /* User */,
+				96D46BAB275FBDEC0078779A /* UserProfile */,
 				DC583A9524CC40EB00D9C4D3 /* Wallet */,
 			);
 			path = Services;
@@ -2862,6 +2878,7 @@
 			isa = PBXGroup;
 			children = (
 				DC12F21524227AB40099C479 /* AccountModel.swift */,
+				96D46BB82760F0FB0078779A /* UserProfileModel.swift */,
 				DC1CBD1D259250D700CCB714 /* DraftModel.swift */,
 				DC75DAB8244E055000D80CB2 /* FollowActionModel.swift */,
 				DC75DABA244E07EE00D80CB2 /* FollowerListResponse.swift */,
@@ -3366,6 +3383,7 @@
 				DC19DBEF23EC60C900571CC8 /* PostCellViewModel.swift in Sources */,
 				DC583A9B24CC46F700D9C4D3 /* LoadingButton.swift in Sources */,
 				DC803C5626974C3B00FCD2B2 /* PageItemControllerProtocol.swift in Sources */,
+				96D46BAF275FBEC70078779A /* UserProfileService.swift in Sources */,
 				DCEC0CC3240A530B002F4B6F /* FilteredCategoryTableViewCell.swift in Sources */,
 				DC9E36F024154BC900289693 /* PFColorHash.swift in Sources */,
 				DC5FC21A2454330900CA6117 /* CommentReplyModel.swift in Sources */,
@@ -3609,6 +3627,7 @@
 				DCF67FE1240FFD65003061A7 /* PeopleTableViewCell.swift in Sources */,
 				DCD39876232E20CF00C812EB /* SlashViewModel.swift in Sources */,
 				DCFBD77225013B29005B6875 /* ConfirmPowerDownViewController.swift in Sources */,
+				96D46BAD275FBE010078779A /* UserProfileApi.swift in Sources */,
 				DC7C8EEE24D9B3100051C084 /* TransferCoinViewModel.swift in Sources */,
 				DC40D5D423E32A4400B0DD96 /* ImageTextCellViewModel.swift in Sources */,
 				DC19DBEB23EC5F9E00571CC8 /* PostTableViewModel.swift in Sources */,
@@ -3666,6 +3685,7 @@
 				DCE6D526249BCB2900C273C2 /* SignUpWalletViewModel.swift in Sources */,
 				DC7C8F0624DB08D50051C084 /* TransactionHistoryViewModel.swift in Sources */,
 				DC6FCE7123F05D1700D72F6D /* Auth.swift in Sources */,
+				96D46BB92760F0FB0078779A /* UserProfileModel.swift in Sources */,
 				DC8EAB8523E7232800E00A00 /* NotificationViewController.swift in Sources */,
 				DC60AC8D24A905E50014B77E /* BaseRootViewController.swift in Sources */,
 				DC6A78F723CA202C001D1009 /* CollectionMultiSectionsProviderModel.swift in Sources */,
