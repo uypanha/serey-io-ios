@@ -27,6 +27,7 @@ def frameworks_pods
   pod 'NVActivityIndicatorView', '~> 5.1.1'
   pod 'NVActivityIndicatorView/Extended'
 	pod 'NotificationBannerSwift'
+  pod "AlignedCollectionViewFlowLayout"
   pod 'Shimmer'
   pod 'RichEditorView', :git => 'https://github.com/uyphanha/RichEditorView.git'
   pod 'LSDialogViewController', :git => 'https://github.com/uyphanha/LSDialogViewController.git'

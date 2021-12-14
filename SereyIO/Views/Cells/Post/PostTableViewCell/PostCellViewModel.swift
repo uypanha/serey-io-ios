@@ -16,6 +16,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
     let post: BehaviorRelay<PostModel?>
     let isShimmering: BehaviorRelay<Bool>
     
+    let loggedUserInfo: BehaviorRelay<UserModel?>
     let profileViewModel: BehaviorSubject<ProfileViewModel?>
     let authorName: BehaviorSubject<String?>
     let publishedAt: BehaviorSubject<String?>
@@ -44,6 +45,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
     let votedType: BehaviorRelay<VotedType?>
     
     init(_ post: PostModel?) {
+        self.loggedUserInfo = .init(value: AuthData.shared.loggedUserModel)
         self.post = BehaviorRelay(value: post)
         self.profileViewModel = BehaviorSubject(value: nil)
         self.authorName = BehaviorSubject(value: nil)

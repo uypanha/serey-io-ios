@@ -67,12 +67,13 @@ struct PostModel: Codable {
     }
     
     var profileViewModel: ProfileViewModel {
-        get {
-            let firstLetter = author.first == nil ? "" : "\(author.first!)"
-            let uniqueColor = UIColor(hexString: PFColorHash().hex("\(author)"))
-            let url = URL(string: self.authorImageUrl ?? "")
-            return ProfileViewModel(shortcut: firstLetter, imageUrl: url, uniqueColor: uniqueColor)
-        }
+        let firstLetter = author.first == nil ? "" : "\(author.first!)"
+        let uniqueColor = UIColor(hexString: PFColorHash().hex("\(author)"))
+        
+        let predicate = NSPredicate(format: "active == true AND username == %@", self.author)
+        let defaultImage: UserProfileModel? = UserProfileModel().qeuryFirst(by: predicate)
+        let url = URL(string: defaultImage?.imageUrl ?? self.authorImageUrl ?? "")
+        return ProfileViewModel(shortcut: firstLetter, imageUrl: url, uniqueColor: uniqueColor)
     }
     
     var votedType: VotedType? {

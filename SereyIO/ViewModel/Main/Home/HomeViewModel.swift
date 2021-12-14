@@ -133,13 +133,7 @@ extension HomeViewModel {
 fileprivate extension HomeViewModel {
     
     func handleFilterPressed() {
-        let viewModel = ChooseCategorySheetViewModel(self.categories.value, self.selectedCategory.value)
-        viewModel.categoryDidSelected.asObservable()
-            .subscribe(onNext: { [weak self] selectedCategory in
-                if selectedCategory?.name != self?.selectedCategory.value?.name {
-                    self?.selectedCategory.accept(selectedCategory)
-                }
-            }) ~ viewModel.disposeBag
+        let viewModel = ChooseCategorySheetViewModel(categories: self.categories.value, self.selectedCategory)
         self.shouldPresent(.choosePostCategoryController(viewModel))
     }
     

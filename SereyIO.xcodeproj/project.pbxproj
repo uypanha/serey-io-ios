@@ -11,7 +11,19 @@
 		813EBD3FDAF47C7A45C36443 /* Pods_SereyIOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33886248612D2F97D120B3C9 /* Pods_SereyIOTests.framework */; };
 		961264AB2757B79900AA1AD2 /* SKActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */; };
 		961264AC2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */; };
+		9625CEC92767B1DC0009FC47 /* FilterHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4022767AAD3005F0C0E /* FilterHeaderCollectionViewCell.xib */; };
+		9625CECA2767B2F20009FC47 /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4082767AB0D005F0C0E /* HeaderCollectionViewCell.xib */; };
 		967BB0DF274E878C005EBCB8 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BB0DE274E878C005EBCB8 /* CountryModel.swift */; };
+		9686E3F627679772005F0C0E /* BaseUserProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686E3F527679772005F0C0E /* BaseUserProfileViewModel.swift */; };
+		9686E3F82767A5C5005F0C0E /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686E3F72767A5C5005F0C0E /* BaseCollectionViewController.swift */; };
+		9686E4002767A763005F0C0E /* ProductCategoryCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686E3FE2767A763005F0C0E /* ProductCategoryCellViewModel.swift */; };
+		9686E4012767A763005F0C0E /* ProductCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686E3FF2767A763005F0C0E /* ProductCategoryCollectionViewCell.swift */; };
+		9686E4042767AAD4005F0C0E /* FilterHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686E4032767AAD3005F0C0E /* FilterHeaderCollectionViewCell.swift */; };
+		9686E4072767AB02005F0C0E /* FilterHeaderCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686E4062767AB02005F0C0E /* FilterHeaderCellViewModel.swift */; };
+		9686E40B2767AB0E005F0C0E /* HeaderCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686E40A2767AB0E005F0C0E /* HeaderCellViewModel.swift */; };
+		9686E40C2767AB0E005F0C0E /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686E4092767AB0E005F0C0E /* HeaderCollectionViewCell.swift */; };
+		9686E40F2767AB99005F0C0E /* MDCChipView+StyleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686E40E2767AB99005F0C0E /* MDCChipView+StyleProtocol.swift */; };
+		9686E4112767ADC8005F0C0E /* CollectionBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686E4102767ADC8005F0C0E /* CollectionBottomSheetViewController.swift */; };
 		96D46BAD275FBE010078779A /* UserProfileApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D46BAC275FBE010078779A /* UserProfileApi.swift */; };
 		96D46BAF275FBEC70078779A /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D46BAE275FBEC70078779A /* UserProfileService.swift */; };
 		96D46BB92760F0FB0078779A /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D46BB82760F0FB0078779A /* UserProfileModel.swift */; };
@@ -499,6 +511,18 @@
 		961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicator.swift; sourceTree = "<group>"; };
 		961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicatorViewStyle.swift; sourceTree = "<group>"; };
 		967BB0DE274E878C005EBCB8 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
+		9686E3F527679772005F0C0E /* BaseUserProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseUserProfileViewModel.swift; sourceTree = "<group>"; };
+		9686E3F72767A5C5005F0C0E /* BaseCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewController.swift; sourceTree = "<group>"; };
+		9686E3FE2767A763005F0C0E /* ProductCategoryCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCategoryCellViewModel.swift; sourceTree = "<group>"; };
+		9686E3FF2767A763005F0C0E /* ProductCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		9686E4022767AAD3005F0C0E /* FilterHeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterHeaderCollectionViewCell.xib; sourceTree = "<group>"; };
+		9686E4032767AAD3005F0C0E /* FilterHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		9686E4062767AB02005F0C0E /* FilterHeaderCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterHeaderCellViewModel.swift; sourceTree = "<group>"; };
+		9686E4082767AB0D005F0C0E /* HeaderCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionViewCell.xib; sourceTree = "<group>"; };
+		9686E4092767AB0E005F0C0E /* HeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionViewCell.swift; sourceTree = "<group>"; };
+		9686E40A2767AB0E005F0C0E /* HeaderCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCellViewModel.swift; sourceTree = "<group>"; };
+		9686E40E2767AB99005F0C0E /* MDCChipView+StyleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDCChipView+StyleProtocol.swift"; sourceTree = "<group>"; };
+		9686E4102767ADC8005F0C0E /* CollectionBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionBottomSheetViewController.swift; sourceTree = "<group>"; };
 		96D46BAC275FBE010078779A /* UserProfileApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileApi.swift; sourceTree = "<group>"; };
 		96D46BAE275FBEC70078779A /* UserProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileService.swift; sourceTree = "<group>"; };
 		96D46BB82760F0FB0078779A /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
@@ -1049,6 +1073,36 @@
 			path = SKActivityIndicator;
 			sourceTree = "<group>";
 		};
+		9686E3F92767A681005F0C0E /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				9686E4052767AAE8005F0C0E /* FilterHeaderCollectionViewCell */,
+				9686E3FE2767A763005F0C0E /* ProductCategoryCellViewModel.swift */,
+				9686E3FF2767A763005F0C0E /* ProductCategoryCollectionViewCell.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
+		9686E4052767AAE8005F0C0E /* FilterHeaderCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				9686E4062767AB02005F0C0E /* FilterHeaderCellViewModel.swift */,
+				9686E4032767AAD3005F0C0E /* FilterHeaderCollectionViewCell.swift */,
+				9686E4022767AAD3005F0C0E /* FilterHeaderCollectionViewCell.xib */,
+			);
+			path = FilterHeaderCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		9686E40D2767AB14005F0C0E /* HeaderCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				9686E40A2767AB0E005F0C0E /* HeaderCellViewModel.swift */,
+				9686E4092767AB0E005F0C0E /* HeaderCollectionViewCell.swift */,
+				9686E4082767AB0D005F0C0E /* HeaderCollectionViewCell.xib */,
+			);
+			path = HeaderCollectionViewCell;
+			sourceTree = "<group>";
+		};
 		96D46BAB275FBDEC0078779A /* UserProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -1187,6 +1241,7 @@
 			isa = PBXGroup;
 			children = (
 				DCF8738123F6FA3B007A8724 /* BasePostViewModel.swift */,
+				9686E3F527679772005F0C0E /* BaseUserProfileViewModel.swift */,
 				DC19DBE923EC5F9100571CC8 /* Home */,
 				DC99253A26FCDF8A00A098EB /* Notifications */,
 				DC9E36DD24129FFD00289693 /* Post */,
@@ -1251,6 +1306,7 @@
 				DC7C740E2471803200610526 /* BottomSheetListViewController.swift */,
 				DC83C38B24E301F2008C9EAB /* BottomSheetProtocol.swift */,
 				DC83C38324E19F2A008C9EAB /* BottomSheetViewController.swift */,
+				9686E4102767ADC8005F0C0E /* CollectionBottomSheetViewController.swift */,
 			);
 			path = BottomSheet;
 			sourceTree = "<group>";
@@ -1349,11 +1405,12 @@
 		DC40D5D123E32A2800B0DD96 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				DC8450B1250C7F0400D7E085 /* LineIndicatorTableViewCell */,
-				DC13409424573F0C00CC9856 /* ToggleTextTableViewCell */,
-				DCD12D69242D06AB0084F66C /* ImageTextTableViewCell */,
 				DCA525552425165C00284CD8 /* ButtonTableViewCell */,
+				9686E40D2767AB14005F0C0E /* HeaderCollectionViewCell */,
+				DCD12D69242D06AB0084F66C /* ImageTextTableViewCell */,
+				DC8450B1250C7F0400D7E085 /* LineIndicatorTableViewCell */,
 				DCC6F1DF242BBDA7003B9E3A /* TextTableViewCell */,
+				DC13409424573F0C00CC9856 /* ToggleTextTableViewCell */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2610,6 +2667,7 @@
 		DCD3985D232E105A00C812EB /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				9686E3F72767A5C5005F0C0E /* BaseCollectionViewController.swift */,
 				DC60AC8C24A905E50014B77E /* BaseRootViewController.swift */,
 				DC8EAB7823E721EE00E00A00 /* BaseTabBarViewController.swift */,
 				DC19DBE423EC5D0700571CC8 /* BaseTableViewController.swift */,
@@ -2627,6 +2685,7 @@
 				DCD39886232E251C00C812EB /* StyleProtocol.swift */,
 				DC3E7E17270362E7001DA924 /* UILabel+Helper.swift */,
 				DCD3987E232E238800C812EB /* UIView+Appearance.swift */,
+				9686E40E2767AB99005F0C0E /* MDCChipView+StyleProtocol.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2741,12 +2800,13 @@
 		DCD3987B232E234600C812EB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				DC3E7E14270360A0001DA924 /* NotificationTableCell */,
 				DC40D5D223E32A3100B0DD96 /* Base */,
 				DC40D5D123E32A2800B0DD96 /* Common */,
 				DC1C6EBF23FC3C3000BA701D /* Dialog */,
+				9686E3F92767A681005F0C0E /* Filter */,
 				DC40D5C823E3298F00B0DD96 /* LanguageTableViewCell */,
 				DC05FDA523F1AB1E0093B47B /* More */,
+				DC3E7E14270360A0001DA924 /* NotificationTableCell */,
 				DCEC0CBF240A52CC002F4B6F /* Post */,
 				DCF67FDE240FFD21003061A7 /* Search */,
 				DCB5BD6C2497CAB90042E5AF /* Wallet */,
@@ -3144,7 +3204,9 @@
 				DCD39859232E0F9600C812EB /* Slash.storyboard in Resources */,
 				DC7558C92459DB0400AD40FA /* Search.strings in Resources */,
 				DCEC0CC4240A530B002F4B6F /* FilteredCategoryTableViewCell.xib in Resources */,
+				9625CECA2767B2F20009FC47 /* HeaderCollectionViewCell.xib in Resources */,
 				DC26813123F45A8C0045776E /* Profile.storyboard in Resources */,
+				9625CEC92767B1DC0009FC47 /* FilterHeaderCollectionViewCell.xib in Resources */,
 				DC79F12024CDD7D3007FCECC /* CreateCredentialTableViewCell.xib in Resources */,
 				DCA459F624D1CA6000E21D9A /* WalletMenuCollectionViewCell.xib in Resources */,
 				DC7C8F1024DC663B0051C084 /* TransactionTableViewCell.xib in Resources */,
@@ -3371,6 +3433,7 @@
 				DC19DBE723EC5E7500571CC8 /* PostTableViewController.swift in Sources */,
 				DCFBD78425029CE8005B6875 /* CancelPowerModel.swift in Sources */,
 				DC5FC218245431CB00CA6117 /* UserCommentReplyCellViewModel.swift in Sources */,
+				9686E4002767A763005F0C0E /* ProductCategoryCellViewModel.swift in Sources */,
 				DC5FC21524542E5600CA6117 /* UserCommentReplyTableViewCell.swift in Sources */,
 				DC9C65A0249DE4F10042C829 /* CreateCredentialViewModel.swift in Sources */,
 				DC40D5D823E32AB800B0DD96 /* Utilities.swift in Sources */,
@@ -3378,6 +3441,7 @@
 				DC7C8EF024D9BDF50051C084 /* TransferCoinRequestModel.swift in Sources */,
 				DCDAB376273AC97600C3B349 /* ConfirmCancelDelegateViewController+LoadViews.swift in Sources */,
 				DC583A8B24C9E95200D9C4D3 /* RSAUtils.swift in Sources */,
+				9686E4112767ADC8005F0C0E /* CollectionBottomSheetViewController.swift in Sources */,
 				DC12F212242278F90099C479 /* UserModel.swift in Sources */,
 				DC9A660624DFE964001F1B60 /* PayQRViewController.swift in Sources */,
 				DC19DBEF23EC60C900571CC8 /* PostCellViewModel.swift in Sources */,
@@ -3411,6 +3475,7 @@
 				DC9AC6E12406C1D1008FAFA6 /* DiscussionService.swift in Sources */,
 				DC9C65A3249E6F0A0042C829 /* ActiveBiometryViewModel.swift in Sources */,
 				DCF67FE724100221003061A7 /* CircularView.swift in Sources */,
+				9686E3F627679772005F0C0E /* BaseUserProfileViewModel.swift in Sources */,
 				DCFBD78625029D01005B6875 /* CancelPowerRequestModel.swift in Sources */,
 				DC7F098624AE36B500CE8AFC /* TransactionHistoryViewController.swift in Sources */,
 				DC7C09C22326AFF60006D0BF /* FireBaseHandler.swift in Sources */,
@@ -3431,6 +3496,7 @@
 				DC6ED57E2326A44A00770B31 /* DefaultsStore.swift in Sources */,
 				961264AB2757B79900AA1AD2 /* SKActivityIndicator.swift in Sources */,
 				DCD12D6C242D06C20084F66C /* ImageTextTableViewCell.swift in Sources */,
+				9686E4072767AB02005F0C0E /* FilterHeaderCellViewModel.swift in Sources */,
 				DCFBD78025022FBF005B6875 /* CancelPowerDownViewController.swift in Sources */,
 				DC40D5DF23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift in Sources */,
 				DC7558BA24589A4C00AD40FA /* SereyAppCellViewModel.swift in Sources */,
@@ -3489,6 +3555,7 @@
 				DC7C740D24717C5500610526 /* VotersViewController.swift in Sources */,
 				DC9AC6E32406C4F7008FAFA6 /* Moya+Extensions.swift in Sources */,
 				DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */,
+				9686E40B2767AB0E005F0C0E /* HeaderCellViewModel.swift in Sources */,
 				DC26812A23F2FCB30045776E /* ProfileTableViewCell.swift in Sources */,
 				DC7558AE24587B3D00AD40FA /* FeatureBoarding.swift in Sources */,
 				DCD39883232E24BF00C812EB /* Realm+Cnfigure.swift in Sources */,
@@ -3610,6 +3677,7 @@
 				DC6A78FE23CA22B0001D1009 /* LoadingIndicatorController.swift in Sources */,
 				DC6ED5822326A47D00770B31 /* AuthData.swift in Sources */,
 				DC0044062433A87900244607 /* FileUploadService.swift in Sources */,
+				9686E4042767AAD4005F0C0E /* FilterHeaderCollectionViewCell.swift in Sources */,
 				DC6ED5722326A36500770B31 /* DeeplinkType.swift in Sources */,
 				DCB5BD792497D7820042E5AF /* ChooseSecurityMethodViewController.swift in Sources */,
 				DC6ED5882326A4F900770B31 /* APNSTokenStore.swift in Sources */,
@@ -3621,11 +3689,14 @@
 				DC24E113253AF10700724CE4 /* VerifyBiometryViewModel.swift in Sources */,
 				DC5B55AE2451E5B200F8531B /* PushService.swift in Sources */,
 				DCDE00752448A70B00D09717 /* CommentTextViewModel.swift in Sources */,
+				9686E40F2767AB99005F0C0E /* MDCChipView+StyleProtocol.swift in Sources */,
+				9686E4012767A763005F0C0E /* ProductCategoryCollectionViewCell.swift in Sources */,
 				DC387C9224E9821100D8C78E /* ChangePasswordViewController.swift in Sources */,
 				DCFBD77925014119005B6875 /* PowerDownModel.swift in Sources */,
 				DC19DBF623EC751700571CC8 /* SearchViewModel.swift in Sources */,
 				DCF67FE1240FFD65003061A7 /* PeopleTableViewCell.swift in Sources */,
 				DCD39876232E20CF00C812EB /* SlashViewModel.swift in Sources */,
+				9686E40C2767AB0E005F0C0E /* HeaderCollectionViewCell.swift in Sources */,
 				DCFBD77225013B29005B6875 /* ConfirmPowerDownViewController.swift in Sources */,
 				96D46BAD275FBE010078779A /* UserProfileApi.swift in Sources */,
 				DC7C8EEE24D9B3100051C084 /* TransferCoinViewModel.swift in Sources */,
@@ -3658,6 +3729,7 @@
 				DCD39898232E2AD700C812EB /* CloseableNavigationController.swift in Sources */,
 				DC583A9424CC303A00D9C4D3 /* KeychainConfiguration.swift in Sources */,
 				DC87FEFE24E44905007622D4 /* WalletProfileCellViewModel.swift in Sources */,
+				9686E3F82767A5C5005F0C0E /* BaseCollectionViewController.swift in Sources */,
 				DC12F20D2422720E0099C479 /* DataResponseModel.swift in Sources */,
 				DC8EAB7923E721EE00E00A00 /* BaseTabBarViewController.swift in Sources */,
 				DC803C512697492200FCD2B2 /* OnBoardingViewController.swift in Sources */,

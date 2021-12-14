@@ -49,14 +49,16 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
     let cellModels: BehaviorRelay<[SectionType: [CellViewModel]]>
     
     var userService: UserService
+    let userProfileService: UserProfileService
     lazy var downloadDisposeBag: DisposeBag = DisposeBag()
     lazy var isDownloading = BehaviorRelay<Bool>(value: false)
     
     override init() {
-        self.userInfo = BehaviorRelay(value: AuthData.shared.loggedUserModel)
-        self.cells = BehaviorRelay(value: [])
-        self.cellModels = BehaviorRelay(value: [:])
-        self.userService = UserService()
+        self.userInfo = .init(value: AuthData.shared.loggedUserModel)
+        self.cells = .init(value: [])
+        self.cellModels = .init(value: [:])
+        self.userService = .init()
+        self.userProfileService = .init()
         super.init()
         
         setUpRxObservers()
@@ -78,6 +80,7 @@ extension MoreViewModel {
         if AuthData.shared.isUserLoggedIn && !self.isDownloading.value {
             self.isDownloading.accept(true)
             self.fetchProfile(username)
+            self.getAllUserProfilePicture(username)
         }
     }
     
@@ -91,6 +94,14 @@ extension MoreViewModel {
             }, onError: { [weak self] error in
                 let errorInfo = ErrorHelper.prepareError(error: error)
                 self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    func getAllUserProfilePicture(_ username: String) {
+        self.userProfileService.getAllProfilePicture(username)
+            .subscribe(onNext: { [weak self] profiles in
+                profiles.saveAll()
+                self?.refreshScreen()
             }) ~ self.disposeBag
     }
     

@@ -13,7 +13,7 @@ import RxBinding
 import RxDataSources
 import LocalAuthentication
 
-class WalletSettingsViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, ShouldReactToAction, ShouldPresent {
+class WalletSettingsViewModel: BaseUserProfileViewModel, CollectionMultiSectionsProviderModel, ShouldReactToAction, ShouldPresent {
     
     enum Action {
         case itemSelected(IndexPath)
@@ -34,12 +34,12 @@ class WalletSettingsViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
     let cells: BehaviorRelay<[SectionItem]>
     let cellModels: BehaviorRelay<[SectionType: [CellViewModel]]>
     
-    override init() {
+    init() {
         self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
         self.cells = .init(value: [])
         self.cellModels = .init(value: [:])
-        super.init()
+        super.init(AuthData.shared.username ?? "")
         
         setUpRxObservers()
     }

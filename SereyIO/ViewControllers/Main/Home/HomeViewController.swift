@@ -14,6 +14,7 @@ import MaterialComponents
 import RxKingfisher
 import Kingfisher
 import SnapKit
+import AlignedCollectionViewFlowLayout
 
 class HomeViewController: BaseViewController, AlertDialogController, LoadingIndicatorController {
     
@@ -258,14 +259,10 @@ fileprivate extension HomeViewController {
             .subscribe(onNext: { viewToPresent in
                 switch viewToPresent {
                 case .choosePostCategoryController(let chooseCategorySheetViewModel):
-                    if let choosePostCategoryViewController = R.storyboard.home.chooseCategorySheetViewController() {
-                        choosePostCategoryViewController.viewModel = chooseCategorySheetViewModel
-                        let bottomSheet = MDCBottomSheetController(contentViewController: choosePostCategoryViewController)
-                        bottomSheet.isScrimAccessibilityElement = false
-                        bottomSheet.trackingScrollView?.contentInsetAdjustmentBehavior = .never
-                        bottomSheet.dismissOnDraggingDownSheet = false
-                        self.present(bottomSheet, animated: true, completion: nil)
-                    }
+                    let choosePostCategoryViewController = ChooseCategorySheetViewController(collectionViewLayout: AlignedCollectionViewFlowLayout())
+                    choosePostCategoryViewController.viewModel = chooseCategorySheetViewModel
+                    let bottomSheet = CollectionBottomSheetViewController(contentViewController: choosePostCategoryViewController)
+                    self.present(bottomSheet, animated: true, completion: nil)
                 case .postDetailViewController(let postDetailViewModel):
                     if let postDetailViewController = R.storyboard.post.postDetailViewController() {
                         postDetailViewController.viewModel = postDetailViewModel
