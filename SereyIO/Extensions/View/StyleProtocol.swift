@@ -78,6 +78,7 @@ extension UIButton: StyleProtocol {
     
     func commonTextColorStyle() {
         self.setTitleColor(self.titleColor(for: .normal)?.withAlphaComponent(0.5), for: .highlighted)
+        self.setTitleColor(self.titleColor(for: .normal)?.withAlphaComponent(0.3), for: .disabled)
     }
     
     func primaryStyle() {

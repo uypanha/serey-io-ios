@@ -23,7 +23,6 @@ class BottomSheetListViewController: MDCBottomSheetController {
     init(contentViewController: UITableViewController) {
         super.init(contentViewController: contentViewController)
         
-        self.automaticallyAdjustsScrollViewInsets = true
         self.dismissOnDraggingDownSheet = true
         self.trackingScrollView = contentViewController.tableView
         self.setShapeGenerator(shapeGenerator, for: .preferred)

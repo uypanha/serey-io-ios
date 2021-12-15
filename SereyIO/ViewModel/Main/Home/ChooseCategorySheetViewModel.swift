@@ -51,13 +51,27 @@ extension ChooseCategorySheetViewModel {
     
     func prepareCells(_ categories: [DiscussionCategoryModel]) -> [SectionItem] {
         var sectionItems: [SectionItem] = []
-        var items: [CellViewModel] = [FilterHeaderCellViewModel(self.selectedCategory)]
+        var items: [CellViewModel] = [FilterHeaderCellViewModel(self.selectedCategory).then {
+            self.setUpFilterHeaderObservers($0)
+        }]
+        
+        var hasSubCategory: Bool = false
+        categories.forEach { mainCategory in
+            if (mainCategory.sub?.count ?? 0) > 0 {
+                hasSubCategory = true
+            }
+        }
+        
         categories.forEach { mainCategory in
             if mainCategory.name != "All" {
                 // ignore "All" category
-                items.append(HeaderCellViewModel(mainCategory.name))
-                items.append(ProductCategoryCellViewModel(mainCategory, selectedCategory: selectedCategory, title: "ALL"))
-                mainCategory.sub?.forEach { category in
+                if hasSubCategory {
+                    items.append(HeaderCellViewModel(mainCategory.name))
+                    items.append(ProductCategoryCellViewModel(mainCategory, selectedCategory: selectedCategory, title: "ALL"))
+                } else {
+                    items.append(ProductCategoryCellViewModel(mainCategory, selectedCategory: selectedCategory))
+                }
+                mainCategory.subCategories?.forEach { category in
                     items.append(ProductCategoryCellViewModel(category, selectedCategory: selectedCategory))
                 }
             }
@@ -72,8 +86,10 @@ fileprivate extension ChooseCategorySheetViewModel {
     
     func handleItemSelected(_ indexPath: IndexPath) {
         if let item = self.item(at: indexPath) as? ProductCategoryCellViewModel {
-            if item.category.value.name != self.selectedCategory.value?.name {
-                self.selectedCategory.accept(item.category.value)
+            let category = item.category.value
+            let selectedCategory = self.selectedCategory.value
+            if category.parent != selectedCategory?.parent || category.name != selectedCategory?.name {
+                self.selectedCategory.accept(category)
                 self.shouldPresent(.dismiss)
             }
         }
@@ -103,5 +119,12 @@ extension ChooseCategorySheetViewModel {
                     self?.handleItemSelected(indexPath)
                 }
             }) ~ self.disposeBag
+    }
+    
+    func setUpFilterHeaderObservers(_ cellModel: FilterHeaderCellViewModel) {
+        cellModel.shouldDismiss.asObservable()
+            .map { ViewToPresent.dismiss }
+            ~> self.shouldPresentSubject
+            ~ cellModel.disposeBag
     }
 }

@@ -42,8 +42,8 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
     // output:
     lazy var shouldPresentSubject = PublishSubject<PostTableViewModel.ViewToPresent>()
     
-    override init(_ type: DiscussionType) {
-        super.init(type)
+    override init(_ type: DiscussionType, _ selectedCategory: BehaviorRelay<DiscussionCategoryModel?>) {
+        super.init(type, selectedCategory)
         
         setUpRxObservers()
         registerForNotifs()
@@ -76,7 +76,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
             return
         default:
             if let categoryId = postModel.categories?.first {
-                let postTableViewModel = PostTableViewModel(.byCategoryId(categoryId))
+                let postTableViewModel = PostTableViewModel(.byCategoryId(categoryId), self.selectedCategory)
                 self.shouldPresent(.postsByCategoryController(postTableViewModel))
             }
         }

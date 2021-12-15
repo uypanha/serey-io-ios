@@ -24,7 +24,7 @@ class UserPostListViewModel: PostTableViewModel {
         self.username = username
         self.drafts = DraftModel().queryAll()
         self.draftCount = .init(value: nil)
-        super.init(.byUser(username))
+        super.init(.byUser(username), .init(value: nil))
         
         setUpRxObservers()
     }

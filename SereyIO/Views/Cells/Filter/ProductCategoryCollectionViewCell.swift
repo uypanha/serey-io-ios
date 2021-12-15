@@ -26,7 +26,9 @@ class ProductCategoryCollectionViewCell: MDCChipCollectionViewCell {
             self.disposeBag ~ [
                 cellModel.isSelected.asObservable()
                     .subscribe(onNext: { [weak self] isSelected in
-                        self?.isSelected = isSelected
+                        DispatchQueue.main.async {
+                            self?.isSelected = isSelected
+                        }
                     })
             ]
         }

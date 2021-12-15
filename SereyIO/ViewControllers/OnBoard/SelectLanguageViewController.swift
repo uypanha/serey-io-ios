@@ -116,9 +116,7 @@ fileprivate extension SelectLanguageViewController {
                         chooseLanguageSheetViewController.viewModel = ChooseLanguageViewModel()
                         self.bottomSheet = MDCBottomSheetController(contentViewController: chooseLanguageSheetViewController)
                         self.bottomSheet?.isScrimAccessibilityElement = false
-                        self.bottomSheet?.automaticallyAdjustsScrollViewInsets = false
                         self.bottomSheet?.dismissOnDraggingDownSheet = false
-//                        self.bottomSheet?.trackingScrollView = chooseLanguageSheetViewController.tableView
                         self.present(self.bottomSheet!, animated: true, completion: nil)
                     }
                 case .mainViewController:

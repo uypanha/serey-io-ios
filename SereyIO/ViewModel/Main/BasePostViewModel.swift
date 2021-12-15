@@ -33,17 +33,17 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     lazy var downloadDisposeBag: DisposeBag = DisposeBag()
     lazy var isDownloading: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
-    init(_ type: DiscussionType) {
+    init(_ type: DiscussionType, _ selectedCategory: BehaviorRelay<DiscussionCategoryModel?>) {
         self.title = type.title
-        self.cells = BehaviorRelay(value: [])
-        self.emptyOrError = BehaviorSubject(value: nil)
-        self.discussions = BehaviorRelay(value: [])
-        self.selectedCategory = BehaviorRelay(value: nil)
-        self.postType = BehaviorRelay(value: type)
-        self.discussionService = DiscussionService()
-        self.canDownloadMorePages = BehaviorRelay(value: true)
+        self.cells = .init(value: [])
+        self.emptyOrError = .init(value: nil)
+        self.discussions = .init(value: [])
+        self.selectedCategory = selectedCategory
+        self.postType = .init(value: type)
+        self.discussionService = .init()
+        self.canDownloadMorePages = .init(value: true)
         self.isRefresh = .init(value: true)
-        self.endRefresh = BehaviorSubject(value: false)
+        self.endRefresh = .init(value: false)
         self.currentCountry = PreferenceStore.shared.currentUserCountry
         super.init()
         
@@ -230,9 +230,9 @@ extension BasePostViewModel {
         self.discussions.accept(posts)
     }
     
-    func setCategory(_ category: DiscussionCategoryModel?) {
-        self.selectedCategory.accept(category)
-    }
+//    func setCategory(_ category: DiscussionCategoryModel?) {
+//        self.selectedCategory.accept(category)
+//    }
 }
 
 // MARK: - SetUp RxObservers

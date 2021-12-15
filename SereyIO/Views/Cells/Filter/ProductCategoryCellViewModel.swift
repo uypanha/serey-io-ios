@@ -35,7 +35,7 @@ extension ProductCategoryCellViewModel {
     
     func setUpRxObservers() {
         self.selectedCategory.asObservable()
-            .map { $0?.name == self.category.value.name }
+            .map { $0?.parent == self.category.value.parent && $0?.name == self.category.value.name }
             ~> self.isSelected
             ~ self.disposeBag
     }

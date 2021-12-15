@@ -10,8 +10,13 @@ import Foundation
 
 struct DiscussionCategoryModel: Codable {
     
+    var parent: String? = nil
     var name: String
     var sub: [DiscussionCategoryModel]?
+    
+    var subCategories: [DiscussionCategoryModel]? {
+        return self.sub?.map { DiscussionCategoryModel(parent: name, name: $0.name, sub: $0.sub) }
+    }
     
     enum CodingKeys: String, CodingKey {
         case name

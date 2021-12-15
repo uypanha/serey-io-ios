@@ -15,10 +15,12 @@ class FilterHeaderCellViewModel: CellViewModel {
     
     let selectedCategory: BehaviorRelay<DiscussionCategoryModel?>
     let isResetEnabled: BehaviorSubject<Bool>
+    let shouldDismiss: PublishSubject<Void>
     
     init(_ selectedCategory: BehaviorRelay<DiscussionCategoryModel?>) {
         self.selectedCategory = selectedCategory
         self.isResetEnabled = .init(value: false)
+        self.shouldDismiss = .init()
         super.init()
         
         setUpRxObservers()
@@ -26,6 +28,7 @@ class FilterHeaderCellViewModel: CellViewModel {
     
     func resetPressed() {
         self.selectedCategory.accept(nil)
+        self.shouldDismiss.onNext(())
     }
 }
 

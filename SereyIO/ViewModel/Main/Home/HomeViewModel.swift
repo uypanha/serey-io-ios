@@ -69,7 +69,7 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
         setUpRxObservers()
         let discussionTypes: [DiscussionType] = [.trending, .hot, .new]
         self.postTabTitles.accept(discussionTypes.map { $0.title })
-        self.postViewModels.accept(discussionTypes.map { $0.viewModel })
+        self.postViewModels.accept(discussionTypes.map { $0.prepareViewModel(self.selectedCategory) })
     }
     
     func validateCountry() {
@@ -180,13 +180,13 @@ extension HomeViewModel {
     }
     
     func setUpContentChangedObservers() {
-        self.selectedCategory.asObservable()
-            .skip(1)
-            .subscribe(onNext: { [weak self] selectedCategory in
-                self?.postViewModels.value.forEach({ postTableViewModel in
-                    postTableViewModel.setCategory(selectedCategory)
-                })
-            }) ~ self.disposeBag
+//        self.selectedCategory.asObservable()
+//            .skip(1)
+//            .subscribe(onNext: { [weak self] selectedCategory in
+//                self?.postViewModels.value.forEach({ postTableViewModel in
+//                    postTableViewModel.setCategory(selectedCategory)
+//                })
+//            }) ~ self.disposeBag
         
         self.postViewModels.asObservable()
             .subscribe(onNext: { [unowned self] viewModels in
@@ -300,8 +300,8 @@ enum DiscussionType {
         }
     }
     
-    var viewModel: PostTableViewModel {
-        return PostTableViewModel(self)
+    func prepareViewModel(_ selectedCategory: BehaviorRelay<DiscussionCategoryModel?>) -> PostTableViewModel {
+        return .init(self, selectedCategory)
     }
     
     var emptyMessage: String {
