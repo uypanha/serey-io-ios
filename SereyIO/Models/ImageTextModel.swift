@@ -14,11 +14,13 @@ class ImageTextModel {
     var imageUrl: String?
     var titleText: String?
     var subTitle: String?
+    var isHtml: Bool = false
     
-    init(image: UIImage? = nil, imageUrl: String? = nil, titleText: String?, subTitle: String? = nil) {
+    init(image: UIImage? = nil, imageUrl: String? = nil, titleText: String?, subTitle: String? = nil, isHtml: Bool = false) {
         self.image = image
         self.imageUrl = imageUrl
         self.titleText = titleText
         self.subTitle = subTitle
+        self.isHtml = isHtml
     }
 }

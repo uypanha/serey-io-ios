@@ -66,7 +66,7 @@ extension MoreViewController {
         self.tableView.sectionFooterHeight = CGFloat.leastNormalMagnitude
         
         self.tableView.tableFooterView = UIView()
-        self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
+        self.tableView.contentInset = .zero
         
         self.tableView.register(SignInTableViewCell.self)
         self.tableView.register(ProfileTableViewCell.self)
@@ -133,7 +133,7 @@ extension MoreViewController: UITableViewDelegate {
         guard let _ = self.viewModel.sectionTitle(in: section) else {
             return CGFloat.leastNormalMagnitude
         }
-        return 40
+        return 60
     }
 }
 

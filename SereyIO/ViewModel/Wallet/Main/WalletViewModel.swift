@@ -55,7 +55,7 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
         self.userInfo = .init(value: AuthData.shared.loggedUserModel)
         self.cells = .init(value: [])
         self.walletCells = .init(value: [])
-        self.wallets = .init(value: [.coin(coins: nil), .power(power: nil)])
+        self.wallets = .init(value: [.coin(coins: nil, usd: nil), .power(power: nil)])
         self.menu = .init(value: WalletMenu.menuItems)
         
         self.userService = .init()
@@ -179,7 +179,8 @@ extension WalletViewModel {
                     self?.setUpUserInfoObservers(userModel)
                 }
             }).subscribe(onNext: { [unowned self] userModel in
-                let coin = WalletType.coin(coins: userModel?.balance.replacingOccurrences(of: "SEREY", with: ""))
+                let usdPrice = userModel?.usdPrice ?? ""
+                let coin = WalletType.coin(coins: userModel?.balance.replacingOccurrences(of: "SEREY", with: ""), usd: "≃ $\(usdPrice)")
                 let power = WalletType.power(power: userModel?.sereypower.replacingOccurrences(of: "SEREY", with: ""))
                 self.wallets.accept([coin, power])
                 self.menu.accept(WalletMenu.menuItems)
@@ -205,7 +206,8 @@ extension WalletViewModel {
         Observable.from(object: userInfo)
             .asObservable()
             .subscribe(onNext: { [unowned self] userModel in
-                let coin = WalletType.coin(coins: userModel.balance.replacingOccurrences(of: "SEREY", with: ""))
+                let usdPrice = userModel.usdPrice ?? ""
+                let coin = WalletType.coin(coins: userModel.balance.replacingOccurrences(of: "SEREY", with: ""), usd: "≃ $\(usdPrice)")
                 let power = WalletType.power(power: userModel.sereypower.replacingOccurrences(of: "SEREY", with: ""))
                 self.wallets.accept([coin, power])
             }).disposed(by: self.disposeBag)

@@ -30,6 +30,14 @@ import RealmSwift
         return "id"
     }
     
+    var usdPrice: String? {
+        if let coins = balance.replacingOccurrences(of: "SEREY", with: "").toDouble() {
+            let usd = coins * CoinPriceManager.shared.sereyPrice.value
+            return usd.currencyFormat()
+        }
+        return nil
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case reputation

@@ -28,7 +28,8 @@ class ImageTextTableViewCell: BaseTableViewCell {
             
             viewModel.image.filter { $0 != nil }.bind(to: self.iconImageView.rx.image).disposed(by: self.disposeBag)
             viewModel.imageUrl.filter { $0 != nil }.map { URL(string: $0!) }.bind(to: self.iconImageView.kf.rx.image()).disposed(by: self.disposeBag)
-            viewModel.titleText.bind(to: self.titleTextLabel.rx.text).disposed(by: self.disposeBag)
+            viewModel.titleText.filter { $0 != nil }.bind(to: self.titleTextLabel.rx.text).disposed(by: self.disposeBag)
+            viewModel.attributedText.filter { $0 != nil }.bind(to: self.titleTextLabel.rx.attributedText).disposed(by: self.disposeBag)
             viewModel.subTitle.bind(to: self.subTitleLabel.rx.text).disposed(by: self.disposeBag)
             viewModel.indicatorAccessory
                 .map { $0 ? ViewUtiliesHelper.prepareIndicatorAccessory() : nil }

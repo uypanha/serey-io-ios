@@ -27,6 +27,7 @@ enum SettingType {
     case country
     case lagnauge
     case notificationSettings
+    case sereyPrice
     case sereyApps
     case version
     
@@ -44,6 +45,11 @@ enum SettingType {
                 return ImageTextModel(image: R.image.languageIcon(), titleText: text)
             case .notificationSettings:
                 return ImageTextModel(image: R.image.tabNotification(), titleText: R.string.settings.notificationSettings.localized())
+            case .sereyPrice:
+                let price = CoinPriceManager.shared.sereyPrice.value
+                let priceString = price == 0 ? "Loading..." : "\(price.currencyFormat())"
+                let title = "Serey Price <font color=\"red\">($\(priceString))</font>"
+                return ImageTextModel(image: R.image.currencyIcon(), titleText: title, isHtml: true)
             case .sereyApps:
                 return ImageTextModel(image: R.image.sereyAppsIcon(), titleText: R.string.settings.sereyApps.localized())
             case .version:
@@ -66,7 +72,7 @@ enum SettingType {
     var indicatorAccessory: Bool {
         get {
             switch self {
-            case .version:
+            case .version, .sereyPrice:
                 return false
             default:
                 return true

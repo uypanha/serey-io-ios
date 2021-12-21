@@ -61,6 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         apnsHandler?.applicationDidBecomeActive()
         self.discussionService?.refreshSereyCountries()
+        CoinPriceManager.loadTicker()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

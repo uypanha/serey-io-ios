@@ -75,6 +75,7 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
     func validateCountry() {
         if self.currentCountry.value?.countryName != PreferenceStore.shared.currentUserCountry {
             self.currentCountry.accept(PreferenceStore.shared.currentCountry)
+            self.selectedCategory.accept(nil)
             self.downloadData()
             self.postViewModels.value.forEach { viewModel in
                 viewModel.validateCountry()

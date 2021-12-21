@@ -171,6 +171,7 @@ extension MoreViewModel {
         ]
         sectionItems[.about] = [
             SettingCellViewModel(.sereyApps),
+            SettingCellViewModel(.sereyPrice),
             SettingCellViewModel(.version, true)
         ]
         
@@ -290,6 +291,11 @@ fileprivate extension MoreViewModel {
         self.cellModels.asObservable()
             .map { self.prepareCells($0) }
             .bind(to: self.cells)
+            .disposed(by: self.disposeBag)
+        
+        CoinPriceManager.shared.sereyPrice
+            .map { _ in self.prepareCellModels() }
+            .bind(to: self.cellModels)
             .disposed(by: self.disposeBag)
         
         self.userInfo.asObservable()

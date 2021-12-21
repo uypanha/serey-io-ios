@@ -19,6 +19,7 @@ class WalletCardCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var vwShimmer: FBShimmeringView!
     @IBOutlet weak var sereyLabel: UILabel!
+    @IBOutlet weak var valueUsdLabel: UILabel!
     
     @IBOutlet weak var sereyImageView: UIImageView!
     @IBOutlet weak var cardHeightConstraint: NSLayoutConstraint!
@@ -32,6 +33,8 @@ class WalletCardCollectionViewCell: BaseCollectionViewCell {
                 cellModel.titleText ~> self.titleLabel.rx.text,
                 cellModel.cardColor ~> self.cardView.rx.backgroundColor,
                 cellModel.valueText ~> self.valueLabel.rx.text,
+                cellModel.valueUsdText ~> self.valueUsdLabel.rx.text,
+                cellModel.valueUsdText.map { $0 == nil } ~> self.valueUsdLabel.rx.isHidden,
                 cellModel.isShimmering.asObservable()
                     .subscribe(onNext: { [weak self] isShimmering in
                         self?.prepareShimmering(isShimmering)
