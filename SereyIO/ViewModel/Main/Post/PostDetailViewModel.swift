@@ -171,7 +171,7 @@ fileprivate extension PostDetailViewModel {
     
     func handleUpVotePressed(_ voteType: VotePostType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
         if AuthData.shared.isUserLoggedIn {
-            let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .upVoteComment : .upvotePost)
+            let voteDialogViewModel = VoteDialogViewModel(type: voteType == .comment ? .upVoteComment : .upvotePost)
             voteDialogViewModel.shouldConfirm
                 .subscribe(onNext: { [weak self] weight in
                     self?.upVote(postModel, weight, isVoting)
@@ -184,7 +184,7 @@ fileprivate extension PostDetailViewModel {
     
     func handleFlagPressed(_ voteType: VotePostType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
         if AuthData.shared.isUserLoggedIn {
-            let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .flagComment : .flagPost)
+            let voteDialogViewModel = VoteDialogViewModel(type: voteType == .comment ? .flagComment : .flagPost)
             voteDialogViewModel.shouldConfirm
                 .subscribe(onNext: { [weak self] weight in
                     self?.flag(postModel, -weight, isVoting)

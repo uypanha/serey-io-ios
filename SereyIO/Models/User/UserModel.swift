@@ -30,8 +30,16 @@ import RealmSwift
         return "id"
     }
     
-    var usdPrice: String? {
+    var usdCoinsPrice: String? {
         if let coins = balance.replacingOccurrences(of: "SEREY", with: "").toDouble() {
+            let usd = coins * CoinPriceManager.shared.sereyPrice.value
+            return usd.currencyFormat()
+        }
+        return nil
+    }
+    
+    var usdPowerPrice: String? {
+        if let coins = sereypower.replacingOccurrences(of: "SEREY", with: "").toDouble() {
             let usd = coins * CoinPriceManager.shared.sereyPrice.value
             return usd.currencyFormat()
         }

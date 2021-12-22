@@ -10,7 +10,7 @@ import UIKit
 
 enum WalletType {
     case coin(coins: String?, usd: String?)
-    case power(power: String?)
+    case power(power: String?, usd: String?)
     
     var title: String {
         switch self {
@@ -34,7 +34,7 @@ enum WalletType {
         switch self {
         case .coin(let coins, _):
             return coins
-        case .power(let power):
+        case .power(let power, _):
             return power
         }
     }
@@ -43,8 +43,8 @@ enum WalletType {
         switch self {
         case .coin(_, let usd):
             return usd
-        default:
-            return nil
+        case .power(_, let usd):
+            return usd
         }
     }
 }

@@ -40,6 +40,24 @@ class VoteDialogViewModel: BaseViewModel, ShouldReactToAction {
                 return R.string.post.flagPost.localized()
             }
         }
+        
+        var maximumVote: Float {
+            switch self {
+            case .upVoteComment, .flagComment:
+                return 10
+            default:
+                return 100
+            }
+        }
+        
+        var defaultValue: Float {
+            switch self {
+            case .upVoteComment, .flagComment:
+                return 10
+            default:
+                return 100
+            }
+        }
     }
     
     enum Action {
@@ -50,18 +68,20 @@ class VoteDialogViewModel: BaseViewModel, ShouldReactToAction {
     
     let voteType: BehaviorRelay<VoteType>
     let voteCount: BehaviorRelay<Float>
+    let maximum: BehaviorRelay<Float>
     
     let titleText: BehaviorSubject<String?>
     let pregressText: BehaviorSubject<String?>
     
     let shouldConfirm: PublishSubject<Int>
     
-    init(_ currentVote: Float, type: VoteType) {
+    init(type: VoteType) {
         self.voteType = BehaviorRelay(value: type)
-        self.voteCount = BehaviorRelay(value: currentVote)
+        self.voteCount = BehaviorRelay(value: type.defaultValue)
         self.titleText = BehaviorSubject(value: nil)
         self.pregressText = BehaviorSubject(value: nil)
         self.shouldConfirm = PublishSubject()
+        self.maximum = .init(value: type.maximumVote)
         super.init()
         
         setUpRxObservers()

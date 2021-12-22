@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": null,
-          "revision": "f96b619bcb2383b43d898402283924b80e2c4bae",
-          "version": "5.4.3"
+          "revision": "f82c23a8a7ef8dc1a49a8bfc6a96883e79121864",
+          "version": "5.5.0"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
           "branch": null,
-          "revision": "d28849cb12de765d013b7222123bd3b8ae8c4f0a",
-          "version": "8.6.0"
+          "revision": "08686f04881483d2bc098b2696e674c0ba135e47",
+          "version": "8.10.0"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
         "state": {
           "branch": null,
-          "revision": "06e74ef7ee7326e1af724d462091eed1e5c6fb4a",
-          "version": "8.3.1"
+          "revision": "9b2f6aca5b4685c45f9f5481f19bee8e7982c538",
+          "version": "8.9.1"
         }
       },
       {
@@ -87,8 +87,8 @@
         "repositoryURL": "https://github.com/google/GoogleDataTransport.git",
         "state": {
           "branch": null,
-          "revision": "9e79fd8deddbef5646fbb5dbb3eaf963e338f007",
-          "version": "9.1.0"
+          "revision": "15ccdfd25ac55b9239b82809531ff26605e7556e",
+          "version": "9.1.2"
         }
       },
       {
@@ -96,8 +96,8 @@
         "repositoryURL": "https://github.com/google/GoogleUtilities.git",
         "state": {
           "branch": null,
-          "revision": "2e364ff22e952c3bcb202263a9a0d26e46c1b172",
-          "version": "7.5.1"
+          "revision": "797005ad8a1f0614063933e2fa010a5d13cb09d0",
+          "version": "7.6.0"
         }
       },
       {
@@ -114,8 +114,8 @@
         "repositoryURL": "https://github.com/google/gtm-session-fetcher.git",
         "state": {
           "branch": null,
-          "revision": "424886f9336a71891aa81852d0c2c08d807d21aa",
-          "version": "1.6.1"
+          "revision": "bc6a19702ac76ac4e488b68148710eb815f9bc56",
+          "version": "1.7.0"
         }
       },
       {
@@ -195,8 +195,8 @@
         "repositoryURL": "https://github.com/shibapm/PackageConfig.git",
         "state": {
           "branch": null,
-          "revision": "bf90dc69fa0792894b08a0b74cf34029694ae486",
-          "version": "0.13.0"
+          "revision": "7081db0a7ad0ce6002115944c26c915167dc0617",
+          "version": "1.1.2"
         }
       },
       {
@@ -240,8 +240,8 @@
         "repositoryURL": "https://github.com/realm/realm-cocoa.git",
         "state": {
           "branch": null,
-          "revision": "7a3e25994d4d917efe30fa4496775d3f024b71b6",
-          "version": "10.13.0"
+          "revision": "e83cc9f28e8bccd477b6b81cee521c02239d2773",
+          "version": "10.20.2"
         }
       },
       {
@@ -249,8 +249,8 @@
         "repositoryURL": "https://github.com/realm/realm-core",
         "state": {
           "branch": null,
-          "revision": "9a7d09994e85b7eda8e3553b444bcfef6ec3f9ea",
-          "version": "11.3.0"
+          "revision": "c3c11a841642ac93c27bd1edd61f989fc0bfb809",
+          "version": "11.6.1"
         }
       },
       {
@@ -258,8 +258,8 @@
         "repositoryURL": "https://github.com/shibapm/Rocket",
         "state": {
           "branch": null,
-          "revision": "51a77ce5fa66c42715c14dcc542c01cd7a60fb27",
-          "version": "1.2.0"
+          "revision": "9880a5beb7fcb9e61ddd5764edc1700b8c418deb",
+          "version": "1.2.1"
         }
       },
       {
@@ -285,8 +285,8 @@
         "repositoryURL": "https://github.com/RxSwiftCommunity/RxDataSources",
         "state": {
           "branch": null,
-          "revision": "e4627ac4f5a8dc10719030561801825c443acfec",
-          "version": "5.0.1"
+          "revision": "90c29b48b628479097fe775ed1966d75ac374518",
+          "version": "5.0.2"
         }
       },
       {
@@ -321,8 +321,8 @@
         "repositoryURL": "https://github.com/RxSwiftCommunity/RxRealm",
         "state": {
           "branch": null,
-          "revision": "73b8d93bddb5b1c012ae96f1f3858d5c720dea1b",
-          "version": "5.0.2"
+          "revision": "d9e612a1bc3788c910b307e49093dec788d102df",
+          "version": "5.0.3"
         }
       },
       {
@@ -348,8 +348,8 @@
         "repositoryURL": "https://github.com/apple/swift-protobuf.git",
         "state": {
           "branch": null,
-          "revision": "1f62db409f2c9b0223a3f68567b4a01333aae778",
-          "version": "1.17.0"
+          "revision": "7e2c5f3cbbeea68e004915e3a8961e20bd11d824",
+          "version": "1.18.0"
         }
       },
       {

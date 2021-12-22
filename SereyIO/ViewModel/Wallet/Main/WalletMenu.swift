@@ -64,7 +64,7 @@ enum WalletMenu: CaseIterable {
         case .delegatePower:
             return "Delegate\nPower"
         case .cancelDelegate:
-            return "Cancel\nDelegate"
+            return "Cancel\nDelegation"
         case .claimReward:
             return "Claim\nReward"
         }

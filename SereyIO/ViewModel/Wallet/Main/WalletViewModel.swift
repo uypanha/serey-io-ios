@@ -55,7 +55,7 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
         self.userInfo = .init(value: AuthData.shared.loggedUserModel)
         self.cells = .init(value: [])
         self.walletCells = .init(value: [])
-        self.wallets = .init(value: [.coin(coins: nil, usd: nil), .power(power: nil)])
+        self.wallets = .init(value: [.coin(coins: nil, usd: nil), .power(power: nil, usd: nil)])
         self.menu = .init(value: WalletMenu.menuItems)
         
         self.userService = .init()
@@ -168,6 +168,11 @@ extension WalletViewModel {
             ~> self.walletCells
             ~ self.disposeBag
         
+        CoinPriceManager.shared.sereyPrice.asObservable()
+            .map { _ in self.prepareWalletCells(self.wallets.value) }
+            .bind(to: self.walletCells)
+            .disposed(by: self.disposeBag)
+        
         self.menu.asObservable()
             .map { self.prepareMenuCells($0) }
             ~> self.cells
@@ -179,9 +184,10 @@ extension WalletViewModel {
                     self?.setUpUserInfoObservers(userModel)
                 }
             }).subscribe(onNext: { [unowned self] userModel in
-                let usdPrice = userModel?.usdPrice ?? ""
+                let usdPrice = userModel?.usdCoinsPrice ?? ""
+                let powerPrice = userModel?.usdPowerPrice ?? ""
                 let coin = WalletType.coin(coins: userModel?.balance.replacingOccurrences(of: "SEREY", with: ""), usd: "≃ $\(usdPrice)")
-                let power = WalletType.power(power: userModel?.sereypower.replacingOccurrences(of: "SEREY", with: ""))
+                let power = WalletType.power(power: userModel?.sereypower.replacingOccurrences(of: "SEREY", with: ""), usd: "≃ $\(powerPrice)")
                 self.wallets.accept([coin, power])
                 self.menu.accept(WalletMenu.menuItems)
             }).disposed(by: self.disposeBag)
@@ -206,9 +212,10 @@ extension WalletViewModel {
         Observable.from(object: userInfo)
             .asObservable()
             .subscribe(onNext: { [unowned self] userModel in
-                let usdPrice = userModel.usdPrice ?? ""
+                let usdPrice = userModel.usdCoinsPrice ?? ""
+                let powerPrice = userModel.usdPowerPrice ?? ""
                 let coin = WalletType.coin(coins: userModel.balance.replacingOccurrences(of: "SEREY", with: ""), usd: "≃ $\(usdPrice)")
-                let power = WalletType.power(power: userModel.sereypower.replacingOccurrences(of: "SEREY", with: ""))
+                let power = WalletType.power(power: userModel.sereypower.replacingOccurrences(of: "SEREY", with: ""), usd: "≃ $\(powerPrice)")
                 self.wallets.accept([coin, power])
             }).disposed(by: self.disposeBag)
     }
