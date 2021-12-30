@@ -272,7 +272,15 @@ extension UserAccountViewController {
                     draftListViewController.hidesBottomBarWhenPushed = true
                     self.show(draftListViewController, sender: nil)
                 case .choosePhotoController:
-                    self.fileMediaHelper.showImagePickerAlert()
+                    self.fileMediaHelper.showImagePicker()
+                case .bottomListViewController(let bottomMenuListViewModel):
+                    let bottomMenuViewController = BottomMenuViewController(bottomMenuListViewModel)
+                    self.present(bottomMenuViewController, animated: true, completion: nil)
+                case .profileGalleryController:
+                    let profileGalleryViewController = ProfileGalleryViewController()
+                    profileGalleryViewController.hidesBottomBarWhenPushed = true
+                    profileGalleryViewController.viewModel = .init()
+                    self.show(profileGalleryViewController, sender: nil)
                 }
             }) ~ self.disposeBag
     }

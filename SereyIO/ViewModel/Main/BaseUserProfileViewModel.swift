@@ -14,7 +14,8 @@ import RxBinding
 class BaseUserProfileViewModel: BaseCellViewModel {
     
     let username:  BehaviorRelay<String>
-    let profileImage: BehaviorRelay<UserProfileModel?>
+    let loggedUserInfo: BehaviorRelay<UserModel?>
+    let userInfo: BehaviorRelay<UserModel?>
     
     var userService: UserService
     let userProfileService: UserProfileService
@@ -24,17 +25,14 @@ class BaseUserProfileViewModel: BaseCellViewModel {
     
     init(_ username: String) {
         self.username = .init(value: username)
-        self.profileImage = .init(value: nil)
+        self.userInfo = .init(value: nil)
+        self.loggedUserInfo = .init(value: AuthData.shared.loggedUserModel)
         
         self.userService = .init()
         self.userProfileService = .init()
         self.fileUploadService = .init()
         self.isUploading = .init(value: false)
         super.init()
-        
-        let predicate = NSPredicate(format: "active == true AND username == %@", username)
-        let defaultImage: UserProfileModel? = UserProfileModel().qeuryFirst(by: predicate)
-        self.profileImage.accept(defaultImage)
     }
     
     func refreshScreen() {
@@ -44,12 +42,25 @@ class BaseUserProfileViewModel: BaseCellViewModel {
 // MARK: - Networks
 extension BaseUserProfileViewModel {
     
-    func getAllUserProfilePicture(_ username: String) {
-        self.userProfileService.getAllProfilePicture(username)
+    func getAllUserProfilePicture(completion: @escaping ([UserProfileModel]) -> Void) {
+        self.userProfileService.getAllProfilePicture(self.username.value)
             .subscribe(onNext: { [weak self] profiles in
-                profiles.saveAll()
-                self?.profileImage.accept(profiles.first(where: { $0.active }))
+                completion(profiles)
                 self?.refreshScreen()
+            }, onError: { [weak self] error in
+                completion([])
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    func fetchProfile() {
+        self.userService.fetchProfile(self.username.value)
+            .subscribe(onNext: { data in
+                if data.data.result.name == AuthData.shared.username {
+                    data.data.result.save()
+                }
+                self.userInfo.accept(data.data.result)
             }) ~ self.disposeBag
     }
     
@@ -76,12 +87,12 @@ extension BaseUserProfileViewModel {
             }) ~ self.disposeBag
     }
     
-    func changeProfile(_ id: String) {
+    func changeProfile(_ id: String, completion: @escaping (UserProfileModel) -> Void = { _ in }) {
         self.userProfileService.changeProfile(id)
             .subscribe(onNext: { [unowned self] data in
                 self.isUploading.accept(false)
-                self.profileImage.accept(data)
-                self.getAllUserProfilePicture(self.username.value)
+                self.fetchProfile()
+                completion(data)
             }, onError: { [weak self] error in
                 self?.isUploading.accept(false)
                 let errorInfo = ErrorHelper.prepareError(error: error)

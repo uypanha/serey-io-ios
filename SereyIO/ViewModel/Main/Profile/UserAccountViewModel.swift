@@ -37,6 +37,8 @@ class UserAccountViewModel: BaseUserProfileViewModel, DownloadStateNetworkProtoc
         case signInViewController
         case draftListViewController(DraftListViewModel)
         case choosePhotoController
+        case bottomListViewController(BottomListMenuViewModel)
+        case profileGalleryController
     }
     
     // input:
@@ -45,7 +47,6 @@ class UserAccountViewModel: BaseUserProfileViewModel, DownloadStateNetworkProtoc
     // output:
     lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
     
-    let userInfo: BehaviorRelay<UserModel?>
     let followers: BehaviorRelay<[String]>
     let tabTitles: BehaviorRelay<[String]>
     let tabViewModels: BehaviorRelay<[BaseViewModel]>
@@ -64,7 +65,6 @@ class UserAccountViewModel: BaseUserProfileViewModel, DownloadStateNetworkProtoc
     var didScrolledToIndex: Bool = false
     
     override init(_ username: String) {
-        self.userInfo = .init(value: nil)
         self.followers = .init(value: [])
         self.tabTitles = .init(value: [])
         self.tabViewModels = .init(value: [])
@@ -104,7 +104,6 @@ extension UserAccountViewModel {
     func downloadData() {
         if !self.isDownloading.value {
             getProfile()
-            getAllUserProfilePicture(self.username.value)
         }
     }
     
@@ -124,15 +123,6 @@ extension UserAccountViewModel {
                 self?.shouldPresentError(errorInfo)
         }) ~ self.disposeBag
     }
-    
-//    func getAllUserProfilePicture() {
-//        self.getAllUserProfilePicture(self.username.value)
-////        self.userProfileService.getAllProfilePicture(self.username.value)
-////            .subscribe(onNext: { [weak self] profiles in
-////                profiles.saveAll()
-////                self?.profileImage.accept(profiles.first(where: { $0.active }))
-////            }) ~ self.disposeBag
-//    }
     
     func followAction(_ action: FollowActionType) {
         self.shouldPresent(.followLoading(true))
@@ -155,42 +145,6 @@ extension UserAccountViewModel {
                     self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
     }
-    
-//    func uploadPhoto(_ pickerModel: PickerPhotoModel) {
-//        self.shouldPresent(.loading(true))
-//        self.fileUploadService.uploadPhoto(pickerModel.image)
-//            .subscribe(onNext: { [weak self] fileUpload in
-//                self?.addProfile(fileUpload.url)
-//            }, onError: { [weak self] error in
-//                self?.shouldPresent(.loading(false))
-//                let errorInfo = ErrorHelper.prepareError(error: error)
-//                self?.shouldPresentError(errorInfo)
-//            }) ~ self.disposeBag
-//    }
-    
-//    func addProfile(_ url: String) {
-//        self.userProfileService.addUserProfile(url)
-//            .subscribe(onNext: { [weak self] data in
-//                self?.changeProfile(data.id)
-//            }, onError: { [weak self] error in
-//                self?.shouldPresent(.loading(false))
-//                let errorInfo = ErrorHelper.prepareError(error: error)
-//                self?.shouldPresentError(errorInfo)
-//            }) ~ self.disposeBag
-//    }
-    
-//    func changeProfile(_ id: String) {
-//        self.userProfileService.changeProfile(id)
-//            .subscribe(onNext: { [weak self] data in
-//                self?.shouldPresent(.loading(false))
-//                self?.profileImage.accept(data)
-//                self?.getAllUserProfilePicture()
-//            }, onError: { [weak self] error in
-//                self?.shouldPresent(.loading(false))
-//                let errorInfo = ErrorHelper.prepareError(error: error)
-//                self?.shouldPresentError(errorInfo)
-//            }) ~ self.disposeBag
-//    }
 }
 
 // MARK: - Preparations & Tools
@@ -230,17 +184,11 @@ extension UserAccountViewModel {
     }
     
     private func notifyDataChanged(_ data: UserModel?) {
-        self.profileViewModel.onNext(prepareProfileViewModel(from: self.username.value))
+        self.profileViewModel.onNext(data?.profileModel)
         self.accountName.onNext((data?.name ?? self.username.value))
         self.postCountText.onNext(preparePostCountText(data?.postCount ?? 0))
         self.followerCountText.onNext(prepareFollowersCountText(data?.followersCount ?? 0))
         self.followingCountText.onNext(prepareFollowingsCountText(data?.followingCount ?? 0))
-    }
-    
-    private func prepareProfileViewModel(from username: String) -> ProfileViewModel {
-        let firstLetter = username.first == nil ? "" : "\(username.first!)"
-        let uniqueColor = UIColor(hexString: PFColorHash().hex(username))
-        return ProfileViewModel(shortcut: firstLetter, imageUrl: URL(string: self.profileImage.value?.imageUrl ?? ""), uniqueColor: uniqueColor)
     }
     
     private func prepareFollowingsCountText(_ count: Int) -> String {
@@ -283,7 +231,22 @@ fileprivate extension UserAccountViewModel {
     }
     
     func handleChangeProfilePressed() {
-        self.shouldPresent(.choosePhotoController)
+        let items: [ImageTextCellViewModel] = ProfileOption.allCases.map { $0.cellModel }
+        
+        let bottomListMenuViewModel = BottomListMenuViewModel(header: "Profile Picture", items)
+        bottomListMenuViewModel.shouldSelectMenuItem
+            .subscribe(onNext: { [unowned self] cellModel in
+                if let cellModel = cellModel as? ProfilePictureOptionCellViewModel {
+                    switch cellModel.option {
+                    case .selectFromGallery:
+                        self.shouldPresent(.profileGalleryController)
+                    case .uploadNewPicture:
+                        self.shouldPresent(.choosePhotoController)
+                    }
+                }
+            }) ~ self.disposeBag
+        
+        self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
     }
 }
 
@@ -297,12 +260,6 @@ fileprivate extension UserAccountViewModel {
     
     func setUpContentChangedObservers() {
         self.userInfo.asObservable()
-            .subscribe(onNext: { [weak self] user in
-                self?.notifyDataChanged(user)
-            }) ~ self.disposeBag
-        
-        self.profileImage.asObservable()
-            .map { _ in self.userInfo.value }
             .subscribe(onNext: { [weak self] user in
                 self?.notifyDataChanged(user)
             }) ~ self.disposeBag
@@ -330,6 +287,16 @@ fileprivate extension UserAccountViewModel {
                     self.setUpTabViewModelObsevers(viewModel)
                 }
             }) ~ self.disposeBag
+        
+        self.loggedUserInfo.asObservable()
+            .filter { $0?.name == self.username.value }
+            .`do`(onNext: { [weak self] userModel in
+                if let userModel = userModel {
+                    self?.setUpUserInfoObservers(userModel)
+                }
+            }).subscribe(onNext: { [unowned self] userModel in
+                self.notifyDataChanged(userModel)
+            }).disposed(by: self.disposeBag)
     }
     
     func setUpTabViewModelObsevers(_ viewModel: BaseViewModel) {
@@ -381,6 +348,15 @@ fileprivate extension UserAccountViewModel {
                     self?.uploadPhoto(pickerModel)
                 }
             }) ~ self.disposeBag
+    }
+    
+    private func setUpUserInfoObservers(_ userInfo: UserModel) {
+        
+        Observable.from(object: userInfo)
+            .asObservable()
+            .subscribe(onNext: { [unowned self] userModel in
+                self.notifyDataChanged(userModel)
+            }).disposed(by: self.disposeBag)
     }
 }
 

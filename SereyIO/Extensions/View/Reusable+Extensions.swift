@@ -64,11 +64,15 @@ extension UICollectionReusableView: ReusableView, NibLoadableView {}
 
 extension UICollectionView {
     
-    func register<T: UICollectionViewCell>(_: T.Type) {
-        let bundle = Bundle(for: T.self)
-        let nib = UINib(nibName: T.nibName, bundle: bundle)
-        
-        self.register(nib, forCellWithReuseIdentifier: T.defaultReuseIdentifier)
+    func register<T: UICollectionViewCell>(_: T.Type, isNib: Bool = true) {
+        if isNib {
+            let bundle = Bundle(for: T.self)
+            let nib = UINib(nibName: T.nibName, bundle: bundle)
+            
+            self.register(nib, forCellWithReuseIdentifier: T.defaultReuseIdentifier)
+        } else {
+            self.register(T.self, forCellWithReuseIdentifier: T.defaultReuseIdentifier)
+        }
     }
     
     func register<T: UICollectionReusableView>(_: T.Type, forSupplementaryViewOfKind: String) {

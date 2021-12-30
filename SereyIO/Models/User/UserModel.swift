@@ -70,8 +70,8 @@ extension UserModel {
         let firstLetter = name.first == nil ? "" : "\(name.first!)"
         let uniqueColor = UIColor(hexString: PFColorHash().hex("\(name)"))
         
-        let predicate = NSPredicate(format: "active == true AND username == %@", self.name)
-        let defaultImage: UserProfileModel? = UserProfileModel().qeuryFirst(by: predicate)
-        return ProfileViewModel(shortcut: firstLetter, imageUrl: URL(string: defaultImage?.imageUrl ?? ""), uniqueColor: uniqueColor)
+//        let predicate = NSPredicate(format: "active == true AND username == %@", self.name)
+//        let defaultImage: UserProfileModel? = UserProfileModel().qeuryFirst(by: predicate)
+        return ProfileViewModel(shortcut: firstLetter, imageUrl: URL(string: self.profilePicture ?? ""), uniqueColor: uniqueColor)
     }
 }

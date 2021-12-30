@@ -107,7 +107,11 @@ extension UINavigationController {
                 .foregroundColor: tintColor,
                 .font: UIFont.systemFont(ofSize: 17, weight: .medium)
             ]
-            self.navigationBar.scrollEdgeAppearance = standardAppearance
+            if #available(iOS 15.0, *) {
+                self.navigationBar.scrollEdgeAppearance = standardAppearance
+            } else {
+                self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
+            }
         } else if #available(iOS 11.0, *) {
             self.navigationBar.largeTitleTextAttributes = [
                 .foregroundColor: tintColor,

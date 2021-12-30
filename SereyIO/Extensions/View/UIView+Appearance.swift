@@ -8,6 +8,8 @@
 
 import UIKit
 
+public let kShapeDashed : String = "kShapeDashed"
+
 extension UIView {
     
     func setRadius(all corners: CGFloat, with border: Bool? = nil, borderColor: UIColor? = nil, borderWidth: CGFloat? = nil) {
@@ -135,6 +137,44 @@ extension UIView {
     func removeViews() {
         subviews.forEach { view in
             view.removeFromSuperview()
+        }
+    }
+    
+    func addDashedBorder(width: CGFloat? = nil, height: CGFloat? = nil, lineWidth: CGFloat = 2, lineDashPattern:[NSNumber]? = [6, 4], strokeColor: UIColor = UIColor.red, fillColor: UIColor = UIColor.clear) {
+        
+        var fWidth: CGFloat? = width
+        var fHeight: CGFloat? = height
+        
+        if fWidth == nil {
+            fWidth = self.frame.width
+        }
+        
+        if fHeight == nil {
+            fHeight = self.frame.height
+        }
+        
+        let shapeLayer:CAShapeLayer = CAShapeLayer()
+        
+        let shapeRect = CGRect(x: 0, y: 0, width: fWidth!, height: fHeight!)
+        
+        shapeLayer.bounds = shapeRect
+        shapeLayer.position = CGPoint(x: fWidth!/2, y: fHeight!/2)
+        shapeLayer.fillColor = fillColor.cgColor
+        shapeLayer.strokeColor = strokeColor.cgColor
+        shapeLayer.lineWidth = lineWidth
+        shapeLayer.lineJoin = CAShapeLayerLineJoin.round
+        shapeLayer.lineDashPattern = lineDashPattern
+        shapeLayer.name = kShapeDashed
+        shapeLayer.path = UIBezierPath(roundedRect: shapeRect, cornerRadius: self.layer.cornerRadius).cgPath
+        
+        self.layer.addSublayer(shapeLayer)
+    }
+    
+    func removeDashedBorder() {
+        self.layer.sublayers?.forEach {
+            if kShapeDashed == $0.name {
+                $0.removeFromSuperlayer()
+            }
         }
     }
 }

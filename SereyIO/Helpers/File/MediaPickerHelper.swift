@@ -81,7 +81,7 @@ class MediaPickerHelper: NSObject {
         }
     }
     
-    private func showImagePicker() {
+    func showImagePicker() {
         guard let pickerController = self.pickerController else {
             return
         }
@@ -92,7 +92,7 @@ class MediaPickerHelper: NSObject {
         self.presentingViewController.present(pickerController, animated: true, completion: nil)
     }
     
-    private func showCameraPicker() {
+    func showCameraPicker() {
         guard let pickerController = self.pickerController else {
             return
         }
