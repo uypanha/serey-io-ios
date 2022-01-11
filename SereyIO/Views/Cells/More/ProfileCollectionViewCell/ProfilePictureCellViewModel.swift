@@ -6,13 +6,12 @@
 //  Copyright © 2021 Serey IO. All rights reserved.
 //
 
-import Foundation
 import RxCocoa
 import RxSwift
 import RxBinding
 import UIKit
 
-class ProfilePictureCellViewModel: CellViewModel {
+class ProfilePictureCellViewModel: CellViewModel, ShimmeringProtocol {
     
     let profile: BehaviorRelay<UserProfileModel?>
     let selectedProfile: BehaviorRelay<UserProfileModel?>
@@ -21,14 +20,22 @@ class ProfilePictureCellViewModel: CellViewModel {
     let buttonImage: BehaviorSubject<UIImage?>
     let buttonBackgroundColor: BehaviorSubject<UIColor?>
     let isSelected: BehaviorSubject<Bool>
+    let isShimmering: BehaviorRelay<Bool>
     
-    init(_ profile: UserProfileModel, _ selectedProfile: BehaviorRelay<UserProfileModel?>) {
+    required convenience init(_ isShimmering: Bool) {
+        self.init(nil, .init(value: nil))
+        
+        self.isShimmering.accept(isShimmering)
+    }
+    
+    init(_ profile: UserProfileModel?, _ selectedProfile: BehaviorRelay<UserProfileModel?>) {
         self.profile = .init(value: profile)
         self.selectedProfile = selectedProfile
-        self.profileUrl = .init(value: URL(string: profile.imageUrl))
-        self.buttonImage = .init(value: profile.active ? R.image.checkedCircleIcon() : R.image.removeIcon())
-        self.buttonBackgroundColor = .init(value: profile.active ? UIColor(hexString: "#20F54F").withAlphaComponent(0.58) : UIColor(hexString: "#F35050").withAlphaComponent(0.58))
+        self.profileUrl = .init(value: URL(string: profile?.imageUrl ?? ""))
+        self.buttonImage = .init(value: (profile?.active == true) ? R.image.checkedCircleIcon() : R.image.removeIcon())
+        self.buttonBackgroundColor = .init(value: (profile?.active == true) ? UIColor(hexString: "#2979FF") : UIColor(hexString: "#F35050").withAlphaComponent(0.58))
         self.isSelected = .init(value: false)
+        self.isShimmering = .init(value: false)
         super.init()
         
         setUpRxObservers()

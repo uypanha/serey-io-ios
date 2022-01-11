@@ -16,6 +16,7 @@ class ProfileGalleryViewModel: BaseUserProfileViewModel, CollectionSingleSecitio
     enum Action {
         case itemSelected(IndexPath)
         case updatePressed
+        case photoSelected(PickerPhotoModel)
     }
     
     enum ViewToPresent {
@@ -37,6 +38,7 @@ class ProfileGalleryViewModel: BaseUserProfileViewModel, CollectionSingleSecitio
     let isUpdateButonHidden: BehaviorSubject<Bool>
     
     let isDescriptionHidden: BehaviorSubject<Bool>
+    let isNoProfileViewHidden: BehaviorSubject<Bool>
     let isDownloading: BehaviorRelay<Bool>
     
     init() {
@@ -48,11 +50,17 @@ class ProfileGalleryViewModel: BaseUserProfileViewModel, CollectionSingleSecitio
         self.selectedProfile = .init(value: nil)
         self.isUpdateButonHidden = .init(value: true)
         
-        self.isDescriptionHidden = .init(value: false)
+        self.isDescriptionHidden = .init(value: true)
+        self.isNoProfileViewHidden = .init(value: true)
         self.isDownloading = .init(value: false)
         super.init(AuthData.shared.username ?? "")
         
         setUpRxObservers()
+    }
+    
+    override func profileDidChanged(_ profile: UserProfileModel) {
+        self.updateActiveData(profile)
+        self.shouldPresent(.dismiss)
     }
 }
 
@@ -64,7 +72,7 @@ extension ProfileGalleryViewModel {
             self.isDownloading.accept(true)
             self.getAllUserProfilePicture { profiles in
                 self.isDownloading.accept(false)
-                self.profiles.accept(profiles)
+                self.profiles.accept([])
             }
         }
     }
@@ -75,10 +83,14 @@ extension ProfileGalleryViewModel {
     
     func prepareCells() -> [CellViewModel] {
         var items: [CellViewModel] = []
-        if self.isDownloading.value || !self.profiles.value.isEmpty {
+        if !self.isDownloading.value && !self.profiles.value.isEmpty {
             items.append(UploadProfileCellViewModel())
         }
         items.append(contentsOf: self.profiles.value.map { ProfilePictureCellViewModel($0, self.selectedProfile) })
+        if self.isDownloading.value {
+            let itemCount = self.profiles.value.isEmpty ? 5 : 2
+            items.append(contentsOf: (0...itemCount).map { _ in ProfilePictureCellViewModel(true) })
+        }
         return items
     }
     
@@ -89,6 +101,14 @@ extension ProfileGalleryViewModel {
         }
         profiles.insert(data, at: 0)
         self.profiles.accept(profiles)
+    }
+    
+    func validateDescriptionHidden() -> Bool {
+        return self.isDownloading.value || self.profiles.value.isEmpty
+    }
+    
+    func validateNoProfileHidden() -> Bool {
+        return self.isDownloading.value || !self.profiles.value.isEmpty
     }
 }
 
@@ -106,11 +126,12 @@ extension ProfileGalleryViewModel {
     func handleUpdatePressed() {
         if let selectedProfile = self.selectedProfile.value {
             self.isUploading.accept(true)
-            self.changeProfile(selectedProfile.id) { data in
-                self.updateActiveData(data)
-                self.shouldPresent(.dismiss)
-            }
+            self.changeProfile(selectedProfile.id)
         }
+    }
+    
+    func handlePhotoSelected(_ photo: PickerPhotoModel) {
+        self.uploadPhoto(photo)
     }
 }
 
@@ -126,6 +147,32 @@ extension ProfileGalleryViewModel {
         self.profiles.asObservable()
             .map { _ in self.prepareCells() }
             ~> self.cells
+            ~ self.disposeBag
+        
+        self.isDownloading.asObservable()
+            .filter { _ in self.profiles.value.isEmpty }
+            .map { _ in self.prepareCells() }
+            ~> self.cells
+            ~ self.disposeBag
+        
+        self.isDownloading.asObservable()
+            .map { _ in self.validateDescriptionHidden() }
+            ~> self.isDescriptionHidden
+            ~ self.disposeBag
+        
+        self.profiles.asObservable()
+            .map { _ in self.validateDescriptionHidden() }
+            ~> self.isDescriptionHidden
+            ~ self.disposeBag
+        
+        self.profiles.asObservable()
+            .map { _ in self.validateNoProfileHidden() }
+            ~> self.isNoProfileViewHidden
+            ~ self.disposeBag
+        
+        self.isDownloading.asObservable()
+            .map { _ in self.validateNoProfileHidden() }
+            ~> self.isNoProfileViewHidden
             ~ self.disposeBag
         
         self.selectedProfile.asObservable()
@@ -147,6 +194,8 @@ extension ProfileGalleryViewModel {
                     self?.handleItemSelected(indexPath)
                 case .updatePressed:
                     self?.handleUpdatePressed()
+                case .photoSelected(let photo):
+                    self?.handlePhotoSelected(photo)
                 }
             }) ~ self.disposeBag
     }

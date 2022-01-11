@@ -13,6 +13,7 @@
 		961264AC2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */; };
 		9625CEC92767B1DC0009FC47 /* FilterHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4022767AAD3005F0C0E /* FilterHeaderCollectionViewCell.xib */; };
 		9625CECA2767B2F20009FC47 /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4082767AB0D005F0C0E /* HeaderCollectionViewCell.xib */; };
+		9667F213278DE13200A4304D /* NoProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9667F212278DE13200A4304D /* NoProfilePictureView.swift */; };
 		967BB0DF274E878C005EBCB8 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BB0DE274E878C005EBCB8 /* CountryModel.swift */; };
 		967DAAD2277B5D0F00B3D0D7 /* UploadProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967DAAD1277B5D0F00B3D0D7 /* UploadProfileCollectionViewCell.swift */; };
 		967DAAD4277B61F200B3D0D7 /* DashBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967DAAD3277B61F200B3D0D7 /* DashBorderView.swift */; };
@@ -525,6 +526,7 @@
 		8DC4AE990A81B7E80AD7C57E /* Pods-SereyIOUITests.release_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.release_development.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.release_development.xcconfig"; sourceTree = "<group>"; };
 		961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicator.swift; sourceTree = "<group>"; };
 		961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicatorViewStyle.swift; sourceTree = "<group>"; };
+		9667F212278DE13200A4304D /* NoProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoProfilePictureView.swift; sourceTree = "<group>"; };
 		967BB0DE274E878C005EBCB8 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
 		967DAAD1277B5D0F00B3D0D7 /* UploadProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		967DAAD3277B61F200B3D0D7 /* DashBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBorderView.swift; sourceTree = "<group>"; };
@@ -1154,6 +1156,7 @@
 		96CB1AB6277A0E80000C5930 /* Gallery */ = {
 			isa = PBXGroup;
 			children = (
+				9667F212278DE13200A4304D /* NoProfilePictureView.swift */,
 				96CB1AB4277A0E4D000C5930 /* ProfileGalleryViewController.swift */,
 				96CB1AB7277A0E91000C5930 /* ProfileGalleryViewController+LoadViews.swift */,
 			);
@@ -3633,6 +3636,7 @@
 				DCACDDE02702104300F69AEA /* NotificationService.swift in Sources */,
 				DC1C6ECC23FC404C00BA701D /* SubPostCategoryCollectionViewCell.swift in Sources */,
 				DCFF5877251F7A66002E570A /* ChangePasswordViewModel.swift in Sources */,
+				9667F213278DE13200A4304D /* NoProfilePictureView.swift in Sources */,
 				DC1F79CF24CF294200B7F0D3 /* CreateCredentialCellViewModel.swift in Sources */,
 				DC88A73923DF3F5200EB7F79 /* SelectLanguageViewController.swift in Sources */,
 				DC4B162C269893F10070A442 /* ChooseCountryViewModel.swift in Sources */,

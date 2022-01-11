@@ -37,6 +37,9 @@ class BaseUserProfileViewModel: BaseCellViewModel {
     
     func refreshScreen() {
     }
+    
+    func profileDidChanged(_ profile: UserProfileModel) {
+    }
 }
 
 // MARK: - Networks
@@ -54,13 +57,17 @@ extension BaseUserProfileViewModel {
             }) ~ self.disposeBag
     }
     
-    func fetchProfile() {
+    func fetchProfile(completion: @escaping () -> Void = {}) {
         self.userService.fetchProfile(self.username.value)
-            .subscribe(onNext: { data in
+            .subscribe(onNext: { [unowned self] data in
+                self.isUploading.accept(false)
                 if data.data.result.name == AuthData.shared.username {
                     data.data.result.save()
                 }
                 self.userInfo.accept(data.data.result)
+                completion()
+            }, onError: { [weak self] _ in
+                self?.isUploading.accept(false)
             }) ~ self.disposeBag
     }
     
@@ -90,9 +97,10 @@ extension BaseUserProfileViewModel {
     func changeProfile(_ id: String, completion: @escaping (UserProfileModel) -> Void = { _ in }) {
         self.userProfileService.changeProfile(id)
             .subscribe(onNext: { [unowned self] data in
-                self.isUploading.accept(false)
-                self.fetchProfile()
-                completion(data)
+                self.fetchProfile {
+                    completion(data)
+                    self.profileDidChanged(data)
+                }
             }, onError: { [weak self] error in
                 self?.isUploading.accept(false)
                 let errorInfo = ErrorHelper.prepareError(error: error)

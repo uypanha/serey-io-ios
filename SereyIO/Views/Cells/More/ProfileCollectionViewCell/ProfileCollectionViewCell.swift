@@ -33,7 +33,9 @@ class ProfileCollectionViewCell: BaseCollectionViewCell {
     }()
     
     lazy var profileImageView: UIImageView = {
-        return .init()
+        return .init().then {
+            $0.backgroundColor = ColorName.shimmering.color.withAlphaComponent(0.5)
+        }
     }()
     
     lazy var actionButton: UIButton = {
@@ -62,10 +64,15 @@ class ProfileCollectionViewCell: BaseCollectionViewCell {
                     }),
                 cellModel.isSelected
                     .subscribe(onNext: { [weak self] isSelected in
-                        self?.mainView.borderColor = isSelected ? .color(.primary) : .clear
+                        self?.mainView.borderColor = isSelected ? .color(.primary) : ColorName.shimmering.color.withAlphaComponent(0.5)
                         self?.mainView.borderWidth = isSelected ? 3 : 1
                     })
             ]
+            
+            cellModel.isShimmering.asObservable()
+                .subscribe(onNext: { [weak self] isShimmering in
+                    self?.prepareShimmering(isShimmering)
+                }) ~ self.disposeBag
         }
     }
     
@@ -93,6 +100,21 @@ class ProfileCollectionViewCell: BaseCollectionViewCell {
     }
 }
 
+// MARK: - Preparations & Tools
+extension ProfileCollectionViewCell {
+    
+    func prepareShimmering(_ isShimmering: Bool) {
+        let isHidden = isShimmering
+        
+        self.actionButton.isHidden = isHidden
+        
+        DispatchQueue.main.async {
+            self.shimmerView.isShimmering = isShimmering
+        }
+    }
+}
+
+// MARK: - PreparViews
 extension ProfileCollectionViewCell {
     
     func loadViews() {

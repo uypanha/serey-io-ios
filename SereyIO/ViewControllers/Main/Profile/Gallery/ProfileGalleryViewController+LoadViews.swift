@@ -13,7 +13,7 @@ import SnapKit
 extension ProfileGalleryViewController {
     
     func prepareViews() -> UIView {
-        let mainView = ViewHelper.prepareScrollView { contentView in
+        let scrollView = ViewHelper.prepareScrollView { contentView in
             let infoStackView = UIStackView().then {
                 $0.axis = .vertical
                 $0.spacing = 16
@@ -36,11 +36,23 @@ extension ProfileGalleryViewController {
             contentView.addSubview(self.collectionView)
             self.collectionView.snp.makeConstraints { make in
                 make.top.equalTo(infoStackView.snp.bottom).offset(16)
-                make.left.right.bottom.equalToSuperview()
+                make.left.right.equalToSuperview()
+                make.bottom.equalToSuperview().inset(16)
             }
         }
         
-        mainView.backgroundColor = .white
+        let mainView = UIView().then {
+            $0.backgroundColor = .white
+        }
+        mainView.addSubview(scrollView)
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        mainView.addSubview(self.noProfileView)
+        self.noProfileView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         return mainView
     }
 }

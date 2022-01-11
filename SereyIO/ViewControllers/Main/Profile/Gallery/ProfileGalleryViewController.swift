@@ -49,6 +49,10 @@ class ProfileGalleryViewController: BaseViewController, AlertDialogController, L
         return .init(title: "Update", style: .plain, target: nil, action: nil)
     }()
     
+    lazy var noProfileView: NoProfilePictureView = {
+        return .init()
+    }()
+    
     lazy var fileMediaHelper: MediaPickerHelper = .init(withPresenting: self)
     
     var menuColumn: CGFloat { return 3 }
@@ -151,6 +155,23 @@ extension ProfileGalleryViewController {
             .subscribe(onNext: { [weak self] isHidden in
                 self?.navigationItem.rightBarButtonItem = isHidden ? nil : self?.updateButton
             }) ~ self.disposeBag
+        
+        self.viewModel.isDescriptionHidden.asObservable()
+            ~> self.tipsDescriptionLabel.rx.isHidden
+            ~ self.disposeBag
+        
+        self.viewModel.isDescriptionHidden.asObservable()
+            ~> self.tipsLabel.rx.isHidden
+            ~ self.disposeBag
+        
+        self.viewModel.isNoProfileViewHidden.asObservable()
+            ~> self.noProfileView.rx.isHidden
+            ~ self.disposeBag
+        
+        self.fileMediaHelper.selectedPhotoSubject.asObservable()
+            .map { ProfileGalleryViewModel.Action.photoSelected($0) }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpViewToPresentObservers() {
