@@ -73,6 +73,11 @@ class ProfileCollectionViewCell: BaseCollectionViewCell {
                 .subscribe(onNext: { [weak self] isShimmering in
                     self?.prepareShimmering(isShimmering)
                 }) ~ self.disposeBag
+            
+            self.actionButton.rx.tap.asObservable()
+                .map { ProfilePictureCellViewModel.Action.actionButtonPressed }
+                ~> cellModel.didActionSubject
+                ~ self.disposeBag
         }
     }
     

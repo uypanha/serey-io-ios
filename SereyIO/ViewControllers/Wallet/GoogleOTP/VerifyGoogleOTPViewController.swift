@@ -19,6 +19,7 @@ class VerifyGoogleOTPViewController: BaseViewController, AlertDialogController {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var pinTextFields: PinCodeTextField!
     @IBOutlet weak var confirmOTPButton: UIButton!
+    @IBOutlet weak var reSignUpButton: UIButton!
     
     var viewModel: VerifyGoogleOTPViewModel!
     
@@ -73,6 +74,11 @@ extension VerifyGoogleOTPViewController {
             .map { VerifyGoogleOTPViewModel.Action.confirmPressed }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
+        
+        self.reSignUpButton.rx.tap.asObservable()
+            .map { VerifyGoogleOTPViewModel.Action.signUpPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpViewToPresentObservers() {
@@ -85,6 +91,8 @@ extension VerifyGoogleOTPViewController {
                     SereyWallet.shared?.rootViewController.switchToMainScreen()
                 case .alertDialogController(let alertDialogModel):
                     self?.showDialog(alertDialogModel)
+                case .signUpWalletController:
+                    SereyWallet.shared?.rootViewController.switchToSignUpWallet()
                 }
             }) ~ self.disposeBag
     }

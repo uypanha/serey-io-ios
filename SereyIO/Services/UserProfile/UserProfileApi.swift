@@ -15,6 +15,8 @@ enum UserProfileApi {
     case addUserProfile(String)
     
     case changeProfile(String)
+    
+    case deleteProfile(String)
 }
 
 extension UserProfileApi: AuthorizedApiTargetType {
@@ -33,6 +35,10 @@ extension UserProfileApi: AuthorizedApiTargetType {
             return [
                 "id"    : id
             ]
+        case .deleteProfile(let id):
+            return [
+                "id" : id
+            ]
         }
     }
     
@@ -44,6 +50,8 @@ extension UserProfileApi: AuthorizedApiTargetType {
             return "/api/v1/user_profile_picture/add_user_profile_picture"
         case .changeProfile:
             return "api/v1/user_profile_picture/change_user_profile_picture"
+        case .deleteProfile:
+            return "api/v1/user_profile_picture/delete_user_profile_picture"
         }
     }
     
@@ -55,12 +63,14 @@ extension UserProfileApi: AuthorizedApiTargetType {
             return .post
         case .changeProfile:
             return .put
+        case .deleteProfile:
+            return .delete
         }
     }
     
     var task: Task {
         switch self {
-        case .getAllUserProfilePicture:
+        case .getAllUserProfilePicture, .deleteProfile:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         case .addUserProfile, .changeProfile:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)

@@ -107,4 +107,15 @@ extension BaseUserProfileViewModel {
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
     }
+    
+    func deleteProfile(id: String, compeltion: @escaping (Bool, [UserProfileModel]) -> Void = { _, _ in }) {
+        self.userProfileService.deleteProfle(id: id)
+            .subscribe(onNext: { data in
+                compeltion(true, data)
+            }, onError: { [weak self] error in
+                compeltion(false, [])
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
 }

@@ -16,12 +16,14 @@ class VerifyGoogleOTPViewModel: BaseViewModel, ShouldReactToAction, ShouldPresen
     
     enum Action {
         case confirmPressed
+        case signUpPressed
     }
     
     enum ViewToPresent {
         case dismiss
         case walletController
         case alertDialogController(AlertDialogModel)
+        case signUpWalletController
     }
     
     enum ParentController {
@@ -111,6 +113,10 @@ fileprivate extension VerifyGoogleOTPViewModel {
         let alertDialogModel = AlertDialogModel(title: "Google Authenticator", message: "Sorry, your verification code is invalid.", actions: [confirmAction])
         self.shouldPresent(.alertDialogController(alertDialogModel))
     }
+    
+    func handleSignUpPressed() {
+        self.shouldPresent(.signUpWalletController)
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -134,6 +140,8 @@ extension VerifyGoogleOTPViewModel {
                 switch action {
                 case .confirmPressed:
                     self?.handleConfirmPressed()
+                case .signUpPressed:
+                    self?.handleSignUpPressed()
                 }
             }) ~ self.disposeBag
     }

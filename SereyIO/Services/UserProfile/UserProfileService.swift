@@ -28,4 +28,9 @@ class UserProfileService: AppService<UserProfileApi> {
         return self.provider.rx.requestObject(.changeProfile(id), type: UserProfileModel.self)
             .asObservable()
     }
+    
+    func deleteProfle(id: String) -> Observable<[UserProfileModel]> {
+        return self.provider.rx.requestObject(.deleteProfile(id), type: [UserProfileModel].self)
+            .asObservable()
+    }
 }

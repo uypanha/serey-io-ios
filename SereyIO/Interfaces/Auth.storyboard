@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -29,16 +29,16 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Ycc-ru-dbW">
-                                        <rect key="frame" x="42" y="153" width="330" height="185"/>
+                                        <rect key="frame" x="42" y="155.5" width="330" height="180"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign-In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Jr-Td-BoP">
-                                                <rect key="frame" x="127.5" y="0.0" width="75.5" height="29"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <rect key="frame" x="133.5" y="0.0" width="63.5" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="HLq-51-kLc">
-                                                <rect key="frame" x="0.0" y="45" width="330" height="80"/>
+                                                <rect key="frame" x="0.0" y="40" width="330" height="80"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Odr-XX-uEj" customClass="MDCOutlinedTextField">
                                                         <rect key="frame" x="0.0" y="0.0" width="330" height="34"/>
@@ -55,7 +55,7 @@
                                                 </subviews>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFy-KS-B6l" customClass="LoadingButton" customModule="SereyIO" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="141" width="330" height="44"/>
+                                                <rect key="frame" x="0.0" y="136" width="330" height="44"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="JfG-sn-10m"/>
@@ -74,7 +74,7 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="Hwk-3r-RXS">
-                                        <rect key="frame" x="32" y="362" width="350" height="154.5"/>
+                                        <rect key="frame" x="32" y="359.5" width="350" height="154.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9l8-G2-a3b">
                                                 <rect key="frame" x="73" y="0.0" width="204" height="42"/>
@@ -149,16 +149,16 @@ Sign up now and get free Serey coins!</string>
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="MYj-md-kdN">
-                                        <rect key="frame" x="42" y="141" width="330" height="209"/>
+                                        <rect key="frame" x="42" y="143.5" width="330" height="204"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign-Up Wallet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ii-GR-FDR">
-                                                <rect key="frame" x="0.0" y="0.0" width="330" height="29"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="330" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="pdi-5Q-gXy">
-                                                <rect key="frame" x="0.0" y="61" width="330" height="148"/>
+                                                <rect key="frame" x="0.0" y="56" width="330" height="148"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="KRl-4y-Lyh">
                                                         <rect key="frame" x="0.0" y="0.0" width="330" height="80"/>
@@ -193,7 +193,7 @@ Sign up now and get free Serey coins!</string>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="QAz-hR-oS0">
-                                        <rect key="frame" x="32" y="382" width="350" height="35.5"/>
+                                        <rect key="frame" x="32" y="379.5" width="350" height="35.5"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Term Service" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="kWX-Xd-mNh">
                                                 <rect key="frame" x="122.5" y="0.0" width="105" height="35.5"/>
@@ -250,16 +250,16 @@ Sign up now and get free Serey coins!</string>
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="F3G-98-CAW">
-                                        <rect key="frame" x="42" y="45.5" width="330" height="400"/>
+                                        <rect key="frame" x="42" y="32" width="330" height="437"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Credential" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D7i-Bk-5je">
-                                                <rect key="frame" x="75" y="0.0" width="180.5" height="29"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <rect key="frame" x="88.5" y="0.0" width="153" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="fd8-h6-2cS">
-                                                <rect key="frame" x="0.0" y="61" width="330" height="80"/>
+                                                <rect key="frame" x="0.0" y="56" width="330" height="80"/>
                                                 <subviews>
                                                     <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nPm-Uj-NXw" customClass="MDCPasswordTextField" customModule="SereyIO" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="330" height="34"/>
@@ -275,17 +275,19 @@ Sign up now and get free Serey coins!</string>
                                                     </textField>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xKn-IX-vDy">
-                                                <rect key="frame" x="21" y="173" width="288.5" height="42"/>
-                                                <string key="text">Password should be [8,16] symbols contain at least
-1 upper case, 1 lower case letter, 1 digit and 1 special
-symbol.</string>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xKn-IX-vDy">
+                                                <rect key="frame" x="0.0" y="168" width="330" height="84"/>
+                                                <string key="text">Password should be between 8 to 16 characters containing at least:
+-  an upper case letter
+-  a lower case letter 
+-  a digit
+-  a special symbol like:  !, @, #, $, %, etc.</string>
                                                 <fontDescription key="fontDescription" name="CircularStd-Book" family="Circular Std" pointSize="12"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tOf-aA-GP9">
-                                                <rect key="frame" x="0.0" y="247" width="330" height="44"/>
+                                                <rect key="frame" x="0.0" y="284" width="330" height="44"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="fRD-Ma-Px0"/>
@@ -296,16 +298,16 @@ symbol.</string>
                                                 </state>
                                             </button>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="bWd-Tv-dgZ">
-                                                <rect key="frame" x="5" y="323" width="320.5" height="77"/>
+                                                <rect key="frame" x="22.5" y="360" width="285.5" height="77"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skip this step if you already set the password. Password also can be changed later in the wallet's settings." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7o-xZ-uSe">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320.5" height="29"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skip this step if you've already set up a password. Passwords can also be changed in wallet settings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T7o-xZ-uSe">
+                                                        <rect key="frame" x="0.0" y="0.0" width="285.5" height="29"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHh-Ok-88W">
-                                                        <rect key="frame" x="120" y="45" width="80" height="32"/>
+                                                        <rect key="frame" x="102.5" y="45" width="80" height="32"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="Eyc-mi-iLD"/>
@@ -321,6 +323,8 @@ symbol.</string>
                                         <constraints>
                                             <constraint firstItem="tOf-aA-GP9" firstAttribute="leading" secondItem="F3G-98-CAW" secondAttribute="leading" id="3Tn-gv-SlS"/>
                                             <constraint firstItem="fd8-h6-2cS" firstAttribute="leading" secondItem="F3G-98-CAW" secondAttribute="leading" id="CIl-7y-nz1"/>
+                                            <constraint firstItem="xKn-IX-vDy" firstAttribute="leading" secondItem="F3G-98-CAW" secondAttribute="leading" id="WhW-a6-koi"/>
+                                            <constraint firstAttribute="trailing" secondItem="xKn-IX-vDy" secondAttribute="trailing" id="pCS-0p-xPI"/>
                                             <constraint firstAttribute="trailing" secondItem="tOf-aA-GP9" secondAttribute="trailing" id="sYc-GN-3U8"/>
                                             <constraint firstAttribute="trailing" secondItem="fd8-h6-2cS" secondAttribute="trailing" id="zVh-EA-XWu"/>
                                         </constraints>
@@ -329,7 +333,7 @@ symbol.</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="F3G-98-CAW" secondAttribute="trailing" constant="42" id="OCy-Ux-gSO"/>
-                                    <constraint firstItem="F3G-98-CAW" firstAttribute="centerY" secondItem="dhF-1a-9AV" secondAttribute="centerY" multiplier="0.6" id="l5k-ZO-0Oy"/>
+                                    <constraint firstItem="F3G-98-CAW" firstAttribute="top" secondItem="dhF-1a-9AV" secondAttribute="top" constant="32" id="fGD-Wp-qiG"/>
                                     <constraint firstItem="F3G-98-CAW" firstAttribute="leading" secondItem="dhF-1a-9AV" secondAttribute="leading" constant="42" id="w78-cf-e4V"/>
                                 </constraints>
                             </view>
@@ -372,20 +376,19 @@ symbol.</string>
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="345"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="ORC-ZZ-SFy">
-                                                <rect key="frame" x="24" y="54" width="366" height="259"/>
+                                                <rect key="frame" x="24" y="54" width="366" height="226"/>
                                                 <subviews>
-                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="3wP-bU-mBo">
-                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="101"/>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="3wP-bU-mBo">
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="68"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a Security Method" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gL-AY-5GF">
-                                                                <rect key="frame" x="46" y="0.0" width="274" height="29"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add an extra security method (optional)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4gL-AY-5GF">
+                                                                <rect key="frame" x="0.0" y="0.0" width="366" height="24"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oeu-kQ-jwP">
-                                                                <rect key="frame" x="10.5" y="45" width="345" height="56"/>
-                                                                <string key="text">Two-step authentication adds an extra layer of protection to yourwallet. When you sign-in with 2FA enabled, you’ll prompt to enter averification code or scan your FingerPrint ID depend on method youuse below.</string>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Two-step authentication adds an extra layer of protection to your wallet." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oeu-kQ-jwP">
+                                                                <rect key="frame" x="0.0" y="40" width="366" height="28"/>
                                                                 <fontDescription key="fontDescription" name="CircularStd-Book" family="Circular Std" pointSize="12"/>
                                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -393,7 +396,7 @@ symbol.</string>
                                                         </subviews>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hh9-jv-23i">
-                                                        <rect key="frame" x="0.0" y="133" width="366" height="54"/>
+                                                        <rect key="frame" x="0.0" y="100" width="366" height="54"/>
                                                         <subviews>
                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yhf-8R-sLi" customClass="ContentSizedTableView" customModule="SereyIO" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="366" height="54"/>
@@ -405,7 +408,7 @@ symbol.</string>
                                                         </subviews>
                                                     </stackView>
                                                     <button opaque="NO" contentMode="scaleAspectFit" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Fq-pL-7F9">
-                                                        <rect key="frame" x="0.0" y="219" width="366" height="40"/>
+                                                        <rect key="frame" x="0.0" y="186" width="366" height="40"/>
                                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="1Hw-IA-chf"/>

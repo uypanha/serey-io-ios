@@ -23,6 +23,10 @@ class NoProfilePictureView: UIView {
         return self.prepareUploadButton()
     }()
     
+    var uploadTapRegonizer: UITapGestureRecognizer!
+    
+    var didUploadPressed: () -> Void = {}
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -31,6 +35,10 @@ class NoProfilePictureView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func uploadPressed() {
+        self.didUploadPressed()
     }
 }
 
@@ -86,6 +94,10 @@ extension NoProfilePictureView {
             make.left.right.equalToSuperview().inset(10)
             make.centerY.equalToSuperview()
         }
+        
+        self.uploadTapRegonizer = .init(target: self, action: #selector(self.uploadPressed))
+        mainView.addGestureRecognizer(self.uploadTapRegonizer)
+        mainView.isUserInteractionEnabled = true
         
         return mainView
     }

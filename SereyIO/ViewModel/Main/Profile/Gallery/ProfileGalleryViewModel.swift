@@ -10,6 +10,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 import RxBinding
+import Then
 
 class ProfileGalleryViewModel: BaseUserProfileViewModel, CollectionSingleSecitionProviderModel, DownloadStateNetworkProtocol, ShouldReactToAction, ShouldPresent {
     
@@ -17,6 +18,7 @@ class ProfileGalleryViewModel: BaseUserProfileViewModel, CollectionSingleSecitio
         case itemSelected(IndexPath)
         case updatePressed
         case photoSelected(PickerPhotoModel)
+        case uploadPressed
     }
     
     enum ViewToPresent {
@@ -72,7 +74,7 @@ extension ProfileGalleryViewModel {
             self.isDownloading.accept(true)
             self.getAllUserProfilePicture { profiles in
                 self.isDownloading.accept(false)
-                self.profiles.accept([])
+                self.profiles.accept(profiles)
             }
         }
     }
@@ -86,7 +88,9 @@ extension ProfileGalleryViewModel {
         if !self.isDownloading.value && !self.profiles.value.isEmpty {
             items.append(UploadProfileCellViewModel())
         }
-        items.append(contentsOf: self.profiles.value.map { ProfilePictureCellViewModel($0, self.selectedProfile) })
+        items.append(contentsOf: self.profiles.value.map { ProfilePictureCellViewModel($0, self.selectedProfile).then {
+            self.setUpProfilePictureObservers($0)
+        } })
         if self.isDownloading.value {
             let itemCount = self.profiles.value.isEmpty ? 5 : 2
             items.append(contentsOf: (0...itemCount).map { _ in ProfilePictureCellViewModel(true) })
@@ -132,6 +136,22 @@ extension ProfileGalleryViewModel {
     
     func handlePhotoSelected(_ photo: PickerPhotoModel) {
         self.uploadPhoto(photo)
+    }
+    
+    func handleRemoveProfilePressed(_ profile: UserProfileModel) {
+        let cancelAction = ActionModel(R.string.common.cancel.localized(), style: .cancel)
+        let deleteAction = ActionModel(R.string.common.delete.localized(), style: .destructive) {
+            self.shouldPresent(.loading(true, "Deleting..."))
+            self.deleteProfile(id: profile.id) { success, data in
+                self.shouldPresent(.loading(false, nil))
+                if success {
+                    self.profiles.accept(data)
+                }
+            }
+        }
+        
+        let alertDialogModel = AlertDialogModel(title: "Delete Profile?", message: "Are you sure to delete this profile?", actions: [cancelAction, deleteAction])
+        self.shouldPresent(.showAlertDialog(alertDialogModel))
     }
 }
 
@@ -196,7 +216,16 @@ extension ProfileGalleryViewModel {
                     self?.handleUpdatePressed()
                 case .photoSelected(let photo):
                     self?.handlePhotoSelected(photo)
+                case .uploadPressed:
+                    self?.shouldPresent(.openMediaPicker)
                 }
             }) ~ self.disposeBag
+    }
+    
+    func setUpProfilePictureObservers(_ cellModel: ProfilePictureCellViewModel) {
+        cellModel.shouldRemoveProfile.asObservable()
+            .subscribe(onNext: { [weak self] profile in
+                self?.handleRemoveProfilePressed(profile)
+            }) ~ cellModel.disposeBag
     }
 }

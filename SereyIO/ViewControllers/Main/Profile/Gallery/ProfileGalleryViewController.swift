@@ -70,6 +70,10 @@ class ProfileGalleryViewController: BaseViewController, AlertDialogController, L
         self.navigationItem.rightBarButtonItem = self.updateButton
         setUpRxObservers()
         self.viewModel.downloadData()
+        
+        self.noProfileView.didUploadPressed = {
+            self.viewModel.didAction(with: .uploadPressed)
+        }
     }
     
     override func setUpLocalizedTexts() {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -49,10 +49,10 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOs-tn-CQ0" customClass="CardView" customModule="SereyIO" customModuleProvider="target">
-                                <rect key="frame" x="32" y="68" width="350" height="124"/>
+                                <rect key="frame" x="32" y="68" width="350" height="107"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="BGR-xp-Gyf">
-                                        <rect key="frame" x="24" y="24" width="302" height="76"/>
+                                        <rect key="frame" x="24" y="24" width="302" height="59"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rMC-y4-hFj">
                                                 <rect key="frame" x="91.5" y="0.0" width="119" height="21.5"/>
@@ -60,8 +60,8 @@
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please use Google authentiator app to scan the QR Code to activate your Two Factor OTP authentication." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLx-dh-rcm">
-                                                <rect key="frame" x="3" y="25.5" width="296.5" height="50.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please use the Google Authenticator app to scan this QR code." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLx-dh-rcm">
+                                                <rect key="frame" x="9" y="25.5" width="284" height="33.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -87,7 +87,7 @@
                                 <rect key="frame" x="32" y="758" width="350" height="88"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WNV-n6-Yit">
-                                        <rect key="frame" x="13.5" y="0.0" width="323" height="24"/>
+                                        <rect key="frame" x="8" y="0.0" width="334.5" height="24"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MR7-Wy-kPu" customClass="CheckBox" customModule="SereyIO" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
@@ -121,8 +121,8 @@
                                                     <action selector="didChecked:" destination="TdG-I8-vra" eventType="valueChanged" id="Oiu-DG-xeo"/>
                                                 </connections>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I am ready to add QR Code to Google Authenticator" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBK-Fs-eKT">
-                                                <rect key="frame" x="32" y="0.0" width="291" height="24"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I've already connected Google Authenticator to Serey" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBK-Fs-eKT">
+                                                <rect key="frame" x="32" y="0.0" width="302.5" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -180,7 +180,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="2n1-20-jmN">
-                                <rect key="frame" x="32" y="80" width="350" height="150"/>
+                                <rect key="frame" x="32" y="80" width="350" height="169"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="V5n-1t-nlm">
                                         <rect key="frame" x="60" y="0.0" width="230.5" height="56.5"/>
@@ -199,8 +199,9 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Just incase of missing OTP generator app, please re-activate your wallet app to reset your two factor authenticator." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tom-vi-BTd">
-                                        <rect key="frame" x="2.5" y="92.5" width="345" height="57.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tom-vi-BTd">
+                                        <rect key="frame" x="2.5" y="92.5" width="345" height="76.5"/>
+                                        <string key="text">In case you lost your Google Authenticator, you can remove or reset the Google Authenticator code by signing up in the wallet using your private key.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -208,7 +209,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ds1-p0-6V7" customClass="PinCodeTextField" customModule="PinCodeTextField">
-                                <rect key="frame" x="32" y="272" width="350" height="50"/>
+                                <rect key="frame" x="32" y="291" width="350" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="UUp-wv-epH"/>
@@ -246,7 +247,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAC-V3-eWw">
-                                <rect key="frame" x="106" y="356" width="202" height="40"/>
+                                <rect key="frame" x="106" y="375" width="202" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="U3X-BP-CxV"/>
@@ -257,15 +258,25 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEY-qK-IFf">
+                                <rect key="frame" x="106.5" y="810.5" width="201" height="35.5"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="LOST GOOGLE AUTH">
+                                    <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="18"/>
+                                    <color key="baseForegroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="v3H-Re-eT5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="v3H-Re-eT5" firstAttribute="trailing" secondItem="2n1-20-jmN" secondAttribute="trailing" constant="32" id="20G-qS-AHI"/>
+                            <constraint firstItem="v3H-Re-eT5" firstAttribute="bottom" secondItem="sEY-qK-IFf" secondAttribute="bottom" constant="16" id="9Ke-7v-bBo"/>
                             <constraint firstItem="ds1-p0-6V7" firstAttribute="leading" secondItem="v3H-Re-eT5" secondAttribute="leading" constant="32" id="Bva-uU-DPt"/>
                             <constraint firstItem="eAC-V3-eWw" firstAttribute="centerX" secondItem="v3H-Re-eT5" secondAttribute="centerX" id="GTU-2a-tmU"/>
                             <constraint firstItem="2n1-20-jmN" firstAttribute="leading" secondItem="v3H-Re-eT5" secondAttribute="leading" constant="32" id="L80-ma-R1s"/>
                             <constraint firstItem="2n1-20-jmN" firstAttribute="top" secondItem="v3H-Re-eT5" secondAttribute="top" constant="36" id="L8d-dw-qij"/>
+                            <constraint firstItem="sEY-qK-IFf" firstAttribute="centerX" secondItem="v3H-Re-eT5" secondAttribute="centerX" id="OCk-qo-Nmf"/>
                             <constraint firstItem="v3H-Re-eT5" firstAttribute="trailing" secondItem="ds1-p0-6V7" secondAttribute="trailing" constant="32" id="TKy-b1-KbX"/>
                             <constraint firstItem="eAC-V3-eWw" firstAttribute="top" secondItem="ds1-p0-6V7" secondAttribute="bottom" constant="34" id="Yoa-Tg-FSH"/>
                             <constraint firstItem="ds1-p0-6V7" firstAttribute="top" secondItem="2n1-20-jmN" secondAttribute="bottom" constant="42" id="xUW-un-XTa"/>
@@ -276,6 +287,7 @@
                         <outlet property="enterDigitsLabel" destination="pNr-E8-gSW" id="XdC-iu-6XZ"/>
                         <outlet property="messageLabel" destination="tom-vi-BTd" id="v98-EQ-VJJ"/>
                         <outlet property="pinTextFields" destination="ds1-p0-6V7" id="RkJ-Yz-xMQ"/>
+                        <outlet property="reSignUpButton" destination="sEY-qK-IFf" id="uNf-hW-id5"/>
                         <outlet property="verifyAccountLabel" destination="XTb-2E-Zls" id="pXF-tM-Dba"/>
                     </connections>
                 </viewController>

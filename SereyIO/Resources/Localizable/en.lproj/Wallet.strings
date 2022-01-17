@@ -8,4 +8,4 @@
 
 "myWallet"                          = "My Wallet";
 "signUpWallet"                      = "Sign-Up Wallet";
-"termsAndPrivacyAgreementMessage"   = "By using Serey you accept the\n%@ and %@";
+"termsAndPrivacyAgreementMessage"   = "By signing up in the Serey Wallet, you'll agree on the %@ and %@";

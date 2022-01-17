@@ -31,6 +31,12 @@ class HomeViewController: BaseViewController, AlertDialogController, LoadingIndi
         return UIBarButtonItem(image: R.image.filterIcon(), style: .plain, target: nil, action: nil)
     }()
     
+    private lazy var sereyPrice: UIBarButtonItem = {
+        return .init(title: CoinPriceManager.shared.sereyPrice.value.currencyFormat(), style: .plain, target: nil, action: nil).then {
+            $0.tintColor = .red
+        }
+    }()
+    
     private lazy var postButton: MDCFloatingButton = {
         let button = MDCFloatingButton()
         button.setImage(R.image.plusIcon(), for: .normal)
@@ -101,7 +107,7 @@ extension HomeViewController {
     func setUpViews() {
         self.navigationController?.removeNavigationBarBorder()
         self.navigationItem.leftBarButtonItems = [logoBarItem, .init(customView: self.countryButton)]
-        self.navigationItem.rightBarButtonItem = filterButton
+        self.navigationItem.rightBarButtonItems = [filterButton, sereyPrice]
         
         self.scrollView.delegate = self
         self.scrollView.backgroundColor = ColorName.postBackground.color
@@ -220,6 +226,11 @@ fileprivate extension HomeViewController {
         self.countryButton.rx.tap.asObservable()
             .map { _ in HomeViewModel.Action.countryPressed }
             ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+        
+        CoinPriceManager.shared.sereyPrice.asObservable()
+            .map { $0 == 0 ? "" : "$\($0.currencyFormat())" }
+            ~> self.sereyPrice.rx.title
             ~ self.disposeBag
     }
     
