@@ -17,12 +17,18 @@ class WalletSettingsViewModel: BaseUserProfileViewModel, CollectionMultiSections
     
     enum Action {
         case itemSelected(IndexPath)
+        case changeProfilePressed
+        case photoSelected(PickerPhotoModel)
     }
     
     enum ViewToPresent {
         case changePasswordController(ChangePasswordViewModel)
         case activateGoogleOTPContronner(ActivateGoogleOTPViewModel)
         case activeBiometryViewController(ActiveBiometryViewModel)
+        case bottomListViewController(BottomListMenuViewModel)
+        case choosePhotoController
+        case profileGalleryController
+        case loading(Bool)
     }
     
     // input:
@@ -94,6 +100,15 @@ extension WalletSettingsViewModel {
         SectionType.allCases.forEach { type in
             if let cells = cellModels[type] {
                 sectionItems.append(SectionItem(model: Section(header: type.title), items: cells))
+                
+                cells.forEach { cellItem in
+                    if let item = cellItem as? WalletProfileCellViewModel {
+                        item.shouldChangeProfile.asObservable()
+                            .map { _ in Action.changeProfilePressed }
+                            ~> self.didActionSubject
+                            ~ item.disposeBag
+                    }
+                }
             }
         }
         
@@ -137,6 +152,25 @@ fileprivate extension WalletSettingsViewModel {
             break
         }
     }
+    
+    func handleChangeProfilePressed() {
+        let items: [ImageTextCellViewModel] = ProfileOption.allCases.map { $0.cellModel }
+        
+        let bottomListMenuViewModel = BottomListMenuViewModel(header: "Profile Picture", items)
+        bottomListMenuViewModel.shouldSelectMenuItem
+            .subscribe(onNext: { [unowned self] cellModel in
+                if let cellModel = cellModel as? ProfilePictureOptionCellViewModel {
+                    switch cellModel.option {
+                    case .selectFromGallery:
+                        self.shouldPresent(.profileGalleryController)
+                    case .uploadNewPicture:
+                        self.shouldPresent(.choosePhotoController)
+                    }
+                }
+            }) ~ self.disposeBag
+        
+        self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -153,14 +187,10 @@ extension WalletSettingsViewModel {
             .bind(to: self.cells)
             .disposed(by: self.disposeBag)
         
-//        self.userInfo.asObservable()
-//            .`do`(onNext: { [weak self] userModel in
-//                if let userModel = userModel {
-//                    self?.setUpUserInfoObservers(userModel)
-//                }
-//            }).subscribe(onNext: { [unowned self] userModel in
-//                self.cellModels.accept(self.prepareCellModels())
-//            }).disposed(by: self.disposeBag)
+        self.isUploading.asObservable()
+            .map { ViewToPresent.loading($0) }
+            ~> self.shouldPresentSubject
+            ~ self.disposeBag
     }
     
     func setUpActionObservers() {
@@ -169,6 +199,10 @@ extension WalletSettingsViewModel {
                 switch action {
                 case .itemSelected(let indexPath):
                     self?.handleItemSelected(indexPath)
+                case .changeProfilePressed:
+                    self?.handleChangeProfilePressed()
+                case .photoSelected(let pickerModel):
+                    self?.uploadPhoto(pickerModel)
                 }
             }) ~ self.disposeBag
     }
@@ -180,4 +214,13 @@ extension WalletSettingsViewModel {
             }) ~ cellModel.disposeBag
 
     }
+    
+//    private func setUpUserInfoObservers(_ userInfo: UserModel) {
+//
+//        Observable.from(object: userInfo)
+//            .asObservable()
+//            .subscribe(onNext: { [unowned self] userModel in
+////                self.notifyDataChanged(userModel)
+//            }).disposed(by: self.disposeBag)
+//    }
 }

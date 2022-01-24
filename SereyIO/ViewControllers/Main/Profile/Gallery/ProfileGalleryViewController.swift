@@ -76,6 +76,12 @@ class ProfileGalleryViewController: BaseViewController, AlertDialogController, L
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.removeNavigationBarBorder()
+    }
+    
     override func setUpLocalizedTexts() {
         super.setUpLocalizedTexts()
         

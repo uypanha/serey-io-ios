@@ -44,11 +44,11 @@
 		96D46BAF275FBEC70078779A /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D46BAE275FBEC70078779A /* UserProfileService.swift */; };
 		96D46BB92760F0FB0078779A /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D46BB82760F0FB0078779A /* UserProfileModel.swift */; };
 		B6138434D2AC9BE300634E3A /* Pods_SereyIOUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A407BB647B50EB3891A9B90 /* Pods_SereyIOUITests.framework */; };
+		B84F92BE2795CFE300074EB1 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84F92BD2795CFE300074EB1 /* MimeType.swift */; };
 		DC0044062433A87900244607 /* FileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0044052433A87900244607 /* FileUploadService.swift */; };
 		DC0044092433A98200244607 /* FileUploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0044082433A98200244607 /* FileUploadModel.swift */; };
 		DC0079102438D4150063C3FF /* GoogleService-Info-Development.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC00790F2438D4150063C3FF /* GoogleService-Info-Development.plist */; };
 		DC010D392434F685002BE182 /* URL+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC010D382434F685002BE182 /* URL+Helpers.swift */; };
-		DC010D3B2434F6C6002BE182 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC010D3A2434F6C6002BE182 /* MimeType.swift */; };
 		DC05FDAB23F1AB620093B47B /* SettingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05FDA823F1AB620093B47B /* SettingCellViewModel.swift */; };
 		DC05FDB023F1AC4F0093B47B /* Settings.strings in Resources */ = {isa = PBXBuildFile; fileRef = DC05FDB223F1AC4F0093B47B /* Settings.strings */; };
 		DC05FDBC23F1B0500093B47B /* MoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC05FDBB23F1B0500093B47B /* MoreViewModel.swift */; };
@@ -561,13 +561,13 @@
 		A1881865A5CB109CA74734FE /* Pods-SereyIOUITests.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.release_production.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.release_production.xcconfig"; sourceTree = "<group>"; };
 		A407EA3FA97859A37E09FEBF /* Pods-SereyIO.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIO.release_production.xcconfig"; path = "Target Support Files/Pods-SereyIO/Pods-SereyIO.release_production.xcconfig"; sourceTree = "<group>"; };
 		B23EDC4C4A4735EC30AE93DA /* Pods-SereyIOTests.debug_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.debug_development.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.debug_development.xcconfig"; sourceTree = "<group>"; };
+		B84F92BD2795CFE300074EB1 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		BDE9516EAC0414FBDFB62936 /* Pods-SereyIOUITests.debug_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.debug_production.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.debug_production.xcconfig"; sourceTree = "<group>"; };
 		C766FFE8DCD74E9C18A51E95 /* Pods-SereyIO.debug_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIO.debug_development.xcconfig"; path = "Target Support Files/Pods-SereyIO/Pods-SereyIO.debug_development.xcconfig"; sourceTree = "<group>"; };
 		DC0044052433A87900244607 /* FileUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadService.swift; sourceTree = "<group>"; };
 		DC0044082433A98200244607 /* FileUploadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadModel.swift; sourceTree = "<group>"; };
 		DC00790F2438D4150063C3FF /* GoogleService-Info-Development.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-Development.plist"; sourceTree = "<group>"; };
 		DC010D382434F685002BE182 /* URL+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Helpers.swift"; sourceTree = "<group>"; };
-		DC010D3A2434F6C6002BE182 /* MimeType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MimeType.swift; path = "../../../../../../../Bloo.io/develop/bloo-ios/BlooiOS/Helpers/File/MimeType.swift"; sourceTree = "<group>"; };
 		DC05FDA823F1AB620093B47B /* SettingCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCellViewModel.swift; sourceTree = "<group>"; };
 		DC05FDB123F1AC4F0093B47B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
 		DC05FDB323F1AC520093B47B /* km-KH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "km-KH"; path = "km-KH.lproj/Settings.strings"; sourceTree = "<group>"; };
@@ -1658,6 +1658,7 @@
 				DC40D5CF23E329E000B0DD96 /* LanguageModel.swift */,
 				DCF67FEE24100C6F003061A7 /* ListDataResponseModel.swift */,
 				DC952FB1268A2D1000B6D3D7 /* PaginationRequestModel.swift */,
+				9697722E2770C998008F6B0C /* TickerModel.swift */,
 				DC12F209242271A30099C479 /* Auth */,
 				DCCD40CC2436425200093A18 /* BlockChain */,
 				DC9AC6E42406C5A2008FAFA6 /* Discussion */,
@@ -1665,7 +1666,6 @@
 				DCACDDE12702205600F69AEA /* Notification */,
 				DCF67FEA24100BC7003061A7 /* User */,
 				DC1F79D924D089E000B7F0D3 /* Wallet */,
-				9697722E2770C998008F6B0C /* TickerModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1876,10 +1876,10 @@
 				DC583A9C24CC7EEF00D9C4D3 /* SereyKeyHelper.swift */,
 				DC40D5D723E32AB800B0DD96 /* Utilities.swift */,
 				DC115F2B241A8D38006BE78C /* UtilsHelper.swift */,
+				96CB1AB9277A1009000C5930 /* ViewHelper.swift */,
 				DC387C8A24E6E90300D8C78E /* AES */,
 				DCD3988F232E264E00C812EB /* File */,
 				DC6ED57A2326A42D00770B31 /* Store */,
-				96CB1AB9277A1009000C5930 /* ViewHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2915,7 +2915,7 @@
 			isa = PBXGroup;
 			children = (
 				DCD39890232E265F00C812EB /* MediaPickerHelper.swift */,
-				DC010D3A2434F6C6002BE182 /* MimeType.swift */,
+				B84F92BD2795CFE300074EB1 /* MimeType.swift */,
 			);
 			path = File;
 			sourceTree = "<group>";
@@ -3105,7 +3105,6 @@
 				DC6ED51A23267EED00770B31 /* Frameworks */,
 				DC6ED51B23267EED00770B31 /* Resources */,
 				3014EFD087298EBD0273A55E /* [CP] Embed Pods Frameworks */,
-				DC6A258B243F822400725962 /* Carthage Run Script */,
 			);
 			buildRules = (
 			);
@@ -3422,26 +3421,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DC6A258B243F822400725962 /* Carthage Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"$(SRCROOT)/input.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = "Carthage Run Script";
-			outputFileListPaths = (
-				"$(SRCROOT)/output.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
-		};
 		DC6ED55D232696E200770B31 /* R.swift Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3458,7 +3437,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate --disable-input-output-files-validation \"$SRCROOT/R.generated.swift\"\n";
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
 		};
 		DC6ED55E2326973900770B31 /* SwiftGen Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3615,6 +3594,7 @@
 				DC1CBD6E2596325A00CCB714 /* DraftCellViewModel.swift in Sources */,
 				DCED6A0B2534B007003C9A43 /* CornerView.swift in Sources */,
 				DC40D5D623E32A6B00B0DD96 /* ImageTextModel.swift in Sources */,
+				B84F92BE2795CFE300074EB1 /* MimeType.swift in Sources */,
 				969772312770D207008F6B0C /* Double+Extension.swift in Sources */,
 				DCD39866232E1CC600C812EB /* BaseViewModel.swift in Sources */,
 				DCD3988D232E259700C812EB /* KeyboardController+Actions.swift in Sources */,
@@ -3766,7 +3746,6 @@
 				96CB1ABA277A1009000C5930 /* ViewHelper.swift in Sources */,
 				DC3E7E1C270364D3001DA924 /* UIColor+Extensions.swift in Sources */,
 				DCB5BD712497CAE40042E5AF /* SecurityMethodeTableViewCell.swift in Sources */,
-				DC010D3B2434F6C6002BE182 /* MimeType.swift in Sources */,
 				DCDE007124475DFA00D09717 /* CommentTextView.swift in Sources */,
 				DCD3985C232E104400C812EB /* SlashScreenViewController.swift in Sources */,
 				DC7C8F0324DAB93E0051C084 /* AlertDialogModel.swift in Sources */,

@@ -12,11 +12,13 @@ import RxSwift
 import RxBinding
 import RxDataSources
 
-class WalletSettingsViewController: BaseTableViewController {
+class WalletSettingsViewController: BaseTableViewController, LoadingIndicatorController {
     
     lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
         return self.prepreDataSource()
     }()
+    
+    lazy var fileMediaHelper: MediaPickerHelper = .init(withPresenting: self)
     
     var viewModel: WalletSettingsViewModel!
     
@@ -137,6 +139,11 @@ extension WalletSettingsViewController {
             .map { WalletSettingsViewModel.Action.itemSelected($0) }
             .bind(to: self.viewModel.didActionSubject)
             .disposed(by: self.disposeBag)
+        
+        self.fileMediaHelper.selectedPhotoSubject.asObservable()
+            .subscribe(onNext: { [weak self] pickerModel in
+                self?.viewModel.didAction(with: .photoSelected(pickerModel))
+            }) ~ self.disposeBag
     }
     
     func setUpViewToPresentObservers() {
@@ -158,6 +165,18 @@ extension WalletSettingsViewController {
                         activeBiometryViewController.viewModel = activeBiometryViewModel
                         self?.show(CloseableNavigationController(rootViewController: activeBiometryViewController), sender: nil)
                     }
+                case .choosePhotoController:
+                    self?.fileMediaHelper.showImagePicker()
+                case .bottomListViewController(let bottomMenuListViewModel):
+                    let bottomMenuViewController = BottomMenuViewController(bottomMenuListViewModel)
+                    self?.present(bottomMenuViewController, animated: true, completion: nil)
+                case .profileGalleryController:
+                    let profileGalleryViewController = ProfileGalleryViewController()
+                    profileGalleryViewController.hidesBottomBarWhenPushed = true
+                    profileGalleryViewController.viewModel = .init()
+                    self?.show(profileGalleryViewController, sender: nil)
+                case .loading(let loading):
+                    loading ? self?.showLoading() : self?.dismissLoading()
                 }
             }) ~ self.disposeBag
     }

@@ -21,7 +21,8 @@ class WalletProfileTableViewCell: BaseTableViewCell {
             guard let cellModel = self.cellModel else { return }
             
             self.disposeBag ~ [
-                cellModel.profileModel ~> self.profileView.rx.profileViewModel
+                cellModel.profileModel ~> self.profileView.rx.profileViewModel,
+                cameraButton.rx.tap ~> cellModel.shouldChangeProfile
             ]
         }
     }

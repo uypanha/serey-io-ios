@@ -40,8 +40,8 @@ class SignUpWalletViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
         self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
         
-        self.userNameTextFieldViewModel = .textFieldWith(title: "Username", errorMessage: "", validation: .notEmpty)
-        self.ownerKeyTextFieldViewModel = .textFieldWith(title: "Owner Key", errorMessage: "Please enter a valid owner key", validation: .ownerKey)
+        self.userNameTextFieldViewModel = .textFieldWith(title: "Username", placeholder: "Input your username", errorMessage: "", validation: .notEmpty)
+        self.ownerKeyTextFieldViewModel = .textFieldWith(title: "Private Key", placeholder: "Input your private key", errorMessage: "Please enter a valid owner key", validation: .ownerKey)
         self.shouldEnbleSignUp = .init(value: false)
         
         self.authService = AuthService()
