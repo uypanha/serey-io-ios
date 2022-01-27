@@ -16,7 +16,7 @@ class BottomListMenuViewModel: BaseListTableViewModel {
     
     let shouldSelectMenuItem: PublishSubject<ImageTextCellViewModel>
     
-    init(header: String? = nil,_ items: [ImageTextCellViewModel]) {
+    init(header: String? = nil, _ items: [ImageTextCellViewModel]) {
         self.shouldSelectMenuItem = PublishSubject()
         super.init([SectionItem(model: .init(header: header), items: items)])
         

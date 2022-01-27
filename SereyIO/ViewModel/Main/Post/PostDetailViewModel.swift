@@ -130,11 +130,8 @@ extension PostDetailViewModel {
 fileprivate extension PostDetailViewModel {
     
     func handleMorePressed() {
-        var items: [PostMenu] = [.edit]
-        if let post = self.post.value, post.voterCount == 0 {
-            items.append(.delete)
-        }
-        let bottomMenuViewModel = BottomListMenuViewModel(items.map { $0.cellModel })
+        let items: [PostMenu] = self.post.value?.prepareOptionMenu() ?? []
+        let bottomMenuViewModel = BottomListMenuViewModel(header: " ", items.map { $0.cellModel })
         
         bottomMenuViewModel.shouldSelectMenuItem.asObservable()
             .subscribe(onNext: { [weak self] item in
@@ -159,6 +156,10 @@ fileprivate extension PostDetailViewModel {
                     self.deletePost(post)
                 }
             }))
+        case.reportPost:
+            break
+        case .hidePost:
+            break
         }
     }
     
@@ -302,6 +303,8 @@ class PostMenuCellViewModel: ImageTextCellViewModel {
 enum PostMenu {
     case edit
     case delete
+    case reportPost
+    case hidePost
     
     var cellModel: PostMenuCellViewModel {
         return PostMenuCellViewModel(self)
@@ -313,6 +316,10 @@ enum PostMenu {
             return ImageTextModel(image: R.image.editIcon(), titleText: R.string.common.edit.localized())
         case .delete:
             return ImageTextModel(image: R.image.trashIcon(), titleText: R.string.common.delete.localized())
+        case .hidePost:
+            return ImageTextModel(image: R.image.hidePostIcon(), titleText: "Hide post")
+        case .reportPost:
+            return ImageTextModel(image: R.image.reportPostIcon(), titleText: "Report post")
         }
     }
 }

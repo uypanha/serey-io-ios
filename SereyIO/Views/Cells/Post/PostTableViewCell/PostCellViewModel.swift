@@ -46,34 +46,34 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
     
     init(_ post: PostModel?) {
         self.loggedUserInfo = .init(value: AuthData.shared.loggedUserModel)
-        self.post = BehaviorRelay(value: post)
-        self.profileViewModel = BehaviorSubject(value: nil)
-        self.authorName = BehaviorSubject(value: nil)
-        self.publishedAt = BehaviorSubject(value: nil)
-        self.thumbnailURL = BehaviorSubject(value: nil)
-        self.tags = BehaviorSubject(value: [])
-        self.titleText = BehaviorSubject(value: nil)
-        self.contentDesc = BehaviorSubject(value: nil)
-        self.sereyValue = BehaviorSubject(value: nil)
-        self.upVoteCount = BehaviorSubject(value: nil)
-        self.downVoteCount = BehaviorSubject(value: nil)
-        self.commentCount = BehaviorSubject(value: nil)
-        self.isShimmering = BehaviorRelay(value: false)
-        self.isMoreHidden = BehaviorSubject(value: true)
+        self.post = .init(value: post)
+        self.profileViewModel = .init(value: nil)
+        self.authorName = .init(value: nil)
+        self.publishedAt = .init(value: nil)
+        self.thumbnailURL = .init(value: nil)
+        self.tags = .init(value: [])
+        self.titleText = .init(value: nil)
+        self.contentDesc = .init(value: nil)
+        self.sereyValue = .init(value: nil)
+        self.upVoteCount = .init(value: nil)
+        self.downVoteCount = .init(value: nil)
+        self.commentCount = .init(value: nil)
+        self.isShimmering = .init(value: false)
+        self.isMoreHidden = .init(value: true)
         
-        self.isVoteAllowed = BehaviorRelay(value: false)
-        self.upVoteEnabled = BehaviorSubject(value: true)
-        self.flagEnabled = BehaviorSubject(value: true)
-        self.isVoting = BehaviorSubject(value: nil)
+        self.isVoteAllowed = .init(value: false)
+        self.upVoteEnabled = .init(value: true)
+        self.flagEnabled = .init(value: true)
+        self.isVoting = .init(value: nil)
         
-        self.shouldShowMoreOption = PublishSubject()
-        self.shouldShowPostsByCategory = PublishSubject()
-        self.shouldShowAuthorProfile = PublishSubject()
+        self.shouldShowMoreOption = .init()
+        self.shouldShowPostsByCategory = .init()
+        self.shouldShowAuthorProfile = .init()
         
-        self.shouldUpVote = PublishSubject()
-        self.shouldFlag = PublishSubject()
-        self.shouldDownvote = PublishSubject()
-        self.votedType = BehaviorRelay(value: nil)
+        self.shouldUpVote = .init()
+        self.shouldFlag = .init()
+        self.shouldDownvote = .init()
+        self.votedType = .init(value: nil)
         super.init()
         
         setUpRxObservers()
@@ -97,9 +97,13 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
         self.upVoteCount.onNext("\(data?.voterCount ?? 0)")
         self.downVoteCount.onNext("\(data?.flaggerCount ?? 0)")
         self.commentCount.onNext("\(data?.answerCount ?? 0)")
-        let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.author == AuthData.shared.username : false
-        let isOverAWeek = data?.isOverAWeek ?? false
-        self.isMoreHidden.onNext(isOverAWeek || !isMorePresent)
+        let isLoggedUser = AuthData.shared.isUserLoggedIn ? data?.author == AuthData.shared.username : false
+        if isLoggedUser {
+            let isOverAWeek = data?.isOverAWeek ?? false
+            self.isMoreHidden.onNext(isOverAWeek)
+        } else {
+            self.isMoreHidden.onNext(data == nil || false)
+        }
         
         self.isVoteAllowed.accept(data?.author != AuthData.shared.username)
         self.votedType.accept(data?.votedType)

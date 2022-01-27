@@ -34,6 +34,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         case downVoteDialogController(DownvoteDialogViewModel)
         case signInViewController
         case draftsViewController(DraftListViewModel)
+        case reportPostController(ReportPostViewModel)
     }
     
     // input:
@@ -54,20 +55,21 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
     }
     
     override func onMorePressed(of postModel: PostModel) {
-        var items: [PostMenu] = [.edit]
-        if postModel.voterCount == 0 {
-            items.append(.delete)
+        if AuthData.shared.isUserLoggedIn {
+            let items: [PostMenu] = postModel.prepareOptionMenu()
+            let bottomMenuViewModel = BottomListMenuViewModel(header: " ", items.map { $0.cellModel })
+            
+            bottomMenuViewModel.shouldSelectMenuItem.asObservable()
+                .subscribe(onNext: { [weak self] item in
+                    if let itemType = (item as? PostMenuCellViewModel)?.type {
+                        self?.handleMenuPressed(itemType, postModel)
+                    }
+                }) ~ bottomMenuViewModel.disposeBag
+            
+            self.shouldPresent(.moreDialogController(bottomMenuViewModel))
+        } else {
+            self.shouldPresent(.signInViewController)
         }
-        let bottomMenuViewModel = BottomListMenuViewModel(items.map { $0.cellModel })
-        
-        bottomMenuViewModel.shouldSelectMenuItem.asObservable()
-            .subscribe(onNext: { [weak self] item in
-                if let itemType = (item as? PostMenuCellViewModel)?.type {
-                    self?.handleMenuPressed(itemType, postModel)
-                }
-            }) ~ bottomMenuViewModel.disposeBag
-        
-        self.shouldPresent(.moreDialogController(bottomMenuViewModel))
     }
     
     override func onCategoryPressed(of postModel: PostModel) {
@@ -152,6 +154,10 @@ fileprivate extension PostTableViewModel {
             self.shouldPresent(.deletePostDialog(confirm: {
                 self.deletePost(post)
             }))
+        case .reportPost:
+            self.shouldPresent(.reportPostController(.init()))
+        case .hidePost:
+            break
         }
     }
     

@@ -281,6 +281,11 @@ extension UserAccountViewController {
                     profileGalleryViewController.hidesBottomBarWhenPushed = true
                     profileGalleryViewController.viewModel = .init()
                     self.show(profileGalleryViewController, sender: nil)
+                case .reportPostController:
+                    let reportPostViewController = ReportPostViewController()
+                    self.present(UINavigationController(rootViewController: reportPostViewController).then {
+                        $0.modalPresentationStyle = .fullScreen
+                    }, animated: true, completion: nil)
                 }
             }) ~ self.disposeBag
     }

@@ -13,6 +13,7 @@ import RxBinding
 import RxDataSources
 import NVActivityIndicatorView
 import SnapKit
+import Then
 
 class PostTableViewController: BaseTableViewController, AlertDialogController {
     

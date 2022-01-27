@@ -33,6 +33,9 @@
 		9697722D2770C97D008F6B0C /* CoinPriceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697722C2770C97D008F6B0C /* CoinPriceManager.swift */; };
 		9697722F2770C998008F6B0C /* TickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697722E2770C998008F6B0C /* TickerModel.swift */; };
 		969772312770D207008F6B0C /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969772302770D207008F6B0C /* Double+Extension.swift */; };
+		96AE4E2127A19F2000470B6D /* ReportPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE4E2027A19F2000470B6D /* ReportPostViewController.swift */; };
+		96AE4E2327A1A0A700470B6D /* ReportPostViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE4E2227A1A0A700470B6D /* ReportPostViewController+LoadViews.swift */; };
+		96AE4E2627A1AE3C00470B6D /* ReportPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE4E2527A1AE3C00470B6D /* ReportPostViewModel.swift */; };
 		96CB1AB3277A086B000C5930 /* ProfileOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB1AB2277A086B000C5930 /* ProfileOption.swift */; };
 		96CB1AB5277A0E4D000C5930 /* ProfileGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB1AB4277A0E4D000C5930 /* ProfileGalleryViewController.swift */; };
 		96CB1AB8277A0E91000C5930 /* ProfileGalleryViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB1AB7277A0E91000C5930 /* ProfileGalleryViewController+LoadViews.swift */; };
@@ -548,6 +551,9 @@
 		9697722C2770C97D008F6B0C /* CoinPriceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPriceManager.swift; sourceTree = "<group>"; };
 		9697722E2770C998008F6B0C /* TickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerModel.swift; sourceTree = "<group>"; };
 		969772302770D207008F6B0C /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		96AE4E2027A19F2000470B6D /* ReportPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPostViewController.swift; sourceTree = "<group>"; };
+		96AE4E2227A1A0A700470B6D /* ReportPostViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReportPostViewController+LoadViews.swift"; sourceTree = "<group>"; };
+		96AE4E2527A1AE3C00470B6D /* ReportPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPostViewModel.swift; sourceTree = "<group>"; };
 		96CB1AB2277A086B000C5930 /* ProfileOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOption.swift; sourceTree = "<group>"; };
 		96CB1AB4277A0E4D000C5930 /* ProfileGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGalleryViewController.swift; sourceTree = "<group>"; };
 		96CB1AB7277A0E91000C5930 /* ProfileGalleryViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileGalleryViewController+LoadViews.swift"; sourceTree = "<group>"; };
@@ -1151,6 +1157,23 @@
 				969772282770C94D008F6B0C /* CoinService.swift */,
 			);
 			path = Coin;
+			sourceTree = "<group>";
+		};
+		96AE4E1F27A19F0F00470B6D /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				96AE4E2027A19F2000470B6D /* ReportPostViewController.swift */,
+				96AE4E2227A1A0A700470B6D /* ReportPostViewController+LoadViews.swift */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
+		96AE4E2427A1AE2900470B6D /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				96AE4E2527A1AE3C00470B6D /* ReportPostViewModel.swift */,
+			);
+			path = Report;
 			sourceTree = "<group>";
 		};
 		96CB1AB6277A0E80000C5930 /* Gallery */ = {
@@ -2372,6 +2395,7 @@
 				DC9E36DB24129ACA00289693 /* PostDetailViewController.swift */,
 				DC7C740C24717C5500610526 /* VotersViewController.swift */,
 				DCDE00652446013D00D09717 /* Comment */,
+				96AE4E1F27A19F0F00470B6D /* Report */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -2385,6 +2409,7 @@
 				DC7C740A24717B0F00610526 /* VoterListViewModel.swift */,
 				DC5D59DB243243660048C921 /* Category */,
 				DCDE00682446019900D09717 /* Comment */,
+				96AE4E2427A1AE2900470B6D /* Report */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -3484,6 +3509,7 @@
 				DCCC15CF2509366B00ED4C52 /* TransactionInfoCellViewModel.swift in Sources */,
 				DC115F3B241A9A74006BE78C /* SignInTableViewCell.swift in Sources */,
 				DCBBD6C224E4375F0099C406 /* WalletSettingsViewController.swift in Sources */,
+				96AE4E2327A1A0A700470B6D /* ReportPostViewController+LoadViews.swift in Sources */,
 				DC5FC20F2453F62500CA6117 /* UserAccountViewModel.swift in Sources */,
 				DCA5255A2425166B00284CD8 /* ButtonTableViewCell.swift in Sources */,
 				DC1F79DB24D089FA00B7F0D3 /* InitTransactionModel.swift in Sources */,
@@ -3793,6 +3819,7 @@
 				DCA459FA24D1D22400E21D9A /* WalletMenu.swift in Sources */,
 				DC6ED5742326A37800770B31 /* DeeplinkParser.swift in Sources */,
 				DCCD40CB2436422C00093A18 /* BlockChainResponse.swift in Sources */,
+				96AE4E2627A1AE3C00470B6D /* ReportPostViewModel.swift in Sources */,
 				DC19DBE323EC581A00571CC8 /* ChooseCategorySheetViewController.swift in Sources */,
 				DCD3986B232E1DF700C812EB /* AppService.swift in Sources */,
 				DC1CBD1E259250D700CCB714 /* DraftModel.swift in Sources */,
@@ -3830,6 +3857,7 @@
 				DC13409924573F0C00CC9856 /* ToggleTextCellModel.swift in Sources */,
 				DCBBD6C524E43A870099C406 /* WalletSettingsViewModel.swift in Sources */,
 				DC6ED56823269B8400770B31 /* R.generated.swift in Sources */,
+				96AE4E2127A19F2000470B6D /* ReportPostViewController.swift in Sources */,
 				DC7F097824ACE31500CE8AFC /* WalletViewModel.swift in Sources */,
 				967BB0DF274E878C005EBCB8 /* CountryModel.swift in Sources */,
 				DC115F3E241A9BA5006BE78C /* SignInCellViewModel.swift in Sources */,

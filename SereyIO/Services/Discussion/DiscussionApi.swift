@@ -33,6 +33,8 @@ enum DiscussionApi {
     case downVote(permlink: String, author: String)
     
     case getSereyCountries
+    
+    case getReportTypes
 }
 
 extension DiscussionApi: AuthorizedApiTargetType {
@@ -122,6 +124,8 @@ extension DiscussionApi: AuthorizedApiTargetType {
             return "/api/v1/vote/flag"
         case .getSereyCountries:
             return "/api/v1/general/get_serey_countries"
+        case .getReportTypes:
+            return "/api/v1/general/get_report_types"
         }
     }
     
@@ -136,7 +140,7 @@ extension DiscussionApi: AuthorizedApiTargetType {
     
     var task: Task {
         switch self {
-        case .getDiscussions, .getPostDetail, .getCommentReply, .getCategories, .getSereyCountries:
+        case .getDiscussions, .getPostDetail, .getCommentReply, .getCategories, .getSereyCountries, .getReportTypes:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         case .submitPost, .submitComment, .deletPost, .upVote, .flag, .downVote:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)

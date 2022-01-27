@@ -39,6 +39,7 @@ class UserAccountViewModel: BaseUserProfileViewModel, DownloadStateNetworkProtoc
         case choosePhotoController
         case bottomListViewController(BottomListMenuViewModel)
         case profileGalleryController
+        case reportPostController
     }
     
     // input:
@@ -328,6 +329,8 @@ fileprivate extension UserAccountViewModel {
                     self?.shouldPresent(.signInViewController)
                 case .draftsViewController(let draftListViewModel):
                     self?.shouldPresent(.draftListViewController(draftListViewModel))
+                case .reportPostController:
+                    self?.shouldPresent(.reportPostController)
                 default:
                     break
                 }

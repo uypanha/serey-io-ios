@@ -316,6 +316,11 @@ fileprivate extension HomeViewController {
                 case .bottomListViewController(let bottomListMenuViewModel):
                     let bottomMenuViewController = BottomMenuViewController(bottomListMenuViewModel)
                     self.present(bottomMenuViewController, animated: true, completion: nil)
+                case .reportPostViewController:
+                    let reportPostViewController = ReportPostViewController()
+                    self.present(UINavigationController(rootViewController: reportPostViewController).then {
+                        $0.modalPresentationStyle = .fullScreen
+                    }, animated: true, completion: nil)
                 }
             }) ~ self.disposeBag
     }

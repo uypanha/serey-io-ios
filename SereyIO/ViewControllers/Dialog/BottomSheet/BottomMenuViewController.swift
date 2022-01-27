@@ -33,6 +33,9 @@ class MenuListTableViewController: ListTableViewController<BottomListMenuViewMod
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if self.viewModel.sectionTitle(in: section) == " " {
+            return 16
+        }
         return 54
     }
 }

@@ -90,6 +90,20 @@ struct PostModel: Codable {
         }
     }
     
+    func prepareOptionMenu() -> [PostMenu] {
+        var menu: [PostMenu] = []
+        if self.author == AuthData.shared.username {
+            menu.append(.edit)
+            if voterCount == 0 {
+                menu.append(.delete)
+            }
+        } else {
+            menu.append(.hidePost)
+            menu.append(.reportPost)
+        }
+        return menu
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case parentAuthor = "parent_author"
