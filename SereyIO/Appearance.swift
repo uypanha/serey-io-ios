@@ -9,6 +9,7 @@
 import UIKit
 import Then
 import RichEditorView
+import SkeletonView
 
 class Appearance {
     
@@ -85,5 +86,10 @@ fileprivate extension Appearance {
         RichEditorToolbar.appearance.selectedTintColor = UIColor.black
         RichEditorToolbar.appearance.selectedBackgroundImage = R.image.toolbarBgSelected()
         RichEditorToolbar.appearance.backgroundImage = R.image.transaprent()
+    }
+    
+    static func prepareSkeletonView() {
+        SkeletonAppearance.default.tintColor = .color(.shimmering)
+        SkeletonAppearance.default.multilineCornerRadius = 4
     }
 }

@@ -80,4 +80,9 @@ class DiscussionService: AppService<DiscussionApi> {
                 countries.saveAll()
             }) ~ self.disposeBag
     }
+    
+    func getReportTypes() -> Observable<ReportTypeResponseModel> {
+        return self.provider.rx.requestObject(.getReportTypes, type: ReportTypeResponseModel.self)
+            .asObservable()
+    }
 }

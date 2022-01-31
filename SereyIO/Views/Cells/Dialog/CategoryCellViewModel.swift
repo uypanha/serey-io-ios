@@ -20,4 +20,8 @@ class CategoryCellViewModel: TextCellViewModel {
         self.isSelected = BehaviorRelay(value: isSelected)
         super.init(with: title, properties: .defaultProperties(), indicatorAccessory: indicatorAccessory, isSelectionEnabled: false)
     }
+    
+    convenience required init(_ isShimmering: Bool) {
+        fatalError("init(_:) has not been implemented")
+    }
 }

@@ -159,6 +159,10 @@ extension CreatePostViewModel {
             self.category = category
             super.init(with: category.selectTitle, properties: .defaultProperties(), indicatorAccessory: indicatorAccessory)
         }
+        
+        convenience required init(_ isShimmering: Bool) {
+            fatalError("init(_:) has not been implemented")
+        }
     }
     
     enum CategoryCellType {

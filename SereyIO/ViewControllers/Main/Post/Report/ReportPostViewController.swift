@@ -27,6 +27,8 @@ class ReportPostViewController: BaseViewController {
     lazy var tableView: ContentSizedTableView = {
         return .init(frame: .init(), style: .plain).then {
             $0.contentInset = .zero
+            $0.register(TextTableViewCell.self)
+            $0.separatorStyle = .none
         }
     }()
     
@@ -46,7 +48,7 @@ class ReportPostViewController: BaseViewController {
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
-//        viewModel.downloadData()
+        viewModel.downloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,6 +77,7 @@ extension ReportPostViewController {
     
     func setUpRxObservers() {
         setUpControlObservers()
+        setUpContentChangedObservers()
     }
     
     func setUpControlObservers() {
@@ -82,5 +85,20 @@ extension ReportPostViewController {
             .subscribe(onNext: { [weak self] _ in
                 self?.dismiss(animated: true, completion: nil)
             }) ~ self.disposeBag
+    }
+    
+    func setUpContentChangedObservers() {
+        self.viewModel.cells.asObservable()
+            .bind(to: self.tableView.rx.items) { tableView, index, item in
+                let indexPath = IndexPath(row: index, section: 0)
+                switch item {
+                case is TextCellViewModel:
+                    let cell: TextTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+                    cell.cellModel = item as? TextCellViewModel
+                    return cell
+                default:
+                    return .init()
+                }
+            }.disposed(by: self.disposeBag)
     }
 }

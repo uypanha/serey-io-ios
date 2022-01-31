@@ -47,7 +47,10 @@
 		96D46BAF275FBEC70078779A /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D46BAE275FBEC70078779A /* UserProfileService.swift */; };
 		96D46BB92760F0FB0078779A /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D46BB82760F0FB0078779A /* UserProfileModel.swift */; };
 		B6138434D2AC9BE300634E3A /* Pods_SereyIOUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A407BB647B50EB3891A9B90 /* Pods_SereyIOUITests.framework */; };
+		B80B289827A82AF70023D894 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = B80B289727A82AF70023D894 /* SkeletonView */; };
+		B80B289A27A82D580023D894 /* SkeletonView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B289927A82D580023D894 /* SkeletonView+Extensions.swift */; };
 		B84F92BE2795CFE300074EB1 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84F92BD2795CFE300074EB1 /* MimeType.swift */; };
+		B8D65EC027A4447F00D72607 /* ReportTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D65EBF27A4447F00D72607 /* ReportTypeModel.swift */; };
 		DC0044062433A87900244607 /* FileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0044052433A87900244607 /* FileUploadService.swift */; };
 		DC0044092433A98200244607 /* FileUploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0044082433A98200244607 /* FileUploadModel.swift */; };
 		DC0079102438D4150063C3FF /* GoogleService-Info-Development.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC00790F2438D4150063C3FF /* GoogleService-Info-Development.plist */; };
@@ -567,7 +570,9 @@
 		A1881865A5CB109CA74734FE /* Pods-SereyIOUITests.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.release_production.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.release_production.xcconfig"; sourceTree = "<group>"; };
 		A407EA3FA97859A37E09FEBF /* Pods-SereyIO.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIO.release_production.xcconfig"; path = "Target Support Files/Pods-SereyIO/Pods-SereyIO.release_production.xcconfig"; sourceTree = "<group>"; };
 		B23EDC4C4A4735EC30AE93DA /* Pods-SereyIOTests.debug_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.debug_development.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.debug_development.xcconfig"; sourceTree = "<group>"; };
+		B80B289927A82D580023D894 /* SkeletonView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkeletonView+Extensions.swift"; sourceTree = "<group>"; };
 		B84F92BD2795CFE300074EB1 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
+		B8D65EBF27A4447F00D72607 /* ReportTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTypeModel.swift; sourceTree = "<group>"; };
 		BDE9516EAC0414FBDFB62936 /* Pods-SereyIOUITests.debug_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.debug_production.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.debug_production.xcconfig"; sourceTree = "<group>"; };
 		C766FFE8DCD74E9C18A51E95 /* Pods-SereyIO.debug_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIO.debug_development.xcconfig"; path = "Target Support Files/Pods-SereyIO/Pods-SereyIO.debug_development.xcconfig"; sourceTree = "<group>"; };
 		DC0044052433A87900244607 /* FileUploadService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileUploadService.swift; sourceTree = "<group>"; };
@@ -1047,6 +1052,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B80B289827A82AF70023D894 /* SkeletonView in Frameworks */,
 				DC817FB226D802C0001E2BAE /* RxKingfisher in Frameworks */,
 				DC817F9926D7FF0E001E2BAE /* RxMoya in Frameworks */,
 				DC817FAF26D80251001E2BAE /* RxKeyboard in Frameworks */,
@@ -2350,12 +2356,13 @@
 		DC9AC6E42406C5A2008FAFA6 /* Discussion */ = {
 			isa = PBXGroup;
 			children = (
+				DC5FC2192454330900CA6117 /* CommentReplyModel.swift */,
 				DC9AC6E52406C5BA008FAFA6 /* DiscussionCategoryModel.swift */,
 				DC2EA011241934640025D0B0 /* PostDetailResponse.swift */,
 				DCE19A9E240822FD0054F752 /* PostModel.swift */,
-				DCCD40C824363EF700093A18 /* SubmitPostModel.swift */,
+				B8D65EBF27A4447F00D72607 /* ReportTypeModel.swift */,
 				DC2DA4D6243B991800B99A86 /* SubmitCommentModel.swift */,
-				DC5FC2192454330900CA6117 /* CommentReplyModel.swift */,
+				DCCD40C824363EF700093A18 /* SubmitPostModel.swift */,
 			);
 			path = Discussion;
 			sourceTree = "<group>";
@@ -2796,6 +2803,7 @@
 				DC3E7E17270362E7001DA924 /* UILabel+Helper.swift */,
 				DCD3987E232E238800C812EB /* UIView+Appearance.swift */,
 				9686E40E2767AB99005F0C0E /* MDCChipView+StyleProtocol.swift */,
+				B80B289927A82D580023D894 /* SkeletonView+Extensions.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3157,6 +3165,7 @@
 				DC817FB126D802C0001E2BAE /* RxKingfisher */,
 				DC817FB426D80335001E2BAE /* RxReachability */,
 				DC817FB726D803C1001E2BAE /* AlamofireNetworkActivityLogger */,
+				B80B289727A82AF70023D894 /* SkeletonView */,
 			);
 			productName = iOSTemplate;
 			productReference = DC6ED51D23267EED00770B31 /* SereyIO.app */;
@@ -3250,6 +3259,7 @@
 				DC817FB026D802BF001E2BAE /* XCRemoteSwiftPackageReference "RxKingfisher" */,
 				DC817FB326D80335001E2BAE /* XCRemoteSwiftPackageReference "RxReachability" */,
 				DC817FB626D803C1001E2BAE /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */,
+				B80B289627A82AF60023D894 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = DC6ED51E23267EED00770B31 /* Products */;
 			projectDirPath = "";
@@ -3495,6 +3505,7 @@
 				DCED6A102534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift in Sources */,
 				DCD39873232E204000C812EB /* Rx+Extensions.swift in Sources */,
 				961264AC2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift in Sources */,
+				B8D65EC027A4447F00D72607 /* ReportTypeModel.swift in Sources */,
 				DC5D59DD2432437A0048C921 /* SelectCategoryViewModel.swift in Sources */,
 				DC243FC624666A19007B2EC5 /* CategoryPostsViewController.swift in Sources */,
 				DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */,
@@ -3843,6 +3854,7 @@
 				DC8EAB7923E721EE00E00A00 /* BaseTabBarViewController.swift in Sources */,
 				DC803C512697492200FCD2B2 /* OnBoardingViewController.swift in Sources */,
 				DC9E36F82416947900289693 /* CommentTableViewCell.swift in Sources */,
+				B80B289A27A82D580023D894 /* SkeletonView+Extensions.swift in Sources */,
 				DC83C38424E19F2A008C9EAB /* BottomSheetViewController.swift in Sources */,
 				DC2DA4D7243B991800B99A86 /* SubmitCommentModel.swift in Sources */,
 				DCD39891232E265F00C812EB /* MediaPickerHelper.swift in Sources */,
@@ -4626,6 +4638,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B80B289627A82AF60023D894 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		DC7F098724B05ED300CE8AFC /* XCRemoteSwiftPackageReference "swift-steem" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/steemit/swift-steem.git";
@@ -4749,6 +4769,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		B80B289727A82AF70023D894 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B80B289627A82AF60023D894 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
+		};
 		DC7F098824B05ED400CE8AFC /* Steem */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DC7F098724B05ED300CE8AFC /* XCRemoteSwiftPackageReference "swift-steem" */;

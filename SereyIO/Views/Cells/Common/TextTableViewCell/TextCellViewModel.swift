@@ -10,21 +10,30 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class TextCellViewModel: CellViewModel {
+class TextCellViewModel: CellViewModel, ShimmeringProtocol {
     
     let titleLabelText: BehaviorSubject<String?>
     let labelProperties: BehaviorSubject<TextLabelProperties>
     let isSelectionEnabled: BehaviorSubject<Bool>
+    let isShimmering: BehaviorRelay<Bool>
     
     init(with text: String, properties: TextLabelProperties, indicatorAccessory: Bool, isSelectionEnabled: Bool = true) {
-        self.titleLabelText = BehaviorSubject<String?>(value: nil)
-        self.labelProperties =  BehaviorSubject<TextLabelProperties>(value:  TextLabelProperties.defaultProperties())
-        self.isSelectionEnabled = BehaviorSubject(value: isSelectionEnabled)
+        self.titleLabelText = .init(value: nil)
+        self.labelProperties =  .init(value: .defaultProperties())
+        self.isSelectionEnabled = .init(value: isSelectionEnabled)
+        self.isShimmering = .init(value: false)
         super.init(indicatorAccessory)
         
         self.titleLabelText.onNext(text)
         self.labelProperties.onNext(properties)
     }
+    
+    convenience required init(_ isShimmering: Bool) {
+        self.init(with: "", properties: .defaultProperties(), indicatorAccessory: false)
+        
+        self.isShimmering.accept(isShimmering)
+    }
+    
 }
 
 struct TextLabelProperties {

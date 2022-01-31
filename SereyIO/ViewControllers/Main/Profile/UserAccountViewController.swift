@@ -283,6 +283,7 @@ extension UserAccountViewController {
                     self.show(profileGalleryViewController, sender: nil)
                 case .reportPostController:
                     let reportPostViewController = ReportPostViewController()
+                    reportPostViewController.viewModel = .init()
                     self.present(UINavigationController(rootViewController: reportPostViewController).then {
                         $0.modalPresentationStyle = .fullScreen
                     }, animated: true, completion: nil)

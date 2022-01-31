@@ -28,7 +28,7 @@ extension ReportPostViewController {
             
             contentView.addSubview(self.tableView)
             self.tableView.snp.makeConstraints { make in
-                make.top.equalTo(infoStackView.snp.bottom).inset(16)
+                make.top.equalTo(infoStackView.snp.bottom).offset(16)
                 make.left.right.bottom.equalToSuperview()
             }
         }

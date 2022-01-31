@@ -318,6 +318,7 @@ fileprivate extension HomeViewController {
                     self.present(bottomMenuViewController, animated: true, completion: nil)
                 case .reportPostViewController:
                     let reportPostViewController = ReportPostViewController()
+                    reportPostViewController.viewModel = .init()
                     self.present(UINavigationController(rootViewController: reportPostViewController).then {
                         $0.modalPresentationStyle = .fullScreen
                     }, animated: true, completion: nil)
