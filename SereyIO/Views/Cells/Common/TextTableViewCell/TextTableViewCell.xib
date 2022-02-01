@@ -30,6 +30,9 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="lastLineFillPercent">
                                 <integer key="value" value="70"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="linesCornerRadius">
+                                <integer key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
                 </subviews>

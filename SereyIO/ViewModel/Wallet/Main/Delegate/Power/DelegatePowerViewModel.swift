@@ -21,7 +21,7 @@ class DelegatePowerViewModel: BaseInitTransactionViewModel, ShouldPresent, Shoul
         case loading(Bool)
         case dismiss
         case confirmDelegatePowerController(ConfirmDelegatePowerViewModel)
-        case confirmCancelDelegateController(ConfirmDelegatePowerViewModel)
+        case confirmCancelDelegateController(String, String, String, () -> Void)
         case showAlertDialogController(AlertDialogModel)
     }
     
@@ -111,16 +111,20 @@ extension DelegatePowerViewModel {
         let fromAccount = AuthData.shared.username ?? ""
         let toAccount = self.accountTextFieldViewModel.value ?? ""
         let amount = self.amountTextFieldViewModel.value ?? ""
-        let confirmDelegatePowerViewModel = ConfirmDelegatePowerViewModel(from: fromAccount, to: toAccount, amount: amount).then {
-            $0.confirmed.asObserver()
-                .subscribe(onNext: { [weak self] _ in
-                    self?.delegatePower()
-                }).disposed(by: $0.disposeBag)
-        }
         if self.type == .delegatePower {
+            let confirmDelegatePowerViewModel = ConfirmDelegatePowerViewModel(from: fromAccount, to: toAccount, amount: amount).then {
+                $0.confirmed.asObserver()
+                    .subscribe(onNext: { [weak self] _ in
+                        self?.delegatePower()
+                    }).disposed(by: $0.disposeBag)
+            }
             self.shouldPresent(.confirmDelegatePowerController(confirmDelegatePowerViewModel))
         } else {
-            self.shouldPresent(.confirmCancelDelegateController(confirmDelegatePowerViewModel))
+            let title = "Cancel Delegation from \"\(toAccount)\""
+            let message = "Are you sure you want to cancel delegate power?"
+            self.shouldPresent(.confirmCancelDelegateController(title, message, "Cancel Delegate", {
+                self.delegatePower()
+            }))
         }
     }
 }

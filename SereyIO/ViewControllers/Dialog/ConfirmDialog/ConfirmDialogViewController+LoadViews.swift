@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension ConfirmCancelDelegateViewController {
+extension ConfirmDialogViewController {
     
     func prepareViews() -> UIView {
         let mainView = UIView()
@@ -31,10 +31,10 @@ extension ConfirmCancelDelegateViewController {
             }
             
             $0.addArrangedSubview(labelsStackView)
-            $0.addArrangedSubview(self.cancelPowerDownButton)
+            $0.addArrangedSubview(self.confirmButton)
         }
         
-        self.cancelPowerDownButton.snp.makeConstraints { make in
+        self.confirmButton.snp.makeConstraints { make in
             make.height.equalTo(44)
         }
         self.containerView.addSubview(mainStackView)

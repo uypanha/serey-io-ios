@@ -38,6 +38,7 @@ class TextTableViewCell: BaseTableViewCell {
                 cellModel.isShimmering.asObservable()
                     .subscribe(onNext: { [weak self] isShimmering in
                         DispatchQueue.main.async {
+                            self?.titleLabel.lastLineFillPercent = Int.random(in: 50...90)
                             self?.titleLabel.setSkeletonView(isShimmering)
                         }
                     })

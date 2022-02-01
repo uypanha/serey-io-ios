@@ -100,9 +100,8 @@ extension DelegatePowerViewController {
                     confirmDelegatePowerViewController.viewModel = confirmDelegatePowerViewModel
                     let bottomSheet = BottomSheetViewController(contentViewController: confirmDelegatePowerViewController)
                     self.present(bottomSheet, animated: true, completion: nil)
-                case .confirmCancelDelegateController(let confirmDelegatePowerViewModel):
-                    let confirmCancelDelegateViewController = ConfirmCancelDelegateViewController()
-                    confirmCancelDelegateViewController.viewModel = confirmDelegatePowerViewModel
+                case .confirmCancelDelegateController(let title, let message, let buttonTitle, let completion):
+                    let confirmCancelDelegateViewController = ConfirmDialogViewController(title, message: message, buttonTItle: buttonTitle, completion: completion)
                     let bottomSheet = BottomSheetViewController(contentViewController: confirmCancelDelegateViewController)
                     self.present(bottomSheet, animated: true, completion: nil)
                 }

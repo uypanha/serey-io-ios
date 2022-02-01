@@ -78,6 +78,7 @@ extension ReportPostViewController {
     func setUpRxObservers() {
         setUpControlObservers()
         setUpContentChangedObservers()
+        setUpViewToPresentObservers()
     }
     
     func setUpControlObservers() {
@@ -85,6 +86,12 @@ extension ReportPostViewController {
             .subscribe(onNext: { [weak self] _ in
                 self?.dismiss(animated: true, completion: nil)
             }) ~ self.disposeBag
+        
+        self.tableView.rx.itemSelected.asObservable()
+            .`do`(onNext: { self.tableView.deselectRow(at: $0, animated: true) })
+            .map { ReportPostViewModel.Action.itemSelected($0) }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpContentChangedObservers() {
@@ -100,5 +107,20 @@ extension ReportPostViewController {
                     return .init()
                 }
             }.disposed(by: self.disposeBag)
+    }
+    
+    func setUpViewToPresentObservers() {
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { [weak self] viewToPresent in
+                switch viewToPresent {
+                case .confirmDialogController(let title, let message, let buttonTitle, let completion):
+                    let confirmCancelDelegateViewController = ConfirmDialogViewController(title, message: message, buttonTItle: buttonTitle, completion: completion)
+                    let bottomSheet = BottomSheetViewController(contentViewController: confirmCancelDelegateViewController)
+                    self?.present(bottomSheet, animated: true, completion: nil)
+                case .enterIssueViewController:
+                    let enterIssueViewController = EnterIssueViewController()
+                    self?.navigationController?.pushViewController(enterIssueViewController, animated: true)
+                }
+            }) ~ self.disposeBag
     }
 }

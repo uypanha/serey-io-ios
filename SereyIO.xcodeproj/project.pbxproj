@@ -13,6 +13,8 @@
 		961264AC2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */; };
 		9625CEC92767B1DC0009FC47 /* FilterHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4022767AAD3005F0C0E /* FilterHeaderCollectionViewCell.xib */; };
 		9625CECA2767B2F20009FC47 /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4082767AB0D005F0C0E /* HeaderCollectionViewCell.xib */; };
+		9649B11B27A9995D009B40A3 /* EnterIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B11A27A9995D009B40A3 /* EnterIssueViewController.swift */; };
+		9649B11D27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B11C27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift */; };
 		9667F213278DE13200A4304D /* NoProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9667F212278DE13200A4304D /* NoProfilePictureView.swift */; };
 		967BB0DF274E878C005EBCB8 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BB0DE274E878C005EBCB8 /* CountryModel.swift */; };
 		967DAAD2277B5D0F00B3D0D7 /* UploadProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967DAAD1277B5D0F00B3D0D7 /* UploadProfileCollectionViewCell.swift */; };
@@ -453,8 +455,8 @@
 		DCD3989A232E2DE700C812EB /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD39899232E2DE700C812EB /* UINavigationController.swift */; };
 		DCDAB36F27397C3900C3B349 /* ConfirmDelegatePowerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDAB36E27397C3900C3B349 /* ConfirmDelegatePowerViewModel.swift */; };
 		DCDAB3722739868A00C3B349 /* DelegatePowerRequestModel.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDAB3712739868A00C3B349 /* DelegatePowerRequestModel.swift.swift */; };
-		DCDAB374273AC95A00C3B349 /* ConfirmCancelDelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDAB373273AC95A00C3B349 /* ConfirmCancelDelegateViewController.swift */; };
-		DCDAB376273AC97600C3B349 /* ConfirmCancelDelegateViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDAB375273AC97600C3B349 /* ConfirmCancelDelegateViewController+LoadViews.swift */; };
+		DCDAB374273AC95A00C3B349 /* ConfirmDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDAB373273AC95A00C3B349 /* ConfirmDialogViewController.swift */; };
+		DCDAB376273AC97600C3B349 /* ConfirmDialogViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDAB375273AC97600C3B349 /* ConfirmDialogViewController+LoadViews.swift */; };
 		DCDD97C42694B6D7006A6CFA /* CountryPicker in Frameworks */ = {isa = PBXBuildFile; productRef = DCDD97C32694B6D7006A6CFA /* CountryPicker */; };
 		DCDE00672446016800D09717 /* ReplyCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE00662446016800D09717 /* ReplyCommentViewController.swift */; };
 		DCDE006A244601A600D09717 /* ReplyCommentTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCDE0069244601A600D09717 /* ReplyCommentTableViewModel.swift */; };
@@ -532,6 +534,8 @@
 		8DC4AE990A81B7E80AD7C57E /* Pods-SereyIOUITests.release_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.release_development.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.release_development.xcconfig"; sourceTree = "<group>"; };
 		961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicator.swift; sourceTree = "<group>"; };
 		961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicatorViewStyle.swift; sourceTree = "<group>"; };
+		9649B11A27A9995D009B40A3 /* EnterIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterIssueViewController.swift; sourceTree = "<group>"; };
+		9649B11C27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnterIssueViewController+LoadViews.swift"; sourceTree = "<group>"; };
 		9667F212278DE13200A4304D /* NoProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoProfilePictureView.swift; sourceTree = "<group>"; };
 		967BB0DE274E878C005EBCB8 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
 		967DAAD1277B5D0F00B3D0D7 /* UploadProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -991,8 +995,8 @@
 		DCD39899232E2DE700C812EB /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		DCDAB36E27397C3900C3B349 /* ConfirmDelegatePowerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDelegatePowerViewModel.swift; sourceTree = "<group>"; };
 		DCDAB3712739868A00C3B349 /* DelegatePowerRequestModel.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegatePowerRequestModel.swift.swift; sourceTree = "<group>"; };
-		DCDAB373273AC95A00C3B349 /* ConfirmCancelDelegateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmCancelDelegateViewController.swift; sourceTree = "<group>"; };
-		DCDAB375273AC97600C3B349 /* ConfirmCancelDelegateViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConfirmCancelDelegateViewController+LoadViews.swift"; sourceTree = "<group>"; };
+		DCDAB373273AC95A00C3B349 /* ConfirmDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogViewController.swift; sourceTree = "<group>"; };
+		DCDAB375273AC97600C3B349 /* ConfirmDialogViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ConfirmDialogViewController+LoadViews.swift"; sourceTree = "<group>"; };
 		DCDE00662446016800D09717 /* ReplyCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyCommentViewController.swift; sourceTree = "<group>"; };
 		DCDE0069244601A600D09717 /* ReplyCommentTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyCommentTableViewModel.swift; sourceTree = "<group>"; };
 		DCDE006D2446161500D09717 /* UIPlaceHolderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPlaceHolderTextView.swift; sourceTree = "<group>"; };
@@ -1117,6 +1121,15 @@
 			path = SKActivityIndicator;
 			sourceTree = "<group>";
 		};
+		9649B11927A99921009B40A3 /* EnterIssue */ = {
+			isa = PBXGroup;
+			children = (
+				9649B11A27A9995D009B40A3 /* EnterIssueViewController.swift */,
+				9649B11C27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift */,
+			);
+			path = EnterIssue;
+			sourceTree = "<group>";
+		};
 		967DAAD0277B5CF700B3D0D7 /* UploadProfileCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1170,6 +1183,7 @@
 			children = (
 				96AE4E2027A19F2000470B6D /* ReportPostViewController.swift */,
 				96AE4E2227A1A0A700470B6D /* ReportPostViewController+LoadViews.swift */,
+				9649B11927A99921009B40A3 /* EnterIssue */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -1542,6 +1556,7 @@
 				DC40D5DE23E3319700B0DD96 /* ChooseLanguageSheetViewController.swift */,
 				DCFF69602448B5BB00416218 /* VoteDialogProtocol.swift */,
 				DC1CBD082592449800CCB714 /* BottomSheet */,
+				DCB070382732DC96004463E7 /* ConfirmDialog */,
 				DC0F36AB2450937700916886 /* DialogViewController */,
 				DCDE00762448B08600D09717 /* VoteDialogController */,
 			);
@@ -2504,7 +2519,6 @@
 		DCB070362732DC7D004463E7 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
-				DCB070382732DC96004463E7 /* Cancel */,
 				DCB070372732DC91004463E7 /* Power */,
 			);
 			path = Delegate;
@@ -2521,13 +2535,13 @@
 			path = Power;
 			sourceTree = "<group>";
 		};
-		DCB070382732DC96004463E7 /* Cancel */ = {
+		DCB070382732DC96004463E7 /* ConfirmDialog */ = {
 			isa = PBXGroup;
 			children = (
-				DCDAB373273AC95A00C3B349 /* ConfirmCancelDelegateViewController.swift */,
-				DCDAB375273AC97600C3B349 /* ConfirmCancelDelegateViewController+LoadViews.swift */,
+				DCDAB373273AC95A00C3B349 /* ConfirmDialogViewController.swift */,
+				DCDAB375273AC97600C3B349 /* ConfirmDialogViewController+LoadViews.swift */,
 			);
-			path = Cancel;
+			path = ConfirmDialog;
 			sourceTree = "<group>";
 		};
 		DCB0703F2732DE63004463E7 /* Widget */ = {
@@ -3524,7 +3538,7 @@
 				DC5FC20F2453F62500CA6117 /* UserAccountViewModel.swift in Sources */,
 				DCA5255A2425166B00284CD8 /* ButtonTableViewCell.swift in Sources */,
 				DC1F79DB24D089FA00B7F0D3 /* InitTransactionModel.swift in Sources */,
-				DCDAB374273AC95A00C3B349 /* ConfirmCancelDelegateViewController.swift in Sources */,
+				DCDAB374273AC95A00C3B349 /* ConfirmDialogViewController.swift in Sources */,
 				DC40D5CE23E3298F00B0DD96 /* LanguageCellViewModel.swift in Sources */,
 				DC7C8F0824DB099C0051C084 /* WalletType.swift in Sources */,
 				DCB0705127343C38004463E7 /* ConfirmDelegatePowerViewController.swift in Sources */,
@@ -3543,7 +3557,7 @@
 				DC40D5D823E32AB800B0DD96 /* Utilities.swift in Sources */,
 				DC9C65AB24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift in Sources */,
 				DC7C8EF024D9BDF50051C084 /* TransferCoinRequestModel.swift in Sources */,
-				DCDAB376273AC97600C3B349 /* ConfirmCancelDelegateViewController+LoadViews.swift in Sources */,
+				DCDAB376273AC97600C3B349 /* ConfirmDialogViewController+LoadViews.swift in Sources */,
 				DC583A8B24C9E95200D9C4D3 /* RSAUtils.swift in Sources */,
 				9686E4112767ADC8005F0C0E /* CollectionBottomSheetViewController.swift in Sources */,
 				DC12F212242278F90099C479 /* UserModel.swift in Sources */,
@@ -3642,6 +3656,7 @@
 				DC6A790923CA2510001D1009 /* RealmManager.swift in Sources */,
 				DCB0703A2732DD2B004463E7 /* DelegatePowerViewController.swift in Sources */,
 				DC6ED5762326A38B00770B31 /* FMDataParser.swift in Sources */,
+				9649B11B27A9995D009B40A3 /* EnterIssueViewController.swift in Sources */,
 				96CB1AB8277A0E91000C5930 /* ProfileGalleryViewController+LoadViews.swift in Sources */,
 				DC6FCE7723F05D1700D72F6D /* Tag.swift in Sources */,
 				DCDE007C2448B3DB00D09717 /* VoteDialogViewModel.swift in Sources */,
@@ -3780,6 +3795,7 @@
 				DC56243C241E82B80076A78C /* AuthService.swift in Sources */,
 				DC7AAFFB24F80BD000ECDF47 /* PowerDownViewController.swift in Sources */,
 				DC83C38224E19DCC008C9EAB /* ConfirmTransferViewController.swift in Sources */,
+				9649B11D27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift in Sources */,
 				96CB1ABA277A1009000C5930 /* ViewHelper.swift in Sources */,
 				DC3E7E1C270364D3001DA924 /* UIColor+Extensions.swift in Sources */,
 				DCB5BD712497CAE40042E5AF /* SecurityMethodeTableViewCell.swift in Sources */,
