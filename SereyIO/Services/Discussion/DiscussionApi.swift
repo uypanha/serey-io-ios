@@ -35,6 +35,8 @@ enum DiscussionApi {
     case getSereyCountries
     
     case getReportTypes
+    
+    case reportPost(postId: String, typeId: String, description: String)
 }
 
 extension DiscussionApi: AuthorizedApiTargetType {
@@ -95,6 +97,12 @@ extension DiscussionApi: AuthorizedApiTargetType {
                 "author"    : author,
                 "permlink"  : permlink
             ]
+        case .reportPost(let postId, let typeId, let description):
+            return [
+                "post_id" : postId,
+                "report_type_id" : typeId,
+                "description" : description
+            ]
         default:
             return [:]
         }
@@ -126,12 +134,14 @@ extension DiscussionApi: AuthorizedApiTargetType {
             return "/api/v1/general/get_serey_countries"
         case .getReportTypes:
             return "/api/v1/general/get_report_types"
+        case .reportPost:
+            return "/api/v1/general/report_posts"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .submitPost, .submitComment, .deletPost, .upVote, .downVote, .flag:
+        case .submitPost, .submitComment, .deletPost, .upVote, .downVote, .flag, .reportPost:
             return .post
         default:
             return .get
@@ -142,7 +152,7 @@ extension DiscussionApi: AuthorizedApiTargetType {
         switch self {
         case .getDiscussions, .getPostDetail, .getCommentReply, .getCategories, .getSereyCountries, .getReportTypes:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-        case .submitPost, .submitComment, .deletPost, .upVote, .flag, .downVote:
+        case .submitPost, .submitComment, .deletPost, .upVote, .flag, .downVote, .reportPost:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }
     }

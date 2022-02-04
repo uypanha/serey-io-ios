@@ -21,7 +21,7 @@ class DelegatePowerViewModel: BaseInitTransactionViewModel, ShouldPresent, Shoul
         case loading(Bool)
         case dismiss
         case confirmDelegatePowerController(ConfirmDelegatePowerViewModel)
-        case confirmCancelDelegateController(String, String, String, () -> Void)
+        case confirmCancelDelegateController(viewModel: ConfirmDialogViewModel)
         case showAlertDialogController(AlertDialogModel)
     }
     
@@ -122,9 +122,10 @@ extension DelegatePowerViewModel {
         } else {
             let title = "Cancel Delegation from \"\(toAccount)\""
             let message = "Are you sure you want to cancel delegate power?"
-            self.shouldPresent(.confirmCancelDelegateController(title, message, "Cancel Delegate", {
+            let viewModel = ConfirmDialogViewModel(title: title, message: message, action: .init("Cancel Delegate", style: .default, completion: {
                 self.delegatePower()
             }))
+            self.shouldPresent(.confirmCancelDelegateController(viewModel: viewModel))
         }
     }
 }

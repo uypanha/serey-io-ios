@@ -12,7 +12,7 @@ import RxSwift
 import RxBinding
 import Then
 
-class ReportPostViewController: BaseViewController {
+class ReportPostViewController: BaseViewController, LoadingIndicatorController {
     
     lazy var titleLabel: UILabel = {
         return .createLabel(22, weight: .medium, textColor: .black)
@@ -113,13 +113,19 @@ extension ReportPostViewController {
         self.viewModel.shouldPresent.asObservable()
             .subscribe(onNext: { [weak self] viewToPresent in
                 switch viewToPresent {
-                case .confirmDialogController(let title, let message, let buttonTitle, let completion):
-                    let confirmCancelDelegateViewController = ConfirmDialogViewController(title, message: message, buttonTItle: buttonTitle, completion: completion)
-                    let bottomSheet = BottomSheetViewController(contentViewController: confirmCancelDelegateViewController)
+                case .confirmDialogController(let viewModel, let dismissable):
+                    let confirmDialogViewController = ConfirmDialogViewController(viewModel)
+                    let bottomSheet = BottomSheetViewController(contentViewController: confirmDialogViewController)
+                    bottomSheet.dismissOnBackgroundTap = dismissable
                     self?.present(bottomSheet, animated: true, completion: nil)
-                case .enterIssueViewController:
+                case .enterIssueViewController(let viewModel):
                     let enterIssueViewController = EnterIssueViewController()
+                    enterIssueViewController.viewModel = viewModel
                     self?.navigationController?.pushViewController(enterIssueViewController, animated: true)
+                case .loading(let loading):
+                    loading ? self?.showLoading("Loading...") : self?.dismissLoading()
+                case .dismiss:
+                    self?.dismiss(animated: true, completion: nil)
                 }
             }) ~ self.disposeBag
     }

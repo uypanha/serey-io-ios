@@ -281,12 +281,16 @@ extension UserAccountViewController {
                     profileGalleryViewController.hidesBottomBarWhenPushed = true
                     profileGalleryViewController.viewModel = .init()
                     self.show(profileGalleryViewController, sender: nil)
-                case .reportPostController:
+                case .reportPostController(let viewModel):
                     let reportPostViewController = ReportPostViewController()
-                    reportPostViewController.viewModel = .init()
+                    reportPostViewController.viewModel = viewModel
                     self.present(UINavigationController(rootViewController: reportPostViewController).then {
                         $0.modalPresentationStyle = .fullScreen
                     }, animated: true, completion: nil)
+                case .confirmViewController(let viewModel):
+                    let confirmDialogViewController = ConfirmDialogViewController(viewModel)
+                    let bottomSheet = BottomSheetViewController(contentViewController: confirmDialogViewController)
+                    self.present(bottomSheet, animated: true, completion: nil)
                 }
             }) ~ self.disposeBag
     }

@@ -36,7 +36,8 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
         case voteDialogController(VoteDialogViewModel)
         case downVoteDialogController(DownvoteDialogViewModel)
         case bottomListViewController(BottomListMenuViewModel)
-        case reportPostViewController
+        case reportPostViewController(ReportPostViewModel)
+        case confirmViewController(ConfirmDialogViewModel)
     }
     
     // input:
@@ -236,8 +237,10 @@ extension HomeViewModel {
                     self?.shouldPresent(.downVoteDialogController(downVoteDialogViewModel))
                 case .signInViewController:
                     self?.shouldPresent(.signInViewController)
-                case .reportPostController:
-                    self?.shouldPresent(.reportPostViewController)
+                case .reportPostController(let viewModel):
+                    self?.shouldPresent(.reportPostViewController(viewModel))
+                case .confirmViewController(let viewModel):
+                    self?.shouldPresent(.confirmViewController(viewModel))
                 default:
                     break
                 }

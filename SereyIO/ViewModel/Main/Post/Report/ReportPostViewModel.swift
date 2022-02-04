@@ -18,8 +18,10 @@ class ReportPostViewModel: BaseViewModel, CollectionSingleSecitionProviderModel,
     }
     
     enum ViewToPresent {
-        case confirmDialogController(String, String, String, () -> Void)
-        case enterIssueViewController
+        case loading(Bool)
+        case confirmDialogController(viewModel: ConfirmDialogViewModel, dismissable: Bool = true)
+        case enterIssueViewController(EnterIssueViewModel)
+        case dismiss
     }
     
     // input:
@@ -28,13 +30,15 @@ class ReportPostViewModel: BaseViewModel, CollectionSingleSecitionProviderModel,
     // output:
     let shouldPresentSubject: PublishSubject<ViewToPresent>
     
+    let post: PostModel
     let cells: BehaviorRelay<[CellViewModel]>
     let types: BehaviorRelay<[ReportTypeModel]>
     
     let isDownloading: BehaviorRelay<Bool>
     let discussionService: DiscussionService
     
-    override init() {
+    init(with post: PostModel) {
+        self.post = post
         self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
         
@@ -69,7 +73,15 @@ extension ReportPostViewModel {
     }
     
     func reportPost(with type: ReportTypeModel) {
-        
+        self.shouldPresent(.loading(true))
+        self.discussionService.reportPost(self.post.id, typeId: type.id, description: type.title)
+            .subscribe(onNext: { [weak self] data in
+                self?.shouldPresent(.loading(false))
+                self?.handleReportSuccess()
+            }, onError: { [weak self] error in
+                self?.shouldPresent(.loading(false))
+                self?.shouldPresentError(ErrorHelper.prepareError(error: error))
+            }) ~ self.disposeBag
     }
 }
 
@@ -92,13 +104,24 @@ extension ReportPostViewModel {
         if let item = self.item(at: indexPath) as? ReportTypeCellViewModel, let type = item.type {
             if type.title != "Something Else" {
                 let message = "Are you sure to report this post as \"\(type.title)\"?"
-                self.shouldPresent(.confirmDialogController("Report this post?", message, "Submit", {
+                let action = ActionModel("Submit", style: .default) {
                     self.reportPost(with: type)
-                }))
+                }
+                let viewModel = ConfirmDialogViewModel(title: "Report this post?", message: message, action: action)
+                self.shouldPresent(.confirmDialogController(viewModel: viewModel))
             } else {
-                self.shouldPresent(.enterIssueViewController)
+                self.shouldPresent(.enterIssueViewController(.init(from: self.post.id, with: type)))
             }
         }
+    }
+    
+    func handleReportSuccess() {
+        let message = "We’ll use this information to improve our process. Independent fact-checkers may review the article."
+        let action = ActionModel("Done", style: .default) {
+            self.shouldPresent(.dismiss)
+        }
+        let viewModel = ConfirmDialogViewModel(title: "Thanks for letting us know.", message: message, action: action)
+        self.shouldPresent(.confirmDialogController(viewModel: viewModel, dismissable: false))
     }
 }
 

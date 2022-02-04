@@ -85,4 +85,9 @@ class DiscussionService: AppService<DiscussionApi> {
         return self.provider.rx.requestObject(.getReportTypes, type: ReportTypeResponseModel.self)
             .asObservable()
     }
+    
+    func reportPost(_ postId: String, typeId: String, description: String) -> Observable<AnyCodable> {
+        return self.provider.rx.requestObject(.reportPost(postId: postId, typeId: typeId, description: description), type: AnyCodable.self)
+            .asObservable()
+    }
 }

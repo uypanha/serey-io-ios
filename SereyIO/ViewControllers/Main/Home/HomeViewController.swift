@@ -316,12 +316,16 @@ fileprivate extension HomeViewController {
                 case .bottomListViewController(let bottomListMenuViewModel):
                     let bottomMenuViewController = BottomMenuViewController(bottomListMenuViewModel)
                     self.present(bottomMenuViewController, animated: true, completion: nil)
-                case .reportPostViewController:
+                case .reportPostViewController(let viewModel):
                     let reportPostViewController = ReportPostViewController()
-                    reportPostViewController.viewModel = .init()
+                    reportPostViewController.viewModel = viewModel
                     self.present(UINavigationController(rootViewController: reportPostViewController).then {
                         $0.modalPresentationStyle = .fullScreen
                     }, animated: true, completion: nil)
+                case .confirmViewController(let viewModel):
+                    let confirmDialogViewController = ConfirmDialogViewController(viewModel)
+                    let bottomSheet = BottomSheetViewController(contentViewController: confirmDialogViewController)
+                    self.present(bottomSheet, animated: true, completion: nil)
                 }
             }) ~ self.disposeBag
     }

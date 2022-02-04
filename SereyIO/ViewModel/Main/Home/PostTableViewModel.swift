@@ -35,6 +35,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         case signInViewController
         case draftsViewController(DraftListViewModel)
         case reportPostController(ReportPostViewModel)
+        case confirmViewController(ConfirmDialogViewModel)
     }
     
     // input:
@@ -155,9 +156,15 @@ fileprivate extension PostTableViewModel {
                 self.deletePost(post)
             }))
         case .reportPost:
-            self.shouldPresent(.reportPostController(.init()))
+            self.shouldPresent(.reportPostController(.init(with: post)))
         case .hidePost:
-            break
+            let title = "Hide this post?"
+            let message = "You won’t see this post from \(post.author) in your feed."
+            let action = ActionModel("Hide", style: .default) {
+                
+            }
+            let confirmDialogViewModel = ConfirmDialogViewModel(title: title, message: message, action: action)
+            self.shouldPresent(.confirmViewController(confirmDialogViewModel))
         }
     }
     

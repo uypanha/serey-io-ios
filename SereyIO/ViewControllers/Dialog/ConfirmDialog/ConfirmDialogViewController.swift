@@ -31,15 +31,12 @@ class ConfirmDialogViewController: BaseViewController, BottomSheetProtocol {
         return .init()
     }()
     
-    var onConfirmDidPressed: () -> Void = {}
+    var viewModel: ConfirmDialogViewModel!
     
-    init(_ title: String, message: String, buttonTItle: String = R.string.common.confirm.localized(), completion: @escaping () -> Void = {}) {
+    init(_ viewModel: ConfirmDialogViewModel) {
         super.init(nibName: nil, bundle: nil)
         
-        self.titleLabel.text = title
-        self.messageLabel.text = message
-        self.confirmButton.setTitle(buttonTItle, for: .normal)
-        self.onConfirmDidPressed = completion
+        self.viewModel = viewModel
     }
     
     required init?(coder: NSCoder) {
@@ -72,9 +69,19 @@ extension ConfirmDialogViewController {
 extension ConfirmDialogViewController {
     
     func setUpRxObservers() {
+        self.titleLabel.text = self.viewModel.title
+        self.messageLabel.text = self.viewModel.message
+        
+        if let action = viewModel.actions.first {
+            self.confirmButton.setTitle(action.title, for: .normal)
+            self.confirmButton.primaryStyle()
+        }
+        
         self.confirmButton.rx.tap.asObservable()
             .subscribe(onNext: { [weak self] _ in
-                self?.onConfirmDidPressed()
+                self?.dismiss(animated: true, completion: {
+                    self?.viewModel.actions.first?.completion()
+                })
             }) ~ self.disposeBag
     }
 }
