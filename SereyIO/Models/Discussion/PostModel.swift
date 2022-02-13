@@ -32,6 +32,8 @@ struct PostModel: Codable {
     let authorImageUrl: String?
     var replies: [PostModel]?
     
+    var isHidden: Bool = false
+    
     var firstThumnailURL: URL? {
         get {
             return imageUrl?.first == nil ? nil : URL(string: imageUrl!.first!)

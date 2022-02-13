@@ -38,11 +38,11 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>${app_name} needs access to your camera to take photos.</string>
+	<string>${app_name} needs access to your camera to take photos for your post or profile.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>We use Face ID to authentiate your account.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>${app_name} needs access to your photo library to store photos.</string>
+	<string>${app_name} needs access to your photo library to upload photos for your post or profile.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>${app_name} needs access to your photo library to store photos.</string>
 	<key>Notificaton Center URL</key>

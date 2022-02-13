@@ -76,6 +76,7 @@ fileprivate extension PostTableViewController {
         self.tableView.register(PostTableViewCell.self)
         self.tableView.register(FilteredCategoryTableViewCell.self)
         self.tableView.register(DraftSavedTableViewCell.self)
+        self.tableView.register(UndoHiddenPostTableViewCell.self, isNib: false)
     }
     
     func prepreDataSource() -> RxTableViewSectionedReloadDataSource<SectionItem> {
@@ -93,6 +94,10 @@ fileprivate extension PostTableViewController {
             case is DraftSavedCellViewModel:
                 let cell: DraftSavedTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
                 cell.cellModel = item as? DraftSavedCellViewModel
+                return cell
+            case is UndoHiddenPostCellViewModel:
+                let cell: UndoHiddenPostTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
+                cell.cellModel = item as? UndoHiddenPostCellViewModel
                 return cell
             default:
                 return UITableViewCell()

@@ -37,6 +37,10 @@ enum DiscussionApi {
     case getReportTypes
     
     case reportPost(postId: String, typeId: String, description: String)
+    
+    case hidePost(String)
+    
+    case unhidePost(String)
 }
 
 extension DiscussionApi: AuthorizedApiTargetType {
@@ -103,6 +107,14 @@ extension DiscussionApi: AuthorizedApiTargetType {
                 "report_type_id" : typeId,
                 "description" : description
             ]
+        case .hidePost(let id):
+            return [
+                "post_id"   : id
+            ]
+        case .unhidePost(let id):
+            return [
+                "post_id"   : id
+            ]
         default:
             return [:]
         }
@@ -136,12 +148,16 @@ extension DiscussionApi: AuthorizedApiTargetType {
             return "/api/v1/general/get_report_types"
         case .reportPost:
             return "/api/v1/general/report_posts"
+        case .hidePost:
+            return "/api/v1/general/hide_posts"
+        case .unhidePost:
+            return "/api/v1/general/unhide_posts"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .submitPost, .submitComment, .deletPost, .upVote, .downVote, .flag, .reportPost:
+        case .submitPost, .submitComment, .deletPost, .upVote, .downVote, .flag, .reportPost, .hidePost, .unhidePost:
             return .post
         default:
             return .get
@@ -152,7 +168,7 @@ extension DiscussionApi: AuthorizedApiTargetType {
         switch self {
         case .getDiscussions, .getPostDetail, .getCommentReply, .getCategories, .getSereyCountries, .getReportTypes:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-        case .submitPost, .submitComment, .deletPost, .upVote, .flag, .downVote, .reportPost:
+        case .submitPost, .submitComment, .deletPost, .upVote, .flag, .downVote, .reportPost, .hidePost, .unhidePost:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }
     }

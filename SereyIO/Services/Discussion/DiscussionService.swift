@@ -90,4 +90,14 @@ class DiscussionService: AppService<DiscussionApi> {
         return self.provider.rx.requestObject(.reportPost(postId: postId, typeId: typeId, description: description), type: AnyCodable.self)
             .asObservable()
     }
+    
+    func hidePost(with postId: String) -> Observable<AnyCodable> {
+        return self.provider.rx.requestObject(.hidePost(postId), type: AnyCodable.self)
+            .asObservable()
+    }
+    
+    func unhidePost(with postId: String) -> Observable<AnyCodable> {
+        return self.provider.rx.requestObject(.unhidePost(postId), type: AnyCodable.self)
+            .asObservable()
+    }
 }

@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import RxBinding
 import RxDataSources
+import Then
 
 class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, InfiniteNetworkProtocol {
     
@@ -96,8 +97,14 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
         }
         
         cells.append(contentsOf: discussions.map {
-            PostCellViewModel($0).then {
-                setUpPostCellViewModel($0)
+            if $0.isHidden {
+                return UndoHiddenPostCellViewModel($0).then {
+                    setUpHiddenPostCellObservers($0)
+                }
+            } else {
+                return PostCellViewModel($0).then {
+                    setUpPostCellViewModel($0)
+                }
             }
         })
         
@@ -190,6 +197,30 @@ extension BasePostViewModel {
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
     }
+    
+    internal func hidePost(_ post: PostModel) {
+        self.discussionService.hidePost(with: post.id)
+            .subscribe(onNext: { [weak self] data in
+                var post = post
+                post.isHidden = true
+                self?.updatePost(post)
+            }, onError: { [weak self] error in
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    internal func unhidePost(_ post: PostModel) {
+        self.discussionService.unhidePost(with: post.id)
+            .subscribe(onNext: { [weak self] data in
+                var post = post
+                post.isHidden = false
+                self?.updatePost(post)
+            }, onError: { [weak self] error in
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
 }
 
 // MARK: - Preparations & Tools
@@ -275,5 +306,12 @@ fileprivate extension BasePostViewModel {
             .map { _ in return nil }
             ~> self.selectedCategory
             ~ cellModel.disposeBag
+    }
+    
+    func setUpHiddenPostCellObservers(_ cellModel: UndoHiddenPostCellViewModel) {
+        cellModel.shouldUnhidePost.asObservable()
+            .subscribe(onNext: { [weak self] post in
+                self?.unhidePost(post)
+            }) ~ cellModel.disposeBag
     }
 }

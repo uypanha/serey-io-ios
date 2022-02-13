@@ -18,6 +18,8 @@
 		9649B11F27AC20A4009B40A3 /* ConfirmDialogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B11E27AC20A4009B40A3 /* ConfirmDialogViewModel.swift */; };
 		9649B12127AC2729009B40A3 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B12027AC2729009B40A3 /* UIButton+Extensions.swift */; };
 		9649B12327AC2A90009B40A3 /* EnterIssueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B12227AC2A90009B40A3 /* EnterIssueViewModel.swift */; };
+		9649B12627B174F2009B40A3 /* UndoHiddenPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B12527B174F2009B40A3 /* UndoHiddenPostTableViewCell.swift */; };
+		9649B12827B17AA2009B40A3 /* UndoHiddenPostCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B12727B17AA2009B40A3 /* UndoHiddenPostCellViewModel.swift */; };
 		9667F213278DE13200A4304D /* NoProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9667F212278DE13200A4304D /* NoProfilePictureView.swift */; };
 		967BB0DF274E878C005EBCB8 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BB0DE274E878C005EBCB8 /* CountryModel.swift */; };
 		967DAAD2277B5D0F00B3D0D7 /* UploadProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967DAAD1277B5D0F00B3D0D7 /* UploadProfileCollectionViewCell.swift */; };
@@ -542,6 +544,8 @@
 		9649B11E27AC20A4009B40A3 /* ConfirmDialogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogViewModel.swift; sourceTree = "<group>"; };
 		9649B12027AC2729009B40A3 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		9649B12227AC2A90009B40A3 /* EnterIssueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterIssueViewModel.swift; sourceTree = "<group>"; };
+		9649B12527B174F2009B40A3 /* UndoHiddenPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoHiddenPostTableViewCell.swift; sourceTree = "<group>"; };
+		9649B12727B17AA2009B40A3 /* UndoHiddenPostCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoHiddenPostCellViewModel.swift; sourceTree = "<group>"; };
 		9667F212278DE13200A4304D /* NoProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoProfilePictureView.swift; sourceTree = "<group>"; };
 		967BB0DE274E878C005EBCB8 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
 		967DAAD1277B5D0F00B3D0D7 /* UploadProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1136,6 +1140,15 @@
 			path = EnterIssue;
 			sourceTree = "<group>";
 		};
+		9649B12427B174D0009B40A3 /* UndoHiddenPostTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				9649B12727B17AA2009B40A3 /* UndoHiddenPostCellViewModel.swift */,
+				9649B12527B174F2009B40A3 /* UndoHiddenPostTableViewCell.swift */,
+			);
+			path = UndoHiddenPostTableViewCell;
+			sourceTree = "<group>";
+		};
 		967DAAD0277B5CF700B3D0D7 /* UploadProfileCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1281,6 +1294,7 @@
 				DC26812723F2FC6C0045776E /* ProfileTableViewCell */,
 				DC7558B42458986300AD40FA /* SereyAppTableViewCell */,
 				DC115F38241A9A56006BE78C /* SignInTableViewCell */,
+				9649B12427B174D0009B40A3 /* UndoHiddenPostTableViewCell */,
 				967DAAD0277B5CF700B3D0D7 /* UploadProfileCollectionViewCell */,
 			);
 			path = More;
@@ -3575,6 +3589,7 @@
 				DC583A9B24CC46F700D9C4D3 /* LoadingButton.swift in Sources */,
 				DC803C5626974C3B00FCD2B2 /* PageItemControllerProtocol.swift in Sources */,
 				96D46BAF275FBEC70078779A /* UserProfileService.swift in Sources */,
+				9649B12627B174F2009B40A3 /* UndoHiddenPostTableViewCell.swift in Sources */,
 				DCEC0CC3240A530B002F4B6F /* FilteredCategoryTableViewCell.swift in Sources */,
 				DC9E36F024154BC900289693 /* PFColorHash.swift in Sources */,
 				DC5FC21A2454330900CA6117 /* CommentReplyModel.swift in Sources */,
@@ -3622,6 +3637,7 @@
 				DCD39881232E24A400C812EB /* NSLayoutConstraint+Multiplier.swift in Sources */,
 				DC6FCE7923F05D1700D72F6D /* Helper.swift in Sources */,
 				DCDE006E2446161500D09717 /* UIPlaceHolderTextView.swift in Sources */,
+				9649B12827B17AA2009B40A3 /* UndoHiddenPostCellViewModel.swift in Sources */,
 				DCD3989A232E2DE700C812EB /* UINavigationController.swift in Sources */,
 				DC6ED57E2326A44A00770B31 /* DefaultsStore.swift in Sources */,
 				961264AB2757B79900AA1AD2 /* SKActivityIndicator.swift in Sources */,
