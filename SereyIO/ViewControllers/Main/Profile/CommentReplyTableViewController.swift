@@ -11,6 +11,8 @@ import RxBinding
 
 class CommentReplyTableViewController: ListTableViewController<CommentsListViewModel> {
     
+    var scrollViewDelegate: UIScrollViewDelegate?
+    
     override func viewDidLoad() {
         self.sepereatorStyle = .none
         self.contentInset = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0)
@@ -30,5 +32,13 @@ class CommentReplyTableViewController: ListTableViewController<CommentsListViewM
                     }, negativeButton: R.string.common.cancel.localized())
                 }
             }) ~ self.disposeBag
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.scrollViewDelegate?.scrollViewDidScroll?(scrollView)
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.scrollViewDelegate?.scrollViewWillBeginDragging?(scrollView)
     }
 }

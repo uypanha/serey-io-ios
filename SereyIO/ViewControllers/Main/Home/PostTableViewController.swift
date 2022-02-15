@@ -27,6 +27,8 @@ class PostTableViewController: BaseTableViewController, AlertDialogController {
         return self.prepreDataSource()
     }()
     
+    var scrollViewDelegate: UIScrollViewDelegate?
+    
     var viewModel: PostTableViewModel!
 
     override func viewDidLoad() {
@@ -59,6 +61,14 @@ class PostTableViewController: BaseTableViewController, AlertDialogController {
         setUpContentChangedObservers()
         shouldPresentObservers()
         setUpShouldPresentErrorObservers()
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.scrollViewDelegate?.scrollViewDidScroll?(scrollView)
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.scrollViewDelegate?.scrollViewWillBeginDragging?(scrollView)
     }
 }
 

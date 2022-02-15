@@ -27,6 +27,13 @@ class UserAccountViewController: BaseViewController, AlertDialogController, Load
     @IBOutlet weak var followLoadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tabBar: MDCTabBarView!
     
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    var lastContentOffset: CGFloat = 0
+    
+    var maxTopOffset: CGFloat = 60
+    let minTopOffset: CGFloat = 0
+    var previousScrollOffset: CGFloat = 0
+    
     lazy var fileMediaHelper: MediaPickerHelper = .init(withPresenting: self)
     
     private var tabItems: [UITabBarItem] = [] {
@@ -50,6 +57,9 @@ class UserAccountViewController: BaseViewController, AlertDialogController, Load
         setUpViews()
         setUpRxObservers()
         viewModel.downloadData()
+        DispatchQueue.main.async {
+            self.maxTopOffset = self.profileContainerView.frame.height
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -125,9 +135,13 @@ extension UserAccountViewController {
         viewModels.forEach { viewModel in
             switch viewModel {
             case is PostTableViewModel:
-                slides.append(PostTableViewController(style: .plain).then { $0.viewModel = viewModel as? PostTableViewModel })
+                slides.append(PostTableViewController(style: .plain).then {
+                    $0.viewModel = viewModel as? PostTableViewModel
+                    $0.scrollViewDelegate = self
+                })
             case is CommentsListViewModel:
                 let commentReplyViewController = CommentReplyTableViewController(viewModel as! CommentsListViewModel)
+                commentReplyViewController.scrollViewDelegate = self
                 slides.append(commentReplyViewController)
             default:
                 slides.append(UIViewController())
@@ -142,6 +156,56 @@ extension UserAccountViewController: MDCTabBarViewDelegate {
     
     func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
         self.contentScrollView.scrollRectToVisible(self.slideViews[item.tag].view.frame, animated: true)
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension UserAccountViewController: UIScrollViewDelegate {
+    
+    func prepareScrollingSwitchView(_ scrollView: UIScrollView) {
+        let scrollDiff = (scrollView.contentOffset.y - previousScrollOffset)
+        let isScrollingDown = scrollDiff > 0
+        let isScrollingUp = scrollDiff < 0
+        if self.canAnimateHeader(scrollView) {
+            let currentOffset = abs(self.topConstraint.constant)
+            var newOffset = currentOffset
+            if isScrollingDown {
+                newOffset = min(maxTopOffset, currentOffset + abs(scrollDiff))
+            } else if isScrollingUp {
+                print("isScrollingUp")
+                newOffset = max(minTopOffset, currentOffset - abs(scrollDiff))
+            }
+            print("Current Offset ==> \(currentOffset), New Offset ==> \(newOffset), scrollDiff == \(scrollDiff)")
+            if newOffset != currentOffset {
+                self.topConstraint.constant = -newOffset//.update(offset: newOffset).activate()
+                setScrollPosition(scrollView)
+                previousScrollOffset = scrollView.contentOffset.y
+            }
+            
+            if newOffset >= (self.maxTopOffset / 2) {
+                self.title = self.viewModel.username.value
+            } else {
+                self.title = nil
+            }
+        }
+    }
+    
+    func canAnimateHeader (_ scrollView: UIScrollView) -> Bool {
+        let currentTopConstant = self.topConstraint.constant
+        let scrollViewMaxHeight = scrollView.frame.height + currentTopConstant
+        return scrollView.contentSize.height > scrollViewMaxHeight
+    }
+    
+    func setScrollPosition(_ scrollView: UIScrollView) {
+        scrollView.contentOffset = .zero
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.lastContentOffset = scrollView.contentOffset.y
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.prepareScrollingSwitchView(scrollView)
     }
 }
 
