@@ -15,7 +15,7 @@ class EmptyOrErrorView: NibView {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var actionButton: UIButton! {
         didSet {
-            actionButton.setTitleColor(ColorName.primary.color, for: .normal)
+            actionButton.setTitleColor(.color(.primary), for: .normal)
         }
     }
     @IBOutlet weak var topConstraint: NSLayoutConstraint!

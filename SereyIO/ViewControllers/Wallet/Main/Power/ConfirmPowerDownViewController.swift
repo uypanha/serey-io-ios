@@ -39,7 +39,7 @@ class ConfirmPowerDownViewController: BaseViewController, BottomSheetProtocol {
 extension ConfirmPowerDownViewController {
     
     func setUpViews() {
-        self.amountLabel.textColor = ColorName.primary.color
+        self.amountLabel.textColor = .color(.primary)
         self.powerDownButton.primaryStyle()
     }
 }

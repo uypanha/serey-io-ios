@@ -30,7 +30,7 @@ class HeaderCollectionViewCell: BaseCollectionViewCell {
         super.awakeFromNib()
         
         // Initialization code
-        self.headerLabel.textColor = .black//ColorName.title.color
+        self.headerLabel.textColor = .black
     }
     
     func updateSize(_ size: CGSize) {

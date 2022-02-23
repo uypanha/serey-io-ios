@@ -51,7 +51,7 @@ class NotificationTableCell: BaseTableViewCell {
             $0.contentMode = .scaleAspectFill
             $0.clipsToBounds = true
             $0.setRadius(all: 8)
-            $0.backgroundColor = ColorName.shimmering.color.withAlphaComponent(0.5)
+            $0.backgroundColor = .color(.shimmering).withAlphaComponent(0.5)
             $0.snp.makeConstraints { make in
                 make.width.height.equalTo(48)
             }
@@ -142,7 +142,7 @@ extension NotificationTableCell {
 extension NotificationTableCell {
     
     private func prepareShimmering(_ isShimmering: Bool) {
-        let backgroundColor = isShimmering ? ColorName.shimmering.color.withAlphaComponent(0.5) : UIColor.clear
+        let backgroundColor = isShimmering ? .color(.shimmering).withAlphaComponent(0.5) : UIColor.clear
         let cornerRadius : CGFloat = isShimmering ? 8 : 0
         
         self.profileView.backgroundColor = backgroundColor

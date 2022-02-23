@@ -45,7 +45,7 @@ class ImageTextTableViewCell: BaseTableViewCell {
                 .subscribe(onNext: { [weak self] showSeperatorLine in
                     self?.removeAllBorders()
                     if (showSeperatorLine) {
-                        self?.addBorder(edges: .bottom, color: UIColor.lightGray.withAlphaComponent(0.5), thickness: 1)
+                        self?.addBorder(edges: .bottom, color: .color(.border), thickness: 1)
                     }
                 }).disposed(by: self.disposeBag)
         }

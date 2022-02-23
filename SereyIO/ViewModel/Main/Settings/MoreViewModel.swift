@@ -178,8 +178,8 @@ extension MoreViewModel {
         if AuthData.shared.isUserLoggedIn {
             let signOutButtonProperties = ButtonProperties().then {
                 $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-                $0.textColor = ColorName.primaryRed.color
-                $0.borderColor = ColorName.primaryRed.color
+                $0.textColor = .color(.primaryRed)
+                $0.borderColor = .color(.primaryRed)
                 $0.isCircular = false
             }
             let signOutButtonModel = ButtonCellViewModel(R.string.auth.signOut.localized(), signOutButtonProperties).then { [unowned self] in

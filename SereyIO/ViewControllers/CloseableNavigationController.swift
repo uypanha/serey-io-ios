@@ -17,11 +17,11 @@ class CloseableNavigationController: UINavigationController {
     fileprivate lazy var closeButton: UIButton = {
         return UIButton(type: .custom).then {
             $0.setImage(closeIcon, for: .normal) // Image can be downloaded from here below link
-            $0.setImage(closeIcon?.image(withTintColor: ColorName.primary.color.withAlphaComponent(0.3)), for: .highlighted)
+            $0.setImage(closeIcon?.image(withTintColor: .color(.primary).withAlphaComponent(0.3)), for: .highlighted)
             if let closeTitle = self.closeTitle {
                 $0.setTitle(" \(closeTitle.localized())", for: .normal)
             }
-            $0.tintColor = ColorName.primary.color
+            $0.tintColor = .color(.primary)
             $0.setTitleColor($0.tintColor, for: .normal) // You can change the TitleColor
             $0.setTitleColor($0.tintColor.withAlphaComponent(0.3), for: .highlighted)
             $0.addTarget(self, action: #selector(self.backActionPressed), for: .touchUpInside)

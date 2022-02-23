@@ -68,7 +68,7 @@ class SignInViewController: BaseViewController, LoadingIndicatorController, Keyb
 fileprivate extension SignInViewController {
     
     func setUpViews() {
-        self.signInButton.customStyle(with: ColorName.buttonBg.color)
+        self.signInButton.customStyle(with: .color(.buttonBg))
         
         self.userNameTextField.primaryStyle()
         self.passwordTextField.primaryStyle()

@@ -52,7 +52,7 @@ class SelectLanguageViewController: BaseViewController {
 extension SelectLanguageViewController {
     
     func setUpViews() {
-        self.continueButton.backgroundColor = ColorName.primary.color
+        self.continueButton.backgroundColor = .color(.primary)
         self.continueButtonHeightConstraint.constant = 56 + self.bottomSafeAreaHeight
         self.continueButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: self.bottomSafeAreaHeight, right: 0)
         

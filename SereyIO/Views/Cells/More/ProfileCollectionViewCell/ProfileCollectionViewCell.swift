@@ -34,7 +34,7 @@ class ProfileCollectionViewCell: BaseCollectionViewCell {
     
     lazy var profileImageView: UIImageView = {
         return .init().then {
-            $0.backgroundColor = ColorName.shimmering.color.withAlphaComponent(0.5)
+            $0.backgroundColor = .color(.shimmering).withAlphaComponent(0.5)
         }
     }()
     
@@ -64,7 +64,7 @@ class ProfileCollectionViewCell: BaseCollectionViewCell {
                     }),
                 cellModel.isSelected
                     .subscribe(onNext: { [weak self] isSelected in
-                        self?.mainView.borderColor = isSelected ? .color(.primary) : ColorName.shimmering.color.withAlphaComponent(0.5)
+                        self?.mainView.borderColor = isSelected ? .color(.primary) : .color(.shimmering).withAlphaComponent(0.5)
                         self?.mainView.borderWidth = isSelected ? 3 : 1
                     })
             ]

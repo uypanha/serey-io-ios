@@ -21,12 +21,6 @@ class HomeViewController: BaseViewController, AlertDialogController, LoadingIndi
     @IBOutlet weak var tabBar: MDCTabBarView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    private lazy var logoBarItem: UIBarButtonItem = {
-        let customView = UIImageView()
-        customView.image = R.image.logo()
-        return UIBarButtonItem(customView: customView)
-    }()
-    
     private lazy var filterButton: UIBarButtonItem = { [unowned self] in
         return UIBarButtonItem(image: R.image.filterIcon(), style: .plain, target: nil, action: nil)
     }()
@@ -41,7 +35,7 @@ class HomeViewController: BaseViewController, AlertDialogController, LoadingIndi
         let button = MDCFloatingButton()
         button.setImage(R.image.plusIcon(), for: .normal)
         button.tintColor = .white
-        button.backgroundColor = ColorName.almostRed.color
+        button.backgroundColor = .color(.almostRed)
         button.setElevation(ShadowElevation(rawValue: 4), for: .normal)
         button.setElevation(ShadowElevation(rawValue: 8), for: .highlighted)
         return button
@@ -106,11 +100,11 @@ extension HomeViewController {
     
     func setUpViews() {
         self.navigationController?.removeNavigationBarBorder()
-        self.navigationItem.leftBarButtonItems = [logoBarItem, .init(customView: self.countryButton)]
+        self.navigationItem.leftBarButtonItems = [.init(customView: self.countryButton)]
         self.navigationItem.rightBarButtonItems = [filterButton, sereyPrice]
         
         self.scrollView.delegate = self
-        self.scrollView.backgroundColor = ColorName.postBackground.color
+        self.scrollView.backgroundColor = .color(.postBackground)
         
         preparePostButton()
         prepareTabBar()
@@ -127,17 +121,17 @@ extension HomeViewController {
     }
     
     func prepareTabBar() {
-        tabBar.tintColor = ColorName.primary.color
+        tabBar.tintColor = .color(.primary)
         tabBar.setTitleColor(.gray, for: .normal)
-        tabBar.setTitleColor(ColorName.primary.color, for: .selected)
+        tabBar.setTitleColor(.color(.primary), for: .selected)
         
         tabBar.setTitleFont(UIFont.systemFont(ofSize: 14, weight: .medium), for: .selected)
         tabBar.setTitleFont(UIFont.systemFont(ofSize: 14, weight: .medium), for: .normal)
         tabBar.rippleColor = .clear
-        tabBar.selectionIndicatorStrokeColor = ColorName.primary.color
+        tabBar.selectionIndicatorStrokeColor = .color(.primary)
         
         tabBar.selectionIndicatorTemplate = TabBarIndicator()
-        tabBar.bottomDividerColor = ColorName.border.color
+        tabBar.bottomDividerColor = .color(.border)
         tabBar.tabBarDelegate = self
     }
     
@@ -248,7 +242,7 @@ fileprivate extension HomeViewController {
         self.viewModel.currentCountry.asObservable()
             .subscribe(onNext: { [weak self] country in
                 if let country = country {
-                    self?.countryButton.setTitle(country.countryName, for: .normal)
+                    self?.countryButton.setTitle("Serey \(country.countryName)", for: .normal)
                     if country.icon == nil, let iconUrl = URL(string: country.iconUrl ?? "") {
                         let resizingProcessor = ResizingImageProcessor(referenceSize: CGSize(width: 16, height: 16))
                         self?.countryButton.kf.setImage(with: iconUrl, for: .normal, options: [.processor(resizingProcessor)])
@@ -256,7 +250,7 @@ fileprivate extension HomeViewController {
                         self?.countryButton.setImage(country.icon, for: .normal)
                     }
                 } else {
-                    self?.countryButton.setTitle("Global", for: .normal)
+                    self?.countryButton.setTitle("Serey Global", for: .normal)
                     self?.countryButton.setImage(R.image.earhIcon(), for: .normal)
                 }
                 self?.countryButton.tintColor = .black

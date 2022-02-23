@@ -88,17 +88,17 @@ extension UserAccountViewController {
     }
     
     func prepareTabBar() {
-        tabBar.tintColor = ColorName.primary.color
+        tabBar.tintColor = .color(.primary)
         tabBar.setTitleColor(.gray, for: .normal)
-        tabBar.setTitleColor(ColorName.primary.color, for: .selected)
+        tabBar.setTitleColor(.color(.primary), for: .selected)
         
         tabBar.setTitleFont(UIFont.systemFont(ofSize: 14, weight: .medium), for: .selected)
         tabBar.setTitleFont(UIFont.systemFont(ofSize: 14, weight: .medium), for: .normal)
         tabBar.rippleColor = .clear
-        tabBar.selectionIndicatorStrokeColor = ColorName.primary.color
+        tabBar.selectionIndicatorStrokeColor = .color(.primary)
         
         tabBar.selectionIndicatorTemplate = TabBarIndicator()
-        tabBar.bottomDividerColor = ColorName.border.color
+        tabBar.bottomDividerColor = .color(.border)
         tabBar.tabBarDelegate = self
     }
     
@@ -260,17 +260,17 @@ extension UserAccountViewController {
         self.viewModel.isFollowed.asObservable()
             .subscribe(onNext: { [weak self] isFollowed in
                 if let isFollowed = isFollowed {
-                    let titleColor = isFollowed ? UIColor.white : ColorName.primary.color
+                    let titleColor = isFollowed ? UIColor.white : .color(.primary)
                     self?.followButton.setTitleColor(titleColor, for: .normal)
                     if isFollowed {
                         self?.followButton.setTitle(R.string.account.unfollow.localized(), for: .normal)
                         self?.followButton.primaryStyle()
                     } else {
                         self?.followButton.setTitle(R.string.account.follow.localized(), for: .normal)
-                        self?.followButton.customBorderStyle(with: ColorName.primary.color, border: 1.5, isCircular: false)
+                        self?.followButton.customBorderStyle(with: .color(.primary), border: 1.5, isCircular: false)
                     }
                 } else {
-                    self?.followButton.setTitleColor(ColorName.primary.color, for: .normal)
+                    self?.followButton.setTitleColor(.color(.primary), for: .normal)
                     self?.followButton.customBorderStyle(with: .lightGray, border: 1, isCircular: false)
                     self?.followButton.setTitle(R.string.account.followUnfollow.localized(), for: .normal)
                 }

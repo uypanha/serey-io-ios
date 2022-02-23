@@ -51,7 +51,7 @@ class VoteDialogViewController: BaseViewController {
 extension VoteDialogViewController {
     
     func setUpViews() {
-        self.titleContainerView.addBorders(edges: [.bottom], color: ColorName.border.color)
+        self.titleContainerView.addBorders(edges: [.bottom], color: .color(.border))
         self.confirmButton.primaryStyle()
         self.cancelButton.secondaryStyle()
         

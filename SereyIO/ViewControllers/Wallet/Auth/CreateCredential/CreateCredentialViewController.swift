@@ -38,7 +38,7 @@ extension CreateCredentialViewController {
     
     func setUpViews() {
         self.nextButton.primaryStyle()
-        self.skipButton.setTitleColor(ColorName.primary.color, for: .normal)
+        self.skipButton.setTitleColor(.color(.primary), for: .normal)
         self.skipButton.customStyle(with: .clear)
         
         self.passwordTextField.primaryStyle()

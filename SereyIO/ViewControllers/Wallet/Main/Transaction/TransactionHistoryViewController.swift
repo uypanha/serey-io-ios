@@ -50,7 +50,7 @@ extension TransactionHistoryViewController {
     }
     
     func prepareTableView() {
-        self.tableView.separatorColor = ColorName.border.color
+        self.tableView.separatorColor = .color(.border)
         self.tableView.tableFooterView = UIView()
         
         self.tableView.register(TransactionTableViewCell.self)

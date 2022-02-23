@@ -34,7 +34,7 @@ class FilterHeaderCollectionViewCell: BaseCollectionViewCell {
         
         // Initialization code
         self.titleLabel.textColor = .black
-        self.resetButton.setTitleColor(ColorName.almostRed.color, for: .normal)
+        self.resetButton.setTitleColor(.color(.almostRed), for: .normal)
         self.resetButton.customStyle(with: .clear)
     }
     

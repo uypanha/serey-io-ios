@@ -38,7 +38,7 @@ class WalletViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.setNavigationBarColor(ColorName.navigationBg.color, tintColor: ColorName.navigationTint.color)
+        self.navigationController?.setNavigationBarColor(.color(.navigationBg), tintColor: .color(.navigationTint))
         self.navigationController?.showNavigationBarBorder()
     }
     
@@ -60,8 +60,8 @@ extension WalletViewController {
         self.navigationItem.rightBarButtonItem = self.settingButton
         self.viewHeightConstraint.constant = -self.bottomSafeAreaHeight
         self.transactionButton.setRadius(all: 8)
-        self.transactionButton.setTitleColor(ColorName.primary.color, for: .normal)
-        self.transactionButton.tintColor = ColorName.primary.color
+        self.transactionButton.setTitleColor(.color(.primary), for: .normal)
+        self.transactionButton.tintColor = .color(.primary)
         self.transactionButton.customStyle(with: UIColor(hexString: "EDF1FB"))
     }
     

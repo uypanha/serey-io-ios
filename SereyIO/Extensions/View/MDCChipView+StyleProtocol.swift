@@ -32,16 +32,16 @@ extension MDCChipView: StyleProtocol {
     
     func primaryStyle() {
         self.commonStyle()
-        self.imageView.tintColor = ColorName.icon.color
-        self.selectedImageView.tintColor = ColorName.primary.color
-        self.setTitleColor(ColorName.icon.color, for: .normal)
-        self.setTitleColor(ColorName.primary.color, for: .highlighted)
-        self.setTitleColor(ColorName.primary.color, for: .selected)
-        self.setBorderColor(ColorName.border.color, for: .normal)
+        self.imageView.tintColor = .color(.icon)
+        self.selectedImageView.tintColor = .color(.primary)
+        self.setTitleColor(.color(.icon), for: .normal)
+        self.setTitleColor(.color(.primary), for: .highlighted)
+        self.setTitleColor(.color(.primary), for: .selected)
+        self.setBorderColor(.color(.border), for: .normal)
         self.setBorderWidth(1, for: .normal)
         self.setBackgroundColor(.white, for: .normal)
-        self.setBackgroundColor(ColorName.secondaryLight.color, for: .highlighted)
-        self.setBackgroundColor(ColorName.secondaryLight.color, for: .selected)
+        self.setBackgroundColor(.color(.secondaryLight), for: .highlighted)
+        self.setBackgroundColor(.color(.secondaryLight), for: .selected)
     }
     
     func secondaryStyle() {

@@ -86,9 +86,9 @@ class CreatePostViewController: BaseViewController, KeyboardController, LoadingI
 extension CreatePostViewController {
     
     func setUpViews() {
-        self.titleTextField.addBorders(edges: [.bottom], color: ColorName.border.color)
-        self.richEditorView.addBorders(edges: [.bottom], color: ColorName.border.color)
-        self.shortDescTextField.addBorders(edges: [.bottom], color: ColorName.border.color)
+        self.titleTextField.addBorders(edges: [.bottom], color: .color(.border))
+        self.richEditorView.addBorders(edges: [.bottom], color: .color(.border))
+        self.shortDescTextField.addBorders(edges: [.bottom], color: .color(.border))
         
         setUpEditorView(self.richEditorView)
         
@@ -98,7 +98,7 @@ extension CreatePostViewController {
     }
     
     func prepareTableView() {
-        self.tableView.separatorColor = ColorName.border.color
+        self.tableView.separatorColor = .color(.border)
         self.tableView.tableFooterView = UIView()
         self.tableView.register(TextTableViewCell.self)
     }

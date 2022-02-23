@@ -60,8 +60,8 @@ class WalletCardCollectionViewCell: BaseCollectionViewCell {
 extension WalletCardCollectionViewCell {
     
     func prepareShimmering(_ isShimmering: Bool) {
-        let backgroundColor = isShimmering ? ColorName.shimmering.color.withAlphaComponent(0.5) : UIColor.clear
-        let textColor = isShimmering ? ColorName.shimmering.color.withAlphaComponent(0.5) : UIColor.white
+        let backgroundColor = isShimmering ? .color(.shimmering).withAlphaComponent(0.5) : UIColor.clear
+        let textColor = isShimmering ? .color(.shimmering).withAlphaComponent(0.5) : UIColor.white
         let cornerRadius : CGFloat = isShimmering ? 8 : 0
         
         self.titleLabel.backgroundColor = backgroundColor
@@ -76,7 +76,7 @@ extension WalletCardCollectionViewCell {
         self.sereyImageView.isHidden = isShimmering
         
         if isShimmering {
-            self.cardView.backgroundColor = ColorName.shimmering.color
+            self.cardView.backgroundColor = .color(.shimmering)
         }
         
         DispatchQueue.main.async {

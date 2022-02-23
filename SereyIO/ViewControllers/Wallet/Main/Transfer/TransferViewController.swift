@@ -38,7 +38,7 @@ class TransferViewController: BaseViewController, KeyboardController, LoadingInd
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.setNavigationBarColor(ColorName.primary.color, tintColor: .white)
+        self.navigationController?.setNavigationBarColor(.color(.primary), tintColor: .white)
         self.navigationController?.removeNavigationBarBorder()
     }
     
@@ -53,7 +53,7 @@ class TransferViewController: BaseViewController, KeyboardController, LoadingInd
 extension TransferViewController {
     
     func setUpViews() {
-        self.headerView.backgroundColor = ColorName.primary.color
+        self.headerView.backgroundColor = .color(.primary)
         
         self.accountTextField.primaryStyle()
         self.amountTextField.primaryStyle()

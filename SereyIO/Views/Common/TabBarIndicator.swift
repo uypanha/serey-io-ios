@@ -19,7 +19,7 @@ class TabBarIndicator: NSObject, MDCTabBarViewIndicatorTemplate {
         let bounds = context.bounds
         let attributes = MDCTabBarViewIndicatorAttributes()
         let lineFrame = CGRect(x: bounds.minX + padding, y: bounds.maxY - underlineHeight, width: bounds.width - (padding * 2), height: underlineHeight)
-        attributes.path = UIBezierPath(roundedRect: lineFrame, byRoundingCorners: [UIRectCorner.topLeft, UIRectCorner.topRight], cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+        attributes.path = UIBezierPath(roundedRect: lineFrame, byRoundingCorners: [.topLeft, .topRight], cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
         return attributes
     }
 }

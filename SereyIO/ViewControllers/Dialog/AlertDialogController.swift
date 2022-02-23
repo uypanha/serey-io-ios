@@ -73,7 +73,7 @@ extension AlertDialogController where Self: UIViewController {
         self.view.endEditing(true)
         
         let alertDialogViewController = UIAlertController(title: model.title, message: model.message, preferredStyle: .alert)
-        alertDialogViewController.view.tintColor = ColorName.primary.color
+        alertDialogViewController.view.tintColor = .color(.primary)
         
         model.actions.forEach { action in
             let alertAction = UIAlertAction(title: action.title, style: action.actionStyle) { _ in
@@ -96,7 +96,7 @@ extension AlertDialogController where Self: UIViewController {
         self.view.endEditing(true)
         
         let alertDialogViewController = UIAlertController(title: model.title, message: model.message, preferredStyle: .actionSheet)
-        alertDialogViewController.view.tintColor = ColorName.primary.color
+        alertDialogViewController.view.tintColor = .color(.primary)
         
         model.actions.forEach { action in
             let alertAction = UIAlertAction(title: action.title, style: action.actionStyle) { _ in

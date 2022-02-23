@@ -153,11 +153,11 @@ enum TransferType: String {
     func valueColor(_ data: TransactionDataModel) -> UIColor {
         switch self {
         case .transfer:
-            return data.from == AuthData.shared.username ? .red : ColorName.primary.color
+            return data.from == AuthData.shared.username ? .red : .color(.primary)
         case .claimRewardBalance, .transferVesting:
-            return ColorName.primary.color
+            return .color(.primary)
         case .withdrawVesting:
-            return data.vestingShares == "0.000000 VESTS" ? .darkGray : ColorName.primary.color
+            return data.vestingShares == "0.000000 VESTS" ? .darkGray :.color(.primary)
         case .delegatePower:
             return .darkGray
         }

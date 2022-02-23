@@ -10,7 +10,7 @@ Disabled        : #CCCCCC
 
 ButtonBg        : #7F98ED
 PostBackground  : #FFFFFF
-Border          : #DBDBDB
+Border          : #F8F8F8
 
 NavigationBg    : #FFFFFF
 NavigationTint  : #414141

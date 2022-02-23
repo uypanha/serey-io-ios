@@ -69,7 +69,7 @@ extension PayQRViewController {
         self.flashButton.isHidden = !self.hasTorch()
         
         self.viewMyQRButton.spacing = 8
-        self.viewMyQRButton.setTitleColor(ColorName.primary.color, for: .normal)
+        self.viewMyQRButton.setTitleColor(.color(.primary), for: .normal)
         self.viewMyQRButton.customStyle(with: nil)
         
         prepareCameraPreview()

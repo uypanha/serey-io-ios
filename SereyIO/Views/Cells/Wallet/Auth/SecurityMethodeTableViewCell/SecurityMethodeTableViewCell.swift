@@ -34,7 +34,7 @@ class SecurityMethodeTableViewCell: BaseTableViewCell {
         super.awakeFromNib()
         
         // Initialization code
-        self.cardView.borderColor = ColorName.border.color
+        self.cardView.borderColor = .color(.border)
         self.iconImageView.makeMeCircular()
         self.selectionStyle = .none
     }
@@ -44,10 +44,10 @@ class SecurityMethodeTableViewCell: BaseTableViewCell {
         
         if animated {
             UIView.animate(withDuration: 0.3, animations: {
-                self.cardView.backgroundColor = selected ? ColorName.primary.color.withAlphaComponent(0.2) : .white
+                self.cardView.backgroundColor = selected ? .color(.primary).withAlphaComponent(0.2) : .white
             })
         } else {
-            self.cardView.backgroundColor = selected ? ColorName.primary.color.withAlphaComponent(0.2) : .white
+            self.cardView.backgroundColor = selected ? .color(.primary).withAlphaComponent(0.2) : .white
         }
     }
     
@@ -56,10 +56,10 @@ class SecurityMethodeTableViewCell: BaseTableViewCell {
         
         if animated {
             UIView.animate(withDuration: 0.3, animations: {
-                self.cardView.backgroundColor = highlighted ? ColorName.primary.color.withAlphaComponent(0.2) : .white
+                self.cardView.backgroundColor = highlighted ? .color(.primary).withAlphaComponent(0.2) : .white
             })
         } else {
-            self.cardView.backgroundColor = highlighted ? ColorName.primary.color.withAlphaComponent(0.2) : .white
+            self.cardView.backgroundColor = highlighted ? .color(.primary).withAlphaComponent(0.2) : .white
         }
     }
 }

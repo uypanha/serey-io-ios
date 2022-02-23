@@ -46,7 +46,7 @@ class DelegatePowerViewController: BaseViewController, KeyboardController, Alert
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.setNavigationBarColor(ColorName.primary.color, tintColor: .white)
+        self.navigationController?.setNavigationBarColor(.color(.primary), tintColor: .white)
         self.navigationController?.removeNavigationBarBorder()
     }
     

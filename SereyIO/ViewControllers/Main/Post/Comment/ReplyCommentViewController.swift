@@ -80,7 +80,7 @@ extension ReplyCommentViewController {
     func setUpViews() {
         self.title = R.string.post.replies.localized()
         self.tableView.refreshControl = UIRefreshControl()
-        self.commentContainerView.addBorders(edges: [.top], color: ColorName.border.color, thickness: 1)
+        self.commentContainerView.addBorders(edges: [.top], color: .color(.border), thickness: 1)
         prepareTableView()
     }
     

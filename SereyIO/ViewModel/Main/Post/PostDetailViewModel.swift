@@ -35,6 +35,8 @@ class PostDetailViewModel: BasePostDetailViewModel, ShouldReactToAction, ShouldP
         case loading(Bool)
         case userAccountController(UserAccountViewModel)
         case votersViewController(VoterListViewModel)
+        case reportPostController(ReportPostViewModel)
+        case confirmViewController(ConfirmDialogViewModel)
     }
     
     // input:
@@ -124,12 +126,32 @@ extension PostDetailViewModel {
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
     }
+    
+    func hidePost(_ post: PostModel) {
+        self.shouldPresent(.loading(true))
+        self.discussionService.hidePost(with: post.id)
+            .subscribe(onNext: { [weak self] data in
+                self?.shouldPresent(.loading(false))
+                var post = post
+                post.isHidden = true
+                NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: post.permlink, author: post.author, post: post))
+                self?.shouldPresent(.dismiss)
+            }, onError: { [weak self] error in
+                self?.shouldPresent(.loading(false))
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
 }
 
 // MARK: - Action Handlers
 fileprivate extension PostDetailViewModel {
     
     func handleMorePressed() {
+        if !AuthData.shared.isUserLoggedIn {
+            self.shouldPresent(.signInViewController)
+            return
+        }
         let items: [PostMenu] = self.post.value?.prepareOptionMenu() ?? []
         let bottomMenuViewModel = BottomListMenuViewModel(header: " ", items.map { $0.cellModel })
         
@@ -157,9 +179,19 @@ fileprivate extension PostDetailViewModel {
                 }
             }))
         case.reportPost:
-            break
+            if let post = self.post.value {
+                self.shouldPresent(.reportPostController(.init(with: post)))
+            }
         case .hidePost:
-            break
+            if let post = self.post.value {
+                let title = "Hide this post?"
+                let message = "You won’t see this post from \(self.post.value?.author ?? "") in your feed."
+                let action = ActionModel("Hide", style: .default) {
+                    self.hidePost(post)
+                }
+                let confirmDialogViewModel = ConfirmDialogViewModel(title: title, message: message, action: action)
+                self.shouldPresent(.confirmViewController(confirmDialogViewModel))
+            }
         }
     }
     

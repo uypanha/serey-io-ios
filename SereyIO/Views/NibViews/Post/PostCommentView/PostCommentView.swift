@@ -67,13 +67,13 @@ class PostCommentView: NibView {
 fileprivate extension PostCommentView {
     
     func preparepVoteTypeStyle(_ voteType: VotedType?) {
-        let downVoteTintColor: UIColor = voteType == .flag ? ColorName.primary.color : .gray
+        let downVoteTintColor: UIColor = voteType == .flag ? .color(.primary) : .gray
         let downVoteIcon: UIImage? = voteType == .flag ? R.image.downVoteFilledIcon() : R.image.downVoteIcon()
         self.downVoteButton.tintColor = downVoteTintColor
         self.downVoteButton.setTitleColor(downVoteTintColor, for: .normal)
         self.downVoteButton.setImage(downVoteIcon, for: .normal)
         
-        let upVoteTintColor: UIColor = voteType == .upvote ? ColorName.primary.color : .gray
+        let upVoteTintColor: UIColor = voteType == .upvote ? .color(.primary) : .gray
         let upVoteIcon: UIImage? = voteType == .upvote ? R.image.upVoteFilledIcon() : R.image.upVoteIcon()
         self.upVoteButton.tintColor = upVoteTintColor
         self.upVoteButton.setTitleColor(upVoteTintColor, for: .normal)

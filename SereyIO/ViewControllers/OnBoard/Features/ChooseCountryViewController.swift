@@ -40,7 +40,7 @@ extension ChooseCountryViewController {
     
     func setUpViews() {
         self.countryButton.secondaryStyle()
-        self.detectButton.setTitleColor(ColorName.primary.color, for: .normal)
+        self.detectButton.setTitleColor(.color(.primary), for: .normal)
         self.detectButton.customStyle(with: .clear)
     }
     

@@ -57,7 +57,7 @@ extension SearchViewController {
         self.searchTextField.rightView = UIImageView(image: R.image.searchIcon()?.image(withTintColor: .black))
         self.searchTextField.rightViewMode = .always
         
-        self.activityIndicator.progressTintColor = ColorName.primary.color
+        self.activityIndicator.progressTintColor = .color(.primary)
         self.activityIndicator.mode = .indeterminate
         
         prepareTableView()
@@ -65,7 +65,7 @@ extension SearchViewController {
     
     func prepareTableView() {
         self.tableView.tableFooterView = UIView()
-        self.tableView.separatorColor = ColorName.border.color
+        self.tableView.separatorColor = .color(.border)
         self.tableView.register(PeopleTableViewCell.self)
     }
     

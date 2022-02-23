@@ -74,7 +74,7 @@ extension OnBoardingViewController {
     func setUpPageControl() {
         self.pageControl.backgroundColor = .clear
         self.pageControl.pageIndicatorTintColor = UIColor(hexString: "#CECECE")
-        self.pageControl.currentPageIndicatorTintColor = ColorName.primary.color
+        self.pageControl.currentPageIndicatorTintColor = .color(.primary)
         self.pageControl.hidesForSinglePage = true
     }
     

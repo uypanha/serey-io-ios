@@ -37,7 +37,7 @@ class PowerUpViewController: BaseViewController, KeyboardController, AlertDialog
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.setNavigationBarColor(ColorName.primary.color, tintColor: .white)
+        self.navigationController?.setNavigationBarColor(.color(.primary), tintColor: .white)
         self.navigationController?.removeNavigationBarBorder()
     }
     
@@ -59,7 +59,7 @@ class PowerUpViewController: BaseViewController, KeyboardController, AlertDialog
 extension PowerUpViewController {
     
     func setUpViews() {
-        self.headerView.backgroundColor = ColorName.primary.color
+        self.headerView.backgroundColor = .color(.primary)
         
         self.accountTextField.primaryStyle()
         self.amountTextField.primaryStyle()

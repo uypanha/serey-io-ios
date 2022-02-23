@@ -79,9 +79,13 @@ class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
     }
     
     internal func notifyDataChanged(_ data: PostModel?) {
-        let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.author == AuthData.shared.username : false
-        let isOVerAWeek = data?.isOverAWeek ?? false
-        self.isMoreHidden.onNext(isOVerAWeek || !isMorePresent)
+        let isLoggedUser = AuthData.shared.isUserLoggedIn ? data?.author == AuthData.shared.username : false
+        if isLoggedUser {
+            let isOverAWeek = data?.isOverAWeek ?? false
+            self.isMoreHidden.onNext(isOverAWeek)
+        } else {
+            self.isMoreHidden.onNext(data == nil || false)
+        }
     }
     
     internal func setUpCommentCellObservers(_ cellModel: CommentCellViewModel) {

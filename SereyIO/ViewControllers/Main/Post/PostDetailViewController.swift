@@ -63,8 +63,8 @@ extension PostDetailViewController {
     
     func setUpViews() {
         self.scrollView.refreshControl = UIRefreshControl()
-        self.postDetailView.addBorders(edges: [.bottom], color: ColorName.border.color, thickness: 1)
-        self.postCommentContainerView.addBorders(edges: [.top], color: ColorName.border.color, thickness: 1)
+        self.postDetailView.addBorders(edges: [.bottom], color: .color(.border), thickness: 1)
+        self.postCommentContainerView.addBorders(edges: [.top], color: .color(.border), thickness: 1)
         prepareTableView()
     }
     
@@ -215,6 +215,16 @@ extension PostDetailViewController {
                 case .votersViewController(let voterListViewModel):
                     let votersViewController = VotersViewController(voterListViewModel)
                     let bottomSheet = BottomSheetListViewController(contentViewController: votersViewController)
+                    self.present(bottomSheet, animated: true, completion: nil)
+                case .reportPostController(let viewModel):
+                    let reportPostViewController = ReportPostViewController()
+                    reportPostViewController.viewModel = viewModel
+                    self.present(UINavigationController(rootViewController: reportPostViewController).then {
+                        $0.modalPresentationStyle = .fullScreen
+                    }, animated: true, completion: nil)
+                case .confirmViewController(let viewModel):
+                    let confirmDialogViewController = ConfirmDialogViewController(viewModel)
+                    let bottomSheet = BottomSheetViewController(contentViewController: confirmDialogViewController)
                     self.present(bottomSheet, animated: true, completion: nil)
                 }
             }) ~ self.disposeBag

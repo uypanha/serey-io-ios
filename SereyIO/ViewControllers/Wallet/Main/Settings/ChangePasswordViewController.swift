@@ -34,7 +34,7 @@ class ChangePasswordViewController: BaseViewController, KeyboardController, Aler
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.setNavigationBarColor(ColorName.primary.color, tintColor: .white)
+        self.navigationController?.setNavigationBarColor(.color(.primary), tintColor: .white)
         self.navigationController?.removeNavigationBarBorder()
     }
     
@@ -49,7 +49,7 @@ class ChangePasswordViewController: BaseViewController, KeyboardController, Aler
 extension ChangePasswordViewController {
     
     func setUpViews() {
-        self.headerView.backgroundColor = ColorName.primary.color
+        self.headerView.backgroundColor = .color(.primary)
         self.currentPasswordField.primaryStyle()
         self.newPasswordField.primaryStyle()
         self.confirmNewPasswordField.primaryStyle()

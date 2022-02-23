@@ -158,7 +158,7 @@ class PostTableViewCell: BaseTableViewCell {
 extension PostTableViewCell {
     
     private func prepareShimmering(_ isShimmering: Bool) {
-        let backgroundColor = isShimmering ? ColorName.shimmering.color.withAlphaComponent(0.5) : UIColor.clear
+        let backgroundColor = isShimmering ? .color(.shimmering).withAlphaComponent(0.5) : UIColor.clear
         let cornerRadius : CGFloat = isShimmering ? 8 : 0
         let isHidden = isShimmering
         
@@ -182,13 +182,13 @@ extension PostTableViewCell {
     }
     
     func preparepVoteTypeStyle(_ voteType: VotedType?) {
-        let downVoteTintColor: UIColor = voteType == .flag ? ColorName.primary.color : .lightGray
+        let downVoteTintColor: UIColor = voteType == .flag ? .color(.primary) : .lightGray
         let downVoteIcon: UIImage? = voteType == .flag ? R.image.downVoteFilledIcon() : R.image.downVoteIcon()
         self.downVoteImageView.tintColor = downVoteTintColor
         self.downVoteCountLabel.textColor = downVoteTintColor
         self.downVoteImageView.image = downVoteIcon
         
-        let upVoteTintColor: UIColor = voteType == .upvote ? ColorName.primary.color : .lightGray
+        let upVoteTintColor: UIColor = voteType == .upvote ? .color(.primary) : .lightGray
         let upVoteIcon: UIImage? = voteType == .upvote ? R.image.upVoteFilledIcon() : R.image.upVoteIcon()
         self.upVoteImageView.tintColor = upVoteTintColor
         self.upVoteCountLabel.textColor = upVoteTintColor

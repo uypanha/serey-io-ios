@@ -42,7 +42,7 @@ class WalletSettingsViewController: BaseTableViewController, LoadingIndicatorCon
         super.viewWillAppear(animated)
         
         self.viewModel.loadCells()
-        self.navigationController?.setNavigationBarColor(ColorName.navigationBg.color, tintColor: ColorName.navigationTint.color)
+        self.navigationController?.setNavigationBarColor(.color(.navigationBg), tintColor: .color(.navigationTint))
         self.navigationController?.showNavigationBarBorder()
     }
     

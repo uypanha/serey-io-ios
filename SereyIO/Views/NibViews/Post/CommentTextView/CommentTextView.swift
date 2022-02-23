@@ -52,9 +52,9 @@ class CommentTextView: NibView {
         self.backgroundColor = .clear
         self.textView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
         
-        self.sendButton.tintColor = ColorName.primary.color
+        self.sendButton.tintColor = .color(.primary)
         self.sendButton.setImage(R.image.sendIcon()?.image(withTintColor: .lightGray), for: .disabled)
-        self.sendButton.setImage(R.image.sendIcon()?.image(withTintColor: ColorName.primary.color), for: .normal)
+        self.sendButton.setImage(R.image.sendIcon()?.image(withTintColor: .color(.primary)), for: .normal)
     }
 }
 

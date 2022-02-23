@@ -67,7 +67,7 @@ class UserCommentReplyTableViewCell: BaseTableViewCell {
         
         self.vwShimmer.shimmeringSpeed = 400
         self.vwShimmer.contentView = self.mainView
-        self.mainCardView.borderColor = ColorName.border.color
+        self.mainCardView.borderColor = .color(.border)
     }
 }
 
@@ -75,7 +75,7 @@ class UserCommentReplyTableViewCell: BaseTableViewCell {
 extension UserCommentReplyTableViewCell {
     
     private func prepareShimmering(_ isShimmering: Bool) {
-        let backgroundColor = isShimmering ? ColorName.shimmering.color.withAlphaComponent(0.5) : UIColor.clear
+        let backgroundColor = isShimmering ? .color(.shimmering).withAlphaComponent(0.5) : UIColor.clear
         let cornerRadius : CGFloat = isShimmering ? 8 : 0
         let isHidden = isShimmering
         

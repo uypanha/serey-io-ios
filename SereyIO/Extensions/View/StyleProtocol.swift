@@ -24,8 +24,8 @@ extension MDCOutlinedTextField: StyleProtocol {
     fileprivate func prepareContainerScheme() -> MDCContainerScheme {
         let containerScheme = MDCContainerScheme()
         let colorScheme = MDCSemanticColorScheme()
-        colorScheme.surfaceColor = ColorName.primary.color
-        colorScheme.primaryColor = ColorName.primary.color
+        colorScheme.surfaceColor = .color(.primary)
+        colorScheme.primaryColor = .color(.primary)
         colorScheme.errorColor = .red
         containerScheme.colorScheme = colorScheme
         return containerScheme
@@ -58,7 +58,7 @@ extension UIButton: StyleProtocol {
     private func commonBackgroundStyle() {
         if self.backgroundColor != nil && self.backgroundColor != .clear {
             self.setRadius(all: 8)
-            self.setBackgroundColor(ColorName.disabled.color, for: .disabled)
+            self.setBackgroundColor(.color(.disabled), for: .disabled)
             self.setBackgroundColor(self.backgroundColor!.withAlphaComponent(0.5), for: .highlighted)
         } else {
             self.setBackgroundColor(nil, for: .disabled)
@@ -83,13 +83,13 @@ extension UIButton: StyleProtocol {
     
     func primaryStyle() {
         self.setTitleColor(.white, for: .normal)
-        self.customStyle(with: ColorName.primary.color)
+        self.customStyle(with: .color(.primary))
     }
     
     func secondaryStyle() {
-        self.tintColor = ColorName.primary.color
-        self.setTitleColor(ColorName.primary.color, for: .normal)
-        self.customStyle(with: ColorName.lightPrimary.color)
+        self.tintColor = .color(.primary)
+        self.setTitleColor(.color(.primary), for: .normal)
+        self.customStyle(with: .color(.lightPrimary))
     }
 
     func secondaryStyle(borderColor: UIColor? = nil, borderWidth: CGFloat = 2, isCircular: Bool = true) {
@@ -99,7 +99,7 @@ extension UIButton: StyleProtocol {
         } else {
             self.setRadius(all: 8)
         }
-        self.setBorder(borderWith: borderWidth, borderColor: borderColor ?? ColorName.primary.color)
+        self.setBorder(borderWith: borderWidth, borderColor: borderColor ?? .color(.primary))
         
         if let image = self.image(for: .normal) {
             if image.renderingMode == .alwaysOriginal {
@@ -113,7 +113,7 @@ extension UIButton: StyleProtocol {
     }
     
     func dangerouseStyle() {
-        self.customStyle(with: ColorName.almostRed.color)
+        self.customStyle(with: .color(.almostRed))
     }
     
     func customStyle(with backgroundColor: UIColor?) {

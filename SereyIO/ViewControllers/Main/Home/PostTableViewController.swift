@@ -81,7 +81,7 @@ fileprivate extension PostTableViewController {
     
     func prepareTableView() {
         self.refreshControl = UIRefreshControl()
-        self.tableView.backgroundColor = ColorName.postBackground.color
+        self.tableView.backgroundColor = .color(.postBackground)
         self.tableView.tableFooterView = UIView()
         self.tableView.register(PostTableViewCell.self)
         self.tableView.register(FilteredCategoryTableViewCell.self)

@@ -38,7 +38,7 @@ class ViewUtiliesHelper {
     
     // MARK: - Default image placeholder
     public static func prepareDefualtPlaceholder() -> UIImage {
-        return ColorName.shimmering.color.withAlphaComponent(0.5).toImage() ?? UIImage()
+        return UIColor.color(.shimmering).withAlphaComponent(0.5).toImage() ?? UIImage()
     }
     
     // MARK: - Default profile image placeholder

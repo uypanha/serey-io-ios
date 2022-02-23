@@ -26,39 +26,40 @@ fileprivate extension Appearance {
     
     static func prepareTableView() {
         UITableViewCell.appearance().selectedBackgroundView = UIView().then {
-            $0.backgroundColor = ColorName.primary.color.withAlphaComponent(0.15)
+            $0.backgroundColor = .color(.primary).withAlphaComponent(0.15)
         }
+        UITableView.appearance().separatorColor = .color(.border)
     }
     
     static func prepareTabBar() {
-        UITabBar.appearance().tintColor = ColorName.primary.color
+        UITabBar.appearance().tintColor = .color(.primary)
         if #available(iOS 10.0, *) {
-            UITabBar.appearance().unselectedItemTintColor = UIColor.darkGray
+            UITabBar.appearance().unselectedItemTintColor = .darkGray
         }
         
         if #available(iOS 13.0, *) {
             let tabBarAppearance = UITabBarAppearance()
             tabBarAppearance.configureWithOpaqueBackground()
-            tabBarAppearance.backgroundColor = ColorName.tabBarBg.color
+            tabBarAppearance.backgroundColor = .color(.tabBarBg)
             UITabBar.appearance().standardAppearance = tabBarAppearance
             
             if #available(iOS 15, *) {
                 UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
             }
         } else {
-            UITabBar.appearance().backgroundColor = ColorName.tabBarBg.color
+            UITabBar.appearance().backgroundColor = .color(.tabBarBg)
         }
     }
     
     static func prepareNavigationBar() {
         //NavigationBar
         UINavigationBar.appearance().isTranslucent = false
-        UINavigationBar.appearance().barTintColor = ColorName.navigationBg.color
-        UINavigationBar.appearance().tintColor = ColorName.navigationTint.color
+        UINavigationBar.appearance().barTintColor = .color(.navigationBg)
+        UINavigationBar.appearance().tintColor = .color(.navigationTint)
         
-        UINavigationBar.appearance().backgroundColor = ColorName.navigationBg.color
+        UINavigationBar.appearance().backgroundColor = .color(.navigationBg)
         UINavigationBar.appearance().titleTextAttributes = [
-            .foregroundColor: ColorName.navigationTint.color
+            .foregroundColor: UIColor.color(.navigationTint)
         ]
         
         // change big title
@@ -66,16 +67,16 @@ fileprivate extension Appearance {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
             navBarAppearance.titleTextAttributes = [
-                .foregroundColor: ColorName.navigationTint.color,
+                .foregroundColor: UIColor.color(.navigationTint),
                 .font: UIFont.systemFont(ofSize: 17, weight: .medium)
             ]
-            navBarAppearance.backgroundColor = ColorName.navigationBg.color
+            navBarAppearance.backgroundColor = .color(.navigationBg)
             UINavigationBar.appearance().standardAppearance = navBarAppearance
             UINavigationBar.appearance().compactAppearance = navBarAppearance
             UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
         } else if #available(iOS 11.0, *) {
             UINavigationBar.appearance().largeTitleTextAttributes = [
-                .foregroundColor: ColorName.navigationTint.color,
+                .foregroundColor: UIColor.color(.navigationTint),
                 .font: UIFont.boldSystemFont(ofSize: 24)
             ]
         }

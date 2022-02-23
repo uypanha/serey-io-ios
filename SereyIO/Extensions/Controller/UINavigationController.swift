@@ -19,8 +19,8 @@ extension UINavigationController {
         
         //  change to opaque all
         self.navigationBar.isTranslucent = false
-        self.view.backgroundColor = ColorName.navigationBg.color
-        self.setNavigationBarColor(ColorName.navigationBg.color, tintColor: ColorName.navigationTint.color)
+        self.view.backgroundColor = UIColor.color(.navigationBg)
+        self.setNavigationBarColor(.color(.navigationBg), tintColor: .color(.navigationTint))
     }
     
     func transparentNavigationBar() {
@@ -53,21 +53,24 @@ extension UINavigationController {
     }
     
     func showNavigationBarBorder() {
-        self.navigationBar.shadowImage = UIColor.lightGray.withAlphaComponent(0.5).toImage()
+        let shadowColor = UIColor.color(.border)
+        let shadowImage = shadowColor.toImage()
+        self.navigationBar.shadowImage = shadowImage
+        
         if #available(iOS 13.0, *) {
             let standardAppearance = self.navigationBar.standardAppearance.copy()
-            standardAppearance.shadowColor = UIColor.lightGray.withAlphaComponent(0.5)
-            standardAppearance.shadowImage = UIColor.lightGray.withAlphaComponent(0.5).toImage()
+            standardAppearance.shadowColor = shadowColor
+            standardAppearance.shadowImage = shadowImage
             self.navigationBar.standardAppearance = standardAppearance
             
             let compactAppearance = self.navigationBar.compactAppearance?.copy()
-            compactAppearance?.shadowColor = UIColor.lightGray.withAlphaComponent(0.5)
-            compactAppearance?.shadowImage = UIColor.lightGray.withAlphaComponent(0.5).toImage()
+            compactAppearance?.shadowColor = shadowColor
+            compactAppearance?.shadowImage = shadowImage
             self.navigationBar.compactAppearance = compactAppearance
             
             let scrollEdgeAppearance = self.navigationBar.scrollEdgeAppearance?.copy()
-            scrollEdgeAppearance?.shadowColor = UIColor.lightGray.withAlphaComponent(0.5)
-            scrollEdgeAppearance?.shadowImage = UIColor.lightGray.withAlphaComponent(0.5).toImage()
+            scrollEdgeAppearance?.shadowColor = shadowColor
+            scrollEdgeAppearance?.shadowImage = shadowImage
             self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
         }
     }

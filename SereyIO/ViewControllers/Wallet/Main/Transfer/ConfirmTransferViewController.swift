@@ -49,7 +49,7 @@ class ConfirmTransferViewController: BaseViewController, BottomSheetProtocol {
 extension ConfirmTransferViewController {
     
     func setUpViews() {
-        self.amountLabel.textColor = ColorName.primary.color
+        self.amountLabel.textColor = .color(.primary)
         self.transferButton.primaryStyle()
     }
 }

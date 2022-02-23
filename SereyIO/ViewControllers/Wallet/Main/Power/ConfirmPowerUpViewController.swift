@@ -41,7 +41,7 @@ class ConfirmPowerUpViewController: BaseViewController, BottomSheetProtocol {
 extension ConfirmPowerUpViewController {
     
     func setUpViews() {
-        self.amountLabel.textColor = ColorName.primary.color
+        self.amountLabel.textColor = .color(.primary)
         self.powerUpButton.primaryStyle()
     }
 }
