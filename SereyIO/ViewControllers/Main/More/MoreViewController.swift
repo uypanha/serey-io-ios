@@ -15,7 +15,7 @@ import CountryPicker
 
 class MoreViewController: BaseViewController, AlertDialogController {
     
-    @IBOutlet weak var tableView: ContentSizedTableView!
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var termsContainerView: UIView!
     @IBOutlet weak var privacyPolicyButton: UIButton!
     @IBOutlet weak var termServiceButton: UIButton!

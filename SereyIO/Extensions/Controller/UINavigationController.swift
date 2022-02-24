@@ -92,6 +92,7 @@ extension UINavigationController {
                 .foregroundColor: tintColor,
                 .font: UIFont.systemFont(ofSize: 17, weight: .medium)
             ]
+            applyBackButtonImage(standardAppearance)
             self.navigationBar.standardAppearance = standardAppearance
             
             let compactAppearance = self.navigationBar.compactAppearance?.copy()
@@ -101,6 +102,7 @@ extension UINavigationController {
                 .foregroundColor: tintColor,
                 .font: UIFont.systemFont(ofSize: 17, weight: .medium)
             ]
+            applyBackButtonImage(compactAppearance)
             self.navigationBar.compactAppearance = compactAppearance
             
             let scrollEdgeAppearance = self.navigationBar.scrollEdgeAppearance?.copy()
@@ -110,6 +112,7 @@ extension UINavigationController {
                 .foregroundColor: tintColor,
                 .font: UIFont.systemFont(ofSize: 17, weight: .medium)
             ]
+            applyBackButtonImage(scrollEdgeAppearance)
             if #available(iOS 15.0, *) {
                 self.navigationBar.scrollEdgeAppearance = standardAppearance
             } else {
@@ -121,5 +124,10 @@ extension UINavigationController {
                 .font: UIFont.boldSystemFont(ofSize: 24)
             ]
         }
+    }
+    
+    @available(iOS 13.0, *)
+    private func applyBackButtonImage(_ appearance: UINavigationBarAppearance?) {
+        appearance?.setBackIndicatorImage(R.image.leftArrowIcon(), transitionMaskImage: R.image.leftArrowIcon())
     }
 }

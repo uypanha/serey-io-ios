@@ -18,6 +18,7 @@ class Appearance {
         prepareNavigationBar()
         prepareTabBar()
         prepareRichEditorAppearance()
+        prepareCustomBackImage()
     }
 }
 
@@ -66,10 +67,12 @@ fileprivate extension Appearance {
         if #available(iOS 13, *) {
             let navBarAppearance = UINavigationBarAppearance()
             navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.setBackIndicatorImage(R.image.leftArrowIcon(), transitionMaskImage: R.image.leftArrowIcon())
             navBarAppearance.titleTextAttributes = [
                 .foregroundColor: UIColor.color(.navigationTint),
                 .font: UIFont.systemFont(ofSize: 17, weight: .medium)
             ]
+            
             navBarAppearance.backgroundColor = .color(.navigationBg)
             UINavigationBar.appearance().standardAppearance = navBarAppearance
             UINavigationBar.appearance().compactAppearance = navBarAppearance
@@ -80,6 +83,12 @@ fileprivate extension Appearance {
                 .font: UIFont.boldSystemFont(ofSize: 24)
             ]
         }
+    }
+    
+    static func prepareCustomBackImage() {
+        var backButtonImage = R.image.leftArrowIcon()
+        backButtonImage = backButtonImage?.stretchableImage(withLeftCapWidth: 15, topCapHeight: 30)
+        UIBarButtonItem.appearance().setBackButtonBackgroundImage(backButtonImage, for: .normal, barMetrics: .default)
     }
     
     static func prepareRichEditorAppearance() {
