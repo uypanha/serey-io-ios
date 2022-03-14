@@ -131,6 +131,16 @@ extension Object {
         }
     }
     
+    func queryFirstWith<T: Object>(query completion: @escaping (Query<T>) -> Query<T>) -> T? {
+        do {
+            let realm = try Realm()
+            let data = realm.objects(T.self).where(completion).first
+            return data
+        } catch let error as NSError {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
     func save() {
         if let realm = self.realm {
             realm.add(self, update: .all)

@@ -67,7 +67,7 @@ public struct Constants {
     
     static var termAndConditionsUrl: URL? {
         get {
-            return URL(string: "\(ConfigSetting.urlProcol.value() + ConfigSetting.baseDomain.value())/term-service")
+            return URL(string: "\(ConfigSetting.urlProcol.value() + ConfigSetting.baseDomain.value())/term-of-service")
         }
     }
     

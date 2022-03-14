@@ -34,7 +34,7 @@ class CoinPriceManager: NSObject {
     override init() {
         self.coinService = .init()
         self.disposeBag = .init()
-        self.sereyTicker = .init(value: TickerModel().qeuryFirst())
+        self.sereyTicker = .init(value: TickerModel().qeuryFirst(by: .init(format: "id == %d", 0)))
         self.sereyPrice = .init(value: 0)
         super.init()
         

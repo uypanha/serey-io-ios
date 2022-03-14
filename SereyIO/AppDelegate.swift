@@ -41,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appDelegateHelper = AppDelegateHelper()
         appDelegateHelper?.initMessageHandlers(window: window!, apnsHandler: apnsHandler!)
         self.discussionService = .init()
+        CoinPriceManager.loadTicker()
         
         return true
     }

@@ -13,10 +13,10 @@ import RealmSwift
 @objcMembers class TickerModel: Object, Codable {
     
     @objc dynamic var id = 0
-    @objc dynamic var price: String = ""
+    @objc dynamic var price: Double = 0
     
     var sereyPrice: Double {
-        return Double(price) ?? 0
+        return price
     }
     
     override static func primaryKey() -> String? {
