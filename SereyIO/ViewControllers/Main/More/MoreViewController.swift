@@ -225,6 +225,9 @@ fileprivate extension MoreViewController {
                 case .bottomListViewController(let bottomListMenuViewModel):
                     let bottomMenuViewController = BottomMenuViewController(bottomListMenuViewModel)
                     self.present(bottomMenuViewController, animated: true, completion: nil)
+                case .myReferralIdViewConroller:
+                    let myReferralIdViewController = MyReferralIdViewController()
+                    self.show(myReferralIdViewController, sender: nil)
                 }
             }).disposed(by: self.disposeBag)
     }

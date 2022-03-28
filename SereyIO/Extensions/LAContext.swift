@@ -45,7 +45,7 @@ extension LAContext {
             var error: NSError?
             let _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
             
-            if error?.code == LAError.Code.touchIDNotAvailable.rawValue {
+            if error?.code == LAError.Code.biometryNotAvailable.rawValue {
                 return .none
             }
             

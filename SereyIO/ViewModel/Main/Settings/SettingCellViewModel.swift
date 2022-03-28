@@ -28,6 +28,7 @@ enum SettingType {
     case lagnauge
     case notificationSettings
     case sereyPrice
+    case myReferralId
     case sereyApps
     case version
     
@@ -51,9 +52,11 @@ enum SettingType {
                 let title = "Serey Price <font color=\"red\">($\(priceString))</font>"
                 return ImageTextModel(image: R.image.currencyIcon(), titleText: title, isHtml: true)
             case .sereyApps:
-                return ImageTextModel(image: R.image.sereyAppsIcon(), titleText: R.string.settings.sereyApps.localized())
+                return ImageTextModel(image: R.image.aboutIcon(), titleText: R.string.settings.sereyApps.localized())
             case .version:
                 return ImageTextModel(image: R.image.aboutIcon(), titleText: R.string.settings.version.localized(), subTitle: self.subTitle)
+            case .myReferralId:
+                return .init(image: R.image.myReferralIdIcon(), titleText: "My Referral ID")
             }
         }
     }

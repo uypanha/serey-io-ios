@@ -22,6 +22,10 @@ enum UserApi {
     case followAction(author: String, actionType: FollowActionType)
     
     case changePassword(current: String, new: String)
+    
+    case getReferralCode(String)
+    
+    case addReferralId(String)
 }
 
 extension UserApi: AuthorizedApiTargetType {
@@ -75,6 +79,10 @@ extension UserApi: AuthorizedApiTargetType {
             return "/api/v1/follow/getFollowerList"
         case .changePassword:
             return "/api/v1/accounts/changePassword"
+        case .getReferralCode(let username):
+            return "/api/v1/general/get_referal_id/\(username)"
+        case .addReferralId(let username):
+            return "/api/v1/general/get_referal_id/\(username)"
         }
     }
     

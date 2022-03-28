@@ -36,6 +36,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case walletViewController
         case signOutDialog
         case bottomListViewController(BottomListMenuViewModel)
+        case myReferralIdViewConroller
     }
     
     // input:
@@ -151,10 +152,11 @@ extension MoreViewModel {
         
         if AuthData.shared.isUserLoggedIn {
             if Constants.includeWallet {
-                sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value), SettingCellViewModel(.myWallet, true)]
+                sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value), SettingCellViewModel(.myWallet)]
             } else {
-                sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value, true)]
+                sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value)]
             }
+            sectionItems[.profile]?.append(SettingCellViewModel(.myReferralId, true))
         } else {
             let signInCellViewModel = SignInCellViewModel().then { [weak self] in self?.setUpSignInCellViewModelObservers($0) }
             #if DEVELOPMENT
@@ -244,6 +246,8 @@ fileprivate extension MoreViewModel {
                         }
                     }) ~ self.disposeBag
                 self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
+            case .myReferralId:
+                self.shouldPresent(.myReferralIdViewConroller)
             default:
                 break
             }

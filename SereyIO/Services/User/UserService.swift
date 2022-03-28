@@ -38,4 +38,13 @@ class UserService: AppService<UserApi> {
         return self.provider.rx.requestObject(.changePassword(current: current, new: new), type: AnyCodable.self)
             .asObservable()
     }
+    
+    func fetchReferralId() -> Observable<AnyCodable> {
+        return self.provider.rx.requestObject(.getReferralCode(AuthData.shared.username ?? ""), type: AnyCodable.self)
+            .asObservable()
+    }
+    
+    func addReferralId() {
+        
+    }
 }

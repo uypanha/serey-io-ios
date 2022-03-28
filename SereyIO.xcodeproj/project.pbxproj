@@ -11,6 +11,8 @@
 		813EBD3FDAF47C7A45C36443 /* Pods_SereyIOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33886248612D2F97D120B3C9 /* Pods_SereyIOTests.framework */; };
 		961264AB2757B79900AA1AD2 /* SKActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */; };
 		961264AC2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */; };
+		961DC9FA27EA19E6003B73E5 /* MyReferralIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961DC9F927EA19E5003B73E5 /* MyReferralIdViewController.swift */; };
+		961DC9FC27EA1C19003B73E5 /* MyReferralIdViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961DC9FB27EA1C19003B73E5 /* MyReferralIdViewController+LoadViews.swift */; };
 		9625CEC92767B1DC0009FC47 /* FilterHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4022767AAD3005F0C0E /* FilterHeaderCollectionViewCell.xib */; };
 		9625CECA2767B2F20009FC47 /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4082767AB0D005F0C0E /* HeaderCollectionViewCell.xib */; };
 		9649B11B27A9995D009B40A3 /* EnterIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B11A27A9995D009B40A3 /* EnterIssueViewController.swift */; };
@@ -539,6 +541,8 @@
 		8DC4AE990A81B7E80AD7C57E /* Pods-SereyIOUITests.release_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.release_development.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.release_development.xcconfig"; sourceTree = "<group>"; };
 		961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicator.swift; sourceTree = "<group>"; };
 		961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicatorViewStyle.swift; sourceTree = "<group>"; };
+		961DC9F927EA19E5003B73E5 /* MyReferralIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReferralIdViewController.swift; sourceTree = "<group>"; };
+		961DC9FB27EA1C19003B73E5 /* MyReferralIdViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyReferralIdViewController+LoadViews.swift"; sourceTree = "<group>"; };
 		9649B11A27A9995D009B40A3 /* EnterIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterIssueViewController.swift; sourceTree = "<group>"; };
 		9649B11C27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnterIssueViewController+LoadViews.swift"; sourceTree = "<group>"; };
 		9649B11E27AC20A4009B40A3 /* ConfirmDialogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogViewModel.swift; sourceTree = "<group>"; };
@@ -1129,6 +1133,15 @@
 				961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */,
 			);
 			path = SKActivityIndicator;
+			sourceTree = "<group>";
+		};
+		961DC9F827EA1881003B73E5 /* Referral */ = {
+			isa = PBXGroup;
+			children = (
+				961DC9F927EA19E5003B73E5 /* MyReferralIdViewController.swift */,
+				961DC9FB27EA1C19003B73E5 /* MyReferralIdViewController+LoadViews.swift */,
+			);
+			path = Referral;
 			sourceTree = "<group>";
 		};
 		9649B11927A99921009B40A3 /* EnterIssue */ = {
@@ -2336,6 +2349,7 @@
 				DC8EAB8223E7231A00E00A00 /* MoreViewController.swift */,
 				DC05FDC423F1BE420093B47B /* Languages */,
 				DC13409124573AC100CC9856 /* Notifications */,
+				961DC9F827EA1881003B73E5 /* Referral */,
 			);
 			path = More;
 			sourceTree = "<group>";
@@ -3706,6 +3720,7 @@
 				DC6ED57C2326A43700770B31 /* Store.swift in Sources */,
 				DC6A78F323CA1FEB001D1009 /* CollectionSingleSecitionProviderModel.swift in Sources */,
 				DC9E36DF2412A01000289693 /* PostDetailViewModel.swift in Sources */,
+				961DC9FC27EA1C19003B73E5 /* MyReferralIdViewController+LoadViews.swift in Sources */,
 				DC7C740D24717C5500610526 /* VotersViewController.swift in Sources */,
 				DC9AC6E32406C4F7008FAFA6 /* Moya+Extensions.swift in Sources */,
 				DC6A78EC23CA1F58001D1009 /* CellViewModel.swift in Sources */,
@@ -3728,6 +3743,7 @@
 				DC9AC6E62406C5BA008FAFA6 /* DiscussionCategoryModel.swift in Sources */,
 				96CB1AB3277A086B000C5930 /* ProfileOption.swift in Sources */,
 				DC7C8F0F24DC663B0051C084 /* TransactionTableViewCell.swift in Sources */,
+				961DC9FA27EA19E6003B73E5 /* MyReferralIdViewController.swift in Sources */,
 				DC6A78FA23CA20B3001D1009 /* FieldViewModelProtocol.swift in Sources */,
 				DCB5BD812499170A0042E5AF /* LAContext.swift in Sources */,
 				DCF67FEF24100C6F003061A7 /* ListDataResponseModel.swift in Sources */,
