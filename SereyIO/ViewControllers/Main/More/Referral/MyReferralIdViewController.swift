@@ -9,6 +9,10 @@
 import UIKit
 import Then
 import SnapKit
+import RxCocoa
+import RxSwift
+import RxBinding
+import MaterialComponents
 
 class MyReferralIdViewController: BaseViewController {
     
@@ -25,9 +29,12 @@ class MyReferralIdViewController: BaseViewController {
     }()
     
     lazy var referralLinkLabel: UILabel = {
-        return .createLabel(13, weight: .semibold, textColor: .color(.primary))
+        return .createLabel(13, weight: .semibold, textColor: .color(.primary)).then {
+            $0.lineBreakMode = .byTruncatingMiddle
+        }
     }()
     
+    var loadingIndicator: UIActivityIndicatorView!
     lazy var copyLinkButton: UIButton = {
         return .createButton().then {
             $0.setImage(R.image.copyIcon(), for: .normal)
@@ -45,9 +52,12 @@ class MyReferralIdViewController: BaseViewController {
         }
     }()
     
+    var viewModel: MyReferralIdViewModel!
+    
     init() {
         super.init(nibName: nil, bundle: nil)
         
+        self.viewModel = .init()
         self.hidesBottomBarWhenPushed = true
     }
     
@@ -63,7 +73,8 @@ class MyReferralIdViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.referralLinkLabel.text = "https://kyc.serey.io/?referralId=YDYG43D"
+        self.viewModel.downloadData()
+        setUpRxObservers()
     }
     
     override func setUpLocalizedTexts() {
@@ -73,5 +84,64 @@ class MyReferralIdViewController: BaseViewController {
         self.inviteButton.setTitle("Invite Friends", for: .normal)
         self.titleLabel.text = "Invite other people and receive reward."
         self.messageLabel.text = "Invite friends and other people you know to Serey by sharing them this referral link and earn free Serey Coins. You can also share them the referral link by clicking on \"Invite Friends\"."
+    }
+}
+
+// MARK: - SetUp RxObservers
+fileprivate extension MyReferralIdViewController {
+    
+    func setUpRxObservers() {
+        setUpControlObservers()
+        setUpContentChangedObservers()
+        setUpViewToPresentObservers()
+    }
+    
+    func setUpControlObservers() {
+        self.copyLinkButton.rx.tap.asObservable()
+            .map { MyReferralIdViewModel.Action.copyLinkPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+        
+        self.inviteButton.rx.tap.asObservable()
+            .map { MyReferralIdViewModel.Action.invitePressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+    }
+    
+    func setUpContentChangedObservers() {
+        self.viewModel.referralUrl.asObservable()
+            .subscribe(onNext: { [weak self] link in
+                self?.referralLinkLabel.text = link
+                self?.copyLinkButton.isHidden = link == nil
+                self?.loadingIndicator.isHidden = link != nil
+                self?.inviteButton.isEnabled = link != nil
+                if link == nil {
+                    self?.loadingIndicator.startAnimating()
+                }
+            }) ~ self.disposeBag
+    }
+    
+    func setUpViewToPresentObservers() {
+        self.viewModel.shouldPresent.asObservable()
+            .subscribe(onNext: { [weak self] viewToPresent in
+                switch viewToPresent {
+                case .showSnackBar(let messageText):
+                    let message = MDCSnackbarMessage()
+                    message.text = messageText
+                    MDCSnackbarManager.default.show(message)
+                case .inviteFriendDialogController(let viewModel):
+                    let inviteFriendViewController = InviteFriendDialogViewController()
+                    inviteFriendViewController.viewModel = viewModel
+                    let bottomSheetController = BottomSheetViewController(contentViewController: inviteFriendViewController)
+                    self?.present(bottomSheetController, animated: true, completion: nil)
+                case .shareLink(let url):
+                    DispatchQueue.main.async {
+                        let messaage = "Join me in Serey"
+                        let activityVC = UIActivityViewController(activityItems: [messaage, url], applicationActivities: nil)
+                        activityVC.excludedActivityTypes = [.airDrop, .addToReadingList]
+                        self?.present(activityVC, animated: true, completion: nil)
+                    }
+                }
+            }) ~ self.disposeBag
     }
 }

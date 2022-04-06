@@ -82,13 +82,13 @@ extension UserApi: AuthorizedApiTargetType {
         case .getReferralCode(let username):
             return "/api/v1/general/get_referal_id/\(username)"
         case .addReferralId(let username):
-            return "/api/v1/general/get_referal_id/\(username)"
+            return "/api/v1/general/add_referal_id/\(username)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .followAction, .changePassword:
+        case .followAction, .changePassword, .addReferralId:
             return .post
         default:
             return .get
@@ -97,7 +97,7 @@ extension UserApi: AuthorizedApiTargetType {
     
     var task: Task {
         switch self {
-        case .followAction, .changePassword:
+        case .followAction, .changePassword, .addReferralId:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         default:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
@@ -105,7 +105,14 @@ extension UserApi: AuthorizedApiTargetType {
     }
     
     var headers: [String : String]? {
-        return [:]
+        switch self {
+        case .getReferralCode, .addReferralId:
+            return [
+                "token" : AuthData.shared.userToken ?? ""
+            ]
+        default:
+            return [:]
+        }
     }
 }
 

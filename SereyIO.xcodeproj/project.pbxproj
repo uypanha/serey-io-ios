@@ -58,7 +58,11 @@
 		B6138434D2AC9BE300634E3A /* Pods_SereyIOUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A407BB647B50EB3891A9B90 /* Pods_SereyIOUITests.framework */; };
 		B80B289827A82AF70023D894 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = B80B289727A82AF70023D894 /* SkeletonView */; };
 		B80B289A27A82D580023D894 /* SkeletonView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B289927A82D580023D894 /* SkeletonView+Extensions.swift */; };
+		B82ADD6227FC9C860028A750 /* InviteFriendDialogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82ADD6127FC9C860028A750 /* InviteFriendDialogViewModel.swift */; };
 		B84F92BE2795CFE300074EB1 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84F92BD2795CFE300074EB1 /* MimeType.swift */; };
+		B861CB8E27F753DF00D27666 /* InviteFriendDialogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861CB8D27F753DF00D27666 /* InviteFriendDialogViewController.swift */; };
+		B861CB9027F7545200D27666 /* InviteFriendDialogViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = B861CB8F27F7545200D27666 /* InviteFriendDialogViewController+LoadViews.swift */; };
+		B896CED727F4A10000332397 /* MyReferralIdViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B896CED627F4A10000332397 /* MyReferralIdViewModel.swift */; };
 		B8D65EC027A4447F00D72607 /* ReportTypeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D65EBF27A4447F00D72607 /* ReportTypeModel.swift */; };
 		DC0044062433A87900244607 /* FileUploadService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0044052433A87900244607 /* FileUploadService.swift */; };
 		DC0044092433A98200244607 /* FileUploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0044082433A98200244607 /* FileUploadModel.swift */; };
@@ -589,7 +593,11 @@
 		A407EA3FA97859A37E09FEBF /* Pods-SereyIO.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIO.release_production.xcconfig"; path = "Target Support Files/Pods-SereyIO/Pods-SereyIO.release_production.xcconfig"; sourceTree = "<group>"; };
 		B23EDC4C4A4735EC30AE93DA /* Pods-SereyIOTests.debug_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.debug_development.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.debug_development.xcconfig"; sourceTree = "<group>"; };
 		B80B289927A82D580023D894 /* SkeletonView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkeletonView+Extensions.swift"; sourceTree = "<group>"; };
+		B82ADD6127FC9C860028A750 /* InviteFriendDialogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendDialogViewModel.swift; sourceTree = "<group>"; };
 		B84F92BD2795CFE300074EB1 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
+		B861CB8D27F753DF00D27666 /* InviteFriendDialogViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendDialogViewController.swift; sourceTree = "<group>"; };
+		B861CB8F27F7545200D27666 /* InviteFriendDialogViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InviteFriendDialogViewController+LoadViews.swift"; sourceTree = "<group>"; };
+		B896CED627F4A10000332397 /* MyReferralIdViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReferralIdViewModel.swift; sourceTree = "<group>"; };
 		B8D65EBF27A4447F00D72607 /* ReportTypeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportTypeModel.swift; sourceTree = "<group>"; };
 		BDE9516EAC0414FBDFB62936 /* Pods-SereyIOUITests.debug_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.debug_production.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.debug_production.xcconfig"; sourceTree = "<group>"; };
 		C766FFE8DCD74E9C18A51E95 /* Pods-SereyIO.debug_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIO.debug_development.xcconfig"; path = "Target Support Files/Pods-SereyIO/Pods-SereyIO.debug_development.xcconfig"; sourceTree = "<group>"; };
@@ -1140,6 +1148,7 @@
 			children = (
 				961DC9F927EA19E5003B73E5 /* MyReferralIdViewController.swift */,
 				961DC9FB27EA1C19003B73E5 /* MyReferralIdViewController+LoadViews.swift */,
+				B861CB8C27F753C300D27666 /* InviteFriendDialogViewController */,
 			);
 			path = Referral;
 			sourceTree = "<group>";
@@ -1263,6 +1272,15 @@
 				96D46BAE275FBEC70078779A /* UserProfileService.swift */,
 			);
 			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		B861CB8C27F753C300D27666 /* InviteFriendDialogViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B861CB8D27F753DF00D27666 /* InviteFriendDialogViewController.swift */,
+				B861CB8F27F7545200D27666 /* InviteFriendDialogViewController+LoadViews.swift */,
+			);
+			path = InviteFriendDialogViewController;
 			sourceTree = "<group>";
 		};
 		DC0044072433A97000244607 /* File */ = {
@@ -1601,8 +1619,10 @@
 			isa = PBXGroup;
 			children = (
 				DC88B19F269F278A001FA62A /* ChooseCountryOption.swift */,
+				B82ADD6127FC9C860028A750 /* InviteFriendDialogViewModel.swift */,
 				DCEF9D36243E1680002B7E99 /* MoreAppsViewModel.swift */,
 				DC05FDBB23F1B0500093B47B /* MoreViewModel.swift */,
+				B896CED627F4A10000332397 /* MyReferralIdViewModel.swift */,
 				DC05FDA823F1AB620093B47B /* SettingCellViewModel.swift */,
 				DC40D5E123E335F900B0DD96 /* Language */,
 				DC7558AF24588C1600AD40FA /* Notification */,
@@ -3552,6 +3572,7 @@
 			files = (
 				DC1CBD4E2594E75F00CCB714 /* DraftSavedCellViewModel.swift in Sources */,
 				DC583A9D24CC7EEF00D9C4D3 /* SereyKeyHelper.swift in Sources */,
+				B861CB8E27F753DF00D27666 /* InviteFriendDialogViewController.swift in Sources */,
 				DC8EAB8123E7231200E00A00 /* HomeViewController.swift in Sources */,
 				DCED6A102534B0A6003C9A43 /* ActivateGoogleOTP2ViewController.swift in Sources */,
 				DCD39873232E204000C812EB /* Rx+Extensions.swift in Sources */,
@@ -3678,6 +3699,7 @@
 				DC05FDAB23F1AB620093B47B /* SettingCellViewModel.swift in Sources */,
 				DC13409324573AE700CC9856 /* NotificationSettingsViewController.swift in Sources */,
 				DCACDDDE2702103600F69AEA /* NotificationApi.swift in Sources */,
+				B896CED727F4A10000332397 /* MyReferralIdViewModel.swift in Sources */,
 				DC05FDC323F1BDF10093B47B /* LanguagesViewController.swift in Sources */,
 				DCDAB36F27397C3900C3B349 /* ConfirmDelegatePowerViewModel.swift in Sources */,
 				DC9AC6E82406CC9C008FAFA6 /* ChooseCategorySheetViewModel.swift in Sources */,
@@ -3735,6 +3757,7 @@
 				DC9A660024DE9233001F1B60 /* ReceiveCoinViewController.swift in Sources */,
 				DCF8738223F6FA3B007A8724 /* BasePostViewModel.swift in Sources */,
 				DCB5BD742497D2E10042E5AF /* SecurityMethodCellViewModel.swift in Sources */,
+				B82ADD6227FC9C860028A750 /* InviteFriendDialogViewModel.swift in Sources */,
 				DCACDDE5270222A900F69AEA /* NotificationsResponseModel.swift in Sources */,
 				DC583A8F24CC281C00D9C4D3 /* WalletAuthValidationViewModel.swift in Sources */,
 				DCFBD77425013D4D005B6875 /* PowerDownViewModel.swift in Sources */,
@@ -3812,6 +3835,7 @@
 				DCA5255F242921EA00284CD8 /* CreatePostViewController.swift in Sources */,
 				DC19DBED23EC601900571CC8 /* HomeViewModel.swift in Sources */,
 				DC8AB7C024FC058600968FCD /* ConfirmPowerViewModel.swift in Sources */,
+				B861CB9027F7545200D27666 /* InviteFriendDialogViewController+LoadViews.swift in Sources */,
 				DC6ED5912326A8F400770B31 /* Appearance.swift in Sources */,
 				DC5FC21C245484B000CA6117 /* CommentReplyTableViewController.swift in Sources */,
 				DCFBD7822502964D005B6875 /* CancelPowerDownViewModel.swift in Sources */,

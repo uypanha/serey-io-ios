@@ -54,6 +54,18 @@ extension MyReferralIdViewController {
             referralContainer.addSubview(referralStackView)
             referralStackView.snp.makeConstraints { make in
                 make.edges.equalToSuperview().inset(16)
+                make.height.greaterThanOrEqualTo(24)
+            }
+            
+            if #available(iOS 13.0, *) {
+                self.loadingIndicator = .init(style: .medium)
+            } else {
+                self.loadingIndicator = .init(style: .gray)
+            }
+            self.loadingIndicator.tintColor = .color(.primary)
+            referralContainer.addSubview(self.loadingIndicator)
+            self.loadingIndicator.snp.makeConstraints { make in
+                make.center.equalToSuperview()
             }
         }
         

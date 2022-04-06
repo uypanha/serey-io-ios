@@ -11,7 +11,7 @@ import MaterialComponents
 
 class BottomSheetViewController: MDCBottomSheetController {
 
-    override init(contentViewController: UIViewController){
+    override init(contentViewController: UIViewController) {
         contentViewController.view.roundCorners(corners: [.topLeft, .topRight], radius: 16)
         super.init(contentViewController: contentViewController)
         
