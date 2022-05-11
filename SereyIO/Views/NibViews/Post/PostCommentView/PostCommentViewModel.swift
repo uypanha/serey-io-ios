@@ -17,6 +17,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
         case upVotePressed
         case flagPressed
         case votersPressed
+        case sharePressed
     }
     
     // input:
@@ -34,6 +35,7 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
     let shouldFlag: PublishSubject<PostModel>
     let shouldDownvote: PublishSubject<(VotedType, PostModel)>
     let shouldShowVoters: PublishSubject<Void>
+    let shouldShare: PublishSubject<Void>
     
     let votedType: BehaviorRelay<VotedType?>
     let upVoteEnabled: BehaviorSubject<Bool>
@@ -46,27 +48,28 @@ class PostCommentViewModel: BaseViewModel, ShimmeringProtocol, PostCellProtocol,
     let commentTextViewModel: CommentTextViewModel
     
     init(_ postModel: PostModel?) {
-        self.post = BehaviorRelay(value: postModel)
-        self.isShimmering = BehaviorRelay(value: false)
-        self.upVoteCount = BehaviorSubject(value: nil)
-        self.downVoteCount = BehaviorSubject(value: nil)
-        self.isVoteAllowed = BehaviorRelay(value: true)
-        self.votedType = BehaviorRelay(value: nil)
-        self.upVoteEnabled = BehaviorSubject(value: true)
-        self.flagEnabled = BehaviorSubject(value: true)
-        self.isVoting = BehaviorSubject(value: nil)
-        self.commentHidden = BehaviorSubject(value: false)
-        self.isVotersHidden = BehaviorSubject(value: true)
+        self.post = .init(value: postModel)
+        self.isShimmering = .init(value: false)
+        self.upVoteCount = .init(value: nil)
+        self.downVoteCount = .init(value: nil)
+        self.isVoteAllowed = .init(value: true)
+        self.votedType = .init(value: nil)
+        self.upVoteEnabled = .init(value: true)
+        self.flagEnabled = .init(value: true)
+        self.isVoting = .init(value: nil)
+        self.commentHidden = .init(value: false)
+        self.isVotersHidden = .init(value: true)
         
-        self.shouldComment = PublishSubject()
-        self.shouldUpVote = PublishSubject()
-        self.shouldFlag = PublishSubject()
-        self.shouldDownvote = PublishSubject()
-        self.shouldShowVoters = PublishSubject()
+        self.shouldComment = .init()
+        self.shouldUpVote = .init()
+        self.shouldFlag = .init()
+        self.shouldDownvote = .init()
+        self.shouldShowVoters = .init()
+        self.shouldShare = .init()
         
-        self.isUploading = BehaviorSubject(value: false)
+        self.isUploading = .init(value: false)
         
-        self.commentTextViewModel = CommentTextViewModel()
+        self.commentTextViewModel = .init()
         super.init()
         
         setUpRxObservers()
@@ -164,6 +167,8 @@ fileprivate extension PostCommentViewModel {
                     self?.handleFlagPressed()
                 case .votersPressed:
                     self?.shouldShowVoters.onNext(())
+                case .sharePressed:
+                    self?.shouldShare.onNext(())
                 }
             }) ~ self.disposeBag
     }

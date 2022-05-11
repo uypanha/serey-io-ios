@@ -10,7 +10,10 @@ import UIKit
 
 class ConfirmDialogViewModel: AlertDialogModel {
     
-    init(title: String, message: String, action: ActionModel) {
+    let icon: UIImage?
+    
+    init(icon: UIImage? = nil, title: String, message: String, action: ActionModel) {
+        self.icon = icon
         super.init(title: title, message: message, actions: [action])
     }
 }

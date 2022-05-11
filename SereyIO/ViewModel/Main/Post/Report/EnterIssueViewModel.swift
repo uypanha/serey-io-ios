@@ -74,7 +74,7 @@ extension EnterIssueViewModel {
             let action = ActionModel("Submit", style: .default) {
                 self.reportPost(self.issueTextFieldViewModel.value ?? "")
             }
-            let viewModel = ConfirmDialogViewModel(title: "Report this post?", message: message, action: action)
+            let viewModel = ConfirmDialogViewModel(icon: R.image.infoYellowIcon(), title: "Report this post?", message: message, action: action)
             self.shouldPresent(.confirmDialogController(viewModel: viewModel))
         }
     }

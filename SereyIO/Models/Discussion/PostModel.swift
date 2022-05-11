@@ -92,6 +92,13 @@ struct PostModel: Codable {
         }
     }
     
+    func prepareOptionMenuTitle() -> String {
+        if self.author != AuthData.shared.username {
+            return "How can we help?"
+        }
+        return " "
+    }
+    
     func prepareOptionMenu() -> [PostMenu] {
         var menu: [PostMenu] = []
         if self.author == AuthData.shared.username {

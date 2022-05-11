@@ -19,8 +19,13 @@ class ConfirmDialogViewController: BaseViewController, BottomSheetProtocol {
     }
     
     var containerView: UIView!
+    lazy var iconImageView: UIImageView = {
+        return .init().then {
+            $0.contentMode = .scaleAspectFit
+        }
+    }()
     lazy var titleLabel: UILabel = {
-        return .createLabel(17, weight: .semibold, textColor: .black)
+        return .createLabel(22, weight: .semibold, textColor: .black)
     }()
     
     lazy var messageLabel: UILabel = {
@@ -69,6 +74,8 @@ extension ConfirmDialogViewController {
 extension ConfirmDialogViewController {
     
     func setUpRxObservers() {
+        self.iconImageView.image = self.viewModel.icon
+        self.iconImageView.isHidden = self.viewModel.icon == nil
         self.titleLabel.text = self.viewModel.title
         self.messageLabel.text = self.viewModel.message
         

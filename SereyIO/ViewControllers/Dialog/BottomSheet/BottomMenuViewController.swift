@@ -30,6 +30,9 @@ class MenuListTableViewController: ListTableViewController<BottomListMenuViewMod
         let headerView = view as? UITableViewHeaderFooterView
         headerView?.contentView.backgroundColor = .white
         headerView?.textLabel?.textColor = .black
+        if let font = self.viewModel.headerFont {
+            headerView?.textLabel?.font = font
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

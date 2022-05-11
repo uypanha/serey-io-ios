@@ -51,7 +51,7 @@ target 'SereyIO' do
 
   # Pods for SereyIO
 	frameworks_pods
-
+ 
   target 'SereyIOTests' do
     inherit! :search_paths
     # Pods for testing
@@ -64,12 +64,14 @@ target 'SereyIO' do
 end
 
 post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |config|
-            config.build_settings['LD_NO_PIE'] = 'NO'
-            config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
-            # Suppress warning of minimum development target
-            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10'
-        end
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      # Needed for building for simulator on M1 Macs
+      config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
+      config.build_settings['LD_NO_PIE'] = 'NO'
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+      # Suppress warning of minimum development target
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12'
     end
+  end
 end

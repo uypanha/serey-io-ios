@@ -29,6 +29,7 @@ class SignInViewController: BaseViewController, LoadingIndicatorController, Keyb
     @IBOutlet weak var dontHaveAccountLabel: UILabel!
     @IBOutlet weak var termServiceTextView: UITextView!
     
+    @IBOutlet weak var rememberCheckbox: CheckBox!
     @IBOutlet weak var signUpButton: UIButton!
     
     var viewModel: SignInViewModel!
@@ -68,6 +69,7 @@ class SignInViewController: BaseViewController, LoadingIndicatorController, Keyb
 fileprivate extension SignInViewController {
     
     func setUpViews() {
+        self.rememberCheckbox.borderStyle = .roundedSquare(radius: 4)
         self.signInButton.customStyle(with: .color(.buttonBg))
         
         self.userNameTextField.primaryStyle()

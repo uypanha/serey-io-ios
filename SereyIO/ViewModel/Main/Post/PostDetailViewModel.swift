@@ -37,6 +37,7 @@ class PostDetailViewModel: BasePostDetailViewModel, ShouldReactToAction, ShouldP
         case votersViewController(VoterListViewModel)
         case reportPostController(ReportPostViewModel)
         case confirmViewController(ConfirmDialogViewModel)
+        case shareLink(URL, String)
     }
     
     // input:
@@ -153,11 +154,17 @@ fileprivate extension PostDetailViewModel {
             return
         }
         let items: [PostMenu] = self.post.value?.prepareOptionMenu() ?? []
-        let bottomMenuViewModel = BottomListMenuViewModel(header: " ", items.map { $0.cellModel })
+        let bottomMenuViewModel = BottomListMenuViewModel(header: self.post.value?.prepareOptionMenuTitle(), items.map { $0.cellModel })
+        bottomMenuViewModel.headerFont = .customFont(with: 22, weight: .medium)
         
         bottomMenuViewModel.shouldSelectMenuItem.asObservable()
             .subscribe(onNext: { [weak self] item in
                 if let itemType = (item as? PostMenuCellViewModel)?.type {
+                    self?.handleMenuPressed(itemType)
+                    return
+                }
+                
+                if let itemType = (item as? PostOptionCellViewModel)?.postOption {
                     self?.handleMenuPressed(itemType)
                 }
             }) ~ bottomMenuViewModel.disposeBag
@@ -185,11 +192,11 @@ fileprivate extension PostDetailViewModel {
         case .hidePost:
             if let post = self.post.value {
                 let title = "Hide this post?"
-                let message = "You won’t see this post from \(self.post.value?.author ?? "") in your feed."
-                let action = ActionModel("Hide", style: .default) {
+                let message = "By clicking “Hide Post” you won’t see this post form “\(post.author)” in your feed. And it also a button for undo to cancel this action right after this post it submmited."
+                let action = ActionModel("Hide Post", style: .default) {
                     self.hidePost(post)
                 }
-                let confirmDialogViewModel = ConfirmDialogViewModel(title: title, message: message, action: action)
+                let confirmDialogViewModel = ConfirmDialogViewModel(icon: R.image.infoYellowIcon(), title: title, message: message, action: action)
                 self.shouldPresent(.confirmViewController(confirmDialogViewModel))
             }
         }
@@ -259,6 +266,15 @@ fileprivate extension PostDetailViewModel {
             self.shouldPresent(.votersViewController(voterListViewModel))
         }
     }
+    
+    func handleSharePressed() {
+        if let post = self.post.value {
+            let link = "https://serey.io/authors/\(post.author)/\(post.permlink)"
+            if let url = URL(string: link) {
+                self.shouldPresent(.shareLink(url, post.title))
+            }
+        }
+    }
 }
 
 // MARK: - SetUp RxObservers
@@ -317,6 +333,11 @@ extension PostDetailViewModel {
             .subscribe(onNext: { [weak self] _ in
                 self?.handleShowVotersPressed()
             }) ~ viewModel.disposeBag
+        
+        viewModel.shouldShare.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.handleSharePressed()
+            }) ~ viewModel.disposeBag
     }
 }
 
@@ -338,20 +359,53 @@ enum PostMenu {
     case reportPost
     case hidePost
     
-    var cellModel: PostMenuCellViewModel {
-        return PostMenuCellViewModel(self)
+    var cellModel: CellViewModel {
+        switch self {
+        case .reportPost, .hidePost:
+            return PostOptionCellViewModel(self)
+        default:
+            return PostMenuCellViewModel(self)
+        }
+    }
+    
+    var icon: UIImage? {
+        switch self {
+        case .delete:
+            return R.image.trashIcon()
+        case .edit:
+            return R.image.editIcon()
+        case .hidePost:
+            return R.image.hidePostIcon()
+        case .reportPost:
+            return R.image.reportPostIcon()
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .delete:
+            return R.string.common.delete.localized()
+        case .edit:
+            return R.string.common.edit.localized()
+        case .hidePost:
+            return "Hide this post"
+        case .reportPost:
+            return "Report Post"
+        }
+    }
+    
+    var subTitle: String? {
+        switch self {
+        case .hidePost:
+            return "I’m not feeling good seeing this post"
+        case .reportPost:
+            return "I’m concerned about this post"
+        default:
+            return nil
+        }
     }
     
     var imageTextModel: ImageTextModel {
-        switch self {
-        case .edit:
-            return ImageTextModel(image: R.image.editIcon(), titleText: R.string.common.edit.localized())
-        case .delete:
-            return ImageTextModel(image: R.image.trashIcon(), titleText: R.string.common.delete.localized())
-        case .hidePost:
-            return ImageTextModel(image: R.image.hidePostIcon(), titleText: "Hide post")
-        case .reportPost:
-            return ImageTextModel(image: R.image.reportPostIcon(), titleText: "Report post")
-        }
+        return .init(image: self.icon, titleText: self.title)
     }
 }

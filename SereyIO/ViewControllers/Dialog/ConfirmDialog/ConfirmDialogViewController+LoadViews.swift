@@ -25,7 +25,18 @@ extension ConfirmDialogViewController {
                 $0.spacing = 12
                 
                 self.titleLabel.numberOfLines = 0
-                $0.addArrangedSubview(self.titleLabel)
+                let titleStackView = UIStackView().then {
+                    $0.axis = .horizontal
+                    $0.distribution = .fillProportionally
+                    $0.spacing = 14
+                    
+                    $0.addArrangedSubview(self.iconImageView)
+                    $0.addArrangedSubview(self.titleLabel)
+                    self.iconImageView.snp.makeConstraints { make in
+                        make.width.height.equalTo(32)
+                    }
+                }
+                $0.addArrangedSubview(titleStackView)
                 self.messageLabel.numberOfLines = 0
                 $0.addArrangedSubview(self.messageLabel)
             }

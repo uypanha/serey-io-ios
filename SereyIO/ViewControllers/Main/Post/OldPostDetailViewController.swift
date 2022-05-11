@@ -1,5 +1,5 @@
 //
-//  PostDetailViewController.swift
+//  OldPostDetailViewController.swift
 //  SereyIO
 //
 //  Created by Phanha Uy on 3/6/20.
@@ -15,7 +15,7 @@ import RxDataSources
 import MaterialComponents
 import RxKeyboard
 
-class PostDetailViewController: BaseViewController, AlertDialogController, LoadingIndicatorController, VoteDialogProtocol {
+class OldPostDetailViewController: BaseViewController, AlertDialogController, LoadingIndicatorController, VoteDialogProtocol {
     
     fileprivate lazy var keyboardDisposeBag = DisposeBag()
     fileprivate lazy var moreButtonDisposeBag = DisposeBag()
@@ -59,7 +59,7 @@ class PostDetailViewController: BaseViewController, AlertDialogController, Loadi
 }
 
 // MARK: - Preparations & Tools
-extension PostDetailViewController {
+extension OldPostDetailViewController {
     
     func setUpViews() {
         self.scrollView.refreshControl = UIRefreshControl()
@@ -119,7 +119,7 @@ extension PostDetailViewController {
 }
 
 // MARK: - SetUp RxObservers
-extension PostDetailViewController {
+extension OldPostDetailViewController {
     
     func setUpRxObservers() {
         setUpControlsObsservers()
@@ -226,6 +226,12 @@ extension PostDetailViewController {
                     let confirmDialogViewController = ConfirmDialogViewController(viewModel)
                     let bottomSheet = BottomSheetViewController(contentViewController: confirmDialogViewController)
                     self.present(bottomSheet, animated: true, completion: nil)
+                case .shareLink(let url, let message):
+                    DispatchQueue.main.async {
+                        let activityVC = UIActivityViewController(activityItems: [message, url], applicationActivities: nil)
+                        activityVC.excludedActivityTypes = [.airDrop, .addToReadingList]
+                        self.present(activityVC, animated: true, completion: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

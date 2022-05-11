@@ -58,12 +58,19 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
     override func onMorePressed(of postModel: PostModel) {
         if AuthData.shared.isUserLoggedIn {
             let items: [PostMenu] = postModel.prepareOptionMenu()
-            let bottomMenuViewModel = BottomListMenuViewModel(header: " ", items.map { $0.cellModel })
+            let bottomMenuViewModel = BottomListMenuViewModel(header: postModel.prepareOptionMenuTitle(), items.map { $0.cellModel })
+            bottomMenuViewModel.headerFont = .customFont(with: 22, weight: .medium)
             
             bottomMenuViewModel.shouldSelectMenuItem.asObservable()
                 .subscribe(onNext: { [weak self] item in
                     if let itemType = (item as? PostMenuCellViewModel)?.type {
                         self?.handleMenuPressed(itemType, postModel)
+                        return
+                    }
+                    
+                    if let itemType = (item as? PostOptionCellViewModel)?.postOption {
+                        self?.handleMenuPressed(itemType, postModel)
+                        return
                     }
                 }) ~ bottomMenuViewModel.disposeBag
             
@@ -159,11 +166,11 @@ fileprivate extension PostTableViewModel {
             self.shouldPresent(.reportPostController(.init(with: post)))
         case .hidePost:
             let title = "Hide this post?"
-            let message = "You won’t see this post from \(post.author) in your feed."
-            let action = ActionModel("Hide", style: .default) {
+            let message = "By clicking “Hide Post” you won’t see this post form “\(post.author)” in your feed. And it also a button for undo to cancel this action right after this post it submmited."
+            let action = ActionModel("Hide Post", style: .default) {
                 self.hidePost(post)
             }
-            let confirmDialogViewModel = ConfirmDialogViewModel(title: title, message: message, action: action)
+            let confirmDialogViewModel = ConfirmDialogViewModel(icon: R.image.infoYellowIcon(), title: title, message: message, action: action)
             self.shouldPresent(.confirmViewController(confirmDialogViewModel))
         }
     }

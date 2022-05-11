@@ -20,6 +20,7 @@ class PostCommentView: NibView {
     @IBOutlet weak var downVoteButton: UIButton!
     @IBOutlet weak var commentTextView: CommentTextView!
     @IBOutlet weak var voterButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
     
     var viewModel: PostCommentViewModel? {
         didSet {
@@ -89,7 +90,6 @@ fileprivate extension PostCommentView {
     }
     
     func setUpControlObsservers() {
-        
         self.upVoteButton.rx.tap.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel?.didAction(with: .upVotePressed)
@@ -103,6 +103,11 @@ fileprivate extension PostCommentView {
         self.voterButton.rx.tap.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.viewModel?.didAction(with: .votersPressed)
+            }) ~ self.disposeBag
+        
+        self.shareButton.rx.tap.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel?.didAction(with: .sharePressed)
             }) ~ self.disposeBag
     }
 }
