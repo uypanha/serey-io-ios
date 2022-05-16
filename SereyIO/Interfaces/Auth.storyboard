@@ -167,6 +167,7 @@ Sign up now and get free Serey coins!</string>
                         <outlet property="formCenterConstraint" destination="4mg-Wn-qzF" id="twR-xI-9st"/>
                         <outlet property="passwordTextField" destination="80O-dR-qRO" id="zQJ-lZ-uya"/>
                         <outlet property="rememberCheckbox" destination="SOG-Gk-IsL" id="oAA-rn-kIo"/>
+                        <outlet property="rememberMeStackView" destination="HLb-Cd-jcS" id="fwF-JG-M9a"/>
                         <outlet property="signInButton" destination="LFy-KS-B6l" id="Zet-Mo-5xN"/>
                         <outlet property="signInLabel" destination="1Jr-Td-BoP" id="65L-bt-OK0"/>
                         <outlet property="signUpButton" destination="njA-BV-b1G" id="A5g-0W-KmG"/>

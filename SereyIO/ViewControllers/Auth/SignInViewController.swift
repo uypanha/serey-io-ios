@@ -29,6 +29,7 @@ class SignInViewController: BaseViewController, LoadingIndicatorController, Keyb
     @IBOutlet weak var dontHaveAccountLabel: UILabel!
     @IBOutlet weak var termServiceTextView: UITextView!
     
+    @IBOutlet weak var rememberMeStackView: UIStackView!
     @IBOutlet weak var rememberCheckbox: CheckBox!
     @IBOutlet weak var signUpButton: UIButton!
     
@@ -38,6 +39,7 @@ class SignInViewController: BaseViewController, LoadingIndicatorController, Keyb
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.rememberMeStackView.isHidden = true
         setUpViews()
         setUpRxObservers()
     }

@@ -171,7 +171,7 @@ extension PostTableViewCell {
         self.thumbnailImageView.backgroundColor = backgroundColor
         self.titleLabel.backgroundColor = backgroundColor
         self.titleLabel.setRadius(all: cornerRadius)
-        self.sereyValueContainerView.isHidden = isHidden
+        self.sereyValueContainerView.isHidden = !Constants.showReward || isHidden
         self.upVoteContainerView.isHidden = isHidden
         self.downVoteContainerView.isHidden = isHidden
         self.commentContainerView.isHidden = isHidden

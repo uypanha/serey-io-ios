@@ -142,7 +142,7 @@ extension CommentTableViewCell {
         self.descriptionLabel.backgroundColor = backgroundColor
         self.descriptionLabel.setRadius(all: cornerRadius)
         
-        self.sereyValueContainerView.isHidden = isHidden
+        self.sereyValueContainerView.isHidden = !Constants.showReward || isHidden
         self.actionContainerView.isHidden = isHidden
         
         DispatchQueue.main.async {

@@ -26,3 +26,4 @@ app_version_name        = 1.0.0
 app_version_code        = 1
 
 INCLUDE_WALLET          = true
+SHOW_REWARD             = false

@@ -47,6 +47,8 @@
 	<string>${app_name} needs access to your photo library to store photos.</string>
 	<key>Notificaton Center URL</key>
 	<string>${NOTIFICATION_URL}</string>
+	<key>SHOW_REWARD</key>
+	<string>${SHOW_REWARD}</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

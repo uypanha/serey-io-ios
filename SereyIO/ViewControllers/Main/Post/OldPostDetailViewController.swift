@@ -150,7 +150,7 @@ extension OldPostDetailViewController {
         
         self.viewModel.sereyValueText
             .subscribe(onNext: { [unowned self] title in
-                self.sereyValueButton = self.prepareSereyValueButton(title)
+                self.sereyValueButton = Constants.showReward ? self.prepareSereyValueButton(title) : nil
                 self.prepareRightButtonItems()
             }) ~ self.disposeBag
         

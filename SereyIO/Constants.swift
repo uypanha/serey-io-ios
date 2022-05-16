@@ -40,6 +40,10 @@ public struct Constants {
         return (ConfigSetting.includeWallet.value() as NSString).boolValue
     }
     
+    static var showReward: Bool {
+        return (ConfigSetting.showReward.value() as NSString).boolValue
+    }
+    
     public static let limitPerPage: Int = 10
     
     static var uploadImageUrl: String {
@@ -87,6 +91,7 @@ fileprivate enum ConfigSetting {
     case urlProcol
     case includeWallet
     case notificationCenterUrl
+    case showReward
     
     private var key: String {
         switch self {
@@ -104,6 +109,8 @@ fileprivate enum ConfigSetting {
             return "INCLUDE_WALLET"
         case .notificationCenterUrl:
             return "Notificaton Center URL"
+        case .showReward:
+            return "SHOW_REWARD"
         }
     }
     
