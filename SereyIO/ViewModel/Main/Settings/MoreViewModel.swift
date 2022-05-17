@@ -173,7 +173,7 @@ extension MoreViewModel {
         ]
         sectionItems[.about] = [
             SettingCellViewModel(.sereyApps),
-            SettingCellViewModel(.sereyPrice),
+//            SettingCellViewModel(.sereyPrice),
             SettingCellViewModel(.version, true)
         ]
         

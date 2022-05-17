@@ -101,7 +101,7 @@ extension HomeViewController {
     func setUpViews() {
         self.navigationController?.removeNavigationBarBorder()
         self.navigationItem.leftBarButtonItems = [.init(customView: self.countryButton)]
-        self.navigationItem.rightBarButtonItems = [filterButton, sereyPrice]
+        self.navigationItem.rightBarButtonItems = [filterButton]//, sereyPrice]
         
         self.scrollView.delegate = self
         self.scrollView.backgroundColor = .color(.postBackground)
