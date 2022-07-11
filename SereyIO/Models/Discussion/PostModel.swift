@@ -10,7 +10,7 @@ import UIKit
 
 struct PostModel: Codable {
     
-    let id: String
+    let id: String?
     let parentAuthor: String?
     let parentPermlink: String?
     let title: String

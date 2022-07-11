@@ -199,7 +199,7 @@ extension BasePostViewModel {
     }
     
     internal func hidePost(_ post: PostModel) {
-        self.discussionService.hidePost(with: post.id)
+        self.discussionService.hidePost(with: post.id ?? "")
             .subscribe(onNext: { [weak self] data in
                 var post = post
                 post.isHidden = true
@@ -211,7 +211,7 @@ extension BasePostViewModel {
     }
     
     internal func unhidePost(_ post: PostModel) {
-        self.discussionService.unhidePost(with: post.id)
+        self.discussionService.unhidePost(with: post.id ?? "")
             .subscribe(onNext: { [weak self] data in
                 var post = post
                 post.isHidden = false

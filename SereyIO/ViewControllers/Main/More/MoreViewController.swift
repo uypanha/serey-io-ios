@@ -228,6 +228,10 @@ fileprivate extension MoreViewController {
                 case .myReferralIdViewConroller:
                     let myReferralIdViewController = MyReferralIdViewController()
                     self.show(myReferralIdViewController, sender: nil)
+                case .sereyDrumController:
+                    let sereyDrumController = SereyDrum.newInstance().rootViewController
+                    sereyDrumController.modalPresentationStyle = .fullScreen
+                    self.present(sereyDrumController, animated: true)
                 }
             }).disposed(by: self.disposeBag)
     }

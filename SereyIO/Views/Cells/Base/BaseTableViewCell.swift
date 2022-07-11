@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import MaterialComponents
 
 class BaseTableViewCell: UITableViewCell {
     
@@ -15,6 +16,7 @@ class BaseTableViewCell: UITableViewCell {
         return DisposeBag()
     }()
     
+    lazy var rippleController = MDCRippleTouchController()
     lazy var borderViews: [UIView] = []
     
     override func prepareForReuse() {

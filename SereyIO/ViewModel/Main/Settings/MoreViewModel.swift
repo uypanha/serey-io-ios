@@ -37,6 +37,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case signOutDialog
         case bottomListViewController(BottomListMenuViewModel)
         case myReferralIdViewConroller
+        case sereyDrumController
     }
     
     // input:
@@ -156,15 +157,17 @@ extension MoreViewModel {
             } else {
                 sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value)]
             }
-            sectionItems[.profile]?.append(SettingCellViewModel(.myReferralId, true))
+            sectionItems[.profile]?.append(SettingCellViewModel(.myReferralId))
+            sectionItems[.profile]?.append(SettingCellViewModel(.sereyDrum, true))
         } else {
             let signInCellViewModel = SignInCellViewModel().then { [weak self] in self?.setUpSignInCellViewModelObservers($0) }
             #if DEVELOPMENT
-                let walletCellViewModel = SettingCellViewModel(.myWallet, true)
+                let walletCellViewModel = SettingCellViewModel(.myWallet)
                 sectionItems[.signIn] = [signInCellViewModel, walletCellViewModel]
             #else
                 sectionItems[.signIn] = [signInCellViewModel]
             #endif
+            sectionItems[.signIn]?.append(SettingCellViewModel(.sereyDrum, true))
         }
         sectionItems[.general] = [
             SettingCellViewModel(.country),
@@ -248,6 +251,8 @@ fileprivate extension MoreViewModel {
                 self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
             case .myReferralId:
                 self.shouldPresent(.myReferralIdViewConroller)
+            case .sereyDrum:
+                self.shouldPresent(.sereyDrumController)
             default:
                 break
             }

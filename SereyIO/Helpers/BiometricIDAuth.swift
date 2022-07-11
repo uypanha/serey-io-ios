@@ -48,30 +48,17 @@ class BiometricIDAuth {
                 case LAError.userFallback?:
                     message = "You pressed password."
                 default:
-                    if #available(iOS 11.0, *) {
-                        switch evaluateError {
-                        case LAError.biometryNotAvailable?:
-                            message = "\(type.title) is not available."
-                        case LAError.biometryNotEnrolled?:
-                            message = "\(type.title) is not set up. Please go to settings to set up \(type.title)."
-                            reqiuredSetUp = true
-                        case LAError.biometryLockout?:
-                            message = "\(type.title) is locked."
-                        default:
-                            message = "\(type.title) may not be configured"
-                            reqiuredSetUp = true
-                        }
-                    } else {
-                        switch evaluateError {
-                        case LAError.touchIDNotEnrolled?:
-                            message = "\(type.title) is not set up. Please go to settings and set up \(type.title)."
-                            reqiuredSetUp = true
-                        case LAError.touchIDLockout?:
-                            message = "\(type.title) is locked."
-                        default:
-                            message = "\(type.title) may not be configured"
-                            reqiuredSetUp = true
-                        }
+                    switch evaluateError {
+                    case LAError.biometryNotAvailable?:
+                        message = "\(type.title) is not available."
+                    case LAError.biometryNotEnrolled?:
+                        message = "\(type.title) is not set up. Please go to settings to set up \(type.title)."
+                        reqiuredSetUp = true
+                    case LAError.biometryLockout?:
+                        message = "\(type.title) is locked."
+                    default:
+                        message = "\(type.title) may not be configured"
+                        reqiuredSetUp = true
                     }
                 }
                 
@@ -81,5 +68,17 @@ class BiometricIDAuth {
                 }
             }
         }
+    }
+    
+    func getPwSecAccessControl() -> SecAccessControl {
+        var access: SecAccessControl?
+        var error: Unmanaged<CFError>?
+        
+        access = SecAccessControlCreateWithFlags(nil,
+                                                 kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
+                                                 .applicationPassword,
+                                                 &error)
+        precondition(access != nil, "SecAccessControlCreateWithFlags failed")
+        return access!
     }
 }

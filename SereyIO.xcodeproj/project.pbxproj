@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		8BDAFF58EC9ED1931EAE55DE /* Pods_SereyIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D3470C69E01F2FDF5C19861 /* Pods_SereyIO.framework */; };
+		96113DE9287C78EC00F14B8C /* PostDrumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96113DE8287C78EC00F14B8C /* PostDrumViewController.swift */; };
 		961264AB2757B79900AA1AD2 /* SKActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */; };
 		961264AC2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */; };
 		961DC9FA27EA19E6003B73E5 /* MyReferralIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961DC9F927EA19E5003B73E5 /* MyReferralIdViewController.swift */; };
 		961DC9FC27EA1C19003B73E5 /* MyReferralIdViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961DC9FB27EA1C19003B73E5 /* MyReferralIdViewController+LoadViews.swift */; };
+		9621B80F286DF09900C73816 /* DrumsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621B80E286DF09900C73816 /* DrumsApi.swift */; };
+		9621B811286DF26400C73816 /* DrumsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621B810286DF26400C73816 /* DrumsService.swift */; };
 		9625CEC92767B1DC0009FC47 /* FilterHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4022767AAD3005F0C0E /* FilterHeaderCollectionViewCell.xib */; };
 		9625CECA2767B2F20009FC47 /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4082767AB0D005F0C0E /* HeaderCollectionViewCell.xib */; };
+		9636C796285B7DA0002EF5CA /* MyFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636C795285B7DA0002EF5CA /* MyFeedViewController.swift */; };
+		9636C798285B8490002EF5CA /* MyDrumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636C797285B8490002EF5CA /* MyDrumsViewController.swift */; };
+		9636C79B285B8A40002EF5CA /* DrumsPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636C79A285B8A40002EF5CA /* DrumsPeopleViewController.swift */; };
 		9649B11B27A9995D009B40A3 /* EnterIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B11A27A9995D009B40A3 /* EnterIssueViewController.swift */; };
 		9649B11D27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B11C27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift */; };
 		9649B11F27AC20A4009B40A3 /* ConfirmDialogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B11E27AC20A4009B40A3 /* ConfirmDialogViewModel.swift */; };
@@ -23,6 +29,7 @@
 		9649B12827B17AA2009B40A3 /* UndoHiddenPostCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B12727B17AA2009B40A3 /* UndoHiddenPostCellViewModel.swift */; };
 		9658C1F6282ABF5B00FC35B3 /* PostOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9658C1F5282ABF5B00FC35B3 /* PostOptionTableViewCell.swift */; };
 		9667F213278DE13200A4304D /* NoProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9667F212278DE13200A4304D /* NoProfilePictureView.swift */; };
+		96753F262873375A00237C1D /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96753F252873375A00237C1D /* UIView+Constraints.swift */; };
 		967BB0DF274E878C005EBCB8 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967BB0DE274E878C005EBCB8 /* CountryModel.swift */; };
 		967DAAD2277B5D0F00B3D0D7 /* UploadProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967DAAD1277B5D0F00B3D0D7 /* UploadProfileCollectionViewCell.swift */; };
 		967DAAD4277B61F200B3D0D7 /* DashBorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967DAAD3277B61F200B3D0D7 /* DashBorderView.swift */; };
@@ -39,6 +46,17 @@
 		9686E4112767ADC8005F0C0E /* CollectionBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686E4102767ADC8005F0C0E /* CollectionBottomSheetViewController.swift */; };
 		968AFD9F28202C7E001E8496 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968AFD9E28202C7D001E8496 /* PostDetailViewController.swift */; };
 		968AFDA128202C8C001E8496 /* PostDetailViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968AFDA028202C8C001E8496 /* PostDetailViewController+LoadViews.swift */; };
+		968BBB2A28748F78001F6D51 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968BBB2928748F78001F6D51 /* ImageCollectionViewCell.swift */; };
+		968BBB2C2874916F001F6D51 /* ImageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968BBB2B2874916F001F6D51 /* ImageCellViewModel.swift */; };
+		96931AF12858D39300877BCF /* SereyDrum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96931AF02858D39300877BCF /* SereyDrum.swift */; };
+		96931AF32858D3C100877BCF /* DrumRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96931AF22858D3C100877BCF /* DrumRootViewController.swift */; };
+		96931AF62858D41900877BCF /* DrumMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96931AF52858D41900877BCF /* DrumMainViewController.swift */; };
+		96931AF92858DB0700877BCF /* BrowseDrumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96931AF82858DB0700877BCF /* BrowseDrumsViewController.swift */; };
+		9696C8C2286202D8007FD25B /* PostDrumsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9696C8C1286202D8007FD25B /* PostDrumsTableViewCell.swift */; };
+		9696C8C428620516007FD25B /* PostDrumsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9696C8C328620516007FD25B /* PostDrumsCellViewModel.swift */; };
+		9696C8C728620551007FD25B /* BrowseDrumsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9696C8C628620551007FD25B /* BrowseDrumsViewModel.swift */; };
+		9696C8CB28620A6E007FD25B /* DrumsPostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9696C8CA28620A6E007FD25B /* DrumsPostTableViewCell.swift */; };
+		9696C8CD28620CF0007FD25B /* DrumsPostCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9696C8CC28620CF0007FD25B /* DrumsPostCellViewModel.swift */; };
 		969772292770C94D008F6B0C /* CoinService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969772282770C94D008F6B0C /* CoinService.swift */; };
 		9697722A2770C94D008F6B0C /* CoinApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969772272770C94D008F6B0C /* CoinApi.swift */; };
 		9697722D2770C97D008F6B0C /* CoinPriceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697722C2770C97D008F6B0C /* CoinPriceManager.swift */; };
@@ -551,10 +569,16 @@
 		69EBB42D2E47D74265135911 /* Pods-SereyIOUITests.release_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOUITests.release_production.xcconfig"; path = "Target Support Files/Pods-SereyIOUITests/Pods-SereyIOUITests.release_production.xcconfig"; sourceTree = "<group>"; };
 		708C012F5475EA47610870EB /* Pods-SereyIOTests.debug_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.debug_development.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.debug_development.xcconfig"; sourceTree = "<group>"; };
 		740426AD0D6071AD43C2EEFF /* Pods-SereyIO.debug_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIO.debug_production.xcconfig"; path = "Target Support Files/Pods-SereyIO/Pods-SereyIO.debug_production.xcconfig"; sourceTree = "<group>"; };
+		96113DE8287C78EC00F14B8C /* PostDrumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDrumViewController.swift; sourceTree = "<group>"; };
 		961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicator.swift; sourceTree = "<group>"; };
 		961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicatorViewStyle.swift; sourceTree = "<group>"; };
 		961DC9F927EA19E5003B73E5 /* MyReferralIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReferralIdViewController.swift; sourceTree = "<group>"; };
 		961DC9FB27EA1C19003B73E5 /* MyReferralIdViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyReferralIdViewController+LoadViews.swift"; sourceTree = "<group>"; };
+		9621B80E286DF09900C73816 /* DrumsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsApi.swift; sourceTree = "<group>"; };
+		9621B810286DF26400C73816 /* DrumsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsService.swift; sourceTree = "<group>"; };
+		9636C795285B7DA0002EF5CA /* MyFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedViewController.swift; sourceTree = "<group>"; };
+		9636C797285B8490002EF5CA /* MyDrumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDrumsViewController.swift; sourceTree = "<group>"; };
+		9636C79A285B8A40002EF5CA /* DrumsPeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsPeopleViewController.swift; sourceTree = "<group>"; };
 		9649B11A27A9995D009B40A3 /* EnterIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterIssueViewController.swift; sourceTree = "<group>"; };
 		9649B11C27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnterIssueViewController+LoadViews.swift"; sourceTree = "<group>"; };
 		9649B11E27AC20A4009B40A3 /* ConfirmDialogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogViewModel.swift; sourceTree = "<group>"; };
@@ -564,6 +588,7 @@
 		9649B12727B17AA2009B40A3 /* UndoHiddenPostCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoHiddenPostCellViewModel.swift; sourceTree = "<group>"; };
 		9658C1F5282ABF5B00FC35B3 /* PostOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOptionTableViewCell.swift; sourceTree = "<group>"; };
 		9667F212278DE13200A4304D /* NoProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoProfilePictureView.swift; sourceTree = "<group>"; };
+		96753F252873375A00237C1D /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		967BB0DE274E878C005EBCB8 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
 		967DAAD1277B5D0F00B3D0D7 /* UploadProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadProfileCollectionViewCell.swift; sourceTree = "<group>"; };
 		967DAAD3277B61F200B3D0D7 /* DashBorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashBorderView.swift; sourceTree = "<group>"; };
@@ -582,6 +607,17 @@
 		9686E4102767ADC8005F0C0E /* CollectionBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionBottomSheetViewController.swift; sourceTree = "<group>"; };
 		968AFD9E28202C7D001E8496 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		968AFDA028202C8C001E8496 /* PostDetailViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostDetailViewController+LoadViews.swift"; sourceTree = "<group>"; };
+		968BBB2928748F78001F6D51 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		968BBB2B2874916F001F6D51 /* ImageCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCellViewModel.swift; sourceTree = "<group>"; };
+		96931AF02858D39300877BCF /* SereyDrum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SereyDrum.swift; sourceTree = "<group>"; };
+		96931AF22858D3C100877BCF /* DrumRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumRootViewController.swift; sourceTree = "<group>"; };
+		96931AF52858D41900877BCF /* DrumMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumMainViewController.swift; sourceTree = "<group>"; };
+		96931AF82858DB0700877BCF /* BrowseDrumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseDrumsViewController.swift; sourceTree = "<group>"; };
+		9696C8C1286202D8007FD25B /* PostDrumsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDrumsTableViewCell.swift; sourceTree = "<group>"; };
+		9696C8C328620516007FD25B /* PostDrumsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDrumsCellViewModel.swift; sourceTree = "<group>"; };
+		9696C8C628620551007FD25B /* BrowseDrumsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseDrumsViewModel.swift; sourceTree = "<group>"; };
+		9696C8CA28620A6E007FD25B /* DrumsPostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsPostTableViewCell.swift; sourceTree = "<group>"; };
+		9696C8CC28620CF0007FD25B /* DrumsPostCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsPostCellViewModel.swift; sourceTree = "<group>"; };
 		969772272770C94D008F6B0C /* CoinApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinApi.swift; sourceTree = "<group>"; };
 		969772282770C94D008F6B0C /* CoinService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinService.swift; sourceTree = "<group>"; };
 		9697722C2770C97D008F6B0C /* CoinPriceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPriceManager.swift; sourceTree = "<group>"; };
@@ -1142,6 +1178,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		96113DE7287C78CD00F14B8C /* PostDrumViewController */ = {
+			isa = PBXGroup;
+			children = (
+				96113DE8287C78EC00F14B8C /* PostDrumViewController.swift */,
+			);
+			path = PostDrumViewController;
+			sourceTree = "<group>";
+		};
 		961264A82757B78B00AA1AD2 /* SKActivityIndicator */ = {
 			isa = PBXGroup;
 			children = (
@@ -1159,6 +1203,39 @@
 				B861CB8C27F753C300D27666 /* InviteFriendDialogViewController */,
 			);
 			path = Referral;
+			sourceTree = "<group>";
+		};
+		9621B80D286DF08B00C73816 /* Drums */ = {
+			isa = PBXGroup;
+			children = (
+				9621B80E286DF09900C73816 /* DrumsApi.swift */,
+				9621B810286DF26400C73816 /* DrumsService.swift */,
+			);
+			path = Drums;
+			sourceTree = "<group>";
+		};
+		9636C793285B7D57002EF5CA /* MyFeed */ = {
+			isa = PBXGroup;
+			children = (
+				9636C795285B7DA0002EF5CA /* MyFeedViewController.swift */,
+			);
+			path = MyFeed;
+			sourceTree = "<group>";
+		};
+		9636C794285B7D61002EF5CA /* MyDrums */ = {
+			isa = PBXGroup;
+			children = (
+				9636C797285B8490002EF5CA /* MyDrumsViewController.swift */,
+			);
+			path = MyDrums;
+			sourceTree = "<group>";
+		};
+		9636C799285B8A21002EF5CA /* People */ = {
+			isa = PBXGroup;
+			children = (
+				9636C79A285B8A40002EF5CA /* DrumsPeopleViewController.swift */,
+			);
+			path = People;
 			sourceTree = "<group>";
 		};
 		9649B11927A99921009B40A3 /* EnterIssue */ = {
@@ -1234,6 +1311,82 @@
 				968AFDA028202C8C001E8496 /* PostDetailViewController+LoadViews.swift */,
 			);
 			path = PostDetailViewController;
+			sourceTree = "<group>";
+		};
+		968BBB2828748F52001F6D51 /* ImageCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				968BBB2B2874916F001F6D51 /* ImageCellViewModel.swift */,
+				968BBB2928748F78001F6D51 /* ImageCollectionViewCell.swift */,
+			);
+			path = ImageCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		96931AEF2858D36E00877BCF /* Drums */ = {
+			isa = PBXGroup;
+			children = (
+				96931AF22858D3C100877BCF /* DrumRootViewController.swift */,
+				96931AF02858D39300877BCF /* SereyDrum.swift */,
+				96931AF42858D40100877BCF /* Main */,
+			);
+			path = Drums;
+			sourceTree = "<group>";
+		};
+		96931AF42858D40100877BCF /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				96931AF52858D41900877BCF /* DrumMainViewController.swift */,
+				96931AF72858DA9500877BCF /* Browse */,
+				9636C794285B7D61002EF5CA /* MyDrums */,
+				9636C793285B7D57002EF5CA /* MyFeed */,
+				9636C799285B8A21002EF5CA /* People */,
+				96113DE7287C78CD00F14B8C /* PostDrumViewController */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		96931AF72858DA9500877BCF /* Browse */ = {
+			isa = PBXGroup;
+			children = (
+				96931AF82858DB0700877BCF /* BrowseDrumsViewController.swift */,
+			);
+			path = Browse;
+			sourceTree = "<group>";
+		};
+		9696C8C02862029B007FD25B /* Drums */ = {
+			isa = PBXGroup;
+			children = (
+				9696C8C928620A3A007FD25B /* DrumsPostTableViewCell */,
+				968BBB2828748F52001F6D51 /* ImageCollectionViewCell */,
+				9696C8C8286209FE007FD25B /* PostDrumsTableViewCell */,
+			);
+			path = Drums;
+			sourceTree = "<group>";
+		};
+		9696C8C528620539007FD25B /* Drums */ = {
+			isa = PBXGroup;
+			children = (
+				9696C8C628620551007FD25B /* BrowseDrumsViewModel.swift */,
+			);
+			path = Drums;
+			sourceTree = "<group>";
+		};
+		9696C8C8286209FE007FD25B /* PostDrumsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				9696C8C328620516007FD25B /* PostDrumsCellViewModel.swift */,
+				9696C8C1286202D8007FD25B /* PostDrumsTableViewCell.swift */,
+			);
+			path = PostDrumsTableViewCell;
+			sourceTree = "<group>";
+		};
+		9696C8C928620A3A007FD25B /* DrumsPostTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				9696C8CC28620CF0007FD25B /* DrumsPostCellViewModel.swift */,
+				9696C8CA28620A6E007FD25B /* DrumsPostTableViewCell.swift */,
+			);
+			path = DrumsPostTableViewCell;
 			sourceTree = "<group>";
 		};
 		9697722B2770C958008F6B0C /* Coin */ = {
@@ -1892,6 +2045,7 @@
 				DCD3985D232E105A00C812EB /* Base */,
 				DC5D59D424323C080048C921 /* Common */,
 				DC40D5DD23E3316B00B0DD96 /* Dialog */,
+				96931AEF2858D36E00877BCF /* Drums */,
 				DC6A791323CB66E5001D1009 /* Main */,
 				DC88A73723DF3F3300EB7F79 /* OnBoard */,
 				DCD3985A232E102D00C812EB /* SlashScreen */,
@@ -2893,15 +3047,16 @@
 		DCD39860232E112A00C812EB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9686E40E2767AB99005F0C0E /* MDCChipView+StyleProtocol.swift */,
 				DCD39880232E24A400C812EB /* NSLayoutConstraint+Multiplier.swift */,
 				DCD39884232E24E500C812EB /* Reusable+Extensions.swift */,
 				DC9E36E82413F4A100289693 /* RichEditor+Custom.swift */,
+				B80B289927A82D580023D894 /* SkeletonView+Extensions.swift */,
 				DCD39886232E251C00C812EB /* StyleProtocol.swift */,
+				9649B12027AC2729009B40A3 /* UIButton+Extensions.swift */,
 				DC3E7E17270362E7001DA924 /* UILabel+Helper.swift */,
 				DCD3987E232E238800C812EB /* UIView+Appearance.swift */,
-				9686E40E2767AB99005F0C0E /* MDCChipView+StyleProtocol.swift */,
-				B80B289927A82D580023D894 /* SkeletonView+Extensions.swift */,
-				9649B12027AC2729009B40A3 /* UIButton+Extensions.swift */,
+				96753F252873375A00237C1D /* UIView+Constraints.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2913,6 +3068,7 @@
 				DCD39864232E1CB600C812EB /* Base */,
 				DC6A78F823CA20AB001D1009 /* Common */,
 				DCD12D66242D036A0084F66C /* Dialog */,
+				9696C8C528620539007FD25B /* Drums */,
 				DC19DBE823EC5F8400571CC8 /* Main */,
 				DC88A73A23DF4A7700EB7F79 /* OnBoard */,
 				DCD39874232E20BF00C812EB /* Slash */,
@@ -2942,6 +3098,7 @@
 				DC56243A241E82A90076A78C /* Auth */,
 				9697722B2770C958008F6B0C /* Coin */,
 				DC9AC6DD2406BEFB008FAFA6 /* Discussion */,
+				9621B80D286DF08B00C73816 /* Drums */,
 				DCACDDDC2702101E00F69AEA /* Notification */,
 				DC5B55AC2451E59500F8531B /* Push */,
 				DCF67FDB240FFC3B003061A7 /* Search */,
@@ -3020,6 +3177,7 @@
 				DC40D5D223E32A3100B0DD96 /* Base */,
 				DC40D5D123E32A2800B0DD96 /* Common */,
 				DC1C6EBF23FC3C3000BA701D /* Dialog */,
+				9696C8C02862029B007FD25B /* Drums */,
 				9686E3F92767A681005F0C0E /* Filter */,
 				DC40D5C823E3298F00B0DD96 /* LanguageTableViewCell */,
 				DC05FDA523F1AB1E0093B47B /* More */,
@@ -3636,6 +3794,8 @@
 				DC010D392434F685002BE182 /* URL+Helpers.swift in Sources */,
 				DC19DBE723EC5E7500571CC8 /* PostTableViewController.swift in Sources */,
 				DCFBD78425029CE8005B6875 /* CancelPowerModel.swift in Sources */,
+				96931AF12858D39300877BCF /* SereyDrum.swift in Sources */,
+				96753F262873375A00237C1D /* UIView+Constraints.swift in Sources */,
 				DC5FC218245431CB00CA6117 /* UserCommentReplyCellViewModel.swift in Sources */,
 				9686E4002767A763005F0C0E /* ProductCategoryCellViewModel.swift in Sources */,
 				DC5FC21524542E5600CA6117 /* UserCommentReplyTableViewCell.swift in Sources */,
@@ -3644,6 +3804,7 @@
 				DC9C65AB24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift in Sources */,
 				DC7C8EF024D9BDF50051C084 /* TransferCoinRequestModel.swift in Sources */,
 				DCDAB376273AC97600C3B349 /* ConfirmDialogViewController+LoadViews.swift in Sources */,
+				9696C8C728620551007FD25B /* BrowseDrumsViewModel.swift in Sources */,
 				DC583A8B24C9E95200D9C4D3 /* RSAUtils.swift in Sources */,
 				9686E4112767ADC8005F0C0E /* CollectionBottomSheetViewController.swift in Sources */,
 				DC12F212242278F90099C479 /* UserModel.swift in Sources */,
@@ -3675,6 +3836,7 @@
 				DC583A8D24CC26A200D9C4D3 /* WalletAuthValidateController.swift in Sources */,
 				DCA74DC9253AD6A40041EAAE /* VerifyBiometryViewController.swift in Sources */,
 				DC1CBD2625939E9A00CCB714 /* UserPostListViewModel.swift in Sources */,
+				9636C796285B7DA0002EF5CA /* MyFeedViewController.swift in Sources */,
 				DC4B162A2698933B0070A442 /* ChooseCountryViewController.swift in Sources */,
 				DC12F21424227A340099C479 /* UserService.swift in Sources */,
 				DC115F2C241A8D38006BE78C /* UtilsHelper.swift in Sources */,
@@ -3781,6 +3943,7 @@
 				DC7558AE24587B3D00AD40FA /* FeatureBoarding.swift in Sources */,
 				DCD39883232E24BF00C812EB /* Realm+Cnfigure.swift in Sources */,
 				DC9E36DC24129ACA00289693 /* OldPostDetailViewController.swift in Sources */,
+				9636C79B285B8A40002EF5CA /* DrumsPeopleViewController.swift in Sources */,
 				DCB0703C2732DD5B004463E7 /* DelegatePowerViewController+LoadViews.swift in Sources */,
 				DCCC15C825092AE500ED4C52 /* TransactionDetailViewModel.swift in Sources */,
 				DCD3988B232E255E00C812EB /* UIImage+Extensions.swift in Sources */,
@@ -3808,6 +3971,8 @@
 				DC26812D23F2FCD50045776E /* ProfileCellViewModel.swift in Sources */,
 				DC3E7E1E27036815001DA924 /* NotificationCellViewModel.swift in Sources */,
 				9697722A2770C94D008F6B0C /* CoinApi.swift in Sources */,
+				9696C8CD28620CF0007FD25B /* DrumsPostCellViewModel.swift in Sources */,
+				9621B811286DF26400C73816 /* DrumsService.swift in Sources */,
 				DC115F2E241A8E18006BE78C /* NSAttributedString+Extensions.swift in Sources */,
 				DC1CBD3F2593A1CE00CCB714 /* DraftSavedTableViewCell.swift in Sources */,
 				DCB9F2FA24D85F540028D449 /* TransferViewController.swift in Sources */,
@@ -3828,6 +3993,9 @@
 				DC5FC21124542CB700CA6117 /* CommentsListViewModel.swift in Sources */,
 				DCA74DC12539F6700041EAAE /* BiometricIDAuth.swift in Sources */,
 				DCACDDE32702207800F69AEA /* NotificationModel.swift in Sources */,
+				9696C8C2286202D8007FD25B /* PostDrumsTableViewCell.swift in Sources */,
+				968BBB2C2874916F001F6D51 /* ImageCellViewModel.swift in Sources */,
+				96113DE9287C78EC00F14B8C /* PostDrumViewController.swift in Sources */,
 				DC6FCE7423F05D1700D72F6D /* Steem.swift in Sources */,
 				DCCD40C924363EF700093A18 /* SubmitPostModel.swift in Sources */,
 				DC9A660B24E05725001F1B60 /* PayQRViewModel.swift in Sources */,
@@ -3846,6 +4014,7 @@
 				DC7558B7245898EC00AD40FA /* SereyAppTableViewCell.swift in Sources */,
 				DC6FCE7323F05D1700D72F6D /* HttpClient.swift in Sources */,
 				DC0F36AD245093A800916886 /* DownvoteDialogViewController.swift in Sources */,
+				96931AF32858D3C100877BCF /* DrumRootViewController.swift in Sources */,
 				DC9AC6DF2406BF1C008FAFA6 /* DiscussionApi.swift in Sources */,
 				DC40D5C723E31FDF00B0DD96 /* GradientView.swift in Sources */,
 				DC6ED58F2326A7B000770B31 /* AppDelegateHelper.swift in Sources */,
@@ -3865,6 +4034,7 @@
 				968AFDA128202C8C001E8496 /* PostDetailViewController+LoadViews.swift in Sources */,
 				DCA5255F242921EA00284CD8 /* CreatePostViewController.swift in Sources */,
 				DC19DBED23EC601900571CC8 /* HomeViewModel.swift in Sources */,
+				968BBB2A28748F78001F6D51 /* ImageCollectionViewCell.swift in Sources */,
 				DC8AB7C024FC058600968FCD /* ConfirmPowerViewModel.swift in Sources */,
 				B861CB9027F7545200D27666 /* InviteFriendDialogViewController+LoadViews.swift in Sources */,
 				DC6ED5912326A8F400770B31 /* Appearance.swift in Sources */,
@@ -3885,10 +4055,12 @@
 				DC88A73C23DF4A8900EB7F79 /* SelectLanguageViewModel.swift in Sources */,
 				DCA74DA82537EDBA0041EAAE /* WalletPreferenceStore.swift in Sources */,
 				DC8AB7BE24FBA13200968FCD /* ConfirmPowerUpViewController.swift in Sources */,
+				9696C8CB28620A6E007FD25B /* DrumsPostTableViewCell.swift in Sources */,
 				DC13409A24573F0C00CC9856 /* ToggleTextTableViewCell.swift in Sources */,
 				DC6A790523CA242B001D1009 /* EmptyOrErrorView.swift in Sources */,
 				DC583A9224CC2E7A00D9C4D3 /* WalletStore.swift in Sources */,
 				DC7C740F2471803200610526 /* BottomSheetListViewController.swift in Sources */,
+				96931AF62858D41900877BCF /* DrumMainViewController.swift in Sources */,
 				DCEC0CBE240971AE002F4B6F /* ShimmeringProtocol.swift in Sources */,
 				DC56243C241E82B80076A78C /* AuthService.swift in Sources */,
 				DC7AAFFB24F80BD000ECDF47 /* PowerDownViewController.swift in Sources */,
@@ -3934,6 +4106,7 @@
 				9697722D2770C97D008F6B0C /* CoinPriceManager.swift in Sources */,
 				DC7C8EEE24D9B3100051C084 /* TransferCoinViewModel.swift in Sources */,
 				DC40D5D423E32A4400B0DD96 /* ImageTextCellViewModel.swift in Sources */,
+				96931AF92858DB0700877BCF /* BrowseDrumsViewController.swift in Sources */,
 				DC19DBEB23EC5F9E00571CC8 /* PostTableViewModel.swift in Sources */,
 				DC1CBD652594F79200CCB714 /* DraftTableViewCell.swift in Sources */,
 				DCFBD7892503E119005B6875 /* ClaimRewardViewModel.swift in Sources */,
@@ -3946,6 +4119,7 @@
 				DC6ED5742326A37800770B31 /* DeeplinkParser.swift in Sources */,
 				DCCD40CB2436422C00093A18 /* BlockChainResponse.swift in Sources */,
 				96AE4E2627A1AE3C00470B6D /* ReportPostViewModel.swift in Sources */,
+				9621B80F286DF09900C73816 /* DrumsApi.swift in Sources */,
 				DC19DBE323EC581A00571CC8 /* ChooseCategorySheetViewController.swift in Sources */,
 				DCD3986B232E1DF700C812EB /* AppService.swift in Sources */,
 				DC1CBD1E259250D700CCB714 /* DraftModel.swift in Sources */,
@@ -3983,6 +4157,7 @@
 				DCC49AD323E865D700119BAA /* ProfileView.swift in Sources */,
 				DC05FDBC23F1B0500093B47B /* MoreViewModel.swift in Sources */,
 				DC13409924573F0C00CC9856 /* ToggleTextCellModel.swift in Sources */,
+				9696C8C428620516007FD25B /* PostDrumsCellViewModel.swift in Sources */,
 				DCBBD6C524E43A870099C406 /* WalletSettingsViewModel.swift in Sources */,
 				DC6ED56823269B8400770B31 /* R.generated.swift in Sources */,
 				96AE4E2127A19F2000470B6D /* ReportPostViewController.swift in Sources */,
@@ -4000,6 +4175,7 @@
 				DC8EAB8523E7232800E00A00 /* NotificationViewController.swift in Sources */,
 				DC60AC8D24A905E50014B77E /* BaseRootViewController.swift in Sources */,
 				DC6A78F723CA202C001D1009 /* CollectionMultiSectionsProviderModel.swift in Sources */,
+				9636C798285B8490002EF5CA /* MyDrumsViewController.swift in Sources */,
 				DCC49AD723E8795600119BAA /* TabBarIndicator.swift in Sources */,
 				DC87FEFB24E44770007622D4 /* WalletProfileTableViewCell.swift in Sources */,
 				DC6ED56C2326A19B00770B31 /* Constants.swift in Sources */,

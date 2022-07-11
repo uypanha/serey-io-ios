@@ -29,6 +29,7 @@ enum SettingType {
     case notificationSettings
     case sereyPrice
     case myReferralId
+    case sereyDrum
     case sereyApps
     case version
     
@@ -57,6 +58,8 @@ enum SettingType {
                 return ImageTextModel(image: R.image.aboutIcon(), titleText: R.string.settings.version.localized(), subTitle: self.subTitle)
             case .myReferralId:
                 return .init(image: R.image.myReferralIdIcon(), titleText: "My Referral ID")
+            case .sereyDrum:
+                return .init(image: R.image.drumsLogo(), titleText: "Drums")
             }
         }
     }

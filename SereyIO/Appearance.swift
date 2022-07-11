@@ -100,6 +100,8 @@ fileprivate extension Appearance {
     
     static func prepareSkeletonView() {
         SkeletonAppearance.default.tintColor = .color(.shimmering)
-        SkeletonAppearance.default.multilineCornerRadius = 4
+        SkeletonAppearance.default.multilineCornerRadius = 6
+        SkeletonAppearance.default.skeletonCornerRadius = 6
+        SkeletonAppearance.default.multilineSpacing = 6
     }
 }
