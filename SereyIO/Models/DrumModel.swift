@@ -1,16 +1,15 @@
 //
-//  PostModel.swift
+//  DrumModel.swift
 //  SereyIO
 //
-//  Created by Phanha Uy on 2/27/20.
-//  Copyright © 2020 Serey IO. All rights reserved.
+//  Created by Panha Uy on 15/7/22.
+//  Copyright © 2022 Serey IO. All rights reserved.
 //
 
 import UIKit
 
-struct PostModel: Codable {
+struct DrumModel: Codable {
     
-    let id: String
     let parentAuthor: String?
     let parentPermlink: String?
     let title: String
@@ -30,9 +29,32 @@ struct PostModel: Codable {
     let flaggerCount: Int
     let allowVote: Bool
     let authorImageUrl: String?
-    var replies: [PostModel]?
+    var replies: [DrumModel]?
+    
+    let redrummer: String?
+    let redrummers: [String]
+    
+    // Quotes Fields
+    let postAuthor: String?
+    let postAuthorImageUrl: String?
+    let postPermlink: String?
+    let postDescription: String?
+    let postImageUrl: [String]
+    let postCreatedAt: String?
     
     var isHidden: Bool = false
+    
+    var redrummedBy: String? {
+        if let redrummer = redrummer {
+            let author = redrummer == AuthData.shared.username ? "You" : redrummer
+            return author + " redrummed"
+        }
+        return nil
+    }
+    
+    var isLoggedUserRedrummed: Bool {
+        return self.redrummers.contains(where: { $0 == AuthData.shared.username })
+    }
     
     var firstThumnailURL: URL? {
         get {
@@ -72,8 +94,6 @@ struct PostModel: Codable {
         let firstLetter = author.first == nil ? "" : "\(author.first!)"
         let uniqueColor = UIColor(hexString: PFColorHash().hex("\(author)"))
         
-//        let predicate = NSPredicate(format: "active == true AND username == %@", self.author)
-//        let defaultImage: UserProfileModel? = UserProfileModel().qeuryFirst(by: predicate)
         let url = URL(string: self.authorImageUrl ?? "")
         return ProfileViewModel(shortcut: firstLetter, imageUrl: url, uniqueColor: uniqueColor)
     }
@@ -114,7 +134,6 @@ struct PostModel: Codable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case id
         case parentAuthor = "parent_author"
         case parentPermlink = "parent_permlink"
         case title
@@ -135,5 +154,13 @@ struct PostModel: Codable {
         case flaggerCount = "flagger_count"
         case authorImageUrl = "author_image_url"
         case replies
+        case redrummer = "redrummer"
+        case redrummers = "redrummers"
+        case postAuthor = "post_author"
+        case postAuthorImageUrl = "post_author_image_url"
+        case postPermlink = "post_permlink"
+        case postDescription = "post_description"
+        case postImageUrl = "post_image_url"
+        case postCreatedAt = "post_created_at"
     }
 }

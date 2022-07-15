@@ -74,7 +74,7 @@ extension ReportPostViewModel {
     
     func reportPost(with type: ReportTypeModel) {
         self.shouldPresent(.loading(true))
-        self.discussionService.reportPost(self.post.id ?? "", typeId: type.id, description: type.title)
+        self.discussionService.reportPost(self.post.id, typeId: type.id, description: type.title)
             .subscribe(onNext: { [weak self] data in
                 self?.shouldPresent(.loading(false))
                 self?.handleReportSuccess()
@@ -110,7 +110,7 @@ extension ReportPostViewModel {
                 let viewModel = ConfirmDialogViewModel(title: "Report this post?", message: message, action: action)
                 self.shouldPresent(.confirmDialogController(viewModel: viewModel))
             } else {
-                self.shouldPresent(.enterIssueViewController(.init(from: self.post.id ?? "", with: type)))
+                self.shouldPresent(.enterIssueViewController(.init(from: self.post.id, with: type)))
             }
         }
     }

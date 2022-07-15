@@ -13,22 +13,28 @@ import RxBinding
 
 class DrumsPostCellViewModel: CellViewModel, ShimmeringProtocol, CollectionSingleSecitionProviderModel {
     
-    let post: BehaviorRelay<PostModel?>
+    let post: BehaviorRelay<DrumModel?>
     let isShimmering: BehaviorRelay<Bool>
     
+    let redrummedBy: BehaviorSubject<String?>
     let profileModel: BehaviorSubject<ProfileViewModel?>
     let profileName: BehaviorSubject<String?>
     let createdAt: BehaviorSubject<String?>
     let title: BehaviorSubject<String?>
     let likeCount: BehaviorSubject<String?>
     let collectionViewHeight: BehaviorSubject<CGFloat>
+    let redrumButtonColor: BehaviorSubject<UIColor>
     
     let cells: BehaviorRelay<[CellViewModel]>
     
-    init(_ post: PostModel? = nil) {
+    let didProfilePressed: PublishSubject<String>
+    
+    init(_ post: DrumModel? = nil) {
         self.post = .init(value: post)
         self.isShimmering = .init(value: post == nil)
         
+        self.redrummedBy = .init(value: post?.redrummedBy)
+        self.redrumButtonColor = .init(value: post?.isLoggedUserRedrummed == true ? .color("#F2F8FD") : .color("#E1E1E1"))
         self.profileModel = .init(value: post?.profileViewModel)
         self.profileName = .init(value: post?.author ?? "    ")
         self.createdAt = .init(value: post?.publishedDateString ?? "    ")
@@ -38,6 +44,8 @@ class DrumsPostCellViewModel: CellViewModel, ShimmeringProtocol, CollectionSingl
         
         self.cells = .init(value: [])
         self.collectionViewHeight = .init(value: 100)
+        
+        self.didProfilePressed = .init()
         super.init()
         
         setUpRxObservers()
@@ -64,6 +72,10 @@ extension DrumsPostCellViewModel {
                 (items.last as? ImageCellViewModel)?.plusImage.accept(imageCount - images.count)
             }
             
+            if post.postAuthor != nil {
+                items.append(QuotedDrumCellViewModel(post))
+            }
+            
             height += imageCount > 1 ? 100 : 160
         }
         self.collectionViewHeight.onNext(height)
@@ -76,7 +88,17 @@ extension DrumsPostCellViewModel {
             let height: CGFloat = (self.post.value?.imageUrl?.count ?? 0 > 1) ? (100) : 160
             return .init(width: width, height: height)
         }
+        
+        if let _ = self.item(at: at) as? QuotedDrumCellViewModel {
+            return .init(width: maxWidth, height: 100)
+        }
         return .init(width: maxWidth, height: 94)
+    }
+    
+    func handleProfilePressed() {
+        if let author = self.post.value?.author {
+            self.didProfilePressed.onNext(author)
+        }
     }
 }
 

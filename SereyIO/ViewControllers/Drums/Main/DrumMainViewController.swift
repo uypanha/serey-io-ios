@@ -38,7 +38,7 @@ extension DrumMainViewController {
             var viewController: UIViewController? = nil
             switch self {
             case .home:
-                viewController = BrowseDrumsViewController(viewModel: .init())
+                viewController = BrowseDrumsViewController(viewModel: .init(containPostItem: true))
             case .myFeed:
                 viewController = MyFeedViewController()
             case .myDrums:

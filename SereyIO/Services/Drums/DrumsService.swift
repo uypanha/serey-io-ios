@@ -12,8 +12,8 @@ import RxSwift
 
 class DrumsService: AppService<DrumsApi> {
     
-    func fetchAllDrums(_ pagination: PaginationRequestModel) -> Observable<[PostModel]> {
-        return self.provider.rx.requestObject(.allDrums(pagination), type: [PostModel].self)
+    func fetchAllDrums(author: String?, pagination: PaginationRequestModel) -> Observable<[DrumModel]> {
+        return self.provider.rx.requestObject(.allDrums(author, pagination), type: [DrumModel].self)
             .asObservable()
     }
 }

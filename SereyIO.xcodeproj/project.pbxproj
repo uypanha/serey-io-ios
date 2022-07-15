@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8BDAFF58EC9ED1931EAE55DE /* Pods_SereyIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D3470C69E01F2FDF5C19861 /* Pods_SereyIO.framework */; };
 		96113DE9287C78EC00F14B8C /* PostDrumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96113DE8287C78EC00F14B8C /* PostDrumViewController.swift */; };
+		96113DF0287DD3D700F14B8C /* NoMorePostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96113DEF287DD3D700F14B8C /* NoMorePostTableViewCell.swift */; };
+		96113DF2287DD62300F14B8C /* NoMorePostCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96113DF1287DD62300F14B8C /* NoMorePostCellViewModel.swift */; };
 		961264AB2757B79900AA1AD2 /* SKActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */; };
 		961264AC2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */; };
 		961DC9FA27EA19E6003B73E5 /* MyReferralIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961DC9F927EA19E5003B73E5 /* MyReferralIdViewController.swift */; };
@@ -17,6 +19,11 @@
 		9621B811286DF26400C73816 /* DrumsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621B810286DF26400C73816 /* DrumsService.swift */; };
 		9625CEC92767B1DC0009FC47 /* FilterHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4022767AAD3005F0C0E /* FilterHeaderCollectionViewCell.xib */; };
 		9625CECA2767B2F20009FC47 /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4082767AB0D005F0C0E /* HeaderCollectionViewCell.xib */; };
+		963530B528806FFE006290CF /* BaseDrumListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963530B428806FFE006290CF /* BaseDrumListingViewController.swift */; };
+		963530B728807228006290CF /* AuthorDrumListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963530B628807228006290CF /* AuthorDrumListViewController.swift */; };
+		963530BF2881A9B2006290CF /* DrumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963530BE2881A9B1006290CF /* DrumModel.swift */; };
+		963530C22881B201006290CF /* QuotedDrumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963530C12881B201006290CF /* QuotedDrumCollectionViewCell.swift */; };
+		963530C42881B2E3006290CF /* QuotedDrumCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963530C32881B2E3006290CF /* QuotedDrumCellViewModel.swift */; };
 		9636C796285B7DA0002EF5CA /* MyFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636C795285B7DA0002EF5CA /* MyFeedViewController.swift */; };
 		9636C798285B8490002EF5CA /* MyDrumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636C797285B8490002EF5CA /* MyDrumsViewController.swift */; };
 		9636C79B285B8A40002EF5CA /* DrumsPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636C79A285B8A40002EF5CA /* DrumsPeopleViewController.swift */; };
@@ -570,12 +577,19 @@
 		708C012F5475EA47610870EB /* Pods-SereyIOTests.debug_development.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIOTests.debug_development.xcconfig"; path = "Target Support Files/Pods-SereyIOTests/Pods-SereyIOTests.debug_development.xcconfig"; sourceTree = "<group>"; };
 		740426AD0D6071AD43C2EEFF /* Pods-SereyIO.debug_production.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SereyIO.debug_production.xcconfig"; path = "Target Support Files/Pods-SereyIO/Pods-SereyIO.debug_production.xcconfig"; sourceTree = "<group>"; };
 		96113DE8287C78EC00F14B8C /* PostDrumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDrumViewController.swift; sourceTree = "<group>"; };
+		96113DEF287DD3D700F14B8C /* NoMorePostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMorePostTableViewCell.swift; sourceTree = "<group>"; };
+		96113DF1287DD62300F14B8C /* NoMorePostCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoMorePostCellViewModel.swift; sourceTree = "<group>"; };
 		961264A92757B79800AA1AD2 /* SKActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicator.swift; sourceTree = "<group>"; };
 		961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActivityIndicatorViewStyle.swift; sourceTree = "<group>"; };
 		961DC9F927EA19E5003B73E5 /* MyReferralIdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReferralIdViewController.swift; sourceTree = "<group>"; };
 		961DC9FB27EA1C19003B73E5 /* MyReferralIdViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyReferralIdViewController+LoadViews.swift"; sourceTree = "<group>"; };
 		9621B80E286DF09900C73816 /* DrumsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsApi.swift; sourceTree = "<group>"; };
 		9621B810286DF26400C73816 /* DrumsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsService.swift; sourceTree = "<group>"; };
+		963530B428806FFE006290CF /* BaseDrumListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDrumListingViewController.swift; sourceTree = "<group>"; };
+		963530B628807228006290CF /* AuthorDrumListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorDrumListViewController.swift; sourceTree = "<group>"; };
+		963530BE2881A9B1006290CF /* DrumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumModel.swift; sourceTree = "<group>"; };
+		963530C12881B201006290CF /* QuotedDrumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotedDrumCollectionViewCell.swift; sourceTree = "<group>"; };
+		963530C32881B2E3006290CF /* QuotedDrumCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotedDrumCellViewModel.swift; sourceTree = "<group>"; };
 		9636C795285B7DA0002EF5CA /* MyFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedViewController.swift; sourceTree = "<group>"; };
 		9636C797285B8490002EF5CA /* MyDrumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDrumsViewController.swift; sourceTree = "<group>"; };
 		9636C79A285B8A40002EF5CA /* DrumsPeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsPeopleViewController.swift; sourceTree = "<group>"; };
@@ -1186,6 +1200,15 @@
 			path = PostDrumViewController;
 			sourceTree = "<group>";
 		};
+		96113DEE287DD3B900F14B8C /* NoMorePostTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				96113DF1287DD62300F14B8C /* NoMorePostCellViewModel.swift */,
+				96113DEF287DD3D700F14B8C /* NoMorePostTableViewCell.swift */,
+			);
+			path = NoMorePostTableViewCell;
+			sourceTree = "<group>";
+		};
 		961264A82757B78B00AA1AD2 /* SKActivityIndicator */ = {
 			isa = PBXGroup;
 			children = (
@@ -1212,6 +1235,15 @@
 				9621B810286DF26400C73816 /* DrumsService.swift */,
 			);
 			path = Drums;
+			sourceTree = "<group>";
+		};
+		963530C02881B1E4006290CF /* QuotedDrumCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				963530C32881B2E3006290CF /* QuotedDrumCellViewModel.swift */,
+				963530C12881B201006290CF /* QuotedDrumCollectionViewCell.swift */,
+			);
+			path = QuotedDrumCollectionViewCell;
 			sourceTree = "<group>";
 		};
 		9636C793285B7D57002EF5CA /* MyFeed */ = {
@@ -1335,6 +1367,8 @@
 		96931AF42858D40100877BCF /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				963530B628807228006290CF /* AuthorDrumListViewController.swift */,
+				963530B428806FFE006290CF /* BaseDrumListingViewController.swift */,
 				96931AF52858D41900877BCF /* DrumMainViewController.swift */,
 				96931AF72858DA9500877BCF /* Browse */,
 				9636C794285B7D61002EF5CA /* MyDrums */,
@@ -1358,7 +1392,9 @@
 			children = (
 				9696C8C928620A3A007FD25B /* DrumsPostTableViewCell */,
 				968BBB2828748F52001F6D51 /* ImageCollectionViewCell */,
+				96113DEE287DD3B900F14B8C /* NoMorePostTableViewCell */,
 				9696C8C8286209FE007FD25B /* PostDrumsTableViewCell */,
+				963530C02881B1E4006290CF /* QuotedDrumCollectionViewCell */,
 			);
 			path = Drums;
 			sourceTree = "<group>";
@@ -1931,6 +1967,7 @@
 			children = (
 				967BB0DE274E878C005EBCB8 /* CountryModel.swift */,
 				DC12F20C2422720E0099C479 /* DataResponseModel.swift */,
+				963530BE2881A9B1006290CF /* DrumModel.swift */,
 				DC40D5D523E32A6B00B0DD96 /* ImageTextModel.swift */,
 				DC40D5CF23E329E000B0DD96 /* LanguageModel.swift */,
 				DCF67FEE24100C6F003061A7 /* ListDataResponseModel.swift */,
@@ -3767,6 +3804,7 @@
 				DC5D59DD2432437A0048C921 /* SelectCategoryViewModel.swift in Sources */,
 				DC243FC624666A19007B2EC5 /* CategoryPostsViewController.swift in Sources */,
 				DC88A73623DF3EC300EB7F79 /* UICenteredHorizantalButton.swift in Sources */,
+				963530C22881B201006290CF /* QuotedDrumCollectionViewCell.swift in Sources */,
 				DC1C6EC923FC3F6100BA701D /* BaseCollectionViewCell.swift in Sources */,
 				DC115F34241A9744006BE78C /* MDCPasswordTextField.swift in Sources */,
 				DCE19A9F240822FD0054F752 /* PostModel.swift in Sources */,
@@ -3803,6 +3841,7 @@
 				DC40D5D823E32AB800B0DD96 /* Utilities.swift in Sources */,
 				DC9C65AB24A0FCF10042C829 /* ActivateGoogleOTPViewModel.swift in Sources */,
 				DC7C8EF024D9BDF50051C084 /* TransferCoinRequestModel.swift in Sources */,
+				963530BF2881A9B2006290CF /* DrumModel.swift in Sources */,
 				DCDAB376273AC97600C3B349 /* ConfirmDialogViewController+LoadViews.swift in Sources */,
 				9696C8C728620551007FD25B /* BrowseDrumsViewModel.swift in Sources */,
 				DC583A8B24C9E95200D9C4D3 /* RSAUtils.swift in Sources */,
@@ -3878,6 +3917,7 @@
 				DC6ED56A23269CA300770B31 /* RootViewController.swift in Sources */,
 				DC7C740B24717B0F00610526 /* VoterListViewModel.swift in Sources */,
 				DC6FCE7623F05D1700D72F6D /* Accounts.swift in Sources */,
+				963530B528806FFE006290CF /* BaseDrumListingViewController.swift in Sources */,
 				DC8EAB7B23E722BC00E00A00 /* MainTabBarViewController.swift in Sources */,
 				9649B12127AC2729009B40A3 /* UIButton+Extensions.swift in Sources */,
 				9697722F2770C998008F6B0C /* TickerModel.swift in Sources */,
@@ -4009,6 +4049,7 @@
 				DC0F36B32450A27700916886 /* BasePostDetailViewModel.swift in Sources */,
 				DCA45A1024D317D400E21D9A /* ClaimRewardModel.swift in Sources */,
 				DC3E7E162703614D001DA924 /* NotificationTableCell.swift in Sources */,
+				963530B728807228006290CF /* AuthorDrumListViewController.swift in Sources */,
 				DCB0704F2734332A004463E7 /* DelegatePowerViewModel.swift in Sources */,
 				DCD3987D232E235000C812EB /* BaseTableViewCell.swift in Sources */,
 				DC7558B7245898EC00AD40FA /* SereyAppTableViewCell.swift in Sources */,
@@ -4078,6 +4119,7 @@
 				DCD39868232E1D1B00C812EB /* ErrorHelper.swift in Sources */,
 				DC99253C26FCDFA400A098EB /* NotificationViewModel.swift in Sources */,
 				DC6A78FE23CA22B0001D1009 /* LoadingIndicatorController.swift in Sources */,
+				963530C42881B2E3006290CF /* QuotedDrumCellViewModel.swift in Sources */,
 				DC6ED5822326A47D00770B31 /* AuthData.swift in Sources */,
 				DC0044062433A87900244607 /* FileUploadService.swift in Sources */,
 				9686E4042767AAD4005F0C0E /* FilterHeaderCollectionViewCell.swift in Sources */,
@@ -4109,6 +4151,7 @@
 				96931AF92858DB0700877BCF /* BrowseDrumsViewController.swift in Sources */,
 				DC19DBEB23EC5F9E00571CC8 /* PostTableViewModel.swift in Sources */,
 				DC1CBD652594F79200CCB714 /* DraftTableViewCell.swift in Sources */,
+				96113DF2287DD62300F14B8C /* NoMorePostCellViewModel.swift in Sources */,
 				DCFBD7892503E119005B6875 /* ClaimRewardViewModel.swift in Sources */,
 				DCED6A062534ADF7003C9A43 /* CheckBox.swift in Sources */,
 				DC6FCE7523F05D1700D72F6D /* Misc.swift in Sources */,
@@ -4153,6 +4196,7 @@
 				DC8EAB8723E7232F00E00A00 /* SearchViewController.swift in Sources */,
 				DCFBD777250140DC005B6875 /* PowerDownRequestModel.swift in Sources */,
 				DC7F097A24ACE51600CE8AFC /* WalletCardCellViewModel.swift in Sources */,
+				96113DF0287DD3D700F14B8C /* NoMorePostTableViewCell.swift in Sources */,
 				DC6ED5802326A46300770B31 /* SimpleStore.swift in Sources */,
 				DCC49AD323E865D700119BAA /* ProfileView.swift in Sources */,
 				DC05FDBC23F1B0500093B47B /* MoreViewModel.swift in Sources */,

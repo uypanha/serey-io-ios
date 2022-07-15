@@ -11,21 +11,28 @@ import Moya
 
 enum DrumsApi {
     
-    case allDrums(PaginationRequestModel)
+    case allDrums(String?, PaginationRequestModel)
 }
 
 extension DrumsApi: AuthorizedApiTargetType {
     
     var parameters: [String : Any] {
         switch self {
-        case .allDrums(let pagination):
-            return pagination.parameters
+        case .allDrums(let author, let pagination):
+            var parameters = pagination.parameters
+            if let author = author {
+                parameters["author"] = author
+            }
+            return parameters
         }
     }
     
     var path: String {
         switch self {
-        case .allDrums:
+        case .allDrums(let author, _):
+            if author != nil {
+                return "/api/v1/sereyweb/get_all_drum_posts_by_author"
+            }
             return "/api/v1/sereyweb/get_all_drum_posts"
         }
     }

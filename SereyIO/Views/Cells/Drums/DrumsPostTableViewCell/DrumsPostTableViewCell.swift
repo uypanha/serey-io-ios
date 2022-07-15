@@ -17,6 +17,27 @@ import SkeletonView
 class DrumsPostTableViewCell: BaseTableViewCell {
     
     lazy var containerView: UIView = .init()
+    
+    lazy var redrummedView: UIStackView = {
+        return .init().then {
+            $0.axis = .horizontal
+            $0.distribution = .fillProportionally
+            $0.spacing = 6
+            $0.alignment = .center
+            
+            let iconImageView = UIImageView(image: R.image.redrumIcon()).then {
+                $0.tintColor = .color(.subTitle)
+                $0.withSize(.init(width: 12, height: 12))
+            }
+            $0.addArrangedSubview(iconImageView)
+            $0.addArrangedSubview(self.redrummedByLabel)
+        }
+    }()
+    
+    lazy var redrummedByLabel: UILabel = {
+        return .createLabel(12, weight: .regular, textColor: .color(.subTitle))
+    }()
+    
     lazy var profileView: ProfileView = .init(frame: .init())
     lazy var profileNamaLabel: UILabel = {
         return .createLabel(14, weight: .medium, textColor: .color(.primary)).then {
@@ -37,9 +58,9 @@ class DrumsPostTableViewCell: BaseTableViewCell {
     lazy var titleLabel: UILabel = {
         return .createLabel(14, weight: .medium, textColor: .color(.title)).then {
             $0.numberOfLines = 0
-            $0.skeletonTextNumberOfLines = 3
+            $0.skeletonTextNumberOfLines = 1
             $0.lastLineFillPercent = 80
-            $0.skeletonLineSpacing = 4
+            $0.skeletonTextLineHeight = .fixed(14)
             $0.withMinHeight(14)
         }
     }()
@@ -55,6 +76,7 @@ class DrumsPostTableViewCell: BaseTableViewCell {
             $0.isScrollEnabled = false
             $0.delegate = self
             $0.register(ImageCollectionViewCell.self, isNib: false)
+            $0.register(QuotedDrumCollectionViewCell.self, isNib: false)
         }
     }()
     
@@ -82,6 +104,24 @@ class DrumsPostTableViewCell: BaseTableViewCell {
         }
     }()
     
+    private var profileViewGesture: UITapGestureRecognizer? {
+        didSet {
+            guard let gesture = self.profileViewGesture else { return }
+            
+            self.profileView.isUserInteractionEnabled = true
+            self.profileView.addGestureRecognizer(gesture)
+        }
+    }
+    
+    private var profileLabelGesture: UITapGestureRecognizer? {
+        didSet {
+            guard let gesture = self.profileLabelGesture else { return }
+            
+            self.profileNamaLabel.isUserInteractionEnabled = true
+            self.profileNamaLabel.addGestureRecognizer(gesture)
+        }
+    }
+    
     var cellModel: DrumsPostCellViewModel? {
         didSet {
             guard let cellModel = cellModel else {
@@ -89,6 +129,8 @@ class DrumsPostTableViewCell: BaseTableViewCell {
             }
 
             self.disposeBag ~ [
+                cellModel.redrummedBy ~> self.redrummedByLabel.rx.text,
+                cellModel.redrummedBy.map { $0 == nil } ~> self.redrummedView.rx.isHidden,
                 cellModel.profileModel ~> self.profileView.rx.profileViewModel,
                 cellModel.profileName ~> self.profileNamaLabel.rx.text,
                 cellModel.createdAt ~> self.createdAtLabel.rx.text,
@@ -101,7 +143,6 @@ class DrumsPostTableViewCell: BaseTableViewCell {
                 cellModel.isShimmering.asObservable()
                     .subscribe(onNext: { [weak self] isShimmering in
                         DispatchQueue.main.async {
-                            self?.titleLabel.numberOfLines = isShimmering ? 3 : 0
                             self?.profileView.setSkeletonView(isShimmering)
                             self?.profileNamaLabel.setSkeletonView(isShimmering)
                             self?.createdAtLabel.setSkeletonView(isShimmering)
@@ -114,6 +155,11 @@ class DrumsPostTableViewCell: BaseTableViewCell {
                     })
             ]
             
+            cellModel.redrumButtonColor.asObservable()
+                .subscribe(onNext: { [unowned self] color in
+                    self.setButtonAction(button: self.redrumButton, color)
+                }) ~ self.disposeBag
+            
             cellModel.cells.asObservable()
                 .bind(to: self.collectionView.rx.items) { collectionView, index, item in
                     let indexPath = IndexPath(row: index, section: 0)
@@ -122,10 +168,24 @@ class DrumsPostTableViewCell: BaseTableViewCell {
                         let cell: ImageCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
                         cell.cellModel = item as? ImageCellViewModel
                         return cell
+                    case is QuotedDrumCellViewModel:
+                        let cell: QuotedDrumCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+                        cell.cellModel = item as? QuotedDrumCellViewModel
+                        return cell
                     default:
                         return .init()
                     }
                 }.disposed(by: self.disposeBag)
+            
+            self.profileViewGesture?.rx.event.asObservable()
+                .subscribe(onNext: { [weak cellModel] _ in
+                    cellModel?.handleProfilePressed()
+                }).disposed(by: self.disposeBag)
+            
+            self.profileLabelGesture?.rx.event.asObservable()
+                .subscribe(onNext: { [weak cellModel] _ in
+                    cellModel?.handleProfilePressed()
+                }).disposed(by: self.disposeBag)
         }
     }
 
@@ -169,6 +229,8 @@ extension DrumsPostTableViewCell {
             $0.distribution = .fillProportionally
             $0.spacing = 16
             
+            $0.addArrangedSubview(self.redrummedView)
+            
             let profileStackView = UIStackView().then {
                 $0.axis = .horizontal
                 $0.distribution = .fillProportionally
@@ -200,6 +262,7 @@ extension DrumsPostTableViewCell {
                 $0.axis = .horizontal
                 $0.spacing = 13
                 $0.distribution = .fill
+                $0.withHeight(24)
                 
                 $0.addArrangedSubview(self.commentButton)
                 $0.addArrangedSubview(self.redrumButton)
@@ -229,13 +292,15 @@ extension DrumsPostTableViewCell {
         self.contentView.backgroundColor = .clear
         self.selectionStyle = .none
         self.prepareSkeletonViews()
+        
+        self.profileViewGesture = .init()
+        self.profileLabelGesture = .init()
     }
     
     private func prepareActionButton(_ button: UIButton, image: UIImage?) {
         button.setImage(image, for: .normal)
-        button.customStyle(with: .color("#E1E1E1"))
         button.imageEdgeInsets = .init(top: 6, left: 6, bottom: 6, right: 6)
-        button.setRadius(all: 12)
+        self.setButtonAction(button: button, .color("#E1E1E1"))
         button.snp.makeConstraints { make in
             make.width.height.equalTo(24)
         }
@@ -252,5 +317,10 @@ extension DrumsPostTableViewCell {
         self.commentButton.isSkeletonable = true
         self.redrumButton.isSkeletonable = true
         self.likeButton.isSkeletonable = true
+    }
+    
+    private func setButtonAction(button: UIButton, _ color: UIColor) {
+        button.customStyle(with: color)
+        button.setRadius(all: 12)
     }
 }

@@ -130,7 +130,7 @@ extension PostDetailViewModel {
     
     func hidePost(_ post: PostModel) {
         self.shouldPresent(.loading(true))
-        self.discussionService.hidePost(with: post.id ?? "")
+        self.discussionService.hidePost(with: post.id)
             .subscribe(onNext: { [weak self] data in
                 self?.shouldPresent(.loading(false))
                 var post = post
