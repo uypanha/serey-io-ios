@@ -1,27 +1,29 @@
 //
-//  DrumsPostTableViewCell.swift
+//  DrumDetailView.swift
 //  SereyIO
 //
-//  Created by Panha Uy on 21/6/22.
+//  Created by Panha Uy on 20/7/22.
 //  Copyright © 2022 Serey IO. All rights reserved.
 //
 
 import UIKit
-import Then
-import SnapKit
 import RxCocoa
 import RxSwift
 import RxBinding
+import Then
+import SnapKit
 import SkeletonView
+import RichEditorView
 
-class DrumsPostTableViewCell: BaseTableViewCell {
+class DrumDetailView: UIView {
     
+    lazy var disposeBag = DisposeBag()
     lazy var containerView: UIView = .init()
     
     lazy var redrummedView: UIStackView = {
         return .init().then {
             $0.axis = .horizontal
-            $0.distribution = .fillProportionally
+            $0.distribution = .fill
             $0.spacing = 6
             $0.alignment = .center
             
@@ -55,13 +57,14 @@ class DrumsPostTableViewCell: BaseTableViewCell {
         }
     }()
     
-    lazy var titleLabel: UILabel = {
-        return .createLabel(14, weight: .medium, textColor: .color(.title)).then {
-            $0.numberOfLines = 0
-            $0.skeletonTextNumberOfLines = 1
-            $0.lastLineFillPercent = 80
-            $0.skeletonTextLineHeight = .fixed(14)
-            $0.withMinHeight(14)
+    var editorHeightConstraint: ConstraintMakerEditable!
+    lazy var richEditor: SRichEditorView = {
+        return .init(frame: .init()).then {
+            $0.isSkeletonable = true
+            $0.skeletonCornerRadius = 4
+            $0.snp.makeConstraints { make in
+                self.editorHeightConstraint = make.height.equalTo(16)
+            }
         }
     }()
     
@@ -83,12 +86,6 @@ class DrumsPostTableViewCell: BaseTableViewCell {
     lazy var commentButton: UIButton = {
         return .createButton(with: 0, weight: .regular).then {
             self.prepareActionButton($0, image: R.image.commentDrumIcon())
-        }
-    }()
-    
-    lazy var commentCount: UILabel = {
-        return .createLabel(12, weight: .medium, textColor: .color(.title)).then {
-            $0.text = "1"
         }
     }()
     
@@ -140,11 +137,8 @@ class DrumsPostTableViewCell: BaseTableViewCell {
                 cellModel.profileModel ~> self.profileView.rx.profileViewModel,
                 cellModel.profileName ~> self.profileNamaLabel.rx.text,
                 cellModel.createdAt ~> self.createdAtLabel.rx.text,
-                cellModel.title ~> self.titleLabel.rx.text,
+                cellModel.descriptionHtml ~> self.richEditor.rx.html,
                 cellModel.likeCount ~> self.likeCount.rx.text,
-                cellModel.commentCount ~> self.commentCount.rx.text,
-                cellModel.commentCount.map { $0 == nil } ~> self.commentCount.rx.isHidden,
-                cellModel.isVoteEnabled ~> self.likeButton.rx.isEnabled,
                 cellModel.cells.asObservable().map { $0.isEmpty }
                     .subscribe(onNext: { [weak self] isEmpty in
                         self?.collectionContainerView.isHidden = isEmpty
@@ -153,14 +147,15 @@ class DrumsPostTableViewCell: BaseTableViewCell {
                 cellModel.isShimmering.asObservable()
                     .subscribe(onNext: { [weak self] isShimmering in
                         self?.likeCount.isHidden = isShimmering
+                        self?.commentButton.setSkeletonView(isShimmering)
+                        self?.redrumButton.setSkeletonView(isShimmering)
+                        self?.likeButton.setSkeletonView(isShimmering)
+                        
                         DispatchQueue.main.async {
                             self?.profileView.setSkeletonView(isShimmering)
+                            self?.richEditor.setSkeletonView(isShimmering)
                             self?.profileNamaLabel.setSkeletonView(isShimmering)
                             self?.createdAtLabel.setSkeletonView(isShimmering)
-                            self?.titleLabel.setSkeletonView(isShimmering)
-                            self?.commentButton.setSkeletonView(isShimmering)
-                            self?.redrumButton.setSkeletonView(isShimmering)
-                            self?.likeButton.setSkeletonView(isShimmering)
                         }
                     })
             ]
@@ -199,30 +194,15 @@ class DrumsPostTableViewCell: BaseTableViewCell {
                     cellModel?.didAction(with: .profilePressed)
                 }).disposed(by: self.disposeBag)
             
-            self.commentButton.rx.tap.asObservable()
-                .map { DrumsPostCellViewModel.Action.commentPressed }
-                ~> cellModel.didActionSubject
-                ~ self.disposeBag
-            
-            self.redrumButton.rx.tap.asObservable()
-                .map { DrumsPostCellViewModel.Action.redrumQuotePressed }
-                ~> cellModel.didActionSubject
-                ~ self.disposeBag
-            
-            self.likeButton.rx.tap.asObservable()
-                .map { DrumsPostCellViewModel.Action.votePressed }
-                ~> cellModel.didActionSubject
-                ~ self.disposeBag
-            
             self.collectionView.rx.itemSelected.asObservable()
                 .map { DrumsPostCellViewModel.Action.itemSelected($0) }
                 ~> cellModel.didActionSubject
                 ~ self.disposeBag
         }
     }
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         
         setUpLayout()
     }
@@ -232,15 +212,10 @@ class DrumsPostTableViewCell: BaseTableViewCell {
         
         setUpLayout()
     }
-    
-    func shouldUpdateCollectionViewHeight(_ width: CGFloat? = nil) {
-        let height = self.cellModel?.minHeight(with: width ?? self.collectionView.frame.height) ?? 100
-        self.collectionHeightConstraint.constraint.update(offset: height).activate()
-    }
 }
 
 // MARK: - Preparations & Tools
-extension DrumsPostTableViewCell {
+extension DrumDetailView {
     
     func setUpLayout() {
         let cardView = CardView(false)
@@ -262,7 +237,7 @@ extension DrumsPostTableViewCell {
             
             let profileStackView = UIStackView().then {
                 $0.axis = .horizontal
-                $0.distribution = .fillProportionally
+                $0.distribution = .fill
                 $0.alignment = .center
                 $0.spacing = 12
                 $0.withHeight(43)
@@ -281,7 +256,7 @@ extension DrumsPostTableViewCell {
                 $0.addArrangedSubview(profileInfoStackView)
             }
             $0.addArrangedSubview(profileStackView)
-            $0.addArrangedSubview(self.titleLabel)
+            $0.addArrangedSubview(self.richEditor)
             self.collectionContainerView = UIStackView().then {
                 $0.addArrangedSubview(self.collectionView)
                 
@@ -300,13 +275,7 @@ extension DrumsPostTableViewCell {
                 $0.distribution = .fill
                 $0.withHeight(24)
                 
-                $0.addArrangedSubview(UIStackView().then {
-                    $0.axis = .horizontal
-                    $0.spacing = 6
-                    
-                    $0.addArrangedSubview(self.commentButton)
-                    $0.addArrangedSubview(self.commentCount)
-                })
+                $0.addArrangedSubview(self.commentButton)
                 $0.addArrangedSubview(self.redrumButton)
                 $0.addArrangedSubview(UIStackView().then {
                     $0.axis = .horizontal
@@ -324,15 +293,13 @@ extension DrumsPostTableViewCell {
             make.edges.equalToSuperview()
         }
         
-        self.contentView.addSubview(cardView)
+        self.addSubview(cardView)
         cardView.snp.makeConstraints { make in
             make.left.right.equalToSuperview().inset(16)
             make.top.bottom.equalToSuperview().inset(8)
         }
         
         self.backgroundColor = .clear
-        self.contentView.backgroundColor = .clear
-        self.selectionStyle = .none
         self.prepareSkeletonViews()
         
         self.profileViewGesture = .init()
@@ -342,6 +309,13 @@ extension DrumsPostTableViewCell {
         if let flowLayout = layout as? UICollectionViewFlowLayout {
             flowLayout.estimatedItemSize = .init(width: self.collectionView.frame.width, height: 100)
         }
+        setUpEditor()
+    }
+    
+    func setUpEditor() {
+        richEditor.isScrollEnabled = false
+        richEditor.editingEnabled = false
+        richEditor.delegate = self
     }
     
     private func prepareActionButton(_ button: UIButton, image: UIImage?) {
@@ -359,8 +333,7 @@ extension DrumsPostTableViewCell {
         self.profileNamaLabel.linesCornerRadius = 4
         self.createdAtLabel.isSkeletonable = true
         self.createdAtLabel.linesCornerRadius = 4
-        self.titleLabel.isSkeletonable = true
-        self.titleLabel.linesCornerRadius = 4
+        self.richEditor.isSkeletonable = true
         self.commentButton.isSkeletonable = true
         self.redrumButton.isSkeletonable = true
         self.likeButton.isSkeletonable = true
@@ -369,5 +342,25 @@ extension DrumsPostTableViewCell {
     private func setButtonAction(button: UIButton, _ color: UIColor) {
         button.customStyle(with: color)
         button.setRadius(all: 12)
+    }
+}
+
+// MARK: - RichEditorDelegate
+extension DrumDetailView: RichEditorDelegate {
+    
+    func richEditor(_ editor: RichEditorView, heightDidChange height: Int) {
+        self.editorHeightConstraint.constraint.update(offset: CGFloat(height)).activate()
+    }
+    
+    func richEditorDidLoad(_ editor: RichEditorView) {
+        editor.customCssAndJS()
+        editor.setFontSize(14)
+        self.richEditor.editorMargin = 0
+        let html = editor.html
+        editor.html = html
+    }
+    
+    func richEditor(_ editor: RichEditorView, shouldInteractWith url: URL) -> Bool {
+        return false
     }
 }

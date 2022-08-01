@@ -8,13 +8,22 @@
 
 import UIKit
 
-class MyDrumsViewController: BaseViewController {
-
+class MyDrumsViewController: BaseDrumListingViewController {
+    
+    init() {
+        super.init(viewModel: MyDrumsViewModel())
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        self.viewModel = MyDrumsViewModel()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        self.view.backgroundColor = .color("#FAFAFA")
+        
+        self.title = "My Drums"
     }
     
     override func notificationReceived(_ notification: Notification) {

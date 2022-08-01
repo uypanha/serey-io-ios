@@ -12,7 +12,9 @@ final class ContentSizedTableView: UITableView {
     
     override var intrinsicContentSize: CGSize {
         self.layoutIfNeeded()
-        return self.contentSize
+        var size = self.contentSize
+        size.height += self.contentInset.top + self.contentInset.bottom
+        return size
     }
 
     override var contentSize: CGSize {

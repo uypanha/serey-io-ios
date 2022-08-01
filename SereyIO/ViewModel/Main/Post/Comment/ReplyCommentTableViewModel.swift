@@ -98,7 +98,7 @@ class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, 
             ~ cellModel.disposeBag
     }
     
-    override func updateData(_ data: PostDetailResponse) {
+    override func updateData(_ data: PostDetailResponse<PostModel>) {
         var post = data.content
         post.replies = data.replies
         self.post.accept(post)

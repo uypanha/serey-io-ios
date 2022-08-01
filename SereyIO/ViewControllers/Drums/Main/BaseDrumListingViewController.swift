@@ -70,6 +70,7 @@ extension BaseDrumListingViewController {
             case is DrumsPostCellViewModel:
                 let cell: DrumsPostTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
                 cell.cellModel = item as? DrumsPostCellViewModel
+                cell.shouldUpdateCollectionViewHeight(self.tableView.frame.width - 64)
                 return cell
             case is NoMorePostCellViewModel:
                 let cell: NoMorePostTableViewCell = tableView.dequeueReusableCell(forIndexPath: indexPath)
@@ -97,9 +98,13 @@ extension BaseDrumListingViewController {
     func setUpControlObservers() {
         self.tableView.rx.willDisplayCell.asObservable()
             .subscribe(on: MainScheduler.asyncInstance)
-            .subscribe(onNext: { [weak self] cell, indexPath in
-                if self?.viewModel.isLastItem(indexPath: indexPath) == true {
-                    self?.viewModel.downloadData()
+            .subscribe(onNext: { [unowned self] cell, indexPath in
+                if let cell = cell as? DrumsPostTableViewCell {
+                    cell.shouldUpdateCollectionViewHeight(self.tableView.frame.width - 64)
+                }
+                
+                if self.viewModel.isLastItem(indexPath: indexPath) {
+                    self.viewModel.downloadData()
                 }
             }) ~ self.disposeBag
         
@@ -126,6 +131,14 @@ extension BaseDrumListingViewController {
                 case .authorDrumListingViewController(let viewModel):
                     let authorDrumListViewController = AuthorDrumListViewController(viewModel: viewModel)
                     self?.show(authorDrumListViewController, sender: nil)
+                case .drumDetailViewController(let viewModel):
+                    let drumDetailViewController = DrumDetailViewController(viewModel)
+                    self?.show(drumDetailViewController, sender: nil)
+                case .signInViewController:
+                    if let signInViewController = R.storyboard.auth.signInViewController() {
+                        signInViewController.viewModel = SignInViewModel()
+                        self?.show(CloseableNavigationController(rootViewController: signInViewController), sender: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

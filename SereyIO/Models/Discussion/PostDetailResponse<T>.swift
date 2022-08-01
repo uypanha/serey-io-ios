@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct PostDetailResponse: Codable {
+struct PostDetailResponse<T: Codable>: Codable {
     
-    let content: PostModel
+    let content: T
     let replies: [PostModel]
     
     enum CodingKeys: String, CodingKey {

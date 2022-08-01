@@ -30,7 +30,10 @@ extension CollectionSingleSecitionProviderModel where Self: BaseViewModel {
     }
     
     func item(at indexPath: IndexPath) -> CellViewModel? {
-        return cells.value[indexPath.row]
+        if indexPath.row < cells.value.count {
+            return cells.value[indexPath.row]
+        }
+        return nil
     }
     
     func isLastItem(indexPath: IndexPath) -> Bool {

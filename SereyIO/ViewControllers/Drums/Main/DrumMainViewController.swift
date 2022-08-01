@@ -11,11 +11,13 @@ import UIKit
 class DrumMainViewController: BaseTabBarViewController {
     
     private var previousController: UIViewController? = nil
+    private var browseDrumsViewController: BrowseDrumsViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.browseDrumsViewController = .init(viewModel: .init(containPostItem: true))
         setUpViews()
     }
     
@@ -24,6 +26,17 @@ class DrumMainViewController: BaseTabBarViewController {
             for i in 0..<viewControllers.count {
                 ((viewControllers[i] as? UINavigationController)?.viewControllers.first as? TabBarControllerDelegate)?.configureTabBar(i)
             }
+        }
+    }
+    
+    override func notificationReceived(_ notification: Notification) {
+        super.notificationReceived(notification)
+        
+        switch notification.appNotification {
+        case .userDidLogin, .userDidLogOut:
+            self.configureTabBarController()
+        default:
+            break
         }
     }
 }
@@ -57,7 +70,13 @@ extension DrumMainViewController {
     }
     
     func configureTabBarController() {
-        let controllers: [UIViewController] = ControllerType.allCases.map { $0.prepareViewController() }
+        var controllers: [UIViewController] = [browseDrumsViewController]
+        
+        if AuthData.shared.isUserLoggedIn {
+            controllers.append(ControllerType.myFeed.prepareViewController())
+            controllers.append(ControllerType.myDrums.prepareViewController())
+            controllers.append(ControllerType.people.prepareViewController())
+        }
         
         for i in 0..<controllers.count {
             (controllers[i] as? TabBarControllerDelegate)?.configureTabBar(i)
@@ -66,6 +85,8 @@ extension DrumMainViewController {
         viewControllers = controllers.map({ viewController -> UIViewController in
             return CloseableNavigationController(rootViewController: viewController)
         })
+        
+        self.tabBar.isHidden = (self.viewControllers?.count ?? 0) <= 1
     }
 }
 

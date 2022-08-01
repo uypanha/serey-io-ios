@@ -12,6 +12,8 @@ import Moya
 enum DrumsApi {
     
     case allDrums(String?, PaginationRequestModel)
+    
+    case drumDetail(String, String)
 }
 
 extension DrumsApi: AuthorizedApiTargetType {
@@ -24,6 +26,11 @@ extension DrumsApi: AuthorizedApiTargetType {
                 parameters["author"] = author
             }
             return parameters
+        case .drumDetail(let author, let permlink):
+            return [
+                "permlink" : permlink,
+                "authorName" : author
+            ]
         }
     }
     
@@ -34,6 +41,8 @@ extension DrumsApi: AuthorizedApiTargetType {
                 return "/api/v1/sereyweb/get_all_drum_posts_by_author"
             }
             return "/api/v1/sereyweb/get_all_drum_posts"
+        case .drumDetail:
+            return "/api/v1/sereyweb/get_drum_detail_by_permlink"
         }
     }
     
@@ -43,7 +52,7 @@ extension DrumsApi: AuthorizedApiTargetType {
     
     var task: Task {
         switch self {
-        case .allDrums:
+        case .allDrums, .drumDetail:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         }
     }

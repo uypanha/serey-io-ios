@@ -19,14 +19,21 @@
 		9621B811286DF26400C73816 /* DrumsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621B810286DF26400C73816 /* DrumsService.swift */; };
 		9625CEC92767B1DC0009FC47 /* FilterHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4022767AAD3005F0C0E /* FilterHeaderCollectionViewCell.xib */; };
 		9625CECA2767B2F20009FC47 /* HeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4082767AB0D005F0C0E /* HeaderCollectionViewCell.xib */; };
+		962B582C288EF55D00D880F0 /* DrumReplyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B582B288EF55D00D880F0 /* DrumReplyTableViewCell.swift */; };
+		962B582E288EF76600D880F0 /* DrumReplyCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962B582D288EF76600D880F0 /* DrumReplyCellViewModel.swift */; };
 		963530B528806FFE006290CF /* BaseDrumListingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963530B428806FFE006290CF /* BaseDrumListingViewController.swift */; };
 		963530B728807228006290CF /* AuthorDrumListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963530B628807228006290CF /* AuthorDrumListViewController.swift */; };
 		963530BF2881A9B2006290CF /* DrumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963530BE2881A9B1006290CF /* DrumModel.swift */; };
 		963530C22881B201006290CF /* QuotedDrumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963530C12881B201006290CF /* QuotedDrumCollectionViewCell.swift */; };
 		963530C42881B2E3006290CF /* QuotedDrumCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963530C32881B2E3006290CF /* QuotedDrumCellViewModel.swift */; };
+		963530C72881BEC9006290CF /* DrumDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963530C62881BEC8006290CF /* DrumDetailViewController.swift */; };
+		963530CB2885B3D9006290CF /* MyDrumsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 963530CA2885B3D9006290CF /* MyDrumsViewModel.swift */; };
 		9636C796285B7DA0002EF5CA /* MyFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636C795285B7DA0002EF5CA /* MyFeedViewController.swift */; };
 		9636C798285B8490002EF5CA /* MyDrumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636C797285B8490002EF5CA /* MyDrumsViewController.swift */; };
 		9636C79B285B8A40002EF5CA /* DrumsPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9636C79A285B8A40002EF5CA /* DrumsPeopleViewController.swift */; };
+		9638F68B288853D5008F5B6E /* DrumDetailViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9638F68A288853D5008F5B6E /* DrumDetailViewController+LoadViews.swift */; };
+		9638F68D28885475008F5B6E /* DrumDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9638F68C28885475008F5B6E /* DrumDetailView.swift */; };
+		9638F68F28885D7D008F5B6E /* DrumDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9638F68E28885D7D008F5B6E /* DrumDetailViewModel.swift */; };
 		9649B11B27A9995D009B40A3 /* EnterIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B11A27A9995D009B40A3 /* EnterIssueViewController.swift */; };
 		9649B11D27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B11C27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift */; };
 		9649B11F27AC20A4009B40A3 /* ConfirmDialogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B11E27AC20A4009B40A3 /* ConfirmDialogViewModel.swift */; };
@@ -161,7 +168,7 @@
 		DC26812F23F450BE0045776E /* More.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC26812E23F450BE0045776E /* More.storyboard */; };
 		DC26813123F45A8C0045776E /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC26813023F45A8C0045776E /* Profile.storyboard */; };
 		DC2DA4D7243B991800B99A86 /* SubmitCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2DA4D6243B991800B99A86 /* SubmitCommentModel.swift */; };
-		DC2EA012241934640025D0B0 /* PostDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2EA011241934640025D0B0 /* PostDetailResponse.swift */; };
+		DC2EA012241934640025D0B0 /* PostDetailResponse<T>.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC2EA011241934640025D0B0 /* PostDetailResponse<T>.swift */; };
 		DC357A4E243CC72C00B2D3B7 /* ContentSizedCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC357A4D243CC72C00B2D3B7 /* ContentSizedCollectionView.swift */; };
 		DC357A50243CC88E00B2D3B7 /* PostDetailCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC357A4F243CC88E00B2D3B7 /* PostDetailCellViewModel.swift */; };
 		DC387C8D24E6E90C00D8C78E /* CryptLib.m in Sources */ = {isa = PBXBuildFile; fileRef = DC387C8C24E6E90C00D8C78E /* CryptLib.m */; };
@@ -585,14 +592,21 @@
 		961DC9FB27EA1C19003B73E5 /* MyReferralIdViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyReferralIdViewController+LoadViews.swift"; sourceTree = "<group>"; };
 		9621B80E286DF09900C73816 /* DrumsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsApi.swift; sourceTree = "<group>"; };
 		9621B810286DF26400C73816 /* DrumsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsService.swift; sourceTree = "<group>"; };
+		962B582B288EF55D00D880F0 /* DrumReplyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumReplyTableViewCell.swift; sourceTree = "<group>"; };
+		962B582D288EF76600D880F0 /* DrumReplyCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumReplyCellViewModel.swift; sourceTree = "<group>"; };
 		963530B428806FFE006290CF /* BaseDrumListingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDrumListingViewController.swift; sourceTree = "<group>"; };
 		963530B628807228006290CF /* AuthorDrumListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorDrumListViewController.swift; sourceTree = "<group>"; };
 		963530BE2881A9B1006290CF /* DrumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumModel.swift; sourceTree = "<group>"; };
 		963530C12881B201006290CF /* QuotedDrumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotedDrumCollectionViewCell.swift; sourceTree = "<group>"; };
 		963530C32881B2E3006290CF /* QuotedDrumCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotedDrumCellViewModel.swift; sourceTree = "<group>"; };
+		963530C62881BEC8006290CF /* DrumDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumDetailViewController.swift; sourceTree = "<group>"; };
+		963530CA2885B3D9006290CF /* MyDrumsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDrumsViewModel.swift; sourceTree = "<group>"; };
 		9636C795285B7DA0002EF5CA /* MyFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFeedViewController.swift; sourceTree = "<group>"; };
 		9636C797285B8490002EF5CA /* MyDrumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDrumsViewController.swift; sourceTree = "<group>"; };
 		9636C79A285B8A40002EF5CA /* DrumsPeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsPeopleViewController.swift; sourceTree = "<group>"; };
+		9638F68A288853D5008F5B6E /* DrumDetailViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrumDetailViewController+LoadViews.swift"; sourceTree = "<group>"; };
+		9638F68C28885475008F5B6E /* DrumDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumDetailView.swift; sourceTree = "<group>"; };
+		9638F68E28885D7D008F5B6E /* DrumDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumDetailViewModel.swift; sourceTree = "<group>"; };
 		9649B11A27A9995D009B40A3 /* EnterIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterIssueViewController.swift; sourceTree = "<group>"; };
 		9649B11C27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnterIssueViewController+LoadViews.swift"; sourceTree = "<group>"; };
 		9649B11E27AC20A4009B40A3 /* ConfirmDialogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogViewModel.swift; sourceTree = "<group>"; };
@@ -730,7 +744,7 @@
 		DC26812E23F450BE0045776E /* More.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = More.storyboard; sourceTree = "<group>"; };
 		DC26813023F45A8C0045776E /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		DC2DA4D6243B991800B99A86 /* SubmitCommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitCommentModel.swift; sourceTree = "<group>"; };
-		DC2EA011241934640025D0B0 /* PostDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailResponse.swift; sourceTree = "<group>"; };
+		DC2EA011241934640025D0B0 /* PostDetailResponse<T>.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostDetailResponse<T>.swift"; sourceTree = "<group>"; };
 		DC357A4D243CC72C00B2D3B7 /* ContentSizedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedCollectionView.swift; sourceTree = "<group>"; };
 		DC357A4F243CC88E00B2D3B7 /* PostDetailCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailCellViewModel.swift; sourceTree = "<group>"; };
 		DC387C8B24E6E90C00D8C78E /* CryptLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CryptLib.h; sourceTree = "<group>"; };
@@ -1237,6 +1251,15 @@
 			path = Drums;
 			sourceTree = "<group>";
 		};
+		962B582A288EF54200D880F0 /* DrumReplyTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				962B582D288EF76600D880F0 /* DrumReplyCellViewModel.swift */,
+				962B582B288EF55D00D880F0 /* DrumReplyTableViewCell.swift */,
+			);
+			path = DrumReplyTableViewCell;
+			sourceTree = "<group>";
+		};
 		963530C02881B1E4006290CF /* QuotedDrumCollectionViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1244,6 +1267,16 @@
 				963530C12881B201006290CF /* QuotedDrumCollectionViewCell.swift */,
 			);
 			path = QuotedDrumCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		963530C52881BEA5006290CF /* DrumDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9638F68C28885475008F5B6E /* DrumDetailView.swift */,
+				963530C62881BEC8006290CF /* DrumDetailViewController.swift */,
+				9638F68A288853D5008F5B6E /* DrumDetailViewController+LoadViews.swift */,
+			);
+			path = DrumDetailViewController;
 			sourceTree = "<group>";
 		};
 		9636C793285B7D57002EF5CA /* MyFeed */ = {
@@ -1371,6 +1404,7 @@
 				963530B428806FFE006290CF /* BaseDrumListingViewController.swift */,
 				96931AF52858D41900877BCF /* DrumMainViewController.swift */,
 				96931AF72858DA9500877BCF /* Browse */,
+				963530C52881BEA5006290CF /* DrumDetailViewController */,
 				9636C794285B7D61002EF5CA /* MyDrums */,
 				9636C793285B7D57002EF5CA /* MyFeed */,
 				9636C799285B8A21002EF5CA /* People */,
@@ -1390,6 +1424,7 @@
 		9696C8C02862029B007FD25B /* Drums */ = {
 			isa = PBXGroup;
 			children = (
+				962B582A288EF54200D880F0 /* DrumReplyTableViewCell */,
 				9696C8C928620A3A007FD25B /* DrumsPostTableViewCell */,
 				968BBB2828748F52001F6D51 /* ImageCollectionViewCell */,
 				96113DEE287DD3B900F14B8C /* NoMorePostTableViewCell */,
@@ -1403,6 +1438,8 @@
 			isa = PBXGroup;
 			children = (
 				9696C8C628620551007FD25B /* BrowseDrumsViewModel.swift */,
+				9638F68E28885D7D008F5B6E /* DrumDetailViewModel.swift */,
+				963530CA2885B3D9006290CF /* MyDrumsViewModel.swift */,
 			);
 			path = Drums;
 			sourceTree = "<group>";
@@ -2645,7 +2682,7 @@
 			children = (
 				DC5FC2192454330900CA6117 /* CommentReplyModel.swift */,
 				DC9AC6E52406C5BA008FAFA6 /* DiscussionCategoryModel.swift */,
-				DC2EA011241934640025D0B0 /* PostDetailResponse.swift */,
+				DC2EA011241934640025D0B0 /* PostDetailResponse<T>.swift */,
 				DCE19A9E240822FD0054F752 /* PostModel.swift */,
 				B8D65EBF27A4447F00D72607 /* ReportTypeModel.swift */,
 				DC2DA4D6243B991800B99A86 /* SubmitCommentModel.swift */,
@@ -3812,7 +3849,7 @@
 				DC40D5D023E329E000B0DD96 /* LanguageModel.swift in Sources */,
 				DC6ED5782326A40200770B31 /* AppCoordinator.swift in Sources */,
 				DCB070412732DE7D004463E7 /* TransactionHeaderView.swift in Sources */,
-				DC2EA012241934640025D0B0 /* PostDetailResponse.swift in Sources */,
+				DC2EA012241934640025D0B0 /* PostDetailResponse<T>.swift in Sources */,
 				DCCC15CF2509366B00ED4C52 /* TransactionInfoCellViewModel.swift in Sources */,
 				DC115F3B241A9A74006BE78C /* SignInTableViewCell.swift in Sources */,
 				DCBBD6C224E4375F0099C406 /* WalletSettingsViewController.swift in Sources */,
@@ -3846,6 +3883,7 @@
 				9696C8C728620551007FD25B /* BrowseDrumsViewModel.swift in Sources */,
 				DC583A8B24C9E95200D9C4D3 /* RSAUtils.swift in Sources */,
 				9686E4112767ADC8005F0C0E /* CollectionBottomSheetViewController.swift in Sources */,
+				9638F68B288853D5008F5B6E /* DrumDetailViewController+LoadViews.swift in Sources */,
 				DC12F212242278F90099C479 /* UserModel.swift in Sources */,
 				DC9A660624DFE964001F1B60 /* PayQRViewController.swift in Sources */,
 				DC19DBEF23EC60C900571CC8 /* PostCellViewModel.swift in Sources */,
@@ -3873,6 +3911,7 @@
 				DC42AF0723E9D39B008F8A0F /* CardView.swift in Sources */,
 				DC9E36E324135A3400289693 /* PostDetailView.swift in Sources */,
 				DC583A8D24CC26A200D9C4D3 /* WalletAuthValidateController.swift in Sources */,
+				963530C72881BEC9006290CF /* DrumDetailViewController.swift in Sources */,
 				DCA74DC9253AD6A40041EAAE /* VerifyBiometryViewController.swift in Sources */,
 				DC1CBD2625939E9A00CCB714 /* UserPostListViewModel.swift in Sources */,
 				9636C796285B7DA0002EF5CA /* MyFeedViewController.swift in Sources */,
@@ -3949,6 +3988,7 @@
 				DC6A791523CB676E001D1009 /* MainViewController.swift in Sources */,
 				DC803C5B26974CD600FCD2B2 /* FeatureViewModel.swift in Sources */,
 				DC6A790923CA2510001D1009 /* RealmManager.swift in Sources */,
+				962B582E288EF76600D880F0 /* DrumReplyCellViewModel.swift in Sources */,
 				DCB0703A2732DD2B004463E7 /* DelegatePowerViewController.swift in Sources */,
 				DC6ED5762326A38B00770B31 /* FMDataParser.swift in Sources */,
 				9649B11B27A9995D009B40A3 /* EnterIssueViewController.swift in Sources */,
@@ -3987,6 +4027,7 @@
 				DCB0703C2732DD5B004463E7 /* DelegatePowerViewController+LoadViews.swift in Sources */,
 				DCCC15C825092AE500ED4C52 /* TransactionDetailViewModel.swift in Sources */,
 				DCD3988B232E255E00C812EB /* UIImage+Extensions.swift in Sources */,
+				962B582C288EF55D00D880F0 /* DrumReplyTableViewCell.swift in Sources */,
 				DC9A660024DE9233001F1B60 /* ReceiveCoinViewController.swift in Sources */,
 				DCF8738223F6FA3B007A8724 /* BasePostViewModel.swift in Sources */,
 				DCB5BD742497D2E10042E5AF /* SecurityMethodCellViewModel.swift in Sources */,
@@ -4052,6 +4093,7 @@
 				963530B728807228006290CF /* AuthorDrumListViewController.swift in Sources */,
 				DCB0704F2734332A004463E7 /* DelegatePowerViewModel.swift in Sources */,
 				DCD3987D232E235000C812EB /* BaseTableViewCell.swift in Sources */,
+				9638F68D28885475008F5B6E /* DrumDetailView.swift in Sources */,
 				DC7558B7245898EC00AD40FA /* SereyAppTableViewCell.swift in Sources */,
 				DC6FCE7323F05D1700D72F6D /* HttpClient.swift in Sources */,
 				DC0F36AD245093A800916886 /* DownvoteDialogViewController.swift in Sources */,
@@ -4146,6 +4188,7 @@
 				96D46BAD275FBE010078779A /* UserProfileApi.swift in Sources */,
 				9649B11F27AC20A4009B40A3 /* ConfirmDialogViewModel.swift in Sources */,
 				9697722D2770C97D008F6B0C /* CoinPriceManager.swift in Sources */,
+				963530CB2885B3D9006290CF /* MyDrumsViewModel.swift in Sources */,
 				DC7C8EEE24D9B3100051C084 /* TransferCoinViewModel.swift in Sources */,
 				DC40D5D423E32A4400B0DD96 /* ImageTextCellViewModel.swift in Sources */,
 				96931AF92858DB0700877BCF /* BrowseDrumsViewController.swift in Sources */,
@@ -4159,6 +4202,7 @@
 				DC4B162E26989A780070A442 /* AccesoryButton.swift in Sources */,
 				DCDE006A244601A600D09717 /* ReplyCommentTableViewModel.swift in Sources */,
 				DCA459FA24D1D22400E21D9A /* WalletMenu.swift in Sources */,
+				9638F68F28885D7D008F5B6E /* DrumDetailViewModel.swift in Sources */,
 				DC6ED5742326A37800770B31 /* DeeplinkParser.swift in Sources */,
 				DCCD40CB2436422C00093A18 /* BlockChainResponse.swift in Sources */,
 				96AE4E2627A1AE3C00470B6D /* ReportPostViewModel.swift in Sources */,

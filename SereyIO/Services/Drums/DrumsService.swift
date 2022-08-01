@@ -16,4 +16,9 @@ class DrumsService: AppService<DrumsApi> {
         return self.provider.rx.requestObject(.allDrums(author, pagination), type: [DrumModel].self)
             .asObservable()
     }
+    
+    func fetchDrumDetail(author: String, permlink: String) -> Observable<PostDetailResponse<DrumModel>> {
+        return self.provider.rx.requestObject(.drumDetail(author, permlink), type: PostDetailResponse<DrumModel>.self)
+            .asObservable()
+    }
 }

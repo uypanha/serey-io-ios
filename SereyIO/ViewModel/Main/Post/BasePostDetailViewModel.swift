@@ -103,7 +103,7 @@ class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
         return [SectionItem(items: cells)]
     }
     
-    internal func updateData(_ data: PostDetailResponse) {
+    internal func updateData(_ data: PostDetailResponse<PostModel>) {
         NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: data.content.permlink, author: data.content.author, post: data.content))
         if self.post.value == nil {
             self.post.accept(data.content)

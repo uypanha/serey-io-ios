@@ -70,6 +70,10 @@ extension String {
             return nil
         }
     }
+    
+    var htmlToString: String {
+        return htmlWithoutCss()?.string ?? ""
+    }
 }
 
 // MARK: - Case Converter

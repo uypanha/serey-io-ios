@@ -52,6 +52,12 @@ class AuthData {
         }
     }
     
+    var loggedDrumAuthor: String? {
+        get {
+            return self.isUserLoggedIn ? self.username : nil
+        }
+    }
+    
     init() {
         self.apnsTokenStore = APNSTokenStore()
     }

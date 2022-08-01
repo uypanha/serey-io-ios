@@ -32,6 +32,13 @@ class BrowseDrumsViewController: BaseDrumListingViewController {
         self.navigationItem.leftBarButtonItems?.append(.init(customView: self.drumLogoImageView))
         self.navigationItem.rightBarButtonItem = .init(image: R.image.tabNotification(), style: .plain, target: nil, action: nil)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let shouldHideTabbar = self.tabBarController?.viewControllers?.count ?? 0 <= 1
+        self.tabBarController?.tabBar.isHidden = shouldHideTabbar
+    }
 }
 
 // MARK: - TabBarControllerDelegate

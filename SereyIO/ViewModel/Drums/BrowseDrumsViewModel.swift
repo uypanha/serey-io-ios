@@ -21,6 +21,8 @@ class BrowseDrumsViewModel: BaseViewModel, CollectionMultiSectionsProviderModel,
     enum ViewToPresent {
         case postDrumViewController
         case authorDrumListingViewController(BrowseDrumsViewModel)
+        case drumDetailViewController(DrumDetailViewModel)
+        case signInViewController
     }
     
     // input:
@@ -62,6 +64,7 @@ class BrowseDrumsViewModel: BaseViewModel, CollectionMultiSectionsProviderModel,
     }
 }
 
+// MARK: - Networks
 extension BrowseDrumsViewModel {
     
     func downloadData() {
@@ -121,6 +124,13 @@ extension BrowseDrumsViewModel {
         
         return [.init(items: items)]
     }
+    
+    func authorDrumTitle() -> String? {
+        if self.author == AuthData.shared.loggedDrumAuthor {
+            return "My Drums"
+        }
+        return self.author
+    }
 }
 
 // MARK: - Action Handlers
@@ -128,13 +138,41 @@ extension BrowseDrumsViewModel {
     
     func handleItemSelected(_ indexPath: IndexPath) {
         if let _ = self.item(at: indexPath) as? PostDrumsCellViewModel {
-            self.shouldPresent(.postDrumViewController)
+            self.shouldPresent(AuthData.shared.isUserLoggedIn ? .postDrumViewController : .signInViewController)
+        }
+        
+        if let item = self.item(at: indexPath) as? DrumsPostCellViewModel, let drum = item.post.value {
+            let viewModel = DrumDetailViewModel(drum)
+            self.shouldPresent(.drumDetailViewController(viewModel))
         }
     }
     
     func handleOnProfilePressed(_ author: String) {
         if author != self.author {
             self.shouldPresent(.authorDrumListingViewController(.init(author: author, containPostItem: false)))
+        }
+    }
+    
+    func handleQuotedDrumPressed(_ drum: DrumModel) {
+        if let author = drum.postAuthor {
+            let viewModel = DrumDetailViewModel(author: author, permlink: drum.postPermlink ?? "")
+            self.shouldPresent(.drumDetailViewController(viewModel))
+        }
+    }
+    
+    func handleDrumActionPressed(_ drum: DrumModel, action: DrumsPostCellViewModel.DrumAction) {
+        if !AuthData.shared.isUserLoggedIn {
+            self.shouldPresent(.signInViewController)
+            return
+        }
+        
+        switch action {
+        case .redrum:
+            break
+        case .comment:
+            break
+        case .vote:
+            break
         }
     }
 }
@@ -168,6 +206,16 @@ extension BrowseDrumsViewModel {
         cellModel.didProfilePressed.asObservable()
             .subscribe(onNext: { [weak self] author in
                 self?.handleOnProfilePressed(author)
+            }) ~ cellModel.disposeBag
+        
+        cellModel.didQuotedPostPressed.asObservable()
+            .subscribe(onNext: { [weak self] drum in
+                self?.handleQuotedDrumPressed(drum)
+            }) ~ cellModel.disposeBag
+        
+        cellModel.didPostActionPressed.asObservable()
+            .subscribe(onNext: { [weak self] action, drum in
+                self?.handleDrumActionPressed(drum, action: action)
             }) ~ cellModel.disposeBag
     }
 }

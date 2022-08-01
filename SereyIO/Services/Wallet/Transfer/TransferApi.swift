@@ -101,6 +101,7 @@ extension TransferApi: AuthorizedApiTargetType {
     }
     
     var task: Task {
+        print("Request Body: \(String(describing: try? parameters.stringify()))")
         return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
     }
     

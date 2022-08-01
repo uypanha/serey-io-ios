@@ -29,7 +29,7 @@ struct DrumModel: Codable {
     let flaggerCount: Int
     let allowVote: Bool
     let authorImageUrl: String?
-    var replies: [DrumModel]?
+    var replies: [PostModel]?
     
     let redrummer: String?
     let redrummers: [String]
@@ -82,6 +82,18 @@ struct DrumModel: Codable {
         }
     }
     
+    var postPublishedDateString: String? {
+        get {
+            guard let date = Date.date(from: self.postCreatedAt, format: "yyyy-MM-dd HH:mm") else { return nil }
+            
+            if (date.daysCount(to: Date()) < 7) {
+                return date.timeAgo(to: Date())
+            }
+            
+            return date.format("MMM, dd yyyy")
+        }
+    }
+    
     var isOverAWeek: Bool {
         get {
             guard let date = Date.date(from: self.publishDate, format: "yyyy-MM-dd HH:mm") else { return false }
@@ -96,6 +108,17 @@ struct DrumModel: Codable {
         
         let url = URL(string: self.authorImageUrl ?? "")
         return ProfileViewModel(shortcut: firstLetter, imageUrl: url, uniqueColor: uniqueColor)
+    }
+    
+    var postProfileViewModel: ProfileViewModel? {
+        if let postAuthor = postAuthor {
+            let firstLetter = author.first == nil ? "" : "\(postAuthor.first!)"
+            let uniqueColor = UIColor(hexString: PFColorHash().hex("\(postAuthor)"))
+            
+            let url = URL(string: self.postAuthorImageUrl ?? "")
+            return ProfileViewModel(shortcut: firstLetter, imageUrl: url, uniqueColor: uniqueColor)
+        }
+        return nil
     }
     
     var votedType: VotedType? {

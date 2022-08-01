@@ -58,7 +58,7 @@ extension UIButton: StyleProtocol {
     private func commonBackgroundStyle() {
         if self.backgroundColor != nil && self.backgroundColor != .clear {
             self.setRadius(all: 8)
-            self.setBackgroundColor(.color(.disabled), for: .disabled)
+            self.setBackgroundColor(self.backgroundColor!.withAlphaComponent(0.2), for: .disabled)
             self.setBackgroundColor(self.backgroundColor!.withAlphaComponent(0.5), for: .highlighted)
         } else {
             self.setBackgroundColor(nil, for: .disabled)
@@ -67,18 +67,21 @@ extension UIButton: StyleProtocol {
         
         if let image = self.image(for: .normal) {
             if image.renderingMode == .alwaysOriginal {
+                self.setImage(image.image(with: 0.2), for: .disabled)
                 self.setImage(image.image(with: 0.5), for: .highlighted)
             } else {
+                self.setImage(image.image(withTintColor: self.tintColor.withAlphaComponent(0.2)), for: .disabled)
                 self.setImage(image.image(withTintColor: self.tintColor.withAlphaComponent(0.5)), for: .highlighted)
             }
         } else {
+            self.setImage(nil, for: .disabled)
             self.setImage(nil, for: .highlighted)
         }
     }
     
     func commonTextColorStyle() {
         self.setTitleColor(self.titleColor(for: .normal)?.withAlphaComponent(0.5), for: .highlighted)
-        self.setTitleColor(self.titleColor(for: .normal)?.withAlphaComponent(0.3), for: .disabled)
+        self.setTitleColor(self.titleColor(for: .normal)?.withAlphaComponent(0.2), for: .disabled)
     }
     
     func primaryStyle() {

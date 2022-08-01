@@ -34,6 +34,9 @@ class ImageCollectionViewCell: BaseCollectionViewCell {
         return .createLabel(32, weight: .regular, textColor: .white)
     }()
     
+    var widthConstraint: ConstraintMakerEditable!
+    var heightConstraint: ConstraintMakerEditable!
+    
     var cellModel: ImageCellViewModel? {
         didSet {
             guard let cellModel = cellModel else {
@@ -61,6 +64,11 @@ class ImageCollectionViewCell: BaseCollectionViewCell {
         
         setUpLayout()
     }
+    
+    func updateSize(_ size: CGSize) {
+        self.widthConstraint.constraint.update(offset: size.width).activate()
+        self.heightConstraint.constraint.update(offset: size.height).activate()
+    }
 }
 
 // MARK: - Preparations & Tools
@@ -71,6 +79,8 @@ extension ImageCollectionViewCell {
         self.contentView.addSubview(self.imageView)
         self.imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+            self.widthConstraint = make.width.equalTo(200)
+            self.heightConstraint = make.height.equalTo(120)
         }
         
         self.contentView.addSubview(self.plusCountView)
