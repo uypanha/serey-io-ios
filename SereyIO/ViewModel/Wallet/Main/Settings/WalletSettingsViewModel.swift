@@ -18,7 +18,7 @@ class WalletSettingsViewModel: BaseUserProfileViewModel, CollectionMultiSections
     enum Action {
         case itemSelected(IndexPath)
         case changeProfilePressed
-        case photoSelected(PickerPhotoModel)
+        case photoSelected(PickerFileModel)
     }
     
     enum ViewToPresent {
@@ -202,7 +202,7 @@ extension WalletSettingsViewModel {
                 case .changeProfilePressed:
                     self?.handleChangeProfilePressed()
                 case .photoSelected(let pickerModel):
-                    self?.uploadPhoto(pickerModel)
+                    self?.uploadPickerFile(pickerModel)
                 }
             }) ~ self.disposeBag
     }

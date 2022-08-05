@@ -17,7 +17,7 @@ class CreatePostViewModel: BaseCellViewModel, CollectionSingleSecitionProviderMo
     enum Action {
         case itemSelected(IndexPath)
         case chooseImage(MediaChooserType)
-        case imageSelected(PickerPhotoModel)
+        case imageSelected(PickerFileModel)
         case closePressed
         case postPressed
     }
@@ -133,6 +133,10 @@ extension CreatePostViewModel {
     
     private func uploadImage(_ image: UIImage) -> Observable<FileUploadModel> {
         return self.fileUploadService.uploadPhoto(image)
+    }
+    
+    private func uploadPicker(_ pickerFile: PickerFileModel) -> Observable<FileUploadModel> {
+        return self.fileUploadService.uploadPickerFile(pickerFile)
     }
     
     private func submitPost(with thumnailUrl: String) {
@@ -341,14 +345,16 @@ fileprivate extension CreatePostViewModel {
         }
     }
     
-    func handleImageSelected(_ photoModel: PickerPhotoModel) {
+    func handleImageSelected(_ photoModel: PickerFileModel) {
         if let imageType = self.imageType {
             switch imageType {
             case .thumbnail:
-                self.thumbnailImage.accept(photoModel.image)
+                photoModel.dkAsset.fetchOriginalImage { image, info in
+                    self.thumbnailImage.accept(image)
+                }
             case .insertImage:
                 self.shouldPresent(.loading(true))
-                self.uploadImage(photoModel.image)
+                self.uploadPicker(photoModel)
                     .subscribe(onNext: { [weak self] data in
                         self?.shouldPresent(.loading(false))
                         self?.shouldInsertImage.onNext(data.url)

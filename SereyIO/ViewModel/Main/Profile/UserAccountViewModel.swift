@@ -22,7 +22,7 @@ class UserAccountViewModel: BaseUserProfileViewModel, DownloadStateNetworkProtoc
         case changeProfilePressed
         case refresh
         case followPressed
-        case photoSelected(PickerPhotoModel)
+        case photoSelected(PickerFileModel)
     }
     
     enum ViewToPresent {
@@ -351,7 +351,7 @@ fileprivate extension UserAccountViewModel {
                 case .changeProfilePressed:
                     self?.handleChangeProfilePressed()
                 case .photoSelected(let pickerModel):
-                    self?.uploadPhoto(pickerModel)
+                    self?.uploadPickerFile(pickerModel)
                 }
             }) ~ self.disposeBag
     }

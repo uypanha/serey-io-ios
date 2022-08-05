@@ -15,7 +15,7 @@ import Kingfisher
 import RxKingfisher
 import SnapKit
 
-class ProfileCollectionViewCell: BaseCollectionViewCell {
+class ImageCollectionViewCell: BaseCollectionViewCell {
     
     lazy var shimmerView: FBShimmeringView = {
         return .init()
@@ -32,7 +32,7 @@ class ProfileCollectionViewCell: BaseCollectionViewCell {
         }
     }()
     
-    lazy var profileImageView: UIImageView = {
+    lazy var imageView: UIImageView = {
         return .init().then {
             $0.backgroundColor = .color(.shimmering).withAlphaComponent(0.5)
         }
@@ -51,21 +51,22 @@ class ProfileCollectionViewCell: BaseCollectionViewCell {
     var widthConstraint: ConstraintMakerEditable!
     var heightConstraint: ConstraintMakerEditable!
     
-    var cellModel: ProfilePictureCellViewModel? {
+    var cellModel: ImageCollectionCellViewModel? {
         didSet {
             guard let cellModel = self.cellModel else { return }
             
             self.disposeBag ~ [
-                cellModel.profileUrl.map { $0 }.bind(to: self.profileImageView.kf.rx.image()),
+                cellModel.imageUrl.filter { $0 != nil }.map { $0 }.bind(to: self.imageView.kf.rx.image()),
+                cellModel.image.filter { $0 != nil }.bind(to: self.imageView.rx.image),
                 cellModel.buttonImage ~> self.actionButton.rx.image(for: .normal),
                 cellModel.buttonBackgroundColor
                     .subscribe(onNext: { [weak self] color in
                         self?.actionButton.setBackgroundColor(color, for: .normal)
                     }),
-                cellModel.isSelected
-                    .subscribe(onNext: { [weak self] isSelected in
-                        self?.mainView.borderColor = isSelected ? .color(.primary) : .color(.shimmering).withAlphaComponent(0.5)
-                        self?.mainView.borderWidth = isSelected ? 3 : 1
+                cellModel.border.asObservable()
+                    .subscribe(onNext: { [weak self] color, width in
+                        self?.mainView.borderColor = color
+                        self?.mainView.borderWidth = width
                     })
             ]
             
@@ -75,7 +76,7 @@ class ProfileCollectionViewCell: BaseCollectionViewCell {
                 }) ~ self.disposeBag
             
             self.actionButton.rx.tap.asObservable()
-                .map { ProfilePictureCellViewModel.Action.actionButtonPressed }
+                .map { ImageCollectionCellViewModel.Action.actionButtonPressed }
                 ~> cellModel.didActionSubject
                 ~ self.disposeBag
         }
@@ -106,7 +107,7 @@ class ProfileCollectionViewCell: BaseCollectionViewCell {
 }
 
 // MARK: - Preparations & Tools
-extension ProfileCollectionViewCell {
+extension ImageCollectionViewCell {
     
     func prepareShimmering(_ isShimmering: Bool) {
         let isHidden = isShimmering
@@ -120,7 +121,7 @@ extension ProfileCollectionViewCell {
 }
 
 // MARK: - PreparViews
-extension ProfileCollectionViewCell {
+extension ImageCollectionViewCell {
     
     func loadViews() {
         let mainView = UIView()
@@ -134,8 +135,8 @@ extension ProfileCollectionViewCell {
         self.mainView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        self.mainView.addSubview(self.profileImageView)
-        self.profileImageView.snp.makeConstraints { make in
+        self.mainView.addSubview(self.imageView)
+        self.imageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         

@@ -285,7 +285,7 @@ extension UserAccountViewController {
         
         self.fileMediaHelper.selectedPhotoSubject.asObservable()
             .subscribe(onNext: { [weak self] pickerModel in
-                self?.viewModel.didAction(with: .photoSelected(pickerModel))
+                self?.viewModel.didAction(with: .photoSelected(pickerModel.first!))
             }) ~ self.disposeBag
     }
     

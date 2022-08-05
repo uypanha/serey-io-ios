@@ -25,6 +25,13 @@ class FileUploadService {
         self.disposeBag = DisposeBag()
     }
     
+    func uploadPickerFile(_ pickerModel: PickerFileModel) -> Observable<FileUploadModel> {
+        let url = Constants.apiEndPoint.absoluteString + "/api/v1/Image/UploadNoToken"
+        pickerModel.isUploading.accept(true)
+        return pickerModel.mediaFromLibrary()
+            .flatMap { self.uploadAsset($0, parameters: [:], uploadURL: url, progress: { pickerModel.uploadProgress.accept($0) }) }
+    }
+    
     func uploadPhoto(_ fixedPhoto: UIImage) -> Observable<FileUploadModel> {
         let uploadSubject = PublishSubject<FileUploadModel>()
         
@@ -159,3 +166,43 @@ extension FileUploadService {
 //    }
 }
 
+// MARK: - Networks
+extension FileUploadService {
+    
+    func uploadAsset<R: Decodable>(_ asset: AssetUploadModel, parameters: [String: Any], uploadURL: String, progress: @escaping (Double) -> Void = { _ in }) -> Observable<R> {
+        let uploadSubject: PublishSubject<R> = .init()
+        
+        Alamofire.Session.default.upload(multipartFormData: { multipartFormData in
+            for (key, value) in parameters {
+                let valueData = (value as AnyObject).data(using: String.Encoding.utf8.rawValue)
+                multipartFormData.append(valueData!, withName: key)
+            }
+            
+            if let image = asset.image {
+                let imageData = image.imageData ?? image.jpegData(compressionQuality: 1)!
+                multipartFormData.append(imageData, withName: "upfile", fileName: asset.filenameUrlEncoded, mimeType: asset.mimeType)
+            } else if let url = asset.url {
+                multipartFormData.append(url, withName: "upfile", fileName: asset.filenameUrlEncoded, mimeType: asset.mimeType)
+            }
+            #if DEBUG
+            print(multipartFormData)
+            #endif
+        }, to: uploadURL, headers: self.createHeaders())
+        .uploadProgress(closure: { uploadProgress in
+            progress(uploadProgress.fractionCompleted)
+            #if DEBUG
+            print("Uploading: \(uploadProgress.fractionCompleted)")
+            #endif
+        })
+        .responseDecodable { (response: DataResponse<R, AFError>) in
+            switch response.result {
+            case .success(let data):
+                uploadSubject.onNext(data)
+            case .failure(let error):
+                uploadSubject.onError(FileUploadError.error(error))
+            }
+        }
+        
+        return uploadSubject
+    }
+}

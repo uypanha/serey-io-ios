@@ -54,7 +54,7 @@ class QuotedDrumCollectionViewCell: BaseCollectionViewCell {
             $0.isScrollEnabled = false
             $0.delegate = self
             
-            $0.register(ImageCollectionViewCell.self, isNib: false)
+            $0.register(DrumImageCollectionViewCell.self, isNib: false)
             $0.snp.makeConstraints { make in
                 self.collectionHeightConstraint = make.height.greaterThanOrEqualTo(100)
             }
@@ -88,7 +88,7 @@ class QuotedDrumCollectionViewCell: BaseCollectionViewCell {
                     let indexPath = IndexPath(row: index, section: 0)
                     switch item {
                     case is ImageCellViewModel:
-                        let cell: ImageCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+                        let cell: DrumImageCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
                         cell.cellModel = item as? ImageCellViewModel
                         cell.updateSize(cellModel.size(forCell: indexPath, maxWidth: self.collectionViewWidth))
                         return cell

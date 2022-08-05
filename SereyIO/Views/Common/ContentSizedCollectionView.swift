@@ -17,8 +17,10 @@ final class ContentSizedCollectionView: UICollectionView {
     }
     
     override var intrinsicContentSize: CGSize {
-        layoutIfNeeded()
-        return CGSize(width: UIView.noIntrinsicMetric, height: contentSize.height)
+        self.layoutIfNeeded()
+        var size = self.contentSize
+        size.height += self.contentInset.top + self.contentInset.bottom
+        return size
     }
     
     override func layoutSubviews() {

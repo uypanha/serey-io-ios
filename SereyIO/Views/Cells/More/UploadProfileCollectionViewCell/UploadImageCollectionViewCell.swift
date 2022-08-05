@@ -1,5 +1,5 @@
 //
-//  UploadProfileCollectionViewCell.swift
+//  UploadImageCollectionViewCell.swift
 //  SereyIO
 //
 //  Created by Mäd on 28/12/2021.
@@ -13,11 +13,20 @@ import RxSwift
 import RxBinding
 import Then
 
-class UploadProfileCollectionViewCell: BaseCollectionViewCell {
+class UploadImageCollectionViewCell: BaseCollectionViewCell {
     
-    var cellModel: UploadProfileCellViewModel? {
+    lazy var iconImageView: UIImageView = {
+        return .init(image: R.image.uploadProfileBigIcon()).then {
+            $0.tintColor = UIColor(hexString: "#A7A7A7")
+            $0.contentMode = .scaleAspectFit
+        }
+    }()
+    
+    var cellModel: UploadImageCellViewModel? {
         didSet {
-//            guard let cellModel = self.cellModel else { return }
+            guard let cellModel = self.cellModel else { return }
+            
+            cellModel.image ~> self.iconImageView.rx.image ~ self.disposeBag
         }
     }
     
@@ -49,7 +58,7 @@ class UploadProfileCollectionViewCell: BaseCollectionViewCell {
 }
 
 // MARK: - LoadViews
-extension UploadProfileCollectionViewCell {
+extension UploadImageCollectionViewCell {
     
     func loadViews() {
         let mainView = DashBorderView().then {
@@ -63,16 +72,12 @@ extension UploadProfileCollectionViewCell {
             $0.alignment = .center
             $0.spacing = 6
             
-            let imageView = UIImageView(image: R.image.uploadProfileBigIcon()).then {
-                $0.tintColor = UIColor(hexString: "#A7A7A7")
-                $0.contentMode = .scaleAspectFit
-            }
-            $0.addArrangedSubview(imageView)
-            imageView.snp.makeConstraints { make in
+            $0.addArrangedSubview(self.iconImageView)
+            self.iconImageView.snp.makeConstraints { make in
                 make.width.height.equalTo(48)
             }
             
-            let uploadLabel: UILabel = .createLabel(18, weight: .regular, textColor: UIColor(hexString: "#A7A7A7"))
+            let uploadLabel: UILabel = .createLabel(18, weight: .medium, textColor: UIColor(hexString: "#A7A7A7"))
             uploadLabel.text = "Upload"
             $0.addArrangedSubview(uploadLabel)
         }

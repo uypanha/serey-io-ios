@@ -174,7 +174,7 @@ extension CreatePostViewController {
             ~ self.disposeBag
         
         self.imagePickerHelper.selectedPhotoSubject.asObservable()
-            .map { CreatePostViewModel.Action.imageSelected($0) }
+            .map { CreatePostViewModel.Action.imageSelected($0.first!) }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
         
@@ -253,8 +253,8 @@ extension CreatePostViewController {
                     listTableViewController.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 8, right: 0)
                     let bottomSheet = BottomSheetListViewController(contentViewController: listTableViewController)
                     self.present(bottomSheet, animated: true, completion: nil)
-                case .chooseMediaController(let title, let editable):
-                    self.imagePickerHelper.allowEditting = editable
+                case .chooseMediaController(let title, _):
+                    self.imagePickerHelper.singleSelect = true
                     self.imagePickerHelper.showImagePickerAlert(title: title)
                 case .dismiss:
                     self.dismiss(animated: true, completion: nil)

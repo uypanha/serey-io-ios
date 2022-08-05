@@ -83,6 +83,18 @@ extension BaseUserProfileViewModel {
             }) ~ self.disposeBag
     }
     
+    func uploadPickerFile(_ pickerModel: PickerFileModel) {
+        self.isUploading.accept(true)
+        self.fileUploadService.uploadPickerFile(pickerModel)
+            .subscribe(onNext: { [weak self] fileUpload in
+                self?.addProfile(fileUpload.url)
+            }, onError: { [weak self] error in
+                self?.isUploading.accept(false)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
     func addProfile(_ url: String) {
         self.userProfileService.addUserProfile(url)
             .subscribe(onNext: { [weak self] data in

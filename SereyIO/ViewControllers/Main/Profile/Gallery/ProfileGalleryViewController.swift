@@ -38,8 +38,8 @@ class ProfileGalleryViewController: BaseViewController, AlertDialogController, L
             $0.itemSize = .init(width: 1, height: 1)
         }).then {
             $0.contentInset = .init(top: 16, left: 16, bottom: 16, right: 16)
-            $0.register(ProfileCollectionViewCell.self, isNib: false)
-            $0.register(UploadProfileCollectionViewCell.self, isNib: false)
+            $0.register(ImageCollectionViewCell.self, isNib: false)
+            $0.register(UploadImageCollectionViewCell.self, isNib: false)
             $0.isScrollEnabled = false
             $0.delegate = self
         }
@@ -105,13 +105,13 @@ extension ProfileGalleryViewController {
 extension ProfileGalleryViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        (collectionView.cellForItem(at: indexPath) as? UploadProfileCollectionViewCell)?.setHighlighted(true, animated: true)
-        (collectionView.cellForItem(at: indexPath) as? ProfileCollectionViewCell)?.setHighlighted(true, animated: true)
+        (collectionView.cellForItem(at: indexPath) as? UploadImageCollectionViewCell)?.setHighlighted(true, animated: true)
+        (collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell)?.setHighlighted(true, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        (collectionView.cellForItem(at: indexPath) as? UploadProfileCollectionViewCell)?.setHighlighted(false, animated: true)
-        (collectionView.cellForItem(at: indexPath) as? ProfileCollectionViewCell)?.setHighlighted(false, animated: true)
+        (collectionView.cellForItem(at: indexPath) as? UploadImageCollectionViewCell)?.setHighlighted(false, animated: true)
+        (collectionView.cellForItem(at: indexPath) as? ImageCollectionViewCell)?.setHighlighted(false, animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -147,13 +147,13 @@ extension ProfileGalleryViewController {
                 let indexPath = IndexPath(row: index, section: 0)
                 switch item {
                 case is ProfilePictureCellViewModel:
-                    let cell: ProfileCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+                    let cell: ImageCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
                     cell.cellModel = item as? ProfilePictureCellViewModel
                     cell.updateSize(self.getGridItemSize())
                     return cell
-                case is UploadProfileCellViewModel:
-                    let cell: UploadProfileCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
-                    cell.cellModel = item as? UploadProfileCellViewModel
+                case is UploadImageCellViewModel:
+                    let cell: UploadImageCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+                    cell.cellModel = item as? UploadImageCellViewModel
                     cell.updateSize(self.getGridItemSize())
                     return cell
                 default:
@@ -179,7 +179,7 @@ extension ProfileGalleryViewController {
             ~ self.disposeBag
         
         self.fileMediaHelper.selectedPhotoSubject.asObservable()
-            .map { ProfileGalleryViewModel.Action.photoSelected($0) }
+            .map { ProfileGalleryViewModel.Action.photoSelected($0.first!) }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
     }

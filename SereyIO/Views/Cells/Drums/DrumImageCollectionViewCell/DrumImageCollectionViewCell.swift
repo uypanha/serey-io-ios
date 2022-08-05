@@ -1,5 +1,5 @@
 //
-//  ImageCollectionViewCell.swift
+//  DrumImageCollectionViewCell.swift
 //  SereyIO
 //
 //  Created by Panha Uy on 5/7/22.
@@ -15,7 +15,7 @@ import RxBinding
 import RxKingfisher
 import MaterialComponents
 
-class ImageCollectionViewCell: BaseCollectionViewCell {
+class DrumImageCollectionViewCell: BaseCollectionViewCell {
     
     lazy var imageView: UIImageView = {
         return .init().then {
@@ -72,7 +72,7 @@ class ImageCollectionViewCell: BaseCollectionViewCell {
 }
 
 // MARK: - Preparations & Tools
-extension ImageCollectionViewCell {
+extension DrumImageCollectionViewCell {
     
     func setUpLayout() {
         self.contentView.setRadius(all: 8)

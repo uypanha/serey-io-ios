@@ -32,6 +32,14 @@ public enum CRichEditorOption: RichEditorOption {
         .unorderedList, .link, .image
     ]
     
+    public static let allExeptAttachment: [CRichEditorOption] = [
+        .bold, .italic,
+        .strike, .underline,
+        //.header(1),
+        .outdent, .indent, .orderedList,
+        .unorderedList, .link
+    ]
+    
     // MARK: RichEditorOption
     
     public var image: UIImage? {

@@ -17,7 +17,7 @@ class ProfileGalleryViewModel: BaseUserProfileViewModel, CollectionSingleSecitio
     enum Action {
         case itemSelected(IndexPath)
         case updatePressed
-        case photoSelected(PickerPhotoModel)
+        case photoSelected(PickerFileModel)
         case uploadPressed
     }
     
@@ -86,7 +86,7 @@ extension ProfileGalleryViewModel {
     func prepareCells() -> [CellViewModel] {
         var items: [CellViewModel] = []
         if !self.isDownloading.value && !self.profiles.value.isEmpty {
-            items.append(UploadProfileCellViewModel())
+            items.append(UploadImageCellViewModel(R.image.uploadProfileBigIcon()))
         }
         items.append(contentsOf: self.profiles.value.map { ProfilePictureCellViewModel($0, self.selectedProfile).then {
             self.setUpProfilePictureObservers($0)
@@ -120,7 +120,7 @@ extension ProfileGalleryViewModel {
 extension ProfileGalleryViewModel {
     
     func handleItemSelected(_ indexPath: IndexPath) {
-        if let _ = self.item(at: indexPath) as? UploadProfileCellViewModel {
+        if let _ = self.item(at: indexPath) as? UploadImageCellViewModel {
             self.shouldPresent(.openMediaPicker)
         } else if let item = self.item(at: indexPath) as? ProfilePictureCellViewModel {
             self.selectedProfile.accept(item.profile.value)
@@ -134,8 +134,8 @@ extension ProfileGalleryViewModel {
         }
     }
     
-    func handlePhotoSelected(_ photo: PickerPhotoModel) {
-        self.uploadPhoto(photo)
+    func handlePhotoSelected(_ photo: PickerFileModel) {
+        self.uploadPickerFile(photo)
     }
     
     func handleRemoveProfilePressed(_ profile: UserProfileModel) {

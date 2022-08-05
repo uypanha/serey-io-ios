@@ -32,6 +32,7 @@ def frameworks_pods
   pod 'RichEditorView', :git => 'https://github.com/uyphanha/RichEditorView.git'
   pod 'LSDialogViewController', :git => 'https://github.com/uyphanha/LSDialogViewController.git'
   pod 'PinCodeTextField', :git => 'https://github.com/uypanha/PinCodeTextField.git'
+  pod 'DKImagePickerController', :subspecs => ['PhotoGallery', 'Camera', 'InlineCamera'], :git => 'https://github.com/uypanha/DKImagePickerController.git', :branch => 'develop'
   
   # MARK: - Material Components
   pod 'MaterialComponents/Tabs'
