@@ -14,13 +14,14 @@ import RxSwift
 import RxBinding
 import RxDataSources
 
-class BaseDrumListingViewController: BaseTableViewController {
+class BaseDrumListingViewController: BaseTableViewController, AlertDialogController {
 
     lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
         return self.prepreDataSource()
     }()
     
     var viewModel: BrowseDrumsViewModel!
+    var shouldRefresh: Bool = false
     
     init(viewModel: BrowseDrumsViewModel) {
         super.init(nibName: nil, bundle: nil)
@@ -40,6 +41,28 @@ class BaseDrumListingViewController: BaseTableViewController {
         setUpRxObservers()
         DispatchQueue.main.async {
             self.viewModel.downloadData()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if self.shouldRefresh {
+            self.viewModel.reset()
+            self.shouldRefresh = false
+        }
+    }
+    
+    override func notificationReceived(_ notification: Notification) {
+        super.notificationReceived(notification)
+        
+        switch notification.appNotification {
+        case .drumCreated:
+            self.shouldRefresh = true
+        case .drumUpdated(let permlink, let author, let post):
+            self.viewModel.handlePostUpdated(permlink: permlink, author: author, post: post)
+        default:
+            break
         }
     }
 }
@@ -93,6 +116,7 @@ extension BaseDrumListingViewController {
         setUpControlObservers()
         setContentChangedObservers()
         setUpViewToPresentObservers()
+        setUpShouldPresentErrorObservers()
     }
     
     func setUpControlObservers() {
@@ -139,7 +163,18 @@ extension BaseDrumListingViewController {
                         signInViewController.viewModel = SignInViewModel()
                         self?.show(CloseableNavigationController(rootViewController: signInViewController), sender: nil)
                     }
+                case .voteDialogController(let voteDialogViewModel):
+                    (self?.tabBarController as? DrumMainViewController)?.showVoteDialog(voteDialogViewModel)
+                case .downVoteDialogController(let downVoewDialogViewModel):
+                    (self?.tabBarController as? DrumMainViewController)?.showDownvoteDialog(downVoewDialogViewModel)
                 }
+            }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentErrorObservers() {
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [weak self] errorInfo in
+                self?.showDialogError(errorInfo)
             }) ~ self.disposeBag
     }
 }

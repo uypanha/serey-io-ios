@@ -86,7 +86,7 @@ extension PostDrumViewController: RichEditorDelegate, RichEditorToolbarDelegate 
     }
     
     func richEditor(_ editor: RichEditorView, contentDidChange content: String) {
-//        self.viewModel.descriptionFieldViewModel.value = content
+        self.viewModel.descriptionTextField.value = content
     }
     
     func richEditorToolbarInsertLink(_ toolbar: RichEditorToolbar) {

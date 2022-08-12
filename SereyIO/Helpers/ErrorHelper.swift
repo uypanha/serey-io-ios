@@ -30,6 +30,7 @@ class ErrorHelper {
     fileprivate static var errorDomain = Constants.appBundleIndentifire
     
     enum PredefinedError: Int {
+        case voteOnYourOwnPost = 0001
         case unknownError = 9000
         case unknownServerError = 9001
         case unauthenticatedError = 9002
@@ -39,6 +40,8 @@ class ErrorHelper {
         
         var errorTitle: String? {
             switch self {
+            case .voteOnYourOwnPost:
+                return "Up Vote"
             case .networkOffline:
                 return R.string.common.networkOfflineTitle.localized()
             case .unknownServerError:
@@ -63,6 +66,8 @@ class ErrorHelper {
             let errorDescription: String
             
             switch self {
+            case .voteOnYourOwnPost:
+                errorDescription = "You can't up vote your own post!"
             case .unknownError:
                 errorDescription = errorMessage ?? R.string.common.errorUnknownDescription.localized()
             case .unknownServerError:
@@ -163,6 +168,10 @@ class ErrorHelper {
     
     static func defaultError(message: String? = nil) -> ErrorInfo {
         return PredefinedError.unknownError.prepareError(errorMessage: message)
+    }
+    
+    static func preparePredefineError(_ error: PredefinedError) -> ErrorInfo {
+        return error.prepareError()
     }
 }
 

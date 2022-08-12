@@ -20,6 +20,7 @@ class ImageCollectionCellViewModel: CellViewModel, ShimmeringProtocol, ShouldRea
     // input:
     let didActionSubject: PublishSubject<Action>
     
+    let pickerModel: BehaviorRelay<PickerFileModel?>
     let imageUrl: BehaviorRelay<URL?>
     let image: BehaviorRelay<UIImage?>
     let buttonImage: BehaviorSubject<UIImage?>
@@ -27,6 +28,7 @@ class ImageCollectionCellViewModel: CellViewModel, ShimmeringProtocol, ShouldRea
     let border: BehaviorSubject<(UIColor, CGFloat)>
     
     let isShimmering: BehaviorRelay<Bool>
+    let shouldReactToAction: PublishSubject<Void>
     
     required convenience init(_ isShimmering: Bool) {
         self.init(nil)
@@ -40,20 +42,32 @@ class ImageCollectionCellViewModel: CellViewModel, ShimmeringProtocol, ShouldRea
         self.image.accept(image)
     }
     
+    convenience init(pickerModel: PickerFileModel) {
+        self.init(nil)
+        
+        self.pickerModel.accept(pickerModel)
+        pickerModel.previewImage.bind(to: self.image).disposed(by: self.disposeBag)
+    }
+    
     init(_ url: URL?) {
         self.didActionSubject = .init()
         
+        self.pickerModel = .init(value: nil)
         self.imageUrl = .init(value: url)
         self.image = .init(value: nil)
         self.buttonImage = .init(value: R.image.removeIcon())
         self.buttonBackgroundColor = .init(value: UIColor(hexString: "#F35050").withAlphaComponent(0.58))
-        self.border = .init(value: (.clear, 0))
+        self.border = .init(value: (.color(.shimmering).withAlphaComponent(0.5), 1.5))
         self.isShimmering = .init(value: false)
+        self.shouldReactToAction = .init()
         
         super.init()
+        
+        setUpRxObservers()
     }
     
     func handleActionButtonPressed() {
+        self.shouldReactToAction.onNext(())
     }
 }
 

@@ -23,6 +23,8 @@ class DrumDetailViewModel: BaseViewModel,
     
     enum ViewToPresent {
         case signInViewController
+        case voteDialogController(VoteDialogViewModel)
+        case downVoteDialogController(DownvoteDialogViewModel)
     }
     
     // input:
@@ -112,6 +114,32 @@ extension DrumDetailViewModel {
             }) ~ self.disposeBag
     }
     
+    internal func upVote(_ post: DrumModel, _ weight: Int, _ isVoting: BehaviorSubject<VotedType?>) {
+        isVoting.onNext(.upvote)
+        self.discussionService.upVote(post.permlink, author: post.author, weight: weight)
+            .subscribe(onNext: { [weak self] _ in
+                self?.fetchDrumDetail()
+                isVoting.onNext(nil)
+            }, onError: { [weak self] error in
+                isVoting.onNext(nil)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    internal func downVote(_ post: DrumModel, _ votedType: VotedType, _ isVoting: BehaviorSubject<VotedType?>) {
+        isVoting.onNext(votedType)
+        self.discussionService.downVote(post.permlink, author: post.author)
+            .subscribe(onNext: { [weak self] _ in
+                self?.fetchDrumDetail()
+                isVoting.onNext(nil)
+            }, onError: { [weak self] error in
+                isVoting.onNext(nil)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
     internal func prepareSubmitCommentModel(_ comment: String) -> SubmitCommentModel {
         let permlink = self.drum.value?.permlink ?? ""
         let author = self.drum.value?.author ?? ""
@@ -144,12 +172,63 @@ private extension DrumDetailViewModel {
     }
 }
 
+// MARK: - Action Handlers
+fileprivate extension DrumDetailViewModel {
+    
+    func handleDrumActionPressed(_ drum: DrumModel, action: DrumsPostCellViewModel.DrumAction) {
+        if !AuthData.shared.isUserLoggedIn {
+            self.shouldPresent(.signInViewController)
+            return
+        }
+        
+        switch action {
+        case .redrum:
+            break
+        case .comment:
+            break
+        case .vote(let voteType, let isVoting):
+            if let _ = voteType {
+                // Undo Voting
+                self.handleDownVote(.upvotePost, drum, isVoting)
+            } else {
+                // Upvote
+                self.handleUpvote(.article, drum, isVoting)
+            }
+        }
+    }
+    
+    func handleUpvote(_ voteType: VotePostType, _ drumModel: DrumModel, _ isVoting: BehaviorSubject<VotedType?>) {
+        if drumModel.author == AuthData.shared.username {
+            self.shouldPresentError(ErrorHelper.preparePredefineError(.voteOnYourOwnPost))
+            return
+        }
+        
+        let voteDialogViewModel = VoteDialogViewModel(type: voteType == .comment ? .upVoteComment : .upvoteDrum)
+        voteDialogViewModel.shouldConfirm
+            .subscribe(onNext: { [weak self] weight in
+                self?.upVote(drumModel, weight, isVoting)
+            }) ~ voteDialogViewModel.disposeBag
+        self.shouldPresent(.voteDialogController(voteDialogViewModel))
+    }
+    
+    func handleDownVote(_ downvoteType: DownvoteDialogViewModel.DownVoteType, _ drumModel: DrumModel, _ isVoting: BehaviorSubject<VotedType?>) {
+        let downvoteViewModel = DownvoteDialogViewModel(downvoteType)
+        downvoteViewModel.shouldConfirm
+            .subscribe(onNext: { [weak self] _ in
+                let votedType : VotedType = (downvoteType == .upVoteComment || downvoteType == .upvotePost) ? .upvote : .flag
+                self?.downVote(drumModel, votedType, isVoting)
+            }) ~ downvoteViewModel.disposeBag
+        self.shouldPresent(.downVoteDialogController(downvoteViewModel))
+    }
+}
+
 // MARK: - SetUp RxObservers
 private extension DrumDetailViewModel {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
         setUpActionObservers()
+        setUpDrumPostCellObservers(self.drumDetailCellModel)
     }
     
     func setUpContentChangedObservers() {
@@ -173,6 +252,23 @@ private extension DrumDetailViewModel {
             .subscribe(onNext: { [weak self] text in
                 self?.submitComment(text)
             }) ~ self.disposeBag
+    }
+    
+    func setUpDrumPostCellObservers(_ cellModel: DrumsPostCellViewModel) {
+        cellModel.didProfilePressed.asObservable()
+            .subscribe(onNext: { [weak self] author in
+//                self?.handleOnProfilePressed(author)
+            }) ~ cellModel.disposeBag
+        
+        cellModel.didQuotedPostPressed.asObservable()
+            .subscribe(onNext: { [weak self] drum in
+//                self?.handleQuotedDrumPressed(drum)
+            }) ~ cellModel.disposeBag
+        
+        cellModel.didPostActionPressed.asObservable()
+            .subscribe(onNext: { [weak self] action, drum in
+                self?.handleDrumActionPressed(drum, action: action)
+            }) ~ cellModel.disposeBag
     }
     
     func setUpActionObservers() {

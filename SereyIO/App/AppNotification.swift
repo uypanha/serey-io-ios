@@ -14,6 +14,8 @@ enum AppNotification {
     case userDidLogOut
     case languageChanged
     case postCreated
+    case drumCreated
+    case drumUpdated(permlink: String, author: String, post: DrumModel?)
     case postUpdated(permlink: String, author: String, post: PostModel?)
     case postDeleted(permlink: String, author: String)
     case notificationRecived

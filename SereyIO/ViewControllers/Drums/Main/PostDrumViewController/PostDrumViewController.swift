@@ -15,7 +15,7 @@ import SnapKit
 import RichEditorView
 import AlignedCollectionViewFlowLayout
 
-class PostDrumViewController: BaseViewController, KeyboardController {
+class PostDrumViewController: BaseViewController, KeyboardController, LoadingIndicatorController, AlertDialogController {
     
     var editorHeightContraint: ConstraintMakerEditable!
     var bottomConstraint: ConstraintMakerEditable!
@@ -62,7 +62,9 @@ class PostDrumViewController: BaseViewController, KeyboardController {
     
     var viewModel: PostDrumViewModel = .init()
     lazy var fileMediaHelper: MediaPickerHelper = {
-        return .init(withPresenting: self)
+        return .init(withPresenting: self).then {
+            $0.singleSelect = false
+        }
     }()
     
     override func loadView() {
@@ -119,9 +121,18 @@ extension PostDrumViewController: UICollectionViewDelegate {
 private extension PostDrumViewController {
     
     func setUpRxObservers() {
+        setUpControlObservers()
         setUpContentChangedObservers()
         setUpViewToPresentObservers()
+        setUpShouldPresentError()
         setUpTabSelfToDismissKeyboard()?.disposed(by: self.disposeBag)
+    }
+    
+    func setUpControlObservers() {
+        self.postButton.rx.tap.asObservable()
+            .map { _ in PostDrumViewModel.Action.postPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpContentChangedObservers() {
@@ -145,9 +156,13 @@ private extension PostDrumViewController {
             }.disposed(by: self.disposeBag)
         
         self.fileMediaHelper.selectedPhotoSubject.asObservable()
-            .subscribe(onNext: { [weak self] picker in
-                self?.viewModel.didAction(with: .didPhotoSelected(picker))
+            .subscribe(onNext: { [weak self] pickers in
+                self?.viewModel.didAction(with: .didPhotoSelected(pickers))
             }) ~ self.disposeBag
+        
+        self.viewModel.isPostEnabled.asObservable()
+            ~> self.postButton.rx.isEnabled
+            ~ self.disposeBag
     }
     
     func setUpViewToPresentObservers() {
@@ -157,13 +172,25 @@ private extension PostDrumViewController {
                 case .bottomListViewController(let viewModel):
                     let bottomMenuViewController = BottomMenuViewController(viewModel)
                     self?.present(bottomMenuViewController, animated: true, completion: nil)
-                case .choosePhotoController:
+                case .choosePhotoController(let assets):
+                    self?.fileMediaHelper.selectedAssets = assets
                     self?.fileMediaHelper.showImagePicker()
                 case .takePhotoController:
                     DispatchQueue.main.async {
                         self?.fileMediaHelper.showCameraPicker()
                     }
+                case .loading(let loading):
+                    loading ? self?.showLoading() : self?.dismissLoading()
+                case .dismiss:
+                    self?.dismiss(animated: true)
                 }
+            }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentError() {
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [weak self] error in
+                self?.showDialogError(error)
             }) ~ self.disposeBag
     }
 }

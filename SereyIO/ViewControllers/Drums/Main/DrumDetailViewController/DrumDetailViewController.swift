@@ -14,7 +14,7 @@ import RxDataSources
 import RxKeyboard
 import SnapKit
 
-class DrumDetailViewController: BaseViewController, KeyboardController {
+class DrumDetailViewController: BaseViewController, KeyboardController, VoteDialogProtocol, AlertDialogController {
     
     lazy var keyboardDisposeBag: DisposeBag = .init()
     
@@ -139,6 +139,7 @@ private extension DrumDetailViewController {
     func setUpRxObservers() {
         setUpContentChangedObservers()
         setUpViewToPresentObservers()
+        setUpShouldPresentErrorObservers()
         setUpTabSelfToDismissKeyboard()?.disposed(by: self.disposeBag)
     }
     
@@ -158,7 +159,18 @@ private extension DrumDetailViewController {
                         signInViewController.viewModel = SignInViewModel()
                         self?.show(CloseableNavigationController(rootViewController: signInViewController), sender: nil)
                     }
+                case .voteDialogController(let voteDialogViewModel):
+                    self?.showVoteDialog(voteDialogViewModel)
+                case .downVoteDialogController(let downVoewDialogViewModel):
+                    self?.showDownvoteDialog(downVoewDialogViewModel)
                 }
+            }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentErrorObservers() {
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [weak self] errorInfo in
+                self?.showDialogError(errorInfo)
             }) ~ self.disposeBag
     }
     

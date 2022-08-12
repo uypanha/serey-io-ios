@@ -160,9 +160,18 @@ class DrumDetailView: UIView {
                     })
             ]
             
-            cellModel.redrumButtonColor.asObservable()
-                .subscribe(onNext: { [unowned self] color in
-                    self.setButtonAction(button: self.redrumButton, color)
+            cellModel.isLoggedUserRedrummed.asObservable()
+                .subscribe(onNext: { [unowned self] isRedrummed in
+                    let backgroundColor: UIColor = isRedrummed ? .color("#7FBBE7") : .color("#E1E1E1")
+                    let tintColor: UIColor = isRedrummed ? .white : .black
+                    self.setButtonAction(button: self.redrumButton, tintColor: tintColor, backgroundColor)
+                }) ~ self.disposeBag
+            
+            cellModel.isLoggedUserVoted.asObservable()
+                .subscribe(onNext: { [unowned self] isRedrummed in
+                    let backgroundColor: UIColor = isRedrummed ? .color("#7FBBE7") : .color("#E1E1E1")
+                    let tintColor: UIColor = isRedrummed ? .white : .black
+                    self.setButtonAction(button: self.likeButton, tintColor: tintColor, backgroundColor)
                 }) ~ self.disposeBag
             
             cellModel.cells.asObservable()
@@ -193,6 +202,16 @@ class DrumDetailView: UIView {
                 .subscribe(onNext: { [weak cellModel] _ in
                     cellModel?.didAction(with: .profilePressed)
                 }).disposed(by: self.disposeBag)
+            
+            self.redrumButton.rx.tap.asObservable()
+                .map { DrumsPostCellViewModel.Action.redrumQuotePressed }
+                ~> cellModel.didActionSubject
+                ~ self.disposeBag
+            
+            self.likeButton.rx.tap.asObservable()
+                .map { DrumsPostCellViewModel.Action.votePressed }
+                ~> cellModel.didActionSubject
+                ~ self.disposeBag
             
             self.collectionView.rx.itemSelected.asObservable()
                 .map { DrumsPostCellViewModel.Action.itemSelected($0) }
@@ -321,7 +340,7 @@ extension DrumDetailView {
     private func prepareActionButton(_ button: UIButton, image: UIImage?) {
         button.setImage(image, for: .normal)
         button.imageEdgeInsets = .init(top: 6, left: 6, bottom: 6, right: 6)
-        self.setButtonAction(button: button, .color("#E1E1E1"))
+        self.setButtonAction(button: button, tintColor: .black, .color("#E1E1E1"))
         button.snp.makeConstraints { make in
             make.width.height.equalTo(24)
         }
@@ -339,7 +358,8 @@ extension DrumDetailView {
         self.likeButton.isSkeletonable = true
     }
     
-    private func setButtonAction(button: UIButton, _ color: UIColor) {
+    private func setButtonAction(button: UIButton, tintColor: UIColor, _ color: UIColor) {
+        button.tintColor = tintColor
         button.customStyle(with: color)
         button.setRadius(all: 12)
     }

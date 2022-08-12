@@ -26,6 +26,7 @@ class DrumsPostCellViewModel: CellViewModel, ShimmeringProtocol, CollectionSingl
     
     let post: BehaviorRelay<DrumModel?>
     let isShimmering: BehaviorRelay<Bool>
+    let votedType: BehaviorRelay<VotedType?>
     
     let redrummedBy: BehaviorSubject<String?>
     let profileModel: BehaviorSubject<ProfileViewModel?>
@@ -33,12 +34,14 @@ class DrumsPostCellViewModel: CellViewModel, ShimmeringProtocol, CollectionSingl
     let createdAt: BehaviorSubject<String?>
     let title: BehaviorSubject<String?>
     let descriptionHtml: BehaviorSubject<String?>
-    let isVoteEnabled: BehaviorSubject<Bool>
+    let isVoteEnabled: BehaviorRelay<Bool>
     
     let commentCount: BehaviorSubject<String?>
     let likeCount: BehaviorSubject<String?>
     
-    let redrumButtonColor: BehaviorSubject<UIColor>
+    let isLoggedUserRedrummed: BehaviorSubject<Bool>
+    let isLoggedUserVoted: BehaviorSubject<Bool>
+    let isVoting: BehaviorSubject<VotedType?>
     
     let cells: BehaviorRelay<[CellViewModel]>
     
@@ -50,9 +53,12 @@ class DrumsPostCellViewModel: CellViewModel, ShimmeringProtocol, CollectionSingl
         self.didActionSubject = .init()
         self.post = .init(value: post)
         self.isShimmering = .init(value: post == nil)
+        self.votedType = .init(value: post?.votedType)
+        self.isVoting = .init(value: nil)
         
         self.redrummedBy = .init(value: post?.redrummedBy)
-        self.redrumButtonColor = .init(value: post?.isLoggedUserRedrummed == true ? .color("#F2F8FD") : .color("#E1E1E1"))
+        self.isLoggedUserRedrummed = .init(value: post?.isLoggedUserRedrummed ?? false)
+        self.isLoggedUserVoted = .init(value: post?.isLoggedUserVoted ?? false)
         self.profileModel = .init(value: post?.profileViewModel)
         self.profileName = .init(value: post?.author ?? "    ")
         self.createdAt = .init(value: post?.publishedDateString ?? "    ")
@@ -88,12 +94,13 @@ extension DrumsPostCellViewModel {
     enum DrumAction {
         case comment
         case redrum
-        case vote
+        case vote(VotedType?, BehaviorSubject<VotedType?>)
     }
     
     private func notifyDataChanaged(_ data: DrumModel?) {
         self.redrummedBy.onNext(data?.redrummedBy)
-        self.redrumButtonColor.onNext(data?.isLoggedUserRedrummed == true ? .color("#F2F8FD") : .color("#E1E1E1"))
+        self.isLoggedUserRedrummed.onNext(data?.isLoggedUserRedrummed ?? false)
+        self.isLoggedUserVoted.onNext(data?.isLoggedUserVoted ?? false)
         self.profileModel.onNext(data?.profileViewModel)
         self.profileName.onNext(data?.author ?? "    ")
         self.createdAt.onNext(data?.publishedDateString ?? "      ")
@@ -101,6 +108,7 @@ extension DrumsPostCellViewModel {
         self.descriptionHtml.onNext(data?.descriptionText ?? "      ")
         let likeCount = data?.voterCount ?? 0
         self.likeCount.onNext(likeCount == 0 ? "" : "\(likeCount)")
+        self.isVoteEnabled.accept(data?.allowVote ?? false)
     }
     
     private func prepareCells() -> [CellViewModel] {
@@ -202,8 +210,8 @@ private extension DrumsPostCellViewModel {
                         self?.didPostActionPressed.onNext((.comment, drum))
                     }
                 case .votePressed:
-                    if let drum = self?.post.value {
-                        self?.didPostActionPressed.onNext((.vote, drum))
+                    if let drum = self?.post.value, self?.isVoteEnabled.value == true, let _self = self {
+                        self?.didPostActionPressed.onNext((.vote(drum.votedType, _self.isVoting), drum))
                     }
                 case .redrumQuotePressed:
                     if let drum = self?.post.value {

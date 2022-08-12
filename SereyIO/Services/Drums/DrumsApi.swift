@@ -14,6 +14,8 @@ enum DrumsApi {
     case allDrums(String?, PaginationRequestModel)
     
     case drumDetail(String, String)
+    
+    case submitDrum(SubmitDrumPostModel)
 }
 
 extension DrumsApi: AuthorizedApiTargetType {
@@ -31,6 +33,12 @@ extension DrumsApi: AuthorizedApiTargetType {
                 "permlink" : permlink,
                 "authorName" : author
             ]
+        case .submitDrum(let model):
+            var parameters = model.parameters
+            if let country = PreferenceStore.shared.currentCountry {
+                parameters["country_name"] = country.countryName
+            }
+            return parameters
         }
     }
     
@@ -43,17 +51,26 @@ extension DrumsApi: AuthorizedApiTargetType {
             return "/api/v1/sereyweb/get_all_drum_posts"
         case .drumDetail:
             return "/api/v1/sereyweb/get_drum_detail_by_permlink"
+        case .submitDrum:
+            return "/api/v1/sereyweb/submitPost"
         }
     }
     
     var method: Moya.Method {
-        return .get
+        switch self {
+        case .submitDrum:
+            return .post
+        default:
+            return .get
+        }
     }
     
     var task: Task {
         switch self {
         case .allDrums, .drumDetail:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+        case .submitDrum:
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }
     }
     

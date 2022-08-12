@@ -23,6 +23,8 @@ class BrowseDrumsViewModel: BaseViewModel, CollectionMultiSectionsProviderModel,
         case authorDrumListingViewController(BrowseDrumsViewModel)
         case drumDetailViewController(DrumDetailViewModel)
         case signInViewController
+        case voteDialogController(VoteDialogViewModel)
+        case downVoteDialogController(DownvoteDialogViewModel)
     }
     
     // input:
@@ -41,7 +43,9 @@ class BrowseDrumsViewModel: BaseViewModel, CollectionMultiSectionsProviderModel,
     let isDownloading: BehaviorRelay<Bool>
     let isRefresh: BehaviorRelay<Bool>
     var pageModel: PaginationRequestModel
+    
     let drumsService: DrumsService
+    let discussionService: DiscussionService
     
     init(author: String? = nil, containPostItem: Bool) {
         self.didActionSubject = .init()
@@ -58,6 +62,7 @@ class BrowseDrumsViewModel: BaseViewModel, CollectionMultiSectionsProviderModel,
         self.drums = .init(value: [])
         self.cells = .init(value: [])
         self.drumsService = .init()
+        self.discussionService = .init()
         super.init()
         
         setUpRxObservers()
@@ -85,6 +90,43 @@ extension BrowseDrumsViewModel {
                 self?.shouldPresentError(ErrorHelper.prepareError(error: error))
             }) ~ self.disposeBag
     }
+    
+    private func fetchPostDetial(_ permlink: String, _ author: String) {
+        self.drumsService.fetchDrumDetail(author: author, permlink: permlink)
+            .subscribe(onNext: { response in
+                NotificationDispatcher.sharedInstance.dispatch(.drumUpdated(permlink: response.content.permlink, author: response.content.author, post: response.content))
+            }, onError: { [weak self] error in
+                self?.isDownloading.accept(false)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    internal func upVote(_ post: DrumModel, _ weight: Int, _ isVoting: BehaviorSubject<VotedType?>) {
+        isVoting.onNext(.upvote)
+        self.discussionService.upVote(post.permlink, author: post.author, weight: weight)
+            .subscribe(onNext: { [weak self] _ in
+                self?.fetchPostDetial(post.permlink, post.author)
+                isVoting.onNext(nil)
+            }, onError: { [weak self] error in
+                isVoting.onNext(nil)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    internal func downVote(_ post: DrumModel, _ votedType: VotedType, _ isVoting: BehaviorSubject<VotedType?>) {
+        isVoting.onNext(votedType)
+        self.discussionService.downVote(post.permlink, author: post.author)
+            .subscribe(onNext: { [weak self] _ in
+                self?.fetchPostDetial(post.permlink, post.author)
+                isVoting.onNext(nil)
+            }, onError: { [weak self] error in
+                isVoting.onNext(nil)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
 }
 
 // MARK: - Preparations & Tools
@@ -103,6 +145,14 @@ extension BrowseDrumsViewModel {
         self.pageModel.offset = data.count + drums.count
         
         self.drums.accept(drums)
+    }
+    
+    private func update(drum: DrumModel) {
+        var posts = self.drums.value
+        if let indexToUpdate = posts.index(where: { $0.permlink == drum.permlink && $0.author == drum.author }) {
+            posts[indexToUpdate] = drum
+        }
+        self.drums.accept(posts)
     }
     
     private func prepareCells() -> [SectionItem] {
@@ -171,8 +221,44 @@ extension BrowseDrumsViewModel {
             break
         case .comment:
             break
-        case .vote:
-            break
+        case .vote(let voteType, let isVoting):
+            if let _ = voteType {
+                // Undo Voting
+                self.handleDownVote(.upvotePost, drum, isVoting)
+            } else {
+                // Upvote
+                self.handleUpvote(.article, drum, isVoting)
+            }
+        }
+    }
+    
+    func handleUpvote(_ voteType: VotePostType, _ drumModel: DrumModel, _ isVoting: BehaviorSubject<VotedType?>) {
+        if drumModel.author == AuthData.shared.username {
+            self.shouldPresentError(ErrorHelper.preparePredefineError(.voteOnYourOwnPost))
+            return
+        }
+        
+        let voteDialogViewModel = VoteDialogViewModel(type: voteType == .comment ? .upVoteComment : .upvoteDrum)
+        voteDialogViewModel.shouldConfirm
+            .subscribe(onNext: { [weak self] weight in
+                self?.upVote(drumModel, weight, isVoting)
+            }) ~ voteDialogViewModel.disposeBag
+        self.shouldPresent(.voteDialogController(voteDialogViewModel))
+    }
+    
+    func handleDownVote(_ downvoteType: DownvoteDialogViewModel.DownVoteType, _ drumModel: DrumModel, _ isVoting: BehaviorSubject<VotedType?>) {
+        let downvoteViewModel = DownvoteDialogViewModel(downvoteType)
+        downvoteViewModel.shouldConfirm
+            .subscribe(onNext: { [weak self] _ in
+                let votedType : VotedType = (downvoteType == .upVoteComment || downvoteType == .upvotePost) ? .upvote : .flag
+                self?.downVote(drumModel, votedType, isVoting)
+            }) ~ downvoteViewModel.disposeBag
+        self.shouldPresent(.downVoteDialogController(downvoteViewModel))
+    }
+    
+    func handlePostUpdated(permlink: String, author: String, post: DrumModel?) {
+        if let post = post {
+            update(drum: post)
         }
     }
 }

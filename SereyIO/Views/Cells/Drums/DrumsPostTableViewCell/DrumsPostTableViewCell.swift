@@ -104,6 +104,10 @@ class DrumsPostTableViewCell: BaseTableViewCell {
         }
     }()
     
+    lazy var loadingIndicatorView: UIActivityIndicatorView = .init(frame: .init()).then {
+        $0.withSize(.init(width: 24, height: 24))
+    }
+    
     lazy var likeCount: UILabel = {
         return .createLabel(12, weight: .medium, textColor: .color(.title)).then {
             $0.text = "6"
@@ -165,9 +169,18 @@ class DrumsPostTableViewCell: BaseTableViewCell {
                     })
             ]
             
-            cellModel.redrumButtonColor.asObservable()
-                .subscribe(onNext: { [unowned self] color in
-                    self.setButtonAction(button: self.redrumButton, color)
+            cellModel.isLoggedUserRedrummed.asObservable()
+                .subscribe(onNext: { [unowned self] isRedrummed in
+                    let backgroundColor: UIColor = isRedrummed ? .color("#7FBBE7") : .color("#E1E1E1")
+                    let tintColor: UIColor = isRedrummed ? .white : .black
+                    self.setButtonAction(button: self.redrumButton, tintColor: tintColor, backgroundColor)
+                }) ~ self.disposeBag
+            
+            cellModel.isLoggedUserVoted.asObservable()
+                .subscribe(onNext: { [unowned self] isVoted in
+                    let backgroundColor: UIColor = isVoted ? .color("#7FBBE7") : .color("#E1E1E1")
+                    let tintColor: UIColor = isVoted ? .white : .black
+                    self.setButtonAction(button: self.likeButton, tintColor: tintColor, backgroundColor)
                 }) ~ self.disposeBag
             
             cellModel.cells.asObservable()
@@ -218,6 +231,15 @@ class DrumsPostTableViewCell: BaseTableViewCell {
                 .map { DrumsPostCellViewModel.Action.itemSelected($0) }
                 ~> cellModel.didActionSubject
                 ~ self.disposeBag
+            
+            cellModel.isVoting.asObservable()
+                .subscribe(onNext: { [weak self] voteType in
+                    self?.loadingIndicatorView.isHidden = voteType == nil
+                    self?.likeButton.isHidden = voteType == .upvote
+                    if voteType != nil {
+                        self?.loadingIndicatorView.startAnimating()
+                    }
+                }) ~ self.disposeBag
         }
     }
 
@@ -312,6 +334,7 @@ extension DrumsPostTableViewCell {
                     $0.axis = .horizontal
                     $0.spacing = 6
                     
+                    $0.addArrangedSubview(self.loadingIndicatorView)
                     $0.addArrangedSubview(self.likeButton)
                     $0.addArrangedSubview(self.likeCount)
                 })
@@ -347,7 +370,7 @@ extension DrumsPostTableViewCell {
     private func prepareActionButton(_ button: UIButton, image: UIImage?) {
         button.setImage(image, for: .normal)
         button.imageEdgeInsets = .init(top: 6, left: 6, bottom: 6, right: 6)
-        self.setButtonAction(button: button, .color("#E1E1E1"))
+        self.setButtonAction(button: button, tintColor: .black, .color("#E1E1E1"))
         button.snp.makeConstraints { make in
             make.width.height.equalTo(24)
         }
@@ -366,7 +389,8 @@ extension DrumsPostTableViewCell {
         self.likeButton.isSkeletonable = true
     }
     
-    private func setButtonAction(button: UIButton, _ color: UIColor) {
+    private func setButtonAction(button: UIButton, tintColor: UIColor, _ color: UIColor) {
+        button.tintColor = tintColor
         button.customStyle(with: color)
         button.setRadius(all: 12)
     }

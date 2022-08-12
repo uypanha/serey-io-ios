@@ -9,6 +9,7 @@
 import Foundation
 import RxCocoa
 import RxSwift
+import AnyCodable
 
 class DrumsService: AppService<DrumsApi> {
     
@@ -20,5 +21,11 @@ class DrumsService: AppService<DrumsApi> {
     func fetchDrumDetail(author: String, permlink: String) -> Observable<PostDetailResponse<DrumModel>> {
         return self.provider.rx.requestObject(.drumDetail(author, permlink), type: PostDetailResponse<DrumModel>.self)
             .asObservable()
+    }
+    
+    func submitDrum(_ model: SubmitDrumPostModel) -> Observable<BlockChainResponse> {
+        return self.provider.rx.requestObject(.submitDrum(model), type: DataResponseModel<BlockChainResponse>.self)
+            .asObservable()
+            .map { $0.data }
     }
 }

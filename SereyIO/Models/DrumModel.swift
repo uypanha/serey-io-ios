@@ -56,6 +56,10 @@ struct DrumModel: Codable {
         return self.redrummers.contains(where: { $0 == AuthData.shared.username })
     }
     
+    var isLoggedUserVoted: Bool {
+        return self.voters.contains(where: { $0 == AuthData.shared.username })
+    }
+    
     var firstThumnailURL: URL? {
         get {
             return imageUrl?.first == nil ? nil : URL(string: imageUrl!.first!)

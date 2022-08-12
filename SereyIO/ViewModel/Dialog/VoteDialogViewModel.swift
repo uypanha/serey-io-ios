@@ -18,6 +18,7 @@ class VoteDialogViewModel: BaseViewModel, ShouldReactToAction {
         case flagComment
         case upvotePost
         case flagPost
+        case upvoteDrum
         
         var minusText: String {
             switch self {
@@ -32,6 +33,8 @@ class VoteDialogViewModel: BaseViewModel, ShouldReactToAction {
             switch self {
             case .upvotePost:
                 return R.string.post.upVotePost.localized()
+            case .upvoteDrum:
+                return "Upvote Drum"
             case .upVoteComment:
                 return R.string.post.upVoteComment.localized()
             case .flagComment:
@@ -43,7 +46,7 @@ class VoteDialogViewModel: BaseViewModel, ShouldReactToAction {
         
         var maximumVote: Float {
             switch self {
-            case .upVoteComment, .flagComment:
+            case .upVoteComment, .flagComment, .upvoteDrum:
                 return 10
             default:
                 return 100
@@ -54,6 +57,8 @@ class VoteDialogViewModel: BaseViewModel, ShouldReactToAction {
             switch self {
             case .upVoteComment, .flagComment:
                 return 10
+            case .upvoteDrum:
+                return 5
             default:
                 return 100
             }

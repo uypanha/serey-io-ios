@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DrumMainViewController: BaseTabBarViewController {
+class DrumMainViewController: BaseTabBarViewController, VoteDialogProtocol {
     
     private var previousController: UIViewController? = nil
     private var browseDrumsViewController: BrowseDrumsViewController!

@@ -85,6 +85,8 @@
 		96AE4E2127A19F2000470B6D /* ReportPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE4E2027A19F2000470B6D /* ReportPostViewController.swift */; };
 		96AE4E2327A1A0A700470B6D /* ReportPostViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE4E2227A1A0A700470B6D /* ReportPostViewController+LoadViews.swift */; };
 		96AE4E2627A1AE3C00470B6D /* ReportPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE4E2527A1AE3C00470B6D /* ReportPostViewModel.swift */; };
+		96B4A16228A16B5A0000425A /* SubmitDrumPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4A16128A16B5A0000425A /* SubmitDrumPostModel.swift */; };
+		96B4A16428A16CA10000425A /* PostDrumViewModel+Networks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B4A16328A16CA10000425A /* PostDrumViewModel+Networks.swift */; };
 		96CB1AB3277A086B000C5930 /* ProfileOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB1AB2277A086B000C5930 /* ProfileOption.swift */; };
 		96CB1AB5277A0E4D000C5930 /* ProfileGalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB1AB4277A0E4D000C5930 /* ProfileGalleryViewController.swift */; };
 		96CB1AB8277A0E91000C5930 /* ProfileGalleryViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CB1AB7277A0E91000C5930 /* ProfileGalleryViewController+LoadViews.swift */; };
@@ -666,6 +668,8 @@
 		96AE4E2027A19F2000470B6D /* ReportPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPostViewController.swift; sourceTree = "<group>"; };
 		96AE4E2227A1A0A700470B6D /* ReportPostViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReportPostViewController+LoadViews.swift"; sourceTree = "<group>"; };
 		96AE4E2527A1AE3C00470B6D /* ReportPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPostViewModel.swift; sourceTree = "<group>"; };
+		96B4A16128A16B5A0000425A /* SubmitDrumPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitDrumPostModel.swift; sourceTree = "<group>"; };
+		96B4A16328A16CA10000425A /* PostDrumViewModel+Networks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostDrumViewModel+Networks.swift"; sourceTree = "<group>"; };
 		96CB1AB2277A086B000C5930 /* ProfileOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOption.swift; sourceTree = "<group>"; };
 		96CB1AB4277A0E4D000C5930 /* ProfileGalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileGalleryViewController.swift; sourceTree = "<group>"; };
 		96CB1AB7277A0E91000C5930 /* ProfileGalleryViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileGalleryViewController+LoadViews.swift"; sourceTree = "<group>"; };
@@ -1454,6 +1458,7 @@
 				9638F68E28885D7D008F5B6E /* DrumDetailViewModel.swift */,
 				963530CA2885B3D9006290CF /* MyDrumsViewModel.swift */,
 				96789D88289AD58000770B30 /* PostDrumViewModel.swift */,
+				96B4A16328A16CA10000425A /* PostDrumViewModel+Networks.swift */,
 				9655EA33289C13CC00B1A008 /* UploadImageOption.swift */,
 			);
 			path = Drums;
@@ -1503,6 +1508,14 @@
 				9649B12227AC2A90009B40A3 /* EnterIssueViewModel.swift */,
 			);
 			path = Report;
+			sourceTree = "<group>";
+		};
+		96B4A16028A16B4B0000425A /* Drum */ = {
+			isa = PBXGroup;
+			children = (
+				96B4A16128A16B5A0000425A /* SubmitDrumPostModel.swift */,
+			);
+			path = Drum;
 			sourceTree = "<group>";
 		};
 		96CB1AB6277A0E80000C5930 /* Gallery */ = {
@@ -2029,6 +2042,7 @@
 				DC12F209242271A30099C479 /* Auth */,
 				DCCD40CC2436425200093A18 /* BlockChain */,
 				DC9AC6E42406C5A2008FAFA6 /* Discussion */,
+				96B4A16028A16B4B0000425A /* Drum */,
 				DC0044072433A97000244607 /* File */,
 				DCACDDE12702205600F69AEA /* Notification */,
 				DCF67FEA24100BC7003061A7 /* User */,
@@ -3952,6 +3966,7 @@
 				DC6A790323CA242B001D1009 /* EmptyOrErrorViewModel.swift in Sources */,
 				DCD39889232E254100C812EB /* UIColor+Converter.swift in Sources */,
 				DCD39885232E24E500C812EB /* Reusable+Extensions.swift in Sources */,
+				96B4A16428A16CA10000425A /* PostDrumViewModel+Networks.swift in Sources */,
 				DC5B55B02451E5C800F8531B /* PushApi.swift in Sources */,
 				DC3E7E18270362E7001DA924 /* UILabel+Helper.swift in Sources */,
 				DC12F20B242271B60099C479 /* TokenModel.swift in Sources */,
@@ -3979,6 +3994,7 @@
 				963530B528806FFE006290CF /* BaseDrumListingViewController.swift in Sources */,
 				DC8EAB7B23E722BC00E00A00 /* MainTabBarViewController.swift in Sources */,
 				9649B12127AC2729009B40A3 /* UIButton+Extensions.swift in Sources */,
+				96B4A16228A16B5A0000425A /* SubmitDrumPostModel.swift in Sources */,
 				9697722F2770C998008F6B0C /* TickerModel.swift in Sources */,
 				968AFD9F28202C7E001E8496 /* PostDetailViewController.swift in Sources */,
 				DC387C8D24E6E90C00D8C78E /* CryptLib.m in Sources */,

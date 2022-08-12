@@ -35,6 +35,7 @@ class ImageCollectionViewCell: BaseCollectionViewCell {
     lazy var imageView: UIImageView = {
         return .init().then {
             $0.backgroundColor = .color(.shimmering).withAlphaComponent(0.5)
+            $0.contentMode = .scaleAspectFill
         }
     }()
     
