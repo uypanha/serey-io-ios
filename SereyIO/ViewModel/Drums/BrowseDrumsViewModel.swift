@@ -19,12 +19,14 @@ class BrowseDrumsViewModel: BaseViewModel, CollectionMultiSectionsProviderModel,
     }
     
     enum ViewToPresent {
-        case postDrumViewController
+        case postDrumViewController(PostDrumViewModel)
         case authorDrumListingViewController(BrowseDrumsViewModel)
         case drumDetailViewController(DrumDetailViewModel)
         case signInViewController
         case voteDialogController(VoteDialogViewModel)
         case downVoteDialogController(DownvoteDialogViewModel)
+        case bottomListViewController(BottomListMenuViewModel)
+        case mediaPreviewViewController(MediaPreviewViewModel)
     }
     
     // input:
@@ -79,6 +81,19 @@ extension BrowseDrumsViewModel {
         }
     }
     
+    private func fetchFirstDrum() {
+        self.isDownloading.accept(true)
+        self.drumsService.fetchAllDrums(author: self.author, pagination: .init(offset: 0, limit: 1))
+            .subscribe(onNext: { [weak self] data in
+                self?.isDownloading.accept(true)
+                if let drum = data.first {
+                    self?.update(drum: drum)
+                }
+            }, onError: { [weak self] error in
+                self?.isDownloading.accept(true)
+            }) ~ self.disposeBag
+    }
+    
     private func fetchAllDrums() {
         self.drumsService.fetchAllDrums(author: self.author, pagination: self.pageModel)
             .asObservable()
@@ -127,6 +142,27 @@ extension BrowseDrumsViewModel {
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
     }
+    
+    internal func redrum(_ drum: DrumModel) {
+        self.drumsService.redrum(author: drum.author, permlink: drum.permlink)
+            .subscribe(onNext: { [weak self] data in
+                drum.redrummers.append(AuthData.shared.username ?? "")
+                self?.update(drum: drum)
+                self?.fetchFirstDrum()
+            }, onError: { [weak self] error in
+                self?.shouldPresentError(ErrorHelper.prepareError(error: error))
+            }) ~ self.disposeBag
+    }
+    
+    internal func undoRedrum(_ drum: DrumModel) {
+        self.drumsService.undoRedrum(author: drum.author, permlink: drum.permlink)
+            .subscribe(onNext: { [weak self] data in
+                self?.removeDrum(with: drum.author, permlink: drum.permlink, redrummer: AuthData.shared.username ?? "")
+                self?.removeRedrum(with: drum.author, permlink: drum.permlink)
+            }, onError: { [weak self] error in
+                self?.shouldPresentError(ErrorHelper.prepareError(error: error))
+            }) ~ self.disposeBag
+    }
 }
 
 // MARK: - Preparations & Tools
@@ -147,9 +183,30 @@ extension BrowseDrumsViewModel {
         self.drums.accept(drums)
     }
     
-    private func update(drum: DrumModel) {
+    private func update(drum: DrumModel, insertFirstIndex: Bool = false) {
         var posts = self.drums.value
-        if let indexToUpdate = posts.index(where: { $0.permlink == drum.permlink && $0.author == drum.author }) {
+        if let indexToUpdate = posts.index(where: { $0.permlink == drum.permlink && $0.author == drum.author && $0.redrummer == drum.redrummer }) {
+            posts[indexToUpdate] = drum
+        } else {
+            posts.insert(drum, at: 0)
+        }
+        self.drums.accept(posts)
+    }
+    
+    private func removeDrum(with author: String, permlink: String, redrummer: String? = nil) {
+        var posts = self.drums.value
+        if let indexToRemove = posts.index(where: { $0.permlink == permlink && $0.author == author && $0.redrummer == redrummer }) {
+            posts.remove(at: indexToRemove)
+        }
+        self.drums.accept(posts)
+    }
+    
+    private func removeRedrum(with author: String, permlink: String) {
+        var posts = self.drums.value
+        let username = AuthData.shared.username ?? ""
+        if let indexToUpdate = posts.index(where: { $0.permlink == permlink && $0.author == author && $0.redrummers.contains(username) }) {
+            let drum = posts[indexToUpdate]
+            drum.redrummers = drum.redrummers.filter { $0 != username }
             posts[indexToUpdate] = drum
         }
         self.drums.accept(posts)
@@ -188,7 +245,7 @@ extension BrowseDrumsViewModel {
     
     func handleItemSelected(_ indexPath: IndexPath) {
         if let _ = self.item(at: indexPath) as? PostDrumsCellViewModel {
-            self.shouldPresent(AuthData.shared.isUserLoggedIn ? .postDrumViewController : .signInViewController)
+            self.shouldPresent(AuthData.shared.isUserLoggedIn ? .postDrumViewController(.init()) : .signInViewController)
         }
         
         if let item = self.item(at: indexPath) as? DrumsPostCellViewModel, let drum = item.post.value {
@@ -218,9 +275,10 @@ extension BrowseDrumsViewModel {
         
         switch action {
         case .redrum:
-            break
+            self.handleRedrumPressed(drum)
         case .comment:
-            break
+            let viewModel = DrumDetailViewModel(drum, comment: true)
+            self.shouldPresent(.drumDetailViewController(viewModel))
         case .vote(let voteType, let isVoting):
             if let _ = voteType {
                 // Undo Voting
@@ -259,6 +317,30 @@ extension BrowseDrumsViewModel {
     func handlePostUpdated(permlink: String, author: String, post: DrumModel?) {
         if let post = post {
             update(drum: post)
+        }
+    }
+    
+    func handleRedrumPressed(_ drum: DrumModel) {
+        let cellOptions: [CellViewModel] = drum.prepareRedrumQuoteOptions().map { $0.cellModel }
+        let bottomListViewModel = BottomListMenuViewModel(header: " ", cellOptions)
+        bottomListViewModel.shouldSelectMenuItem.asObservable()
+            .subscribe(onNext: { [weak self] item in
+                if let item = item as? RedrumQuoteOptionCellViewModel {
+                    self?.handleQuoteDrumOption(drum, option: item.option)
+                }
+            }) ~ bottomListViewModel.disposeBag
+        self.shouldPresent(.bottomListViewController(bottomListViewModel))
+    }
+    
+    func handleQuoteDrumOption(_ drum: DrumModel, option: RedrumQuoteOption) {
+        switch option {
+        case .redrum:
+            self.redrum(drum)
+        case .undoRedrum:
+            return self.undoRedrum(drum)
+        case .quoteDrum:
+            let postDrumViewModel = PostDrumViewModel(.quote, drum: drum)
+            self.shouldPresent(.postDrumViewController(postDrumViewModel))
         }
     }
 }
@@ -303,5 +385,12 @@ extension BrowseDrumsViewModel {
             .subscribe(onNext: { [weak self] action, drum in
                 self?.handleDrumActionPressed(drum, action: action)
             }) ~ cellModel.disposeBag
+        
+        cellModel.shouldPreviewImages.asObservable()
+            .subscribe(onNext: { [weak self] viewModel in
+                DispatchQueue.main.async {
+                    self?.shouldPresent(.mediaPreviewViewController(viewModel))
+                }
+            }) ~ self.disposeBag
     }
 }

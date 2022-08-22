@@ -11,6 +11,20 @@ import Rswift
 
 class CloseableNavigationController: UINavigationController {
     
+    var isDarkContentBackground = false
+    
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        if isDarkContentBackground {
+            return .lightContent
+        } else {
+            if #available(iOS 13.0, *) {
+                return .darkContent
+            } else {
+                return .default
+            }
+        }
+    }
+    
     private var closeIcon: UIImage?
     private var closeTitle: StringResource?
     

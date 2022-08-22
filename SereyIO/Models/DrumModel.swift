@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct DrumModel: Codable {
+class DrumModel: Codable {
     
     let parentAuthor: String?
     let parentPermlink: String?
@@ -32,7 +32,7 @@ struct DrumModel: Codable {
     var replies: [PostModel]?
     
     let redrummer: String?
-    let redrummers: [String]
+    var redrummers: [String]
     
     // Quotes Fields
     let postAuthor: String?
@@ -139,25 +139,34 @@ struct DrumModel: Codable {
         }
     }
     
-    func prepareOptionMenuTitle() -> String {
-        if self.author != AuthData.shared.username {
-            return "How can we help?"
-        }
-        return " "
-    }
+//    func prepareOptionMenuTitle() -> String {
+//        if self.author != AuthData.shared.username {
+//            return "How can we help?"
+//        }
+//        return " "
+//    }
     
-    func prepareOptionMenu() -> [PostMenu] {
-        var menu: [PostMenu] = []
-        if self.author == AuthData.shared.username {
-            menu.append(.edit)
-            if voterCount == 0 {
-                menu.append(.delete)
-            }
-        } else {
-            menu.append(.hidePost)
-            menu.append(.reportPost)
-        }
-        return menu
+//    func prepareOptionMenu() -> [PostMenu] {
+//        var menu: [PostMenu] = []
+//        if self.author == AuthData.shared.username {
+//            menu.append(.edit)
+//            if voterCount == 0 {
+//                menu.append(.delete)
+//            }
+//        } else {
+//            menu.append(.hidePost)
+//            menu.append(.reportPost)
+//        }
+//        return menu
+//    }
+//
+    func prepareRedrumQuoteOptions() -> [RedrumQuoteOption] {
+        var options: [RedrumQuoteOption] = []
+        
+        options.append(self.isLoggedUserRedrummed ? .undoRedrum : .redrum)
+        options.append(.quoteDrum)
+        
+        return options
     }
     
     enum CodingKeys: String, CodingKey {
@@ -189,5 +198,50 @@ struct DrumModel: Codable {
         case postDescription = "post_description"
         case postImageUrl = "post_image_url"
         case postCreatedAt = "post_created_at"
+    }
+}
+
+enum RedrumQuoteOption {
+    
+    case redrum
+    case undoRedrum
+    case quoteDrum
+    
+    var image: UIImage? {
+        switch self {
+        case .redrum, .undoRedrum:
+            return R.image.redrumIcon()
+        case .quoteDrum:
+            return R.image.quoteIcon()
+        }
+    }
+    
+    var title: String? {
+        switch self {
+        case .quoteDrum:
+            return "Quote Drum"
+        case .redrum:
+            return "Redrum"
+        case .undoRedrum:
+            return "Undo Redrum"
+        }
+    }
+    
+    var imageTextModel: ImageTextModel {
+        return .init(image: self.image, titleText: self.title)
+    }
+    
+    var cellModel: ImageTextCellViewModel {
+        return RedrumQuoteOptionCellViewModel(self)
+    }
+}
+
+class RedrumQuoteOptionCellViewModel: ImageTextCellViewModel {
+    
+    let option: RedrumQuoteOption
+    
+    init(_ option: RedrumQuoteOption) {
+        self.option = option
+        super.init(model: option.imageTextModel)
     }
 }

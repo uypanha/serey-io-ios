@@ -28,4 +28,19 @@ class DrumsService: AppService<DrumsApi> {
             .asObservable()
             .map { $0.data }
     }
+    
+    func redrum(author: String, permlink: String) -> Observable<AnyCodable> {
+        return self.provider.rx.requestObject(.redrum(author: author, permlink: permlink), type: AnyCodable.self)
+            .asObservable()
+    }
+    
+    func undoRedrum(author: String, permlink: String) -> Observable<AnyCodable> {
+        return self.provider.rx.requestObject(.undoRedrum(author: author, permlink: permlink), type: AnyCodable.self)
+            .asObservable()
+    }
+    
+    func submitQuoteDrum(_ model: SubmitQuoteDrumModel) -> Observable<AnyCodable> {
+        return self.provider.rx.requestObject(.submitQuoteDrum(model), type: AnyCodable.self)
+            .asObservable()
+    }
 }

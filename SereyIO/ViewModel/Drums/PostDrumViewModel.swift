@@ -34,6 +34,9 @@ class PostDrumViewModel: BaseViewModel, CollectionSingleSecitionProviderModel, S
     // output:
     let shouldPresentSubject: PublishSubject<ViewToPresent>
     
+    let option: PostOption
+    let drum: BehaviorRelay<DrumModel?>
+    
     let pickerModels: BehaviorRelay<[PickerFileModel]>
     let cells: BehaviorRelay<[CellViewModel]>
     
@@ -44,7 +47,10 @@ class PostDrumViewModel: BaseViewModel, CollectionSingleSecitionProviderModel, S
     let drumService: DrumsService
     let fileUploadService: FileUploadService
     
-    override init() {
+    init(_ option: PostOption = .create, drum: DrumModel? = nil) {
+        self.option = option
+        self.drum = .init(value: drum)
+        
         self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
         
@@ -65,6 +71,12 @@ class PostDrumViewModel: BaseViewModel, CollectionSingleSecitionProviderModel, S
 
 // MARK: - Preparations & Tools
 extension PostDrumViewModel {
+    
+    enum PostOption {
+        case edit
+        case create
+        case quote
+    }
     
     private func prepareCells() -> [CellViewModel] {
         var items: [CellViewModel] = []

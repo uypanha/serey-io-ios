@@ -16,6 +16,12 @@ enum DrumsApi {
     case drumDetail(String, String)
     
     case submitDrum(SubmitDrumPostModel)
+    
+    case redrum(author: String, permlink: String)
+    
+    case undoRedrum(author: String, permlink: String)
+    
+    case submitQuoteDrum(SubmitQuoteDrumModel)
 }
 
 extension DrumsApi: AuthorizedApiTargetType {
@@ -39,6 +45,18 @@ extension DrumsApi: AuthorizedApiTargetType {
                 parameters["country_name"] = country.countryName
             }
             return parameters
+        case .redrum(let author, let permlink):
+            return [
+                "permlink" : permlink,
+                "author" : author
+            ]
+        case .undoRedrum(let author, let permlink):
+            return [
+                "permlink" : permlink,
+                "author" : author
+            ]
+        case .submitQuoteDrum(let model):
+            return model.parameters
         }
     }
     
@@ -53,12 +71,18 @@ extension DrumsApi: AuthorizedApiTargetType {
             return "/api/v1/sereyweb/get_drum_detail_by_permlink"
         case .submitDrum:
             return "/api/v1/sereyweb/submitPost"
+        case .redrum:
+            return "/api/v1/general/redrum_post"
+        case .undoRedrum:
+            return "/api/v1/general/undo_redrum_post"
+        case .submitQuoteDrum:
+            return "/api/v1/sereyweb/submit_quote_drum"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .submitDrum:
+        case .submitDrum, .redrum, .undoRedrum, .submitQuoteDrum:
             return .post
         default:
             return .get
@@ -69,12 +93,19 @@ extension DrumsApi: AuthorizedApiTargetType {
         switch self {
         case .allDrums, .drumDetail:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-        case .submitDrum:
+        case .submitDrum, .redrum, .undoRedrum, .submitQuoteDrum:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }
     }
     
     var headers: [String : String]? {
-        return [:]
+        switch self {
+        case .redrum, .undoRedrum:
+            return [
+                "token" : AuthData.shared.userToken ?? ""
+            ]
+        default:
+            return [:]
+        }
     }
 }

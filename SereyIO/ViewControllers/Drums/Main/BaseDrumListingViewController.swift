@@ -148,8 +148,9 @@ extension BaseDrumListingViewController {
         self.viewModel.shouldPresent.asObservable()
             .subscribe(onNext: { [weak self] viewToPresent in
                 switch viewToPresent {
-                case .postDrumViewController:
+                case .postDrumViewController(let viewModel):
                     let postDrumViewController = PostDrumViewController()
+                    postDrumViewController.viewModel = viewModel
                     let nv = CloseableNavigationController(rootViewController: postDrumViewController)
                     self?.present(nv, animated: true)
                 case .authorDrumListingViewController(let viewModel):
@@ -167,6 +168,14 @@ extension BaseDrumListingViewController {
                     (self?.tabBarController as? DrumMainViewController)?.showVoteDialog(voteDialogViewModel)
                 case .downVoteDialogController(let downVoewDialogViewModel):
                     (self?.tabBarController as? DrumMainViewController)?.showDownvoteDialog(downVoewDialogViewModel)
+                case .bottomListViewController(let bottomListViewModel):
+                    let bottomMenuViewController = BottomMenuViewController(bottomListViewModel)
+                    self?.present(bottomMenuViewController, animated: true, completion: nil)
+                case .mediaPreviewViewController(let mediaPreviewViewModel):
+                    let mediaPreviewController = MediaPreviewViewController(mediaPreviewViewModel)
+                    let closableViewController = CloseableNavigationController(rootViewController: mediaPreviewController)
+                    closableViewController.isDarkContentBackground = true
+                    self?.present(closableViewController, animated: true, completion: nil)
                 }
             }) ~ self.disposeBag
     }

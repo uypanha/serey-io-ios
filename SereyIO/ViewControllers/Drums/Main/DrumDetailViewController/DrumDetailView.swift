@@ -139,6 +139,7 @@ class DrumDetailView: UIView {
                 cellModel.createdAt ~> self.createdAtLabel.rx.text,
                 cellModel.descriptionHtml ~> self.richEditor.rx.html,
                 cellModel.likeCount ~> self.likeCount.rx.text,
+                cellModel.isVoteEnabled ~> self.likeButton.rx.isEnabled,
                 cellModel.cells.asObservable().map { $0.isEmpty }
                     .subscribe(onNext: { [weak self] isEmpty in
                         self?.collectionContainerView.isHidden = isEmpty

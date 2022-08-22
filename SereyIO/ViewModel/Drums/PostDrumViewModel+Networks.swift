@@ -14,6 +14,30 @@ import RxBinding
 extension PostDrumViewModel {
     
     func submitDrumPost() {
+        switch option {
+        case .quote:
+            self.submitQuote()
+        case .create:
+            self.submitDrum()
+        case .edit:
+            break
+        }
+    }
+    
+    internal func submitQuote() {
+        self.drumService.submitQuoteDrum(self.prepareSubmitQuoteDrumModel())
+            .subscribe(onNext: { [weak self] data in
+                self?.isUploading.accept(false)
+                DispatchQueue.main.async {
+                    self?.handlePostSubmitted()
+                }
+            }, onError: { [weak self] error in
+                self?.isUploading.accept(false)
+                self?.shouldPresentError(ErrorHelper.prepareError(error: error))
+            }) ~ self.disposeBag
+    }
+    
+    internal func submitDrum() {
         self.drumService.submitDrum(self.prepareSubmitModel())
             .subscribe(onNext: { [weak self] data in
                 self?.isUploading.accept(false)
@@ -58,6 +82,13 @@ extension PostDrumViewModel {
         let title = self.descriptionTextField.value ?? ""
         let body = self.descriptionTextField.value ?? ""
         return .init(title: title, body: body, images: images)
+    }
+    
+    fileprivate func prepareSubmitQuoteDrumModel() -> SubmitQuoteDrumModel {
+        let images: [String] = self.pickerModels.value.map { $0.uploadedUrl }.filter { $0 != nil }.map { $0! }
+        let title = self.descriptionTextField.value ?? ""
+        let body = self.descriptionTextField.value ?? ""
+        return .init(postAuthor: self.drum.value?.author ?? "", postPermlink: self.drum.value?.permlink ?? "", title: title, desc: "", body: body, images: images)
     }
     
     func handlePostSubmitted() {

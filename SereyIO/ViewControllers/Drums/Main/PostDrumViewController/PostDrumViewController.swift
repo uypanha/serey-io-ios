@@ -60,7 +60,7 @@ class PostDrumViewController: BaseViewController, KeyboardController, LoadingInd
     var minContentHeight: CGFloat = 48
     var isFirstInitial: Bool = false
     
-    var viewModel: PostDrumViewModel = .init()
+    var viewModel: PostDrumViewModel!
     lazy var fileMediaHelper: MediaPickerHelper = {
         return .init(withPresenting: self).then {
             $0.singleSelect = false

@@ -64,6 +64,14 @@
 		9686E40C2767AB0E005F0C0E /* HeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686E4092767AB0E005F0C0E /* HeaderCollectionViewCell.swift */; };
 		9686E40F2767AB99005F0C0E /* MDCChipView+StyleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686E40E2767AB99005F0C0E /* MDCChipView+StyleProtocol.swift */; };
 		9686E4112767ADC8005F0C0E /* CollectionBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9686E4102767ADC8005F0C0E /* CollectionBottomSheetViewController.swift */; };
+		9687300E28AFF33F003ABC3B /* SubmitQuoteDrumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9687300D28AFF33F003ABC3B /* SubmitQuoteDrumModel.swift */; };
+		9687301028B3D0BE003ABC3B /* MediaPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9687300F28B3D0BE003ABC3B /* MediaPreviewViewController.swift */; };
+		9687301328B3D1CC003ABC3B /* MediaPreviewViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9687301228B3D1CB003ABC3B /* MediaPreviewViewController+LoadViews.swift */; };
+		9687301628B3D685003ABC3B /* ImagePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9687301528B3D685003ABC3B /* ImagePreviewViewModel.swift */; };
+		9687301928B3D6BB003ABC3B /* ImagePrevewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9687301828B3D6BB003ABC3B /* ImagePrevewViewController.swift */; };
+		9687301B28B3D8E5003ABC3B /* MediaPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9687301A28B3D8E5003ABC3B /* MediaPreviewViewModel.swift */; };
+		9687301D28B3D99D003ABC3B /* ZoomingScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9687301C28B3D99D003ABC3B /* ZoomingScrollView.swift */; };
+		9687301F28B3D9E6003ABC3B /* ImagePrevewViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9687301E28B3D9E6003ABC3B /* ImagePrevewViewController+LoadViews.swift */; };
 		968AFD9F28202C7E001E8496 /* PostDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968AFD9E28202C7D001E8496 /* PostDetailViewController.swift */; };
 		968AFDA128202C8C001E8496 /* PostDetailViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968AFDA028202C8C001E8496 /* PostDetailViewController+LoadViews.swift */; };
 		968BBB2A28748F78001F6D51 /* DrumImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968BBB2928748F78001F6D51 /* DrumImageCollectionViewCell.swift */; };
@@ -647,6 +655,14 @@
 		9686E40A2767AB0E005F0C0E /* HeaderCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCellViewModel.swift; sourceTree = "<group>"; };
 		9686E40E2767AB99005F0C0E /* MDCChipView+StyleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MDCChipView+StyleProtocol.swift"; sourceTree = "<group>"; };
 		9686E4102767ADC8005F0C0E /* CollectionBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionBottomSheetViewController.swift; sourceTree = "<group>"; };
+		9687300D28AFF33F003ABC3B /* SubmitQuoteDrumModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitQuoteDrumModel.swift; sourceTree = "<group>"; };
+		9687300F28B3D0BE003ABC3B /* MediaPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewViewController.swift; sourceTree = "<group>"; };
+		9687301228B3D1CB003ABC3B /* MediaPreviewViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediaPreviewViewController+LoadViews.swift"; sourceTree = "<group>"; };
+		9687301528B3D685003ABC3B /* ImagePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewModel.swift; sourceTree = "<group>"; };
+		9687301828B3D6BB003ABC3B /* ImagePrevewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePrevewViewController.swift; sourceTree = "<group>"; };
+		9687301A28B3D8E5003ABC3B /* MediaPreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPreviewViewModel.swift; sourceTree = "<group>"; };
+		9687301C28B3D99D003ABC3B /* ZoomingScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomingScrollView.swift; sourceTree = "<group>"; };
+		9687301E28B3D9E6003ABC3B /* ImagePrevewViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImagePrevewViewController+LoadViews.swift"; sourceTree = "<group>"; };
 		968AFD9E28202C7D001E8496 /* PostDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailViewController.swift; sourceTree = "<group>"; };
 		968AFDA028202C8C001E8496 /* PostDetailViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostDetailViewController+LoadViews.swift"; sourceTree = "<group>"; };
 		968BBB2928748F78001F6D51 /* DrumImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1386,6 +1402,32 @@
 			path = HeaderCollectionViewCell;
 			sourceTree = "<group>";
 		};
+		9687301128B3D167003ABC3B /* MediaPreviewViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9687300F28B3D0BE003ABC3B /* MediaPreviewViewController.swift */,
+				9687301228B3D1CB003ABC3B /* MediaPreviewViewController+LoadViews.swift */,
+			);
+			path = MediaPreviewViewController;
+			sourceTree = "<group>";
+		};
+		9687301428B3D675003ABC3B /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				9687301528B3D685003ABC3B /* ImagePreviewViewModel.swift */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
+		9687301728B3D6AA003ABC3B /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				9687301828B3D6BB003ABC3B /* ImagePrevewViewController.swift */,
+				9687301E28B3D9E6003ABC3B /* ImagePrevewViewController+LoadViews.swift */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
 		968AFD9D28202BB4001E8496 /* PostDetailViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1514,6 +1556,7 @@
 			isa = PBXGroup;
 			children = (
 				96B4A16128A16B5A0000425A /* SubmitDrumPostModel.swift */,
+				9687300D28AFF33F003ABC3B /* SubmitQuoteDrumModel.swift */,
 			);
 			path = Drum;
 			sourceTree = "<group>";
@@ -1976,6 +2019,8 @@
 			isa = PBXGroup;
 			children = (
 				DC5D59D524323C200048C921 /* ListTableViewController.swift */,
+				9687301728B3D6AA003ABC3B /* Media */,
+				9687301128B3D167003ABC3B /* MediaPreviewViewController */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2012,8 +2057,10 @@
 		DC6A78F823CA20AB001D1009 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				DC6A78F923CA20B3001D1009 /* FieldViewModelProtocol.swift */,
 				DC5D59D724323CDA0048C921 /* BaseListTableViewModel.swift */,
+				DC6A78F923CA20B3001D1009 /* FieldViewModelProtocol.swift */,
+				9687301428B3D675003ABC3B /* Media */,
+				9687301A28B3D8E5003ABC3B /* MediaPreviewViewModel.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -2889,6 +2936,7 @@
 			children = (
 				961264A82757B78B00AA1AD2 /* SKActivityIndicator */,
 				DCB070402732DE7D004463E7 /* TransactionHeaderView.swift */,
+				9687301C28B3D99D003ABC3B /* ZoomingScrollView.swift */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -3899,6 +3947,7 @@
 				DC83C38C24E301F2008C9EAB /* BottomSheetProtocol.swift in Sources */,
 				DCFBD77E25014BC7005B6875 /* ClaimRewardViewController.swift in Sources */,
 				DC010D392434F685002BE182 /* URL+Helpers.swift in Sources */,
+				9687301328B3D1CC003ABC3B /* MediaPreviewViewController+LoadViews.swift in Sources */,
 				DC19DBE723EC5E7500571CC8 /* PostTableViewController.swift in Sources */,
 				DCFBD78425029CE8005B6875 /* CancelPowerModel.swift in Sources */,
 				9655EA34289C13CC00B1A008 /* UploadImageOption.swift in Sources */,
@@ -3946,6 +3995,7 @@
 				DC9E36E324135A3400289693 /* PostDetailView.swift in Sources */,
 				DC583A8D24CC26A200D9C4D3 /* WalletAuthValidateController.swift in Sources */,
 				963530C72881BEC9006290CF /* DrumDetailViewController.swift in Sources */,
+				9687300E28AFF33F003ABC3B /* SubmitQuoteDrumModel.swift in Sources */,
 				DCA74DC9253AD6A40041EAAE /* VerifyBiometryViewController.swift in Sources */,
 				DC1CBD2625939E9A00CCB714 /* UserPostListViewModel.swift in Sources */,
 				9636C796285B7DA0002EF5CA /* MyFeedViewController.swift in Sources */,
@@ -3953,6 +4003,7 @@
 				DC12F21424227A340099C479 /* UserService.swift in Sources */,
 				DC115F2C241A8D38006BE78C /* UtilsHelper.swift in Sources */,
 				DC9AC6E12406C1D1008FAFA6 /* DiscussionService.swift in Sources */,
+				9687301928B3D6BB003ABC3B /* ImagePrevewViewController.swift in Sources */,
 				DC9C65A3249E6F0A0042C829 /* ActiveBiometryViewModel.swift in Sources */,
 				DCF67FE724100221003061A7 /* CircularView.swift in Sources */,
 				9686E3F627679772005F0C0E /* BaseUserProfileViewModel.swift in Sources */,
@@ -3974,6 +4025,7 @@
 				967DAAD4277B61F200B3D0D7 /* DashBorderView.swift in Sources */,
 				DCD39881232E24A400C812EB /* NSLayoutConstraint+Multiplier.swift in Sources */,
 				DC6FCE7923F05D1700D72F6D /* Helper.swift in Sources */,
+				9687301028B3D0BE003ABC3B /* MediaPreviewViewController.swift in Sources */,
 				DCDE006E2446161500D09717 /* UIPlaceHolderTextView.swift in Sources */,
 				9649B12827B17AA2009B40A3 /* UndoHiddenPostCellViewModel.swift in Sources */,
 				DCD3989A232E2DE700C812EB /* UINavigationController.swift in Sources */,
@@ -3987,6 +4039,7 @@
 				DC7558BA24589A4C00AD40FA /* SereyAppCellViewModel.swift in Sources */,
 				DCD3987A232E230B00C812EB /* NibView.swift in Sources */,
 				DCD39896232E28E100C812EB /* WebViewViewModel.swift in Sources */,
+				9687301F28B3D9E6003ABC3B /* ImagePrevewViewController+LoadViews.swift in Sources */,
 				DCEF9D37243E1680002B7E99 /* MoreAppsViewModel.swift in Sources */,
 				DC6ED56A23269CA300770B31 /* RootViewController.swift in Sources */,
 				DC7C740B24717B0F00610526 /* VoterListViewModel.swift in Sources */,
@@ -4116,6 +4169,7 @@
 				96113DE9287C78EC00F14B8C /* PostDrumViewController.swift in Sources */,
 				DC6FCE7423F05D1700D72F6D /* Steem.swift in Sources */,
 				DCCD40C924363EF700093A18 /* SubmitPostModel.swift in Sources */,
+				9687301628B3D685003ABC3B /* ImagePreviewViewModel.swift in Sources */,
 				DC9A660B24E05725001F1B60 /* PayQRViewModel.swift in Sources */,
 				DC8EAB8323E7231A00E00A00 /* MoreViewController.swift in Sources */,
 				DCC6F1E2242BBDEA003B9E3A /* TextTableViewCell.swift in Sources */,
@@ -4163,6 +4217,7 @@
 				DC6ED56F2326A30000770B31 /* String+Extensions.swift in Sources */,
 				DCB5BD90249A68EC0042E5AF /* SereyWallet.swift in Sources */,
 				DC6A78EA23CA1F38001D1009 /* BaseCellViewModel.swift in Sources */,
+				9687301B28B3D8E5003ABC3B /* MediaPreviewViewModel.swift in Sources */,
 				967DAAD2277B5D0F00B3D0D7 /* UploadImageCollectionViewCell.swift in Sources */,
 				DCD12D68242D03850084F66C /* BottomMenuViewModel.swift in Sources */,
 				96754ABC289D6EDC00D4F90E /* Units.swift in Sources */,
@@ -4187,6 +4242,7 @@
 				DC7AAFFB24F80BD000ECDF47 /* PowerDownViewController.swift in Sources */,
 				DC83C38224E19DCC008C9EAB /* ConfirmTransferViewController.swift in Sources */,
 				9649B11D27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift in Sources */,
+				9687301D28B3D99D003ABC3B /* ZoomingScrollView.swift in Sources */,
 				96CB1ABA277A1009000C5930 /* ViewHelper.swift in Sources */,
 				DC3E7E1C270364D3001DA924 /* UIColor+Extensions.swift in Sources */,
 				DCB5BD712497CAE40042E5AF /* SecurityMethodeTableViewCell.swift in Sources */,

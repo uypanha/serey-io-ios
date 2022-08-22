@@ -46,8 +46,10 @@ class DrumDetailViewModel: BaseViewModel,
     let isDownloading: BehaviorRelay<Bool>
     let drumService: DrumsService
     let discussionService: DiscussionService
+    let shouldCommentFocus: Bool
     
-    init(author: String, permlink: String) {
+    init(author: String, permlink: String, comment: Bool = false) {
+        self.shouldCommentFocus = comment
         self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
         
@@ -68,8 +70,8 @@ class DrumDetailViewModel: BaseViewModel,
         setUpRxObservers()
     }
     
-    convenience init(_ drum: DrumModel) {
-        self.init(author: drum.author, permlink: drum.permlink)
+    convenience init(_ drum: DrumModel, comment: Bool = false) {
+        self.init(author: drum.author, permlink: drum.permlink, comment: comment)
 
         self.drum.accept(drum)
         self.drumDetailCellModel.update(drum: drum)

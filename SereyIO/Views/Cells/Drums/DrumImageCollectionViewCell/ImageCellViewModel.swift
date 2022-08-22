@@ -13,7 +13,7 @@ import RxBinding
 
 class ImageCellViewModel: CellViewModel {
     
-    let imageUrl: BehaviorSubject<URL?>
+    let imageUrl: BehaviorRelay<URL?>
     let plusImage: BehaviorRelay<Int>
     
     init(_ imageUrl: String) {

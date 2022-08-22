@@ -49,6 +49,8 @@ class DrumsPostCellViewModel: CellViewModel, ShimmeringProtocol, CollectionSingl
     let didQuotedPostPressed: PublishSubject<DrumModel>
     let didPostActionPressed: PublishSubject<(DrumAction, DrumModel)>
     
+    let shouldPreviewImages: PublishSubject<MediaPreviewViewModel>
+    
     init(_ post: DrumModel? = nil) {
         self.didActionSubject = .init()
         self.post = .init(value: post)
@@ -76,6 +78,8 @@ class DrumsPostCellViewModel: CellViewModel, ShimmeringProtocol, CollectionSingl
         self.didProfilePressed = .init()
         self.didQuotedPostPressed = .init()
         self.didPostActionPressed = .init()
+        
+        self.shouldPreviewImages = .init()
         super.init()
         
         setUpRxObservers()
@@ -116,7 +120,9 @@ extension DrumsPostCellViewModel {
         if let post = self.post.value {
             let imageCount = post.imageUrl?.count ?? 0
             let images = post.imageUrl?.prefix(2) ?? []
+            
             items.append(contentsOf: images.map { ImageCellViewModel($0) })
+            
             if (post.imageUrl?.count ?? 0) > 2 {
                 (items.last as? ImageCellViewModel)?.plusImage.accept(imageCount - images.count)
             }
@@ -173,6 +179,16 @@ fileprivate extension DrumsPostCellViewModel {
     func handleItemSelected(at indexPath: IndexPath) {
         if let item = self.item(at: indexPath) as? QuotedDrumCellViewModel {
             self.didQuotedPostPressed.onNext(item.post.value)
+            return
+        }
+        
+        if let item = self.item(at: indexPath) as? ImageCellViewModel, let imageUrl = item.imageUrl.value?.absoluteString {
+            if let drum = self.post.value {
+                let index = drum.imageUrl?.index(where: { $0 == imageUrl }) ?? 0
+                let mediaPreviewModel = MediaPreviewViewModel(drum.imageUrl ?? [], currentIndex: index)
+                self.shouldPreviewImages.onNext(mediaPreviewModel)
+            }
+            return
         }
     }
 }
