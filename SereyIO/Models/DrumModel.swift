@@ -31,7 +31,7 @@ class DrumModel: Codable {
     let authorImageUrl: String?
     var replies: [PostModel]?
     
-    let redrummer: String?
+    var redrummer: String?
     var redrummers: [String]
     
     // Quotes Fields

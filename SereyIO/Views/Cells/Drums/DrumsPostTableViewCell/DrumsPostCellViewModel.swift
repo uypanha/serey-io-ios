@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Then
 import RxCocoa
 import RxSwift
 import RxBinding
@@ -113,6 +114,8 @@ extension DrumsPostCellViewModel {
         let likeCount = data?.voterCount ?? 0
         self.likeCount.onNext(likeCount == 0 ? "" : "\(likeCount)")
         self.isVoteEnabled.accept(data?.allowVote ?? false)
+        let commentCount = data?.answerCount ?? 0
+        self.commentCount.onNext(commentCount == 0 ? nil : "\(commentCount)")
     }
     
     private func prepareCells() -> [CellViewModel] {
@@ -128,7 +131,9 @@ extension DrumsPostCellViewModel {
             }
             
             if post.postAuthor != nil {
-                items.append(QuotedDrumCellViewModel(post))
+                items.append(QuotedDrumCellViewModel(post).then {
+                    self.setUpQuotedDrumCellObservers($0)
+                })
             }
         }
         return items
@@ -235,5 +240,11 @@ private extension DrumsPostCellViewModel {
                     }
                 }
             }) ~ self.disposeBag
+    }
+    
+    func setUpQuotedDrumCellObservers(_ cellModel: QuotedDrumCellViewModel) {
+        cellModel.shouldPreviewImages.asObservable()
+            .bind(to: self.shouldPreviewImages)
+            ~ cellModel.disposeBag
     }
 }

@@ -21,14 +21,20 @@ class QuotedDrumCellViewModel: CellViewModel, CollectionSingleSecitionProviderMo
     let createdAt: BehaviorSubject<String?>
     let descriptionText: BehaviorSubject<String?>
     
-    init(_ drum: DrumModel) {
+    let shouldPreviewImages: PublishSubject<MediaPreviewViewModel>
+    let toQuote: Bool
+    
+    init(_ drum: DrumModel, toQuote: Bool = false) {
+        self.toQuote = toQuote
         self.post = .init(value: drum)
         self.cells = .init(value: [])
         
-        self.profileModel = .init(value: drum.postProfileViewModel)
-        self.profileName = .init(value: drum.postAuthor)
-        self.createdAt = .init(value: drum.postPublishedDateString ?? drum.publishedDateString)
-        self.descriptionText = .init(value: drum.postDescription?.htmlToString ?? drum.descriptionText?.htmlToString)
+        self.profileModel = .init(value: toQuote ? drum.profileViewModel : drum.postProfileViewModel)
+        self.profileName = .init(value: toQuote ? drum.author : drum.postAuthor)
+        self.createdAt = .init(value: toQuote ? drum.publishedDateString : (drum.postPublishedDateString ?? drum.publishedDateString))
+        self.descriptionText = .init(value: toQuote ? drum.descriptionText?.htmlToString : (drum.postDescription?.htmlToString ?? drum.descriptionText?.htmlToString))
+        
+        self.shouldPreviewImages = .init()
         super.init()
         
         self.cells.accept(self.prepareCells())
@@ -42,8 +48,8 @@ extension QuotedDrumCellViewModel {
         var items: [CellViewModel] = []
         
         let drum = self.post.value
-        let imageCount = drum.postImageUrl.count
-        let images = drum.postImageUrl.prefix(2)
+        let imageCount = self.toQuote ? (drum.imageUrl?.count ?? 0) : drum.postImageUrl.count
+        let images = self.toQuote ? (drum.imageUrl?.prefix(2) ?? []) : drum.postImageUrl.prefix(2)
         items.append(contentsOf: images.map { ImageCellViewModel($0) })
         if imageCount > 2 {
             (items.last as? ImageCellViewModel)?.plusImage.accept(imageCount - images.count)
@@ -53,7 +59,8 @@ extension QuotedDrumCellViewModel {
     
     func size(forCell at: IndexPath, maxWidth: CGFloat) -> CGSize {
         if let _ = self.item(at: at) as? ImageCellViewModel {
-            let width: CGFloat = (self.post.value.postImageUrl.count > 1) ? (maxWidth / 2) - 4 : maxWidth
+            let imageCount = self.toQuote ? (self.post.value.imageUrl?.count ?? 0) : self.post.value.postImageUrl.count
+            let width: CGFloat = (imageCount > 1) ? (maxWidth / 2) - 4 : maxWidth
             let height: CGFloat = width * 0.55
             return .init(width: width, height: height)
         }
@@ -61,8 +68,23 @@ extension QuotedDrumCellViewModel {
     }
     
     func maxHeight(with maxWidth: CGFloat) -> CGFloat {
-        let width: CGFloat = (self.post.value.postImageUrl.count > 1) ? (maxWidth / 2) - 4 : maxWidth
+        let imageCount = self.toQuote ? (self.post.value.imageUrl?.count ?? 0) : self.post.value.postImageUrl.count
+        let width: CGFloat = (imageCount > 1) ? (maxWidth / 2) - 4 : maxWidth
         let height: CGFloat = width * 0.55
         return height
+    }
+}
+
+// MARK: - Action Handlers
+extension QuotedDrumCellViewModel {
+    
+    func handleItemSelected(_ indexPath: IndexPath) {
+        if let item = self.item(at: indexPath) as? ImageCellViewModel, let imageUrl = item.imageUrl.value?.absoluteString {
+            let drum = self.post.value
+            let index = drum.postImageUrl.index(where: { $0 == imageUrl }) ?? 0
+            let mediaPreviewModel = MediaPreviewViewModel(drum.postImageUrl, currentIndex: index)
+            self.shouldPreviewImages.onNext(mediaPreviewModel)
+            return
+        }
     }
 }

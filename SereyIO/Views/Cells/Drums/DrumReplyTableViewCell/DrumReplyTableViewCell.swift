@@ -98,6 +98,11 @@ class DrumReplyTableViewCell: BaseTableViewCell {
                         }
                     })
             ]
+            
+            self.likeButton.rx.tap.asObservable()
+                .map { DrumReplyCellViewModel.Action.votePressed }
+                ~> cellModel.didActionSubject
+                ~ self.disposeBag
         }
     }
 

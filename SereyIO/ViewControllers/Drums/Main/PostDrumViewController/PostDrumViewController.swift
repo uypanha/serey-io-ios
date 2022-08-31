@@ -14,11 +14,14 @@ import RxBinding
 import SnapKit
 import RichEditorView
 import AlignedCollectionViewFlowLayout
+import RxKeyboard
 
 class PostDrumViewController: BaseViewController, KeyboardController, LoadingIndicatorController, AlertDialogController {
     
+    lazy var keyboardDisposeBag = DisposeBag()
+    
     var editorHeightContraint: ConstraintMakerEditable!
-    var bottomConstraint: ConstraintMakerEditable!
+    var bottomConstraint: LayoutConstraint!
     var scrollView: UIScrollView!
     
     lazy var postButton: UIBarButtonItem = {
@@ -51,6 +54,7 @@ class PostDrumViewController: BaseViewController, KeyboardController, LoadingInd
             $0.isScrollEnabled = false
             $0.register(UploadImageCollectionViewCell.self, isNib: false)
             $0.register(ImageCollectionViewCell.self, isNib: false)
+            $0.register(QuotedDrumCollectionViewCell.self, isNib: false)
         }
     }()
     
@@ -78,6 +82,18 @@ class PostDrumViewController: BaseViewController, KeyboardController, LoadingInd
         setUpEditorView(self.editor)
         self.navigationItem.rightBarButtonItem = self.postButton
         setUpRxObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.keyboardDisposeBag = .init()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        setUpKeyboardObservers()
     }
     
     override func setUpLocalizedTexts() {
@@ -113,6 +129,9 @@ extension PostDrumViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if let _ = self.viewModel.item(at: indexPath) as? QuotedDrumCellViewModel {
+            return .init(width: collectionView.frame.width - 32, height: 100)
+        }
         return getGridItemSize()
     }
 }
@@ -137,7 +156,7 @@ private extension PostDrumViewController {
     
     func setUpContentChangedObservers() {
         self.viewModel.cells.asObservable()
-            .bind(to: self.collectionView.rx.items) { collectionView, index, item in
+            .bind(to: self.collectionView.rx.items) { [unowned self] collectionView, index, item in
                 let indexPath = IndexPath(row: index, section: 0)
                 switch item {
                 case is UploadImageCellViewModel:
@@ -149,6 +168,11 @@ private extension PostDrumViewController {
                     let cell: ImageCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
                     cell.cellModel = item as? ImageCollectionCellViewModel
                     cell.updateSize(self.getGridItemSize())
+                    return cell
+                case is QuotedDrumCellViewModel:
+                    let cell: QuotedDrumCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+                    cell.updateSize(.init(width: self.collectionView.frame.width - 32, height: 80))
+                    cell.cellModel = item as? QuotedDrumCellViewModel
                     return cell
                 default:
                     return .init()
@@ -192,5 +216,17 @@ private extension PostDrumViewController {
             .subscribe(onNext: { [weak self] error in
                 self?.showDialogError(error)
             }) ~ self.disposeBag
+    }
+    
+    func setUpKeyboardObservers() {
+        RxKeyboard.instance.visibleHeight
+            .drive(onNext: { [weak self] keyboardHeight in
+                if let _self = self {
+                    _self.bottomConstraint.constant = -keyboardHeight
+                    UIView.animate(withDuration: 0.3, animations: {
+                        _self.view.layoutIfNeeded()
+                    })
+                }
+            }).disposed(by: self.keyboardDisposeBag)
     }
 }

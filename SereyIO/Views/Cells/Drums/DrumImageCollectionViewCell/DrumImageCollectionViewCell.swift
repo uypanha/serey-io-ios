@@ -75,6 +75,8 @@ class DrumImageCollectionViewCell: BaseCollectionViewCell {
 extension DrumImageCollectionViewCell {
     
     func setUpLayout() {
+        self.backgroundColor = .clear
+        self.contentView.backgroundColor = .clear
         self.contentView.setRadius(all: 8)
         self.contentView.addSubview(self.imageView)
         self.imageView.snp.makeConstraints { make in

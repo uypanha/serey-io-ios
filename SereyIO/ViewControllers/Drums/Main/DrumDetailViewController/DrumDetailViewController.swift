@@ -70,9 +70,15 @@ class DrumDetailViewController: BaseViewController, KeyboardController, VoteDial
         // Do any additional setup after loading the view.
         self.view.backgroundColor = .color("#FAFAFA")
         self.tableView.backgroundColor = .clear
-        self.commentView.textView.delegate = self
+        self.commentView.textView.textViewDelegate = self
         setUpRxObservers()
         self.viewModel.downloadData()
+        
+        if self.viewModel.shouldCommentFocus && AuthData.shared.isUserLoggedIn {
+            DispatchQueue.main.async {
+//                self.commentView.textView.becomeFirstResponder()
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -159,10 +165,26 @@ private extension DrumDetailViewController {
                         signInViewController.viewModel = SignInViewModel()
                         self?.show(CloseableNavigationController(rootViewController: signInViewController), sender: nil)
                     }
+                case .drumDetailViewController(let viewModel):
+                    let drumDetailViewController = DrumDetailViewController(viewModel)
+                    self?.show(drumDetailViewController, sender: nil)
                 case .voteDialogController(let voteDialogViewModel):
                     self?.showVoteDialog(voteDialogViewModel)
                 case .downVoteDialogController(let downVoewDialogViewModel):
                     self?.showDownvoteDialog(downVoewDialogViewModel)
+                case .bottomListViewController(let bottomListViewModel):
+                    let bottomMenuViewController = BottomMenuViewController(bottomListViewModel)
+                    self?.present(bottomMenuViewController, animated: true, completion: nil)
+                case .mediaPreviewViewController(let mediaPreviewViewModel):
+                    let mediaPreviewController = MediaPreviewViewController(mediaPreviewViewModel)
+                    let closableViewController = CloseableNavigationController(rootViewController: mediaPreviewController)
+                    closableViewController.isDarkContentBackground = true
+                    self?.present(closableViewController, animated: true, completion: nil)
+                case .postDrumViewController(let viewModel):
+                    let postDrumViewController = PostDrumViewController()
+                    postDrumViewController.viewModel = viewModel
+                    let nv = CloseableNavigationController(rootViewController: postDrumViewController)
+                    self?.present(nv, animated: true)
                 }
             }) ~ self.disposeBag
     }

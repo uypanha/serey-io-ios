@@ -37,7 +37,7 @@ extension PostDrumViewController {
         mainView.addSubview(self.scrollView)
         self.scrollView.snp.makeConstraints { make in
             make.left.right.top.equalToSuperview()
-            self.bottomConstraint = make.bottom.greaterThanOrEqualToSuperview()
+            self.bottomConstraint = make.bottom.greaterThanOrEqualToSuperview().constraint.layoutConstraints.first
         }
         
         return mainView

@@ -256,7 +256,7 @@ extension BrowseDrumsViewModel {
     
     func handleOnProfilePressed(_ author: String) {
         if author != self.author {
-            self.shouldPresent(.authorDrumListingViewController(.init(author: author, containPostItem: false)))
+            self.shouldPresent(.authorDrumListingViewController(. init(author: author, containPostItem: false)))
         }
     }
     

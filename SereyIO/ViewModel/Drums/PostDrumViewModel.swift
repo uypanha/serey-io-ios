@@ -88,6 +88,10 @@ extension PostDrumViewModel {
             }
         })
         
+        if self.option == .quote, let drum = self.drum.value {
+            items.append(QuotedDrumCellViewModel(drum, toQuote: true))
+        }
+        
         return items
     }
     

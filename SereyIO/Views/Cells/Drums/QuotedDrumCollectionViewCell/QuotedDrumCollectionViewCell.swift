@@ -124,6 +124,7 @@ class QuotedDrumCollectionViewCell: BaseCollectionViewCell {
 private extension QuotedDrumCollectionViewCell {
     
     func setUpLayout() {
+        self.rippleController = .init(view: self.containerView)
         self.backgroundColor = .clear
         self.contentView.backgroundColor = .clear
         
@@ -171,12 +172,15 @@ private extension QuotedDrumCollectionViewCell {
         mainStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(12)
         }
-        self.rippleController = .init(view: self.containerView)
     }
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension QuotedDrumCollectionViewCell: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.cellModel?.handleItemSelected(indexPath)
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return self.cellModel?.size(forCell: indexPath, maxWidth: self.collectionViewWidth) ?? .init()

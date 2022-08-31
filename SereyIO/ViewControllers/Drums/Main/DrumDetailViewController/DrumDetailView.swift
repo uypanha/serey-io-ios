@@ -89,6 +89,12 @@ class DrumDetailView: UIView {
         }
     }()
     
+    lazy var commentCount: UILabel = {
+        return .createLabel(12, weight: .medium, textColor: .color(.title)).then {
+            $0.text = "1"
+        }
+    }()
+    
     lazy var redrumButton: UIButton = {
         return .createButton(with: 0, weight: .regular).then {
             self.prepareActionButton($0, image: R.image.redrumIcon())
@@ -100,6 +106,10 @@ class DrumDetailView: UIView {
             self.prepareActionButton($0, image: R.image.upVoteIcon())
         }
     }()
+    
+    lazy var loadingIndicatorView: UIActivityIndicatorView = .init(frame: .init()).then {
+        $0.withSize(.init(width: 24, height: 24))
+    }
     
     lazy var likeCount: UILabel = {
         return .createLabel(12, weight: .medium, textColor: .color(.title)).then {
@@ -139,6 +149,8 @@ class DrumDetailView: UIView {
                 cellModel.createdAt ~> self.createdAtLabel.rx.text,
                 cellModel.descriptionHtml ~> self.richEditor.rx.html,
                 cellModel.likeCount ~> self.likeCount.rx.text,
+                cellModel.commentCount ~> self.commentCount.rx.text,
+                cellModel.commentCount.map { $0 == nil } ~> self.commentCount.rx.isHidden,
                 cellModel.isVoteEnabled ~> self.likeButton.rx.isEnabled,
                 cellModel.cells.asObservable().map { $0.isEmpty }
                     .subscribe(onNext: { [weak self] isEmpty in
@@ -218,6 +230,15 @@ class DrumDetailView: UIView {
                 .map { DrumsPostCellViewModel.Action.itemSelected($0) }
                 ~> cellModel.didActionSubject
                 ~ self.disposeBag
+            
+            cellModel.isVoting.asObservable()
+                .subscribe(onNext: { [weak self] voteType in
+                    self?.loadingIndicatorView.isHidden = voteType == nil
+                    self?.likeButton.isHidden = voteType == .upvote
+                    if voteType != nil {
+                        self?.loadingIndicatorView.startAnimating()
+                    }
+                }) ~ self.disposeBag
         }
     }
     
@@ -295,12 +316,19 @@ extension DrumDetailView {
                 $0.distribution = .fill
                 $0.withHeight(24)
                 
-                $0.addArrangedSubview(self.commentButton)
+                $0.addArrangedSubview(UIStackView().then {
+                    $0.axis = .horizontal
+                    $0.spacing = 6
+                    
+                    $0.addArrangedSubview(self.commentButton)
+                    $0.addArrangedSubview(self.commentCount)
+                })
                 $0.addArrangedSubview(self.redrumButton)
                 $0.addArrangedSubview(UIStackView().then {
                     $0.axis = .horizontal
                     $0.spacing = 6
                     
+                    $0.addArrangedSubview(self.loadingIndicatorView)
                     $0.addArrangedSubview(self.likeButton)
                     $0.addArrangedSubview(self.likeCount)
                 })

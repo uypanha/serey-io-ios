@@ -74,6 +74,7 @@ class DrumsPostTableViewCell: BaseTableViewCell {
             $0.scrollDirection = .vertical
         }).then {
             $0.isScrollEnabled = false
+            $0.backgroundColor = .clear
             
             $0.register(DrumImageCollectionViewCell.self, isNib: false)
             $0.register(QuotedDrumCollectionViewCell.self, isNib: false)
