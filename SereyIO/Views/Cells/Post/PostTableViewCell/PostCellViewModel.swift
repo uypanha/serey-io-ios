@@ -43,6 +43,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
     let shouldFlag: PublishSubject<PostModel>
     let shouldDownvote: PublishSubject<(VotedType, PostModel)>
     let votedType: BehaviorRelay<VotedType?>
+    let shouldSharePost: PublishSubject<(URL, String)>
     
     init(_ post: PostModel?) {
         self.loggedUserInfo = .init(value: AuthData.shared.loggedUserModel)
@@ -74,6 +75,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
         self.shouldFlag = .init()
         self.shouldDownvote = .init()
         self.votedType = .init(value: nil)
+        self.shouldSharePost = .init()
         super.init()
         
         setUpRxObservers()
@@ -138,6 +140,15 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
     func didFlagPressed() {
         if self.isVoteAllowed.value {
             handleFlagPressed()
+        }
+    }
+    
+    func handleSharePressed() {
+        if let post = self.post.value {
+            let link = "https://serey.io/authors/\(post.author)/\(post.permlink)"
+            if let url = URL(string: link) {
+                self.shouldSharePost.onNext((url, post.title))
+            }
         }
     }
 }

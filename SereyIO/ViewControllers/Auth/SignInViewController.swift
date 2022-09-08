@@ -145,6 +145,11 @@ fileprivate extension SignInViewController {
     }
     
     func setUpControlsEventObservers() {
+        self.userNameTextField.rx.controlEvent(.editingChanged)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.didAction(with: .editingChanged)
+            }) ~ self.disposeBag
+        
         self.signInButton.rx.tap.asObservable()
             .filter { !self.signInButton.isLoading }
             .map { SignInViewModel.Action.signInPressed }

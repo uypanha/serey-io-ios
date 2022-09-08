@@ -48,6 +48,21 @@ enum TextFieldValidation {
     case phone
     case none
     case ownerKey
+    case username
+    
+    func validationWithError(with text: String) -> String? {
+        if !self.validate(textToValidate: text) {
+            switch self {
+            case .username:
+                if text.contains(" ") {
+                    return "Please remove invalid characters"
+                }
+            default:
+                return nil
+            }
+        }
+        return nil
+    }
     
     func validate(textToValidate text: String) -> Bool {
         switch self {
@@ -65,6 +80,8 @@ enum TextFieldValidation {
             return Constants.PatternValidation.strongPassword.validate(text)
         case .ownerKey:
             return text.count == 52 && text.starts(with: "P5K")
+        case .username:
+            return !text.isEmpty && !text.contains(" ")
         case .none:
             return true
         }
@@ -114,6 +131,7 @@ class TextFieldViewModel: CellViewModel, FieldViewModelProtocol {
     
     func validate(validation: TextFieldValidation? = nil) -> Bool {
         guard (validation ?? self.textValidation).validate(textToValidate: self.textFieldText.value ?? "") else {
+            
             errorText.accept(errorMessage)
             return false
         }
@@ -123,7 +141,18 @@ class TextFieldViewModel: CellViewModel, FieldViewModelProtocol {
     
     func validate(match text: String?) -> Bool {
         guard self.validate() && self.value == text else {
-            errorText.accept(errorMessage)
+            errorText.accept(self.textValidation.validationWithError(with: self.value ?? "") ?? errorMessage)
+            return false
+        }
+        errorText.accept(nil)
+        return true
+    }
+    
+    func validate(_ ignoreEmpty: Bool) -> Bool {
+        guard self.textValidation.validate(textToValidate: self.value ?? "") else {
+            if !(self.value ?? "").isEmpty {
+                errorText.accept(self.textValidation.validationWithError(with: self.value ?? "") ?? errorMessage)
+            }
             return false
         }
         errorText.accept(nil)
@@ -143,7 +172,7 @@ class TextFieldViewModel: CellViewModel, FieldViewModelProtocol {
 extension TextFieldViewModel {
     
     static func userNameTextFieldViewModel() -> TextFieldViewModel {
-        return textFieldWith(title: R.string.auth.userName.localized(), placeholder: "ex: sereyuser", errorMessage: R.string.auth.userNameRequiredMessage.localized(), validation: .notEmpty)
+        return textFieldWith(title: R.string.auth.userName.localized(), placeholder: "ex: sereyuser", errorMessage: R.string.auth.userNameRequiredMessage.localized(), validation: .username)
     }
     
     static func privateKeyOrPwdTextFieldViewModel(_ placeholder: String = R.string.auth.privateKeyOrPassword.localized(), _ errorMessage: String = R.string.auth.privateKeyOrPasswordRequireMessage.localized()) -> TextFieldViewModel {

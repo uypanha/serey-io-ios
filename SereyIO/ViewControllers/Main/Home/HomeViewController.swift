@@ -320,6 +320,16 @@ fileprivate extension HomeViewController {
                     let confirmDialogViewController = ConfirmDialogViewController(viewModel)
                     let bottomSheet = BottomSheetViewController(contentViewController: confirmDialogViewController)
                     self.present(bottomSheet, animated: true, completion: nil)
+                case .shareLink(let url, let message):
+                    let disspatchGroup = DispatchGroup()
+                    disspatchGroup.enter()
+                    let activityVC = UIActivityViewController(activityItems: [message, url], applicationActivities: nil)
+                    activityVC.excludedActivityTypes = [.airDrop, .addToReadingList]
+                    disspatchGroup.leave()
+                    
+                    disspatchGroup.notify(queue: .main) {
+                        self.present(activityVC, animated: true, completion: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

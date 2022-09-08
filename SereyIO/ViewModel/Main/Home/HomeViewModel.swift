@@ -38,6 +38,7 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
         case bottomListViewController(BottomListMenuViewModel)
         case reportPostViewController(ReportPostViewModel)
         case confirmViewController(ConfirmDialogViewModel)
+        case shareLink(URL, String)
     }
     
     // input:
@@ -149,7 +150,7 @@ fileprivate extension HomeViewModel {
     }
     
     func handleCountryPressed() {
-        var items: [ImageTextCellViewModel] = [ChooseCountryOption.global, ChooseCountryOption.detectAutomatically].map { $0.cellModel }
+        var items: [ImageTextCellViewModel] = [ChooseCountryOption.detectAutomatically, ChooseCountryOption.global].map { $0.cellModel }
         let countries: Results<CountryModel> = CountryModel().queryAll()
         items.append(contentsOf: countries.toArray().map { CountryCellViewModel($0) })
         
@@ -241,6 +242,8 @@ extension HomeViewModel {
                     self?.shouldPresent(.reportPostViewController(viewModel))
                 case .confirmViewController(let viewModel):
                     self?.shouldPresent(.confirmViewController(viewModel))
+                case .shareLink(let url, let content):
+                    self?.shouldPresent(.shareLink(url, content))
                 default:
                     break
                 }

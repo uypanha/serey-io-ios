@@ -18,6 +18,7 @@ class ImageTextCellViewModel: CellViewModel {
     let attributedText: BehaviorSubject<NSAttributedString?>
     let subTitle: BehaviorSubject<String?>
     let showSeperatorLine: BehaviorSubject<Bool>
+    let backgroundColor: BehaviorSubject<UIColor?>
     
     init(model: ImageTextModel, _ indicatorAccessory: Bool = false, _ selectionType: UITableViewCell.SelectionStyle = .default, showSeperatorLine: Bool = false) {
         self.image = .init(value: model.image)
@@ -26,6 +27,7 @@ class ImageTextCellViewModel: CellViewModel {
         self.attributedText = .init(value: nil)
         self.subTitle = .init(value: model.subTitle)
         self.showSeperatorLine = .init(value: showSeperatorLine)
+        self.backgroundColor = .init(value: .clear)
         super.init(indicatorAccessory, selectionType)
         
         if model.isHtml {

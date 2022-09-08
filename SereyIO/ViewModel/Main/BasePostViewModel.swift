@@ -86,6 +86,11 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
             .subscribe(onNext: { [weak self] postModel in
                 self?.onProfilePressed(of: postModel)
             }) ~ cellModel.disposeBag
+        
+        cellModel.shouldSharePost.asObservable()
+            .subscribe(onNext: { [weak self] (url, content) in
+                self?.onSharePostPressed(with: url, content: content)
+            }) ~ self.disposeBag
     }
     
     open func prepareCells(_ discussions: [PostModel], _ error: Bool) -> [SectionItem] {
@@ -130,6 +135,8 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     internal func onCategoryPressed(of postModel: PostModel) {}
     
     internal func onProfilePressed(of postModel: PostModel) {}
+    
+    internal func onSharePostPressed(with url: URL, content: String) {}
 }
 
 // MARK: - Networks

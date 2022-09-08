@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxRelay
+import RxBinding
 
 enum ChooseCountryOption: CaseIterable {
     
@@ -36,27 +38,44 @@ enum ChooseCountryOption: CaseIterable {
         }
     }
     
+    var isSelected: Bool {
+        switch self {
+        case .global:
+            return PreferenceStore.shared.currentCountry == nil
+        default:
+            return false
+        }
+    }
+    
     var cellModel: ChooseCountryOptionCellViewModel {
-        return ChooseCountryOptionCellViewModel(self)
+        return ChooseCountryOptionCellViewModel(self, isSelected: self.isSelected)
     }
 }
 
 class ChooseCountryOptionCellViewModel: ImageTextCellViewModel {
     
     let option: ChooseCountryOption
+    let isSelected: BehaviorRelay<Bool>
     
-    init(_ option: ChooseCountryOption) {
+    init(_ option: ChooseCountryOption, isSelected: Bool) {
         self.option = option
+        self.isSelected = .init(value: isSelected)
         super.init(model: .init(image: option.icon, titleText: option.title))
+        
+        self.isSelected.map { $0 ? UIColor.color(.primary).withAlphaComponent(0.15) : .clear } ~> self.backgroundColor ~ self.disposeBag
     }
 }
 
 class CountryCellViewModel: ImageTextCellViewModel {
     
     let country: CountryModel
+    let isSelected: BehaviorRelay<Bool>
     
-    init(_ country: CountryModel) {
+    init(_ country: CountryModel, isSelected: Bool = false) {
         self.country = country
+        self.isSelected = .init(value: isSelected || (PreferenceStore.shared.currentCountry?.countryName == country.countryName))
         super.init(model: .init(imageUrl: country.iconUrl, titleText: country.countryName))
+        
+        self.isSelected.map { $0 ? UIColor.color(.primary).withAlphaComponent(0.15) : .clear } ~> self.backgroundColor ~ self.disposeBag
     }
 }

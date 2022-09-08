@@ -36,6 +36,7 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         case draftsViewController(DraftListViewModel)
         case reportPostController(ReportPostViewModel)
         case confirmViewController(ConfirmDialogViewModel)
+        case shareLink(URL, String)
     }
     
     // input:
@@ -126,6 +127,10 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
             let viewModel = DraftListViewModel()
             self.shouldPresent(.draftsViewController(viewModel))
         }
+    }
+    
+    override func onSharePostPressed(with url: URL, content: String) {
+        self.shouldPresent(.shareLink(url, content))
     }
     
     deinit {

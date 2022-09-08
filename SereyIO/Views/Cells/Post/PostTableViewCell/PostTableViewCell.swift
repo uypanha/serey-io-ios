@@ -46,6 +46,7 @@ class PostTableViewCell: BaseTableViewCell {
     @IBOutlet weak var commentCountLabel: UILabel!
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var shareButton: UIButton!
     
     private var categoryGesture: UITapGestureRecognizer? {
         didSet {
@@ -151,6 +152,7 @@ class PostTableViewCell: BaseTableViewCell {
         self.profileViewGesture = UITapGestureRecognizer()
         self.upVoteGesture = UITapGestureRecognizer()
         self.downVoteGesture = UITapGestureRecognizer()
+        self.thumbnailImageView.kf.indicatorType = .activity
     }
 }
 
@@ -175,6 +177,7 @@ extension PostTableViewCell {
         self.upVoteContainerView.isHidden = isHidden
         self.downVoteContainerView.isHidden = isHidden
         self.commentContainerView.isHidden = isHidden
+        self.shareButton.isHidden = isHidden
         
         DispatchQueue.main.async {
             self.vwShimmer.isShimmering = isShimmering
@@ -228,6 +231,11 @@ extension PostTableViewCell {
         self.downVoteGesture?.rx.event.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.cellModel?.didFlagPressed()
+            }).disposed(by: self.disposeBag)
+        
+        self.shareButton.rx.tap.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.cellModel?.handleSharePressed()
             }).disposed(by: self.disposeBag)
     }
 }

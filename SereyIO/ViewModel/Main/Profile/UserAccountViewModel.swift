@@ -41,6 +41,7 @@ class UserAccountViewModel: BaseUserProfileViewModel, DownloadStateNetworkProtoc
         case profileGalleryController
         case reportPostController(ReportPostViewModel)
         case confirmViewController(ConfirmDialogViewModel)
+        case shareLink(URL, String)
     }
     
     // input:
@@ -334,6 +335,8 @@ fileprivate extension UserAccountViewModel {
                     self?.shouldPresent(.reportPostController(viewModel))
                 case .confirmViewController(let viewModel):
                     self?.shouldPresent(.confirmViewController(viewModel))
+                case .shareLink(let url, let content):
+                    self?.shouldPresent(.shareLink(url, content))
                 default:
                     break
                 }

@@ -73,7 +73,7 @@ extension FileUploadService {
                 multipartFormData.append(valueData!, withName: key)
             }
             
-            let imageData = fixedPhoto.jpegData(compressionQuality: 0.8)!
+            let imageData = fixedPhoto.jpegData(compressionQuality: 0.75)!
             let withName = "upfile"
             let filename = "\(Date().timeIntervalSince1970).jpg"
             let mimetype = "image/jpeg"
@@ -179,7 +179,7 @@ extension FileUploadService {
             }
             
             if let image = asset.image {
-                let imageData = image.imageData ?? image.jpegData(compressionQuality: 1)!
+                let imageData = image.imageData ?? image.jpegData(compressionQuality: 0.75)!
                 multipartFormData.append(imageData, withName: "upfile", fileName: asset.filenameUrlEncoded, mimeType: asset.mimeType)
             } else if let url = asset.url {
                 multipartFormData.append(url, withName: "upfile", fileName: asset.filenameUrlEncoded, mimeType: asset.mimeType)
