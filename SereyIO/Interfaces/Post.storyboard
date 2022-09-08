@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,27 +14,27 @@
             <objects>
                 <viewController storyboardIdentifier="PostDetailViewController" id="PF1-4e-mk9" customClass="OldPostDetailViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6la-aU-8bL">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-Ab-I2i">
-                                <rect key="frame" x="0.0" y="44" width="600" height="749"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="749"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NwO-By-uuf">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="640"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="640"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="cQv-7F-ZFm">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="640"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="640"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZMt-1h-TMJ" customClass="PostDetailView" customModule="SereyIO" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MOL-Ab-ta7">
-                                                        <rect key="frame" x="0.0" y="512" width="600" height="128"/>
+                                                        <rect key="frame" x="0.0" y="512" width="414" height="128"/>
                                                         <subviews>
                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fGC-rn-idh" customClass="ContentSizedTableView" customModule="SereyIO" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="600" height="128"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             </tableView>
                                                         </subviews>
@@ -58,13 +60,13 @@
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fqo-YY-n1f">
-                                <rect key="frame" x="0.0" y="793" width="600" height="103"/>
+                                <rect key="frame" x="0.0" y="793" width="414" height="103"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Nru-gX-dLv">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="69"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="69"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fm0-ru-5j0" customClass="PostCommentView" customModule="SereyIO" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="69"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="69"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                         </subviews>
@@ -110,23 +112,23 @@
             <objects>
                 <viewController storyboardIdentifier="CreatePostViewController" id="9Hj-NM-NmF" customClass="CreatePostViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KNr-6D-pfx">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xh3-Nu-EGD">
-                                <rect key="frame" x="0.0" y="44" width="600" height="852"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mwh-8B-x0o">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="762"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="762"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="9Hr-RL-79Z">
-                                                <rect key="frame" x="0.0" y="12" width="600" height="878"/>
+                                                <rect key="frame" x="0.0" y="12" width="414" height="688"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qKa-F1-V6i">
-                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="292"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="246"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter title" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZmO-j0-Wlc" customClass="PaddingTextField" customModule="SereyIO" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="0.0" width="600" height="46"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="46" id="W2c-kz-FJs"/>
                                                                 </constraints>
@@ -134,37 +136,29 @@
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             </textField>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XIK-rS-6ka" customClass="SRichEditorView" customModule="SereyIO" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="46" width="600" height="200"/>
+                                                                <rect key="frame" x="0.0" y="46" width="414" height="200"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="200" id="XIP-gw-Tjt"/>
                                                                 </constraints>
                                                             </view>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Short description" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7c2-0z-huR" customClass="PaddingTextField" customModule="SereyIO" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="246" width="600" height="46"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="46" id="20v-yd-T9P"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                            </textField>
                                                         </subviews>
                                                     </stackView>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IWV-JH-h58" customClass="ContentSizedTableView" customModule="SereyIO" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="304" width="600" height="128"/>
+                                                        <rect key="frame" x="0.0" y="258" width="414" height="128"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </tableView>
                                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="caG-oB-60F">
-                                                        <rect key="frame" x="0.0" y="444" width="600" height="434"/>
+                                                        <rect key="frame" x="0.0" y="398" width="414" height="290"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0b-Bi-uOU" customClass="CardView" customModule="SereyIO" customModuleProvider="target">
-                                                                <rect key="frame" x="20" y="0.0" width="560" height="434"/>
+                                                                <rect key="frame" x="20" y="0.0" width="374" height="290"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sampleImage" translatesAutoresizingMaskIntoConstraints="NO" id="Fyo-QZ-3Ak">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="560" height="434"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="290"/>
                                                                     </imageView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxx-om-PXg" customClass="CenteredImageButton" customModule="SereyIO" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="560" height="434"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="374" height="290"/>
                                                                         <color key="backgroundColor" white="0.66666666666666663" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -237,7 +231,6 @@
                         <outlet property="contentHeightConstraint" destination="XIP-gw-Tjt" id="zUn-zo-PSf"/>
                         <outlet property="richEditorView" destination="XIK-rS-6ka" id="DSI-Lv-5XK"/>
                         <outlet property="scrollView" destination="Xh3-Nu-EGD" id="dMa-Sj-7YK"/>
-                        <outlet property="shortDescTextField" destination="7c2-0z-huR" id="QWP-8P-1qF"/>
                         <outlet property="tableView" destination="IWV-JH-h58" id="THM-Gy-EaX"/>
                         <outlet property="thumbnailImageView" destination="Fyo-QZ-3Ak" id="kPr-iK-3dT"/>
                         <outlet property="titleTextField" destination="ZmO-j0-Wlc" id="76U-mw-dVn"/>
@@ -253,18 +246,18 @@
             <objects>
                 <viewController storyboardIdentifier="ReplyCommentViewController" id="0jE-I1-2SM" customClass="ReplyCommentViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sN2-O1-pfG">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j1n-Xp-aoJ">
-                                <rect key="frame" x="0.0" y="44" width="600" height="762"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="762"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lDM-Zs-seM">
-                                <rect key="frame" x="0.0" y="806" width="600" height="56"/>
+                                <rect key="frame" x="0.0" y="806" width="414" height="56"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Dc-9h-ZVW" customClass="CommentTextView" customModule="SereyIO" customModuleProvider="target">
-                                        <rect key="frame" x="8" y="8" width="584" height="40"/>
+                                        <rect key="frame" x="8" y="8" width="398" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
                                 </subviews>
@@ -301,6 +294,11 @@
             <point key="canvasLocation" x="1776.8115942028987" y="114.50892857142857"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="ZmO-j0-Wlc">
+            <size key="intrinsicContentSize" width="81.5" height="23"/>
+        </designable>
+    </designables>
     <resources>
         <image name="plusIcon" width="27" height="27"/>
         <image name="sampleImage" width="800" height="400"/>

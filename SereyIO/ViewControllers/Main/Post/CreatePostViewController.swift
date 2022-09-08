@@ -23,7 +23,6 @@ class CreatePostViewController: BaseViewController, KeyboardController, LoadingI
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var titleTextField: PaddingTextField!
     @IBOutlet weak var richEditorView: SRichEditorView!
-    @IBOutlet weak var shortDescTextField: PaddingTextField!
     @IBOutlet weak var tableView: ContentSizedTableView!
     @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
@@ -88,7 +87,6 @@ extension CreatePostViewController {
     func setUpViews() {
         self.titleTextField.addBorders(edges: [.bottom], color: .color(.border))
         self.richEditorView.addBorders(edges: [.bottom], color: .color(.border))
-        self.shortDescTextField.addBorders(edges: [.bottom], color: .color(.border))
         
         setUpEditorView(self.richEditorView)
         
@@ -223,7 +221,6 @@ extension CreatePostViewController {
         
         self.viewModel.shouldEnablePost ~> self.postButton.rx.isEnabled ~ self.disposeBag
         self.viewModel.titleTextFieldViewModel.bind(with: self.titleTextField)
-        self.viewModel.shortDescriptionFieldViewModel.bind(with: self.shortDescTextField)
         self.viewModel.descriptionFieldViewModel.textFieldText.take(1)
             .bind(to: self.richEditorView.rx.html)
             ~ self.disposeBag

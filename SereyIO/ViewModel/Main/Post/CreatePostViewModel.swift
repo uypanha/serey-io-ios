@@ -49,7 +49,6 @@ class CreatePostViewModel: BaseCellViewModel, CollectionSingleSecitionProviderMo
     
     let titleTextFieldViewModel: TextFieldViewModel
     let descriptionFieldViewModel: TextFieldViewModel
-    let shortDescriptionFieldViewModel: TextFieldViewModel
     let thumbnialUrl: BehaviorRelay<URL?>
     let thumbnailImage: BehaviorRelay<UIImage?>
     
@@ -77,7 +76,6 @@ class CreatePostViewModel: BaseCellViewModel, CollectionSingleSecitionProviderMo
         
         self.titleTextFieldViewModel = .textFieldWith(title: R.string.post.enterTitle.localized(), errorMessage: nil, validation: .notEmpty)
         self.descriptionFieldViewModel = .textFieldWith(title: R.string.post.articleBody.localized(), errorMessage: "", validation: .notEmpty)
-        self.shortDescriptionFieldViewModel = .textFieldWith(title: R.string.post.shortDescription.localized(), errorMessage: "", validation: .none)
         self.thumbnialUrl = .init(value: nil)
         self.thumbnailImage = .init(value: nil)
         
@@ -190,7 +188,6 @@ extension CreatePostViewModel {
     fileprivate func notifyDataToUpdate(_ data: PostModel) {
         self.titleTextFieldViewModel.value = data.title
         self.descriptionFieldViewModel.value = data.descriptionText
-        self.shortDescriptionFieldViewModel.value = data.shortDesc
         self.thumbnialUrl.accept(data.firstThumnailURL)
         if let count = data.categories?.count, count > 0 {
             var selectedCategory = DiscussionCategoryModel(name: (data.categories?.first ?? "").capitalized, sub: nil)
@@ -206,7 +203,6 @@ extension CreatePostViewModel {
     fileprivate func notifyDateDraft(_ data: DraftModel) {
         self.titleTextFieldViewModel.value = data.title
         self.descriptionFieldViewModel.value = data.descriptionText
-        self.shortDescriptionFieldViewModel.value = data.shortDescription
         self.thumbnialUrl.accept(data.imageURL)
         self.thumbnailImage.accept(data.image)
         if data.categoryItem.count > 0 {
@@ -284,7 +280,7 @@ extension CreatePostViewModel {
         let permlink = self.post.value?.permlink
         let title = self.titleTextFieldViewModel.value ?? ""
         let body = self.descriptionFieldViewModel.value ?? ""
-        let shortDesc = self.shortDescriptionFieldViewModel.value ?? ""
+        let shortDesc = ""
         let category = self.selectedCategory.value?.name ?? ""
         var subCategories: [String] = []
         if let subCategory = self.selectedSubCategory.value?.name {
@@ -303,7 +299,6 @@ extension CreatePostViewModel {
     func validateForm() -> Bool {
         return self.titleTextFieldViewModel.validate()
             && self.descriptionFieldViewModel.validate()
-            && self.shortDescriptionFieldViewModel.validate()
             && self.selectedCategory.value != nil
             && (self.thumbnailImage.value != nil || self.thumbnialUrl.value != nil)
     }
@@ -311,7 +306,6 @@ extension CreatePostViewModel {
     func isFilledSomeInfo() -> Bool {
         return self.titleTextFieldViewModel.validate()
             || self.descriptionFieldViewModel.validate()
-            || self.shortDescriptionFieldViewModel.validate(validation: .notEmpty)
             || self.selectedCategory.value != nil
             || self.thumbnailImage.value != nil
             || self.thumbnialUrl.value != nil
@@ -415,7 +409,6 @@ fileprivate extension CreatePostViewModel {
         let draftModel = DraftModel(id)
         draftModel.title = self.titleTextFieldViewModel.value
         draftModel.descriptionText = self.descriptionFieldViewModel.value
-        draftModel.shortDescription = self.shortDescriptionFieldViewModel.value
         draftModel.imageData = self.thumbnailImage.value?.jpegData(compressionQuality: 0.5)
         draftModel.imageUrl = self.thumbnialUrl.value?.absoluteString
         var categories: [String] = []
