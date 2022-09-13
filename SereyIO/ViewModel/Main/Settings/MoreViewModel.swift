@@ -158,7 +158,10 @@ extension MoreViewModel {
                 sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value)]
             }
             sectionItems[.profile]?.append(SettingCellViewModel(.myReferralId))
-            sectionItems[.profile]?.append(SettingCellViewModel(.sereyDrum, true))
+            if Constants.showDrum {
+                sectionItems[.profile]?.append(SettingCellViewModel(.sereyDrum, true))
+            }
+            (sectionItems[.profile]?.last as? SettingCellViewModel)?.showSeperatorLine.onNext(true)
         } else {
             let signInCellViewModel = SignInCellViewModel().then { [weak self] in self?.setUpSignInCellViewModelObservers($0) }
             #if DEVELOPMENT
@@ -167,7 +170,10 @@ extension MoreViewModel {
             #else
                 sectionItems[.signIn] = [signInCellViewModel]
             #endif
-            sectionItems[.signIn]?.append(SettingCellViewModel(.sereyDrum, true))
+            if Constants.showDrum {
+                sectionItems[.signIn]?.append(SettingCellViewModel(.sereyDrum))
+            }
+            (sectionItems[.signIn]?.last as? SettingCellViewModel)?.showSeperatorLine.onNext(true)
         }
         sectionItems[.general] = [
             SettingCellViewModel(.country),

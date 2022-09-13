@@ -154,7 +154,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0b-Bi-uOU" customClass="CardView" customModule="SereyIO" customModuleProvider="target">
                                                                 <rect key="frame" x="20" y="0.0" width="374" height="290"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sampleImage" translatesAutoresizingMaskIntoConstraints="NO" id="Fyo-QZ-3Ak">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fyo-QZ-3Ak">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="290"/>
                                                                     </imageView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxx-om-PXg" customClass="CenteredImageButton" customModule="SereyIO" customModuleProvider="target">
@@ -301,7 +301,6 @@
     </designables>
     <resources>
         <image name="plusIcon" width="27" height="27"/>
-        <image name="sampleImage" width="800" height="400"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -27,3 +27,4 @@ app_version_code        = 18
 
 INCLUDE_WALLET          = false
 SHOW_REWARD             = false
+DRUM_ENABLED            = false

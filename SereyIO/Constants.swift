@@ -44,6 +44,10 @@ public struct Constants {
         return (ConfigSetting.showReward.value() as NSString).boolValue
     }
     
+    static var showDrum: Bool {
+        return (ConfigSetting.drumEnabled.value() as NSString).boolValue
+    }
+    
     public static let limitPerPage: Int = 10
     
     static var uploadImageUrl: String {
@@ -92,6 +96,7 @@ fileprivate enum ConfigSetting {
     case includeWallet
     case notificationCenterUrl
     case showReward
+    case drumEnabled
     
     private var key: String {
         switch self {
@@ -111,6 +116,8 @@ fileprivate enum ConfigSetting {
             return "Notificaton Center URL"
         case .showReward:
             return "SHOW_REWARD"
+        case .drumEnabled:
+            return "DRUM_ENABLED"
         }
     }
     

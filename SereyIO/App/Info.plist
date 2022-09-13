@@ -24,6 +24,8 @@
 	<string>${app_version_code}</string>
 	<key>CHAIN_URL</key>
 	<string>${CHAIN_URL}</string>
+	<key>DRUM_ENABLED</key>
+	<string>${DRUM_ENABLED}</string>
 	<key>INCLUDE_WALLET</key>
 	<string>${INCLUDE_WALLET}</string>
 	<key>KYC_URL</key>
