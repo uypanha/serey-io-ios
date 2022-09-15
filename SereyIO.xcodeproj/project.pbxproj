@@ -15,6 +15,9 @@
 		961264AC2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961264AA2757B79900AA1AD2 /* SKActivityIndicatorViewStyle.swift */; };
 		961DC9FA27EA19E6003B73E5 /* MyReferralIdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961DC9F927EA19E5003B73E5 /* MyReferralIdViewController.swift */; };
 		961DC9FC27EA1C19003B73E5 /* MyReferralIdViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 961DC9FB27EA1C19003B73E5 /* MyReferralIdViewController+LoadViews.swift */; };
+		961F53EA28D22E1C00F7D6F2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 961F53E928D22E1C00F7D6F2 /* FirebaseAnalytics */; };
+		961F53EC28D22E1C00F7D6F2 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 961F53EB28D22E1C00F7D6F2 /* FirebaseCrashlytics */; };
+		961F53EE28D22E1C00F7D6F2 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 961F53ED28D22E1C00F7D6F2 /* FirebaseMessaging */; };
 		9621B80F286DF09900C73816 /* DrumsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621B80E286DF09900C73816 /* DrumsApi.swift */; };
 		9621B811286DF26400C73816 /* DrumsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9621B810286DF26400C73816 /* DrumsService.swift */; };
 		9625CEC92767B1DC0009FC47 /* FilterHeaderCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9686E4022767AAD3005F0C0E /* FilterHeaderCollectionViewCell.xib */; };
@@ -344,9 +347,6 @@
 		DC803C5B26974CD600FCD2B2 /* FeatureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC803C5A26974CD600FCD2B2 /* FeatureViewModel.swift */; };
 		DC817F8726D7F11C001E2BAE /* GoogleService-Info-Release.plist in Resources */ = {isa = PBXBuildFile; fileRef = DC817F8626D7F11C001E2BAE /* GoogleService-Info-Release.plist */; };
 		DC817F8A26D7FB72001E2BAE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F8926D7FB72001E2BAE /* SnapKit */; };
-		DC817F8D26D7FCFC001E2BAE /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F8C26D7FCFC001E2BAE /* FirebaseAnalytics */; };
-		DC817F8F26D7FCFC001E2BAE /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F8E26D7FCFC001E2BAE /* FirebaseMessaging */; };
-		DC817F9126D7FCFC001E2BAE /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F9026D7FCFC001E2BAE /* FirebaseCrashlytics */; };
 		DC817F9426D7FD75001E2BAE /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F9326D7FD75001E2BAE /* Then */; };
 		DC817F9726D7FF0E001E2BAE /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F9626D7FF0E001E2BAE /* Moya */; };
 		DC817F9926D7FF0E001E2BAE /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = DC817F9826D7FF0E001E2BAE /* RxMoya */; };
@@ -1185,11 +1185,11 @@
 				B80B289827A82AF70023D894 /* SkeletonView in Frameworks */,
 				DC817FB226D802C0001E2BAE /* RxKingfisher in Frameworks */,
 				DC817F9926D7FF0E001E2BAE /* RxMoya in Frameworks */,
+				961F53EC28D22E1C00F7D6F2 /* FirebaseCrashlytics in Frameworks */,
 				DC817FAF26D80251001E2BAE /* RxKeyboard in Frameworks */,
 				DC817FB826D803C1001E2BAE /* AlamofireNetworkActivityLogger in Frameworks */,
 				DC817FA726D801A8001E2BAE /* RxBinding in Frameworks */,
 				DC817FAC26D8021D001E2BAE /* Differentiator in Frameworks */,
-				DC817F8F26D7FCFC001E2BAE /* FirebaseMessaging in Frameworks */,
 				DC7F098924B05ED400CE8AFC /* Steem in Frameworks */,
 				DC817F9726D7FF0E001E2BAE /* Moya in Frameworks */,
 				DC817FAA26D8021D001E2BAE /* RxDataSources in Frameworks */,
@@ -1197,12 +1197,12 @@
 				DC817FA126D7FFE8001E2BAE /* RxAlamofire in Frameworks */,
 				DC817FA426D80129001E2BAE /* RxRealm in Frameworks */,
 				DC817F9426D7FD75001E2BAE /* Then in Frameworks */,
-				DC817F9126D7FCFC001E2BAE /* FirebaseCrashlytics in Frameworks */,
 				DCDD97C42694B6D7006A6CFA /* CountryPicker in Frameworks */,
-				DC817F8D26D7FCFC001E2BAE /* FirebaseAnalytics in Frameworks */,
 				DC817F9E26D7FF9D001E2BAE /* FlagKit in Frameworks */,
 				DC817FB526D80335001E2BAE /* RxReachability in Frameworks */,
 				DC817F9B26D7FF0E001E2BAE /* ReactiveMoya in Frameworks */,
+				961F53EA28D22E1C00F7D6F2 /* FirebaseAnalytics in Frameworks */,
+				961F53EE28D22E1C00F7D6F2 /* FirebaseMessaging in Frameworks */,
 				8BDAFF58EC9ED1931EAE55DE /* Pods_SereyIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3548,6 +3548,8 @@
 				DC6ED51923267EED00770B31 /* Sources */,
 				DC6ED51A23267EED00770B31 /* Frameworks */,
 				DC6ED51B23267EED00770B31 /* Resources */,
+				961F53EF28D2315C00F7D6F2 /* Copy Google Info Plist File */,
+				961F53E728D22B0300F7D6F2 /* ShellScript */,
 				C07A85D06F01263AAD5F855C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
@@ -3559,9 +3561,6 @@
 				DC7F098824B05ED400CE8AFC /* Steem */,
 				DCDD97C32694B6D7006A6CFA /* CountryPicker */,
 				DC817F8926D7FB72001E2BAE /* SnapKit */,
-				DC817F8C26D7FCFC001E2BAE /* FirebaseAnalytics */,
-				DC817F8E26D7FCFC001E2BAE /* FirebaseMessaging */,
-				DC817F9026D7FCFC001E2BAE /* FirebaseCrashlytics */,
 				DC817F9326D7FD75001E2BAE /* Then */,
 				DC817F9626D7FF0E001E2BAE /* Moya */,
 				DC817F9826D7FF0E001E2BAE /* RxMoya */,
@@ -3577,6 +3576,9 @@
 				DC817FB426D80335001E2BAE /* RxReachability */,
 				DC817FB726D803C1001E2BAE /* AlamofireNetworkActivityLogger */,
 				B80B289727A82AF70023D894 /* SkeletonView */,
+				961F53E928D22E1C00F7D6F2 /* FirebaseAnalytics */,
+				961F53EB28D22E1C00F7D6F2 /* FirebaseCrashlytics */,
+				961F53ED28D22E1C00F7D6F2 /* FirebaseMessaging */,
 			);
 			productName = iOSTemplate;
 			productReference = DC6ED51D23267EED00770B31 /* SereyIO.app */;
@@ -3658,7 +3660,6 @@
 				DC7F098724B05ED300CE8AFC /* XCRemoteSwiftPackageReference "swift-steem" */,
 				DCDD97C22694B6D7006A6CFA /* XCRemoteSwiftPackageReference "CountryPicker" */,
 				DC817F8826D7FB72001E2BAE /* XCRemoteSwiftPackageReference "SnapKit" */,
-				DC817F8B26D7FCFC001E2BAE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				DC817F9226D7FD74001E2BAE /* XCRemoteSwiftPackageReference "Then" */,
 				DC817F9526D7FF0E001E2BAE /* XCRemoteSwiftPackageReference "Moya" */,
 				DC817F9C26D7FF9D001E2BAE /* XCRemoteSwiftPackageReference "FlagKit" */,
@@ -3671,6 +3672,7 @@
 				DC817FB326D80335001E2BAE /* XCRemoteSwiftPackageReference "RxReachability" */,
 				DC817FB626D803C1001E2BAE /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */,
 				B80B289627A82AF60023D894 /* XCRemoteSwiftPackageReference "SkeletonView" */,
+				961F53E828D22E1C00F7D6F2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = DC6ED51E23267EED00770B31 /* Products */;
 			projectDirPath = "";
@@ -3805,6 +3807,41 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		961F53E728D22B0300F7D6F2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+		961F53EF28D2315C00F7D6F2 /* Copy Google Info Plist File */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Google Info Plist File";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nGOOGLE_SERVICE_INFO_PLIST_FROM=\"${FIREBASE_CONFIG_FILE}\"\nBUILD_APP_DIR=\"${BUILT_PRODUCTS_DIR}/${FULL_PRODUCT_NAME}\"\nGOOGLE_SERVICE_INFO_PLIST_TO=\"${BUILD_APP_DIR}/GoogleService-Info.plist\"\ncp \"${GOOGLE_SERVICE_INFO_PLIST_FROM}\" \"${GOOGLE_SERVICE_INFO_PLIST_TO}\" \n";
 		};
 		C07A85D06F01263AAD5F855C /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4669,6 +4706,7 @@
 				CODE_SIGN_ENTITLEMENTS = SereyIO/SereyIO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3FMB4958C;
+				FIREBASE_CONFIG_FILE = "$PROJECT_DIR/$PROJECT_NAME/Resources/GoogleServiceFiles/Development/GoogleService-Info-Development.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4698,6 +4736,7 @@
 				CODE_SIGN_ENTITLEMENTS = SereyIO/SereyIO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3FMB4958C;
+				FIREBASE_CONFIG_FILE = "$PROJECT_DIR/$PROJECT_NAME/Resources/GoogleServiceFiles/Development/GoogleService-Info-Development.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -4875,6 +4914,7 @@
 				CODE_SIGN_ENTITLEMENTS = SereyIO/SereyIO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3FMB4958C;
+				FIREBASE_CONFIG_FILE = "$PROJECT_DIR/$PROJECT_NAME/Resources/GoogleServiceFiles/Release/GoogleService-Info-Release.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -5003,6 +5043,7 @@
 				CODE_SIGN_ENTITLEMENTS = SereyIO/SereyIO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G3FMB4958C;
+				FIREBASE_CONFIG_FILE = "$PROJECT_DIR/$PROJECT_NAME/Resources/GoogleServiceFiles/Release/GoogleService-Info-Release.plist";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -5114,6 +5155,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		961F53E828D22E1C00F7D6F2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		B80B289627A82AF60023D894 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
@@ -5136,14 +5185,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.1;
-			};
-		};
-		DC817F8B26D7FCFC001E2BAE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.6.0;
 			};
 		};
 		DC817F9226D7FD74001E2BAE /* XCRemoteSwiftPackageReference "Then" */ = {
@@ -5245,6 +5286,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		961F53E928D22E1C00F7D6F2 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 961F53E828D22E1C00F7D6F2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		961F53EB28D22E1C00F7D6F2 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 961F53E828D22E1C00F7D6F2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		961F53ED28D22E1C00F7D6F2 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 961F53E828D22E1C00F7D6F2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
 		B80B289727A82AF70023D894 /* SkeletonView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = B80B289627A82AF60023D894 /* XCRemoteSwiftPackageReference "SkeletonView" */;
@@ -5259,21 +5315,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DC817F8826D7FB72001E2BAE /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
-		};
-		DC817F8C26D7FCFC001E2BAE /* FirebaseAnalytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DC817F8B26D7FCFC001E2BAE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAnalytics;
-		};
-		DC817F8E26D7FCFC001E2BAE /* FirebaseMessaging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DC817F8B26D7FCFC001E2BAE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseMessaging;
-		};
-		DC817F9026D7FCFC001E2BAE /* FirebaseCrashlytics */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DC817F8B26D7FCFC001E2BAE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseCrashlytics;
 		};
 		DC817F9326D7FD75001E2BAE /* Then */ = {
 			isa = XCSwiftPackageProductDependency;

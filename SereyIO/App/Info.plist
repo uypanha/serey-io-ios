@@ -40,13 +40,15 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>${app_name} needs access to your camera to take photos for your post or profile.</string>
+	<string>${app_name} needs access to your camera to take photos and videos to upload for profile and content description.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>We use Face ID to authentiate your account.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>${app_name} needs access to your microphone to record videos.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>${app_name} needs access to your photo library to upload photos for your post or profile.</string>
+	<string>${app_name} needs access to your photo library to upload photos and videos for profile and content description.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>${app_name} needs access to your photo library to store photos.</string>
+	<string>${app_name} needs access to your photo library to upload photos and videos for profile and content description.</string>
 	<key>Notificaton Center URL</key>
 	<string>${NOTIFICATION_URL}</string>
 	<key>SHOW_REWARD</key>

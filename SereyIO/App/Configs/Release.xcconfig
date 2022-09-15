@@ -25,6 +25,6 @@ app_bundle              = io.serey.ios
 app_version_name        = 1.0.1
 app_version_code        = 19
 
-INCLUDE_WALLET          = false
+INCLUDE_WALLET          = true
 SHOW_REWARD             = false
 DRUM_ENABLED            = false

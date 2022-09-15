@@ -102,6 +102,7 @@ class MediaPickerHelper: NSObject {
             return
         }
         pickerController.sourceType = .camera
+        pickerController.assetType = includeVideo ? .allAssets : .allPhotos
         pickerController.modalPresentationStyle = .fullScreen
         self.presentingViewController.present(pickerController, animated: true, completion: nil)
     }

@@ -369,10 +369,14 @@ extension MoreViewModel: NotificationObserver {
         guard let appNotif = notification.appNotification else { return }
         switch appNotif {
         case .languageChanged:
-            self.cellModels.accept(self.prepareCellModels())
+            DispatchQueue.main.async {
+                self.cellModels.accept(self.prepareCellModels())
+            }
         case .userDidLogin, .userDidLogOut:
-            self.userService = UserService()
-            self.userInfo.accept(AuthData.shared.loggedUserModel)
+            DispatchQueue.main.async {
+                self.userService = UserService()
+                self.userInfo.accept(AuthData.shared.loggedUserModel)
+            }
         default:
             break
         }
