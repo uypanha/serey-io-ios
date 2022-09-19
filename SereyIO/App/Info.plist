@@ -44,7 +44,7 @@
 	<key>NSFaceIDUsageDescription</key>
 	<string>We use Face ID to authentiate your account.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>${app_name} needs access to your microphone to record videos.</string>
+	<string>${app_name} needs access to your microphone to take videos to upload for content description.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>${app_name} needs access to your photo library to upload photos and videos for profile and content description.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

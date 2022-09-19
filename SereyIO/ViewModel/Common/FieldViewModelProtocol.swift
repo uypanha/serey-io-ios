@@ -79,7 +79,7 @@ enum TextFieldValidation {
         case .strongPassword:
             return Constants.PatternValidation.strongPassword.validate(text)
         case .ownerKey:
-            return text.count == 52 && text.starts(with: "P5K")
+            return text.count == 52 && text.starts(with: "P5")
         case .username:
             return !text.isEmpty && !text.contains(" ")
         case .none:
