@@ -10,6 +10,7 @@ import UIKit
 import Realm
 import RealmSwift
 import SwiftyBeaver
+import Siren
 
 let log = SwiftyBeaver.self
 
@@ -42,6 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appDelegateHelper?.initMessageHandlers(window: window!, apnsHandler: apnsHandler!)
         self.discussionService = .init()
         CoinPriceManager.loadTicker()
+        
+        self.initSiren()
         
         return true
     }
@@ -141,5 +144,12 @@ fileprivate extension AppDelegate {
     
     func initAPNSHandler(withApplication application: UIApplication) {
         apnsHandler = APNSHandler(with: application)
+    }
+    
+    // Force Update
+    func initSiren() {
+        Siren.shared.rulesManager = .init(globalRules: .critical, showAlertAfterCurrentVersionHasBeenReleasedForDays: 1)
+        Siren.shared.presentationManager = .default
+        Siren.shared.wail()
     }
 }

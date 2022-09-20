@@ -8,7 +8,7 @@ install! 'cocoapods',
 def frameworks_pods
   
   # MARK: - Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  platform :ios, '12'
+  platform :ios, '13'
   use_frameworks!
   inhibit_all_warnings!
 
@@ -19,6 +19,7 @@ def frameworks_pods
   pod 'R.swift'
   pod 'SwiftGen'
   pod 'SwiftOTP'
+  pod 'Siren', '~> 5.8.1'
 
 	# MARK: - Logger
   pod 'SwiftyBeaver'
@@ -72,7 +73,7 @@ post_install do |installer|
       config.build_settings['LD_NO_PIE'] = 'NO'
       config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
       # Suppress warning of minimum development target
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12'
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13'
     end
   end
 end

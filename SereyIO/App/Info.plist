@@ -80,5 +80,7 @@
 	<true/>
 	<key>URL_PROTOCOL</key>
 	<string>${URL_PROTOCOL}</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>${app_name} needs access to your location.</string>
 </dict>
 </plist>
