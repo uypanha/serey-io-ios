@@ -72,7 +72,7 @@ extension DelegatePowerViewModel {
         self.transferService.delegatePower(account, amount: amount)
             .subscribe(onNext: { [weak self] data in
                 self?.isLoading.onNext(false)
-//                self?.handlePowerDownSuccess(account, amount: amount)
+                self?.handleDelegateSuccess(account, amount: amount.description)
             }, onError: { [weak self] error in
                 self?.isLoading.onNext(false)
                 let errorInfo = ErrorHelper.prepareError(error: error)
@@ -127,6 +127,16 @@ extension DelegatePowerViewModel {
             }))
             self.shouldPresent(.confirmCancelDelegateController(viewModel: viewModel))
         }
+    }
+    
+    func handleDelegateSuccess(_ account: String, amount: String) {
+        let confirmAction = ActionModel(R.string.common.confirm.localized(), style: .default) {
+            self.shouldPresent(.dismiss)
+            self.didTransactionUpdate.onNext(())
+        }
+        
+        let alerDialogModel = AlertDialogModel(title: "Delegate", message: "You’ve just delegate \(amount) Serey Power to \(account).", actions: [confirmAction])
+        self.shouldPresent(.showAlertDialogController(alerDialogModel))
     }
 }
 
