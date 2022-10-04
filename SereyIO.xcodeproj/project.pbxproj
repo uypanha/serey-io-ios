@@ -4721,6 +4721,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SereyIO/SereyIO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "${app_version_code}";
 				DEVELOPMENT_TEAM = G3FMB4958C;
 				FIREBASE_CONFIG_FILE = "$PROJECT_DIR/$PROJECT_NAME/Resources/GoogleServiceFiles/Development/GoogleService-Info-Development.plist";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4733,6 +4734,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = "${app_version_name}";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-DDEVELOPMENT";
 				PRODUCT_BUNDLE_IDENTIFIER = "${app_bundle}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4751,6 +4753,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SereyIO/SereyIO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "${app_version_code}";
 				DEVELOPMENT_TEAM = G3FMB4958C;
 				FIREBASE_CONFIG_FILE = "$PROJECT_DIR/$PROJECT_NAME/Resources/GoogleServiceFiles/Development/GoogleService-Info-Development.plist";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4763,6 +4766,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = "${app_version_name}";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-DDEVELOPMENT";
 				PRODUCT_BUNDLE_IDENTIFIER = "${app_bundle}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -4929,6 +4933,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SereyIO/SereyIO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "${app_version_code}";
 				DEVELOPMENT_TEAM = G3FMB4958C;
 				FIREBASE_CONFIG_FILE = "$PROJECT_DIR/$PROJECT_NAME/Resources/GoogleServiceFiles/Release/GoogleService-Info-Release.plist";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4941,6 +4946,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = "${app_version_name}";
 				PRODUCT_BUNDLE_IDENTIFIER = "${app_bundle}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SereyIO/SereyIO-Bridging-Header.h";
@@ -5058,6 +5064,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = SereyIO/SereyIO.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "${app_version_code}";
 				DEVELOPMENT_TEAM = G3FMB4958C;
 				FIREBASE_CONFIG_FILE = "$PROJECT_DIR/$PROJECT_NAME/Resources/GoogleServiceFiles/Release/GoogleService-Info-Release.plist";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5070,6 +5077,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = "${app_version_name}";
 				PRODUCT_BUNDLE_IDENTIFIER = "${app_bundle}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SereyIO/SereyIO-Bridging-Header.h";
