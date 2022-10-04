@@ -36,6 +36,7 @@ class ErrorHelper {
         case unauthenticatedError = 9002
         case invalidCredentials = 9004
         case commentIn20s = 9008
+        case referralIdError = 9010
         case networkOffline = 9999
         
         var errorTitle: String? {
@@ -80,6 +81,8 @@ class ErrorHelper {
                 errorDescription = "You may only comment once every 20 seconds."
             case .invalidCredentials:
                 errorDescription = "Your login credentials are incorrect. Please make sure you put in the right credentials"
+            case .referralIdError:
+                errorDescription = "To create referral link you have to login with a password"
             }
             
             return ErrorInfo(error: NSError(domain: ErrorHelper.errorDomain, code: self.rawValue, userInfo: [NSLocalizedDescriptionKey: errorDescription]), type: self, errorTitle: self.errorTitle, errorIcon: self.errorIcon)
@@ -134,6 +137,8 @@ class ErrorHelper {
                 return PredefinedError.invalidCredentials.prepareError()
             case .commentIn20s:
                 return PredefinedError.commentIn20s.prepareError()
+            case .referralId:
+                return PredefinedError.referralIdError.prepareError()
             default:
                 log.error(error)
                 return defaultError(message: error.message)
@@ -183,4 +188,5 @@ fileprivate enum AppApiErrorCode: Int {
     case userNotFound = 12
     case invalidCredentials = 15
     case commentIn20s = 27
+    case referralId = 131
 }

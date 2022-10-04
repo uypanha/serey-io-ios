@@ -36,11 +36,11 @@ extension MyReferralIdViewController {
             }
             $0.addArrangedSubview(infoStackView)
             
-            let referralContainer = DashBorderView()
-            referralContainer.borderColor = .color(.primary)
-            referralContainer.borderWidth = 2
-            referralContainer.backgroundColor = .color("#D7DEF6")
-            referralContainer.cornerRadius = 8
+            self.referralContainer = DashBorderView()
+            self.referralContainer.borderColor = .color(.primary)
+            self.referralContainer.borderWidth = 2
+            self.referralContainer.backgroundColor = .color("#D7DEF6")
+            self.referralContainer.cornerRadius = 8
             $0.addArrangedSubview(referralContainer)
             
             let referralStackView = UIStackView().then {
@@ -51,7 +51,7 @@ extension MyReferralIdViewController {
                 $0.addArrangedSubview(self.referralLinkLabel)
                 $0.addArrangedSubview(self.copyLinkButton)
             }
-            referralContainer.addSubview(referralStackView)
+            self.referralContainer.addSubview(referralStackView)
             referralStackView.snp.makeConstraints { make in
                 make.edges.equalToSuperview().inset(16)
                 make.height.greaterThanOrEqualTo(24)
@@ -63,7 +63,7 @@ extension MyReferralIdViewController {
                 self.loadingIndicator = .init(style: .gray)
             }
             self.loadingIndicator.tintColor = .color(.primary)
-            referralContainer.addSubview(self.loadingIndicator)
+            self.referralContainer.addSubview(self.loadingIndicator)
             self.loadingIndicator.snp.makeConstraints { make in
                 make.center.equalToSuperview()
             }
