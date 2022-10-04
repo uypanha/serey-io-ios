@@ -20,7 +20,7 @@ class PowerDownViewController: BaseViewController, KeyboardController, AlertDial
     @IBOutlet weak var powerDownMessageLabel: UILabel!
     
     @IBOutlet weak var accountTextField: MDCOutlinedTextField!
-    @IBOutlet weak var amountTextField: MDCOutlinedTextField!
+    @IBOutlet weak var amountTextField: CurrencyTextField!
     
     @IBOutlet weak var powerDownButton: LoadingButton!
     
@@ -65,6 +65,7 @@ extension PowerDownViewController {
         self.amountTextField.primaryStyle()
         self.accountTextField.isEnabled = false
         
+        self.amountTextField.keyboardType = .decimalPad
         self.amountTextField.leftView = UIImageView(image: R.image.amountIcon()).then { $0.tintColor = .gray }
         self.amountTextField.leftViewMode = .always
         self.accountTextField.leftView = UIImageView(image: R.image.accountIcon()).then { $0.tintColor = .gray }
@@ -87,7 +88,7 @@ extension PowerDownViewController {
     
     func setUpContentChangedObservers() {
         self.viewModel.accountTextFieldViewModel.bind(withMDC: self.accountTextField)
-        self.viewModel.amountTextFieldViewModel.bind(withMDC: self.amountTextField)
+        self.amountTextField.viewModel = self.viewModel.amountTextFieldViewModel
         
         self.viewModel.isPowerDownEnabled ~> self.powerDownButton.rx.isEnabled ~ self.disposeBag
     }

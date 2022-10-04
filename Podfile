@@ -19,6 +19,7 @@ def frameworks_pods
   pod 'R.swift'
   pod 'SwiftGen'
   pod 'SwiftOTP'
+  pod 'TLCustomMask'
   pod 'Siren', '~> 5.8.1'
 
 	# MARK: - Logger
@@ -72,8 +73,15 @@ post_install do |installer|
       config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
       config.build_settings['LD_NO_PIE'] = 'NO'
       config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+      
       # Suppress warning of minimum development target
-      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13'
+      # config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13'
+      
+      # Workaround signing error xcode 14
+      config.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ""
+      config.build_settings['CODE_SIGNING_IDENTITY'] = ""
+      config.build_settings['CODE_SIGNING_REQUIRED'] = "NO"
+      config.build_settings['CODE_SIGNING_ALLOWED'] = "NO"
     end
   end
 end

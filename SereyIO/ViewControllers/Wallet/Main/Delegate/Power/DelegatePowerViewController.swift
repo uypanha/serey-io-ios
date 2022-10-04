@@ -25,7 +25,7 @@ class DelegatePowerViewController: BaseViewController, KeyboardController, Alert
     }()
     
     var accountTextField: MDCOutlinedTextField!
-    var amountTextField: MDCOutlinedTextField!
+    var amountTextField: CurrencyTextField!
     var delegateButton: LoadingButton!
     
     var viewModel: DelegatePowerViewModel!
@@ -76,7 +76,7 @@ extension DelegatePowerViewController {
     
     func setUpContentChangedObservers() {
         self.viewModel.accountTextFieldViewModel.bind(withMDC: self.accountTextField)
-        self.viewModel.amountTextFieldViewModel.bind(withMDC: self.amountTextField)
+        self.amountTextField.viewModel = self.viewModel.amountTextFieldViewModel
         self.viewModel.titleText ~> self.headerView.titleLabel.rx.text ~ self.disposeBag
         self.viewModel.isDelegateEnabled ~> self.delegateButton.rx.isEnabled ~ self.disposeBag
         self.viewModel.isAmountHidden ~> self.amountTextField.rx.isHidden ~ self.disposeBag

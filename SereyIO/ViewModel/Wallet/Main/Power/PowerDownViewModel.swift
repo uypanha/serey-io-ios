@@ -108,7 +108,7 @@ fileprivate extension PowerDownViewModel {
             self.didTransactionUpdate.onNext(())
         }
         
-        let alerDialogModel = AlertDialogModel(title: "Power Down", message: "You just power down Serey Power with \(amount).", actions: [confirmAction])
+        let alerDialogModel = AlertDialogModel(title: "Power Down", message: "You’ve just powered down \(amount) Serey Power.", actions: [confirmAction])
         self.shouldPresent(.showAlertDialogController(alerDialogModel))
     }
 }

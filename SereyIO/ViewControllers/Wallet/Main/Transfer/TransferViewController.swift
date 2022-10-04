@@ -21,7 +21,7 @@ class TransferViewController: BaseViewController, KeyboardController, LoadingInd
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var accountTextField: MDCOutlinedTextField!
-    @IBOutlet weak var amountTextField: MDCOutlinedTextField!
+    @IBOutlet weak var amountTextField: CurrencyTextField!
     @IBOutlet weak var memoTextField: MDCOutlinedTextField!
     @IBOutlet weak var transferButton: LoadingButton!
     
@@ -59,6 +59,7 @@ extension TransferViewController {
         self.amountTextField.primaryStyle()
         self.memoTextField.primaryStyle()
         
+        self.amountTextField.keyboardType = .decimalPad
         self.amountTextField.leftView = UIImageView(image: R.image.amountIcon()).then { $0.tintColor = .gray }
         self.amountTextField.leftViewMode = .always
         self.accountTextField.leftView = UIImageView(image: R.image.accountIcon()).then { $0.tintColor = .gray }
@@ -80,8 +81,9 @@ extension TransferViewController {
     }
     
     func setUpContentChangedObservers() {
+        self.amountTextField.viewModel = self.viewModel.amountTextFieldViewModel
+        
         self.viewModel.accountTextFieldViewModel.bind(withMDC: self.accountTextField)
-        self.viewModel.amountTextFieldViewModel.bind(withMDC: self.amountTextField)
         self.viewModel.memoTextFieldViewModel.bind(withMDC: self.memoTextField)
         
         self.viewModel.isTransferEnabled ~> self.transferButton.rx.isEnabled ~ self.disposeBag

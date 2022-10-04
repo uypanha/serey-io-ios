@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,7 +26,7 @@
                                 <blurEffect style="systemThinMaterialDark"/>
                             </visualEffectView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Izq-nj-vHa">
-                                <rect key="frame" x="44" y="278.5" width="326" height="349.5"/>
+                                <rect key="frame" x="44" y="280.5" width="326" height="349.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="SCu-Dm-fgN">
                                         <rect key="frame" x="86.5" y="0.0" width="153" height="49"/>
@@ -74,8 +74,8 @@
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="showShadow" value="NO"/>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use this address to transfer props from another wallet to this wallet." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LV7-Nk-nO4">
-                                        <rect key="frame" x="19" y="251" width="288.5" height="38.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use this QR-code to let others transfer Serey Coins to you" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LV7-Nk-nO4">
+                                        <rect key="frame" x="20.5" y="251" width="285" height="38.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -120,7 +120,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vj9-mv-x48">
-                                <rect key="frame" x="352" y="278.5" width="36" height="36"/>
+                                <rect key="frame" x="352" y="280.5" width="36" height="36"/>
                                 <color key="backgroundColor" red="0.75856598984771573" green="0.75856598984771573" blue="0.75856598984771573" alpha="0.4943279109589041" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="TzI-Zn-mVz"/>
@@ -167,17 +167,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bzj-rn-73Z">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="453"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="455"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scanFrame" translatesAutoresizingMaskIntoConstraints="NO" id="R1p-D2-CwV">
-                                <rect key="frame" x="62" y="146" width="290" height="193"/>
+                                <rect key="frame" x="62" y="147" width="290" height="193"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="R1p-D2-CwV" secondAttribute="height" multiplier="3:2" id="bZS-B8-z9I"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PLU-lK-rJ3">
-                                <rect key="frame" x="0.0" y="453" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="455" width="414" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Scan QR code to make transcation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jB8-Vd-n7K">
                                         <rect key="frame" x="95.5" y="16.5" width="223" height="17"/>
@@ -208,7 +208,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lJL-Fd-G81">
-                                <rect key="frame" x="8" y="52" width="36" height="36"/>
+                                <rect key="frame" x="8" y="56" width="36" height="36"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="Nt5-2k-kHH"/>
@@ -218,16 +218,16 @@
                                 <state key="normal" image="clearIcon"/>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYp-F4-nDz">
-                                <rect key="frame" x="0.0" y="503" width="414" height="359"/>
+                                <rect key="frame" x="0.0" y="505" width="414" height="357"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Generate your own QR code and share with other party to receive coins after scanning" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zke-nq-yOx">
-                                        <rect key="frame" x="44" y="322" width="326" height="29"/>
+                                        <rect key="frame" x="44" y="320" width="326" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RgE-Fh-9Kd" customClass="TextBelowImageButton" customModule="SereyIO" customModuleProvider="target">
-                                        <rect key="frame" x="132" y="124.5" width="150" height="62"/>
+                                        <rect key="frame" x="132" y="123.5" width="150" height="62"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="View my QR" image="qrCode">
                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

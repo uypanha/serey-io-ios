@@ -193,8 +193,10 @@ extension TextFieldViewModel {
         (uitextView.rx.value <-> textFieldText).disposed(by: self.disposeBag)
     }
     
-    func bind(with uitextField: UITextField, clearErrorOnEdit: Bool = true) {
-        (uitextField.rx.value <-> textFieldText).disposed(by: self.disposeBag)
+    func bind(with uitextField: UITextField, clearErrorOnEdit: Bool = true, ignoreBindText: Bool = false) {
+        if !ignoreBindText {
+            (uitextField.rx.value <-> textFieldText).disposed(by: self.disposeBag)
+        }
         textFieldPlaceholder.bind(to: uitextField.rx.placeholder).disposed(by: self.disposeBag)
         
         if clearErrorOnEdit {
@@ -205,8 +207,8 @@ extension TextFieldViewModel {
         }
     }
     
-    func bind(withMDC textField: MDCOutlinedTextField, clearErrorOnEdit: Bool = true) {
-        bind(with: textField)
+    func bind(withMDC textField: MDCOutlinedTextField, clearErrorOnEdit: Bool = true, ignoreBindText: Bool = false) {
+        bind(with: textField, ignoreBindText: ignoreBindText)
         
         titleText.bind(to: textField.label.rx.text).disposed(by: self.disposeBag)
         

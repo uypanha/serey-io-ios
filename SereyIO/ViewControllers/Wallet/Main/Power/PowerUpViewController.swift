@@ -19,7 +19,7 @@ class PowerUpViewController: BaseViewController, KeyboardController, AlertDialog
     @IBOutlet weak var contentView: UIView!
     
     @IBOutlet weak var accountTextField: MDCOutlinedTextField!
-    @IBOutlet weak var amountTextField: MDCOutlinedTextField!
+    @IBOutlet weak var amountTextField: CurrencyTextField!
     
     @IBOutlet weak var upMyselfButton: UIButton!
     @IBOutlet weak var powerUpButton: LoadingButton!
@@ -64,6 +64,7 @@ extension PowerUpViewController {
         self.accountTextField.primaryStyle()
         self.amountTextField.primaryStyle()
         
+        self.amountTextField.keyboardType = .decimalPad
         self.amountTextField.leftView = UIImageView(image: R.image.amountIcon()).then { $0.tintColor = .gray }
         self.amountTextField.leftViewMode = .always
         self.accountTextField.leftView = UIImageView(image: R.image.accountIcon()).then { $0.tintColor = .gray }
@@ -86,7 +87,7 @@ extension PowerUpViewController {
     
     func setUpContentChangedObservers() {
         self.viewModel.accountTextFieldViewModel.bind(withMDC: self.accountTextField)
-        self.viewModel.amountTextFieldViewModel.bind(withMDC: self.amountTextField)
+        self.amountTextField.viewModel = self.viewModel.amountTextFieldViewModel
         
         self.viewModel.isPowerUpEnabled ~> self.powerUpButton.rx.isEnabled ~ self.disposeBag
     }

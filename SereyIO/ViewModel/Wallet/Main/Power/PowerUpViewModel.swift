@@ -138,7 +138,7 @@ fileprivate extension PowerUpViewModel {
             self.didTransactionUpdate.onNext(())
         }
         
-        let alerDialogModel = AlertDialogModel(title: "Power Up", message: "You just power Up Serey coin with \(amount) SEREY to \(account).", actions: [confirmAction])
+        let alerDialogModel = AlertDialogModel(title: "Power Up", message: "You’ve just powered up \(amount) Serey Coins to \(account).", actions: [confirmAction])
         self.shouldPresent(.showAlertDialogController(alerDialogModel))
     }
 }

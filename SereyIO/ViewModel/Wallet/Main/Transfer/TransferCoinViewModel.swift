@@ -44,7 +44,7 @@ class TransferCoinViewModel: BaseInitTransactionViewModel, ShouldReactToAction, 
         self.shouldPresentSubject = .init()
         
         self.accountTextFieldViewModel = .textFieldWith(title: R.string.transfer.toAccount.localized() + " *", validation: .notEmpty)
-        self.amountTextFieldViewModel = .textFieldWith(title: R.string.transfer.amount.localized() + " *", validation: .notEmpty)
+        self.amountTextFieldViewModel = .textFieldWith(title: R.string.transfer.amount.localized() + " *", placeholder: "0.00", validation: .notEmpty)
         self.memoTextFieldViewModel = .textFieldWith(title: R.string.common.description.localized(), validation: .none)
         
         self.isUsernameEditable = .init(value: username == nil)
@@ -111,7 +111,7 @@ fileprivate extension TransferCoinViewModel {
             self.didTransactionUpdate.onNext(())
         }
         
-        let alerDialogModel = AlertDialogModel(title: "Transfer Coin", message: "You just transfered Serey coin with \(amount) SEREY to \(account).", actions: [confirmAction])
+        let alerDialogModel = AlertDialogModel(title: "Transfer Coin", message: "You’ve just transferred \(amount) Serey Coins to \(account).", actions: [confirmAction])
         self.shouldPresent(.showAlertDialogController(alerDialogModel))
     }
     

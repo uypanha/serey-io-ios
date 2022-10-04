@@ -31,7 +31,7 @@ extension DelegatePowerViewController {
         }
         
         self.accountTextField = .init().then {
-            $0.keyboardType = .default
+            $0.keyboardType = .decimalPad
             $0.autocapitalizationType = .none
             $0.autocorrectionType = .no
             $0.leftView = UIImageView(image: R.image.accountIcon()).then { $0.tintColor = .gray }

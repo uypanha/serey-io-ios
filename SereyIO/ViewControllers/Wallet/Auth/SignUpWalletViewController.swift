@@ -13,7 +13,7 @@ import RxBinding
 import MaterialComponents
 import RxKeyboard
 
-class SignUpWalletViewController: BaseViewController, KeyboardController {
+class SignUpWalletViewController: BaseViewController, KeyboardController, AlertDialogController {
     
     fileprivate lazy var keyboardDisposeBag = DisposeBag()
     
@@ -110,6 +110,7 @@ extension SignUpWalletViewController {
         setUpContentChangedObservers()
         setUpShouldPresentObservers()
         setUpControlsObservers()
+        setUpShouldPresentErrorObservers()
         setUpTabSelfToDismissKeyboard()?.disposed(by: self.disposeBag)
     }
     
@@ -139,6 +140,13 @@ extension SignUpWalletViewController {
                     self.ownerKeyTextField.isEnabled = !loading
                     self.nextButton.isLoading = loading
                 }
+            }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentErrorObservers() {
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [weak self] errorInfo in
+                self?.showDialogError(errorInfo)
             }) ~ self.disposeBag
     }
 }

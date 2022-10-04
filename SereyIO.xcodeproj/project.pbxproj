@@ -108,6 +108,7 @@
 		96D46BAD275FBE010078779A /* UserProfileApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D46BAC275FBE010078779A /* UserProfileApi.swift */; };
 		96D46BAF275FBEC70078779A /* UserProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D46BAE275FBEC70078779A /* UserProfileService.swift */; };
 		96D46BB92760F0FB0078779A /* UserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96D46BB82760F0FB0078779A /* UserProfileModel.swift */; };
+		96DDD8F928DB4EA9005BB5BB /* CurrencyTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DDD8F828DB4EA9005BB5BB /* CurrencyTextField.swift */; };
 		96FFB936282C024B002057A0 /* PostOptionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FFB935282C024B002057A0 /* PostOptionCellViewModel.swift */; };
 		B80B289827A82AF70023D894 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = B80B289727A82AF70023D894 /* SkeletonView */; };
 		B80B289A27A82D580023D894 /* SkeletonView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80B289927A82D580023D894 /* SkeletonView+Extensions.swift */; };
@@ -696,6 +697,7 @@
 		96D46BAC275FBE010078779A /* UserProfileApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileApi.swift; sourceTree = "<group>"; };
 		96D46BAE275FBEC70078779A /* UserProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileService.swift; sourceTree = "<group>"; };
 		96D46BB82760F0FB0078779A /* UserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileModel.swift; sourceTree = "<group>"; };
+		96DDD8F828DB4EA9005BB5BB /* CurrencyTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTextField.swift; sourceTree = "<group>"; };
 		96FFB935282C024B002057A0 /* PostOptionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostOptionCellViewModel.swift; sourceTree = "<group>"; };
 		9D3470C69E01F2FDF5C19861 /* Pods_SereyIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SereyIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B80B289927A82D580023D894 /* SkeletonView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkeletonView+Extensions.swift"; sourceTree = "<group>"; };
@@ -2934,9 +2936,10 @@
 		DCB0703F2732DE63004463E7 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
-				961264A82757B78B00AA1AD2 /* SKActivityIndicator */,
+				96DDD8F828DB4EA9005BB5BB /* CurrencyTextField.swift */,
 				DCB070402732DE7D004463E7 /* TransactionHeaderView.swift */,
 				9687301C28B3D99D003ABC3B /* ZoomingScrollView.swift */,
+				961264A82757B78B00AA1AD2 /* SKActivityIndicator */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -4205,6 +4208,7 @@
 				968BBB2C2874916F001F6D51 /* ImageCellViewModel.swift in Sources */,
 				96113DE9287C78EC00F14B8C /* PostDrumViewController.swift in Sources */,
 				DC6FCE7423F05D1700D72F6D /* Steem.swift in Sources */,
+				96DDD8F928DB4EA9005BB5BB /* CurrencyTextField.swift in Sources */,
 				DCCD40C924363EF700093A18 /* SubmitPostModel.swift in Sources */,
 				9687301628B3D685003ABC3B /* ImagePreviewViewModel.swift in Sources */,
 				DC9A660B24E05725001F1B60 /* PayQRViewModel.swift in Sources */,
