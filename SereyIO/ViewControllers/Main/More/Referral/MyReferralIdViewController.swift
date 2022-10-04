@@ -28,6 +28,7 @@ class MyReferralIdViewController: BaseViewController, AlertDialogController {
         }
     }()
     
+    var referralContainer: DashBorderView!
     lazy var referralLinkLabel: UILabel = {
         return .createLabel(13, weight: .semibold, textColor: .color(.primary)).then {
             $0.lineBreakMode = .byTruncatingMiddle
@@ -151,7 +152,8 @@ fileprivate extension MyReferralIdViewController {
             .subscribe(onNext: { [weak self] errorInfo in
                 switch errorInfo.prefinedErrorType {
                 case .referralIdError:
-                    break
+                    self?.referralContainer.isHidden = true
+                    self?.messageLabel.text = errorInfo.error.localizedDescription
                 default:
                     self?.showDialogError(errorInfo, positiveButton: "Okay".localize())
                 }
