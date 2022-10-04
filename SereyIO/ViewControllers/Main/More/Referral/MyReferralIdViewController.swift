@@ -14,7 +14,7 @@ import RxSwift
 import RxBinding
 import MaterialComponents
 
-class MyReferralIdViewController: BaseViewController {
+class MyReferralIdViewController: BaseViewController, AlertDialogController {
     
     lazy var titleLabel: UILabel = {
         return .createLabel(22, weight: .bold, textColor: .color(.title)).then {
@@ -94,6 +94,7 @@ fileprivate extension MyReferralIdViewController {
         setUpControlObservers()
         setUpContentChangedObservers()
         setUpViewToPresentObservers()
+        setUpShouldPresentErrorObservers()
     }
     
     func setUpControlObservers() {
@@ -141,6 +142,18 @@ fileprivate extension MyReferralIdViewController {
                         activityVC.excludedActivityTypes = [.airDrop, .addToReadingList]
                         self?.present(activityVC, animated: true, completion: nil)
                     }
+                }
+            }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentErrorObservers() {
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [weak self] errorInfo in
+                switch errorInfo.prefinedErrorType {
+                case .referralIdError:
+                    break
+                default:
+                    self?.showDialogError(errorInfo, positiveButton: "Okay".localize())
                 }
             }) ~ self.disposeBag
     }
