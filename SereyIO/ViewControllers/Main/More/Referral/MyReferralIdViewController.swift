@@ -14,7 +14,7 @@ import RxSwift
 import RxBinding
 import MaterialComponents
 
-class MyReferralIdViewController: BaseViewController {
+class MyReferralIdViewController: BaseViewController, AlertDialogController {
     
     lazy var titleLabel: UILabel = {
         return .createLabel(22, weight: .bold, textColor: .color(.title)).then {
@@ -28,6 +28,7 @@ class MyReferralIdViewController: BaseViewController {
         }
     }()
     
+    var referralContainer: DashBorderView!
     lazy var referralLinkLabel: UILabel = {
         return .createLabel(13, weight: .semibold, textColor: .color(.primary)).then {
             $0.lineBreakMode = .byTruncatingMiddle
@@ -94,6 +95,7 @@ fileprivate extension MyReferralIdViewController {
         setUpControlObservers()
         setUpContentChangedObservers()
         setUpViewToPresentObservers()
+        setUpShouldPresentErrorObservers()
     }
     
     func setUpControlObservers() {
@@ -141,6 +143,19 @@ fileprivate extension MyReferralIdViewController {
                         activityVC.excludedActivityTypes = [.airDrop, .addToReadingList]
                         self?.present(activityVC, animated: true, completion: nil)
                     }
+                }
+            }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentErrorObservers() {
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [weak self] errorInfo in
+                switch errorInfo.prefinedErrorType {
+                case .referralIdError:
+                    self?.referralContainer.isHidden = true
+                    self?.messageLabel.text = errorInfo.error.localizedDescription
+                default:
+                    self?.showDialogError(errorInfo, positiveButton: "Okay".localize())
                 }
             }) ~ self.disposeBag
     }

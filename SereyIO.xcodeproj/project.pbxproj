@@ -93,6 +93,7 @@
 		9697722D2770C97D008F6B0C /* CoinPriceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697722C2770C97D008F6B0C /* CoinPriceManager.swift */; };
 		9697722F2770C998008F6B0C /* TickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9697722E2770C998008F6B0C /* TickerModel.swift */; };
 		969772312770D207008F6B0C /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969772302770D207008F6B0C /* Double+Extension.swift */; };
+		969A063F28EC903E001CCD13 /* ci_post_clone.sh in Resources */ = {isa = PBXBuildFile; fileRef = 969A063E28EC903E001CCD13 /* ci_post_clone.sh */; };
 		96AE4E2127A19F2000470B6D /* ReportPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE4E2027A19F2000470B6D /* ReportPostViewController.swift */; };
 		96AE4E2327A1A0A700470B6D /* ReportPostViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE4E2227A1A0A700470B6D /* ReportPostViewController+LoadViews.swift */; };
 		96AE4E2627A1AE3C00470B6D /* ReportPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96AE4E2527A1AE3C00470B6D /* ReportPostViewModel.swift */; };
@@ -682,6 +683,7 @@
 		9697722C2770C97D008F6B0C /* CoinPriceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinPriceManager.swift; sourceTree = "<group>"; };
 		9697722E2770C998008F6B0C /* TickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerModel.swift; sourceTree = "<group>"; };
 		969772302770D207008F6B0C /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		969A063E28EC903E001CCD13 /* ci_post_clone.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = ci_post_clone.sh; sourceTree = "<group>"; };
 		96AE4E2027A19F2000470B6D /* ReportPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPostViewController.swift; sourceTree = "<group>"; };
 		96AE4E2227A1A0A700470B6D /* ReportPostViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReportPostViewController+LoadViews.swift"; sourceTree = "<group>"; };
 		96AE4E2527A1AE3C00470B6D /* ReportPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportPostViewModel.swift; sourceTree = "<group>"; };
@@ -1535,6 +1537,14 @@
 			path = Coin;
 			sourceTree = "<group>";
 		};
+		969A063D28EC903E001CCD13 /* ci_scripts */ = {
+			isa = PBXGroup;
+			children = (
+				969A063E28EC903E001CCD13 /* ci_post_clone.sh */,
+			);
+			path = ci_scripts;
+			sourceTree = SOURCE_ROOT;
+		};
 		96AE4E1F27A19F0F00470B6D /* Report */ = {
 			isa = PBXGroup;
 			children = (
@@ -2148,6 +2158,7 @@
 				DC6ED56B2326A19B00770B31 /* Constants.swift */,
 				DC6ED58B2326A5D300770B31 /* APNS */,
 				DC6ED55A2326822700770B31 /* App */,
+				969A063D28EC903E001CCD13 /* ci_scripts */,
 				DC6ED5702326A35800770B31 /* Deeplink */,
 				DC6ED56D2326A2E100770B31 /* Extensions */,
 				DC6ED5792326A42100770B31 /* Helpers */,
@@ -3732,6 +3743,7 @@
 				DCB5BD722497CAE40042E5AF /* SecurityMethodeTableViewCell.xib in Resources */,
 				DC7558B8245898EC00AD40FA /* SereyAppTableViewCell.xib in Resources */,
 				DC6ED56523269B6600770B31 /* colors.txt in Resources */,
+				969A063F28EC903E001CCD13 /* ci_post_clone.sh in Resources */,
 				DC9E36F92416947900289693 /* CommentTableViewCell.xib in Resources */,
 				DC9E36EE2413F57800289693 /* common_css.css in Resources */,
 				DC88B13324F5729500327C50 /* Power.storyboard in Resources */,
