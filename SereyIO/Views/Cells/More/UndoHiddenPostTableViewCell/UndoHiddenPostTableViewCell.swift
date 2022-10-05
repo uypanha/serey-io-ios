@@ -65,7 +65,7 @@ extension UndoHiddenPostTableViewCell {
     
     func prepareViews() {
         let mainView = UIView()
-        let iconImageView = UIImageView(image: R.image.iconHiddenPost())
+        let iconImageView = UIImageView(image: R.image.iconHIddenPost())
         mainView.addSubview(iconImageView)
         iconImageView.snp.makeConstraints { make in
             make.top.left.equalToSuperview()
