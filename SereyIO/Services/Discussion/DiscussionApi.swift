@@ -200,6 +200,8 @@ fileprivate extension DiscussionType {
         switch self {
         case .byUser(let username):
             return ["userId" : username]
+        case .byCategoryId(let categoryId):
+            return ["categoryId" : categoryId]
         default:
             return [:]
         }

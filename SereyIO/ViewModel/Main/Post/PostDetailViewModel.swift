@@ -37,6 +37,7 @@ class PostDetailViewModel: BasePostDetailViewModel, ShouldReactToAction, ShouldP
         case votersViewController(VoterListViewModel)
         case reportPostController(ReportPostViewModel)
         case confirmViewController(ConfirmDialogViewModel)
+        case postsByCategoryController(PostTableViewModel)
         case shareLink(URL, String)
     }
     
@@ -305,6 +306,12 @@ extension PostDetailViewModel {
         viewModel.shouldShowAuthorProfile.asObservable()
             .subscribe(onNext: { [weak self] postModel in
                 self?.handleProfilePressed(of: postModel)
+            }) ~ viewModel.disposeBag
+        
+        viewModel.shouldShowPostsByCategory.asObservable()
+            .subscribe(onNext: { [weak self] category in
+                let postTableViewModel = PostTableViewModel(.byCategoryId(category), .init(value: nil))
+                self?.shouldPresent(.postsByCategoryController(postTableViewModel))
             }) ~ viewModel.disposeBag
     }
     

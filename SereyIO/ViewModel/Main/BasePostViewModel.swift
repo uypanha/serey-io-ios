@@ -78,8 +78,8 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
             }) ~ cellModel.disposeBag
         
         cellModel.shouldShowPostsByCategory.asObservable()
-            .subscribe(onNext: { [weak self] postModel in
-                self?.onCategoryPressed(of: postModel)
+            .subscribe(onNext: { [weak self] category in
+                self?.onCategoryPressed(of: category)
             }) ~ cellModel.disposeBag
         
         cellModel.shouldShowAuthorProfile.asObservable()
@@ -132,7 +132,7 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     
     internal func onMorePressed(of postModel: PostModel) {}
     
-    internal func onCategoryPressed(of postModel: PostModel) {}
+    internal func onCategoryPressed(of category: String) {}
     
     internal func onProfilePressed(of postModel: PostModel) {}
     

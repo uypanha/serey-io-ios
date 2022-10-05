@@ -81,15 +81,13 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         }
     }
     
-    override func onCategoryPressed(of postModel: PostModel) {
+    override func onCategoryPressed(of category: String) {
         switch self.postType.value {
         case .byCategoryId:
             return
         default:
-            if let categoryId = postModel.categories?.first {
-                let postTableViewModel = PostTableViewModel(.byCategoryId(categoryId), self.selectedCategory)
-                self.shouldPresent(.postsByCategoryController(postTableViewModel))
-            }
+            let postTableViewModel = PostTableViewModel(.byCategoryId(category), self.selectedCategory)
+            self.shouldPresent(.postsByCategoryController(postTableViewModel))
         }
     }
     

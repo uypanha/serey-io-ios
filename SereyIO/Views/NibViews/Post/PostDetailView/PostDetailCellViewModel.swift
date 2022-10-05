@@ -31,6 +31,12 @@ class PostDetailCellViewModel: PostCellViewModel, CollectionSingleSecitionProvid
         
         self.cells.accept(self.prepareCells(data?.categories ?? []))
     }
+    
+    func handleCategoryItemSelected(at indexPath: IndexPath) {
+        if let item = self.item(at: indexPath) as? CategoryCellViewModel {
+            self.shouldShowPostsByCategory.onNext(item.category.value.name)
+        }
+    }
 }
 
 // MARK: - Preparations & Tools

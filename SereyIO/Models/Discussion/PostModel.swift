@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import AnyCodable
 
 struct PostModel: Codable {
     
-    let id: String
+    let idValue: AnyCodable
     let parentAuthor: String?
     let parentPermlink: String?
     let title: String
@@ -31,6 +32,10 @@ struct PostModel: Codable {
     let allowVote: Bool
     let authorImageUrl: String?
     var replies: [PostModel]?
+    
+    var id: String {
+        return (self.idValue.value as? String) ?? (self.idValue.value as? Int)?.description ?? ""
+    }
     
     var isHidden: Bool = false
     
@@ -114,7 +119,7 @@ struct PostModel: Codable {
     }
     
     enum CodingKeys: String, CodingKey {
-        case id
+        case idValue = "id"
         case parentAuthor = "parent_author"
         case parentPermlink = "parent_permlink"
         case title
