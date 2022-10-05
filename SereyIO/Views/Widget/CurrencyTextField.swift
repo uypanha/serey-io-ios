@@ -43,17 +43,17 @@ class CurrencyTextField: MDCOutlinedTextField {
 extension CurrencyTextField: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if string.starts(with: ".") || string.starts(with: ",") {
-            if textField.text?.contains(string) == true {
-                return false
-            }
-            let text = self.viewModel?.value ?? ""
-            self.viewModel?.value = text + "."
+        if (range.location == 0 && (string.starts(with: ".") || string.starts(with: ","))) {
+            self.viewModel?.value = "0."
             return false
         }
         
-        if (range.location == 0 && (string.starts(with: ".") || string.starts(with: ","))) {
-            self.viewModel?.value = "0."
+        if string.starts(with: ".") || string.starts(with: ",") {
+            let text = self.viewModel?.value ?? ""
+            if text.contains(".") || text.contains(",") {
+                return false
+            }
+            self.viewModel?.value = text + "."
             return false
         }
         
