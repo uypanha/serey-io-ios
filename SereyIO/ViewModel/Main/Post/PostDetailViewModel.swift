@@ -206,6 +206,12 @@ fileprivate extension PostDetailViewModel {
     func handleReplyCommentPressed(_ cellViewModel: CommentCellViewModel) {
         if let commentData = cellViewModel.post.value {
             let replyCommentViewModel = ReplyCommentTableViewModel(commentData, title: self.post.value?.title ?? "")
+            
+            replyCommentViewModel.onCommentReplied.asObservable()
+                .subscribe(onNext: { [weak self] _ in
+                    self?.fetchPostDetial()
+                }) ~ replyCommentViewModel.disposeBag
+            
             self.shouldPresent(.replyComment(replyCommentViewModel))
         }
     }

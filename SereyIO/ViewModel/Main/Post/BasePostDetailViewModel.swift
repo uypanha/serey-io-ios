@@ -94,6 +94,10 @@ class BasePostDetailViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
     internal func clearCommentInput() {
     }
     
+    internal func onCommented(_ comment: PostModel) {
+        self.fetchPostDetial()
+    }
+    
     internal func prepareCells(_ replies: [PostModel]) -> [SectionItem] {
         var cells: [CellViewModel] = []
         cells.append(contentsOf: replies.map { CommentCellViewModel($0).then { self.setUpCommentCellObservers($0) } })
@@ -135,14 +139,15 @@ extension BasePostDetailViewModel {
         let submitCommentModel = self.prepareSubmitCommentModel(comment)
         isUploading.onNext(true)
         self.discussionService.submitComment(submitCommentModel)
-            .subscribe(onNext: { [weak self] _ in
+            .subscribe(onNext: { [weak self] data in
                 isUploading.onNext(false)
-                self?.fetchPostDetial()
+                self?.onCommented(data.data)
                 self?.clearCommentInput()
             }, onError: { [weak self] error in
                 self?.isDownloading.accept(false)
                 isUploading.onNext(false)
-                let errorInfo = ErrorHelper.prepareError(error: error)
+                var errorInfo = ErrorHelper.prepareError(error: error)
+                errorInfo.errorTitle = "Invalid Action"
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
     }

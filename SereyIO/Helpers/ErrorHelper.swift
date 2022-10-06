@@ -80,7 +80,7 @@ class ErrorHelper {
             case .commentIn20s:
                 errorDescription = "You may only comment once every 20 seconds."
             case .invalidCredentials:
-                errorDescription = "Your login credentials are incorrect. Please make sure you put in the right credentials"
+                errorDescription = errorMessage ?? "Your login credentials are incorrect. Please make sure you put in the right credentials"
             case .referralIdError:
                 errorDescription = "To create referral link you have to login with a password"
             }
@@ -134,7 +134,7 @@ class ErrorHelper {
                 }
                 return PredefinedError.unauthenticatedError.prepareError()
             case .userNotFound, .invalidCredentials:
-                return PredefinedError.invalidCredentials.prepareError()
+                return PredefinedError.invalidCredentials.prepareError(errorMessage: error.message)
             case .commentIn20s:
                 return PredefinedError.commentIn20s.prepareError()
             case .referralId:
