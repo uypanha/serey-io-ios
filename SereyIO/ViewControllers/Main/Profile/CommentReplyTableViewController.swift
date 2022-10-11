@@ -3,13 +3,15 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/25/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
 import RxBinding
 
 class CommentReplyTableViewController: ListTableViewController<CommentsListViewModel> {
+    
+    var scrollViewDelegate: UIScrollViewDelegate?
     
     override func viewDidLoad() {
         self.sepereatorStyle = .none
@@ -30,5 +32,13 @@ class CommentReplyTableViewController: ListTableViewController<CommentsListViewM
                     }, negativeButton: R.string.common.cancel.localized())
                 }
             }) ~ self.disposeBag
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.scrollViewDelegate?.scrollViewDidScroll?(scrollView)
+    }
+    
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.scrollViewDelegate?.scrollViewWillBeginDragging?(scrollView)
     }
 }

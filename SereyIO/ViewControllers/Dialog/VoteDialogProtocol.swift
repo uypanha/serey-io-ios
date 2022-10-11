@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/16/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -25,7 +25,7 @@ extension VoteDialogProtocol where Self: UIViewController {
         voteDialogViewController.viewModel = viewModel
         
         // dismiss old dialog befire display new one
-        self.dismissDialogViewController(.zoomInOut)
+        self.dismissDialogViewController(.fadeInOut)
         self.presentDialogViewController(voteDialogViewController, animationPattern: .zoomInOut, backgroundViewType: .solid, dismissButtonEnabled: true, completion: nil)
     }
     
@@ -34,7 +34,7 @@ extension VoteDialogProtocol where Self: UIViewController {
         voteDialogViewController.viewModel = viewModel
         
         // dismiss old dialog befire display new one
-        self.dismissDialogViewController(.zoomInOut)
+        self.dismissDialogViewController(.fadeInOut)
         self.presentDialogViewController(voteDialogViewController, animationPattern: .zoomInOut, backgroundViewType: .solid, dismissButtonEnabled: true, completion: nil)
     }
 }

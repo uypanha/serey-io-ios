@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 6/24/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -38,8 +38,8 @@ class WalletViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController?.setNavigationBarColor(.color(.navigationBg), tintColor: .color(.navigationTint))
         self.navigationController?.showNavigationBarBorder()
-        self.navigationController?.setNavigationBarColor(ColorName.navigationBg.color, tintColor: ColorName.navigationTint.color)
     }
     
     override func setUpLocalizedTexts() {
@@ -60,27 +60,27 @@ extension WalletViewController {
         self.navigationItem.rightBarButtonItem = self.settingButton
         self.viewHeightConstraint.constant = -self.bottomSafeAreaHeight
         self.transactionButton.setRadius(all: 8)
-        self.transactionButton.setTitleColor(ColorName.primary.color, for: .normal)
-        self.transactionButton.tintColor = ColorName.primary.color
+        self.transactionButton.setTitleColor(.color(.primary), for: .normal)
+        self.transactionButton.tintColor = .color(.primary)
         self.transactionButton.customStyle(with: UIColor(hexString: "EDF1FB"))
     }
     
     func prepareWalletCollectionView() {
+        self.collectionView.register(WalletCardCollectionViewCell.self)
         if let collectionViewLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             collectionViewLayout.scrollDirection = .horizontal
         }
         self.collectionView.delegate = self
-        self.collectionView.register(WalletCardCollectionViewCell.self)
     }
     
     func prepareMenuCollectionView() {
-        self.menuCollectionView.delegate = self
         self.menuCollectionView.register(WalletMenuCollectionViewCell.self)
+        self.menuCollectionView.delegate = self
     }
     
     func getMenuItemSize() -> CGSize {
         let viewWidth = self.view.frame.width
-        let itemWidth = (viewWidth - self.menuSpace - (16 * 2)) / self.menuColumn
+        let itemWidth = (viewWidth - self.menuSpace - (18 * 2)) / self.menuColumn
         return CGSize(width: itemWidth, height: itemWidth)
     }
     
@@ -110,6 +110,14 @@ extension WalletViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
         (collectionView.cellForItem(at: indexPath) as? WalletMenuCollectionViewCell)?.setHighlighted(false, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == self.menuCollectionView {
+            return getMenuItemSize()
+        } else {
+            return getCardItemSize()
+        }
     }
 }
 
@@ -220,6 +228,10 @@ extension WalletViewController {
                         let bottomSheet = BottomSheetViewController(contentViewController: cancelPowerDownViewController)
                         self?.present(bottomSheet, animated: true, completion: nil)
                     }
+                case .delegatePowerController(let delegatePowerViewModel):
+                    let delegatePowerController = DelegatePowerViewController()
+                    delegatePowerController.viewModel = delegatePowerViewModel
+                    self?.show(delegatePowerController, sender: nil)
                 }
             }) ~ self.disposeBag
     }

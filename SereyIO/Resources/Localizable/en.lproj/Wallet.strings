@@ -3,9 +3,9 @@
   SereyIO
 
   Created by Panha Uy on 6/24/20.
-  Copyright © 2020 Phanha Uy. All rights reserved.
+  Copyright © 2020 Serey IO. All rights reserved.
 */
 
 "myWallet"                          = "My Wallet";
 "signUpWallet"                      = "Sign-Up Wallet";
-"termsAndPrivacyAgreementMessage"   = "By using Serey you accept the\n%@ and %@";
+"termsAndPrivacyAgreementMessage"   = "By signing up in the Serey Wallet, you'll agree on the %@ and %@";

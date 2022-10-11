@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 1/11/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -30,7 +30,10 @@ extension CollectionSingleSecitionProviderModel where Self: BaseViewModel {
     }
     
     func item(at indexPath: IndexPath) -> CellViewModel? {
-        return cells.value[indexPath.row]
+        if indexPath.row < cells.value.count {
+            return cells.value[indexPath.row]
+        }
+        return nil
     }
     
     func isLastItem(indexPath: IndexPath) -> Bool {

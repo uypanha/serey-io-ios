@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/9/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -49,6 +49,12 @@ class AuthData {
         }
         set {
             Store.secure.setValue(newValue, forKey: loggedUsernameKey)
+        }
+    }
+    
+    var loggedDrumAuthor: String? {
+        get {
+            return self.isUserLoggedIn ? self.username : nil
         }
     }
     

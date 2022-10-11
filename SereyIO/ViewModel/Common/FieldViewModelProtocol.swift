@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 1/11/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -27,7 +27,7 @@ protocol FieldViewModelProtocol {
     init(withTextFieldModel textFieldModel: TextFieldModel)
     
     // Validation
-    func validate() -> Bool
+    func validate(validation: TextFieldValidation?) -> Bool
 }
 
 extension FieldViewModelProtocol {
@@ -48,6 +48,21 @@ enum TextFieldValidation {
     case phone
     case none
     case ownerKey
+    case username
+    
+    func validationWithError(with text: String) -> String? {
+        if !self.validate(textToValidate: text) {
+            switch self {
+            case .username:
+                if text.contains(" ") {
+                    return "Please remove invalid characters"
+                }
+            default:
+                return nil
+            }
+        }
+        return nil
+    }
     
     func validate(textToValidate text: String) -> Bool {
         switch self {
@@ -64,7 +79,9 @@ enum TextFieldValidation {
         case .strongPassword:
             return Constants.PatternValidation.strongPassword.validate(text)
         case .ownerKey:
-            return text.count == 52 && text.starts(with: "P5K")
+            return text.count == 52 && text.starts(with: "P5")
+        case .username:
+            return !text.isEmpty && !text.contains(" ")
         case .none:
             return true
         }
@@ -112,8 +129,9 @@ class TextFieldViewModel: CellViewModel, FieldViewModelProtocol {
             .disposed(by: self.disposeBag)
     }
     
-    func validate() -> Bool {
-        guard self.textValidation.validate(textToValidate: self.textFieldText.value ?? "") else {
+    func validate(validation: TextFieldValidation? = nil) -> Bool {
+        guard (validation ?? self.textValidation).validate(textToValidate: self.textFieldText.value ?? "") else {
+            
             errorText.accept(errorMessage)
             return false
         }
@@ -121,9 +139,20 @@ class TextFieldViewModel: CellViewModel, FieldViewModelProtocol {
         return true
     }
     
-    func validate(with text: String?) -> Bool {
+    func validate(match text: String?) -> Bool {
         guard self.validate() && self.value == text else {
-            errorText.accept(errorMessage)
+            errorText.accept(self.textValidation.validationWithError(with: self.value ?? "") ?? errorMessage)
+            return false
+        }
+        errorText.accept(nil)
+        return true
+    }
+    
+    func validate(_ ignoreEmpty: Bool) -> Bool {
+        guard self.textValidation.validate(textToValidate: self.value ?? "") else {
+            if !(self.value ?? "").isEmpty {
+                errorText.accept(self.textValidation.validationWithError(with: self.value ?? "") ?? errorMessage)
+            }
             return false
         }
         errorText.accept(nil)
@@ -143,15 +172,15 @@ class TextFieldViewModel: CellViewModel, FieldViewModelProtocol {
 extension TextFieldViewModel {
     
     static func userNameTextFieldViewModel() -> TextFieldViewModel {
-        return textFieldWith(title: R.string.auth.userName.localized(), errorMessage: R.string.auth.userNameRequiredMessage.localized(), validation: .notEmpty)
+        return textFieldWith(title: R.string.auth.userName.localized(), placeholder: "ex: sereyuser", errorMessage: R.string.auth.userNameRequiredMessage.localized(), validation: .username)
     }
     
     static func privateKeyOrPwdTextFieldViewModel(_ placeholder: String = R.string.auth.privateKeyOrPassword.localized(), _ errorMessage: String = R.string.auth.privateKeyOrPasswordRequireMessage.localized()) -> TextFieldViewModel {
         return textFieldWith(title: placeholder, errorMessage: errorMessage, validation: .notEmpty)
     }
     
-    static func textFieldWith(title: String, errorMessage: String? = nil, validation: TextFieldValidation = .none) -> TextFieldViewModel {
-        let textFieldModel = TextFieldModel(titleText: title, placeholderText: title, textFieldText: BehaviorRelay(value: ""), errorText: errorMessage, textValidation: validation)
+    static func textFieldWith(title: String, placeholder: String? = nil, errorMessage: String? = nil, validation: TextFieldValidation = .none) -> TextFieldViewModel {
+        let textFieldModel = TextFieldModel(titleText: title, placeholderText: placeholder ?? title, textFieldText: BehaviorRelay(value: ""), errorText: errorMessage, textValidation: validation)
         
         return TextFieldViewModel(withTextFieldModel: textFieldModel)
     }
@@ -164,8 +193,10 @@ extension TextFieldViewModel {
         (uitextView.rx.value <-> textFieldText).disposed(by: self.disposeBag)
     }
     
-    func bind(with uitextField: UITextField, clearErrorOnEdit: Bool = true) {
-        (uitextField.rx.value <-> textFieldText).disposed(by: self.disposeBag)
+    func bind(with uitextField: UITextField, clearErrorOnEdit: Bool = true, ignoreBindText: Bool = false) {
+        if !ignoreBindText {
+            (uitextField.rx.value <-> textFieldText).disposed(by: self.disposeBag)
+        }
         textFieldPlaceholder.bind(to: uitextField.rx.placeholder).disposed(by: self.disposeBag)
         
         if clearErrorOnEdit {
@@ -176,11 +207,15 @@ extension TextFieldViewModel {
         }
     }
     
-    func bind(with textField: MDCTextField, controller: MDCTextInputControllerBase? = nil) {
-        bind(with: textField as UITextField)
+    func bind(withMDC textField: MDCOutlinedTextField, clearErrorOnEdit: Bool = true, ignoreBindText: Bool = false) {
+        bind(with: textField, ignoreBindText: ignoreBindText)
+        
+        titleText.bind(to: textField.label.rx.text).disposed(by: self.disposeBag)
+        
         errorText.asObservable()
             .subscribe(onNext: { errorText in
-                controller?.setErrorText(errorText, errorAccessibilityValue: errorText)
+                errorText == nil ? textField.primaryStyle() : textField.dangerouseStyle()
+                textField.leadingAssistiveLabel.text = errorText
             }).disposed(by: self.disposeBag)
     }
 }

@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/6/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -62,7 +62,7 @@ class TransactionTableViewCell: BaseTableViewCell {
 extension TransactionTableViewCell {
     
     func prepareShimmering(_ isShimmering: Bool) {
-        let backgroundColor = isShimmering ? ColorName.shimmering.color.withAlphaComponent(0.5) : UIColor.clear
+        let backgroundColor = isShimmering ? .color(.shimmering).withAlphaComponent(0.5) : UIColor.clear
         let cornerRadius : CGFloat = isShimmering ? 8 : 0
         
         self.typeImageView.backgroundColor = backgroundColor

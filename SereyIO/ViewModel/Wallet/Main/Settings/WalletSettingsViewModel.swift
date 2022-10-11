@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/12/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -11,15 +11,24 @@ import RxCocoa
 import RxSwift
 import RxBinding
 import RxDataSources
+import LocalAuthentication
 
-class WalletSettingsViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, ShouldReactToAction, ShouldPresent {
+class WalletSettingsViewModel: BaseUserProfileViewModel, CollectionMultiSectionsProviderModel, ShouldReactToAction, ShouldPresent {
     
     enum Action {
         case itemSelected(IndexPath)
+        case changeProfilePressed
+        case photoSelected(PickerFileModel)
     }
     
     enum ViewToPresent {
-        case changePasswordController
+        case changePasswordController(ChangePasswordViewModel)
+        case activateGoogleOTPContronner(ActivateGoogleOTPViewModel)
+        case activeBiometryViewController(ActiveBiometryViewModel)
+        case bottomListViewController(BottomListMenuViewModel)
+        case choosePhotoController
+        case profileGalleryController
+        case loading(Bool)
     }
     
     // input:
@@ -31,15 +40,14 @@ class WalletSettingsViewModel: BaseCellViewModel, CollectionMultiSectionsProvide
     let cells: BehaviorRelay<[SectionItem]>
     let cellModels: BehaviorRelay<[SectionType: [CellViewModel]]>
     
-    override init() {
+    init() {
         self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
         self.cells = .init(value: [])
         self.cellModels = .init(value: [:])
-        super.init()
+        super.init(AuthData.shared.username ?? "")
         
         setUpRxObservers()
-        self.cellModels.accept(self.prepareCellModels())
     }
 }
 
@@ -63,6 +71,10 @@ extension WalletSettingsViewModel {
         }
     }
     
+    func loadCells() {
+        self.cellModels.accept(self.prepareCellModels())
+    }
+    
     fileprivate func prepareCellModels() -> [SectionType: [CellViewModel]] {
         var sectionItems: [SectionType: [CellViewModel]] = [:]
         
@@ -70,8 +82,14 @@ extension WalletSettingsViewModel {
         
         sectionItems[.profileInfo] = [WalletSettingType.profileInfo.cellModel]
         
-        let securityItems: [WalletSettingType] = [.changePassword, .fingerPrint, .googleOTP]
-        sectionItems[.security] = securityItems.map { $0.cellModel }
+        let securityItems: [WalletSettingType] = [.changePassword, .biometry, .googleOTP]
+        sectionItems[.security] = securityItems.map { type in
+            let cell = type.cellModel
+            if let toggledCell = cell as? WalletSettingToggleCellViewModel {
+                self.setUpToggleCellObserver(cellModel: toggledCell)
+            }
+            return cell
+        }
         
         return sectionItems
     }
@@ -82,6 +100,15 @@ extension WalletSettingsViewModel {
         SectionType.allCases.forEach { type in
             if let cells = cellModels[type] {
                 sectionItems.append(SectionItem(model: Section(header: type.title), items: cells))
+                
+                cells.forEach { cellItem in
+                    if let item = cellItem as? WalletProfileCellViewModel {
+                        item.shouldChangeProfile.asObservable()
+                            .map { _ in Action.changeProfilePressed }
+                            ~> self.didActionSubject
+                            ~ item.disposeBag
+                    }
+                }
             }
         }
         
@@ -96,11 +123,53 @@ fileprivate extension WalletSettingsViewModel {
         if let item = self.item(at: indexPath) as? WalletSettingCellViewModel {
             switch item.type.value {
             case .changePassword:
-                self.shouldPresent(.changePasswordController)
+                let changePasswordViewModel = ChangePasswordViewModel()
+                self.shouldPresent(.changePasswordController(changePasswordViewModel))
             default:
                 break
             }
         }
+    }
+    
+    func handleToggledSecurityType(isOn: Bool, type: WalletSettingType) {
+        switch type {
+        case .googleOTP:
+            if (isOn) {
+                let activateGoogleOTPViewModel = ActivateGoogleOTPViewModel(.settings)
+                self.shouldPresent(.activateGoogleOTPContronner(activateGoogleOTPViewModel))
+            } else {
+                WalletPreferenceStore.shared.disableGoogleOTP()
+            }
+        case .biometry:
+            if (isOn) {
+                let biometricType = LAContext().biometricType
+                let activeBiometryViewModel = ActiveBiometryViewModel(parent: .settings, biometricType)
+                self.shouldPresent(.activeBiometryViewController(activeBiometryViewModel))
+            } else {
+                WalletPreferenceStore.shared.disableBiometry()
+            }
+        default:
+            break
+        }
+    }
+    
+    func handleChangeProfilePressed() {
+        let items: [ImageTextCellViewModel] = ProfileOption.allCases.map { $0.cellModel }
+        
+        let bottomListMenuViewModel = BottomListMenuViewModel(header: "Profile Picture", items)
+        bottomListMenuViewModel.shouldSelectMenuItem
+            .subscribe(onNext: { [unowned self] cellModel in
+                if let cellModel = cellModel as? ProfilePictureOptionCellViewModel {
+                    switch cellModel.option {
+                    case .selectFromGallery:
+                        self.shouldPresent(.profileGalleryController)
+                    case .uploadNewPicture:
+                        self.shouldPresent(.choosePhotoController)
+                    }
+                }
+            }) ~ self.disposeBag
+        
+        self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
     }
 }
 
@@ -118,14 +187,10 @@ extension WalletSettingsViewModel {
             .bind(to: self.cells)
             .disposed(by: self.disposeBag)
         
-//        self.userInfo.asObservable()
-//            .`do`(onNext: { [weak self] userModel in
-//                if let userModel = userModel {
-//                    self?.setUpUserInfoObservers(userModel)
-//                }
-//            }).subscribe(onNext: { [unowned self] userModel in
-//                self.cellModels.accept(self.prepareCellModels())
-//            }).disposed(by: self.disposeBag)
+        self.isUploading.asObservable()
+            .map { ViewToPresent.loading($0) }
+            ~> self.shouldPresentSubject
+            ~ self.disposeBag
     }
     
     func setUpActionObservers() {
@@ -134,7 +199,28 @@ extension WalletSettingsViewModel {
                 switch action {
                 case .itemSelected(let indexPath):
                     self?.handleItemSelected(indexPath)
+                case .changeProfilePressed:
+                    self?.handleChangeProfilePressed()
+                case .photoSelected(let pickerModel):
+                    self?.uploadPickerFile(pickerModel)
                 }
             }) ~ self.disposeBag
     }
+    
+    func setUpToggleCellObserver(cellModel: WalletSettingToggleCellViewModel) {
+        cellModel.didToggledUpdated.asObservable()
+            .subscribe(onNext: { [weak self] (isOn, type) in
+                self?.handleToggledSecurityType(isOn: isOn, type: type)
+            }) ~ cellModel.disposeBag
+
+    }
+    
+//    private func setUpUserInfoObservers(_ userInfo: UserModel) {
+//
+//        Observable.from(object: userInfo)
+//            .asObservable()
+//            .subscribe(onNext: { [unowned self] userModel in
+////                self.notifyDataChanged(userModel)
+//            }).disposed(by: self.disposeBag)
+//    }
 }

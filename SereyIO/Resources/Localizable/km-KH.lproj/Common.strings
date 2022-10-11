@@ -3,7 +3,7 @@
   SereyIO
 
   Created by Phanha Uy on 9/15/19.
-  Copyright © 2019 Phanha Uy. All rights reserved.
+  Copyright © 2020 Serey IO. All rights reserved.
 */
 
 "error"                             = "Error";
@@ -43,3 +43,6 @@
 "termsAndPrivacyAgreementMessage"   = "By using Serey you accept the\n%@ and %@";
 "termService"                       = "Term Service";
 "policyAndPrivacy"                  = "Policy Privacy";
+
+"you"                               = "អ្នក";
+"your"                              = "អ្នក";

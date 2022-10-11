@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/15/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -52,9 +52,9 @@ class CommentTextView: NibView {
         self.backgroundColor = .clear
         self.textView.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
         
-        self.sendButton.tintColor = ColorName.primary.color
+        self.sendButton.tintColor = .color(.primary)
         self.sendButton.setImage(R.image.sendIcon()?.image(withTintColor: .lightGray), for: .disabled)
-        self.sendButton.setImage(R.image.sendIcon()?.image(withTintColor: ColorName.primary.color), for: .normal)
+        self.sendButton.setImage(R.image.sendIcon()?.image(withTintColor: .color(.primary)), for: .normal)
     }
 }
 

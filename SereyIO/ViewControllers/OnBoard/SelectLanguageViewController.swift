@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 1/27/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -52,7 +52,7 @@ class SelectLanguageViewController: BaseViewController {
 extension SelectLanguageViewController {
     
     func setUpViews() {
-        self.continueButton.backgroundColor = ColorName.primary.color
+        self.continueButton.backgroundColor = .color(.primary)
         self.continueButtonHeightConstraint.constant = 56 + self.bottomSafeAreaHeight
         self.continueButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: self.bottomSafeAreaHeight, right: 0)
         
@@ -116,11 +116,11 @@ fileprivate extension SelectLanguageViewController {
                         chooseLanguageSheetViewController.viewModel = ChooseLanguageViewModel()
                         self.bottomSheet = MDCBottomSheetController(contentViewController: chooseLanguageSheetViewController)
                         self.bottomSheet?.isScrimAccessibilityElement = false
-                        self.bottomSheet?.automaticallyAdjustsScrollViewInsets = false
                         self.bottomSheet?.dismissOnDraggingDownSheet = false
-//                        self.bottomSheet?.trackingScrollView = chooseLanguageSheetViewController.tableView
                         self.present(self.bottomSheet!, animated: true, completion: nil)
                     }
+                case .mainViewController:
+                    AppDelegate.shared?.rootViewController?.switchToMainScreen()
                 }
             }) ~ self.disposeBag
     }

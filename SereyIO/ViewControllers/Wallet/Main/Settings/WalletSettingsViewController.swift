@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/12/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -12,11 +12,13 @@ import RxSwift
 import RxBinding
 import RxDataSources
 
-class WalletSettingsViewController: BaseTableViewController {
+class WalletSettingsViewController: BaseTableViewController, LoadingIndicatorController {
     
     lazy var dataSource: RxTableViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
         return self.prepreDataSource()
     }()
+    
+    lazy var fileMediaHelper: MediaPickerHelper = .init(withPresenting: self)
     
     var viewModel: WalletSettingsViewModel!
     
@@ -34,6 +36,14 @@ class WalletSettingsViewController: BaseTableViewController {
         // Do any additional setup after loading the view.
         setUpViews()
         setUpRxObservers()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.viewModel.loadCells()
+        self.navigationController?.setNavigationBarColor(.color(.navigationBg), tintColor: .color(.navigationTint))
+        self.navigationController?.showNavigationBarBorder()
     }
     
     override func setUpLocalizedTexts() {
@@ -129,16 +139,44 @@ extension WalletSettingsViewController {
             .map { WalletSettingsViewModel.Action.itemSelected($0) }
             .bind(to: self.viewModel.didActionSubject)
             .disposed(by: self.disposeBag)
+        
+        self.fileMediaHelper.selectedPhotoSubject.asObservable()
+            .subscribe(onNext: { [weak self] pickerModel in
+                self?.viewModel.didAction(with: .photoSelected(pickerModel.first!))
+            }) ~ self.disposeBag
     }
     
     func setUpViewToPresentObservers() {
         self.viewModel.shouldPresent.asObservable()
             .subscribe(onNext: { [weak self] viewToPresent in
                 switch viewToPresent {
-                case .changePasswordController:
+                case .changePasswordController(let changePasswordViewModel):
                     if let changePasswordController = R.storyboard.password.changePasswordViewController() {
+                        changePasswordController.viewModel = changePasswordViewModel
                         self?.show(changePasswordController, sender: nil)
                     }
+                case .activateGoogleOTPContronner(let activateGoogleOTPViewModel):
+                    if let activateGoogleOTPController = R.storyboard.googleOTP.activateGoogleOTP2ViewController() {
+                        activateGoogleOTPController.viewModel = activateGoogleOTPViewModel
+                        self?.show(CloseableNavigationController(rootViewController: activateGoogleOTPController), sender: nil)
+                    }
+                case .activeBiometryViewController(let activeBiometryViewModel):
+                    if let activeBiometryViewController = R.storyboard.biometry.activeBiometryViewController() {
+                        activeBiometryViewController.viewModel = activeBiometryViewModel
+                        self?.show(CloseableNavigationController(rootViewController: activeBiometryViewController), sender: nil)
+                    }
+                case .choosePhotoController:
+                    self?.fileMediaHelper.showImagePicker()
+                case .bottomListViewController(let bottomMenuListViewModel):
+                    let bottomMenuViewController = BottomMenuViewController(bottomMenuListViewModel)
+                    self?.present(bottomMenuViewController, animated: true, completion: nil)
+                case .profileGalleryController:
+                    let profileGalleryViewController = ProfileGalleryViewController()
+                    profileGalleryViewController.hidesBottomBarWhenPushed = true
+                    profileGalleryViewController.viewModel = .init()
+                    self?.show(profileGalleryViewController, sender: nil)
+                case .loading(let loading):
+                    loading ? self?.showLoading() : self?.dismissLoading()
                 }
             }) ~ self.disposeBag
     }

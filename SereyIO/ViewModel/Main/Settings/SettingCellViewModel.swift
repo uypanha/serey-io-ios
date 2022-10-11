@@ -3,12 +3,14 @@
 //  Emergency
 //
 //  Created by Phanha Uy on 12/4/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
 import RxCocoa
 import RxSwift
+import CountryPicker
+import FlagKit
 
 class SettingCellViewModel: ImageTextCellViewModel {
     
@@ -22,8 +24,12 @@ class SettingCellViewModel: ImageTextCellViewModel {
 
 enum SettingType {
     case myWallet
+    case country
     case lagnauge
     case notificationSettings
+    case sereyPrice
+    case myReferralId
+    case sereyDrum
     case sereyApps
     case version
     
@@ -32,15 +38,28 @@ enum SettingType {
             switch self {
             case .myWallet:
                 return ImageTextModel(image: R.image.walletIcon(), titleText: R.string.settings.myWallet.localized())
+            case .country:
+                let country = PreferenceStore.shared.currentCountry
+                let image = country == nil ? R.image.globalIcon() : country?.icon
+                return ImageTextModel(image: image, imageUrl: country?.iconUrl, titleText: "Country (\(country?.countryName ?? "Global"))")
             case .lagnauge:
                 let text = String(format: R.string.settings.language.localized(), LanguageManger.shared.currentLanguage.languageText ?? "")
                 return ImageTextModel(image: R.image.languageIcon(), titleText: text)
             case .notificationSettings:
                 return ImageTextModel(image: R.image.tabNotification(), titleText: R.string.settings.notificationSettings.localized())
+            case .sereyPrice:
+                let price = CoinPriceManager.shared.sereyPrice.value
+                let priceString = price == 0 ? "Loading..." : "\(price.currencyFormat())"
+                let title = "Serey Price <font color=\"red\">($\(priceString))</font>"
+                return ImageTextModel(image: R.image.currencyIcon(), titleText: title, isHtml: true)
             case .sereyApps:
-                return ImageTextModel(image: R.image.sereyAppsIcon(), titleText: R.string.settings.sereyApps.localized())
+                return ImageTextModel(image: R.image.aboutIcon(), titleText: R.string.settings.sereyApps.localized())
             case .version:
                 return ImageTextModel(image: R.image.aboutIcon(), titleText: R.string.settings.version.localized(), subTitle: self.subTitle)
+            case .myReferralId:
+                return .init(image: R.image.myReferralIdIcon(), titleText: "My Referral ID")
+            case .sereyDrum:
+                return .init(image: R.image.drumsLogo(), titleText: "Drums")
             }
         }
     }
@@ -59,7 +78,7 @@ enum SettingType {
     var indicatorAccessory: Bool {
         get {
             switch self {
-            case .version:
+            case .version, .sereyPrice:
                 return false
             default:
                 return true

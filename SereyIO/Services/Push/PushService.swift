@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/23/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -13,6 +13,8 @@ import AnyCodable
 import Moya
 
 class PushService: AppService<PushApi> {
+    
+    private var pushProvider: MoyaProvider<PushApi>!
     
     private func provider(_ accessToken: String? = nil) -> MoyaProvider<PushApi> {
         var plugins: [PluginType] = []
@@ -32,8 +34,8 @@ class PushService: AppService<PushApi> {
             .asObservable()
             .filter { $0.data != nil }
             .flatMap { response -> Observable<NotificationResponse> in
-                return self.provider(response.data?.token ?? "")
-                    .rx.requestObject(.register(username: username, token: token), type: NotificationResponse.self)
+                self.pushProvider = self.provider(response.data?.token ?? "")
+                return self.pushProvider.rx.requestObject(.register(username: username, token: token), type: NotificationResponse.self)
                     .asObservable()
             }.asObservable()
     }
@@ -43,8 +45,8 @@ class PushService: AppService<PushApi> {
             .asObservable()
             .filter { $0.data != nil }
             .flatMap { response -> Observable<NotificationResponse> in
-                return self.provider(response.data?.token ?? "")
-                    .rx.requestObject(.remove(username: username), type: NotificationResponse.self)
+                self.pushProvider = self.provider(response.data?.token ?? "")
+                return self.pushProvider.rx.requestObject(.remove(username: username), type: NotificationResponse.self)
                     .asObservable()
             }.asObservable()
     }
@@ -54,8 +56,8 @@ class PushService: AppService<PushApi> {
         .asObservable()
         .filter { $0.data != nil }
         .flatMap { response -> Observable<NotificationResponse> in
-            return self.provider(response.data?.token ?? "")
-                .rx.requestObject(.updateToken(username: username, token: token), type: NotificationResponse.self)
+            self.pushProvider = self.provider(response.data?.token ?? "")
+            return self.pushProvider.rx.requestObject(.updateToken(username: username, token: token), type: NotificationResponse.self)
                 .asObservable()
         }.asObservable()
     }

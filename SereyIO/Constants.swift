@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/9/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -40,6 +40,14 @@ public struct Constants {
         return (ConfigSetting.includeWallet.value() as NSString).boolValue
     }
     
+    static var showReward: Bool {
+        return (ConfigSetting.showReward.value() as NSString).boolValue
+    }
+    
+    static var showDrum: Bool {
+        return (ConfigSetting.drumEnabled.value() as NSString).boolValue
+    }
+    
     public static let limitPerPage: Int = 10
     
     static var uploadImageUrl: String {
@@ -67,7 +75,7 @@ public struct Constants {
     
     static var termAndConditionsUrl: URL? {
         get {
-            return URL(string: "\(ConfigSetting.urlProcol.value() + ConfigSetting.baseDomain.value())/term-service")
+            return URL(string: "\(ConfigSetting.urlProcol.value() + ConfigSetting.baseDomain.value())/term-of-service")
         }
     }
     
@@ -87,6 +95,8 @@ fileprivate enum ConfigSetting {
     case urlProcol
     case includeWallet
     case notificationCenterUrl
+    case showReward
+    case drumEnabled
     
     private var key: String {
         switch self {
@@ -104,6 +114,10 @@ fileprivate enum ConfigSetting {
             return "INCLUDE_WALLET"
         case .notificationCenterUrl:
             return "Notificaton Center URL"
+        case .showReward:
+            return "SHOW_REWARD"
+        case .drumEnabled:
+            return "DRUM_ENABLED"
         }
     }
     

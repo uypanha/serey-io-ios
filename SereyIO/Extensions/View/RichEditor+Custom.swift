@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 3/7/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -30,6 +30,14 @@ public enum CRichEditorOption: RichEditorOption {
         //.header(1),
         .outdent, .indent, .orderedList,
         .unorderedList, .link, .image
+    ]
+    
+    public static let allExeptAttachment: [CRichEditorOption] = [
+        .bold, .italic,
+        .strike, .underline,
+        //.header(1),
+        .outdent, .indent, .orderedList,
+        .unorderedList, .link
     ]
     
     // MARK: RichEditorOption

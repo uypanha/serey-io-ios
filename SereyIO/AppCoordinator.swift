@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/9/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -27,8 +27,6 @@ class AppCoordinator {
         if PreferenceStore.shared.isAppRunBefore {
             return
         }
-        
-        PreferenceStore.shared.isAppRunBefore = true
         
         // Removing data from keychain
         // TODO: (PŁ) remove all data ??

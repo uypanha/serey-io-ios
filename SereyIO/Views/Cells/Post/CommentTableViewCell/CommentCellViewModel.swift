@@ -3,10 +3,10 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 3/9/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxCocoa
 import RxSwift
 import RxBinding
@@ -53,7 +53,7 @@ class CommentCellViewModel: PostCellViewModel, ShouldReactToAction {
     override func notifyDataChanged(_ data: PostModel?) {
         super.notifyDataChanged(data)
         
-        self.contentAttributedString.onNext(data?.description?.htmlAttributed(size: 12))
+        self.contentAttributedString.onNext(data?.descriptionText?.htmlAttributed(size: 12))
         self.conversationText.onNext(String(format: R.string.post.viewConversation.localized(), "\(data?.answerCount ?? 0)"))
     }
 }

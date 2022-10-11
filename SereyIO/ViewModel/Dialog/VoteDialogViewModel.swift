@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/16/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -18,6 +18,7 @@ class VoteDialogViewModel: BaseViewModel, ShouldReactToAction {
         case flagComment
         case upvotePost
         case flagPost
+        case upvoteDrum
         
         var minusText: String {
             switch self {
@@ -32,12 +33,34 @@ class VoteDialogViewModel: BaseViewModel, ShouldReactToAction {
             switch self {
             case .upvotePost:
                 return R.string.post.upVotePost.localized()
+            case .upvoteDrum:
+                return "Upvote Drum"
             case .upVoteComment:
                 return R.string.post.upVoteComment.localized()
             case .flagComment:
                 return R.string.post.flagComment.localized()
             default:
                 return R.string.post.flagPost.localized()
+            }
+        }
+        
+        var maximumVote: Float {
+            switch self {
+            case .upVoteComment, .flagComment, .upvoteDrum:
+                return 10
+            default:
+                return 100
+            }
+        }
+        
+        var defaultValue: Float {
+            switch self {
+            case .upVoteComment, .flagComment:
+                return 10
+            case .upvoteDrum:
+                return 5
+            default:
+                return 100
             }
         }
     }
@@ -50,18 +73,20 @@ class VoteDialogViewModel: BaseViewModel, ShouldReactToAction {
     
     let voteType: BehaviorRelay<VoteType>
     let voteCount: BehaviorRelay<Float>
+    let maximum: BehaviorRelay<Float>
     
     let titleText: BehaviorSubject<String?>
     let pregressText: BehaviorSubject<String?>
     
     let shouldConfirm: PublishSubject<Int>
     
-    init(_ currentVote: Float, type: VoteType) {
+    init(type: VoteType) {
         self.voteType = BehaviorRelay(value: type)
-        self.voteCount = BehaviorRelay(value: currentVote)
+        self.voteCount = BehaviorRelay(value: type.defaultValue)
         self.titleText = BehaviorSubject(value: nil)
         self.pregressText = BehaviorSubject(value: nil)
         self.shouldConfirm = PublishSubject()
+        self.maximum = .init(value: type.maximumVote)
         super.init()
         
         setUpRxObservers()

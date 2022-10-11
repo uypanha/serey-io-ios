@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 7/1/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -19,6 +19,7 @@ class WalletCardCollectionViewCell: BaseCollectionViewCell {
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var vwShimmer: FBShimmeringView!
     @IBOutlet weak var sereyLabel: UILabel!
+    @IBOutlet weak var valueUsdLabel: UILabel!
     
     @IBOutlet weak var sereyImageView: UIImageView!
     @IBOutlet weak var cardHeightConstraint: NSLayoutConstraint!
@@ -32,6 +33,8 @@ class WalletCardCollectionViewCell: BaseCollectionViewCell {
                 cellModel.titleText ~> self.titleLabel.rx.text,
                 cellModel.cardColor ~> self.cardView.rx.backgroundColor,
                 cellModel.valueText ~> self.valueLabel.rx.text,
+                cellModel.valueUsdText ~> self.valueUsdLabel.rx.text,
+                cellModel.valueUsdText.map { $0 == nil } ~> self.valueUsdLabel.rx.isHidden,
                 cellModel.isShimmering.asObservable()
                     .subscribe(onNext: { [weak self] isShimmering in
                         self?.prepareShimmering(isShimmering)
@@ -57,8 +60,8 @@ class WalletCardCollectionViewCell: BaseCollectionViewCell {
 extension WalletCardCollectionViewCell {
     
     func prepareShimmering(_ isShimmering: Bool) {
-        let backgroundColor = isShimmering ? ColorName.shimmering.color.withAlphaComponent(0.5) : UIColor.clear
-        let textColor = isShimmering ? ColorName.shimmering.color.withAlphaComponent(0.5) : UIColor.white
+        let backgroundColor = isShimmering ? .color(.shimmering).withAlphaComponent(0.5) : UIColor.clear
+        let textColor = isShimmering ? .color(.shimmering).withAlphaComponent(0.5) : UIColor.white
         let cornerRadius : CGFloat = isShimmering ? 8 : 0
         
         self.titleLabel.backgroundColor = backgroundColor
@@ -73,7 +76,7 @@ extension WalletCardCollectionViewCell {
         self.sereyImageView.isHidden = isShimmering
         
         if isShimmering {
-            self.cardView.backgroundColor = ColorName.shimmering.color
+            self.cardView.backgroundColor = .color(.shimmering)
         }
         
         DispatchQueue.main.async {

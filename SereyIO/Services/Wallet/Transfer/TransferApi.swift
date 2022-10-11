@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 7/28/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -24,6 +24,8 @@ enum TransferApi {
     case getAccountHistory
     
     case cancelPowerDown(signTrx: String, trxId: Int)
+    
+    case delegatePower(signTrx: String, trxId: Int)
 }
 
 extension TransferApi: AuthorizedApiTargetType {
@@ -62,6 +64,12 @@ extension TransferApi: AuthorizedApiTargetType {
                 "trxId"     : trxId,
                 "signTrx"   : signTrx
             ]
+        case .delegatePower(let signTrx, let trxId):
+            return [
+                "trx_type"  : "delegate",
+                "trxId"     : trxId,
+                "signTrx"   : signTrx
+            ]
         default:
             return [:]
         }
@@ -83,6 +91,8 @@ extension TransferApi: AuthorizedApiTargetType {
             return "/api/v1/transfer/powerDownSerey"
         case .cancelPowerDown:
             return "/api/v1/transfer/cancelPowerSerey"
+        case .delegatePower:
+            return "/api/v1/transfer/transferVestingShares"
         }
     }
     
@@ -91,6 +101,7 @@ extension TransferApi: AuthorizedApiTargetType {
     }
     
     var task: Task {
+        print("Request Body: \(String(describing: try? parameters.stringify()))")
         return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
     }
     

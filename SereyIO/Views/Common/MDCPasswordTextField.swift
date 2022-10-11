@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 3/12/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import MaterialComponents
 
-class MDCPasswordTextField: MDCTextField {
+class MDCPasswordTextField: MDCOutlinedTextField {
 
     lazy var disposeBag = DisposeBag()
     lazy var passwordToggleImageView: UIImageView? = { [unowned self] in

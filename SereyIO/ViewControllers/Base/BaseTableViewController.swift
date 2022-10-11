@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/6/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -18,6 +18,7 @@ open class BaseTableViewController: UITableViewController, LocalizeProtocol, Not
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.tableView.dataSource = nil
         overrideBackItem()
         registerForNotifs()
     }

@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/15/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -11,7 +11,6 @@ import Moya
 import RxSwift
 import RxCocoa
 import Alamofire
-import ObjectMapper
 
 /// An `Error` emitted by `AppService Provider`.
 enum AppError: Error {

@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/28/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -14,12 +14,13 @@ import RxBinding
 class BaseInitTransactionViewModel: BaseViewModel {
     
     let transferService: TransferService
-    
     let isLoading: BehaviorSubject<Bool>
+    let didTransactionUpdate: PublishSubject<Void>
     
     override init() {
         self.transferService = .init()
         self.isLoading = .init(value: false)
+        self.didTransactionUpdate = .init()
         super.init()
     }
 }

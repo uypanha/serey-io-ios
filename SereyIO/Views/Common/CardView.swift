@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 12/17/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -35,7 +35,7 @@ class CardView: UIView {
         }
     }
     
-    @IBInspectable var shadowOffsetHeight: Int = 3 {
+    @IBInspectable var shadowOffsetHeight: Int = 2 {
         didSet {
             reloadView()
         }
@@ -47,7 +47,7 @@ class CardView: UIView {
         }
     }
     
-    @IBInspectable var shadowOpacity: Float = 0.3 {
+    @IBInspectable var shadowOpacity: Float = 0.1 {
         didSet {
             reloadView()
         }
@@ -63,6 +63,17 @@ class CardView: UIView {
         didSet {
             reloadView()
         }
+    }
+    
+    init(_ showShadow: Bool = true) {
+        super.init(frame: .init())
+        
+        self.showShadow = showShadow
+        self.backgroundColor = .white
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
     
     override func awakeFromNib() {

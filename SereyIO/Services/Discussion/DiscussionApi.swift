@@ -3,17 +3,18 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/26/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
 import Moya
+import CountryPicker
 
 enum DiscussionApi {
     
     case getCategories
     
-    case getDiscussions(DiscussionType, QueryDiscussionsBy)
+    case getDiscussions(DiscussionType, PaginationRequestModel)
     
     case getPostDetail(permlink: String, authorName: String)
     
@@ -30,14 +31,36 @@ enum DiscussionApi {
     case flag(permlink: String, author: String, weight: Int)
     
     case downVote(permlink: String, author: String)
+    
+    case getSereyCountries
+    
+    case getReportTypes
+    
+    case reportPost(postId: String, typeId: String, description: String)
+    
+    case hidePost(String)
+    
+    case unhidePost(String)
 }
 
 extension DiscussionApi: AuthorizedApiTargetType {
     
     var parameters: [String : Any] {
         switch self {
-        case .getDiscussions(let type, let query):
-            return query.prepareParameters(type)
+        case .getCategories:
+            if let country = PreferenceStore.shared.currentCountry {
+                return [ "type" : country.countryName.lowercased() ]
+            }
+            return [:]
+        case .getDiscussions(let type, let pageModel):
+            var parameters: [String: Any] = pageModel.parameters
+            type.params.forEach { param in
+                parameters[param.key] = param.value
+            }
+            if let country = PreferenceStore.shared.currentCountry {
+                parameters["country_name"] = country.countryName
+            }
+            return parameters
         case .getPostDetail(let permlink, let authorName):
             return [
                 "permlink"      : permlink,
@@ -49,7 +72,11 @@ extension DiscussionApi: AuthorizedApiTargetType {
                 "typeId"    : type.typeId
             ]
         case .submitPost(let data):
-            return data.parameters
+            var parameters = data.parameters
+            if let country = PreferenceStore.shared.currentCountry {
+                parameters["country_name"] = country.countryName
+            }
+            return parameters
         case .submitComment(let data):
             return data.parameters
         case .deletPost(let username, let permlink):
@@ -74,6 +101,20 @@ extension DiscussionApi: AuthorizedApiTargetType {
                 "author"    : author,
                 "permlink"  : permlink
             ]
+        case .reportPost(let postId, let typeId, let description):
+            return [
+                "post_id" : postId,
+                "report_type_id" : typeId,
+                "description" : description
+            ]
+        case .hidePost(let id):
+            return [
+                "post_id"   : id
+            ]
+        case .unhidePost(let id):
+            return [
+                "post_id"   : id
+            ]
         default:
             return [:]
         }
@@ -86,7 +127,7 @@ extension DiscussionApi: AuthorizedApiTargetType {
         case .getDiscussions(let type, _):
             return "/api/v1/sereyweb/\(type.path)"
         case .getPostDetail:
-            return "/api/v1/sereyweb/findDetailBypermlink"
+            return "/api/v1/sereyweb/getDetailByPermlink"
         case .getCommentReply:
             return "/api/v1/sereyweb/findRepliesOrCommentsByUserId"
         case .submitPost:
@@ -101,12 +142,22 @@ extension DiscussionApi: AuthorizedApiTargetType {
             return "/api/v1/vote/downvote"
         case .flag:
             return "/api/v1/vote/flag"
+        case .getSereyCountries:
+            return "/api/v1/general/get_serey_countries"
+        case .getReportTypes:
+            return "/api/v1/general/get_report_types"
+        case .reportPost:
+            return "/api/v1/general/report_posts"
+        case .hidePost:
+            return "/api/v1/general/hide_posts"
+        case .unhidePost:
+            return "/api/v1/general/unhide_posts"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .submitPost, .submitComment, .deletPost, .upVote, .downVote, .flag:
+        case .submitPost, .submitComment, .deletPost, .upVote, .downVote, .flag, .reportPost, .hidePost, .unhidePost:
             return .post
         default:
             return .get
@@ -115,12 +166,10 @@ extension DiscussionApi: AuthorizedApiTargetType {
     
     var task: Task {
         switch self {
-        case .getDiscussions, .getPostDetail, .getCommentReply:
+        case .getDiscussions, .getPostDetail, .getCommentReply, .getCategories, .getSereyCountries, .getReportTypes:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
-        case .submitPost, .submitComment, .deletPost, .upVote, .flag, .downVote:
+        case .submitPost, .submitComment, .deletPost, .upVote, .flag, .downVote, .reportPost, .hidePost, .unhidePost:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
-        default:
-            return .requestPlain
         }
     }
     
@@ -135,15 +184,24 @@ fileprivate extension DiscussionType {
     var path: String {
         switch self {
         case .trending:
-            return "getPostsByTrending"
+            return "getAllPostsByTrending"
         case .hot:
-            return "getPostsByHot"
+            return "getAllPostsByHot"
         case .new:
-            return "findByNew"
+            return "getAllPostsByNew"
         case .byUser:
-            return "findByUserId"
+            return "getAllPostsByUserId"
         case .byCategoryId:
             return "getPostsByCategoryId"
+        }
+    }
+    
+    var params: [String: Any] {
+        switch self {
+        case .byUser(let username):
+            return ["userId" : username]
+        default:
+            return [:]
         }
     }
 }

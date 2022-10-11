@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/9/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -13,25 +13,26 @@ class FMDataParser {
     private init() { }
     
     func parseDeepLink(_ userInfo: [AnyHashable: Any]) -> DeeplinkType? {
-        if let category = userInfo["Category"] as? String {
-            switch(NotificationCategory(rawValue: category)) {
-            case .news?:
-                if let value = userInfo["Value"] as? String {
-                    return DeeplinkType.news(value: value)
-                }
-            case .reward?:
-                if let value = userInfo["Value"] as? String {
-                    return DeeplinkType.reward(value: value)
+        if let type = userInfo["type"] as? String {
+            let actor = (userInfo["actor"] as? String) ?? ""
+            
+            switch type {
+            case "FOLLOW":
+                return .followFrom(username: actor)
+            case "COMMENT", "VOTE":
+                if let information = userInfo["information"] as? String {
+                    if let jsonData = information.data(using: .utf8) {
+                        let jsonDecoder = JSONDecoder()
+                        if let data = try? jsonDecoder.decode(NotificationInformationModel.self, from: jsonData) {
+                            return .post(permlink: data.postPermlink ?? "", author: data.postAuthor ?? "")
+                        }
+                    }
                 }
             default:
                 break
             }
         }
+        
         return nil
     }
-}
-
-enum NotificationCategory: String {
-    case news = "NEWS"
-    case reward = "REWARD"
 }

@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/15/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -24,11 +24,15 @@ extension UITableViewCell: ReusableView, NibLoadableView {}
 
 extension UITableView {
     
-    func register<T: UITableViewCell>(_: T.Type) {
-        let bundle = Bundle(for: T.self)
-        let nib = UINib(nibName: T.nibName, bundle: bundle)
-        
-        register(nib, forCellReuseIdentifier: T.defaultReuseIdentifier)
+    func register<T: UITableViewCell>(_: T.Type, isNib: Bool = true) {
+        if isNib {
+            let bundle = Bundle(for: T.self)
+            let nib = UINib(nibName: T.nibName, bundle: bundle)
+            
+            register(nib, forCellReuseIdentifier: T.defaultReuseIdentifier)
+        } else {
+            register(T.self, forCellReuseIdentifier: T.defaultReuseIdentifier)
+        }
     }
     
     func dequeueReusableCell<T: UITableViewCell>(forIndexPath indexPath: IndexPath) -> T {
@@ -60,11 +64,15 @@ extension UICollectionReusableView: ReusableView, NibLoadableView {}
 
 extension UICollectionView {
     
-    func register<T: UICollectionViewCell>(_: T.Type) {
-        let bundle = Bundle(for: T.self)
-        let nib = UINib(nibName: T.nibName, bundle: bundle)
-        
-        self.register(nib, forCellWithReuseIdentifier: T.defaultReuseIdentifier)
+    func register<T: UICollectionViewCell>(_: T.Type, isNib: Bool = true) {
+        if isNib {
+            let bundle = Bundle(for: T.self)
+            let nib = UINib(nibName: T.nibName, bundle: bundle)
+            
+            self.register(nib, forCellWithReuseIdentifier: T.defaultReuseIdentifier)
+        } else {
+            self.register(T.self, forCellWithReuseIdentifier: T.defaultReuseIdentifier)
+        }
     }
     
     func register<T: UICollectionReusableView>(_: T.Type, forSupplementaryViewOfKind: String) {

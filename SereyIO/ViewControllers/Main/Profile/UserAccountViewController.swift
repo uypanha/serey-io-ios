@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/25/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -14,6 +14,7 @@ import MaterialComponents
 
 class UserAccountViewController: BaseViewController, AlertDialogController, LoadingIndicatorController {
     
+    @IBOutlet weak var uploadProfileButton: UIButton!
     @IBOutlet weak var profileView: ProfileView!
     @IBOutlet weak var profileNameLabel: UILabel!
     @IBOutlet weak var postCountLabel: UILabel!
@@ -24,7 +25,16 @@ class UserAccountViewController: BaseViewController, AlertDialogController, Load
     @IBOutlet weak var profileContainerView: UIView!
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var followLoadingIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var tabBar: MDCTabBar!
+    @IBOutlet weak var tabBar: MDCTabBarView!
+    
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    var lastContentOffset: CGFloat = 0
+    
+    var maxTopOffset: CGFloat = 60
+    let minTopOffset: CGFloat = 0
+    var previousScrollOffset: CGFloat = 0
+    
+    lazy var fileMediaHelper: MediaPickerHelper = .init(withPresenting: self)
     
     private var tabItems: [UITabBarItem] = [] {
         didSet {
@@ -47,12 +57,22 @@ class UserAccountViewController: BaseViewController, AlertDialogController, Load
         setUpViews()
         setUpRxObservers()
         viewModel.downloadData()
+        DispatchQueue.main.async {
+            self.maxTopOffset = self.profileContainerView.frame.height
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        self.uploadProfileButton.makeMeCircular()
         setupSlideScrollView(slides: self.slideViews.map { $0.view })
+        if self.slideViews.count > 0 && self.slideViews.count == self.tabItems.count && !self.viewModel.didScrolledToIndex {
+            let item = self.tabItems[0]
+            self.tabBar.setSelectedItem(item, animated: true)
+            self.parentScrollView.scrollRectToVisible(self.slideViews[item.tag].view.frame, animated: false)
+            self.viewModel.didScrolledToIndex = true
+        }
     }
 }
 
@@ -63,24 +83,23 @@ extension UserAccountViewController {
         self.navigationController?.removeNavigationBarBorder()
         self.parentScrollView.refreshControl = UIRefreshControl()
         self.followLoadingIndicator.isHidden = true
+        self.uploadProfileButton.setTitle("", for: .normal)
         prepareTabBar()
     }
     
     func prepareTabBar() {
-        tabBar.tintColor = ColorName.primary.color
+        tabBar.tintColor = .color(.primary)
         tabBar.setTitleColor(.gray, for: .normal)
-        tabBar.setTitleColor(ColorName.primary.color, for: .selected)
-        tabBar.selectedItemTitleFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        tabBar.unselectedItemTitleFont = UIFont.systemFont(ofSize: 14, weight: .medium)
-        tabBar.displaysUppercaseTitles = false
+        tabBar.setTitleColor(.color(.primary), for: .selected)
+        
+        tabBar.setTitleFont(UIFont.systemFont(ofSize: 14, weight: .medium), for: .selected)
+        tabBar.setTitleFont(UIFont.systemFont(ofSize: 14, weight: .medium), for: .normal)
         tabBar.rippleColor = .clear
-        tabBar.enableRippleBehavior = false
-        tabBar.inkColor = .clear
-        tabBar.itemAppearance = .titles
-        tabBar.alignment = .justified
+        tabBar.selectionIndicatorStrokeColor = .color(.primary)
+        
         tabBar.selectionIndicatorTemplate = TabBarIndicator()
-        tabBar.bottomDividerColor = ColorName.border.color
-        tabBar.delegate = self
+        tabBar.bottomDividerColor = .color(.border)
+        tabBar.tabBarDelegate = self
     }
     
     func addSlidesToScrollView() {
@@ -116,9 +135,13 @@ extension UserAccountViewController {
         viewModels.forEach { viewModel in
             switch viewModel {
             case is PostTableViewModel:
-                slides.append(PostTableViewController(style: .plain).then { $0.viewModel = viewModel as? PostTableViewModel })
+                slides.append(PostTableViewController(style: .plain).then {
+                    $0.viewModel = viewModel as? PostTableViewModel
+                    $0.scrollViewDelegate = self
+                })
             case is CommentsListViewModel:
                 let commentReplyViewController = CommentReplyTableViewController(viewModel as! CommentsListViewModel)
+                commentReplyViewController.scrollViewDelegate = self
                 slides.append(commentReplyViewController)
             default:
                 slides.append(UIViewController())
@@ -129,10 +152,60 @@ extension UserAccountViewController {
 }
 
 // MARK: - UIScrollViewDelegate
-extension UserAccountViewController: MDCTabBarDelegate {
+extension UserAccountViewController: MDCTabBarViewDelegate {
     
-    func tabBar(_ tabBar: MDCTabBar, willSelect item: UITabBarItem) {
+    func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
         self.contentScrollView.scrollRectToVisible(self.slideViews[item.tag].view.frame, animated: true)
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+extension UserAccountViewController: UIScrollViewDelegate {
+    
+    func prepareScrollingSwitchView(_ scrollView: UIScrollView) {
+        let scrollDiff = (scrollView.contentOffset.y - previousScrollOffset)
+        let isScrollingDown = scrollDiff > 0
+        let isScrollingUp = scrollDiff < 0
+        if self.canAnimateHeader(scrollView) {
+            let currentOffset = abs(self.topConstraint.constant)
+            var newOffset = currentOffset
+            if isScrollingDown {
+                newOffset = min(maxTopOffset, currentOffset + abs(scrollDiff))
+            } else if isScrollingUp {
+                print("isScrollingUp")
+                newOffset = max(minTopOffset, currentOffset - abs(scrollDiff))
+            }
+            print("Current Offset ==> \(currentOffset), New Offset ==> \(newOffset), scrollDiff == \(scrollDiff)")
+            if newOffset != currentOffset {
+                self.topConstraint.constant = -newOffset//.update(offset: newOffset).activate()
+                setScrollPosition(scrollView)
+                previousScrollOffset = scrollView.contentOffset.y
+            }
+            
+            if newOffset >= (self.maxTopOffset / 2) {
+                self.title = self.viewModel.username.value
+            } else {
+                self.title = nil
+            }
+        }
+    }
+    
+    func canAnimateHeader (_ scrollView: UIScrollView) -> Bool {
+        let currentTopConstant = self.topConstraint.constant
+        let scrollViewMaxHeight = scrollView.frame.height + currentTopConstant
+        return scrollView.contentSize.height > scrollViewMaxHeight
+    }
+    
+    func setScrollPosition(_ scrollView: UIScrollView) {
+        scrollView.contentOffset = .zero
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.lastContentOffset = scrollView.contentOffset.y
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.prepareScrollingSwitchView(scrollView)
     }
 }
 
@@ -156,6 +229,11 @@ extension UserAccountViewController {
             .map { UserAccountViewModel.Action.followPressed }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
+        
+        self.uploadProfileButton.rx.tap.asObservable()
+            .map { UserAccountViewModel.Action.changeProfilePressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpContentChangedObservers() {
@@ -175,23 +253,24 @@ extension UserAccountViewController {
             self.viewModel.postCountText ~> self.postCountLabel.rx.text,
             self.viewModel.followerCountText ~> self.followersCountLabel.rx.text,
             self.viewModel.followingCountText ~> self.followingCountLabel.rx.text,
-            self.viewModel.isFollowHidden ~> self.followButton.rx.isHidden
+            self.viewModel.isFollowHidden ~> self.followButton.rx.isHidden,
+            self.viewModel.isUploadProfileHidden ~> self.uploadProfileButton.rx.isHidden
         ]
         
         self.viewModel.isFollowed.asObservable()
             .subscribe(onNext: { [weak self] isFollowed in
                 if let isFollowed = isFollowed {
-                    let titleColor = isFollowed ? UIColor.white : ColorName.primary.color
+                    let titleColor = isFollowed ? UIColor.white : .color(.primary)
                     self?.followButton.setTitleColor(titleColor, for: .normal)
                     if isFollowed {
                         self?.followButton.setTitle(R.string.account.unfollow.localized(), for: .normal)
                         self?.followButton.primaryStyle()
                     } else {
                         self?.followButton.setTitle(R.string.account.follow.localized(), for: .normal)
-                        self?.followButton.customBorderStyle(with: ColorName.primary.color, border: 1.5, isCircular: false)
+                        self?.followButton.customBorderStyle(with: .color(.primary), border: 1.5, isCircular: false)
                     }
                 } else {
-                    self?.followButton.setTitleColor(ColorName.primary.color, for: .normal)
+                    self?.followButton.setTitleColor(.color(.primary), for: .normal)
                     self?.followButton.customBorderStyle(with: .lightGray, border: 1, isCircular: false)
                     self?.followButton.setTitle(R.string.account.followUnfollow.localized(), for: .normal)
                 }
@@ -202,6 +281,11 @@ extension UserAccountViewController {
                 if endRefreshing {
                     self?.parentScrollView?.refreshControl?.endRefreshing()
                 }
+            }) ~ self.disposeBag
+        
+        self.fileMediaHelper.selectedPhotoSubject.asObservable()
+            .subscribe(onNext: { [weak self] pickerModel in
+                self?.viewModel.didAction(with: .photoSelected(pickerModel.first!))
             }) ~ self.disposeBag
     }
     
@@ -247,6 +331,40 @@ extension UserAccountViewController {
                     (self.tabBarController as? MainTabBarViewController)?.showVoteDialog(voteDialogViewModel)
                 case .downVoteDialogController(let downvoteDialogViewModel):
                     (self.tabBarController as? MainTabBarViewController)?.showDownvoteDialog(downvoteDialogViewModel)
+                case .draftListViewController(let draftListViewModel):
+                    let draftListViewController = DraftListViewController(draftListViewModel)
+                    draftListViewController.hidesBottomBarWhenPushed = true
+                    self.show(draftListViewController, sender: nil)
+                case .choosePhotoController:
+                    self.fileMediaHelper.showImagePicker()
+                case .bottomListViewController(let bottomMenuListViewModel):
+                    let bottomMenuViewController = BottomMenuViewController(bottomMenuListViewModel)
+                    self.present(bottomMenuViewController, animated: true, completion: nil)
+                case .profileGalleryController:
+                    let profileGalleryViewController = ProfileGalleryViewController()
+                    profileGalleryViewController.hidesBottomBarWhenPushed = true
+                    profileGalleryViewController.viewModel = .init()
+                    self.show(profileGalleryViewController, sender: nil)
+                case .reportPostController(let viewModel):
+                    let reportPostViewController = ReportPostViewController()
+                    reportPostViewController.viewModel = viewModel
+                    self.present(UINavigationController(rootViewController: reportPostViewController).then {
+                        $0.modalPresentationStyle = .fullScreen
+                    }, animated: true, completion: nil)
+                case .confirmViewController(let viewModel):
+                    let confirmDialogViewController = ConfirmDialogViewController(viewModel)
+                    let bottomSheet = BottomSheetViewController(contentViewController: confirmDialogViewController)
+                    self.present(bottomSheet, animated: true, completion: nil)
+                case .shareLink(let url, let message):
+                    let disspatchGroup = DispatchGroup()
+                    disspatchGroup.enter()
+                    let activityVC = UIActivityViewController(activityItems: [message, url], applicationActivities: nil)
+                    activityVC.excludedActivityTypes = [.airDrop, .addToReadingList]
+                    disspatchGroup.leave()
+                    
+                    disspatchGroup.notify(queue: .main) {
+                        self.present(activityVC, animated: true, completion: nil)
+                    }
                 }
             }) ~ self.disposeBag
     }

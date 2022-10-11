@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 6/17/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -13,18 +13,15 @@ import RxBinding
 import MaterialComponents
 import RxKeyboard
 
-class SignUpWalletViewController: BaseViewController, KeyboardController {
+class SignUpWalletViewController: BaseViewController, KeyboardController, AlertDialogController {
     
     fileprivate lazy var keyboardDisposeBag = DisposeBag()
     
     @IBOutlet weak var signUpLabel: UILabel!
-    @IBOutlet weak var usernameTextField: MDCTextField!
+    @IBOutlet weak var usernameTextField: MDCOutlinedTextField!
     @IBOutlet weak var ownerKeyTextField: MDCPasswordTextField!
     @IBOutlet weak var nextButton: LoadingButton!
     @IBOutlet weak var signUpMessageLabel: UITextView!
-    
-    var userNameController: MDCTextInputControllerOutlined?
-    var ownerKeyController: MDCTextInputControllerOutlined?
     
     var viewModel: SignUpWalletViewModel!
     
@@ -48,8 +45,9 @@ class SignUpWalletViewController: BaseViewController, KeyboardController {
 extension SignUpWalletViewController {
     
     func setUpViews() {
-        self.userNameController = self.usernameTextField.primaryController()
-        self.ownerKeyController = self.ownerKeyTextField.primaryController()
+        self.usernameTextField.primaryStyle()
+        self.ownerKeyTextField.primaryStyle()
+        
         self.usernameTextField.textColor = .lightGray
         self.nextButton.primaryStyle()
         self.signUpMessageLabel.delegate = self
@@ -112,12 +110,13 @@ extension SignUpWalletViewController {
         setUpContentChangedObservers()
         setUpShouldPresentObservers()
         setUpControlsObservers()
+        setUpShouldPresentErrorObservers()
         setUpTabSelfToDismissKeyboard()?.disposed(by: self.disposeBag)
     }
     
     func setUpContentChangedObservers() {
-        self.viewModel.userNameTextFieldViewModel.bind(with: usernameTextField, controller: userNameController)
-        self.viewModel.ownerKeyTextFieldViewModel.bind(with: ownerKeyTextField, controller: ownerKeyController)
+        self.viewModel.userNameTextFieldViewModel.bind(withMDC: usernameTextField)
+        self.viewModel.ownerKeyTextFieldViewModel.bind(withMDC: ownerKeyTextField)
         
         self.viewModel.shouldEnbleSignUp ~> self.nextButton.rx.isEnabled ~ self.disposeBag
     }
@@ -133,20 +132,21 @@ extension SignUpWalletViewController {
         self.viewModel.shouldPresent.asObservable()
             .subscribe(onNext: { [unowned self] viewToPresent in
                 switch viewToPresent {
-                case .createCredentialController:
-                    SereyWallet.shared?.rootViewController.switchToSetUpCredential()
-                case .chooseSecurityMethodController:
-                    SereyWallet.shared?.rootViewController.switchToChooseSecurityMethod()
+                case .createCredentialViewController(let createCredentialViewModel):
+                    SereyWallet.shared?.rootViewController.switchToCreateCredential(viewModel: createCredentialViewModel)
                 case .dismiss:
                     self.navigationController?.popViewController(animated: true)
                 case .loading(let loading):
                     self.ownerKeyTextField.isEnabled = !loading
-                    if loading {
-                        self.nextButton.showLoading()
-                    } else {
-                        self.nextButton.hideLoading()
-                    }
+                    self.nextButton.isLoading = loading
                 }
+            }) ~ self.disposeBag
+    }
+    
+    func setUpShouldPresentErrorObservers() {
+        self.viewModel.shouldPresentError.asObservable()
+            .subscribe(onNext: { [weak self] errorInfo in
+                self?.showDialogError(errorInfo)
             }) ~ self.disposeBag
     }
 }

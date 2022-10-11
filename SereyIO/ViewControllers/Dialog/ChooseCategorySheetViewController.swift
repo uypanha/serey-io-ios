@@ -3,34 +3,21 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/6/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
 import RxCocoa
 import RxSwift
 import RxBinding
+import RxDataSources
+import AlignedCollectionViewFlowLayout
 
-class ChooseCategorySheetViewController: BaseViewController {
-
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var titleContainerView: UIView!
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var allButton: UIButton!
-    @IBOutlet weak var hieghtConstraint: NSLayoutConstraint!
+class ChooseCategorySheetViewController: BaseCollectionViewController {
     
-    var backgroundGesture: UITapGestureRecognizer? {
-        didSet {
-//            guard let guesture = self.backgroundGesture else { return }
-//
-//            guesture.cancelsTouchesInView = false
-//            view.addGestureRecognizer(guesture)
-//            guesture.rx.event.asObservable()
-//                .subscribe(onNext: { [weak self] _ in
-//                    self?.dismiss(animated: true, completion: nil)
-//                }).disposed(by: self.disposeBag)
-        }
-    }
+    lazy var dataSource: RxCollectionViewSectionedReloadDataSource<SectionItem> = { [unowned self] in
+        return self.prepreDataSource()
+    }()
     
     var viewModel: ChooseCategorySheetViewModel!
     
@@ -41,30 +28,55 @@ class ChooseCategorySheetViewController: BaseViewController {
         setUpViews()
         setUpRxObservers()
     }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        containerView.roundCorners(corners: [.topLeft, .topRight], radius: 8)
-    }
 }
 
 // MARK: - Preparations & Tools
 extension ChooseCategorySheetViewController {
     
     func setUpViews() {
-        self.backgroundGesture = UITapGestureRecognizer()
-        self.titleContainerView.addBorders(edges: [.bottom], color: ColorName.border.color)
-        self.hieghtConstraint.constant = UIScreen.main.bounds.height * 0.4
-        
-        prepareTableView()
+        self.view.backgroundColor = .white
+        setUpCollectionView()
     }
     
-    func prepareTableView() {
-        self.tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = .none
+    func setUpCollectionView() {
+        self.collectionView.backgroundColor = .clear
+        self.collectionView.contentInset = .init(top: 0, left: 24, bottom: 24, right: 24)
+        let flowLayout = (self.collectionView.collectionViewLayout as? AlignedCollectionViewFlowLayout)
+        flowLayout?.horizontalAlignment = .left
+        flowLayout?.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        flowLayout?.itemSize = UICollectionViewFlowLayout.automaticSize
+        flowLayout?.minimumLineSpacing = 12
+        flowLayout?.minimumInteritemSpacing = 12
+        flowLayout?.sectionInset = .init(top: 4, left: 0, bottom: 16 + self.bottomSafeAreaHeight, right: 0)
+        self.collectionView.register(FilterHeaderCollectionViewCell.self)
+        self.collectionView.register(HeaderCollectionViewCell.self)
+        self.collectionView.register(ProductCategoryCollectionViewCell.self, forCellWithReuseIdentifier: "MDCChipCollectionViewCell")
+    }
+    
+    func prepreDataSource() -> RxCollectionViewSectionedReloadDataSource<SectionItem> {
+        let dataSource = RxCollectionViewSectionedReloadDataSource<SectionItem>(configureCell: { (datasource, collectionView, indexPath, item) -> UICollectionViewCell in
+            switch item {
+            case is FilterHeaderCellViewModel:
+                let cell: FilterHeaderCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+                cell.updateSize(UIScreen.main.bounds.size)
+                cell.cellModel = item as? FilterHeaderCellViewModel
+                return cell
+            case is HeaderCellViewModel:
+                let cell: HeaderCollectionViewCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+                cell.cellModel = item as? HeaderCellViewModel
+                cell.updateSize(UIScreen.main.bounds.size)
+                return cell
+            case is ProductCategoryCellViewModel:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MDCChipCollectionViewCell", for: indexPath) as! ProductCategoryCollectionViewCell
+                cell.chipView.primaryStyle()
+                cell.cellModel = item as? ProductCategoryCellViewModel
+                return cell
+            default:
+                return UICollectionViewCell()
+            }
+        })
         
-        self.tableView.register(PostCategoryTableViewCell.self)
+        return dataSource
     }
 }
 
@@ -73,29 +85,24 @@ extension ChooseCategorySheetViewController {
     
     func setUpRxObservers() {
         setUpContentChangedObservers()
-        setUpShouldPresentObservers()
-        
-        self.allButton.rx.tap.asObservable()
-            .map { ChooseCategorySheetViewModel.Action.allCategoryPressed }
+        setUpControlObservers()
+        setUpViewToPresentObservers()
+    }
+    
+    func setUpControlObservers() {
+        self.collectionView.rx.itemSelected.asObservable()
+            .map { ChooseCategorySheetViewModel.Action.itemSelected($0) }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
     }
     
     func setUpContentChangedObservers() {
         self.viewModel.cells.asObservable()
-            .bind(to: self.tableView.rx.items){ tableView, index, item in
-                switch item {
-                case is PostCategoryCellViewModel:
-                    let cell: PostCategoryTableViewCell = tableView.dequeueReusableCell(forIndexPath: IndexPath(row: index, section: 0))
-                    cell.cellModel = item as? PostCategoryCellViewModel
-                    return cell
-                default:
-                    return UITableViewCell()
-                }
-            } ~ self.disposeBag
+            .bind(to: self.collectionView.rx.items(dataSource: self.dataSource))
+            ~ self.disposeBag
     }
     
-    func setUpShouldPresentObservers() {
+    func setUpViewToPresentObservers() {
         self.viewModel.shouldPresent.asObservable()
             .subscribe(onNext: { [weak self] viewToPresent in
                 switch viewToPresent {

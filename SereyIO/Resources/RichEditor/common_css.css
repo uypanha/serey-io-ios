@@ -5,6 +5,11 @@ body {
     font-style: normal;
 }
 
+span {
+    font-family: sans-serif !important;;
+    font-size: (font-size-to-replace)pt !important;
+}
+
 /* unvisited link */
 a {
     color: #00a0d2;

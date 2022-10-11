@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 1/11/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -43,6 +43,19 @@ class RealmManager {
                 try? realm.commitWrite()
             }
             completion()
+        } catch let error as NSError {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    static func delete(_ obj: Object) {
+        do {
+            let realm = try Realm()
+            
+            try? realm.write {
+                realm.delete(obj)
+            }
+            try? realm.commitWrite()
         } catch let error as NSError {
             fatalError(error.localizedDescription)
         }

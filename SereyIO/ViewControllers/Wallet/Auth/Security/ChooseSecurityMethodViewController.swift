@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 6/15/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -102,7 +102,7 @@ extension ChooseSecurityMethodViewController {
                         self?.show(activeBiometryController, sender: nil)
                     }
                 case .activeGoogleOTPController(let activeGoogleOTPViewModel):
-                    if let activeGoogleOTPController = R.storyboard.googleOTP.activateGoogleOTPViewController() {
+                    if let activeGoogleOTPController = R.storyboard.googleOTP.activateGoogleOTP2ViewController() {
                         activeGoogleOTPController.viewModel = activeGoogleOTPViewModel
                         self?.show(activeGoogleOTPController, sender: nil)
                     }

@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/9/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -11,10 +11,16 @@ import Locksmith
 
 class KeychainStore: SimpleStore {
     
+    let serviceName: String
+    
+    init(_ serviceName: String = KeychainConfiguration.dataServiceName) {
+        self.serviceName = serviceName
+    }
+    
     func setValue(_ value: Any?, forKey key: String) {
         if let value = value {
             do {
-                try Locksmith.saveOrUpdateData(data: [KeychainConfiguration.dataServiceName: value], forUserAccount: key)
+                try Locksmith.saveOrUpdateData(data: [self.serviceName: value], forUserAccount: key)
             } catch {
                 log.error("Could not save or update data to keychain for key: \(key)")
                 if let error = error as? LocksmithError {
@@ -34,7 +40,7 @@ class KeychainStore: SimpleStore {
     }
     
     func value(forKey key: String) -> Any? {
-        if let data = Locksmith.loadDataForUserAccount(userAccount: key), let value = data[KeychainConfiguration.dataServiceName] {
+        if let data = Locksmith.loadDataForUserAccount(userAccount: key), let value = data[self.serviceName] {
             return value
         }
         return nil

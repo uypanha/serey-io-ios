@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/27/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -19,13 +19,10 @@ class PowerDownViewController: BaseViewController, KeyboardController, AlertDial
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var powerDownMessageLabel: UILabel!
     
-    @IBOutlet weak var accountTextField: MDCTextField!
-    @IBOutlet weak var amountTextField: MDCTextField!
+    @IBOutlet weak var accountTextField: MDCOutlinedTextField!
+    @IBOutlet weak var amountTextField: CurrencyTextField!
     
     @IBOutlet weak var powerDownButton: LoadingButton!
-    
-    var accountFieldController: MDCTextInputControllerOutlined?
-    var amountFieldController: MDCTextInputControllerOutlined?
     
     var viewModel: PowerDownViewModel!
     
@@ -40,8 +37,8 @@ class PowerDownViewController: BaseViewController, KeyboardController, AlertDial
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController?.setNavigationBarColor(.color(.primary), tintColor: .white)
         self.navigationController?.removeNavigationBarBorder()
-        self.navigationController?.setNavigationBarColor(ColorName.primary.color, tintColor: .white)
     }
     
     override func viewDidLayoutSubviews() {
@@ -62,12 +59,13 @@ class PowerDownViewController: BaseViewController, KeyboardController, AlertDial
 extension PowerDownViewController {
     
     func setUpViews() {
-        self.headerView.backgroundColor = ColorName.primary.color
+        self.headerView.backgroundColor = .color(.primary)
         
-        self.accountFieldController = self.accountTextField.primaryController()
-        self.amountFieldController = self.amountTextField.primaryController()
+        self.accountTextField.primaryStyle()
+        self.amountTextField.primaryStyle()
         self.accountTextField.isEnabled = false
         
+        self.amountTextField.keyboardType = .decimalPad
         self.amountTextField.leftView = UIImageView(image: R.image.amountIcon()).then { $0.tintColor = .gray }
         self.amountTextField.leftViewMode = .always
         self.accountTextField.leftView = UIImageView(image: R.image.accountIcon()).then { $0.tintColor = .gray }
@@ -89,8 +87,8 @@ extension PowerDownViewController {
     }
     
     func setUpContentChangedObservers() {
-        self.viewModel.accountTextFieldViewModel.bind(with: self.accountTextField, controller: self.accountFieldController)
-        self.viewModel.amountTextFieldViewModel.bind(with: self.amountTextField, controller: self.amountFieldController)
+        self.viewModel.accountTextFieldViewModel.bind(withMDC: self.accountTextField)
+        self.amountTextField.viewModel = self.viewModel.amountTextFieldViewModel
         
         self.viewModel.isPowerDownEnabled ~> self.powerDownButton.rx.isEnabled ~ self.disposeBag
     }

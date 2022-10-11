@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/4/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -46,6 +46,7 @@ class PostTableViewCell: BaseTableViewCell {
     @IBOutlet weak var commentCountLabel: UILabel!
     
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var shareButton: UIButton!
     
     private var categoryGesture: UITapGestureRecognizer? {
         didSet {
@@ -151,6 +152,7 @@ class PostTableViewCell: BaseTableViewCell {
         self.profileViewGesture = UITapGestureRecognizer()
         self.upVoteGesture = UITapGestureRecognizer()
         self.downVoteGesture = UITapGestureRecognizer()
+        self.thumbnailImageView.kf.indicatorType = .activity
     }
 }
 
@@ -158,7 +160,7 @@ class PostTableViewCell: BaseTableViewCell {
 extension PostTableViewCell {
     
     private func prepareShimmering(_ isShimmering: Bool) {
-        let backgroundColor = isShimmering ? ColorName.shimmering.color.withAlphaComponent(0.5) : UIColor.clear
+        let backgroundColor = isShimmering ? .color(.shimmering).withAlphaComponent(0.5) : UIColor.clear
         let cornerRadius : CGFloat = isShimmering ? 8 : 0
         let isHidden = isShimmering
         
@@ -171,10 +173,11 @@ extension PostTableViewCell {
         self.thumbnailImageView.backgroundColor = backgroundColor
         self.titleLabel.backgroundColor = backgroundColor
         self.titleLabel.setRadius(all: cornerRadius)
-        self.sereyValueContainerView.isHidden = isHidden
+        self.sereyValueContainerView.isHidden = !Constants.showReward || isHidden
         self.upVoteContainerView.isHidden = isHidden
         self.downVoteContainerView.isHidden = isHidden
         self.commentContainerView.isHidden = isHidden
+        self.shareButton.isHidden = isHidden
         
         DispatchQueue.main.async {
             self.vwShimmer.isShimmering = isShimmering
@@ -182,13 +185,13 @@ extension PostTableViewCell {
     }
     
     func preparepVoteTypeStyle(_ voteType: VotedType?) {
-        let downVoteTintColor: UIColor = voteType == .flag ? ColorName.primary.color : .lightGray
+        let downVoteTintColor: UIColor = voteType == .flag ? .color(.primary) : .lightGray
         let downVoteIcon: UIImage? = voteType == .flag ? R.image.downVoteFilledIcon() : R.image.downVoteIcon()
         self.downVoteImageView.tintColor = downVoteTintColor
         self.downVoteCountLabel.textColor = downVoteTintColor
         self.downVoteImageView.image = downVoteIcon
         
-        let upVoteTintColor: UIColor = voteType == .upvote ? ColorName.primary.color : .lightGray
+        let upVoteTintColor: UIColor = voteType == .upvote ? .color(.primary) : .lightGray
         let upVoteIcon: UIImage? = voteType == .upvote ? R.image.upVoteFilledIcon() : R.image.upVoteIcon()
         self.upVoteImageView.tintColor = upVoteTintColor
         self.upVoteCountLabel.textColor = upVoteTintColor
@@ -228,6 +231,11 @@ extension PostTableViewCell {
         self.downVoteGesture?.rx.event.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 self?.cellModel?.didFlagPressed()
+            }).disposed(by: self.disposeBag)
+        
+        self.shareButton.rx.tap.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                self?.cellModel?.handleSharePressed()
             }).disposed(by: self.disposeBag)
     }
 }

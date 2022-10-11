@@ -3,16 +3,18 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 7/30/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
 
 struct ClaimRewardModel: Codable {
     
-    var message: String
+    var message: String?
+    var Message: String?
     
     enum CodingKeys: String, CodingKey {
-        case message = "Message"
+        case message = "message"
+        case Message = "Message"
     }
 }

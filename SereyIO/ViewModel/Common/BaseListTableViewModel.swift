@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 3/30/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -38,7 +38,11 @@ class BaseListTableViewModel: BaseCellViewModel, CollectionMultiSectionsProvider
     }
     
     func prepareDatasource() -> RxTableViewSectionedReloadDataSource<SectionItem> {
-        return RxTableViewSectionedReloadDataSource<SectionItem>(configureCell: configureCell)
+        let datasource = RxTableViewSectionedReloadDataSource<SectionItem>(configureCell: configureCell)
+        datasource.titleForHeaderInSection = { datasource, section in
+            return self.sectionTitle(in: section)
+        }
+        return datasource
     }
     
     open func configureCell(_ datasource: TableViewSectionedDataSource<SectionItem>, _ tableView: UITableView, _ indexPath: IndexPath, _ item: CellViewModel) -> UITableViewCell {

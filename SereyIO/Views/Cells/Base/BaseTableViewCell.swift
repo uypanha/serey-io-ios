@@ -3,11 +3,12 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/15/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
 import RxSwift
+import MaterialComponents
 
 class BaseTableViewCell: UITableViewCell {
     
@@ -15,6 +16,7 @@ class BaseTableViewCell: UITableViewCell {
         return DisposeBag()
     }()
     
+    lazy var rippleController = MDCRippleTouchController()
     lazy var borderViews: [UIView] = []
     
     override func prepareForReuse() {

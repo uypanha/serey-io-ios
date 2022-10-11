@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/9/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -51,8 +51,8 @@ extension RootViewController {
     }
     
     func switchToBoardingScreen() {
-        if let boardingViewController = R.storyboard.onBoard.boardingViewController() {
-            boardingViewController.viewModel = BoardingViewModel()
+        if let boardingViewController = R.storyboard.onBoard.onBoardingViewController() {
+            boardingViewController.viewModel = .init()
             self.animateFadeTransition(to: UINavigationController(rootViewController: boardingViewController).then {
                 $0.removeNavigationBarBorder()
             })
@@ -74,14 +74,11 @@ extension RootViewController {
                 // reset the deeplink back no nil, so it will not be triggered more than once
                 self.deeplink = nil
             default:
-//                if let mainNavigationController = currentViewController as? MainNavigationViewController {
-//
-//                    mainNavigationController.handleDeeplink(deeplink)
-//
-//                    // reset the deeplink back no nil, so it will not be triggered more than once
-//                    self.deeplink = nil
-//                }
-                break
+                if let mainNavigationController = currentViewController as? MainTabBarViewController {
+                    mainNavigationController.handleDeeplink(deeplink)
+                    // reset the deeplink back no nil, so it will not be triggered more than once
+                    self.deeplink = nil
+                }
             }
         }
     }

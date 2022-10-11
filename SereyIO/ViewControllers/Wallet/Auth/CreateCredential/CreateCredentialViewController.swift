@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 6/19/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -12,16 +12,15 @@ import RxSwift
 import RxBinding
 import MaterialComponents
 
-class CreateCredentialViewController: BaseViewController, KeyboardController {
+class CreateCredentialViewController: BaseViewController, KeyboardController, LoadingIndicatorController {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var passwordTextField: MDCPasswordTextField!
     @IBOutlet weak var confirmPasswordTextField: MDCPasswordTextField!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var nextButton: UIButton!
-    
-    var passwordController: MDCTextInputControllerOutlined?
-    var confirmPasswordController: MDCTextInputControllerOutlined?
+    @IBOutlet weak var skipMessageLabel: UILabel!
+    @IBOutlet weak var skipButton: UIButton!
     
     var viewModel: CreateCredentialViewModel!
     
@@ -39,9 +38,11 @@ extension CreateCredentialViewController {
     
     func setUpViews() {
         self.nextButton.primaryStyle()
+        self.skipButton.setTitleColor(.color(.primary), for: .normal)
+        self.skipButton.customStyle(with: .clear)
         
-        self.passwordController = self.passwordTextField.primaryController()
-        self.confirmPasswordController = self.confirmPasswordTextField.primaryController()
+        self.passwordTextField.primaryStyle()
+        self.confirmPasswordTextField.primaryStyle()
     }
 }
 
@@ -56,8 +57,8 @@ extension CreateCredentialViewController {
     }
     
     func setUpContentChangedObservers() {
-        self.viewModel.passwordTextFieldViewModel.bind(with: passwordTextField, controller: passwordController)
-        self.viewModel.confirmPasswordTextFieldViewModel.bind(with: confirmPasswordTextField, controller: confirmPasswordController)
+        self.viewModel.passwordTextFieldViewModel.bind(withMDC: passwordTextField)
+        self.viewModel.confirmPasswordTextFieldViewModel.bind(withMDC: confirmPasswordTextField)
         
         self.viewModel.shouldEnbleNext ~> self.nextButton.rx.isEnabled ~ self.disposeBag
     }
@@ -67,17 +68,21 @@ extension CreateCredentialViewController {
             .map { _ in CreateCredentialViewModel.Action.nextPressed }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
+        
+        self.skipButton.rx.tap.asObservable()
+            .map { _ in CreateCredentialViewModel.Action.skipPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
     }
     
     func setUpShouldPresentObservers() {
         self.viewModel.shouldPresent.asObservable()
-            .subscribe(onNext: { viewToPresent in
+            .subscribe(onNext: { [weak self] viewToPresent in
                 switch viewToPresent {
-                case .chooseSecurityMethodController(let chooseSecurityMethodViewModel):
-                    if let chooseSecurityViewController = R.storyboard.auth.chooseSecurityMethodViewController() {
-                        chooseSecurityViewController.viewModel = chooseSecurityMethodViewModel
-                        self.show(chooseSecurityViewController, sender: nil)
-                    }
+                case .loading(let loading):
+                    loading ? self?.showLoading() : self?.dismissLoading()
+                case .chooseSecurityMethodController:
+                    SereyWallet.shared?.rootViewController.switchToChooseSecurityMethod()
                 }
             }) ~ self.disposeBag
     }

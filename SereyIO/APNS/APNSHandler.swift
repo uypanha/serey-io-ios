@@ -3,14 +3,13 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/9/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
 import UserNotifications
 import Firebase
 import FirebaseMessaging
-import FirebaseInstanceID
 
 enum APNSNotificationType: String {
     case local = "local"
@@ -30,7 +29,7 @@ class APNSHandler: NSObject {
     fileprivate lazy var tokenStore = APNSTokenStore()
     private var messageHandlers = [APNSNotificationHandler]()
     
-    required init(withApplication application: UIApplication) {
+    required init(with application: UIApplication) {
         self.application = application
         super.init()
         
@@ -65,6 +64,9 @@ class APNSHandler: NSObject {
         logNotification(userInfo: userInfo)
         
         let isExternalPush = userTap || application?.applicationState != .active
+        if !userTap && application?.applicationState == .active {
+            NotificationDispatcher.sharedInstance.dispatch(.notificationRecived)
+        }
         
         let eventType = self.prepareEventType(userInfo)
         
@@ -86,12 +88,6 @@ class APNSHandler: NSObject {
 
 // MARK: - Preparation/Register
 extension APNSHandler {
-    
-    func setupFirebaseTokenRefresh() {
-        NotificationCenter
-            .default
-            .addObserver(self, selector: #selector(self.tokenRefreshNotification), name: Notification.Name.InstanceIDTokenRefresh, object: nil)
-    }
     
     fileprivate func logNotification(userInfo: [AnyHashable: Any]) {
         do {
@@ -160,7 +156,6 @@ extension APNSHandler {
     }
     
     func applicationDidEnterBackground() {
-//        Messaging.messaging().shouldEstablishDirectChannel = false
         log.info("Disconnected from FCM.")
     }
     
@@ -172,28 +167,13 @@ extension APNSHandler {
 // MARK: - Firebase
 extension APNSHandler {
     
-    @objc func tokenRefreshNotification(_ notification: Notification) {
-        
-        InstanceID.instanceID().instanceID { (result, error) in
-            if let error = error {
-                print("Error fetching remote instance ID: \(error)")
-            } else if let result = result {
-                print("Remote instance ID token: \(result.token)")
-                self.tokenStore.saveToken(result.token)
-            }
-        }
-        
-        connectToFcm()
-    }
-    
     func connectToFcm() {
         // Won't connect since there is no token
-        InstanceID.instanceID().instanceID { (result, error) in
+        Messaging.messaging().token { token, error in
             if let error = error {
                 print("Error fetching remote instance ID: \(error)")
-            } else if let result = result {
-                print("Remote instance ID token: \(result.token)")
-//                Messaging.messaging().shouldEstablishDirectChannel = true
+            } else if let token = token {
+                print("Remote instance ID token: \(token)")
             }
         }
     }
@@ -227,7 +207,7 @@ extension APNSHandler: UNUserNotificationCenterDelegate {
 // MARK: - FIRMessagingDelegate
 extension APNSHandler: MessagingDelegate {
     
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         if let token = Messaging.messaging().fcmToken {
             tokenStore.saveToken(token)
         }

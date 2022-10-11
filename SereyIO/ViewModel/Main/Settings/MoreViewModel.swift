@@ -3,15 +3,17 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/10/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxCocoa
 import RxSwift
 import RxBinding
 import RxRealm
 import Then
+import CountryPicker
+import RealmSwift
 
 class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, CollectionMultiSectionsProviderModel, ShouldReactToAction, ShouldPresent {
     
@@ -21,6 +23,7 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case termsPressed
         case signOutPressed
         case signOutConfirmed
+        case countrySelected(CountryModel?)
     }
     
     enum ViewToPresent {
@@ -32,6 +35,9 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
         case webViewController(WebViewViewModel)
         case walletViewController
         case signOutDialog
+        case bottomListViewController(BottomListMenuViewModel)
+        case myReferralIdViewConroller
+        case sereyDrumController
     }
     
     // input:
@@ -45,18 +51,20 @@ class MoreViewModel: BaseCellViewModel, DownloadStateNetworkProtocol, Collection
     let cellModels: BehaviorRelay<[SectionType: [CellViewModel]]>
     
     var userService: UserService
+    let userProfileService: UserProfileService
     lazy var downloadDisposeBag: DisposeBag = DisposeBag()
     lazy var isDownloading = BehaviorRelay<Bool>(value: false)
     
     override init() {
-        self.userInfo = BehaviorRelay(value: AuthData.shared.loggedUserModel)
-        self.cells = BehaviorRelay(value: [])
-        self.cellModels = BehaviorRelay(value: [:])
-        self.userService = UserService()
+        self.userInfo = .init(value: AuthData.shared.loggedUserModel)
+        self.cells = .init(value: [])
+        self.cellModels = .init(value: [:])
+        self.userService = .init()
+        self.userProfileService = .init()
         super.init()
         
         setUpRxObservers()
-        cellModels.accept(prepareCellModels())
+        refreshScreen()
         registerForNotifs()
     }
     
@@ -74,6 +82,7 @@ extension MoreViewModel {
         if AuthData.shared.isUserLoggedIn && !self.isDownloading.value {
             self.isDownloading.accept(true)
             self.fetchProfile(username)
+            self.getAllUserProfilePicture(username)
         }
     }
     
@@ -83,6 +92,29 @@ extension MoreViewModel {
                 response.data.result.save()
                 if self?.userInfo.value == nil {
                     self?.userInfo.accept(response.data.result)
+                }
+            }, onError: { [weak self] error in
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    func getAllUserProfilePicture(_ username: String) {
+        self.userProfileService.getAllProfilePicture(username)
+            .subscribe(onNext: { [weak self] profiles in
+                profiles.saveAll()
+                self?.refreshScreen()
+            }) ~ self.disposeBag
+    }
+    
+    func fetchIpTrace() {
+        self.userService.fetchIpTrace()
+            .subscribe(onNext: { [weak self] data in
+                if let loc = data?.split(separator: "\n").first(where: { $0.contains("loc=") }) {
+                    let countryCode = loc.replacingOccurrences(of: "loc=", with: "")
+                    if let country = CountryManager.shared.country(withCode: countryCode) {
+                        self?.didAction(with: .countrySelected(.init(countryName: country.countryName, iconUrl: nil)))
+                    }
                 }
             }, onError: { [weak self] error in
                 let errorInfo = ErrorHelper.prepareError(error: error)
@@ -121,30 +153,44 @@ extension MoreViewModel {
         
         if AuthData.shared.isUserLoggedIn {
             if Constants.includeWallet {
-                sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value), SettingCellViewModel(.myWallet, true)]
+                sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value), SettingCellViewModel(.myWallet)]
             } else {
-                sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value, true)]
+                sectionItems[.profile] = [ProfileCellViewModel(self.userInfo.value)]
             }
+            sectionItems[.profile]?.append(SettingCellViewModel(.myReferralId))
+            if Constants.showDrum {
+                sectionItems[.profile]?.append(SettingCellViewModel(.sereyDrum, true))
+            }
+            (sectionItems[.profile]?.last as? SettingCellViewModel)?.showSeperatorLine.onNext(true)
         } else {
             let signInCellViewModel = SignInCellViewModel().then { [weak self] in self?.setUpSignInCellViewModelObservers($0) }
             #if DEVELOPMENT
-                let walletCellViewModel = SettingCellViewModel(.myWallet, true)
+                let walletCellViewModel = SettingCellViewModel(.myWallet)
                 sectionItems[.signIn] = [signInCellViewModel, walletCellViewModel]
             #else
                 sectionItems[.signIn] = [signInCellViewModel]
             #endif
+            if Constants.showDrum {
+                sectionItems[.signIn]?.append(SettingCellViewModel(.sereyDrum))
+            }
+            (sectionItems[.signIn]?.last as? SettingCellViewModel)?.showSeperatorLine.onNext(true)
         }
-        sectionItems[.general] = [SettingCellViewModel(.lagnauge), SettingCellViewModel(.notificationSettings, true)]
+        sectionItems[.general] = [
+            SettingCellViewModel(.country),
+            SettingCellViewModel(.lagnauge),
+            SettingCellViewModel(.notificationSettings, true)
+        ]
         sectionItems[.about] = [
-//            SettingCellViewModel(.sereyApps),
+            SettingCellViewModel(.sereyApps),
+//            SettingCellViewModel(.sereyPrice),
             SettingCellViewModel(.version, true)
         ]
         
         if AuthData.shared.isUserLoggedIn {
             let signOutButtonProperties = ButtonProperties().then {
                 $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-                $0.textColor = ColorName.primaryRed.color
-                $0.borderColor = ColorName.primaryRed.color
+                $0.textColor = .color(.primaryRed)
+                $0.borderColor = .color(.primaryRed)
                 $0.isCircular = false
             }
             let signOutButtonModel = ButtonCellViewModel(R.string.auth.signOut.localized(), signOutButtonProperties).then { [unowned self] in
@@ -170,6 +216,10 @@ extension MoreViewModel {
         
         return sectionItems
     }
+    
+    func refreshScreen() {
+        cellModels.accept(prepareCellModels())
+    }
 }
 
 // MARK: - Action Handlers
@@ -187,6 +237,28 @@ fileprivate extension MoreViewModel {
                 self.shouldPresent(.notificationSettingsController)
             case .myWallet:
                 self.shouldPresent(.walletViewController)
+            case .country:
+                let items = ChooseCountryOption.allCases.map { $0.cellModel }
+                let bottomListMenuViewModel = BottomListMenuViewModel(header: "Choose Country Option", items)
+                bottomListMenuViewModel.shouldSelectMenuItem
+                    .map { $0 as? ChooseCountryOptionCellViewModel }
+                    .map { $0?.option }
+                    .subscribe(onNext: { [unowned self] option in
+                        guard let option = option else { return }
+                        switch option {
+                        case .chooseCountry:
+                            self.handleChooseCountry()
+                        case .detectAutomatically:
+                            self.fetchIpTrace()
+                        case .global:
+                            self.didAction(with: .countrySelected(nil))
+                        }
+                    }) ~ self.disposeBag
+                self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
+            case .myReferralId:
+                self.shouldPresent(.myReferralIdViewConroller)
+            case .sereyDrum:
+                self.shouldPresent(.sereyDrumController)
             default:
                 break
             }
@@ -194,6 +266,19 @@ fileprivate extension MoreViewModel {
             let accountViewModel = UserAccountViewModel(user)
             self.shouldPresent(.accountViewController(accountViewModel))
         }
+    }
+    
+    func handleChooseCountry() {
+        let countries: Results<CountryModel> = CountryModel().queryAll()
+        let items: [ImageTextCellViewModel] = countries.toArray().map { CountryCellViewModel($0) }
+        
+        let bottomListMenuViewModel = BottomListMenuViewModel(header: "Select your preffered country", items)
+        bottomListMenuViewModel.shouldSelectMenuItem
+            .map { $0 as? CountryCellViewModel }
+            .subscribe(onNext: { [unowned self] countryModel in
+                self.didAction(with: .countrySelected(countryModel?.country))
+            }) ~ self.disposeBag
+        self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
     }
     
     func handleOpenWebView(_ title: String, url: URL?) {
@@ -223,6 +308,11 @@ fileprivate extension MoreViewModel {
             .bind(to: self.cells)
             .disposed(by: self.disposeBag)
         
+        CoinPriceManager.shared.sereyPrice
+            .map { _ in self.prepareCellModels() }
+            .bind(to: self.cellModels)
+            .disposed(by: self.disposeBag)
+        
         self.userInfo.asObservable()
             .`do`(onNext: { [weak self] userModel in
                 if let userModel = userModel {
@@ -247,6 +337,10 @@ fileprivate extension MoreViewModel {
                     self?.shouldPresent(.signOutDialog)
                 case .signOutConfirmed:
                     AuthData.shared.removeAuthData()
+                case .countrySelected(let country):
+                    PreferenceStore.shared.currentUserCountry = country?.countryName
+                    PreferenceStore.shared.currentUserCountryIconUrl = country?.iconUrl
+                    self?.cellModels.accept(self?.prepareCellModels() ?? [:])
                 }
             }).disposed(by: self.disposeBag)
     }
@@ -275,10 +369,14 @@ extension MoreViewModel: NotificationObserver {
         guard let appNotif = notification.appNotification else { return }
         switch appNotif {
         case .languageChanged:
-            self.cellModels.accept(self.prepareCellModels())
+            DispatchQueue.main.async {
+                self.cellModels.accept(self.prepareCellModels())
+            }
         case .userDidLogin, .userDidLogOut:
-            self.userService = UserService()
-            self.userInfo.accept(AuthData.shared.loggedUserModel)
+            DispatchQueue.main.async {
+                self.userService = UserService()
+                self.userInfo.accept(AuthData.shared.loggedUserModel)
+            }
         default:
             break
         }

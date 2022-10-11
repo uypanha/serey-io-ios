@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/7/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -19,5 +19,9 @@ class CategoryCellViewModel: TextCellViewModel {
         self.category = BehaviorRelay(value: category)
         self.isSelected = BehaviorRelay(value: isSelected)
         super.init(with: title, properties: .defaultProperties(), indicatorAccessory: indicatorAccessory, isSelectionEnabled: false)
+    }
+    
+    convenience required init(_ isShimmering: Bool) {
+        fatalError("init(_:) has not been implemented")
     }
 }
