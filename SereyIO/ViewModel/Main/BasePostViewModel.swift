@@ -58,9 +58,9 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     }
     
     open func prepareEmptyViewModel(_ erroInfo: ErrorInfo) -> EmptyOrErrorViewModel {
-        return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withErrorInfo: erroInfo, actionTitle: R.string.common.tryAgain.localized(), actionCompletion: { [unowned self] in
-            self.downloadData()
-            self.discussions.renotify()
+        return EmptyOrErrorViewModel(withErrorEmptyModel: EmptyOrErrorModel(withErrorInfo: erroInfo, actionTitle: R.string.common.tryAgain.localized(), actionCompletion: { [weak self] in
+            self?.reset()
+            self?.discussions.renotify()
         }))
     }
     
@@ -150,6 +150,9 @@ extension BasePostViewModel {
             }, onError: { [unowned self] error in
                 self.isDownloading.accept(false)
                 let errorInfo = ErrorHelper.prepareError(error: error)
+                if self.discussions.value.isEmpty {
+                    self.canDownloadMorePages.accept(false)
+                }
                 self.cells.accept(self.prepareCells(self.discussions.value, true))
                 self.shouldPresentError(errorInfo)
             }) ~ self.downloadDisposeBag
