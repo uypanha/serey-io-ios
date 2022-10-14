@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/7/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -29,7 +29,7 @@ class PostDetailCellViewModel: PostCellViewModel, CollectionSingleSecitionProvid
     override func notifyDataChanged(_ data: PostModel?) {
         super.notifyDataChanged(data)
         
-        self.cells.accept(self.prepareCells(data?.categoryItem ?? []))
+        self.cells.accept(self.prepareCells(data?.categories ?? []))
     }
 }
 

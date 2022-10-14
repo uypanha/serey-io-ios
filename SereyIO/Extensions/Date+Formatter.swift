@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/28/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -129,5 +129,33 @@ extension Date {
             return "\(secondsCount) seconds ago"
         }
         return "Just now"
+    }
+    
+    func timeCount(to date: Date) -> String {
+        let yearsCount = self.yearsCount(to: date)
+        if yearsCount > 0 {
+            return "\(yearsCount)y"
+        }
+        let weeksCount = self.weeksCount(to: date)
+        if weeksCount > 0 {
+            return "\(weeksCount)w"
+        }
+        let daysCount = self.daysCount(to: date)
+        if daysCount > 0 {
+            return "\(daysCount)d"
+        }
+        let hoursCount = self.hoursCount(to: date)
+        if hoursCount > 0 {
+            return "\(hoursCount)h"
+        }
+        let minutesCount = self.minutesCount(to: date)
+        if minutesCount > 0 {
+            return "\(minutesCount)m"
+        }
+        let secondsCount = self.secondsCount(to: date)
+        if secondsCount >= 3 {
+            return "\(secondsCount)s"
+        }
+        return "just now"
     }
 }

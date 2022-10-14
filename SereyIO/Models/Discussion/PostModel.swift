@@ -3,34 +3,49 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/27/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
 
 struct PostModel: Codable {
     
-    let id: Int
+    let id: String
+    let parentAuthor: String?
+    let parentPermlink: String?
     let title: String
     let permlink: String
-    let description: String?
+    let descriptionText: String?
+    let body: String?
     let shortDesc: String?
-    let authorName: String
-    let categoryItem: [String]
-    let answerCount: Int
+    let author: String
+    let categories: [String]?
+    let answerCount: Int?
     let publishDate: String
     let sereyValue: String
-    let upvote: Int
-    let voter: [String]
-    let flag: Int
-    let flagger: [String]
+    let voters: [String]
+    let flaggers: [String]
     let imageUrl: [String]?
+    let voterCount: Int
+    let flaggerCount: Int
+    let allowVote: Bool
+    let authorImageUrl: String?
     var replies: [PostModel]?
+    
+    var isHidden: Bool = false
     
     var firstThumnailURL: URL? {
         get {
             return imageUrl?.first == nil ? nil : URL(string: imageUrl!.first!)
         }
+    }
+    
+    var isVoted: Bool {
+        return self.voters.first(where: { $0 == AuthData.shared.username }) != nil
+    }
+    
+    var isFlagged: Bool {
+        return self.flaggers.first(where: { $0 == AuthData.shared.username }) != nil
     }
     
     var publishedDateString: String? {
@@ -54,19 +69,21 @@ struct PostModel: Codable {
     }
     
     var profileViewModel: ProfileViewModel {
-        get {
-            let firstLetter = authorName.first == nil ? "" : "\(authorName.first!)"
-            let uniqueColor = UIColor(hexString: PFColorHash().hex("\(authorName)"))
-            return ProfileViewModel(shortcut: firstLetter, imageUrl: nil, uniqueColor: uniqueColor)
-        }
+        let firstLetter = author.first == nil ? "" : "\(author.first!)"
+        let uniqueColor = UIColor(hexString: PFColorHash().hex("\(author)"))
+        
+//        let predicate = NSPredicate(format: "active == true AND username == %@", self.author)
+//        let defaultImage: UserProfileModel? = UserProfileModel().qeuryFirst(by: predicate)
+        let url = URL(string: self.authorImageUrl ?? "")
+        return ProfileViewModel(shortcut: firstLetter, imageUrl: url, uniqueColor: uniqueColor)
     }
     
     var votedType: VotedType? {
         get {
             if let loggerUserName = AuthData.shared.username {
-                if self.voter.contains(where: { $0 == loggerUserName }) {
+                if self.voters.contains(where: { $0 == loggerUserName }) {
                     return .upvote
-                } else if self.flagger.contains(where: { $0 == loggerUserName }) {
+                } else if self.flaggers.contains(where: { $0 == loggerUserName }) {
                     return .flag
                 }
             }
@@ -75,22 +92,48 @@ struct PostModel: Codable {
         }
     }
     
+    func prepareOptionMenuTitle() -> String {
+        if self.author != AuthData.shared.username {
+            return "How can we help?"
+        }
+        return " "
+    }
+    
+    func prepareOptionMenu() -> [PostMenu] {
+        var menu: [PostMenu] = []
+        if self.author == AuthData.shared.username {
+            menu.append(.edit)
+            if voterCount == 0 {
+                menu.append(.delete)
+            }
+        } else {
+            menu.append(.hidePost)
+            menu.append(.reportPost)
+        }
+        return menu
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
+        case parentAuthor = "parent_author"
+        case parentPermlink = "parent_permlink"
         case title
+        case author
         case permlink
-        case description
+        case descriptionText = "description"
+        case body
         case shortDesc = "short_desc"
-        case authorName
-        case categoryItem
-        case answerCount
-        case publishDate
-        case sereyValue
-        case upvote
-        case voter
-        case flag
-        case flagger
-        case imageUrl
+        case categories
+        case answerCount = "answer_count"
+        case publishDate = "publish_date"
+        case sereyValue = "serey_value"
+        case voters
+        case flaggers
+        case imageUrl = "image_url"
+        case allowVote = "allow_vote"
+        case voterCount = "voter_count"
+        case flaggerCount = "flagger_count"
+        case authorImageUrl = "author_image_url"
         case replies
     }
 }

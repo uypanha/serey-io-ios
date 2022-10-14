@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/15/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -19,7 +19,8 @@ extension UINavigationController {
         
         //  change to opaque all
         self.navigationBar.isTranslucent = false
-        self.setNavigationBarColor(ColorName.navigationBg.color, tintColor: ColorName.navigationTint.color)
+        self.view.backgroundColor = UIColor.color(.navigationBg)
+        self.setNavigationBarColor(.color(.navigationBg), tintColor: .color(.navigationTint))
     }
     
     func transparentNavigationBar() {
@@ -30,48 +31,53 @@ extension UINavigationController {
     }
     
     func removeNavigationBarBorder() {
-        self.navigationBar.shadowImage = UIImage()
+        let shadowImage = UIColor.clear.toImage()
+        self.navigationBar.shadowImage = shadowImage
+        
         if #available(iOS 13.0, *) {
             let standardAppearance = self.navigationBar.standardAppearance.copy()
             standardAppearance.shadowColor = .clear
-            standardAppearance.shadowImage = UIImage()
+            standardAppearance.shadowImage = shadowImage
             self.navigationBar.standardAppearance = standardAppearance
             
             let compactAppearance = self.navigationBar.compactAppearance?.copy()
             compactAppearance?.shadowColor = .clear
-            compactAppearance?.shadowImage = UIImage()
+            compactAppearance?.shadowImage = shadowImage
             self.navigationBar.compactAppearance = compactAppearance
             
             let scrollEdgeAppearance = self.navigationBar.scrollEdgeAppearance?.copy()
             scrollEdgeAppearance?.shadowColor = .clear
-            scrollEdgeAppearance?.shadowImage = UIImage()
+            scrollEdgeAppearance?.shadowImage = shadowImage
             self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
         }
     }
     
     func showNavigationBarBorder() {
-        self.navigationBar.shadowImage = UIColor.lightGray.withAlphaComponent(0.5).toImage()
+        let shadowColor = UIColor.color(.border)
+        let shadowImage = shadowColor.toImage()
+        self.navigationBar.shadowImage = shadowImage
+        
         if #available(iOS 13.0, *) {
             let standardAppearance = self.navigationBar.standardAppearance.copy()
-            standardAppearance.shadowColor = UIColor.lightGray.withAlphaComponent(0.5)
-            standardAppearance.shadowImage = UIColor.lightGray.withAlphaComponent(0.5).toImage()
+            standardAppearance.shadowColor = shadowColor
+            standardAppearance.shadowImage = shadowImage
             self.navigationBar.standardAppearance = standardAppearance
             
             let compactAppearance = self.navigationBar.compactAppearance?.copy()
-            compactAppearance?.shadowColor = UIColor.lightGray.withAlphaComponent(0.5)
-            compactAppearance?.shadowImage = UIColor.lightGray.withAlphaComponent(0.5).toImage()
+            compactAppearance?.shadowColor = shadowColor
+            compactAppearance?.shadowImage = shadowImage
             self.navigationBar.compactAppearance = compactAppearance
             
             let scrollEdgeAppearance = self.navigationBar.scrollEdgeAppearance?.copy()
-            scrollEdgeAppearance?.shadowColor = UIColor.lightGray.withAlphaComponent(0.5)
-            scrollEdgeAppearance?.shadowImage = UIColor.lightGray.withAlphaComponent(0.5).toImage()
+            scrollEdgeAppearance?.shadowColor = shadowColor
+            scrollEdgeAppearance?.shadowImage = shadowImage
             self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
         }
     }
     
     func setNavigationBarColor(_ color: UIColor, tintColor: UIColor, isTransparent: Bool = false) {
         self.navigationBar.backgroundColor = color
-        self.navigationBar.barTintColor = tintColor
+        self.navigationBar.barTintColor = color
         self.navigationBar.tintColor = tintColor
         self.navigationBar.titleTextAttributes = [
             .foregroundColor: tintColor
@@ -80,11 +86,13 @@ extension UINavigationController {
         if #available(iOS 13, *) {
             let standardAppearance = self.navigationBar.standardAppearance.copy()
             if (isTransparent) { standardAppearance.configureWithTransparentBackground() }
+            else { standardAppearance.configureWithOpaqueBackground() }
             standardAppearance.backgroundColor = color
             standardAppearance.titleTextAttributes = [
                 .foregroundColor: tintColor,
                 .font: UIFont.systemFont(ofSize: 17, weight: .medium)
             ]
+            applyBackButtonImage(standardAppearance)
             self.navigationBar.standardAppearance = standardAppearance
             
             let compactAppearance = self.navigationBar.compactAppearance?.copy()
@@ -94,6 +102,7 @@ extension UINavigationController {
                 .foregroundColor: tintColor,
                 .font: UIFont.systemFont(ofSize: 17, weight: .medium)
             ]
+            applyBackButtonImage(compactAppearance)
             self.navigationBar.compactAppearance = compactAppearance
             
             let scrollEdgeAppearance = self.navigationBar.scrollEdgeAppearance?.copy()
@@ -103,12 +112,22 @@ extension UINavigationController {
                 .foregroundColor: tintColor,
                 .font: UIFont.systemFont(ofSize: 17, weight: .medium)
             ]
-            self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
+            applyBackButtonImage(scrollEdgeAppearance)
+            if #available(iOS 15.0, *) {
+                self.navigationBar.scrollEdgeAppearance = standardAppearance
+            } else {
+                self.navigationBar.scrollEdgeAppearance = scrollEdgeAppearance
+            }
         } else if #available(iOS 11.0, *) {
             self.navigationBar.largeTitleTextAttributes = [
                 .foregroundColor: tintColor,
                 .font: UIFont.boldSystemFont(ofSize: 24)
             ]
         }
+    }
+    
+    @available(iOS 13.0, *)
+    private func applyBackButtonImage(_ appearance: UINavigationBarAppearance?) {
+        appearance?.setBackIndicatorImage(R.image.leftArrowIcon(), transitionMaskImage: R.image.leftArrowIcon())
     }
 }

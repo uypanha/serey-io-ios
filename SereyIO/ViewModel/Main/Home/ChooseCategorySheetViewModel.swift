@@ -3,18 +3,19 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/26/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
 import RxCocoa
 import RxSwift
+import RxDataSources
 import RxBinding
 
-class ChooseCategorySheetViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel, ShouldReactToAction, ShouldPresent {
+class ChooseCategorySheetViewModel: BaseViewModel, CollectionMultiSectionsProviderModel, ShouldReactToAction, ShouldPresent {
     
     enum Action {
-        case allCategoryPressed
+        case itemSelected(IndexPath)
     }
     
     enum ViewToPresent {
@@ -22,23 +23,23 @@ class ChooseCategorySheetViewModel: BaseCellViewModel, CollectionSingleSecitionP
     }
     
     // input:
-    lazy var didActionSubject = PublishSubject<Action>()
+    let didActionSubject: PublishSubject<Action>
     
     // output:
-    lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
+    let shouldPresentSubject: PublishSubject<ViewToPresent>
+    
+    let cells: BehaviorRelay<[SectionItem]>
     
     let categories: BehaviorRelay<[DiscussionCategoryModel]>
     let selectedCategory: BehaviorRelay<DiscussionCategoryModel?>
     
-    let cells: BehaviorRelay<[CellViewModel]>
-    let categoryDidSelected: PublishSubject<DiscussionCategoryModel?>
-    
-    init(_ categories: [DiscussionCategoryModel], _ selectedCategory: DiscussionCategoryModel?) {
-        self.categories = BehaviorRelay(value: categories)
-        self.selectedCategory = BehaviorRelay(value: selectedCategory)
+    init(categories: [DiscussionCategoryModel], _ selectedCategory: BehaviorRelay<DiscussionCategoryModel?>) {
+        self.didActionSubject = .init()
+        self.shouldPresentSubject = .init()
         
-        self.cells = BehaviorRelay(value: [])
-        self.categoryDidSelected = PublishSubject()
+        self.cells = .init(value: [])
+        self.categories = .init(value: categories)
+        self.selectedCategory = selectedCategory
         super.init()
         
         setUpRxObservers()
@@ -48,12 +49,54 @@ class ChooseCategorySheetViewModel: BaseCellViewModel, CollectionSingleSecitionP
 // MARK: - Preparations & Tools
 extension ChooseCategorySheetViewModel {
     
-    private func prepareCells(_ categories: [DiscussionCategoryModel]) -> [CellViewModel] {
-        return categories.map { PostCategoryCellViewModel($0, self.selectedCategory) }
+    func prepareCells(_ categories: [DiscussionCategoryModel]) -> [SectionItem] {
+        var sectionItems: [SectionItem] = []
+        var items: [CellViewModel] = [FilterHeaderCellViewModel(self.selectedCategory).then {
+            self.setUpFilterHeaderObservers($0)
+        }]
+        
+        var hasSubCategory: Bool = false
+        categories.forEach { mainCategory in
+            if (mainCategory.sub?.count ?? 0) > 0 {
+                hasSubCategory = true
+            }
+        }
+        
+        categories.forEach { mainCategory in
+            if mainCategory.name != "All" {
+                // ignore "All" category
+                if hasSubCategory {
+                    items.append(HeaderCellViewModel(mainCategory.name))
+                    items.append(ProductCategoryCellViewModel(mainCategory, selectedCategory: selectedCategory, title: "ALL"))
+                } else {
+                    items.append(ProductCategoryCellViewModel(mainCategory, selectedCategory: selectedCategory))
+                }
+                mainCategory.subCategories?.forEach { category in
+                    items.append(ProductCategoryCellViewModel(category, selectedCategory: selectedCategory))
+                }
+            }
+        }
+        sectionItems.append(.init(items: items))
+        return sectionItems
     }
 }
 
-// MARK: - SetUp RxOservers
+// MARK: - Action Handlers
+fileprivate extension ChooseCategorySheetViewModel {
+    
+    func handleItemSelected(_ indexPath: IndexPath) {
+        if let item = self.item(at: indexPath) as? ProductCategoryCellViewModel {
+            let category = item.category.value
+            let selectedCategory = self.selectedCategory.value
+            if category.parent != selectedCategory?.parent || category.name != selectedCategory?.name {
+                self.selectedCategory.accept(category)
+                self.shouldPresent(.dismiss)
+            }
+        }
+    }
+}
+
+// MARK: - SetUp RxObservers
 extension ChooseCategorySheetViewModel {
     
     func setUpRxObservers() {
@@ -66,21 +109,22 @@ extension ChooseCategorySheetViewModel {
             .map { self.prepareCells($0) }
             ~> self.cells
             ~ self.disposeBag
-        
-        self.selectedCategory.skip(1)
-            .subscribe(onNext: { [weak self] selectedCategory in
-                self?.categoryDidSelected.onNext(selectedCategory)
-                self?.shouldPresent(.dismiss)
-            }) ~ self.disposeBag
     }
     
     func setUpActionObservers() {
         self.didActionSubject.asObservable()
             .subscribe(onNext: { [weak self] action in
                 switch action {
-                case .allCategoryPressed:
-                    self?.selectedCategory.accept(nil)
+                case .itemSelected(let indexPath):
+                    self?.handleItemSelected(indexPath)
                 }
             }) ~ self.disposeBag
+    }
+    
+    func setUpFilterHeaderObservers(_ cellModel: FilterHeaderCellViewModel) {
+        cellModel.shouldDismiss.asObservable()
+            .map { ViewToPresent.dismiss }
+            ~> self.shouldPresentSubject
+            ~ cellModel.disposeBag
     }
 }

@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 9/3/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -39,7 +39,7 @@ class ConfirmPowerDownViewController: BaseViewController, BottomSheetProtocol {
 extension ConfirmPowerDownViewController {
     
     func setUpViews() {
-        self.amountLabel.textColor = ColorName.primary.color
+        self.amountLabel.textColor = .color(.primary)
         self.powerDownButton.primaryStyle()
     }
 }

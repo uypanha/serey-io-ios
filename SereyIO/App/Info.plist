@@ -24,6 +24,8 @@
 	<string>${app_version_code}</string>
 	<key>CHAIN_URL</key>
 	<string>${CHAIN_URL}</string>
+	<key>DRUM_ENABLED</key>
+	<string>${DRUM_ENABLED}</string>
 	<key>INCLUDE_WALLET</key>
 	<string>${INCLUDE_WALLET}</string>
 	<key>KYC_URL</key>
@@ -38,15 +40,19 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>${app_name} needs access to your camera to take photos.</string>
+	<string>${app_name} needs access to your camera to take photos and videos to upload for profile and content description.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>We use Face ID to authentiate your account.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>${app_name} needs access to your microphone to take videos to upload for content description.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>${app_name} needs access to your photo library to store photos.</string>
+	<string>${app_name} needs access to your photo library to upload photos and videos for profile and content description.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>${app_name} needs access to your photo library to store photos.</string>
+	<string>${app_name} needs access to your photo library to upload photos and videos for profile and content description.</string>
 	<key>Notificaton Center URL</key>
 	<string>${NOTIFICATION_URL}</string>
+	<key>SHOW_REWARD</key>
+	<string>${SHOW_REWARD}</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -74,5 +80,7 @@
 	<true/>
 	<key>URL_PROTOCOL</key>
 	<string>${URL_PROTOCOL}</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>${app_name} needs access to your location.</string>
 </dict>
 </plist>

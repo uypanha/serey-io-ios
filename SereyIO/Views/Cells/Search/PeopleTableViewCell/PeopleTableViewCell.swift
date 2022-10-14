@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 3/4/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -58,7 +58,7 @@ class PeopleTableViewCell: BaseTableViewCell {
 extension PeopleTableViewCell {
     
     private func prepareShimmering(_ isShimmering: Bool) {
-        let backgroundColor = isShimmering ? ColorName.shimmering.color.withAlphaComponent(0.5) : UIColor.clear
+        let backgroundColor = isShimmering ? .color(.shimmering).withAlphaComponent(0.5) : UIColor.clear
         let cornerRadius : CGFloat = isShimmering ? 8 : 0
         
         self.profileView.backgroundColor = backgroundColor

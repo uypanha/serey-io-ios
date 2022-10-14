@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/16/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -51,7 +51,7 @@ class VoteDialogViewController: BaseViewController {
 extension VoteDialogViewController {
     
     func setUpViews() {
-        self.titleContainerView.addBorders(edges: [.bottom], color: ColorName.border.color)
+        self.titleContainerView.addBorders(edges: [.bottom], color: .color(.border))
         self.confirmButton.primaryStyle()
         self.cancelButton.secondaryStyle()
         
@@ -77,6 +77,11 @@ extension VoteDialogViewController {
     
     func setUpControlsObservers() {
         (self.progressSlider.rx.value <-> self.viewModel.voteCount) ~ self.disposeBag
+        
+        self.viewModel.maximum.asObservable()
+            .subscribe(onNext: { [weak self] maximum in
+                self?.progressSlider.maximumValue = maximum
+            }) ~ self.disposeBag
         
         self.confirmButton.rx.tap.map { VoteDialogViewModel.Action.confirmPressed }
             ~> self.viewModel.didActionSubject

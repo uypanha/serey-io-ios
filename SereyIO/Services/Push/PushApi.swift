@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/23/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -32,7 +32,8 @@ extension PushApi: AuthorizedApiTargetType {
             return [
                 "username"      : username,
                 "token"         : token,
-                "deviceType"    : "IOS"
+                "deviceType"    : "IOS",
+                "platformType"  : "SEREY_WEB"
             ]
         case .remove(let username):
             return [
@@ -41,12 +42,13 @@ extension PushApi: AuthorizedApiTargetType {
         case .updateToken(let username, let token):
             return [
                 "username"      : username,
-                "newToken"      : token
+                "newToken"      : token,
+                "platformType"  : "SEREY_WEB"
             ]
         case .login:
             return [
                 "username"      : "mobile",
-                "password"      : "kgx?tMjn@RhBqQ4<",
+                "password"      : "&_3W!nEv'}5cq}XX",
                 "rememberMe"    : true
             ]
         }
@@ -55,13 +57,13 @@ extension PushApi: AuthorizedApiTargetType {
     var path: String {
         switch self {
         case .register:
-            return "/api/notification/user/register"
+            return "/api/notification/user/createToken"
         case .remove:
-            return "/api/notification/user/remove"
+            return "/api/notification/user/removeToken"
         case .login:
             return "/api/notification/user/login"
         case .updateToken:
-            return "/api/notification/user/update"
+            return "/api/notification/user/updateToken"
         }
     }
     
@@ -70,7 +72,12 @@ extension PushApi: AuthorizedApiTargetType {
     }
     
     var task: Task {
-        return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+        switch self {
+        case .login:
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+        default:
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+        }
     }
     
     var headers: [String : String]? {

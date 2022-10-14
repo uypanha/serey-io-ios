@@ -3,14 +3,12 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 3/31/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxSwift
 import Alamofire
-import ObjectMapper
-import AlamofireObjectMapper
 
 /// An `Error` emitted by `FileUploadService`.
 public enum FileUploadError: Error {
@@ -25,6 +23,13 @@ class FileUploadService {
     
     init() {
         self.disposeBag = DisposeBag()
+    }
+    
+    func uploadPickerFile(_ pickerModel: PickerFileModel) -> Observable<FileUploadModel> {
+        let url = Constants.apiEndPoint.absoluteString + "/api/v1/Image/UploadNoToken"
+        pickerModel.isUploading.accept(true)
+        return pickerModel.mediaFromLibrary()
+            .flatMap { self.uploadAsset($0, parameters: [:], uploadURL: url, progress: { pickerModel.uploadProgress.accept($0) }) }
     }
     
     func uploadPhoto(_ fixedPhoto: UIImage) -> Observable<FileUploadModel> {
@@ -68,13 +73,13 @@ extension FileUploadService {
                 multipartFormData.append(valueData!, withName: key)
             }
             
-            let imageData = fixedPhoto.jpegData(compressionQuality: 0.8)!
+            let imageData = fixedPhoto.jpegData(compressionQuality: 0.75)!
             let withName = "upfile"
             let filename = "\(Date().timeIntervalSince1970).jpg"
             let mimetype = "image/jpeg"
             multipartFormData.append(imageData, withName: withName, fileName: filename, mimeType: mimetype)
         }, to: uploadURL, headers: self.createHeaders())
-            .responseObject { (response: DataResponse<FileUploadModel, AFError>) in
+            .responseDecodable { (response: DataResponse<FileUploadModel, AFError>) in
                 switch response.result {
                 case .success(let imageModel):
                     uploadSubject.onNext((true, imageModel))
@@ -161,3 +166,43 @@ extension FileUploadService {
 //    }
 }
 
+// MARK: - Networks
+extension FileUploadService {
+    
+    func uploadAsset<R: Decodable>(_ asset: AssetUploadModel, parameters: [String: Any], uploadURL: String, progress: @escaping (Double) -> Void = { _ in }) -> Observable<R> {
+        let uploadSubject: PublishSubject<R> = .init()
+        
+        Alamofire.Session.default.upload(multipartFormData: { multipartFormData in
+            for (key, value) in parameters {
+                let valueData = (value as AnyObject).data(using: String.Encoding.utf8.rawValue)
+                multipartFormData.append(valueData!, withName: key)
+            }
+            
+            if let image = asset.image {
+                let imageData = image.imageData ?? image.jpegData(compressionQuality: 0.75)!
+                multipartFormData.append(imageData, withName: "upfile", fileName: asset.filenameUrlEncoded, mimeType: asset.mimeType)
+            } else if let url = asset.url {
+                multipartFormData.append(url, withName: "upfile", fileName: asset.filenameUrlEncoded, mimeType: asset.mimeType)
+            }
+            #if DEBUG
+            print(multipartFormData)
+            #endif
+        }, to: uploadURL, headers: self.createHeaders())
+        .uploadProgress(closure: { uploadProgress in
+            progress(uploadProgress.fractionCompleted)
+            #if DEBUG
+            print("Uploading: \(uploadProgress.fractionCompleted)")
+            #endif
+        })
+        .responseDecodable { (response: DataResponse<R, AFError>) in
+            switch response.result {
+            case .success(let data):
+                uploadSubject.onNext(data)
+            case .failure(let error):
+                uploadSubject.onError(FileUploadError.error(error))
+            }
+        }
+        
+        return uploadSubject
+    }
+}

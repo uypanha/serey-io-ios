@@ -3,13 +3,14 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/26/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxCocoa
 import RxSwift
 import AnyCodable
+import RxBinding
 
 class DiscussionService: AppService<DiscussionApi> {
     
@@ -18,13 +19,13 @@ class DiscussionService: AppService<DiscussionApi> {
             .asObservable()
     }
     
-    func getDiscussionList(_ type: DiscussionType, _ query: QueryDiscussionsBy) -> Observable<[PostModel]> {
-        return self.provider.rx.requestObject(.getDiscussions(type, query), type: [PostModel].self)
+    func getDiscussionList(_ type: DiscussionType, _ pageModel: PaginationRequestModel) -> Observable<[PostModel]> {
+        return self.provider.rx.requestObject(.getDiscussions(type, pageModel), type: [PostModel].self)
             .asObservable()
     }
     
-    func getPostDetail(permlink: String, authorName: String) -> Observable<PostDetailResponse> {
-        return self.provider.rx.requestObject(.getPostDetail(permlink: permlink, authorName: authorName), type: PostDetailResponse.self)
+    func getPostDetail(permlink: String, authorName: String) -> Observable<PostDetailResponse<PostModel>> {
+        return self.provider.rx.requestObject(.getPostDetail(permlink: permlink, authorName: authorName), type: PostDetailResponse<PostModel>.self)
             .asObservable()
     }
     
@@ -39,8 +40,8 @@ class DiscussionService: AppService<DiscussionApi> {
             .map { $0.data }
     }
     
-    func submitComment(_ submitModel: SubmitCommentModel) -> Observable<DataResponseModel<[PostModel]>> {
-        return self.provider.rx.requestObject(.submitComment(submitModel), type: DataResponseModel<[PostModel]>.self)
+    func submitComment(_ submitModel: SubmitCommentModel) -> Observable<DataResponseModel<PostModel>> {
+        return self.provider.rx.requestObject(.submitComment(submitModel), type: DataResponseModel<PostModel>.self)
             .asObservable()
     }
     
@@ -67,4 +68,36 @@ class DiscussionService: AppService<DiscussionApi> {
             .map { $0.data }
     }
     
+    func getSereyCountries() -> Observable<[CountryModel]> {
+        return self.provider.rx.requestObject(.getSereyCountries, type: [CountryModel].self)
+            .asObservable()
+    }
+    
+    func refreshSereyCountries() {
+        self.getSereyCountries().asObservable()
+            .subscribe(onNext: { countries in
+                RealmManager.deleteAll(CountryModel.self)
+                countries.saveAll()
+            }) ~ self.disposeBag
+    }
+    
+    func getReportTypes() -> Observable<ReportTypeResponseModel> {
+        return self.provider.rx.requestObject(.getReportTypes, type: ReportTypeResponseModel.self)
+            .asObservable()
+    }
+    
+    func reportPost(_ postId: String, typeId: String, description: String) -> Observable<AnyCodable> {
+        return self.provider.rx.requestObject(.reportPost(postId: postId, typeId: typeId, description: description), type: AnyCodable.self)
+            .asObservable()
+    }
+    
+    func hidePost(with postId: String) -> Observable<AnyCodable> {
+        return self.provider.rx.requestObject(.hidePost(postId), type: AnyCodable.self)
+            .asObservable()
+    }
+    
+    func unhidePost(with postId: String) -> Observable<AnyCodable> {
+        return self.provider.rx.requestObject(.unhidePost(postId), type: AnyCodable.self)
+            .asObservable()
+    }
 }

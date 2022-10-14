@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/15/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -11,17 +11,31 @@ import Rswift
 
 class CloseableNavigationController: UINavigationController {
     
+    var isDarkContentBackground = false
+    
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        if isDarkContentBackground {
+            return .lightContent
+        } else {
+            if #available(iOS 13.0, *) {
+                return .darkContent
+            } else {
+                return .default
+            }
+        }
+    }
+    
     private var closeIcon: UIImage?
     private var closeTitle: StringResource?
     
     fileprivate lazy var closeButton: UIButton = {
         return UIButton(type: .custom).then {
             $0.setImage(closeIcon, for: .normal) // Image can be downloaded from here below link
-            $0.setImage(closeIcon?.image(withTintColor: ColorName.primary.color.withAlphaComponent(0.3)), for: .highlighted)
+            $0.setImage(closeIcon?.image(withTintColor: .color(.primary).withAlphaComponent(0.3)), for: .highlighted)
             if let closeTitle = self.closeTitle {
                 $0.setTitle(" \(closeTitle.localized())", for: .normal)
             }
-            $0.tintColor = ColorName.primary.color
+            $0.tintColor = .color(.primary)
             $0.setTitleColor($0.tintColor, for: .normal) // You can change the TitleColor
             $0.setTitleColor($0.tintColor.withAlphaComponent(0.3), for: .highlighted)
             $0.addTarget(self, action: #selector(self.backActionPressed), for: .touchUpInside)

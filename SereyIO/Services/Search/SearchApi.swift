@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 3/4/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -20,7 +20,7 @@ extension SearchApi: AuthorizedApiTargetType {
         switch self {
         case .searchAuthor(let query):
             return [
-                "name" : query
+                "search_text" : query
             ]
         }
     }
@@ -28,7 +28,7 @@ extension SearchApi: AuthorizedApiTargetType {
     var path: String {
         switch self {
         case .searchAuthor:
-            return "/api/v1/accounts/findUser"
+            return "/api/v1/accounts/search_user"
         }
     }
     

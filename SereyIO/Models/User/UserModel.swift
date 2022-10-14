@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 3/18/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -24,9 +24,26 @@ import RealmSwift
     @objc dynamic var followersCount: Int = 0
     @objc dynamic var profilePicture: String? = nil
     @objc dynamic var recoveryAccount: String? = nil
+    @objc dynamic var isClaimReward: Bool = false
     
     override static func primaryKey() -> String? {
         return "id"
+    }
+    
+    var usdCoinsPrice: String? {
+        if let coins = balance.replacingOccurrences(of: "SEREY", with: "").toDouble() {
+            let usd = coins * CoinPriceManager.shared.sereyPrice.value
+            return usd.currencyFormat()
+        }
+        return nil
+    }
+    
+    var usdPowerPrice: String? {
+        if let coins = sereypower.replacingOccurrences(of: "SEREY", with: "").toDouble() {
+            let usd = coins * CoinPriceManager.shared.sereyPrice.value
+            return usd.currencyFormat()
+        }
+        return nil
     }
     
     enum CodingKeys: String, CodingKey {
@@ -42,6 +59,7 @@ import RealmSwift
         case followersCount
         case profilePicture
         case recoveryAccount = "recovery_account"
+        case isClaimReward
     }
 }
 
@@ -51,6 +69,9 @@ extension UserModel {
     var profileModel: ProfileViewModel {
         let firstLetter = name.first == nil ? "" : "\(name.first!)"
         let uniqueColor = UIColor(hexString: PFColorHash().hex("\(name)"))
-        return ProfileViewModel(shortcut: firstLetter, imageUrl: nil, uniqueColor: uniqueColor)
+        
+//        let predicate = NSPredicate(format: "active == true AND username == %@", self.name)
+//        let defaultImage: UserProfileModel? = UserProfileModel().qeuryFirst(by: predicate)
+        return ProfileViewModel(shortcut: firstLetter, imageUrl: URL(string: self.profilePicture ?? ""), uniqueColor: uniqueColor)
     }
 }

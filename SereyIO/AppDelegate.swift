@@ -3,13 +3,14 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/9/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
 import Realm
 import RealmSwift
 import SwiftyBeaver
+import Siren
 
 let log = SwiftyBeaver.self
 
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var appCoordinator: AppCoordinator?
     var apnsHandler: APNSHandler?
     var appDelegateHelper: AppDelegateHelper?
+    var discussionService: DiscussionService?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -39,6 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         appDelegateHelper = AppDelegateHelper()
         appDelegateHelper?.initMessageHandlers(window: window!, apnsHandler: apnsHandler!)
+        self.discussionService = .init()
+        CoinPriceManager.loadTicker()
+        
+        self.initSiren()
         
         return true
     }
@@ -58,6 +64,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         apnsHandler?.applicationDidBecomeActive()
+        self.discussionService?.refreshSereyCountries()
+        CoinPriceManager.loadTicker()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -98,7 +106,6 @@ extension AppDelegate {
     }
     
     func turnOnPushNotification() {
-        apnsHandler?.setupFirebaseTokenRefresh()
         apnsHandler?.registerAPNS()
     }
     
@@ -124,7 +131,7 @@ fileprivate extension AppDelegate {
     
     func initRealm() {
         // Start to configure realm
-        Realm.configureRealm(schemaVersion: 0)
+        Realm.configureRealm(schemaVersion: 1)
     }
     
     func initSwiftyBeaver() {
@@ -136,6 +143,13 @@ fileprivate extension AppDelegate {
     }
     
     func initAPNSHandler(withApplication application: UIApplication) {
-        apnsHandler = APNSHandler(withApplication: application)
+        apnsHandler = APNSHandler(with: application)
+    }
+    
+    // Force Update
+    func initSiren() {
+        Siren.shared.rulesManager = .init(globalRules: .critical, showAlertAfterCurrentVersionHasBeenReleasedForDays: 1)
+        Siren.shared.presentationManager = .default
+        Siren.shared.wail()
     }
 }

@@ -1,4 +1,6 @@
 Primary         : #3F5AC4
+SecondaryLight  : #EEF1FB
+LightPrimary    : #EFF2FC
 Secondary       : #1E358F
 PrimaryRed      : #D30020
 Positive        : #4ECD77
@@ -8,9 +10,14 @@ Disabled        : #CCCCCC
 
 ButtonBg        : #7F98ED
 PostBackground  : #FFFFFF
-Border          : #DBDBDB
+Border          : #F8F8F8
 
 NavigationBg    : #FFFFFF
 NavigationTint  : #414141
 
 TabBarBg        : #FFFFFF
+Title           : #373737
+SubTitle        : #5F5F5F
+Danger          : #F85A61
+Border          : #EEF1FB
+Icon            : #5F5F5F

@@ -3,14 +3,14 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/5/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
 
 enum WalletType {
-    case coin(coins: String?)
-    case power(power: String?)
+    case coin(coins: String?, usd: String?)
+    case power(power: String?, usd: String?)
     
     var title: String {
         switch self {
@@ -32,10 +32,19 @@ enum WalletType {
     
     var value: String? {
         switch self {
-        case .coin(let coins):
+        case .coin(let coins, _):
             return coins
-        case .power(let power):
+        case .power(let power, _):
             return power
+        }
+    }
+    
+    var valueUSD: String? {
+        switch self {
+        case .coin(_, let usd):
+            return usd
+        case .power(_, let usd):
+            return usd
         }
     }
 }

@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/6/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -33,6 +33,10 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         case voteDialogController(VoteDialogViewModel)
         case downVoteDialogController(DownvoteDialogViewModel)
         case signInViewController
+        case draftsViewController(DraftListViewModel)
+        case reportPostController(ReportPostViewModel)
+        case confirmViewController(ConfirmDialogViewModel)
+        case shareLink(URL, String)
     }
     
     // input:
@@ -41,8 +45,8 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
     // output:
     lazy var shouldPresentSubject = PublishSubject<PostTableViewModel.ViewToPresent>()
     
-    override init(_ type: DiscussionType) {
-        super.init(type)
+    override init(_ type: DiscussionType, _ selectedCategory: BehaviorRelay<DiscussionCategoryModel?>) {
+        super.init(type, selectedCategory)
         
         setUpRxObservers()
         registerForNotifs()
@@ -53,20 +57,28 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
     }
     
     override func onMorePressed(of postModel: PostModel) {
-        var items: [PostMenu] = [.edit]
-        if postModel.upvote == 0 {
-            items.append(.delete)
+        if AuthData.shared.isUserLoggedIn {
+            let items: [PostMenu] = postModel.prepareOptionMenu()
+            let bottomMenuViewModel = BottomListMenuViewModel(header: postModel.prepareOptionMenuTitle(), items.map { $0.cellModel })
+            bottomMenuViewModel.headerFont = .customFont(with: 22, weight: .medium)
+            
+            bottomMenuViewModel.shouldSelectMenuItem.asObservable()
+                .subscribe(onNext: { [weak self] item in
+                    if let itemType = (item as? PostMenuCellViewModel)?.type {
+                        self?.handleMenuPressed(itemType, postModel)
+                        return
+                    }
+                    
+                    if let itemType = (item as? PostOptionCellViewModel)?.postOption {
+                        self?.handleMenuPressed(itemType, postModel)
+                        return
+                    }
+                }) ~ bottomMenuViewModel.disposeBag
+            
+            self.shouldPresent(.moreDialogController(bottomMenuViewModel))
+        } else {
+            self.shouldPresent(.signInViewController)
         }
-        let bottomMenuViewModel = BottomListMenuViewModel(items.map { $0.cellModel })
-        
-        bottomMenuViewModel.shouldSelectMenuItem.asObservable()
-            .subscribe(onNext: { [weak self] item in
-                if let itemType = (item as? PostMenuCellViewModel)?.type {
-                    self?.handleMenuPressed(itemType, postModel)
-                }
-            }) ~ bottomMenuViewModel.disposeBag
-        
-        self.shouldPresent(.moreDialogController(bottomMenuViewModel))
     }
     
     override func onCategoryPressed(of postModel: PostModel) {
@@ -74,15 +86,15 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
         case .byCategoryId:
             return
         default:
-            if let categoryId = postModel.categoryItem.first {
-                let postTableViewModel = PostTableViewModel(.byCategoryId(categoryId))
+            if let categoryId = postModel.categories?.first {
+                let postTableViewModel = PostTableViewModel(.byCategoryId(categoryId), self.selectedCategory)
                 self.shouldPresent(.postsByCategoryController(postTableViewModel))
             }
         }
     }
     
     override func onProfilePressed(of postModel: PostModel) {
-        let userAccountViewModel = UserAccountViewModel(postModel.authorName)
+        let userAccountViewModel = UserAccountViewModel(postModel.author)
         self.shouldPresent(.userAccountController(userAccountViewModel))
     }
     
@@ -105,6 +117,22 @@ class PostTableViewModel: BasePostViewModel, ShouldReactToAction, ShouldPresent,
             ~ cellModel.disposeBag
     }
     
+    func handleItemPressed(_ indexPath: IndexPath) {
+        if let item = self.item(at: indexPath) as? PostCellViewModel {
+            if let discussion = item.post.value {
+                let viewModel = PostDetailViewModel(discussion)
+                self.shouldPresent(.postDetailViewController(viewModel))
+            }
+        } else if self.item(at: indexPath) is DraftSavedCellViewModel {
+            let viewModel = DraftListViewModel()
+            self.shouldPresent(.draftsViewController(viewModel))
+        }
+    }
+    
+    override func onSharePostPressed(with url: URL, content: String) {
+        self.shouldPresent(.shareLink(url, content))
+    }
+    
     deinit {
         unregisterFromNotifs()
     }
@@ -115,10 +143,10 @@ extension PostTableViewModel {
     
     private func deletePost(_ post: PostModel) {
         self.shouldPresent(.loading(true))
-        self.discussionService.deletePost(post.authorName, post.permlink)
+        self.discussionService.deletePost(post.author, post.permlink)
             .subscribe(onNext: { [weak self] _ in
                 self?.shouldPresent(.loading(false))
-                NotificationDispatcher.sharedInstance.dispatch(.postDeleted(permlink: post.permlink, author: post.authorName))
+                NotificationDispatcher.sharedInstance.dispatch(.postDeleted(permlink: post.permlink, author: post.author))
             }, onError: { [weak self] error in
                 self?.shouldPresent(.loading(false))
                 let errorInfo = ErrorHelper.prepareError(error: error)
@@ -130,15 +158,6 @@ extension PostTableViewModel {
 // MARK: - Action Handlers
 fileprivate extension PostTableViewModel {
     
-    func handleItemPressed(_ indexPath: IndexPath) {
-        if let item = self.item(at: indexPath) as? PostCellViewModel {
-            if let discussion = item.post.value {
-                let viewModel = PostDetailViewModel(discussion)
-                self.shouldPresent(.postDetailViewController(viewModel))
-            }
-        }
-    }
-    
     func handleMenuPressed(_ type: PostMenu, _ post: PostModel) {
         switch type {
         case .edit:
@@ -148,6 +167,16 @@ fileprivate extension PostTableViewModel {
             self.shouldPresent(.deletePostDialog(confirm: {
                 self.deletePost(post)
             }))
+        case .reportPost:
+            self.shouldPresent(.reportPostController(.init(with: post)))
+        case .hidePost:
+            let title = "Hide this post?"
+            let message = "By clicking “Hide Post” you won’t see this post form “\(post.author)” in your feed. And it also a button for undo to cancel this action right after this post it submmited."
+            let action = ActionModel("Hide Post", style: .default) {
+                self.hidePost(post)
+            }
+            let confirmDialogViewModel = ConfirmDialogViewModel(icon: R.image.infoYellowIcon(), title: title, message: message, action: action)
+            self.shouldPresent(.confirmViewController(confirmDialogViewModel))
         }
     }
     
@@ -159,7 +188,7 @@ fileprivate extension PostTableViewModel {
     
     func handleUpVotePressed(_ voteType: VotePostType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
         if AuthData.shared.isUserLoggedIn {
-            let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .upVoteComment : .upvotePost)
+            let voteDialogViewModel = VoteDialogViewModel(type: voteType == .comment ? .upVoteComment : .upvotePost)
             voteDialogViewModel.shouldConfirm
                 .subscribe(onNext: { [weak self] weight in
                     self?.upVote(postModel, weight, isVoting)
@@ -172,7 +201,7 @@ fileprivate extension PostTableViewModel {
     
     func handleFlagPressed(_ voteType: VotePostType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
         if AuthData.shared.isUserLoggedIn {
-            let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .flagComment : .flagPost)
+            let voteDialogViewModel = VoteDialogViewModel(type: voteType == .comment ? .flagComment : .flagPost)
             voteDialogViewModel.shouldConfirm
                 .subscribe(onNext: { [weak self] weight in
                     self?.flag(postModel, -weight, isVoting)

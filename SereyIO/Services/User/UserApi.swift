@@ -3,13 +3,15 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 3/18/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
 import Moya
 
 enum UserApi {
+    
+    case iPTrace
     
     case profile(userName: String)
     
@@ -18,9 +20,24 @@ enum UserApi {
     case getFollowerList(author: String)
     
     case followAction(author: String, actionType: FollowActionType)
+    
+    case changePassword(current: String, new: String)
+    
+    case getReferralCode(String)
+    
+    case addReferralId(String)
 }
 
 extension UserApi: AuthorizedApiTargetType {
+    
+    public var baseURL: URL {
+        switch self {
+        case .iPTrace:
+            return URL(string: "https://www.cloudflare.com")!
+        default:
+            return Constants.apiEndPoint
+        }
+    }
     
     var parameters: [String : Any] {
         switch self {
@@ -38,6 +55,11 @@ extension UserApi: AuthorizedApiTargetType {
             return [
                 "username"  : data
             ]
+        case .changePassword(let current, let new):
+            return [
+               "currentPassword"    : current,
+               "newPassword"        : new
+            ]
         default:
             return [:]
         }
@@ -45,6 +67,8 @@ extension UserApi: AuthorizedApiTargetType {
     
     var path: String {
         switch self {
+        case .iPTrace:
+            return "/cdn-cgi/trace"
         case .profile(let username):
             return "/api/v1/accounts/\(username)"
         case .getFollowAction:
@@ -53,12 +77,18 @@ extension UserApi: AuthorizedApiTargetType {
             return "/api/v1/follow/action"
         case .getFollowerList:
             return "/api/v1/follow/getFollowerList"
+        case .changePassword:
+            return "/api/v1/accounts/changePassword"
+        case .getReferralCode(let username):
+            return "/api/v1/general/get_referal_id/\(username)"
+        case .addReferralId(let username):
+            return "/api/v1/general/add_referal_id/\(username)"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .followAction:
+        case .followAction, .changePassword, .addReferralId:
             return .post
         default:
             return .get
@@ -67,7 +97,7 @@ extension UserApi: AuthorizedApiTargetType {
     
     var task: Task {
         switch self {
-        case .followAction:
+        case .followAction, .changePassword, .addReferralId:
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         default:
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
@@ -75,7 +105,14 @@ extension UserApi: AuthorizedApiTargetType {
     }
     
     var headers: [String : String]? {
-        return [:]
+        switch self {
+        case .getReferralCode, .addReferralId:
+            return [
+                "token" : AuthData.shared.userToken ?? ""
+            ]
+        default:
+            return [:]
+        }
     }
 }
 

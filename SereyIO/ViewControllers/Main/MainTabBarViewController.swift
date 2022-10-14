@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/2/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -41,15 +41,16 @@ fileprivate extension MainTabBarViewController {
             switch self {
             case .home:
                 viewController = R.storyboard.home.homeViewController()
-                (viewController as? HomeViewController)?.viewModel = HomeViewModel()
+                (viewController as? HomeViewController)?.viewModel = .init()
             case .search:
                 viewController = R.storyboard.search.searchViewController()
-                (viewController as? SearchViewController)?.viewModel = SearchViewModel()
+                (viewController as? SearchViewController)?.viewModel = .init()
             case .notifications:
                 viewController = NotificationViewController()
+                (viewController as? NotificationViewController)?.viewModel = .init()
             case .more:
                 viewController = R.storyboard.more.moreViewController()
-                (viewController as? MoreViewController)?.viewModel = MoreViewModel()
+                (viewController as? MoreViewController)?.viewModel = .init()
             }
             
             return viewController ?? UIViewController()
@@ -62,7 +63,7 @@ fileprivate extension MainTabBarViewController {
     }
     
     func configureTabBarController() {
-        let controllers: [UIViewController] = [ControllerType.home, .search, .more].map { $0.prepareViewController() }
+        let controllers: [UIViewController] = ControllerType.allCases.map { $0.prepareViewController() }
         
         for i in 0..<controllers.count {
             (controllers[i] as? TabBarControllerDelegate)?.configureTabBar(i)
@@ -71,6 +72,33 @@ fileprivate extension MainTabBarViewController {
         viewControllers = controllers.map({ viewController -> UIViewController in
             return UINavigationController(rootViewController: viewController)
         })
+    }
+}
+
+// MARK: - Action Navigations & Tools
+extension MainTabBarViewController {
+    
+    func handleDeeplink(_ deeplink: DeeplinkType) {
+        switch deeplink {
+        case .post(let permlink, let author):
+            if let navVC = (self.selectedViewController as? UINavigationController) {
+                if let postDetailViewController = R.storyboard.post.postDetailViewController() {
+                    postDetailViewController.viewModel = .init(permlink, author)
+                    postDetailViewController.hidesBottomBarWhenPushed = true
+                    navVC.pushViewController(postDetailViewController, animated: true)
+                }
+            }
+        case .followFrom(let username):
+            if let navVC = (self.selectedViewController as? UINavigationController) {
+                if let accountViewController = R.storyboard.profile.userAccountViewController() {
+                    accountViewController.viewModel = .init(username)
+                    accountViewController.hidesBottomBarWhenPushed = true
+                    navVC.show(accountViewController, sender: nil)
+                }
+            }
+        default:
+            break
+        }
     }
 }
 

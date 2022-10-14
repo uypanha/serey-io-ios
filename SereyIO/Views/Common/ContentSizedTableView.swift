@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 12/19/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -12,7 +12,9 @@ final class ContentSizedTableView: UITableView {
     
     override var intrinsicContentSize: CGSize {
         self.layoutIfNeeded()
-        return self.contentSize
+        var size = self.contentSize
+        size.height += self.contentInset.top + self.contentInset.bottom
+        return size
     }
 
     override var contentSize: CGSize {

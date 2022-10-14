@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 3/15/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -14,6 +14,10 @@ enum AuthApi {
     case login(userName: String, password: String)
     
     case loginOwner(username: String, ownerKey: String)
+    
+    case checkUsername(username: String, publicKey: String)
+    
+    case signUpWallet(username: String, postingPriKey: String, password: String, requestToken: String)
 }
 
 extension AuthApi: AuthorizedApiTargetType {
@@ -31,6 +35,20 @@ extension AuthApi: AuthorizedApiTargetType {
                 "username"  : userName,
                 "password"  : password
             ]
+        case .checkUsername(let username, let publicKey):
+            return [
+                "username"      : username,
+                "postingPubkey" : publicKey
+            ]
+        case .signUpWallet(let username, let postingPriKey, let password, let requestToken):
+            return [
+                "postingkey"    : postingPriKey,
+                "username"      : username,
+                "password"      : password,
+                "avatar"        : "user",
+                "profileUrl"    : "",
+                "requestToken"  : requestToken
+            ]
         }
     }
     
@@ -40,6 +58,10 @@ extension AuthApi: AuthorizedApiTargetType {
             return "/api/v1/authentications/loginKyc"
         case .loginOwner:
             return "/api/v1/authentications/login"
+        case .checkUsername:
+            return "/api/v1/accounts/checkUsername"
+        case .signUpWallet:
+            return "/api/v1/accounts/signUp"
         }
     }
     

@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/29/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -42,13 +42,11 @@ class FilteredCategoryTableViewCell: BaseTableViewCell {
     
     private func prepareChipView(_ text: String) -> MDCChipView {
         let chipView = MDCChipView()
-        chipView.setShadowColor(.clear, for: .normal)
-        chipView.setInkColor(.clear, for: .normal)
-        chipView.setBackgroundColor(chipView.backgroundColor(for: .normal), for: .selected)
         chipView.accessoryView = self.clearButton
         chipView.accessoryPadding = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 6)
         chipView.titleLabel.text = text
         chipView.sizeToFit()
+        chipView.primaryStyle()
         return chipView
     }
     

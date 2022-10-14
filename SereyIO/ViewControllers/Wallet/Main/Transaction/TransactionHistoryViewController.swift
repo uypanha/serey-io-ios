@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 7/2/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -50,7 +50,7 @@ extension TransactionHistoryViewController {
     }
     
     func prepareTableView() {
-        self.tableView.separatorColor = ColorName.border.color
+        self.tableView.separatorColor = .color(.border)
         self.tableView.tableFooterView = UIView()
         
         self.tableView.register(TransactionTableViewCell.self)

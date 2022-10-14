@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/9/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -69,7 +69,7 @@ extension PayQRViewController {
         self.flashButton.isHidden = !self.hasTorch()
         
         self.viewMyQRButton.spacing = 8
-        self.viewMyQRButton.setTitleColor(ColorName.primary.color, for: .normal)
+        self.viewMyQRButton.setTitleColor(.color(.primary), for: .normal)
         self.viewMyQRButton.customStyle(with: nil)
         
         prepareCameraPreview()

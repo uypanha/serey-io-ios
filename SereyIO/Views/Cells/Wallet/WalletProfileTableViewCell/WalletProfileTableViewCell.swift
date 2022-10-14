@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/12/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -21,7 +21,8 @@ class WalletProfileTableViewCell: BaseTableViewCell {
             guard let cellModel = self.cellModel else { return }
             
             self.disposeBag ~ [
-                cellModel.profileModel ~> self.profileView.rx.profileViewModel
+                cellModel.profileModel ~> self.profileView.rx.profileViewModel,
+                cameraButton.rx.tap ~> cellModel.shouldChangeProfile
             ]
         }
     }

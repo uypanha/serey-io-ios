@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 6/16/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -15,6 +15,28 @@ extension LAContext {
         case touchID
         case faceID
         case none
+        
+        var title: String {
+            switch self {
+            case .touchID:
+                return "Touch ID"
+            case .faceID:
+                return "Face ID"
+            default:
+                return ""
+            }
+        }
+        
+        var settingTitle: String {
+            switch self {
+            case .touchID:
+                return "Fingerprint"
+            case .faceID:
+                return "Face ID"
+            default:
+                return ""
+            }
+        }
     }
     
     var biometricType: BiometricType {
@@ -23,7 +45,7 @@ extension LAContext {
             var error: NSError?
             let _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
             
-            if error?.code == LAError.Code.touchIDNotAvailable.rawValue {
+            if error?.code == LAError.Code.biometryNotAvailable.rawValue {
                 return .none
             }
             

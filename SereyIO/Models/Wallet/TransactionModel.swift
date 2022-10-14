@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/6/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -29,7 +29,10 @@ struct TransactionModel: Codable {
     }
     
     var value: String? {
-        return opData.opType?.preapreValue(opData.data)
+        var value = opData.opType?.preapreValue(opData.data)
+        value = value?.replacingOccurrences(of: "SEREY", with: "SRY")
+        value = value?.replacingOccurrences(of: "VESTS", with: "SRY Power")
+        return value
     }
     
     var valueColor: UIColor? {
@@ -77,6 +80,8 @@ struct TransactionDataModel: Codable {
     var amount: String?
     var memo: String?
     
+    var delegatee: String?
+    var delegator: String?
     var vestingShares: String?
     
     enum CodingKeys: String, CodingKey {
@@ -88,6 +93,8 @@ struct TransactionDataModel: Codable {
         case amount
         case memo
         case vestingShares = "vesting_shares"
+        case delegatee
+        case delegator
     }
 }
 
@@ -96,6 +103,7 @@ enum TransferType: String {
     case transferVesting = "transfer_to_vesting"
     case claimRewardBalance = "claim_reward_balance"
     case withdrawVesting = "withdraw_vesting"
+    case delegatePower = "delegate_vesting_shares"
     
     func image(_ data: TransactionDataModel) -> UIImage? {
         switch self {
@@ -107,6 +115,8 @@ enum TransferType: String {
             return R.image.transactionPowerUp()
         case .withdrawVesting:
             return data.vestingShares == "0.000000 VESTS" ? R.image.transactionCancelPowerDown() : R.image.transactionPowerDown()
+        case .delegatePower:
+            return data.vestingShares == "0.000000 VESTS" ? R.image.transactionCancelPowerDown() : R.image.transactionDelegatePower()
         }
     }
     
@@ -120,6 +130,8 @@ enum TransferType: String {
             return "Power Up"
         case .withdrawVesting:
             return data.vestingShares == "0.000000 VESTS" ? "Cancel Power" : "Power Down"
+        case .delegatePower:
+            return data.vestingShares == "0.000000 VESTS" ? "Cancel Delegate Power" : "Delegate Power"
         }
     }
     
@@ -133,17 +145,21 @@ enum TransferType: String {
             return "+" + (data.amount ?? "")
         case .withdrawVesting:
             return data.vestingShares == "0.000000 VESTS" ? (data.vestingShares ?? "") : "+\(data.vestingShares ?? "")"
+        case .delegatePower:
+            return data.vestingShares ?? ""
         }
     }
     
     func valueColor(_ data: TransactionDataModel) -> UIColor {
         switch self {
         case .transfer:
-            return data.from == AuthData.shared.username ? .red : ColorName.primary.color
+            return data.from == AuthData.shared.username ? .red : .color(.primary)
         case .claimRewardBalance, .transferVesting:
-            return ColorName.primary.color
+            return .color(.primary)
         case .withdrawVesting:
-            return data.vestingShares == "0.000000 VESTS" ? .darkGray : ColorName.primary.color
+            return data.vestingShares == "0.000000 VESTS" ? .darkGray :.color(.primary)
+        case .delegatePower:
+            return .darkGray
         }
     }
     
@@ -152,17 +168,19 @@ enum TransferType: String {
         let titleCell = TextCellViewModel(with: self.prepareCellTitle(data), properties: .init(font: .boldSystemFont(ofSize: 17), textColor: .black), indicatorAccessory: false, isSelectionEnabled: false)
         items.append(titleCell)
         
-        if let amount = data.amount {
+        if var amount = data.amount ?? data.vestingShares {
+            amount = amount.replacingOccurrences(of: "SEREY", with: "SRY")
+            amount = amount.replacingOccurrences(of: "VESTS", with: "SRY Power")
             let amountCell = TransactionInfoCellViewModel(title: "Amount", description: amount)
             items.append(amountCell)
         }
         
-        if let fromAccount = data.from ?? data.account {
+        if let fromAccount = data.from ?? data.account ?? data.delegator {
             let fromCell = TransactionInfoCellViewModel(title: "From", description: fromAccount)
             items.append(fromCell)
         }
         
-        if let toAccount = data.to ?? data.account {
+        if let toAccount = data.to ?? data.account ?? data.delegatee {
             let toCell = TransactionInfoCellViewModel(title: "To", description: toAccount)
             items.append(toCell)
         }
@@ -188,6 +206,8 @@ enum TransferType: String {
             return "Power Up"
         case .withdrawVesting:
             return data.vestingShares == "0.000000 VESTS" ? "Cancel Power" : "Power Down"
+        case .delegatePower:
+            return data.vestingShares == "0.000000 VESTS" ? "Cancel Delegate Power" : "Delegate Power"
         }
     }
 }

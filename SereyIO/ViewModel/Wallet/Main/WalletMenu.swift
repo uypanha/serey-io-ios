@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 7/29/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -21,7 +21,7 @@ enum WalletMenu: CaseIterable {
     case claimReward
     
     static var menuItems: [WalletMenu] {
-        return [.sendCoin, .receiveCoin, .pay, .powerUp, .powerDown, .cancelPower, .claimReward]
+        return [.sendCoin, .receiveCoin, .pay, .powerUp, .powerDown, .cancelPower, .delegatePower, .cancelDelegate, .claimReward]
     }
     
     var image: UIImage? {
@@ -64,7 +64,7 @@ enum WalletMenu: CaseIterable {
         case .delegatePower:
             return "Delegate\nPower"
         case .cancelDelegate:
-            return "Cancel\nDelegate"
+            return "Cancel\nDelegation"
         case .claimReward:
             return "Claim\nReward"
         }
@@ -79,15 +79,15 @@ enum WalletMenu: CaseIterable {
         case .pay:
             return "Pay another acc"
         case .powerUp:
-            return "Up your power"
+            return "Up to account"
         case .powerDown:
             return "Down from your acc"
         case .cancelPower:
             return "Cancel power down"
         case .delegatePower:
-            return ""
+            return "Delegate your power"
         case .cancelDelegate:
-            return ""
+            return "Cancel Delegation"
         case .claimReward:
             return "Claim your reward"
         }
@@ -108,7 +108,7 @@ enum WalletMenu: CaseIterable {
         case .cancelPower:
             return UIColor(hexString: "FAE3E2")
         case .delegatePower:
-            return UIColor(hexString: "FDF3E0")
+            return UIColor(hexString: "E5F2DC")
         case .cancelDelegate:
             return UIColor(hexString: "FAE3E2")
         case .claimReward:

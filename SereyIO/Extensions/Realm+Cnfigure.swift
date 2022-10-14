@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/15/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -13,12 +13,12 @@ extension Realm {
     
     static func configureRealm(schemaVersion: UInt64) {
         
-        let deleteRealmIfMigrationNeeded: Bool
-        #if DEBUG
-        deleteRealmIfMigrationNeeded = true
-        #else
-        deleteRealmIfMigrationNeeded = false
-        #endif
+        let deleteRealmIfMigrationNeeded: Bool = true
+//        #if DEBUG
+//        deleteRealmIfMigrationNeeded = true
+//        #else
+//        deleteRealmIfMigrationNeeded = false
+//        #endif
         
         let encryptionConfig = Realm.Configuration(
             // Set the new schema version. This must be greater than the previously used
@@ -30,9 +30,11 @@ extension Realm {
             migrationBlock: { migration, oldSchemaVersion in
                 // We haven’t migrated anything yet, so oldSchemaVersion == 0
                 if (oldSchemaVersion == 0) {
+                    migration.enumerateObjects(ofType: UserModel.className()) { oldObject, newObject in
+                        oldObject?["isClaimReward"] = false
+                    }
                 }
         },
-            
             deleteRealmIfMigrationNeeded: deleteRealmIfMigrationNeeded
         )
         
@@ -43,6 +45,7 @@ extension Realm {
     static func writeRealm(_ writeCompletion: @escaping (Realm) -> Void) {
         do {
             let realm = try Realm()
+            
             try realm.write {
                 writeCompletion(realm)
             }
@@ -128,9 +131,23 @@ extension Object {
         }
     }
     
-    func save(){
-        Realm.writeRealm { (realm) in
+    func queryFirstWith<T: Object>(query completion: @escaping (Query<T>) -> Query<T>) -> T? {
+        do {
+            let realm = try Realm()
+            let data = realm.objects(T.self).where(completion).first
+            return data
+        } catch let error as NSError {
+            fatalError(error.localizedDescription)
+        }
+    }
+    
+    func save() {
+        if let realm = self.realm {
             realm.add(self, update: .all)
+        } else {
+            Realm.writeRealm { (realm) in
+                realm.add(self, update: .all)
+            }
         }
     }
 }

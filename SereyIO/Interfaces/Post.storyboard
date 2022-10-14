@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Post Detail View Controller-->
+        <!--Old Post Detail View Controller-->
         <scene sceneID="bKy-Np-mjS">
             <objects>
-                <viewController storyboardIdentifier="PostDetailViewController" id="PF1-4e-mk9" customClass="PostDetailViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PostDetailViewController" id="PF1-4e-mk9" customClass="OldPostDetailViewController" customModule="SereyIO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6la-aU-8bL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,21 +28,21 @@
                                                 <subviews>
                                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZMt-1h-TMJ" customClass="PostDetailView" customModule="SereyIO" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="MOL-Ab-ta7">
                                                         <rect key="frame" x="0.0" y="512" width="414" height="128"/>
                                                         <subviews>
                                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fGC-rn-idh" customClass="ContentSizedTableView" customModule="SereyIO" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="128"/>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             </tableView>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="cQv-7F-ZFm" secondAttribute="trailing" id="Mr1-jP-i7d"/>
                                             <constraint firstAttribute="bottom" secondItem="cQv-7F-ZFm" secondAttribute="bottom" id="bbv-fA-Rc8"/>
@@ -66,21 +67,22 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fm0-ru-5j0" customClass="PostCommentView" customModule="SereyIO" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="69"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <viewLayoutGuide key="safeArea" id="pwG-vG-hip"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Nru-gX-dLv" secondAttribute="trailing" id="Hy8-L1-Y8k"/>
                                     <constraint firstItem="Nru-gX-dLv" firstAttribute="leading" secondItem="Fqo-YY-n1f" secondAttribute="leading" id="Vjk-yB-LRj"/>
                                     <constraint firstItem="Nru-gX-dLv" firstAttribute="top" secondItem="Fqo-YY-n1f" secondAttribute="top" id="jDc-Mz-c6q"/>
                                     <constraint firstItem="pwG-vG-hip" firstAttribute="bottom" secondItem="Nru-gX-dLv" secondAttribute="bottom" id="s8G-dN-ZQc"/>
                                 </constraints>
-                                <viewLayoutGuide key="safeArea" id="pwG-vG-hip"/>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="b9G-bk-MDh"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Fqo-YY-n1f" firstAttribute="top" secondItem="BfV-Ab-I2i" secondAttribute="bottom" id="17g-5B-xvE"/>
@@ -91,7 +93,6 @@
                             <constraint firstItem="BfV-Ab-I2i" firstAttribute="top" secondItem="b9G-bk-MDh" secondAttribute="top" id="rHS-x4-DcM"/>
                             <constraint firstItem="b9G-bk-MDh" firstAttribute="trailing" secondItem="BfV-Ab-I2i" secondAttribute="trailing" id="uG6-dt-HZo"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="b9G-bk-MDh"/>
                     </view>
                     <connections>
                         <outlet property="bottomConstraint" destination="6ry-Z8-fN0" id="0hn-8O-EOd"/>
@@ -121,10 +122,10 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="762"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="9Hr-RL-79Z">
-                                                <rect key="frame" x="0.0" y="12" width="414" height="734"/>
+                                                <rect key="frame" x="0.0" y="12" width="414" height="688"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qKa-F1-V6i">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="292"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="246"/>
                                                         <subviews>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter title" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZmO-j0-Wlc" customClass="PaddingTextField" customModule="SereyIO" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="46"/>
@@ -136,32 +137,24 @@
                                                             </textField>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XIK-rS-6ka" customClass="SRichEditorView" customModule="SereyIO" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="46" width="414" height="200"/>
-                                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="200" id="XIP-gw-Tjt"/>
                                                                 </constraints>
                                                             </view>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Short description" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7c2-0z-huR" customClass="PaddingTextField" customModule="SereyIO" customModuleProvider="target">
-                                                                <rect key="frame" x="0.0" y="246" width="414" height="46"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" constant="46" id="20v-yd-T9P"/>
-                                                                </constraints>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                            </textField>
                                                         </subviews>
                                                     </stackView>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IWV-JH-h58" customClass="ContentSizedTableView" customModule="SereyIO" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="304" width="414" height="128"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <rect key="frame" x="0.0" y="258" width="414" height="128"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </tableView>
                                                     <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="caG-oB-60F">
-                                                        <rect key="frame" x="0.0" y="444" width="414" height="290"/>
+                                                        <rect key="frame" x="0.0" y="398" width="414" height="290"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0b-Bi-uOU" customClass="CardView" customModule="SereyIO" customModuleProvider="target">
                                                                 <rect key="frame" x="20" y="0.0" width="374" height="290"/>
                                                                 <subviews>
-                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sampleImage" translatesAutoresizingMaskIntoConstraints="NO" id="Fyo-QZ-3Ak">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Fyo-QZ-3Ak">
                                                                         <rect key="frame" x="0.0" y="0.0" width="374" height="290"/>
                                                                     </imageView>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jxx-om-PXg" customClass="CenteredImageButton" customModule="SereyIO" customModuleProvider="target">
@@ -195,7 +188,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </view>
                                                         </subviews>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstItem="g0b-Bi-uOU" firstAttribute="leading" secondItem="caG-oB-60F" secondAttribute="leading" constant="20" symbolic="YES" id="6Fx-jA-1Uo"/>
                                                             <constraint firstAttribute="trailing" secondItem="g0b-Bi-uOU" secondAttribute="trailing" constant="20" symbolic="YES" id="SUa-Q4-v8d"/>
@@ -206,7 +199,7 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="9Hr-RL-79Z" secondAttribute="trailing" id="83x-zv-GPa"/>
                                             <constraint firstItem="9Hr-RL-79Z" firstAttribute="top" secondItem="mwh-8B-x0o" secondAttribute="top" constant="12" id="Eam-jE-bAI"/>
@@ -224,21 +217,20 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="kWj-Lp-M14"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Xh3-Nu-EGD" secondAttribute="bottom" id="8ZI-LI-bGK"/>
                             <constraint firstItem="kWj-Lp-M14" firstAttribute="trailing" secondItem="Xh3-Nu-EGD" secondAttribute="trailing" id="Vko-HV-lsN"/>
                             <constraint firstItem="Xh3-Nu-EGD" firstAttribute="top" secondItem="kWj-Lp-M14" secondAttribute="top" id="Xm8-z7-jAH"/>
                             <constraint firstItem="Xh3-Nu-EGD" firstAttribute="leading" secondItem="kWj-Lp-M14" secondAttribute="leading" id="bTO-nv-aZg"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="kWj-Lp-M14"/>
                     </view>
                     <connections>
                         <outlet property="bottomConstraint" destination="8ZI-LI-bGK" id="lMG-dY-4a7"/>
                         <outlet property="contentHeightConstraint" destination="XIP-gw-Tjt" id="zUn-zo-PSf"/>
                         <outlet property="richEditorView" destination="XIK-rS-6ka" id="DSI-Lv-5XK"/>
                         <outlet property="scrollView" destination="Xh3-Nu-EGD" id="dMa-Sj-7YK"/>
-                        <outlet property="shortDescTextField" destination="7c2-0z-huR" id="QWP-8P-1qF"/>
                         <outlet property="tableView" destination="IWV-JH-h58" id="THM-Gy-EaX"/>
                         <outlet property="thumbnailImageView" destination="Fyo-QZ-3Ak" id="kPr-iK-3dT"/>
                         <outlet property="titleTextField" destination="ZmO-j0-Wlc" id="76U-mw-dVn"/>
@@ -259,7 +251,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="j1n-Xp-aoJ">
                                 <rect key="frame" x="0.0" y="44" width="414" height="762"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lDM-Zs-seM">
                                 <rect key="frame" x="0.0" y="806" width="414" height="56"/>
@@ -278,7 +270,8 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="FUR-uK-Y6I"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="lDM-Zs-seM" firstAttribute="trailing" secondItem="FUR-uK-Y6I" secondAttribute="trailing" id="Lai-2l-tYo"/>
                             <constraint firstItem="lDM-Zs-seM" firstAttribute="top" secondItem="j1n-Xp-aoJ" secondAttribute="bottom" id="Txu-Oc-HS7"/>
@@ -288,7 +281,6 @@
                             <constraint firstItem="FUR-uK-Y6I" firstAttribute="trailing" secondItem="j1n-Xp-aoJ" secondAttribute="trailing" id="t7G-8o-Ujh"/>
                             <constraint firstItem="lDM-Zs-seM" firstAttribute="leading" secondItem="FUR-uK-Y6I" secondAttribute="leading" id="xh0-tt-VG5"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="FUR-uK-Y6I"/>
                     </view>
                     <connections>
                         <outlet property="bottomConstraint" destination="n5a-hh-DOK" id="Yev-GQ-pye"/>
@@ -302,8 +294,15 @@
             <point key="canvasLocation" x="1776.8115942028987" y="114.50892857142857"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="ZmO-j0-Wlc">
+            <size key="intrinsicContentSize" width="81.5" height="23"/>
+        </designable>
+    </designables>
     <resources>
         <image name="plusIcon" width="27" height="27"/>
-        <image name="sampleImage" width="800" height="400"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

@@ -3,20 +3,22 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 3/25/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import RxCocoa
 import RxSwift
 import RxBinding
+import RealmSwift
 
 class CreatePostViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel, ShouldReactToAction, ShouldPresent, DownloadStateNetworkProtocol {
     
     enum Action {
         case itemSelected(IndexPath)
         case chooseImage(MediaChooserType)
-        case imageSelected(PickerPhotoModel)
+        case imageSelected(PickerFileModel)
+        case closePressed
         case postPressed
     }
     
@@ -24,6 +26,7 @@ class CreatePostViewModel: BaseCellViewModel, CollectionSingleSecitionProviderMo
         case loading(Bool)
         case selectCategoryController(title: String, viewModel: SelectCategoryViewModel)
         case chooseMediaController(title: String, editable: Bool)
+        case showAlertDialogController(AlertDialogModel)
         case dismiss
     }
     
@@ -38,15 +41,16 @@ class CreatePostViewModel: BaseCellViewModel, CollectionSingleSecitionProviderMo
     let cells: BehaviorRelay<[CellViewModel]>
     let submitType: BehaviorRelay<SubmitPostType>
     let post: BehaviorRelay<PostModel?>
+    let draft: BehaviorRelay<DraftModel?>
+    
     let categories: BehaviorRelay<[DiscussionCategoryModel]>
     let selectedCategory: BehaviorRelay<DiscussionCategoryModel?>
     let selectedSubCategory: BehaviorRelay<DiscussionCategoryModel?>
-    let newThumbnailImage: BehaviorRelay<PickerPhotoModel?>
     
     let titleTextFieldViewModel: TextFieldViewModel
     let descriptionFieldViewModel: TextFieldViewModel
-    let shortDescriptionFieldViewModel: TextFieldViewModel
     let thumbnialUrl: BehaviorRelay<URL?>
+    let thumbnailImage: BehaviorRelay<UIImage?>
     
     let shouldInsertImage: PublishSubject<String>
     let shouldEnablePost: BehaviorSubject<Bool>
@@ -60,28 +64,28 @@ class CreatePostViewModel: BaseCellViewModel, CollectionSingleSecitionProviderMo
     let postTitle: String!
     
     init(_ type: SubmitPostType) {
-        self.submitType = BehaviorRelay(value: type)
-        self.post = BehaviorRelay(value: type.postModel)
+        self.submitType = .init(value: type)
+        self.post = .init(value: type.postModel)
+        self.draft = .init(value: type.draftModel)
         self.titleText = type.pageTitle
         self.postTitle = type.postTitle
-        self.cells = BehaviorRelay(value: [])
-        self.categories = BehaviorRelay(value: [])
-        self.selectedCategory = BehaviorRelay(value: nil)
-        self.selectedSubCategory = BehaviorRelay(value: nil)
-        self.newThumbnailImage = BehaviorRelay(value: nil)
+        self.cells = .init(value: [])
+        self.categories = .init(value: [])
+        self.selectedCategory = .init(value: nil)
+        self.selectedSubCategory = .init(value: nil)
         
-        self.titleTextFieldViewModel = TextFieldViewModel.textFieldWith(title: R.string.post.enterTitle.localized(), errorMessage: nil, validation: .notEmpty)
-        self.descriptionFieldViewModel = TextFieldViewModel.textFieldWith(title: R.string.post.articleBody.localized(), errorMessage: "", validation: .notEmpty)
-        self.shortDescriptionFieldViewModel = TextFieldViewModel.textFieldWith(title: R.string.post.shortDescription.localized(), errorMessage: "", validation: .none)
-        self.thumbnialUrl = BehaviorRelay(value: nil)
+        self.titleTextFieldViewModel = .textFieldWith(title: R.string.post.enterTitle.localized(), errorMessage: nil, validation: .notEmpty)
+        self.descriptionFieldViewModel = .textFieldWith(title: R.string.post.articleBody.localized(), errorMessage: "", validation: .notEmpty)
+        self.thumbnialUrl = .init(value: nil)
+        self.thumbnailImage = .init(value: nil)
         
-        self.shouldInsertImage = PublishSubject()
-        self.shouldEnablePost = BehaviorSubject(value: false)
-        self.addThumbnailState = BehaviorSubject(value: ("Upload Thumbnail", R.image.bigPlusIcon()))
+        self.shouldInsertImage = .init()
+        self.shouldEnablePost = .init(value: false)
+        self.addThumbnailState = .init(value: ("Upload Thumbnail", R.image.bigPlusIcon()))
         
-        self.discussionService = DiscussionService()
-        self.fileUploadService = FileUploadService()
-        self.isDownloading = BehaviorRelay(value: false)
+        self.discussionService = .init()
+        self.fileUploadService = .init()
+        self.isDownloading = .init(value: false)
         super.init()
         
         setUpRxObservers()
@@ -99,13 +103,13 @@ extension CreatePostViewModel {
     
     private func fetchPostDetial() {
         if let post = self.post.value {
-            self.discussionService.getPostDetail(permlink: post.permlink, authorName: post.authorName)
+            self.discussionService.getPostDetail(permlink: post.permlink, authorName: post.author)
                 .subscribe(onNext: { [weak self] response in
-                    NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: post.permlink, author: post.authorName, post: response.content))
+                    NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: post.permlink, author: post.author, post: response.content))
                     self?.shouldPresent(.loading(false))
                     self?.shouldPresent(.dismiss)
                 }, onError: { [weak self] error in
-                    NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: post.permlink, author: post.authorName, post: nil))
+                    NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: post.permlink, author: post.author, post: nil))
                     self?.shouldPresent(.loading(false))
                     self?.shouldPresent(.dismiss)
                 }) ~ self.disposeBag
@@ -127,6 +131,10 @@ extension CreatePostViewModel {
     
     private func uploadImage(_ image: UIImage) -> Observable<FileUploadModel> {
         return self.fileUploadService.uploadPhoto(image)
+    }
+    
+    private func uploadPicker(_ pickerFile: PickerFileModel) -> Observable<FileUploadModel> {
+        return self.fileUploadService.uploadPickerFile(pickerFile)
     }
     
     private func submitPost(with thumnailUrl: String) {
@@ -153,6 +161,10 @@ extension CreatePostViewModel {
             self.category = category
             super.init(with: category.selectTitle, properties: .defaultProperties(), indicatorAccessory: indicatorAccessory)
         }
+        
+        convenience required init(_ isShimmering: Bool) {
+            fatalError("init(_:) has not been implemented")
+        }
     }
     
     enum CategoryCellType {
@@ -175,9 +187,24 @@ extension CreatePostViewModel {
     
     fileprivate func notifyDataToUpdate(_ data: PostModel) {
         self.titleTextFieldViewModel.value = data.title
-        self.descriptionFieldViewModel.value = data.description
-        self.shortDescriptionFieldViewModel.value = data.shortDesc
+        self.descriptionFieldViewModel.value = data.descriptionText
         self.thumbnialUrl.accept(data.firstThumnailURL)
+        if let count = data.categories?.count, count > 0 {
+            var selectedCategory = DiscussionCategoryModel(name: (data.categories?.first ?? "").capitalized, sub: nil)
+            if count > 1, let subCategoryTitle = data.categories?[1] {
+                let subCategory = DiscussionCategoryModel(name: subCategoryTitle.capitalized, sub: nil)
+                selectedCategory.sub = [subCategory]
+                self.selectedSubCategory.accept(subCategory)
+            }
+            self.selectedCategory.accept(selectedCategory)
+        }
+    }
+    
+    fileprivate func notifyDateDraft(_ data: DraftModel) {
+        self.titleTextFieldViewModel.value = data.title
+        self.descriptionFieldViewModel.value = data.descriptionText
+        self.thumbnialUrl.accept(data.imageURL)
+        self.thumbnailImage.accept(data.image)
         if data.categoryItem.count > 0 {
             var selectedCategory = DiscussionCategoryModel(name: (data.categoryItem.first ?? "").capitalized, sub: nil)
             if data.categoryItem.count > 1 {
@@ -233,8 +260,8 @@ extension CreatePostViewModel {
     }
     
     fileprivate func validateThumbnail(_ completion: @escaping (String) -> Void) {
-        if let newThumnail = self.newThumbnailImage.value {
-            self.uploadImage(newThumnail.image)
+        if let newThumnail = self.thumbnailImage.value {
+            self.uploadImage(newThumnail)
                 .subscribe(onNext: { data in
                     completion(data.url)
                 }, onError: { [weak self] error in
@@ -253,7 +280,7 @@ extension CreatePostViewModel {
         let permlink = self.post.value?.permlink
         let title = self.titleTextFieldViewModel.value ?? ""
         let body = self.descriptionFieldViewModel.value ?? ""
-        let shortDesc = self.shortDescriptionFieldViewModel.value ?? ""
+        let shortDesc = ""
         let category = self.selectedCategory.value?.name ?? ""
         var subCategories: [String] = []
         if let subCategory = self.selectedSubCategory.value?.name {
@@ -263,7 +290,7 @@ extension CreatePostViewModel {
     }
     
     fileprivate func determineUploadThumbnailState() {
-        let selectedImage = (self.thumbnialUrl.value != nil || self.newThumbnailImage.value != nil)
+        let selectedImage = (self.thumbnialUrl.value != nil || self.thumbnailImage.value != nil)
         let title = selectedImage ? R.string.post.changeThumbnail : R.string.post.uploadThumbnail
         let image = selectedImage ? R.image.bigEditIcon() : R.image.bigPlusIcon()
         self.addThumbnailState.onNext((title.localized(), image))
@@ -272,9 +299,22 @@ extension CreatePostViewModel {
     func validateForm() -> Bool {
         return self.titleTextFieldViewModel.validate()
             && self.descriptionFieldViewModel.validate()
-            && self.shortDescriptionFieldViewModel.validate()
             && self.selectedCategory.value != nil
-            && (self.newThumbnailImage.value != nil || self.thumbnialUrl.value != nil)
+            && (self.thumbnailImage.value != nil || self.thumbnialUrl.value != nil)
+    }
+    
+    func isFilledSomeInfo() -> Bool {
+        return self.titleTextFieldViewModel.validate()
+            || self.descriptionFieldViewModel.validate()
+            || self.selectedCategory.value != nil
+            || self.thumbnailImage.value != nil
+            || self.thumbnialUrl.value != nil
+    }
+    
+    private func generateDraftId() -> Int {
+        let date = Date()
+        let timeInterval = date.timeIntervalSince1970
+        return Int(timeInterval)
     }
 }
 
@@ -286,7 +326,7 @@ fileprivate extension CreatePostViewModel {
             switch item.category {
             case .category(let category):
                 switch self.submitType.value {
-                case .create:
+                case .create, .draft:
                     self.prepareOpenSelectCategory(self.categories.value, selected: category)
                 default:
                     break
@@ -299,14 +339,16 @@ fileprivate extension CreatePostViewModel {
         }
     }
     
-    func handleImageSelected(_ photoModel: PickerPhotoModel) {
+    func handleImageSelected(_ photoModel: PickerFileModel) {
         if let imageType = self.imageType {
             switch imageType {
             case .thumbnail:
-                self.newThumbnailImage.accept(photoModel)
+                photoModel.dkAsset.fetchOriginalImage { image, info in
+                    self.thumbnailImage.accept(image)
+                }
             case .insertImage:
                 self.shouldPresent(.loading(true))
-                self.uploadImage(photoModel.image)
+                self.uploadPicker(photoModel)
                     .subscribe(onNext: { [weak self] data in
                         self?.shouldPresent(.loading(false))
                         self?.shouldInsertImage.onNext(data.url)
@@ -334,12 +376,52 @@ fileprivate extension CreatePostViewModel {
     func handlePostSubmitted() {
         if self.post.value != nil {
             // must be updated post
-            self.fetchPostDetial()
+            fetchPostDetial()
         } else {
             NotificationDispatcher.sharedInstance.dispatch(.postCreated)
             self.shouldPresent(.loading(false))
             self.shouldPresent(.dismiss)
+            
+            if let draft = self.draft.value {
+                RealmManager.delete(draft)
+            }
         }
+    }
+    
+    func handleClosePressed() {
+        if self.isFilledSomeInfo() && self.post.value == nil {
+            let yesAction = ActionModel("Yes, please", style: .default) {
+                self.handleSaveDraft()
+            }
+            
+            let cancelAction = ActionModel(R.string.common.no.localized(), style: .cancel) {
+                self.shouldPresent(.dismiss)
+            }
+            let alertDialogModel = AlertDialogModel(title: "Unfinished article", message: "You’re about to leave the unfinsihed article.\nDo you wish to save it as a draft?", actions: [yesAction, cancelAction])
+            self.shouldPresent(.showAlertDialogController(alertDialogModel))
+        } else {
+            self.shouldPresent(.dismiss)
+        }
+    }
+    
+    func handleSaveDraft() {
+        let id: Int = self.draft.value?.id ?? self.generateDraftId()
+        let draftModel = DraftModel(id)
+        draftModel.title = self.titleTextFieldViewModel.value
+        draftModel.descriptionText = self.descriptionFieldViewModel.value
+        draftModel.imageData = self.thumbnailImage.value?.jpegData(compressionQuality: 0.5)
+        draftModel.imageUrl = self.thumbnialUrl.value?.absoluteString
+        var categories: [String] = []
+        if let category = self.selectedCategory.value?.name {
+            categories.append(category)
+            if let subCategory = self.selectedSubCategory.value?.name {
+                categories.append(subCategory)
+            }
+        }
+        draftModel.categoryItem.removeAll()
+        draftModel.categoryItem.append(objectsIn: categories)
+        draftModel.save()
+        self.shouldPresent(.dismiss)
     }
 }
 
@@ -376,7 +458,7 @@ extension CreatePostViewModel {
             ~> self.shouldEnablePost
             ~ self.disposeBag
         
-        self.newThumbnailImage
+        self.thumbnailImage
             .`do`(onNext: { [weak self] _ in
                 self?.determineUploadThumbnailState()
             })
@@ -394,6 +476,12 @@ extension CreatePostViewModel {
             .subscribe(onNext: { [weak self] data in
                 self?.notifyDataToUpdate(data!)
             }) ~ self.disposeBag
+        
+        self.draft.asObservable()
+            .filter { $0 != nil }
+            .subscribe(onNext: { [weak self] draft in
+                self?.notifyDateDraft(draft!)
+            }) ~ self.disposeBag
     }
     
     func setUpActionObservers() {
@@ -408,6 +496,8 @@ extension CreatePostViewModel {
                     self?.handleImageSelected(photoModel)
                 case .postPressed:
                     self?.handlePostPressed()
+                case .closePressed:
+                    self?.handleClosePressed()
                 }
             }) ~ self.disposeBag
     }
@@ -417,6 +507,7 @@ extension CreatePostViewModel {
 enum SubmitPostType {
     
     case edit(PostModel)
+    case draft(DraftModel)
     case create
     
     var postModel: PostModel? {
@@ -428,9 +519,18 @@ enum SubmitPostType {
         }
     }
     
+    var draftModel: DraftModel? {
+        switch self {
+        case .draft(let draft):
+            return draft
+        default:
+            return nil
+        }
+    }
+    
     var pageTitle: String {
         switch self {
-        case .create:
+        case .create, .draft:
             return R.string.post.postAnArticle.localized()
         default:
             return R.string.post.updateAnArticle.localized()
@@ -439,7 +539,7 @@ enum SubmitPostType {
     
     var postTitle: String {
         switch self {
-        case .create:
+        case .create, .draft:
             return R.string.post.post.localized()
         default:
             return R.string.common.update.localized()

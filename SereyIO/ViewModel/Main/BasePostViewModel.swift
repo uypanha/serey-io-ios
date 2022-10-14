@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/14/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 import RxBinding
 import RxDataSources
+import Then
 
 class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel, InfiniteNetworkProtocol {
     
@@ -27,21 +28,24 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     let canDownloadMorePages: BehaviorRelay<Bool>
     let isRefresh: BehaviorRelay<Bool>
     var shouldRefresh: Bool = false
-    lazy var pageModel: QueryDiscussionsBy = QueryDiscussionsBy()
+    var currentCountry: String?
+    
+    lazy var pageModel: PaginationRequestModel = PaginationRequestModel()
     lazy var downloadDisposeBag: DisposeBag = DisposeBag()
     lazy var isDownloading: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
-    init(_ type: DiscussionType) {
+    init(_ type: DiscussionType, _ selectedCategory: BehaviorRelay<DiscussionCategoryModel?>) {
         self.title = type.title
-        self.cells = BehaviorRelay(value: [])
-        self.emptyOrError = BehaviorSubject(value: nil)
-        self.discussions = BehaviorRelay(value: [])
-        self.selectedCategory = BehaviorRelay(value: nil)
-        self.postType = BehaviorRelay(value: type)
-        self.discussionService = DiscussionService()
-        self.canDownloadMorePages = BehaviorRelay(value: true)
+        self.cells = .init(value: [])
+        self.emptyOrError = .init(value: nil)
+        self.discussions = .init(value: [])
+        self.selectedCategory = selectedCategory
+        self.postType = .init(value: type)
+        self.discussionService = .init()
+        self.canDownloadMorePages = .init(value: true)
         self.isRefresh = .init(value: true)
-        self.endRefresh = BehaviorSubject(value: false)
+        self.endRefresh = .init(value: false)
+        self.currentCountry = PreferenceStore.shared.currentUserCountry
         super.init()
         
         setUpRxObservers()
@@ -82,6 +86,48 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
             .subscribe(onNext: { [weak self] postModel in
                 self?.onProfilePressed(of: postModel)
             }) ~ cellModel.disposeBag
+        
+        cellModel.shouldSharePost.asObservable()
+            .subscribe(onNext: { [weak self] (url, content) in
+                self?.onSharePostPressed(with: url, content: content)
+            }) ~ self.disposeBag
+    }
+    
+    open func prepareCells(_ discussions: [PostModel], _ error: Bool) -> [SectionItem] {
+        var cells: [CellViewModel] = []
+        if let selectedCategory = self.selectedCategory.value {
+            cells.append(FilteredCategoryCellViewModel(selectedCategory).then { [weak self] in
+                self?.setUpFilterCellObservers($0)
+            })
+        }
+        
+        cells.append(contentsOf: discussions.map {
+            if $0.isHidden {
+                return UndoHiddenPostCellViewModel($0).then {
+                    setUpHiddenPostCellObservers($0)
+                }
+            } else {
+                return PostCellViewModel($0).then {
+                    setUpPostCellViewModel($0)
+                }
+            }
+        })
+        
+        if self.canDownloadMore() {
+            let loadingCells = error ? nil : !discussions.isEmpty ? (0...0) : (0...3)
+            if let loadingCells = loadingCells {
+                cells.append(contentsOf: loadingCells.map { _ in PostCellViewModel(true) })
+            }
+        }
+        return [SectionItem(items: cells)]
+    }
+    
+    func validateCountry() {
+        if self.currentCountry != PreferenceStore.shared.currentUserCountry {
+            self.currentCountry = PreferenceStore.shared.currentUserCountry
+            var _self = self
+            _self.reset()
+        }
     }
     
     internal func onMorePressed(of postModel: PostModel) {}
@@ -89,6 +135,8 @@ class BasePostViewModel: BaseCellViewModel, CollectionMultiSectionsProviderModel
     internal func onCategoryPressed(of postModel: PostModel) {}
     
     internal func onProfilePressed(of postModel: PostModel) {}
+    
+    internal func onSharePostPressed(with url: URL, content: String) {}
 }
 
 // MARK: - Networks
@@ -110,7 +158,7 @@ extension BasePostViewModel {
     private func fetchPostDetial(_ permlink: String, _ author: String) {
         self.discussionService.getPostDetail(permlink: permlink, authorName: author)
             .subscribe(onNext: { response in
-                NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: response.content.permlink, author: response.content.authorName, post: response.content))
+                NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: response.content.permlink, author: response.content.author, post: response.content))
             }, onError: { [weak self] error in
                 self?.isDownloading.accept(false)
                 let errorInfo = ErrorHelper.prepareError(error: error)
@@ -120,9 +168,9 @@ extension BasePostViewModel {
     
     internal func upVote(_ post: PostModel, _ weight: Int, _ isVoting: BehaviorSubject<VotedType?>) {
         isVoting.onNext(.upvote)
-        self.discussionService.upVote(post.permlink, author: post.authorName, weight: weight)
+        self.discussionService.upVote(post.permlink, author: post.author, weight: weight)
             .subscribe(onNext: { [weak self] _ in
-                self?.fetchPostDetial(post.permlink, post.authorName)
+                self?.fetchPostDetial(post.permlink, post.author)
                 isVoting.onNext(nil)
             }, onError: { [weak self] error in
                 isVoting.onNext(nil)
@@ -133,9 +181,9 @@ extension BasePostViewModel {
     
     internal func flag(_ post: PostModel, _ weight: Int, _ isVoting: BehaviorSubject<VotedType?>) {
         isVoting.onNext(.flag)
-        self.discussionService.flag(post.permlink, author: post.authorName, weight: weight)
+        self.discussionService.flag(post.permlink, author: post.author, weight: weight)
             .subscribe(onNext: { [weak self] _ in
-                self?.fetchPostDetial(post.permlink, post.authorName)
+                self?.fetchPostDetial(post.permlink, post.author)
                 isVoting.onNext(nil)
             }, onError: { [weak self] error in
                 isVoting.onNext(nil)
@@ -146,12 +194,36 @@ extension BasePostViewModel {
     
     internal func downVote(_ post: PostModel, _ votedType: VotedType, _ isVoting: BehaviorSubject<VotedType?>) {
         isVoting.onNext(votedType)
-        self.discussionService.downVote(post.permlink, author: post.authorName)
+        self.discussionService.downVote(post.permlink, author: post.author)
             .subscribe(onNext: { [weak self] _ in
-                self?.fetchPostDetial(post.permlink, post.authorName)
+                self?.fetchPostDetial(post.permlink, post.author)
                 isVoting.onNext(nil)
             }, onError: { [weak self] error in
                 isVoting.onNext(nil)
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    internal func hidePost(_ post: PostModel) {
+        self.discussionService.hidePost(with: post.id)
+            .subscribe(onNext: { [weak self] data in
+                var post = post
+                post.isHidden = true
+                self?.updatePost(post)
+            }, onError: { [weak self] error in
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
+    
+    internal func unhidePost(_ post: PostModel) {
+        self.discussionService.unhidePost(with: post.id)
+            .subscribe(onNext: { [weak self] data in
+                var post = post
+                post.isHidden = false
+                self?.updatePost(post)
+            }, onError: { [weak self] error in
                 let errorInfo = ErrorHelper.prepareError(error: error)
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
@@ -163,7 +235,7 @@ extension BasePostViewModel {
     
     internal func updatePost(_ post: PostModel) {
         var posts = self.discussions.value
-        if let indexToUpdate = posts.index(where: { $0.permlink == post.permlink && $0.authorName == post.authorName }) {
+        if let indexToUpdate = posts.index(where: { $0.permlink == post.permlink && $0.author == post.author }) {
             posts[indexToUpdate] = post
         }
         self.discussions.accept(posts)
@@ -177,12 +249,11 @@ extension BasePostViewModel {
             self.isRefresh.accept(false)
         }
         
-        if data.count > 0 {
-            self.pageModel.start_author = data.last?.authorName
-            self.pageModel.start_permlink = data.last?.permlink
-        }
         if data.isEmpty || pageModel.limit > data.count {
             canDownloadMorePages.accept(false)
+        }
+        if data.count > 0 {
+            self.pageModel.offset = data.count + self.discussions.value.count
         }
         
         discussions.append(contentsOf: data)
@@ -191,38 +262,15 @@ extension BasePostViewModel {
     
     internal func removePost(permlink: String, author: String) {
         var posts = self.discussions.value
-        if let indexToRemove = posts.index(where: { $0.permlink == permlink && $0.authorName == author }) {
+        if let indexToRemove = posts.index(where: { $0.permlink == permlink && $0.author == author }) {
             posts.remove(at: indexToRemove)
         }
         self.discussions.accept(posts)
     }
     
-    fileprivate func prepareCells(_ discussions: [PostModel], _ error: Bool) -> [SectionItem] {
-        var cells: [CellViewModel] = []
-        if let selectedCategory = self.selectedCategory.value {
-            cells.append(FilteredCategoryCellViewModel(selectedCategory).then { [weak self] in
-                self?.setUpFilterCellObservers($0)
-            })
-        }
-        
-        cells.append(contentsOf: discussions.map {
-            PostCellViewModel($0).then {
-                setUpPostCellViewModel($0)
-            }
-        })
-        
-        if self.canDownloadMore() {
-            let loadingCells = error ? nil : !discussions.isEmpty ? (0...0) : (0...3)
-            if let loadingCells = loadingCells {
-                cells.append(contentsOf: loadingCells.map { _ in PostCellViewModel(true) })
-            }
-        }
-        return [SectionItem(items: cells)]
-    }
-    
-    func setCategory(_ category: DiscussionCategoryModel?) {
-        self.selectedCategory.accept(category)
-    }
+//    func setCategory(_ category: DiscussionCategoryModel?) {
+//        self.selectedCategory.accept(category)
+//    }
 }
 
 // MARK: - SetUp RxObservers
@@ -266,13 +314,11 @@ fileprivate extension BasePostViewModel {
             ~> self.selectedCategory
             ~ cellModel.disposeBag
     }
-}
-
-// MARK: - QueryDiscussionsBy
-extension QueryDiscussionsBy: PaginationRequestProtocol {
     
-    mutating func reset() {
-        self.start_permlink = nil
-        self.start_author = nil
+    func setUpHiddenPostCellObservers(_ cellModel: UndoHiddenPostCellViewModel) {
+        cellModel.shouldUnhidePost.asObservable()
+            .subscribe(onNext: { [weak self] post in
+                self?.unhidePost(post)
+            }) ~ cellModel.disposeBag
     }
 }

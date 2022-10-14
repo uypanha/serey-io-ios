@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 9/3/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -105,9 +105,10 @@ fileprivate extension PowerDownViewModel {
     func handlePowerDownSuccess(_ account: String, amount: String) {
         let confirmAction = ActionModel(R.string.common.confirm.localized(), style: .default) {
             self.shouldPresent(.dismiss)
+            self.didTransactionUpdate.onNext(())
         }
         
-        let alerDialogModel = AlertDialogModel(title: "Power Down", message: "You just power down Serey Power with \(amount).", actions: [confirmAction])
+        let alerDialogModel = AlertDialogModel(title: "Power Down", message: "You’ve just powered down \(amount) Serey Power.", actions: [confirmAction])
         self.shouldPresent(.showAlertDialogController(alerDialogModel))
     }
 }

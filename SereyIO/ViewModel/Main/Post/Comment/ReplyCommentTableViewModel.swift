@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/14/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -42,7 +42,7 @@ class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, 
         self.commentHidden = BehaviorSubject(value: false)
         
         self.commentViewModel = CommentTextViewModel()
-        super.init(comment.permlink, comment.authorName)
+        super.init(comment.permlink, comment.author)
         
         self.post.accept(comment)
     }
@@ -98,11 +98,11 @@ class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, 
             ~ cellModel.disposeBag
     }
     
-    override func updateData(_ data: PostDetailResponse) {
+    override func updateData(_ data: PostDetailResponse<PostModel>) {
         var post = data.content
         post.replies = data.replies
         self.post.accept(post)
-        NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: data.content.permlink, author: data.content.authorName, post: post))
+        NotificationDispatcher.sharedInstance.dispatch(.postUpdated(permlink: data.content.permlink, author: data.content.author, post: post))
     }
     
     override func notificationReceived(_ notification: Notification) {
@@ -130,7 +130,7 @@ fileprivate extension ReplyCommentTableViewModel {
     
     func handleUpVotePressed(_ voteType: VotePostType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
         if AuthData.shared.isUserLoggedIn {
-            let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .upVoteComment : .upvotePost)
+            let voteDialogViewModel = VoteDialogViewModel(type: voteType == .comment ? .upVoteComment : .upvotePost)
             voteDialogViewModel.shouldConfirm
                 .subscribe(onNext: { [weak self] weight in
                     self?.upVote(postModel, weight, isVoting)
@@ -143,7 +143,7 @@ fileprivate extension ReplyCommentTableViewModel {
     
     func handleFlagPressed(_ voteType: VotePostType, _ postModel: PostModel, _ isVoting: BehaviorSubject<VotedType?>) {
         if AuthData.shared.isUserLoggedIn {
-            let voteDialogViewModel = VoteDialogViewModel(100, type: voteType == .comment ? .flagComment : .flagPost)
+            let voteDialogViewModel = VoteDialogViewModel(type: voteType == .comment ? .flagComment : .flagPost)
             voteDialogViewModel.shouldConfirm
                 .subscribe(onNext: { [weak self] weight in
                     self?.flag(postModel, -weight, isVoting)

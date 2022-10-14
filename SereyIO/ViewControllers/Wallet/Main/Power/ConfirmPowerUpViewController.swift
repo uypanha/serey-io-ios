@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/30/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -41,7 +41,7 @@ class ConfirmPowerUpViewController: BaseViewController, BottomSheetProtocol {
 extension ConfirmPowerUpViewController {
     
     func setUpViews() {
-        self.amountLabel.textColor = ColorName.primary.color
+        self.amountLabel.textColor = .color(.primary)
         self.powerUpButton.primaryStyle()
     }
 }

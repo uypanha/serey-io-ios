@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 3/23/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -23,7 +23,6 @@ class CreatePostViewController: BaseViewController, KeyboardController, LoadingI
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var titleTextField: PaddingTextField!
     @IBOutlet weak var richEditorView: SRichEditorView!
-    @IBOutlet weak var shortDescTextField: PaddingTextField!
     @IBOutlet weak var tableView: ContentSizedTableView!
     @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
@@ -37,6 +36,9 @@ class CreatePostViewController: BaseViewController, KeyboardController, LoadingI
         return MediaPickerHelper(withPresenting: self)
     }()
     
+    lazy var closeButton: UIBarButtonItem = {
+        return UIBarButtonItem(image: R.image.clearIcon(), style: .plain, target: nil, action: nil)
+    }()
     lazy var postButton: UIBarButtonItem = { [unowned self] in
         return UIBarButtonItem(title: self.viewModel.postTitle, style: .plain, target: nil, action: nil)
     }()
@@ -83,18 +85,18 @@ class CreatePostViewController: BaseViewController, KeyboardController, LoadingI
 extension CreatePostViewController {
     
     func setUpViews() {
-        self.titleTextField.addBorders(edges: [.bottom], color: ColorName.border.color)
-        self.richEditorView.addBorders(edges: [.bottom], color: ColorName.border.color)
-        self.shortDescTextField.addBorders(edges: [.bottom], color: ColorName.border.color)
+        self.titleTextField.addBorders(edges: [.bottom], color: .color(.border))
+        self.richEditorView.addBorders(edges: [.bottom], color: .color(.border))
         
         setUpEditorView(self.richEditorView)
         
         self.navigationItem.rightBarButtonItem = self.postButton
+        self.navigationItem.leftBarButtonItem = self.closeButton
         self.prepareTableView()
     }
     
     func prepareTableView() {
-        self.tableView.separatorColor = ColorName.border.color
+        self.tableView.separatorColor = .color(.border)
         self.tableView.tableFooterView = UIView()
         self.tableView.register(TextTableViewCell.self)
     }
@@ -170,12 +172,17 @@ extension CreatePostViewController {
             ~ self.disposeBag
         
         self.imagePickerHelper.selectedPhotoSubject.asObservable()
-            .map { CreatePostViewModel.Action.imageSelected($0) }
+            .map { CreatePostViewModel.Action.imageSelected($0.first!) }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
         
         self.postButton.rx.tap
             .map { CreatePostViewModel.Action.postPressed }
+            ~> self.viewModel.didActionSubject
+            ~ self.disposeBag
+        
+        self.closeButton.rx.tap
+            .map { CreatePostViewModel.Action.closePressed }
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
     }
@@ -202,9 +209,8 @@ extension CreatePostViewController {
             ~> self.viewModel.didActionSubject
             ~ self.disposeBag
         
-        self.viewModel.newThumbnailImage.asObservable()
+        self.viewModel.thumbnailImage.asObservable()
             .filter { $0 != nil }
-            .map { $0!.image }
             ~> self.thumbnailImageView.rx.image
             ~ self.disposeBag
         
@@ -215,12 +221,12 @@ extension CreatePostViewController {
         
         self.viewModel.shouldEnablePost ~> self.postButton.rx.isEnabled ~ self.disposeBag
         self.viewModel.titleTextFieldViewModel.bind(with: self.titleTextField)
-        self.viewModel.shortDescriptionFieldViewModel.bind(with: self.shortDescTextField)
         self.viewModel.descriptionFieldViewModel.textFieldText.take(1)
             .bind(to: self.richEditorView.rx.html)
             ~ self.disposeBag
         
         self.viewModel.thumbnialUrl.asObservable()
+            .filter { $0 != nil }
             .map { $0 }
             .bind(to: self.thumbnailImageView.kf.rx.image())
             ~ self.disposeBag
@@ -242,18 +248,15 @@ extension CreatePostViewController {
                     let listTableViewController = ListTableViewController(viewModel)
                     listTableViewController.title = title
                     listTableViewController.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 8, right: 0)
-                    listTableViewController.view.roundCorners(corners: [.topLeft, .topRight], radius: 8)
-                    let bottomSheet = MDCBottomSheetController(contentViewController: listTableViewController)
-                    bottomSheet.isScrimAccessibilityElement = false
-                    bottomSheet.automaticallyAdjustsScrollViewInsets = false
-                    bottomSheet.dismissOnDraggingDownSheet = true
-                    bottomSheet.trackingScrollView = listTableViewController.tableView
+                    let bottomSheet = BottomSheetListViewController(contentViewController: listTableViewController)
                     self.present(bottomSheet, animated: true, completion: nil)
-                case .chooseMediaController(let title, let editable):
-                    self.imagePickerHelper.allowEditting = editable
+                case .chooseMediaController(let title, _):
+                    self.imagePickerHelper.singleSelect = true
                     self.imagePickerHelper.showImagePickerAlert(title: title)
                 case .dismiss:
                     self.dismiss(animated: true, completion: nil)
+                case .showAlertDialogController(let alertDialogModel):
+                    self.showDialog(alertDialogModel)
                 }
             }) ~ self.disposeBag
     }

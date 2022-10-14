@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 6/5/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -15,7 +15,7 @@ class EmptyOrErrorView: NibView {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var actionButton: UIButton! {
         didSet {
-            actionButton.setTitleColor(ColorName.primary.color, for: .normal)
+            actionButton.setTitleColor(.color(.primary), for: .normal)
         }
     }
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
@@ -77,11 +77,16 @@ class EmptyOrErrorView: NibView {
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func xibSetup() {
+        super.xibSetup()
+        
+        self.actionButton.secondaryStyle()
+    }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
         
         self.topConstraint.constant = self.topConstraintConstant
         self.errorImageWidthContraint = self.errorImageWidthContraint.changeMultiplier(multiplier: self.imageWidthContraint)
-        self.actionButton.secondaryStyle()
     }
 }

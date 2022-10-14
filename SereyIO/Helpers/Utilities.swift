@@ -3,7 +3,7 @@
 //  Emergency
 //
 //  Created by Phanha Uy on 11/24/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -38,7 +38,7 @@ class ViewUtiliesHelper {
     
     // MARK: - Default image placeholder
     public static func prepareDefualtPlaceholder() -> UIImage {
-        return ColorName.shimmering.color.withAlphaComponent(0.5).toImage() ?? UIImage()
+        return UIColor.color(.shimmering).withAlphaComponent(0.5).toImage() ?? UIImage()
     }
     
     // MARK: - Default profile image placeholder

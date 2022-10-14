@@ -8,60 +8,37 @@ install! 'cocoapods',
 def frameworks_pods
   
   # MARK: - Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  platform :ios, '10'
+  platform :ios, '13'
   use_frameworks!
   inhibit_all_warnings!
-  
-  # MARK: - RX
-  pod 'RxSwift', '~> 5'
-  pod 'RxCocoa', '~> 5'
-  pod 'RxDataSources', '~> 4.0'
-  pod 'RxKeyboard', '1.0.0'
-  pod 'RxKingfisher', '1.0.0'
-  pod 'RxAlamofire', '5.2.0'
-  pod 'RxRealm', '2.0.0'
-  pod 'RxBinding', '0.3.1'
 
 	# MARK: - Data Store
-  pod 'Locksmith'
-	pod 'RealmSwift', '4.0'
-
-	# MARK: - Extentions
-  pod 'Then'
+  pod 'Locksmith', :git => 'https://github.com/uypanha/Locksmith.git'
 
 	# MARK: - Tools + Builders
   pod 'R.swift'
   pod 'SwiftGen'
   pod 'SwiftOTP'
-  
-  # MARK: - Coder Tools
-#  pod 'AnyCodable-FlightSchool', '~> 0.2.3'
+  pod 'TLCustomMask'
+  pod 'Siren', '~> 5.8.1'
 
 	# MARK: - Logger
   pod 'SwiftyBeaver'
-	
-	# MARK: - Network Framework
-  pod 'Kingfisher'
-  pod 'Alamofire'
-  pod 'AlamofireObjectMapper', :git => 'https://github.com/uypanha/AlamofireObjectMapper.git'
-  pod 'ReachabilitySwift'
-  pod 'Moya/RxSwift'
 
 	# MARK: - UI + Controllers
-	pod 'SnapKit'
-	pod 'NVActivityIndicatorView'
+  pod 'NVActivityIndicatorView', '~> 5.1.1'
+  pod 'NVActivityIndicatorView/Extended'
 	pod 'NotificationBannerSwift'
+  pod "AlignedCollectionViewFlowLayout"
   pod 'Shimmer'
   pod 'RichEditorView', :git => 'https://github.com/uyphanha/RichEditorView.git'
   pod 'LSDialogViewController', :git => 'https://github.com/uyphanha/LSDialogViewController.git'
-  
-  # MARK: - Google SDKs
-  pod 'Firebase/Analytics'
-  pod 'Firebase/Core' 
-  pod 'Firebase/Messaging'
+  pod 'PinCodeTextField', :git => 'https://github.com/uypanha/PinCodeTextField.git'
+  pod 'DKImagePickerController', :subspecs => ['PhotoGallery', 'Camera', 'InlineCamera'], :git => 'https://github.com/uypanha/DKImagePickerController.git', :branch => 'develop'
   
   # MARK: - Material Components
   pod 'MaterialComponents/Tabs'
+  pod 'MaterialComponents/Tabs+TabBarView'
   pod 'MaterialComponents/PageControl'
   pod 'MaterialComponents/BottomSheet'
   pod 'MaterialComponents/Chips'
@@ -77,7 +54,7 @@ target 'SereyIO' do
 
   # Pods for SereyIO
 	frameworks_pods
-
+ 
   target 'SereyIOTests' do
     inherit! :search_paths
     # Pods for testing
@@ -86,5 +63,25 @@ target 'SereyIO' do
   target 'SereyIOUITests' do
     inherit! :search_paths
     # Pods for testing
+  end
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      # Needed for building for simulator on M1 Macs
+      config.build_settings['ONLY_ACTIVE_ARCH'] = 'NO'
+      config.build_settings['LD_NO_PIE'] = 'NO'
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+      
+      # Suppress warning of minimum development target
+      # config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13'
+      
+      # Workaround signing error xcode 14
+      config.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ""
+      config.build_settings['CODE_SIGNING_IDENTITY'] = ""
+      config.build_settings['CODE_SIGNING_REQUIRED'] = "NO"
+      config.build_settings['CODE_SIGNING_ALLOWED'] = "NO"
+    end
   end
 end

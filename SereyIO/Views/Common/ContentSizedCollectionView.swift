@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 4/7/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -17,8 +17,10 @@ final class ContentSizedCollectionView: UICollectionView {
     }
     
     override var intrinsicContentSize: CGSize {
-        layoutIfNeeded()
-        return CGSize(width: UIView.noIntrinsicMetric, height: contentSize.height)
+        self.layoutIfNeeded()
+        var size = self.contentSize
+        size.height += self.contentInset.top + self.contentInset.bottom
+        return size
     }
     
     override func layoutSubviews() {

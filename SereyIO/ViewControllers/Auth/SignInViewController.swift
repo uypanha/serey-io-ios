@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 3/12/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -22,17 +22,16 @@ class SignInViewController: BaseViewController, LoadingIndicatorController, Keyb
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var signInLabel: UILabel!
-    @IBOutlet weak var userNameTextField: MDCTextField!
+    @IBOutlet weak var userNameTextField: MDCOutlinedTextField!
     @IBOutlet weak var passwordTextField: MDCPasswordTextField!
     @IBOutlet weak var signInButton: LoadingButton!
     
     @IBOutlet weak var dontHaveAccountLabel: UILabel!
     @IBOutlet weak var termServiceTextView: UITextView!
     
+    @IBOutlet weak var rememberMeStackView: UIStackView!
+    @IBOutlet weak var rememberCheckbox: CheckBox!
     @IBOutlet weak var signUpButton: UIButton!
-    
-    var userNameController: MDCTextInputControllerOutlined?
-    var passwordController: MDCTextInputControllerOutlined?
     
     var viewModel: SignInViewModel!
 
@@ -40,6 +39,7 @@ class SignInViewController: BaseViewController, LoadingIndicatorController, Keyb
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.rememberMeStackView.isHidden = true
         setUpViews()
         setUpRxObservers()
     }
@@ -71,10 +71,11 @@ class SignInViewController: BaseViewController, LoadingIndicatorController, Keyb
 fileprivate extension SignInViewController {
     
     func setUpViews() {
-        self.signInButton.customStyle(with: ColorName.buttonBg.color)
+        self.rememberCheckbox.borderStyle = .roundedSquare(radius: 4)
+        self.signInButton.customStyle(with: .color(.buttonBg))
         
-        self.userNameController = self.userNameTextField.primaryController()
-        self.passwordController = self.passwordTextField.primaryController()
+        self.userNameTextField.primaryStyle()
+        self.passwordTextField.primaryStyle()
         self.termServiceTextView.delegate = self
     }
     
@@ -138,12 +139,17 @@ fileprivate extension SignInViewController {
     }
     
     func setUpContentObservers() {
-        self.viewModel.userNameTextFieldViewModel.bind(with: self.userNameTextField, controller: self.userNameController)
-        self.viewModel.privateKeyOrPwdTextFieldViewModel.bind(with: self.passwordTextField, controller: self.passwordController)
+        self.viewModel.userNameTextFieldViewModel.bind(withMDC: self.userNameTextField)
+        self.viewModel.privateKeyOrPwdTextFieldViewModel.bind(withMDC: self.passwordTextField)
         self.viewModel.shouldEnbleSigIn ~> self.signInButton.rx.isEnabled ~ self.disposeBag
     }
     
     func setUpControlsEventObservers() {
+        self.userNameTextField.rx.controlEvent(.editingChanged)
+            .subscribe(onNext: { [weak self] _ in
+                self?.viewModel.didAction(with: .editingChanged)
+            }) ~ self.disposeBag
+        
         self.signInButton.rx.tap.asObservable()
             .filter { !self.signInButton.isLoading }
             .map { SignInViewModel.Action.signInPressed }

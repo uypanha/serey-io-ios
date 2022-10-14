@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/6/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -13,12 +13,15 @@ import RxBinding
 import RealmSwift
 import Realm
 import RxRealm
+import CountryPicker
 
 class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, DownloadStateNetworkProtocol {
     
     enum Action {
         case filterPressed
         case createPostPressed
+        case countryPressed
+        case countrySelected(CountryModel?)
     }
     
     enum ViewToPresent {
@@ -32,6 +35,10 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
         case userAccountController(UserAccountViewModel)
         case voteDialogController(VoteDialogViewModel)
         case downVoteDialogController(DownvoteDialogViewModel)
+        case bottomListViewController(BottomListMenuViewModel)
+        case reportPostViewController(ReportPostViewModel)
+        case confirmViewController(ConfirmDialogViewModel)
+        case shareLink(URL, String)
     }
     
     // input:
@@ -47,20 +54,36 @@ class HomeViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent, Download
     let categories: BehaviorRelay<[DiscussionCategoryModel]>
     
     let discussionService: DiscussionService
+    let userService: UserService
+    var currentCountry: BehaviorRelay<CountryModel?>
+    var didScrolledToIndex: Bool = false
     lazy var isDownloading = BehaviorRelay<Bool>(value: false)
     
     override init() {
-        self.selectedCategory = BehaviorRelay(value: nil)
-        self.postTabTitles = BehaviorRelay(value: [])
-        self.postViewModels = BehaviorRelay(value: [])
-        self.categories = BehaviorRelay(value: [])
-        self.discussionService = DiscussionService()
+        self.selectedCategory = .init(value: nil)
+        self.postTabTitles = .init(value: [])
+        self.postViewModels = .init(value: [])
+        self.categories = .init(value: [])
+        self.discussionService = .init()
+        self.userService = .init()
+        self.currentCountry = .init(value: PreferenceStore.shared.currentCountry)
         super.init()
         
         setUpRxObservers()
         let discussionTypes: [DiscussionType] = [.trending, .hot, .new]
         self.postTabTitles.accept(discussionTypes.map { $0.title })
-        self.postViewModels.accept(discussionTypes.map { $0.viewModel })
+        self.postViewModels.accept(discussionTypes.map { $0.prepareViewModel(self.selectedCategory) })
+    }
+    
+    func validateCountry() {
+        if self.currentCountry.value?.countryName != PreferenceStore.shared.currentUserCountry {
+            self.currentCountry.accept(PreferenceStore.shared.currentCountry)
+            self.selectedCategory.accept(nil)
+            self.downloadData()
+            self.postViewModels.value.forEach { viewModel in
+                viewModel.validateCountry()
+            }
+        }
     }
 }
 
@@ -85,6 +108,21 @@ extension HomeViewModel {
                 self?.shouldPresentError(errorInfo)
             }) ~ self.disposeBag
     }
+    
+    func fetchIpTrace() {
+        self.userService.fetchIpTrace()
+            .subscribe(onNext: { [weak self] data in
+                if let loc = data?.split(separator: "\n").first(where: { $0.contains("loc=") }) {
+                    let countryCode = loc.replacingOccurrences(of: "loc=", with: "")
+                    if let country = CountryManager.shared.country(withCode: countryCode) {
+                        self?.didAction(with: .countrySelected(.init(countryName: country.countryName, iconUrl: nil)))
+                    }
+                }
+            }, onError: { [weak self] error in
+                let errorInfo = ErrorHelper.prepareError(error: error)
+                self?.shouldPresentError(errorInfo)
+            }) ~ self.disposeBag
+    }
 }
 
 // MARK: - Preparations & Tools
@@ -99,13 +137,7 @@ extension HomeViewModel {
 fileprivate extension HomeViewModel {
     
     func handleFilterPressed() {
-        let viewModel = ChooseCategorySheetViewModel(self.categories.value, self.selectedCategory.value)
-        viewModel.categoryDidSelected.asObservable()
-            .subscribe(onNext: { [weak self] selectedCategory in
-                if selectedCategory?.name != self?.selectedCategory.value?.name {
-                    self?.selectedCategory.accept(selectedCategory)
-                }
-            }) ~ viewModel.disposeBag
+        let viewModel = ChooseCategorySheetViewModel(categories: self.categories.value, self.selectedCategory)
         self.shouldPresent(.choosePostCategoryController(viewModel))
     }
     
@@ -115,6 +147,31 @@ fileprivate extension HomeViewModel {
         } else {
             self.shouldPresent(.signInViewController)
         }
+    }
+    
+    func handleCountryPressed() {
+        var items: [ImageTextCellViewModel] = [ChooseCountryOption.detectAutomatically, ChooseCountryOption.global].map { $0.cellModel }
+        let countries: Results<CountryModel> = CountryModel().queryAll()
+        items.append(contentsOf: countries.toArray().map { CountryCellViewModel($0) })
+        
+        let bottomListMenuViewModel = BottomListMenuViewModel(header: "Select your preffered country", items)
+        bottomListMenuViewModel.shouldSelectMenuItem
+            .subscribe(onNext: { [unowned self] cellModel in
+                if let cellModel = cellModel as? ChooseCountryOptionCellViewModel {
+                    switch cellModel.option {
+                    case .detectAutomatically:
+                        self.fetchIpTrace()
+                    case .global:
+                        self.didAction(with: .countrySelected(nil))
+                    default:
+                        break
+                    }
+                } else if let cellModel = cellModel as? CountryCellViewModel {
+                    self.didAction(with: .countrySelected(cellModel.country))
+                }
+            }) ~ self.disposeBag
+        
+        self.shouldPresent(.bottomListViewController(bottomListMenuViewModel))
     }
 }
 
@@ -127,13 +184,13 @@ extension HomeViewModel {
     }
     
     func setUpContentChangedObservers() {
-        self.selectedCategory.asObservable()
-            .skip(1)
-            .subscribe(onNext: { [weak self] selectedCategory in
-                self?.postViewModels.value.forEach({ postTableViewModel in
-                    postTableViewModel.setCategory(selectedCategory)
-                })
-            }) ~ self.disposeBag
+//        self.selectedCategory.asObservable()
+//            .skip(1)
+//            .subscribe(onNext: { [weak self] selectedCategory in
+//                self?.postViewModels.value.forEach({ postTableViewModel in
+//                    postTableViewModel.setCategory(selectedCategory)
+//                })
+//            }) ~ self.disposeBag
         
         self.postViewModels.asObservable()
             .subscribe(onNext: { [unowned self] viewModels in
@@ -151,6 +208,12 @@ extension HomeViewModel {
                     self?.handleFilterPressed()
                 case .createPostPressed:
                     self?.handleCreatePost()
+                case .countrySelected(let country):
+                    PreferenceStore.shared.currentUserCountry = country?.countryName
+                    PreferenceStore.shared.currentUserCountryIconUrl = country?.iconUrl
+                    self?.validateCountry()
+                case .countryPressed:
+                    self?.handleCountryPressed()
                 }
             }) ~ self.disposeBag
     }
@@ -175,6 +238,12 @@ extension HomeViewModel {
                     self?.shouldPresent(.downVoteDialogController(downVoteDialogViewModel))
                 case .signInViewController:
                     self?.shouldPresent(.signInViewController)
+                case .reportPostController(let viewModel):
+                    self?.shouldPresent(.reportPostViewController(viewModel))
+                case .confirmViewController(let viewModel):
+                    self?.shouldPresent(.confirmViewController(viewModel))
+                case .shareLink(let url, let content):
+                    self?.shouldPresent(.shareLink(url, content))
                 default:
                     break
                 }
@@ -241,8 +310,8 @@ enum DiscussionType {
         }
     }
     
-    var viewModel: PostTableViewModel {
-        return PostTableViewModel(self)
+    func prepareViewModel(_ selectedCategory: BehaviorRelay<DiscussionCategoryModel?>) -> PostTableViewModel {
+        return .init(self, selectedCategory)
     }
     
     var emptyMessage: String {

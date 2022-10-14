@@ -3,13 +3,12 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 1/11/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
-import NVActivityIndicatorView
 
-protocol LoadingIndicatorController: NVActivityIndicatorViewable {
+protocol LoadingIndicatorController {
     
     func showLoading(_ message: String?)
     
@@ -20,11 +19,10 @@ extension LoadingIndicatorController where Self: UIViewController {
     
     func showLoading(_ message: String? = nil) {
         self.view.endEditing(true)
-        let size = CGSize(width: 40, height: 40)
-        self.startAnimating(size, message: message, type: .circleStrokeSpin)
+        SKActivityIndicator.show(message ?? "Loading...")
     }
     
     func dismissLoading() {
-        self.stopAnimating()
+        SKActivityIndicator.dismiss()
     }
 }

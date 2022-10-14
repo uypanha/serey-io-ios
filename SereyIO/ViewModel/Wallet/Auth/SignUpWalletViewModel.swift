@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 6/18/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -19,8 +19,7 @@ class SignUpWalletViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
     }
     
     enum ViewToPresent {
-        case createCredentialController
-        case chooseSecurityMethodController
+        case createCredentialViewController(CreateCredentialViewModel)
         case loading(Bool)
         case dismiss
     }
@@ -41,8 +40,8 @@ class SignUpWalletViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
         self.didActionSubject = .init()
         self.shouldPresentSubject = .init()
         
-        self.userNameTextFieldViewModel = .textFieldWith(title: "Username", errorMessage: "", validation: .notEmpty)
-        self.ownerKeyTextFieldViewModel = .textFieldWith(title: "Owner Key", errorMessage: "Please enter a valid owner key", validation: .ownerKey)
+        self.userNameTextFieldViewModel = .textFieldWith(title: "Username", placeholder: "Input your username", errorMessage: "", validation: .notEmpty)
+        self.ownerKeyTextFieldViewModel = .textFieldWith(title: "Private Key", placeholder: "Input your private key", errorMessage: "Please enter a valid owner key", validation: .ownerKey)
         self.shouldEnbleSignUp = .init(value: false)
         
         self.authService = AuthService()
@@ -58,11 +57,11 @@ extension SignUpWalletViewModel {
     
     func verifyOwnerKey(_ username: String, _ ownerKey: String) {
         self.shouldPresent(.loading(true))
-        let postingKey = SereyKeyHelper.generateKey(from: username, ownerKey: ownerKey, type: .active)?.wif ?? ""
-        self.authService.loginOwner(username, postingKey)
+        let postingKey = SereyKeyHelper.generateKey(from: username, ownerKey: ownerKey, type: .posting)?.createPublic(prefix: .custom("SRY")).address ?? ""
+        self.authService.checkUsernane(username: username, publicKey: postingKey)
             .subscribe(onNext: { [weak self] data in
                 self?.shouldPresent(.loading(false))
-                self?.handleOwnerKeyVerified(username, ownerKey)
+                self?.handleOwnerKeyVerified(username, ownerKey, token: data.data)
             }, onError: { [weak self] error in
                 self?.shouldPresent(.loading(false))
                 let errorInfo = ErrorHelper.prepareError(error: error)
@@ -74,11 +73,10 @@ extension SignUpWalletViewModel {
 // MARK: - Preparations & Tools
 extension SignUpWalletViewModel {
     
-    private func handleOwnerKeyVerified(_ username: String, _ ownerKey: String) {
-        if let activeKey = SereyKeyHelper.generateKey(from: username, ownerKey: ownerKey, type: .active) {
-            WalletStore.shared.savePassword(username: username, password: activeKey.wif)
-            self.shouldPresent(.chooseSecurityMethodController)
-        }
+    private func handleOwnerKeyVerified(_ username: String, _ ownerKey: String, token: TokenModel) {
+        WalletPreferenceStore.shared.disableAllSecurity()
+        let createCredentialViewModel = CreateCredentialViewModel(username, ownerKey: ownerKey, token: token)
+        self.shouldPresent(.createCredentialViewController(createCredentialViewModel))
     }
     
     func validateForm() -> Bool {

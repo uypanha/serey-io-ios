@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 3/30/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -60,6 +60,9 @@ class ListTableViewController<T>: BaseTableViewController, AlertDialogController
         self.tableView.tableFooterView = UIView()
         self.tableView.separatorStyle = self.sepereatorStyle
         self.tableView.contentInset = self.contentInset
+        if #available(iOS 15.0, *) {
+            self.tableView.sectionHeaderTopPadding = 0
+        }
         self.viewModel.registerTableViewCell(self.tableView)
     }
     

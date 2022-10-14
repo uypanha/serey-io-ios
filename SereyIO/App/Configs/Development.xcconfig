@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/9/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 // Configuration settings file format documentation can be found at:
@@ -17,7 +17,7 @@ API_URL                 = test-api.serey.io
 KYC_URL                 = testkyc.serey.io
 CHAIN_URL               = api.serey.io
 URL_PROTOCOL            = https:/$()/
-NOTIFICATION_URL        = http:/$()/116.203.93.152:9292
+NOTIFICATION_URL        = https:/$()/notification-testnet.serey.io
 
 // APP INFO
 app_name                = Serey.io Dev
@@ -26,3 +26,5 @@ app_version_name        = 1.0.0
 app_version_code        = 1
 
 INCLUDE_WALLET          = true
+SHOW_REWARD             = false
+DRUM_ENABLED            = true

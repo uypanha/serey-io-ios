@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 3/15/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -16,6 +16,7 @@ class SignInViewModel: BaseViewModel, ShouldReactToAction, ShouldPresent {
     enum Action {
         case signInPressed
         case signUpPressed
+        case editingChanged
     }
     
     enum ViewToPresent {
@@ -81,6 +82,11 @@ extension SignInViewModel {
         return self.userNameTextFieldViewModel.validate()
             && self.privateKeyOrPwdTextFieldViewModel.validate()
     }
+    
+    fileprivate func validateTyping() -> Bool {
+        return self.userNameTextFieldViewModel.validate(true)
+            && self.privateKeyOrPwdTextFieldViewModel.validate(true)
+    }
 }
 
 // MAR: - Action Handlers
@@ -133,6 +139,8 @@ fileprivate extension SignInViewModel {
                     self?.handleSignInPressed()
                 case .signUpPressed:
                     self?.handleSignUpPressed()
+                case .editingChanged:
+                    _ = self?.validateTyping()
                 }
             }) ~ self.disposeBag
     }

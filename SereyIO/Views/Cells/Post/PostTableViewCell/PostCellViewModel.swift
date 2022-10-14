@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 2/6/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -16,6 +16,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
     let post: BehaviorRelay<PostModel?>
     let isShimmering: BehaviorRelay<Bool>
     
+    let loggedUserInfo: BehaviorRelay<UserModel?>
     let profileViewModel: BehaviorSubject<ProfileViewModel?>
     let authorName: BehaviorSubject<String?>
     let publishedAt: BehaviorSubject<String?>
@@ -42,36 +43,39 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
     let shouldFlag: PublishSubject<PostModel>
     let shouldDownvote: PublishSubject<(VotedType, PostModel)>
     let votedType: BehaviorRelay<VotedType?>
+    let shouldSharePost: PublishSubject<(URL, String)>
     
     init(_ post: PostModel?) {
-        self.post = BehaviorRelay(value: post)
-        self.profileViewModel = BehaviorSubject(value: nil)
-        self.authorName = BehaviorSubject(value: nil)
-        self.publishedAt = BehaviorSubject(value: nil)
-        self.thumbnailURL = BehaviorSubject(value: nil)
-        self.tags = BehaviorSubject(value: [])
-        self.titleText = BehaviorSubject(value: nil)
-        self.contentDesc = BehaviorSubject(value: nil)
-        self.sereyValue = BehaviorSubject(value: nil)
-        self.upVoteCount = BehaviorSubject(value: nil)
-        self.downVoteCount = BehaviorSubject(value: nil)
-        self.commentCount = BehaviorSubject(value: nil)
-        self.isShimmering = BehaviorRelay(value: false)
-        self.isMoreHidden = BehaviorSubject(value: true)
+        self.loggedUserInfo = .init(value: AuthData.shared.loggedUserModel)
+        self.post = .init(value: post)
+        self.profileViewModel = .init(value: nil)
+        self.authorName = .init(value: nil)
+        self.publishedAt = .init(value: nil)
+        self.thumbnailURL = .init(value: nil)
+        self.tags = .init(value: [])
+        self.titleText = .init(value: nil)
+        self.contentDesc = .init(value: nil)
+        self.sereyValue = .init(value: nil)
+        self.upVoteCount = .init(value: nil)
+        self.downVoteCount = .init(value: nil)
+        self.commentCount = .init(value: nil)
+        self.isShimmering = .init(value: false)
+        self.isMoreHidden = .init(value: true)
         
-        self.isVoteAllowed = BehaviorRelay(value: false)
-        self.upVoteEnabled = BehaviorSubject(value: true)
-        self.flagEnabled = BehaviorSubject(value: true)
-        self.isVoting = BehaviorSubject(value: nil)
+        self.isVoteAllowed = .init(value: false)
+        self.upVoteEnabled = .init(value: true)
+        self.flagEnabled = .init(value: true)
+        self.isVoting = .init(value: nil)
         
-        self.shouldShowMoreOption = PublishSubject()
-        self.shouldShowPostsByCategory = PublishSubject()
-        self.shouldShowAuthorProfile = PublishSubject()
+        self.shouldShowMoreOption = .init()
+        self.shouldShowPostsByCategory = .init()
+        self.shouldShowAuthorProfile = .init()
         
-        self.shouldUpVote = PublishSubject()
-        self.shouldFlag = PublishSubject()
-        self.shouldDownvote = PublishSubject()
-        self.votedType = BehaviorRelay(value: nil)
+        self.shouldUpVote = .init()
+        self.shouldFlag = .init()
+        self.shouldDownvote = .init()
+        self.votedType = .init(value: nil)
+        self.shouldSharePost = .init()
         super.init()
         
         setUpRxObservers()
@@ -85,21 +89,25 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
     
     internal func notifyDataChanged(_ data: PostModel?) {
         self.profileViewModel.onNext(data?.profileViewModel)
-        self.authorName.onNext(data?.authorName.capitalized)
+        self.authorName.onNext(data?.author)
         self.publishedAt.onNext(data?.publishedDateString)
         self.thumbnailURL.onNext(data?.firstThumnailURL)
-        self.tags.onNext(data?.categoryItem ?? [])
+        self.tags.onNext(data?.categories ?? [])
         self.titleText.onNext(data?.title)
-        self.contentDesc.onNext(data?.description)
+        self.contentDesc.onNext(data?.descriptionText)
         self.sereyValue.onNext(data?.sereyValue)
-        self.upVoteCount.onNext("\(data?.upvote ?? 0)")
-        self.downVoteCount.onNext("\(data?.flag ?? 0)")
+        self.upVoteCount.onNext("\(data?.voterCount ?? 0)")
+        self.downVoteCount.onNext("\(data?.flaggerCount ?? 0)")
         self.commentCount.onNext("\(data?.answerCount ?? 0)")
-        let isMorePresent = AuthData.shared.isUserLoggedIn ? data?.authorName == AuthData.shared.username : false
-        let isOverAWeek = data?.isOverAWeek ?? false
-        self.isMoreHidden.onNext(isOverAWeek || !isMorePresent)
+        let isLoggedUser = AuthData.shared.isUserLoggedIn ? data?.author == AuthData.shared.username : false
+        if isLoggedUser {
+            let isOverAWeek = data?.isOverAWeek ?? false
+            self.isMoreHidden.onNext(isOverAWeek)
+        } else {
+            self.isMoreHidden.onNext(data == nil || false)
+        }
         
-        self.isVoteAllowed.accept(data?.authorName != AuthData.shared.username)
+        self.isVoteAllowed.accept(data?.author != AuthData.shared.username)
         self.votedType.accept(data?.votedType)
         self.upVoteEnabled.onNext(data?.votedType != .flag)
         self.flagEnabled.onNext(data?.votedType != .upvote)
@@ -132,6 +140,15 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
     func didFlagPressed() {
         if self.isVoteAllowed.value {
             handleFlagPressed()
+        }
+    }
+    
+    func handleSharePressed() {
+        if let post = self.post.value {
+            let link = "https://serey.io/authors/\(post.author)/\(post.permlink)"
+            if let url = URL(string: link) {
+                self.shouldSharePost.onNext((url, post.title))
+            }
         }
     }
 }

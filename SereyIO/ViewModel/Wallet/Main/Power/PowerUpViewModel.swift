@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/27/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import Foundation
@@ -102,8 +102,22 @@ fileprivate extension PowerUpViewModel {
     func handlePowerUpPressed() {
         if self.validateForm() {
             let account = self.accountTextFieldViewModel.value ?? ""
+            if account != AuthData.shared.username {
+                self.handleDifferentAccountRequest(account)
+            } else {
+                self.validateUsername(account)
+            }
+        }
+    }
+    
+    func handleDifferentAccountRequest(_ account: String) {
+        let confirmAction = ActionModel(R.string.common.confirm.localized()) {
             self.validateUsername(account)
         }
+        
+        let cancelAction = ActionModel(R.string.common.cancel.localized(), style: .cancel)
+        let alertDialogModel = AlertDialogModel(title: "Power Up", message: "This transaction cannot be reversed. Are you sure you want to send your serey coin as serey power to another user?", actions: [cancelAction, confirmAction])
+        self.shouldPresent(.showAlertDialogController(alertDialogModel))
     }
     
     func handleConfirmTransfer() {
@@ -121,9 +135,10 @@ fileprivate extension PowerUpViewModel {
     func handlePowerUpSuccess(_ account: String, amount: String) {
         let confirmAction = ActionModel(R.string.common.confirm.localized(), style: .default) {
             self.shouldPresent(.dismiss)
+            self.didTransactionUpdate.onNext(())
         }
         
-        let alerDialogModel = AlertDialogModel(title: "Power Up", message: "You just power Up Serey coin with \(amount) SEREY to \(account).", actions: [confirmAction])
+        let alerDialogModel = AlertDialogModel(title: "Power Up", message: "You’ve just powered up \(amount) Serey Coins to \(account).", actions: [confirmAction])
         self.shouldPresent(.showAlertDialogController(alerDialogModel))
     }
 }

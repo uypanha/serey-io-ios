@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 8/8/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -135,7 +135,7 @@ extension ReceiveCoinViewController {
                 case .snackbar(let messageText):
                     let message = MDCSnackbarMessage()
                     message.text = messageText
-                    MDCSnackbarManager.show(message)
+                    MDCSnackbarManager.default.show(message)
                 }
             }) ~ self.disposeBag
     }

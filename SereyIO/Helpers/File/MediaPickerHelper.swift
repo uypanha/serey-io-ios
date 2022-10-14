@@ -3,26 +3,27 @@
 //  SereyIO
 //
 //  Created by Phanha Uy on 9/15/19.
-//  Copyright © 2019 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
 import RxCocoa
 import RxSwift
 import Photos
+import AVFoundation
+import DKImagePickerController
 
 class MediaPickerHelper: NSObject {
     
-    var selectedPhotoSubject = PublishSubject<PickerPhotoModel>()
+    lazy var disposeBag = DisposeBag()
+    
+    var selectedPhotoSubject = PublishSubject<[PickerFileModel]>()
     
     private weak var presentingViewController: UIViewController!
-    private var _pickerController: UIImagePickerController?
-    private var pickerController: UIImagePickerController? {
+    private var _pickerController: DKImagePickerController?
+    private var pickerController: DKImagePickerController? {
         get {
-            if self._pickerController == nil {
-                self.preparePicker()
-            }
-            
+            self.preparePicker()
             return self._pickerController
         }
         set {
@@ -30,43 +31,44 @@ class MediaPickerHelper: NSObject {
         }
     }
     
-    public var allowEditting = true
-    private var imagePickerControllerImage: UIImagePickerController.InfoKey {
-        get {
-            if (self.allowEditting) {
-                return UIImagePickerController.InfoKey.editedImage
-            }
-            
-            return UIImagePickerController.InfoKey.originalImage
-        }
-    }
+    /// Forces deselect of previous selected image. allowSwipeToSelect will be ignored.
+    public var singleSelect = true
+    public var selectedAssets: [DKAsset] = []
+    /// The maximum count of assets which the user will be able to select, a value of 0 means no limit.
+    public var maximumSelectCouont: Int = 0
     
-    init(withPresenting viewController: UIViewController, allowEditting: Bool = true) {
-        self.allowEditting = allowEditting
+    private var includeVideo: Bool = false
+    
+    init(withPresenting viewController: UIViewController, includeVideo: Bool = false) {
+        self.includeVideo = includeVideo
         self.presentingViewController = viewController
     }
     
     func preparePicker() {
-        let picker = UIImagePickerController()
-        picker.allowsEditing = self.allowEditting
-        picker.delegate = self
+        let dkImagePickerController = DKImagePickerController()
+        dkImagePickerController.singleSelect = singleSelect
+        dkImagePickerController.showsCancelButton = true
         
-        self.pickerController = picker
+        dkImagePickerController.didSelectAssets = { [weak self] (assets: [DKAsset]) in
+            self?.didSelectAssets(assets)
+        }
+        
+        pickerController = dkImagePickerController
     }
     
     func showImagePickerAlert(title: String? = nil, additional actionSheets: [UIViewController.ActionSheet]? = nil, completion: @escaping ((_ index: Int, _ action: UIViewController.ActionSheet) -> Void) = {_,_ in }) {
-        
+
         var photoActionSheets: [UIViewController.ActionSheet] = [
             UIViewController.ActionSheet(title: R.string.common.takePhoto.localized(), style: .default),
             UIViewController.ActionSheet(title: R.string.common.choosePhoto.localized(), style: .default)
         ]
-        
+
         actionSheets?.forEach({ (actionSheet) in
             photoActionSheets.append(actionSheet)
         })
-        
+
         self.presentingViewController.showActionSheet(title: title ?? "Choose Image Source", actionSheets: photoActionSheets) { (index: Int, action: UIViewController.ActionSheet) in
-            
+
             switch(index) {
             case 0:
                 // Take Photo
@@ -81,46 +83,42 @@ class MediaPickerHelper: NSObject {
         }
     }
     
-    private func showImagePicker() {
+    func showImagePicker() {
         guard let pickerController = self.pickerController else {
             return
         }
-        pickerController.sourceType = .photoLibrary
-        pickerController.mediaTypes = UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum)!
-        pickerController.modalPresentationStyle = .fullScreen
         
+        pickerController.maxSelectableCount = maximumSelectCouont
+        pickerController.setSelectedAssets(assets: self.selectedAssets)
+        pickerController.sourceType = .photo
+        pickerController.assetType = includeVideo ? .allAssets : .allPhotos
+        pickerController.modalPresentationStyle = .fullScreen
+
         self.presentingViewController.present(pickerController, animated: true, completion: nil)
     }
     
-    private func showCameraPicker() {
+    func showCameraPicker() {
         guard let pickerController = self.pickerController else {
             return
         }
         pickerController.sourceType = .camera
+        pickerController.assetType = includeVideo ? .allAssets : .allPhotos
+        pickerController.modalPresentationStyle = .fullScreen
         self.presentingViewController.present(pickerController, animated: true, completion: nil)
     }
 }
 
-extension MediaPickerHelper: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+// MARK: - Handlers
+extension MediaPickerHelper {
     
-    @objc func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        self.presentingViewController.dismiss(animated: true, completion: {
-            self.pickerController = nil
-        })
-    }
-    
-    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let chosenImage = info[self.imagePickerControllerImage] as? UIImage else {
-            self.presentingViewController.dismiss(animated: true, completion: {
-                self.pickerController = nil
-            })
-            return
+    private func didSelectAssets(_ assets: [DKAsset]) {
+        var pickedPhotos: [PickerFileModel] = []
+        for asset in assets {
+            pickedPhotos.append(.init(asset))
         }
         
-        self.selectedPhotoSubject.onNext(PickerPhotoModel(chosenImage, localIdentifier: chosenImage.accessibilityIdentifier, orginalSize: chosenImage.size))
-        self.presentingViewController.dismiss(animated: true, completion: {
-            self.pickerController = nil
-        })
+        if !pickedPhotos.isEmpty { self.selectedPhotoSubject.onNext(pickedPhotos) }
+        pickerController = nil
     }
 }
 

@@ -3,7 +3,7 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 7/26/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
 import UIKit
@@ -20,7 +20,7 @@ class CreateCredentialTableViewCell: BaseTableViewCell {
         super.awakeFromNib()
         
         // Initialization code
-        self.cardView.borderColor = ColorName.border.color
+        self.cardView.borderColor = .color(.border)
         self.selectionStyle = .none
     }
     
@@ -29,10 +29,10 @@ class CreateCredentialTableViewCell: BaseTableViewCell {
         
         if animated {
             UIView.animate(withDuration: 0.3, animations: {
-                self.cardView.backgroundColor = selected ? ColorName.primary.color.withAlphaComponent(0.2) : .white
+                self.cardView.backgroundColor = selected ? .color(.primary).withAlphaComponent(0.2) : .white
             })
         } else {
-            self.cardView.backgroundColor = selected ? ColorName.primary.color.withAlphaComponent(0.2) : .white
+            self.cardView.backgroundColor = selected ? .color(.primary).withAlphaComponent(0.2) : .white
         }
     }
     
@@ -41,10 +41,10 @@ class CreateCredentialTableViewCell: BaseTableViewCell {
         
         if animated {
             UIView.animate(withDuration: 0.3, animations: {
-                self.cardView.backgroundColor = highlighted ? ColorName.primary.color.withAlphaComponent(0.2) : .white
+                self.cardView.backgroundColor = highlighted ? .color(.primary).withAlphaComponent(0.2) : .white
             })
         } else {
-            self.cardView.backgroundColor = highlighted ? ColorName.primary.color.withAlphaComponent(0.2) : .white
+            self.cardView.backgroundColor = highlighted ? .color(.primary).withAlphaComponent(0.2) : .white
         }
     }
 }

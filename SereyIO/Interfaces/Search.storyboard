@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,7 +34,7 @@
                                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                             </textField>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="Zh3-QA-Ocn" firstAttribute="top" secondItem="dNq-Uv-RJD" secondAttribute="top" constant="8" id="AU6-bv-6I8"/>
                                             <constraint firstAttribute="bottom" secondItem="Zh3-QA-Ocn" secondAttribute="bottom" constant="8" id="F3q-wd-YVB"/>
@@ -52,10 +53,11 @@
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sZh-zy-7gz">
                                 <rect key="frame" x="0.0" y="99" width="414" height="797"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="iGE-hk-Lq1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="sZh-zy-7gz" firstAttribute="leading" secondItem="iGE-hk-Lq1" secondAttribute="leading" id="0GS-U8-Ooo"/>
                             <constraint firstItem="iGE-hk-Lq1" firstAttribute="trailing" secondItem="sZh-zy-7gz" secondAttribute="trailing" id="7TG-bQ-LEk"/>
@@ -65,7 +67,6 @@
                             <constraint firstAttribute="bottom" secondItem="sZh-zy-7gz" secondAttribute="bottom" id="gb8-kR-yqo"/>
                             <constraint firstItem="6Lj-av-U9C" firstAttribute="top" secondItem="iGE-hk-Lq1" secondAttribute="top" id="yRs-tp-qNk"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="iGE-hk-Lq1"/>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="Jya-Dk-cfa" id="Kay-MO-AOx"/>
@@ -79,4 +80,14 @@
             <point key="canvasLocation" x="-25" y="92"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="Zh3-QA-Ocn">
+            <size key="intrinsicContentSize" width="52" height="21"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

@@ -3,10 +3,11 @@
 //  SereyIO
 //
 //  Created by Panha Uy on 7/28/20.
-//  Copyright © 2020 Phanha Uy. All rights reserved.
+//  Copyright © 2020 Serey IO. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import RxMoya
 import RxCocoa
 import RxSwift
 import AnyCodable
@@ -72,6 +73,16 @@ class TransferService: AppService<TransferApi> {
     
     func getAccountHistory() -> Observable<DataResponseModel<[TransactionModel]>> {
         return provider.rx.requestObject(.getAccountHistory, type: DataResponseModel<[TransactionModel]>.self)
+            .asObservable()
+    }
+    
+    func delegatePower(_ account: String, amount: Double) -> Observable<AnyCodable> {
+        let activeKey = WalletStore.shared.password(from: AuthData.shared.username ?? "") ?? ""
+        let requestData = DelegatePowerRequestModel(activeKey: activeKey, account: account, amount: amount).toJsonString() ?? ""
+        
+        let signTrxData = RSAUtils.encrypt(string: requestData, publicKey: self.publicKey)
+        
+        return provider.rx.requestObject(.delegatePower(signTrx: signTrxData ?? "", trxId: trxId), type: AnyCodable.self)
             .asObservable()
     }
 }

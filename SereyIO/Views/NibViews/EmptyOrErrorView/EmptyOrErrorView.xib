@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmptyOrErrorView" customModule="iOSTemplate" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmptyOrErrorView" customModule="SereyIO" customModuleProvider="target">
             <connections>
                 <outlet property="actionButton" destination="lM7-1s-Xsw" id="jE8-8J-3f4"/>
                 <outlet property="descriptionLabel" destination="RZs-rk-N5P" id="UD8-jg-J8f"/>
@@ -27,17 +27,17 @@
                     <rect key="frame" x="0.0" y="0.0" width="414" height="448"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="id5-Oy-M8N">
-                            <rect key="frame" x="24" y="58.5" width="366" height="331"/>
+                            <rect key="frame" x="24" y="48.5" width="366" height="351"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="errorSad" translatesAutoresizingMaskIntoConstraints="NO" id="OXD-53-7Ge">
                                     <rect key="frame" x="73" y="0.0" width="220" height="175.5"/>
-                                    <color key="tintColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                    <color key="tintColor" systemColor="scrollViewTexturedBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="OXD-53-7Ge" secondAttribute="height" multiplier="1:0.8" id="5QN-jy-Cnv"/>
                                     </constraints>
                                 </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Rhy-lk-msN">
-                                    <rect key="frame" x="16" y="191.5" width="334" height="139.5"/>
+                                    <rect key="frame" x="16" y="207.5" width="334" height="143.5"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="iyG-FN-ZkN">
                                             <rect key="frame" x="0.0" y="0.0" width="334" height="94.5"/>
@@ -57,9 +57,10 @@
                                                 </label>
                                             </subviews>
                                         </stackView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lM7-1s-Xsw">
-                                            <rect key="frame" x="125" y="110.5" width="84" height="29"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lM7-1s-Xsw">
+                                            <rect key="frame" x="111" y="110.5" width="112" height="33"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                            <inset key="contentEdgeInsets" minX="14" minY="8" maxX="14" maxY="8"/>
                                             <state key="normal" title="Tab To Retry">
                                                 <color key="titleColor" red="0.0" green="0.62745098040000002" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
@@ -74,7 +75,7 @@
                             <constraints>
                                 <constraint firstItem="OXD-53-7Ge" firstAttribute="top" secondItem="id5-Oy-M8N" secondAttribute="top" id="4Bw-W0-sP7"/>
                                 <constraint firstItem="Rhy-lk-msN" firstAttribute="leading" secondItem="id5-Oy-M8N" secondAttribute="leading" constant="16" id="BHg-mZ-z5S"/>
-                                <constraint firstItem="Rhy-lk-msN" firstAttribute="top" secondItem="OXD-53-7Ge" secondAttribute="bottom" constant="16" id="Ds4-ox-D48"/>
+                                <constraint firstItem="Rhy-lk-msN" firstAttribute="top" secondItem="OXD-53-7Ge" secondAttribute="bottom" constant="32" id="Ds4-ox-D48"/>
                                 <constraint firstAttribute="trailing" secondItem="Rhy-lk-msN" secondAttribute="trailing" constant="16" id="S89-Ye-HOr"/>
                                 <constraint firstItem="OXD-53-7Ge" firstAttribute="width" secondItem="id5-Oy-M8N" secondAttribute="width" multiplier="0.6" id="XyL-XK-yNh"/>
                                 <constraint firstItem="OXD-53-7Ge" firstAttribute="centerX" secondItem="id5-Oy-M8N" secondAttribute="centerX" id="sDS-IE-xbt"/>
@@ -89,6 +90,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="FTA-eF-SgJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="4eS-Ae-hD9"/>
@@ -97,11 +99,13 @@
                 <constraint firstItem="FTA-eF-SgJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="kmn-qE-0rw"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="152" y="179"/>
         </view>
     </objects>
     <resources>
         <image name="errorSad" width="825" height="609"/>
+        <systemColor name="scrollViewTexturedBackgroundColor">
+            <color red="0.43529411764705878" green="0.44313725490196082" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
