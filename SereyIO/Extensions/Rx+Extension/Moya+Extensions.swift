@@ -29,11 +29,17 @@ extension Reactive where Base: MoyaProviderType {
                     print("Data Response ==> \(str)")
                     
                     if response.statusCode >= 200 && response.statusCode <= 202 {
-                        if let dataResponse = try? decoder.decode(T.self, from: response.data) {
+                        do {
+                            let dataResponse = try decoder.decode(T.self, from: response.data)
                             single(.success(dataResponse))
-                        } else {
-                            single(.failure(NSError(domain: "Data Mapping Error", code: 0, userInfo: nil)))
+                        } catch (let error) {
+                            single(.failure(NSError(domain: "Data Mapping Error == \(error)", code: 0, userInfo: nil)))
                         }
+//                        if let dataResponse = try? decoder.decode(T.self, from: response.data) {
+//                            single(.success(dataResponse))
+//                        } else {
+//                            single(.failure(NSError(domain: "Data Mapping Error", code: 0, userInfo: nil)))
+//                        }
                     } else {
                         if let errorModel = try? decoder.decode(AppApiError.self, from: response.data) {
                             single(.failure(AppError.appApiError(errorModel, code: response.statusCode)))

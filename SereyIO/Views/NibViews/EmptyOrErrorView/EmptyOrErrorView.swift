@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class EmptyOrErrorView: NibView {
     
@@ -31,6 +33,7 @@ class EmptyOrErrorView: NibView {
             viewModel.titleText.bind(to: self.titleLabel.rx.text).disposed(by: self.disposeBag)
             viewModel.actionButtonText.bind(to: self.actionButton.rx.title()).disposed(by: self.disposeBag)
             viewModel.iconImage.bind(to: iconImageView.rx.image).disposed(by: self.disposeBag)
+            viewModel.iconImage.map { $0 == nil }.bind(to: self.iconImageView.rx.isHidden).disposed(by: self.disposeBag)
             
             viewModel.descriptionText
                 .map { text -> NSAttributedString? in

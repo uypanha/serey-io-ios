@@ -232,6 +232,10 @@ extension WalletViewController {
                     let delegatePowerController = DelegatePowerViewController()
                     delegatePowerController.viewModel = delegatePowerViewModel
                     self?.show(delegatePowerController, sender: nil)
+                case .cancelDelegatePowerController(let viewModel):
+                    let delegatePowerController = CancelDelegatePowerViewController()
+                    delegatePowerController.viewModel = viewModel
+                    self?.show(delegatePowerController, sender: nil)
                 }
             }) ~ self.disposeBag
     }

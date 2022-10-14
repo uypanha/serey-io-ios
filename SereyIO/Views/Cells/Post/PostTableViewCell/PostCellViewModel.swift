@@ -36,7 +36,7 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
     let isVoting: BehaviorSubject<VotedType?>
     
     let shouldShowMoreOption: PublishSubject<PostModel>
-    let shouldShowPostsByCategory: PublishSubject<PostModel>
+    let shouldShowPostsByCategory: PublishSubject<String>
     let shouldShowAuthorProfile: PublishSubject<PostModel>
     
     let shouldUpVote: PublishSubject<PostModel>
@@ -120,8 +120,8 @@ class PostCellViewModel: CellViewModel, ShimmeringProtocol, PostCellProtocol {
     }
     
     func onCategoryPressed() {
-        if let postModel = self.post.value {
-            self.shouldShowPostsByCategory.onNext(postModel)
+        if let postModel = self.post.value, let category = postModel.categories?.first {
+            self.shouldShowPostsByCategory.onNext(category)
         }
     }
     

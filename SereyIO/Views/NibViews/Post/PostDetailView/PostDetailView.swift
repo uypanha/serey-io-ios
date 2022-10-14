@@ -109,6 +109,11 @@ extension PostDetailView {
                     return UICollectionViewCell()
                 }
             } ~ self.disposeBag
+        
+        self.collectionView.rx.itemSelected.asObservable()
+            .subscribe(onNext: { [weak viewModel] indexPath in
+                viewModel?.handleCategoryItemSelected(at: indexPath)
+            }) ~ self.disposeBag
     }
 }
 

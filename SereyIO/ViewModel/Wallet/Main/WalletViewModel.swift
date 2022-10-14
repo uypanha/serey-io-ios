@@ -30,6 +30,7 @@ class WalletViewModel: BaseCellViewModel, CollectionSingleSecitionProviderModel,
         case claimRewardController(ClaimRewardViewModel)
         case cancelPowerDownController(CancelPowerDownViewModel)
         case delegatePowerController(DelegatePowerViewModel)
+        case cancelDelegatePowerController(CancelDelegatePowerViewModel)
         case settingsController
     }
     
@@ -137,9 +138,9 @@ fileprivate extension WalletViewModel {
                 self.setUpTransactionObserers(delegatePowerViewModel)
                 self.shouldPresent(.delegatePowerController(delegatePowerViewModel))
             case .cancelDelegate:
-                let delegatePowerViewModel = DelegatePowerViewModel(.cancelDelegate)
-                self.setUpTransactionObserers(delegatePowerViewModel)
-                self.shouldPresent(.delegatePowerController(delegatePowerViewModel))
+                let cancelDelegatePowerViewModel = CancelDelegatePowerViewModel()
+                self.setUpTransactionObserers(cancelDelegatePowerViewModel)
+                self.shouldPresent(.cancelDelegatePowerController(cancelDelegatePowerViewModel))
             case .cancelPower:
                 let cancelPowerDownViewModel = CancelPowerDownViewModel()
                 self.setUpTransactionObserers(cancelPowerDownViewModel)

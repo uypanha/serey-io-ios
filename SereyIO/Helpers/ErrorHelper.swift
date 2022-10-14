@@ -63,8 +63,8 @@ class ErrorHelper {
             }
         }
         
-        func prepareError(errorMessage: String? = nil) -> ErrorInfo {
-            let errorDescription: String
+        func prepareError(errorMessage: String? = nil, errorCode: Int? = nil) -> ErrorInfo {
+            var errorDescription: String
             
             switch self {
             case .voteOnYourOwnPost:
@@ -80,9 +80,13 @@ class ErrorHelper {
             case .commentIn20s:
                 errorDescription = "You may only comment once every 20 seconds."
             case .invalidCredentials:
-                errorDescription = "Your login credentials are incorrect. Please make sure you put in the right credentials"
+                errorDescription = errorMessage ?? "Your login credentials are incorrect. Please make sure you put in the right credentials"
             case .referralIdError:
                 errorDescription = "To create referral link you have to login with a password"
+            }
+            
+            if let errorCode = errorCode {
+                errorDescription += " [\(errorCode)]"
             }
             
             return ErrorInfo(error: NSError(domain: ErrorHelper.errorDomain, code: self.rawValue, userInfo: [NSLocalizedDescriptionKey: errorDescription]), type: self, errorTitle: self.errorTitle, errorIcon: self.errorIcon)
@@ -134,11 +138,11 @@ class ErrorHelper {
                 }
                 return PredefinedError.unauthenticatedError.prepareError()
             case .userNotFound, .invalidCredentials:
-                return PredefinedError.invalidCredentials.prepareError()
+                return PredefinedError.invalidCredentials.prepareError(errorMessage: error.message)
             case .commentIn20s:
                 return PredefinedError.commentIn20s.prepareError()
-            case .referralId:
-                return PredefinedError.referralIdError.prepareError()
+            case .internalServerError:
+                return PredefinedError.unknownError.prepareError(errorCode: error.errorCode)
             default:
                 log.error(error)
                 return defaultError(message: error.message)
@@ -180,7 +184,7 @@ class ErrorHelper {
     }
 }
 
-fileprivate enum AppApiErrorCode: Int {
+enum AppApiErrorCode: Int {
     case signinFailed = 0
     case unauthorized = 3
     case unauthenticateError = 4
@@ -188,5 +192,5 @@ fileprivate enum AppApiErrorCode: Int {
     case userNotFound = 12
     case invalidCredentials = 15
     case commentIn20s = 27
-    case referralId = 131
+    case internalServerError = 131
 }

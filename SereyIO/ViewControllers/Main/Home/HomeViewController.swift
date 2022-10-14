@@ -31,13 +31,12 @@ class HomeViewController: BaseViewController, AlertDialogController, LoadingIndi
         }
     }()
     
-    private lazy var postButton: MDCFloatingButton = {
-        let button = MDCFloatingButton()
-        button.setImage(R.image.plusIcon(), for: .normal)
+    private lazy var postButton: UIButton = {
+        let button = UIButton.createButton(with: 15, weight: .medium)
+        button.setImage(R.image.createPostOutlineIcon(), for: .normal)
         button.tintColor = .white
-        button.backgroundColor = .color(.almostRed)
-        button.setElevation(ShadowElevation(rawValue: 4), for: .normal)
-        button.setElevation(ShadowElevation(rawValue: 8), for: .highlighted)
+        button.customStyle(with: .color(.primary))
+        button.setRadius(all: 12)
         return button
     }()
     
@@ -114,8 +113,8 @@ extension HomeViewController {
         self.view.addSubview(self.postButton)
         self.view.bringSubviewToFront(self.postButton)
         self.postButton.snp.makeConstraints { make in
-            make.height.width.equalTo(48)
-            make.rightMargin.equalTo(0)
+            make.height.width.equalTo(54)
+            make.right.equalToSuperview().inset(16)
             make.bottomMargin.equalTo(-24)
         }
     }
@@ -147,7 +146,7 @@ extension HomeViewController {
         let contentHeight = self.scrollView.frame.height
         scrollView.contentSize = CGSize(width: contentWidth * CGFloat(slides.count), height: contentHeight)
         scrollView.isPagingEnabled = true
-        scrollView.isScrollEnabled = false
+        scrollView.isScrollEnabled = true
         
         for i in 0 ..< slides.count {
             slides[i].frame = CGRect(x: contentWidth * CGFloat(i), y: 0, width: contentWidth, height: contentHeight)
@@ -184,14 +183,14 @@ extension HomeViewController: TabBarControllerDelegate {
 // MARK: - UIScrollViewDelegate
 extension HomeViewController: UIScrollViewDelegate, MDCTabBarViewDelegate {
     
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let pageIndex = round(scrollView.contentOffset.x / self.scrollView.frame.width)
-//        if self.tabBar.selectedItem?.tag != Int(pageIndex) {
-//            let index = Int(pageIndex)
-//            self.tabBar.setSelectedItem(self.tabItems[index], animated: true)
-//        }
-//    }
-//
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let pageIndex = round(scrollView.contentOffset.x / self.scrollView.frame.width)
+        if self.tabBar.selectedItem?.tag != Int(pageIndex) {
+            let index = Int(pageIndex)
+            self.tabBar.setSelectedItem(self.tabItems[index], animated: true)
+        }
+    }
+    
     func tabBarView(_ tabBarView: MDCTabBarView, didSelect item: UITabBarItem) {
         self.scrollView.scrollRectToVisible(self.slideViews[item.tag].view.frame, animated: true)
     }

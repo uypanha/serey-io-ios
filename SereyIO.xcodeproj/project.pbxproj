@@ -37,6 +37,12 @@
 		9638F68B288853D5008F5B6E /* DrumDetailViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9638F68A288853D5008F5B6E /* DrumDetailViewController+LoadViews.swift */; };
 		9638F68D28885475008F5B6E /* DrumDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9638F68C28885475008F5B6E /* DrumDetailView.swift */; };
 		9638F68F28885D7D008F5B6E /* DrumDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9638F68E28885D7D008F5B6E /* DrumDetailViewModel.swift */; };
+		96445F8128F70F2600EECDB2 /* CancelDelegatePowerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96445F8028F70F2600EECDB2 /* CancelDelegatePowerViewController.swift */; };
+		96445F8328F70F5A00EECDB2 /* CancelDelegatePowerViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96445F8228F70F5A00EECDB2 /* CancelDelegatePowerViewController+LoadViews.swift */; };
+		96445F8528F7108B00EECDB2 /* CancelDelegatePowerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96445F8428F7108B00EECDB2 /* CancelDelegatePowerViewModel.swift */; };
+		96445F8828F7158000EECDB2 /* DelegatedUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96445F8728F7158000EECDB2 /* DelegatedUserTableViewCell.swift */; };
+		96445F8A28F7184C00EECDB2 /* DelegatedUserCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96445F8928F7184C00EECDB2 /* DelegatedUserCellViewModel.swift */; };
+		96445F8C28F71FD700EECDB2 /* DelegatedUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96445F8B28F71FD700EECDB2 /* DelegatedUserModel.swift */; };
 		9649B11B27A9995D009B40A3 /* EnterIssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B11A27A9995D009B40A3 /* EnterIssueViewController.swift */; };
 		9649B11D27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B11C27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift */; };
 		9649B11F27AC20A4009B40A3 /* ConfirmDialogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9649B11E27AC20A4009B40A3 /* ConfirmDialogViewModel.swift */; };
@@ -625,6 +631,12 @@
 		9638F68A288853D5008F5B6E /* DrumDetailViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DrumDetailViewController+LoadViews.swift"; sourceTree = "<group>"; };
 		9638F68C28885475008F5B6E /* DrumDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumDetailView.swift; sourceTree = "<group>"; };
 		9638F68E28885D7D008F5B6E /* DrumDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumDetailViewModel.swift; sourceTree = "<group>"; };
+		96445F8028F70F2600EECDB2 /* CancelDelegatePowerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelDelegatePowerViewController.swift; sourceTree = "<group>"; };
+		96445F8228F70F5A00EECDB2 /* CancelDelegatePowerViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CancelDelegatePowerViewController+LoadViews.swift"; sourceTree = "<group>"; };
+		96445F8428F7108B00EECDB2 /* CancelDelegatePowerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelDelegatePowerViewModel.swift; sourceTree = "<group>"; };
+		96445F8728F7158000EECDB2 /* DelegatedUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegatedUserTableViewCell.swift; sourceTree = "<group>"; };
+		96445F8928F7184C00EECDB2 /* DelegatedUserCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegatedUserCellViewModel.swift; sourceTree = "<group>"; };
+		96445F8B28F71FD700EECDB2 /* DelegatedUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DelegatedUserModel.swift; sourceTree = "<group>"; };
 		9649B11A27A9995D009B40A3 /* EnterIssueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterIssueViewController.swift; sourceTree = "<group>"; };
 		9649B11C27A999A1009B40A3 /* EnterIssueViewController+LoadViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EnterIssueViewController+LoadViews.swift"; sourceTree = "<group>"; };
 		9649B11E27AC20A4009B40A3 /* ConfirmDialogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmDialogViewModel.swift; sourceTree = "<group>"; };
@@ -1338,6 +1350,24 @@
 				9636C79A285B8A40002EF5CA /* DrumsPeopleViewController.swift */,
 			);
 			path = People;
+			sourceTree = "<group>";
+		};
+		96445F7F28F70F0000EECDB2 /* Cancel */ = {
+			isa = PBXGroup;
+			children = (
+				96445F8028F70F2600EECDB2 /* CancelDelegatePowerViewController.swift */,
+				96445F8228F70F5A00EECDB2 /* CancelDelegatePowerViewController+LoadViews.swift */,
+			);
+			path = Cancel;
+			sourceTree = "<group>";
+		};
+		96445F8628F7156000EECDB2 /* DelegatedUserTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				96445F8928F7184C00EECDB2 /* DelegatedUserCellViewModel.swift */,
+				96445F8728F7158000EECDB2 /* DelegatedUserTableViewCell.swift */,
+			);
+			path = DelegatedUserTableViewCell;
 			sourceTree = "<group>";
 		};
 		9649B11927A99921009B40A3 /* EnterIssue */ = {
@@ -2919,6 +2949,7 @@
 		DCB070362732DC7D004463E7 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
+				96445F7F28F70F0000EECDB2 /* Cancel */,
 				DCB070372732DC91004463E7 /* Power */,
 			);
 			path = Delegate;
@@ -2968,6 +2999,7 @@
 			children = (
 				DCB0704E2734332A004463E7 /* DelegatePowerViewModel.swift */,
 				DCDAB36E27397C3900C3B349 /* ConfirmDelegatePowerViewModel.swift */,
+				96445F8428F7108B00EECDB2 /* CancelDelegatePowerViewModel.swift */,
 			);
 			path = Power;
 			sourceTree = "<group>";
@@ -2976,6 +3008,7 @@
 			isa = PBXGroup;
 			children = (
 				DCB5BD6D2497CABF0042E5AF /* Auth */,
+				96445F8628F7156000EECDB2 /* DelegatedUserTableViewCell */,
 				DCCC15C92509355400ED4C52 /* TransactionInfoTableViewCell */,
 				DC7C8F0C24DC661D0051C084 /* TransactionTableViewCell */,
 				DC7F097124ACE25000CE8AFC /* WalletCardCollectionViewCell */,
@@ -3390,6 +3423,7 @@
 		DCDAB3702739867300C3B349 /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
+				96445F8B28F71FD700EECDB2 /* DelegatedUserModel.swift */,
 				DCDAB3712739868A00C3B349 /* DelegatePowerRequestModel.swift.swift */,
 			);
 			path = Delegate;
@@ -4074,6 +4108,7 @@
 				96B4A16428A16CA10000425A /* PostDrumViewModel+Networks.swift in Sources */,
 				DC5B55B02451E5C800F8531B /* PushApi.swift in Sources */,
 				DC3E7E18270362E7001DA924 /* UILabel+Helper.swift in Sources */,
+				96445F8328F70F5A00EECDB2 /* CancelDelegatePowerViewController+LoadViews.swift in Sources */,
 				DC12F20B242271B60099C479 /* TokenModel.swift in Sources */,
 				DC56243E241E87000076A78C /* AuthApi.swift in Sources */,
 				967DAAD4277B61F200B3D0D7 /* DashBorderView.swift in Sources */,
@@ -4234,6 +4269,7 @@
 				967DAAD6277B63BA00B3D0D7 /* UploadImageCellViewModel.swift in Sources */,
 				DCDAB3722739868A00C3B349 /* DelegatePowerRequestModel.swift.swift in Sources */,
 				DC0F36B32450A27700916886 /* BasePostDetailViewModel.swift in Sources */,
+				96445F8128F70F2600EECDB2 /* CancelDelegatePowerViewController.swift in Sources */,
 				DCA45A1024D317D400E21D9A /* ClaimRewardModel.swift in Sources */,
 				DC3E7E162703614D001DA924 /* NotificationTableCell.swift in Sources */,
 				963530B728807228006290CF /* AuthorDrumListViewController.swift in Sources */,
@@ -4251,6 +4287,7 @@
 				DCFF69612448B5BB00416218 /* VoteDialogProtocol.swift in Sources */,
 				DC8450B4250C7F6C00D7E085 /* LineIndicatorTableViewCell.swift in Sources */,
 				DC9E36F4241629F900289693 /* SRichEditorView.swift in Sources */,
+				96445F8528F7108B00EECDB2 /* CancelDelegatePowerViewModel.swift in Sources */,
 				DC40D5E323E3360D00B0DD96 /* ChooseLanguageViewModel.swift in Sources */,
 				DC8AB7C224FD54B400968FCD /* PowerUpModel.swift in Sources */,
 				DC6A78F523CA1FFE001D1009 /* CollectionSectionedAnimatedProviderModel.swift in Sources */,
@@ -4275,6 +4312,7 @@
 				9687301B28B3D8E5003ABC3B /* MediaPreviewViewModel.swift in Sources */,
 				967DAAD2277B5D0F00B3D0D7 /* UploadImageCollectionViewCell.swift in Sources */,
 				DCD12D68242D03850084F66C /* BottomMenuViewModel.swift in Sources */,
+				96445F8A28F7184C00EECDB2 /* DelegatedUserCellViewModel.swift in Sources */,
 				96754ABC289D6EDC00D4F90E /* Units.swift in Sources */,
 				DC952FB2268A2D1000B6D3D7 /* PaginationRequestModel.swift in Sources */,
 				DC79F11F24CDD7D3007FCECC /* CreateCredentialTableViewCell.swift in Sources */,
@@ -4302,9 +4340,11 @@
 				DC3E7E1C270364D3001DA924 /* UIColor+Extensions.swift in Sources */,
 				DCB5BD712497CAE40042E5AF /* SecurityMethodeTableViewCell.swift in Sources */,
 				DCDE007124475DFA00D09717 /* CommentTextView.swift in Sources */,
+				96445F8C28F71FD700EECDB2 /* DelegatedUserModel.swift in Sources */,
 				DCD3985C232E104400C812EB /* SlashScreenViewController.swift in Sources */,
 				DC7C8F0324DAB93E0051C084 /* AlertDialogModel.swift in Sources */,
 				DC19DBF323EC6E4600571CC8 /* PaddingTextField.swift in Sources */,
+				96445F8828F7158000EECDB2 /* DelegatedUserTableViewCell.swift in Sources */,
 				DCD39894232E28C900C812EB /* WebViewViewController.swift in Sources */,
 				DC803C5826974C9300FCD2B2 /* FeatureViewController.swift in Sources */,
 				DCD39868232E1D1B00C812EB /* ErrorHelper.swift in Sources */,

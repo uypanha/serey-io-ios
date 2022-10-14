@@ -28,20 +28,26 @@ class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, 
     }
     
     // input:
-    lazy var didActionSubject = PublishSubject<Action>()
+    let didActionSubject: PublishSubject<Action>
     
     // output:
-    lazy var shouldPresentSubject = PublishSubject<ViewToPresent>()
+    let shouldPresentSubject: PublishSubject<ViewToPresent>
+    
+    let onCommentReplied: PublishSubject<Void>
     
     let title: BehaviorRelay<String>
     let commentHidden: BehaviorSubject<Bool>
     let commentViewModel: CommentTextViewModel
     
     init(_ comment: PostModel, title: String) {
-        self.title = BehaviorRelay(value: title)
-        self.commentHidden = BehaviorSubject(value: false)
+        self.didActionSubject = .init()
+        self.shouldPresentSubject = .init()
+        self.onCommentReplied = .init()
         
-        self.commentViewModel = CommentTextViewModel()
+        self.title = .init(value: title)
+        self.commentHidden = .init(value: false)
+        
+        self.commentViewModel = .init()
         super.init(comment.permlink, comment.author)
         
         self.post.accept(comment)
@@ -58,6 +64,11 @@ class ReplyCommentTableViewModel: BasePostDetailViewModel, ShouldReactToAction, 
         super.clearCommentInput()
         
         self.commentViewModel.clearInput()
+    }
+    
+    override func onCommented(_ comment: PostModel) {
+        self.update(reply: comment)
+        self.onCommentReplied.onNext(())
     }
     
     override func prepareCells(_ replies: [PostModel]) -> [SectionItem] {
@@ -122,6 +133,12 @@ extension ReplyCommentTableViewModel {
     
     fileprivate func updateReplies(_ replies: [PostModel]) {
         self.replies.append(contentsOf: replies)
+    }
+    
+    fileprivate func update(reply: PostModel) {
+        var replies = self.replies.value
+        replies.insert(reply, at: 0)
+        self.replies.accept(replies)
     }
 }
 

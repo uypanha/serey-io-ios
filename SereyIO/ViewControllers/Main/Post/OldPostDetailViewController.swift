@@ -232,6 +232,11 @@ extension OldPostDetailViewController {
                         activityVC.excludedActivityTypes = [.airDrop, .addToReadingList]
                         self.present(activityVC, animated: true, completion: nil)
                     }
+                case .postsByCategoryController(let viewModel):
+                    let postTableViewController = CategoryPostsViewController()
+                    postTableViewController.viewModel = viewModel
+                    postTableViewController.title = viewModel.title
+                    self.show(postTableViewController, sender: nil)
                 }
             }) ~ self.disposeBag
     }

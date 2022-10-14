@@ -26,6 +26,8 @@ enum TransferApi {
     case cancelPowerDown(signTrx: String, trxId: Int)
     
     case delegatePower(signTrx: String, trxId: Int)
+    
+    case delegationList
 }
 
 extension TransferApi: AuthorizedApiTargetType {
@@ -93,19 +95,36 @@ extension TransferApi: AuthorizedApiTargetType {
             return "/api/v1/transfer/cancelPowerSerey"
         case .delegatePower:
             return "/api/v1/transfer/transferVestingShares"
+        case .delegationList:
+            return "/api/v1/general/get_vesting_delegation_list"
         }
     }
     
     var method: Moya.Method {
-        return .post
+        switch self {
+        case .delegationList:
+            return .get
+        default:
+            return .post
+        }
     }
     
     var task: Task {
         print("Request Body: \(String(describing: try? parameters.stringify()))")
+        if self.method == .get {
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
+        }
         return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
     }
     
     var headers: [String : String]? {
-        return [:]
+        switch self {
+        case .delegationList:
+            return [
+                "token" : AuthData.shared.userToken ?? ""
+            ]
+        default:
+            return [:]
+        }
     }
 }

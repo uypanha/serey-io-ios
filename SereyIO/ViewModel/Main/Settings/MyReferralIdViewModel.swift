@@ -73,6 +73,15 @@ extension MyReferralIdViewModel {
                 }
             }, onError: { [weak self] error in
                 self?.isDownloading.accept(false)
+                if let apiError = error as? AppError {
+                    switch apiError {
+                    case .appApiError(let error, _):
+                        if error.errorCode == AppApiErrorCode.internalServerError.rawValue {
+                            self?.shouldPresentError(ErrorHelper.PredefinedError.referralIdError.prepareError())
+                            return
+                        }
+                    }
+                }
                 self?.shouldPresentError(ErrorHelper.prepareError(error: error))
             }) ~ self.disposeBag
     }

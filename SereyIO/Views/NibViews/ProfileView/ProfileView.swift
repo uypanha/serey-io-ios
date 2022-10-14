@@ -37,7 +37,7 @@ class ProfileView: NibView {
         didSet {
             self.profileImageView.image = nil
             self.shortcutNameLabel.text = nil
-            self.containerView.backgroundColor = .clear
+            self.containerView.backgroundColor = .color(.shimmering)
             guard let viewModel = self.viewModel else { return }
             
             viewModel.shortcutLabel.asObservable()

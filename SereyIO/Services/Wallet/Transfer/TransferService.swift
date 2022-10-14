@@ -85,4 +85,9 @@ class TransferService: AppService<TransferApi> {
         return provider.rx.requestObject(.delegatePower(signTrx: signTrxData ?? "", trxId: trxId), type: AnyCodable.self)
             .asObservable()
     }
+    
+    func fetchDelegationList() -> Observable<[DelegatedUserModel]> {
+        return self.provider.rx.requestObject(.delegationList, type: [DelegatedUserModel].self)
+            .asObservable()
+    }
 }
